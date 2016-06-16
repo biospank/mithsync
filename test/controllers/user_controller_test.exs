@@ -2,7 +2,7 @@ defmodule Videosync.UserControllerTest do
   use Videosync.ConnCase
 
   alias Videosync.User
-  @valid_attrs %{email: "some content", password_hash: "some content"}
+  @valid_attrs %{email: "some@content", password: "secret"}
   @invalid_attrs %{}
 
   setup %{conn: conn} do
@@ -15,7 +15,7 @@ defmodule Videosync.UserControllerTest do
   end
 
   test "shows chosen resource", %{conn: conn} do
-    user = Repo.insert! %User{}
+    user = Repo.insert! User.registration_changeset(%User{}, @valid_attrs)
     conn = get conn, user_path(conn, :show, user)
     assert json_response(conn, 200)["data"] == %{"id" => user.id,
       "email" => user.email,
@@ -31,7 +31,7 @@ defmodule Videosync.UserControllerTest do
   test "creates and renders resource when data is valid", %{conn: conn} do
     conn = post conn, user_path(conn, :create), user: @valid_attrs
     assert json_response(conn, 201)["data"]["id"]
-    assert Repo.get_by(User, @valid_attrs)
+    assert Repo.get(User, json_response(conn, 201)["data"]["id"])
   end
 
   test "does not create resource and renders errors when data is invalid", %{conn: conn} do
@@ -43,7 +43,7 @@ defmodule Videosync.UserControllerTest do
     user = Repo.insert! %User{}
     conn = put conn, user_path(conn, :update, user), user: @valid_attrs
     assert json_response(conn, 200)["data"]["id"]
-    assert Repo.get_by(User, @valid_attrs)
+    assert Repo.get(User, json_response(conn, 200)["data"]["id"])
   end
 
   test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do

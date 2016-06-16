@@ -19,8 +19,9 @@ defmodule Videosync.Router do
     get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", Videosync do
-  #   pipe_through :api
-  # end
+  scope "/api", Videosync do
+    pipe_through :api
+
+    resources "/users", UserController, except: [:new, :edit]
+  end
 end

@@ -9,7 +9,7 @@ defmodule Videosync.User do
     timestamps
   end
 
-  @required_fields ~w(email password_hash)
+  @required_fields ~w(email password)
   @optional_fields ~w()
 
   @doc """
@@ -21,5 +21,22 @@ defmodule Videosync.User do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+    |> validate_format(:email, ~r/@/)
+  end
+
+  def registration_changeset(model, params \\ :empty) do
+    model
+    |> changeset(params)
+    |> validate_length(:password, min: 6)
+    |> put_password_hash()
+  end
+
+  defp put_password_hash(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true, changes: %{password: pass}} ->
+        put_change(changeset, :password_hash, Comeonin.Bcrypt.hashpwsalt(pass))
+      _ ->
+        changeset
+    end
   end
 end

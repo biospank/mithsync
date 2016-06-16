@@ -12,8 +12,8 @@ config :logger, level: :warn
 # Configure your database
 config :videosync, Videosync.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "videosync",
+  password: "videosync",
   database: "videosync_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
