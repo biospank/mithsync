@@ -35,8 +35,8 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :videosync, Videosync.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "videosync",
+  password: "videosync",
   database: "videosync_dev",
   hostname: "localhost",
   pool_size: 10
