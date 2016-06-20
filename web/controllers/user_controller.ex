@@ -23,7 +23,7 @@ defmodule Videosync.UserController do
         new_conn
         |> put_status(:created)
         |> put_resp_header("location", user_path(new_conn, :show, user))
-        |> render(Videosync.SessionView, "show.json", conn: new_conn)
+        |> render("show.json", user: user)
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)

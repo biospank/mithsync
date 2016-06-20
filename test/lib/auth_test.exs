@@ -12,7 +12,7 @@ defmodule Videosync.AuthTest do
   end
 
   test "login by valid email and password should pass", %{conn: conn} do
-    {:ok, user} = Videosync.Auth.login_by_email_and_password(conn,
+    {:ok, user, _} = Videosync.Auth.login_by_email_and_password(conn,
       @valid_attrs.email,
       @valid_attrs.password,
       repo: Repo)
