@@ -1,7 +1,12 @@
 defmodule Videosync.SessionView do
   use Videosync.Web, :view
 
-  def render("show.json", %{user: user, jwt: jwt}) do
+  alias Videosync.ViewHelper
+
+  def render("show.json", %{conn: conn}) do
+    user = ViewHelper.current_user(conn)
+    jwt = ViewHelper.current_token(conn)
+
     %{
       data: %{
         id: user.id,

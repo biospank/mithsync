@@ -52,6 +52,7 @@ defmodule Videosync.Web do
       import Videosync.Router.Helpers
       import Videosync.ErrorHelpers
       import Videosync.Gettext
+      import Videosync.ViewHelper
     end
   end
 

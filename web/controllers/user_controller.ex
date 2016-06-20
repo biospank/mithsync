@@ -2,6 +2,7 @@ defmodule Videosync.UserController do
   use Videosync.Web, :controller
 
   alias Videosync.User
+  alias Videosync.Auth
 
   plug :scrub_params, "user" when action in [:create, :update]
   # plug Guardian.Plug.EnsureAuthenticated,
@@ -18,10 +19,11 @@ defmodule Videosync.UserController do
 
     case Repo.insert(changeset) do
       {:ok, user} ->
-        conn
+        new_conn = Auth.login(conn, user)
+        new_conn
         |> put_status(:created)
-        |> put_resp_header("location", user_path(conn, :show, user))
-        |> render("show.json", user: user)
+        |> put_resp_header("location", user_path(new_conn, :show, user))
+        |> render(Videosync.SessionView, "show.json", conn: new_conn)
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)

@@ -16,7 +16,7 @@ defmodule Videosync.AuthTest do
       @valid_attrs.email,
       @valid_attrs.password,
       repo: Repo)
-      
+
       assert user
   end
 
@@ -25,7 +25,7 @@ defmodule Videosync.AuthTest do
       conn,
       "invalid@email",
       @valid_attrs.password,
-      repo: Repo) == {:error, :not_found}
+      repo: Repo) == {:error, :not_found, conn}
   end
 
   test "login by invalid password returns unauthorized error", %{conn: conn} do
@@ -33,6 +33,6 @@ defmodule Videosync.AuthTest do
       conn,
       @valid_attrs.email,
       "invalidpass",
-      repo: Repo) == {:error, :unauthorized}
+      repo: Repo) == {:error, :unauthorized, conn}
   end
 end
