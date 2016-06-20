@@ -27,3 +27,13 @@ import_config "#{Mix.env}.exs"
 config :phoenix, :generators,
   migration: true,
   binary_id: false
+
+# Guardian configuration
+config :guardian, Guardian,
+  allowed_algos: ["HS512"],
+  verify_module: Guardian.JWT,
+  issuer: "Videosync",
+  ttl: { 30, :days},
+  verify_issuer: true,
+  secret_key: "videosync-secret-key", # TODO env variable
+  serializer: Videosync.GuardianSerializer

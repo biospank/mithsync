@@ -6,12 +6,33 @@ defmodule Videosync.UserControllerTest do
   @invalid_attrs %{}
 
   setup %{conn: conn} do
-    {:ok, conn: put_req_header(conn, "accept", "application/json")}
+    user = Repo.insert! User.registration_changeset(%User{}, @valid_attrs)
+    {
+      :ok,
+      conn: put_req_header(conn, "accept", "application/json"),
+      user: user
+    }
   end
 
+  test "creates and renders resource when data is valid", %{conn: conn} do
+    conn = post conn, user_path(conn, :create), user: @valid_attrs
+    assert json_response(conn, 201)["data"]["id"]
+    assert Repo.get(User, json_response(conn, 201)["data"]["id"])
+  end
+
+  test "does not create resource and renders errors when data is invalid", %{conn: conn} do
+    conn = post conn, user_path(conn, :create), user: @invalid_attrs
+    assert json_response(conn, 422)["errors"] != %{}
+  end
+
+  setup %{conn: conn, user: user} do
+    {:ok, jwt, full_claims} = Guardian.encode_and_sign(user)
+    conn = put_req_header(conn, "authorization", "Videosync #{jwt}")
+    {:ok, conn: conn, user: user, jwt: jwt, claims: full_claims}
+  end
   test "lists all entries on index", %{conn: conn} do
     conn = get conn, user_path(conn, :index)
-    assert json_response(conn, 200)["data"] == []
+    assert json_response(conn, 200)["data"]
   end
 
   test "shows chosen resource", %{conn: conn} do
@@ -26,17 +47,6 @@ defmodule Videosync.UserControllerTest do
     assert_error_sent 404, fn ->
       get conn, user_path(conn, :show, -1)
     end
-  end
-
-  test "creates and renders resource when data is valid", %{conn: conn} do
-    conn = post conn, user_path(conn, :create), user: @valid_attrs
-    assert json_response(conn, 201)["data"]["id"]
-    assert Repo.get(User, json_response(conn, 201)["data"]["id"])
-  end
-
-  test "does not create resource and renders errors when data is invalid", %{conn: conn} do
-    conn = post conn, user_path(conn, :create), user: @invalid_attrs
-    assert json_response(conn, 422)["errors"] != %{}
   end
 
   test "updates and renders chosen resource when data is valid", %{conn: conn} do

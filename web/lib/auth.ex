@@ -7,12 +7,12 @@ defmodule Videosync.Auth do
 
     cond do
       user && checkpw(given_pass, user.password_hash) ->
-        {:ok, conn}
+        {:ok, user}
       user ->
-        {:error, :unauthorized, conn}
+        {:error, :unauthorized}
       true ->
         dummy_checkpw()
-        {:error, :not_found, conn}
+        {:error, :not_found}
     end
   end
 end

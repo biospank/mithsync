@@ -4,6 +4,9 @@ defmodule Videosync.UserController do
   alias Videosync.User
 
   plug :scrub_params, "user" when action in [:create, :update]
+  # plug Guardian.Plug.EnsureAuthenticated,
+  #   [handler: Videosync.Token]
+  #     when action in [:index, :show, :update, :delete]
 
   def index(conn, _params) do
     users = Repo.all(User)

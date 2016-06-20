@@ -13,6 +13,12 @@ defmodule Videosync.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :api_auth do
+    plug Guardian.Plug.VerifyHeader, realm: "Videosync"
+    plug Guardian.Plug.EnsureAuthenticated, handler: Videosync.Token
+    plug Guardian.Plug.LoadResource
+  end
+
   scope "/", Videosync do
     pipe_through :browser # Use the default browser stack
 
@@ -20,8 +26,16 @@ defmodule Videosync.Router do
   end
 
   scope "/api", Videosync do
-    pipe_through :api
+    pipe_through [:api]
 
-    resources "/users", UserController, except: [:new, :edit]
+    resources "/users", UserController, only: [:create]
+    resources "/sessions", SessionController, only: [:create]
+  end
+
+  scope "/api", Videosync do
+    pipe_through [:api, :api_auth]
+
+    resources "/users", UserController, only: [:index, :show, :update, :delete]
+    resources "/sessions", SessionController, only: [:delete]
   end
 end
