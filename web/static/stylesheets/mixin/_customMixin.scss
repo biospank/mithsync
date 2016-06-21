@@ -1,0 +1,37 @@
+@mixin spaces($padding, $margin){
+  padding: $padding;
+  margin: $margin;
+}
+
+@mixin border($size, $color, $side: nil, $type: solid){
+  @if ($side == 'nil') {
+    border: $size $type $color;
+  } @else {
+    border-#{$side}: $size $type $color;
+  }
+}
+
+@mixin font-style($size, $color, $weight: 300){
+  font-size: $size;
+  color: $color;
+  font-weight: $weight;
+}
+
+@mixin bg-size($size: cover){
+  -webkit-background-size: $size;
+  -moz-background-size: $size;
+  -o-background-size: $size;
+  background-size: $size;
+}
+
+@mixin position($x, $Xval, $y, $Yval, $type: absolute){
+  position: $type;
+  #{$x}: $Xval;
+  #{$y}: $Yval;
+}
+
+@mixin respond-to($type, $query){
+  @media($type: $query){
+    @content;
+  }
+}

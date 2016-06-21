@@ -19,4 +19,5 @@
 // paths "./socket" or full ones "web/static/js/socket".
 
 // import socket from "./socket"
-require("./login");
+
+import router from "./router"

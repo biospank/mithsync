@@ -1,0 +1,8 @@
+.form-control {
+  @include border(#E3E3E3);
+  background-color: white;
+  color: #565656;
+  padding: 8px 12px;
+  height: 40px;
+  @include box-shadow(none);
+}
