@@ -1,7 +1,4 @@
 var textField = {
-  controller: function(){
-    var ctrl = this;
-  },
   view: function(ctrl, attrs) {
     return m(".form-group", [
             m("label", $.extend(attrs.placeholder) ),
@@ -10,6 +7,6 @@ var textField = {
             }))
           ]);
   }
-}
+};
 
 export default textField;

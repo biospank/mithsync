@@ -1,6 +1,4 @@
-// import { mixinLayout, layout, topNav, sidebarNav, breadcrumbBar } from "../layout/layout";
-import mixinLayout from "../layout/layout";
-import layout from "../layout/layout";
+import mixinLayout from "../layout/mixinLayout";
 import textField from "../widgets/textField";
 
 var loginForm = (function() {
@@ -24,14 +22,7 @@ var loginForm = (function() {
   };
 
   return {
-    controller: function(){
-      var ctrl = this;
-    },
-    // view: function() {
-    //   return m("div", {}, "pippo")
-    // }
-    view: mixinLayout(layout, content)
-    // view: mixinLayout()
+    view: mixinLayout(content, 'standard')
   };
 })();
 
