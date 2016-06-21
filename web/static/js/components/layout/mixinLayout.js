@@ -38,7 +38,7 @@ var mixinLayout = function(content, layout) {
   }
 
   return function(ctrl) {
-    return layouts[(layout || "login")](content(ctrl));
+    return layouts[(layout || "standard")](content(ctrl));
   };
 };
 

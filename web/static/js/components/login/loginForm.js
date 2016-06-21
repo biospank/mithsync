@@ -22,7 +22,7 @@ var loginForm = (function() {
   };
 
   return {
-    view: mixinLayout(content, 'standard')
+    view: mixinLayout(content, 'login')
   };
 })();
 
