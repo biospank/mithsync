@@ -1,4 +1,4 @@
-import topNav from "./topNav";
+import topNav from "./top_nav";
 
 var mixinLayout = function(content, layout) {
 
@@ -6,7 +6,7 @@ var mixinLayout = function(content, layout) {
     login: function(content) {
       return [
         m.component(topNav),
-        m('main', { class: 'main-container top'}, [
+        m('main', { class: 'main-container'}, [
           m('.container', content)
         ])
       ]
