@@ -14,9 +14,9 @@ defmodule Videosync.ErrorViewTest do
            "Server internal error"
   end
 
-  test "render error.json" do
-    assert render(Videosync.ErrorView, "error.json", message: "any message") ==
-           %{errors: %{message: "any message"}}
+  test "render any status with an error message" do
+    assert render(Videosync.ErrorView, "any_status.json", message: "any message") ==
+           %{error: %{message: "any message"}}
   end
 
   test "render any other" do

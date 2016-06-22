@@ -12,11 +12,11 @@ defmodule Videosync.SessionController do
       {:error, :not_found, conn} ->
         conn
         |> put_status(404)
-        |> render(Videosync.ErrorView, "error.json", message: "User not found")
+        |> render(Videosync.ErrorView, :"404", message: "User not found")
       {:error, :unauthorized, conn} ->
         conn
         |> put_status(401)
-        |> render(Videosync.ErrorView, "error.json", message: "Incorrect password")
+        |> render(Videosync.ErrorView, :"401", message: "Incorrect password")
     end
   end
 
