@@ -16,7 +16,8 @@ var signIn = (function() {
                 id: 'email',
                 dataLabel: 'Email',
                 oninput: m.withAttr("value", Session.model.email),
-                value: Session.model.email()
+                // value: Session.model.email(),
+                error: ('email' === Session.model.errorField()) ? Session.model.errorMessage() : null
               }),
               m.component(textField, {
                 type: 'password',
@@ -24,7 +25,8 @@ var signIn = (function() {
                 id: 'password',
                 dataLabel: 'Password',
                 oninput: m.withAttr("value", Session.model.password),
-                value: Session.model.password()
+                // value: Session.model.password(),
+                error: ('password' === Session.model.errorField()) ? Session.model.errorMessage() : null
               }),
               m("p", [
                 m("a", { href: "/retrievepsw", config: m.route }, "Forgot password?")
@@ -62,10 +64,9 @@ var signIn = (function() {
     controller: function(){
       var ctrl = this;
       ctrl.createSession = function(event) {
-        console.log("createSession");
         event.preventDefault();
         Session.create().then(function() {
-            m.route("/");
+          m.route("/signup");
         }, function(response) {
           console.log(response.error.message);
         })
