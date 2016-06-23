@@ -54,6 +54,9 @@ var signUp = (function() {
                   m("button[type=submit]", {
                     class: 'btn btn-success btn-lg'
                   }, "Send" )
+                ]),
+                m("p", { class: "text-center" }, "Already a member. ", [
+                  m("a", { class: "/signin", config: m.route }, "Get login!")
                 ])
               ])
             ])

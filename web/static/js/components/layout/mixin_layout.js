@@ -1,4 +1,6 @@
 import topNav from "./top_nav";
+import sidebarNav from "./sidebar_nav";
+import user from "./user";
 
 var mixinLayout = function(content, layout) {
 
@@ -6,7 +8,7 @@ var mixinLayout = function(content, layout) {
     login: function(content) {
       return [
         m.component(topNav),
-        m('main', { class: 'main-container'}, [
+        m('main', { class: 'main-container with-bg'}, [
           m('.container', content)
         ])
       ]
@@ -14,28 +16,21 @@ var mixinLayout = function(content, layout) {
     standard: function(content) {
       return [
         m.component(topNav),
-        m('aside', { class: 'sidebar', id: 'sidebarNav' }, [
-          m('nav', sidebarNav())
+        m('aside', { class: 'sidebar' }, [
+          user(),
+          sidebarNav()
         ]),
         m('main', { class: 'main-container centered'}, [
-          m("section", { class: "breadcrumb-bar" }, [
-            m(".container-fluid", breadcrumbBar())
-          ]),
+          // m("section", { class: "breadcrumb-bar" }, [
+          //   m(".container-fluid", breadcrumbBar())
+          // ]),
           m("section", [
-            m('.container', content)
+            m("div", content)
           ])
         ])
       ]
     }
-  }
-
-  var sidebarNav = function() {
-    return [];
   };
-
-  var breadcrumbBar = function() {
-    return [];
-  }
 
   return function(ctrl) {
     return layouts[(layout || "standard")](content(ctrl));

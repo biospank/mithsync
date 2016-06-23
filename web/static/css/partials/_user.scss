@@ -1,0 +1,46 @@
+.user {
+  padding: 20px 0;
+  color: white;
+  @include border(rgba(255, 255, 255, 0.2), 1px, bottom);
+  &__avatar {
+    @include size(80px, 80px);
+    border-radius: 50%;
+    overflow: hidden;
+    @include border(rgba(255, 255, 255, 0.3), 4px);
+    margin: 0 auto;
+    img {
+      width: 100%;
+    }
+  }
+  &__info {
+    text-align: center;
+    padding: 15px 15px 0 15px;
+  }
+  &__name {
+    color: white;
+    margin-bottom: 10px;
+    display: block;
+    &:hover, &:focus {
+      text-decoration: none;
+      color: white;
+    }
+    .caret {
+      margin-left: 8px;
+    }
+  }
+  &__nav {
+    ul {
+      li {
+        a {
+          color: white;
+          @include transition(all 0.3s ease-out);
+          &:hover {
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.13);
+            border-radius: 4px;
+          }
+        }
+      }
+    }
+  }
+}

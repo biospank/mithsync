@@ -1,0 +1,25 @@
+.main-nav {
+  margin-top: 25px;
+  ul {
+    li {
+      &.active {
+        a {
+          background-color: rgba(255, 255, 255, 0.23);
+          &:hover, &:focus {
+            background-color: rgba(255, 255, 255, 0.23);
+          }
+        }
+      }
+      a {
+        color: white;
+        margin: 5px 15px;
+        @include transition(all 0.3s ease-out);
+        &:hover, &:focus {
+          background-color: rgba(255, 255, 255, 0.23);
+          color: white;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,20 @@
 .main-container {
-  margin-top: 120px;
+  @include spaces(0, 70px 0 0);
+  background-color: #F5F5F5;
+  height: 100%;
+  position: relative;
+  z-index: 2;
   &.middle {
-    margin-top: 180px;
+    padding-top: 180px;
+  }
+  &.with-bg{
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    @include gradient-vertical(#FFA534, rgba(236, 22, 87, 0.6), 0%, 100%);
+  }
+  &.centered{
+    @include respond-to(min-width, 768px) {
+      margin-left: 260px;
+    }
   }
 }

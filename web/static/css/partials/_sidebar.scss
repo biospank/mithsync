@@ -1,0 +1,10 @@
+.sidebar {
+  @include position(left, 0, top, 70px, fixed);
+  z-index: 1;
+  @include size(260px, 100%);
+  min-height: 100%;
+  display: block;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  @include gradient-vertical(#FFA534, rgba(236, 22, 87, 0.6), 0%, 100%);
+}
