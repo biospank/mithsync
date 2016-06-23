@@ -12,7 +12,7 @@ defmodule Videosync.SessionController do
       {:error, :not_found, conn} ->
         conn
         |> put_status(404)
-        |> render(Videosync.ErrorView, :"404", message: "User not found")
+        |> render(Videosync.ErrorView, :"404", message: "Email not found")
       {:error, :unauthorized, conn} ->
         conn
         |> put_status(401)

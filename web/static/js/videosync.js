@@ -1,5 +1,9 @@
-var Videosync = {};
-Videosync.baseUrl = "http://localhost:4000/";
-Videosync.label = "Videosync";
+var Videosync = {
+  domain: "http://localhost:4000",
+  apiBaseUrl: function() {
+    return this.domain + "/api";
+  },
+  realm: "Videosync"
+};
 
 export default Videosync;

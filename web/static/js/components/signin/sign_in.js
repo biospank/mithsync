@@ -3,25 +3,40 @@ import textField from "../widgets/text_field";
 import Session from "./session";
 
 var signIn = (function() {
-  var content = function() {
+  var content = function(ctrl) {
     return [
       m('.col-xs-12 .col-sm-7 .col-md-4 .center-block .space-top', [
         m('.wrapper', [
           m("h2", { class: "header text-center mgv20" }, "Sign In"),
           m(".content", [
             m("form", { class: "light-form" }, [
-              m.component(textField, { type: 'email', placeholder: 'Enter your Email', id: 'email', dataLabel: 'Email' }),
-              m.component(textField, { type: 'password', placeholder: 'Enter Password', id: 'password', dataLabel: 'Password' }),
+              m.component(textField, {
+                type: 'email',
+                placeholder: 'Enter your Email',
+                id: 'email',
+                dataLabel: 'Email',
+                oninput: m.withAttr("value", Session.model.email),
+                value: Session.model.email()
+              }),
+              m.component(textField, {
+                type: 'password',
+                placeholder: 'Enter Password',
+                id: 'password',
+                dataLabel: 'Password',
+                oninput: m.withAttr("value", Session.model.password),
+                value: Session.model.password()
+              }),
               m("p", [
                 m("a", { href: "/retrievepsw", config: m.route }, "Forgot password?")
               ]),
               m("div", { class: "text-center mgv30" }, [
                 m("button[type=submit]", {
-                  class: 'btn btn-success btn-lg'
+                  class: 'btn btn-success btn-lg',
+                  onclick: ctrl.createSession
                 }, "Login" )
               ]),
               m("p", { class: "text-center" }, "Haven't you got an account yet? ", [
-                m("a", { href: "#", onclick: ctrl.createSession }, "Click here")
+                m("a", { href: "/signup" }, "Click here")
               ]),
               m("p", { class: "text-center" }, "Or" ),
               m("ul", { class: "list-inline socials-group text-center" }, [
@@ -47,9 +62,12 @@ var signIn = (function() {
     controller: function(){
       var ctrl = this;
       ctrl.createSession = function(event) {
+        console.log("createSession");
         event.preventDefault();
         Session.create().then(function() {
             m.route("/");
+        }, function(response) {
+          console.log(response.error.message);
         })
         // User.create().then(function() {
         //   update.bind(this);
