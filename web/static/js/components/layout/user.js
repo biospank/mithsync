@@ -15,7 +15,7 @@ var user = function() {
               m("a", { href: "#" }, "My profile")
             ]),
             m("li", [
-              m("a", { href: "#" }, "Edit profile")
+              m("a", { href: "/userprofile", config: m.route }, "Edit profile")
             ]),
             m("li", [
               m("a", { href: "#" }, "Setting")

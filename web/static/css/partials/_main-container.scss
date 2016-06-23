@@ -10,7 +10,7 @@
   &.with-bg{
     background-repeat: no-repeat;
     background-attachment: fixed;
-    @include gradient-vertical(#FFA534, rgba(236, 22, 87, 0.6), 0%, 100%);
+    @include gradient-vertical(#FFA534, rgba(236, 22, 87, 0.6), 0%, 150%);
   }
   &.centered{
     @include respond-to(min-width, 768px) {

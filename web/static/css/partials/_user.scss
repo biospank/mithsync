@@ -2,6 +2,20 @@
   padding: 20px 0;
   color: white;
   @include border(rgba(255, 255, 255, 0.2), 1px, bottom);
+  &.internal {
+    color: #333333;
+    font-weight: 300;
+    .user__name {
+      @include font-style(22px, #333333);
+    }
+    .user__lightext {
+      color: #9A9A9A;
+    }
+    .user__avatar {
+      @include size(150px, 150px);
+      border-color: #EEEEEE;
+    }
+  }
   &__avatar {
     @include size(80px, 80px);
     border-radius: 50%;
