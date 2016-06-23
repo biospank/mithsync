@@ -1,0 +1,26 @@
+$facebook-color: #3b5998;
+$twitter-color: #00acee;
+
+.socials-group {
+  &__item {
+    @include size(35px, 35px);
+    border-radius: 50%;
+    color: white;
+    line-height: 35px;
+    text-align: center;
+    display: block;
+    @include transition(all 0.2s ease-in);
+    &--facebook {
+      background-color: $facebook-color;
+      &:hover {
+        background-color: lighten($facebook-color, 20%);
+      }
+    }
+    &--twitter {
+      background-color: $twitter-color;
+      &:hover {
+        background-color: lighten($twitter-color, 20%);
+      }
+    }
+  }
+}

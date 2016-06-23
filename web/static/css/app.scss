@@ -1,4 +1,10 @@
 @import "../vendor/css/bootstrap";
 @import "./mixin/customMixin";
+@import "./partials/utilities/default-styles";
 @import "./partials/shared/wrapper";
+@import "./partials/shared/buttons";
 @import "./partials/shared/form";
+@import "./partials/top-navbar";
+@import "./partials/main-container";
+@import "./partials/shared/socials-group";
+@import "./partials/shared/plus-list";
