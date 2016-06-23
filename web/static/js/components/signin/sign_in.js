@@ -1,5 +1,6 @@
 import mixinLayout from "../layout/mixin_layout";
 import textField from "../widgets/text_field";
+import Session from "./session";
 
 var signIn = (function() {
   var content = function() {
@@ -20,7 +21,7 @@ var signIn = (function() {
                 }, "Login" )
               ]),
               m("p", { class: "text-center" }, "Haven't you got an account yet? ", [
-                m("a", { href: "/signup", config: m.route }, "Click here")
+                m("a", { href: "#", onclick: ctrl.createSession }, "Click here")
               ]),
               m("p", { class: "text-center" }, "Or" ),
               m("ul", { class: "list-inline socials-group text-center" }, [
@@ -43,6 +44,18 @@ var signIn = (function() {
   };
 
   return {
+    controller: function(){
+      var ctrl = this;
+      ctrl.createSession = function(event) {
+        event.preventDefault();
+        Session.create().then(function() {
+            m.route("/");
+        })
+        // User.create().then(function() {
+        //   update.bind(this);
+        // })
+      };
+    },
     view: mixinLayout(content, 'login')
   };
 })();
