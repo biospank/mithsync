@@ -1,3 +1,5 @@
+import searchForm from "./search_form";
+
 var topNav = {
   view: function(ctrl) {
     return m('nav', { class: 'top-navbar navbar navbar-default navbar-fixed-top' }, [
@@ -11,17 +13,15 @@ var topNav = {
             'data-target': '#sidebarNav', 'aria-expanded': 'false'},
             [
               m('span', { class: 'sr-only' }, 'Toggle navigation'),
-              m('span', { class: 'icon-bar' }),
-              m('span', { class: 'icon-bar' }),
-              m('span', { class: 'icon-bar' })
+              m('span', { class: 'fa fa-list' })
+              // m('span', { class: 'icon-bar' }),
+              // m('span', { class: 'icon-bar' })
             ]),
-          m('a', { class: 'navbar-brand', href: '#' }, [
-            m('img', { src: '/images/logo.png' })
-          ])
-        ])
-        // m('.collapse navbar-collapse navbar-right',
-        //   m.component(avatar)
-        // )
+          m('a', { class: 'navbar-brand', href: '#' }, "Sinkroo")
+        ]),
+        m('.collapse navbar-collapse navbar-right',
+          searchForm()
+        )
       ])
     ]);
   }

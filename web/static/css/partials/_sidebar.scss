@@ -1,5 +1,5 @@
 .sidebar {
-  @include position(left, 0, top, 70px, fixed);
+  @include position(left, 0, top, 50px, fixed);
   z-index: 1;
   @include size(260px, 100%);
   min-height: 100%;

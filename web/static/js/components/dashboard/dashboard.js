@@ -1,46 +1,51 @@
 import mixinLayout from "../layout/mixin_layout";
 import textField from "../widgets/text_field";
+import dashboardBox from "./dashboard_box";
 
 var dashboard = (function() {
+  var dashboardItems = [
+    {
+      "image": "/images/icons/ico-ticket.png",
+      "title": "Projects list",
+      "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit." +
+                    "Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis." +
+                    "Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.",
+      "link": "/task",
+      "btn": "Vai ai task"
+    },
+    {
+      "image": "/images/icons/ico-notes.png",
+      "title": "Appunti",
+      "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit." +
+                    "Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis." +
+                    "Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.",
+      "link": "/notes",
+      "btn": "Vai agli appunti"
+    },
+    {
+      "image": "/images/icons/ico-rubric.png",
+      "title": "Rubrica",
+      "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit." +
+                    "Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis." +
+                    "Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.",
+      "link": "/rubric",
+      "btn": "Vai alla rubrica"
+    },
+    {
+      "image": "/images/icons/ico-users.png",
+      "title": "Amministrazione Utenti",
+      "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit." +
+                    "Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis." +
+                    "Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.",
+      "link": "/users",
+      "btn": "Vai alla lista"
+    }
+  ];
+
   var content = function() {
     return [
-      m('.col-xs-12 .col-sm-7 .col-md-4 .center-block', [
-        m('.wrapper', [
-          m("h2", { class: "header text-center mgv20" }, "Sign In"),
-          m(".content", [
-            m("form", { class: "light-form" }, [
-              m.component(textField, { type: 'email', placeholder: 'Enter your Email', id: 'email', dataLabel: 'Email' }),
-              m.component(textField, { type: 'password', placeholder: 'Enter Password', id: 'password', dataLabel: 'Password' }),
-              // m("p", "Have you forgot yuor password?"),
-              // m("p", "Don't worry ", [
-              //   m("a", { href: "/retrievepsw", config: m.route }, "Click here!"),
-              // ]),
-              m("div", { class: "text-center mgv30" }, [
-                m("button[type=submit]", {
-                  class: 'btn btn-success btn-lg'
-                }, "Login" )
-              ]),
-              m("p", { class: "text-center" }, "Haven't you got an account yet? ", [
-                m("a", { href: "/signup", config: m.route }, "Click here")
-              ]),
-              m("p", { class: "text-center" }, "Or" ),
-              m("ul", { class: "list-inline socials-group text-center" }, [
-                m("li", [
-                  m("a", { href: "", class: "socials-group__item socials-group__item--facebook" }, [
-                    m("i", { class: "fa fa-facebook", "aria-hidden": true })
-                  ])
-                ]),
-                m("li", [
-                  m("a", { href: "", class: "socials-group__item socials-group__item--twitter" }, [
-                    m("i", { class: "fa fa-twitter", "aria-hidden": true })
-                  ])
-                ])
-              ])
-            ])
-          ])
-        ])
-      ])
-		];
+      dashboardItems.map(dashboardBox)
+    ];
   };
 
   return {

@@ -24,8 +24,11 @@ var mixinLayout = function(content, layout) {
           // m("section", { class: "breadcrumb-bar" }, [
           //   m(".container-fluid", breadcrumbBar())
           // ]),
-          m("section", [
-            m("div", content)
+          // m("section", [
+          //   m("div", content)
+          // ])
+          m("section", { class: "wrap clearfix" }, [
+            m(".container-fluid", content)
           ])
         ])
       ]
