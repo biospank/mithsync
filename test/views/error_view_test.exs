@@ -15,8 +15,20 @@ defmodule Videosync.ErrorViewTest do
   end
 
   test "render any status with an error message" do
-    assert render(Videosync.ErrorView, "any_status.json", message: "any message") ==
-           %{error: %{message: "any message"}}
+    assert(
+      render(
+        Videosync.ErrorView,
+        "any_status.json", errors: %{email: "not found"})) ==
+           %{errors: %{email: "not found"}}
+  end
+
+  test "render any status with multiple error messages" do
+    assert(
+      render(
+        Videosync.ErrorView,
+        "any_status.json",
+        errors: %{email: "not found", password: "incorrect"})) ==
+           %{errors: %{email: "not found", password: "incorrect"}}
   end
 
   test "render any other" do

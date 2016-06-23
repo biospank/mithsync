@@ -9,11 +9,9 @@ defmodule Videosync.ErrorView do
     "Server internal error"
   end
 
-  def render(_status, %{message: message}) do
+  def render(_status, %{errors: errors}) do
     %{
-      error: %{
-        message: message
-      }
+      errors: errors
     }
   end
 

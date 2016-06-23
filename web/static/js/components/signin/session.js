@@ -10,14 +10,6 @@ var Session = {
           " "
         )
       );
-    } else if (xhr.status === 404) {
-      Session.model.errorField("email");
-      var data = JSON.parse(xhr.response);
-      Session.model.errorMessage(data.error.message);
-    } else if (xhr.status === 401) {
-      Session.model.errorField("password");
-      var data = JSON.parse(xhr.response);
-      Session.model.errorMessage(data.error.message);
     }
 
     return xhr.response;
@@ -26,9 +18,7 @@ var Session = {
   token: null,
   model: {
     email: m.prop(""),
-    password: m.prop(""),
-    errorField: m.prop(null),
-    errorMessage: m.prop(null)
+    password: m.prop("")
   },
   create: function() {
     return m.request({
