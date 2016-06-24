@@ -67,7 +67,7 @@ var signIn = (function() {
 
       ctrl.createSession = function(args) {
         return Session.create(args).then(function() {
-          m.route("/signup");
+          m.route("/dashboard");
         }, function(response) {
           ctrl.errors(response.errors);
         })

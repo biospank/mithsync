@@ -4,10 +4,12 @@ var Session = {
   url: '/sessions',
   extract: function(xhr, xhrOptions) {
     if (xhr.status === 201) {
-      Session.token = _.last(
-        _.split(
-          xhr.getResponseHeader("Authorization"),
-          " "
+      Session.token(
+        _.last(
+          _.split(
+            xhr.getResponseHeader("Authorization"),
+            " "
+          )
         )
       );
     }
@@ -15,7 +17,12 @@ var Session = {
     return xhr.response;
 
   },
-  token: null,
+  token: function(value) {
+    if (arguments.length)
+      store.set('token', value)
+
+    return store.get('token')
+  },
   model: {
     email: m.prop(""),
     password: m.prop("")

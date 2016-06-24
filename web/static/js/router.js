@@ -6,13 +6,13 @@ import userProfile from "./components/user/user_profile";
 
 export default m.route(document.getElementById('app'), "/", {
   // Login routing
-  "/": signIn,
+  "/": dashboard,
+
+  "/signin": signIn,
 
   "/signup": signUp,
 
   "/retrievepsw": retrievePsw,
-
-  "/dashboard": dashboard,
 
   "/userprofile": userProfile
 
