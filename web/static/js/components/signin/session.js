@@ -20,17 +20,18 @@ var Session = {
     email: m.prop(""),
     password: m.prop("")
   },
-  create: function() {
-    return m.request({
-      method: "POST",
-      url: Videosync.apiBaseUrl() + this.url,
-      data: { user: this.model },
-      config: function(xhr) {
-        xhr.setRequestHeader("accept", "application/json");
-        xhr.setRequestHeader("content-type", "application/json");
-      },
-      extract: this.extract
-    });
+  create: function(args) {
+    return m.request(_.assign({
+        method: "POST",
+        url: Videosync.apiBaseUrl() + this.url,
+        data: { user: this.model },
+        config: function(xhr) {
+          xhr.setRequestHeader("accept", "application/json");
+          xhr.setRequestHeader("content-type", "application/json");
+        },
+        extract: this.extract
+      }, args)
+    );
   }
 };
 

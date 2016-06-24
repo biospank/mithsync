@@ -1,5 +1,6 @@
 import mixinLayout from "../layout/mixin_layout";
 import textField from "../widgets/text_field";
+import feedbackButton from "../widgets/feedback_button";
 import Session from "./session";
 
 var signIn = (function() {
@@ -30,10 +31,11 @@ var signIn = (function() {
                 m("a", { href: "/retrievepsw", config: m.route }, "Forgot password?")
               ]),
               m("div", { class: "text-center mgv30" }, [
-                m("button[type=submit]", {
-                  class: 'btn btn-success btn-lg',
-                  onclick: ctrl.createSession
-                }, "Login" )
+                m.component(feedbackButton, {
+                  action: ctrl.createSession,
+                  label: 'Login',
+                  feedbackLabel: 'Authenticating...'
+                })
               ]),
               m("p", { class: "text-center" }, "Haven't you got an account yet? ", [
                 m("a", { href: "/signup" }, "Click here")
@@ -63,9 +65,8 @@ var signIn = (function() {
       var ctrl = this;
       ctrl.errors = m.prop({});
 
-      ctrl.createSession = function(event) {
-        event.preventDefault();
-        Session.create().then(function() {
+      ctrl.createSession = function(args) {
+        return Session.create(args).then(function() {
           m.route("/signup");
         }, function(response) {
           ctrl.errors(response.errors);
