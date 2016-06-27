@@ -38,5 +38,5 @@ config :guardian, Guardian,
   issuer: "Videosync",
   ttl: { 30, :days},
   verify_issuer: true,
-  secret_key: "videosync-secret-key", # TODO env variable
+  secret_key: System.get_env("GUARDIAN_SECRET_KEY"),
   serializer: Videosync.GuardianSerializer
