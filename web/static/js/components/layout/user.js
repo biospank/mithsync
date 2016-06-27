@@ -19,6 +19,9 @@ var user = function() {
             ]),
             m("li", [
               m("a", { href: "#" }, "Setting")
+            ]),
+            m("li", [
+              m("a", { href: "/logout" }, "Logout")
             ])
           ])
         ])

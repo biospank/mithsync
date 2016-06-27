@@ -15,24 +15,6 @@ var dashboard = (function() {
       "btn": "Vai ai task"
     },
     {
-      "image": "/images/icons/ico-notes.png",
-      "title": "Appunti",
-      "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit." +
-                    "Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis." +
-                    "Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.",
-      "link": "/notes",
-      "btn": "Vai agli appunti"
-    },
-    {
-      "image": "/images/icons/ico-rubric.png",
-      "title": "Rubrica",
-      "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit." +
-                    "Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis." +
-                    "Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.",
-      "link": "/rubric",
-      "btn": "Vai alla rubrica"
-    },
-    {
       "image": "/images/icons/ico-users.png",
       "title": "Amministrazione Utenti",
       "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit." +
@@ -45,7 +27,27 @@ var dashboard = (function() {
 
   var content = function() {
     return [
-      dashboardItems.map(dashboardBox)
+      m(".row", [
+        m(".col-md-5", {}, [
+          m(".row", [
+            m("div", { class: "col-sm-6" }, [
+              m("div", { class: "text-center" }, [
+                m("h3", { class: "no-margin-top" }, "1"),
+                m("p", { class: "no-margin-bottom" }, "OPEN PROJECTS")
+              ])
+            ]),
+            m("div", { class: "col-sm-6" }, [
+              m("div", { class: "text-center" }, [
+                m("h3", { class: "no-margin-top" }, "0"),
+                m("p", { class: "no-margin-bottom" }, "PROJECTS COMPLETED")
+              ])
+            ])
+          ])
+        ]),
+        m(".col-md-7", {}, [
+          dashboardItems.map(dashboardBox)
+        ])
+      ])
     ];
   };
 
