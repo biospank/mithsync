@@ -33,8 +33,10 @@ defmodule Videosync.ConnCase do
   end
 
   setup tags do
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Videosync.Repo)
+
     unless tags[:async] do
-      Ecto.Adapters.SQL.restart_test_transaction(Videosync.Repo, [])
+      Ecto.Adapters.SQL.Sandbox.mode(Videosync.Repo, {:shared, self()})
     end
 
     {:ok, conn: Phoenix.ConnTest.conn()}

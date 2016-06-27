@@ -5,6 +5,9 @@
 # is restricted to this project.
 use Mix.Config
 
+config :videosync,
+  ecto_repos: [Videosync.Repo]
+
 # Configures the endpoint
 config :videosync, Videosync.Endpoint,
   url: [host: "localhost"],
