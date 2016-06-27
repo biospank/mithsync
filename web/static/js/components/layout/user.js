@@ -1,6 +1,17 @@
-var user = function() {
-  return [
-    m(".user", [
+import Session from "../../models/session"
+
+var user = {
+  controller: function(ctrl) {
+    return {
+      logout: function(event) {
+        event.preventDefault();
+        Session.token(null);
+        m.route("/signin");
+      }
+    };
+  },
+  view: function(ctrl) {
+    return m(".user", [
       m("figure", { class: "user__avatar" }, [
         m("img", { src: "/images/avatar.png", alt: "Avatar" })
       ]),
@@ -21,13 +32,13 @@ var user = function() {
               m("a", { href: "#" }, "Setting")
             ]),
             m("li", [
-              m("a", { href: "/logout" }, "Logout")
+              m("a", { href: "#", onclick: ctrl.logout }, "Logout")
             ])
           ])
         ])
       ])
-    ])
-  ];
+    ]);
+  }
 };
 
 export default user;

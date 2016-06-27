@@ -1,4 +1,4 @@
-import Videosync from '../../videosync';
+import Videosync from '../videosync';
 
 var Session = {
   url: '/sessions',

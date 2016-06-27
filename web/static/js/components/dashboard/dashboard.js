@@ -1,7 +1,7 @@
 import mixinLayout from "../layout/mixin_layout";
 import textField from "../widgets/text_field";
 import dashboardBox from "./dashboard_box";
-import Session from "../signin/session";
+import Session from "../../models/session";
 
 var dashboard = (function() {
   var dashboardItems = [
@@ -53,7 +53,7 @@ var dashboard = (function() {
 
   return {
     controller: function() {
-      if(!Session.token)
+      if(!Session.token())
         m.route("/signin");
     },
     view: mixinLayout(content)

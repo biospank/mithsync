@@ -1,7 +1,7 @@
 import mixinLayout from "../layout/mixin_layout";
 import textField from "../widgets/text_field";
 import feedbackButton from "../widgets/feedback_button";
-import Session from "./session";
+import Session from "../../models/session";
 
 var signIn = (function() {
   var content = function(ctrl) {

@@ -17,7 +17,7 @@ var mixinLayout = function(content, layout) {
       return [
         m.component(topNav),
         m('aside', { class: 'sidebar' }, [
-          user(),
+          m.component(user),
           sidebarNav()
         ]),
         m('main', { class: 'main-container centered'}, [

@@ -1,6 +1,6 @@
 import mixinLayout from "../layout/mixin_layout";
 import textField from "../widgets/text_field";
-import Session from "../signin/session";
+import Session from "../../models/session";
 
 var userProfile = (function() {
 
@@ -64,7 +64,7 @@ var userProfile = (function() {
 
   return {
     controller: function() {
-      if(!Session.token)
+      if(!Session.token())
         m.route("/signin");
     },
     view: mixinLayout(content)
