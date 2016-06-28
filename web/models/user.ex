@@ -33,6 +33,7 @@ defmodule Videosync.User do
   def registration_changeset(model, params \\ %{}) do
     model
     |> changeset(params)
+    |> unique_constraint(:email)
     |> validate_length(:password, min: 6)
     |> validate_confirmation(:password, required: true)
     |> put_password_hash()

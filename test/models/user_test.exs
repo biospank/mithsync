@@ -3,7 +3,11 @@ defmodule Videosync.UserTest do
 
   alias Videosync.User
 
-  @valid_attrs %{email: "some@content", password: "secret"}
+  @valid_attrs %{
+    email: "some@content",
+    password: "secret",
+    password_confirmation: "secret"
+  }
   @invalid_email %{email: "some content", password: "secret"}
   @invalid_password %{email: "some@content", password: "pass"}
   @invalid_attrs %{}
@@ -51,4 +55,16 @@ defmodule Videosync.UserTest do
     refute changeset.valid?
     assert Keyword.get(changeset.errors, :password_confirmation) == {"does not match confirmation", []}
   end
+
+  # @duplicate_email %{
+  #   email: "some@content",
+  #   password: "secret",
+  #   password_confirmation: "secret"
+  # }
+  # test "registration changeset with duplicate email" do
+  #   Repo.insert! User.registration_changeset(%User{}, @valid_attrs)
+  #   {:error, changeset} = Repo.insert User.registration_changeset(%User{}, @duplicate_email)
+  #   refute changeset.valid?
+  #   assert Keyword.get(changeset.errors, :email) == {"has already been taken", []}
+  # end
 end
