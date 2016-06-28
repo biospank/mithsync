@@ -2,7 +2,7 @@ var textField = {
   view: function(ctrl, attrs) {
     return m(".form-group", { class: attrs.error ? "has-error" : "" }, [
             m("label", { class: "text-uppercase" }, attrs.dataLabel ),
-            m("input", $.extend(attrs, {
+            m("input", _.assign(attrs, {
               class: 'form-control',
             })),
             m("p", {
