@@ -1,34 +1,14 @@
 import mixinLayout from "../layout/mixin_layout";
 import textField from "../widgets/text_field";
-import dashboardBox from "./dashboard_box";
+import projectsList from "./projects_list";
 import Session from "../../models/session";
 
 var dashboard = (function() {
-  var dashboardItems = [
-    {
-      "image": "/images/icons/ico-ticket.png",
-      "title": "Projects list",
-      "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit." +
-                    "Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis." +
-                    "Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.",
-      "link": "/task",
-      "btn": "Vai ai task"
-    },
-    {
-      "image": "/images/icons/ico-users.png",
-      "title": "Amministrazione Utenti",
-      "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit." +
-                    "Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis." +
-                    "Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.",
-      "link": "/users",
-      "btn": "Vai alla lista"
-    }
-  ];
 
   var content = function() {
     return [
       m(".row", [
-        m(".col-md-5", {}, [
+        m(".col-md-4", {}, [
           m(".row", [
             m("div", { class: "col-sm-6" }, [
               m("div", { class: "text-center" }, [
@@ -44,8 +24,11 @@ var dashboard = (function() {
             ])
           ])
         ]),
-        m(".col-md-7", {}, [
-          dashboardItems.map(dashboardBox)
+        m(".col-md-4", {}, [
+          m.component(projectsList)
+        ]),
+        m(".col-md-4", {}, [
+          // dashboardItems.map(dashboardBox)
         ])
       ])
     ];

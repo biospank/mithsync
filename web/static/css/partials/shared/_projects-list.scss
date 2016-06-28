@@ -1,0 +1,36 @@
+.projects-list {
+  background-color: #f4f6fa;
+  li:nth-child(odd) {
+    padding: 15px;
+    background-color: #f9f9fb;
+    @include transition(all 0.3s ease-out);
+    &:hover {
+      background-color: darken(#f9f9fb, 5%);
+    }
+  }
+  li:nth-child(even) {
+    padding: 15px;
+    background-color: #ffffff;
+    &:hover {
+      background-color: darken(#ffffff, 5%);
+    }
+  }
+  &__content {
+    display: block;
+    color: #313131;
+  }
+  &__content:hover {
+    color: #313131;
+    text-decoration: none;
+  }
+  &__head {
+    @include font-style(16px, $mainColor, 400);
+    margin-top: 0;
+  }
+  &__body {
+    color: #939297;
+  }
+  &__info {
+    color: #cbcbcc;
+  }
+}
