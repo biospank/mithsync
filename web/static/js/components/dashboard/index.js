@@ -28,7 +28,15 @@ var dashboard = (function() {
           m.component(projectsList)
         ]),
         m(".col-md-4", {}, [
-          // dashboardItems.map(dashboardBox)
+          m(".ibox", [
+            m("h4", { class: "ibox__head" }, "Library" ),
+            m("p", { class: "ibox__description" }, [
+              m("small", "Your Library Archive")
+            ]),
+            m("div", { class: "ibox__footer" }, [
+              m("a", { class: "btn btn-success" }, "Go to the Library")
+            ])
+          ])
         ])
       ])
     ];

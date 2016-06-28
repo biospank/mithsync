@@ -1,4 +1,4 @@
-var projectsList = function() {
+var projectsList = {
   controller: function() {},
   view: function() {
     return m(".ibox", [
