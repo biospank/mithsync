@@ -10,16 +10,25 @@ defmodule Videosync.UserControllerTest do
   @invalid_attrs %{}
 
   setup %{conn: conn} do
-    user = Repo.insert! User.registration_changeset(%User{}, @valid_attrs)
-    {
-      :ok,
-      conn: put_req_header(conn, "accept", "application/json"),
-      user: user
-    }
+    user = User.registration_changeset(%User{}, @valid_attrs)
+    |> Repo.insert!
+
+    {:ok, jwt, full_claims} = Guardian.encode_and_sign(user)
+
+    conn = conn
+    |> put_req_header("authorization", "Videosync #{jwt}")
+    |> put_req_header("accept", "application/json")
+
+    {:ok, conn: conn, user: user, jwt: jwt, claims: full_claims}
   end
 
+  @new_user %{
+    email: "some_other@content",
+    password: "secret",
+    password_confirmation: "secret"
+  }
   test "creates and renders resource when data is valid", %{conn: conn} do
-    conn = post conn, user_path(conn, :create), user: @valid_attrs
+    conn = post conn, user_path(conn, :create), user: @new_user
     assert json_response(conn, 201)["data"]["id"]
     assert Repo.get(User, json_response(conn, 201)["data"]["id"])
   end
@@ -29,18 +38,12 @@ defmodule Videosync.UserControllerTest do
     assert json_response(conn, 422)["errors"] != %{}
   end
 
-  setup %{conn: conn, user: user} do
-    {:ok, jwt, full_claims} = Guardian.encode_and_sign(user)
-    conn = put_req_header(conn, "authorization", "Videosync #{jwt}")
-    {:ok, conn: conn, user: user, jwt: jwt, claims: full_claims}
-  end
   test "lists all entries on index", %{conn: conn} do
     conn = get conn, user_path(conn, :index)
     assert json_response(conn, 200)["data"]
   end
 
-  test "shows chosen resource", %{conn: conn} do
-    user = Repo.insert! User.login_changeset(%User{}, @valid_attrs)
+  test "shows chosen resource", %{conn: conn, user: user} do
     conn = get conn, user_path(conn, :show, user)
     assert json_response(conn, 200)["data"] ==
       %{"id" => user.id, "email" => user.email}
@@ -52,8 +55,7 @@ defmodule Videosync.UserControllerTest do
     end
   end
 
-  test "updates and renders chosen resource when data is valid", %{conn: conn} do
-    user = Repo.insert! %User{}
+  test "updates and renders chosen resource when data is valid", %{conn: conn, user: user} do
     conn = put conn, user_path(conn, :update, user), user: @valid_attrs
     assert json_response(conn, 200)["data"]["id"]
     assert Repo.get(User, json_response(conn, 200)["data"]["id"])

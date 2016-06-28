@@ -25,13 +25,13 @@ defmodule Videosync.UserTest do
   test "changeset with invalid email format" do
     changeset = User.changeset(%User{}, @invalid_email)
     refute changeset.valid?
-    assert Keyword.get(changeset.errors, :email) == {"has invalid format", []}
+    assert changeset.errors[:email] == {"has invalid format", []}
   end
 
   test "registration changeset with invalid password" do
     changeset = User.registration_changeset(%User{}, @invalid_password)
     refute changeset.valid?
-    assert Keyword.get(changeset.errors, :password) == {"should be at least %{count} character(s)", [count: 6]}
+    assert changeset.errors[:password] == {"should be at least %{count} character(s)", [count: 6]}
   end
 
   @invalid_password_confirmation %{
@@ -42,7 +42,7 @@ defmodule Videosync.UserTest do
   test "registration changeset with invalid password confirmation" do
     changeset = User.registration_changeset(%User{}, @invalid_password_confirmation)
     refute changeset.valid?
-    assert Keyword.get(changeset.errors, :password_confirmation) == {"does not match confirmation", []}
+    assert changeset.errors[:password_confirmation] == {"does not match password", []}
   end
 
   @empty_password_confirmation %{
@@ -53,7 +53,7 @@ defmodule Videosync.UserTest do
   test "registration changeset with empty password confirmation" do
     changeset = User.registration_changeset(%User{}, @empty_password_confirmation)
     refute changeset.valid?
-    assert Keyword.get(changeset.errors, :password_confirmation) == {"does not match confirmation", []}
+    assert changeset.errors[:password_confirmation] == {"does not match password", []}
   end
 
   # @duplicate_email %{
@@ -65,6 +65,6 @@ defmodule Videosync.UserTest do
   #   Repo.insert! User.registration_changeset(%User{}, @valid_attrs)
   #   {:error, changeset} = Repo.insert User.registration_changeset(%User{}, @duplicate_email)
   #   refute changeset.valid?
-  #   assert Keyword.get(changeset.errors, :email) == {"has already been taken", []}
+  #   assert changeset.errors[:email == "has already been taken"
   # end
 end

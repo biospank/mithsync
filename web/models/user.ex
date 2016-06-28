@@ -35,7 +35,7 @@ defmodule Videosync.User do
     |> changeset(params)
     |> unique_constraint(:email)
     |> validate_length(:password, min: 6)
-    |> validate_confirmation(:password, required: true)
+    |> validate_confirmation(:password, required: true, message: "does not match password")
     |> put_password_hash()
   end
 
