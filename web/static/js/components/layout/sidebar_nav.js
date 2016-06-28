@@ -6,10 +6,10 @@ var sidebarNav = function() {
           m("a", { href: "/dashboard", config: m.route() }, "Dashboard")
         ]),
         m("li", [
-          m("a", { href: "/library", config: m.route() }, "Library")
+          m("a", { href: "/library" }, "Library")
         ]),
         m("li", [
-          m("a", { href: "" }, "Test")
+          m("a", { href: "" }, "Projects list")
         ]),
         m("li", [
           m("a", { href: "" }, "Test")
