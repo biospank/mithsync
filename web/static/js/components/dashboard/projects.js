@@ -1,4 +1,4 @@
-var projectsList = {
+var projects = {
   controller: function() {},
   view: function() {
     return m(".ibox", [
@@ -45,4 +45,4 @@ var projectsList = {
   }
 }
 
-export default projectsList;
+export default projects;

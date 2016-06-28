@@ -1,6 +1,6 @@
 import mixinLayout from "../layout/mixin_layout";
 import textField from "../widgets/text_field";
-import projectsList from "./projects_list";
+import projects from "./projects";
 import Session from "../../models/session";
 
 var dashboard = (function() {
@@ -25,7 +25,7 @@ var dashboard = (function() {
           ])
         ]),
         m(".col-md-4", {}, [
-          m.component(projectsList)
+          m.component(projects)
         ]),
         m(".col-md-4", {}, [
           m(".ibox", [
