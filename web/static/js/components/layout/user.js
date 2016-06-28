@@ -5,7 +5,7 @@ var user = {
     return {
       logout: function(event) {
         event.preventDefault();
-        Session.token(null);
+        Session.reset();
         m.route("/signin");
       }
     };

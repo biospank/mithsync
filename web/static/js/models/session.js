@@ -39,6 +39,11 @@ var Session = {
         extract: this.extract
       }, args)
     );
+  },
+  reset: function() {
+    this.token(null);
+    this.model.email("");
+    this.model.password("");
   }
 };
 
