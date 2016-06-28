@@ -24,10 +24,17 @@ defmodule Videosync.User do
     |> validate_format(:email, ~r/@/)
   end
 
+  def login_changeset(model, params \\ %{}) do
+    model
+    |> changeset(params)
+    |> put_password_hash()
+  end
+
   def registration_changeset(model, params \\ %{}) do
     model
     |> changeset(params)
     |> validate_length(:password, min: 6)
+    |> validate_confirmation(:password, required: true)
     |> put_password_hash()
   end
 

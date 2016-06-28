@@ -38,7 +38,7 @@ var signIn = (function() {
                 })
               ]),
               m("p", { class: "text-center" }, "Haven't you got an account yet? ", [
-                m("a", { href: "/signup" }, "Click here")
+                m("a", { href: "/signup", config: m.route }, "Click here")
               ]),
               m("p", { class: "text-center" }, "Or" ),
               m("ul", { class: "list-inline socials-group text-center" }, [

@@ -7,7 +7,7 @@ defmodule Videosync.SessionControllerTest do
   @valid_attrs %{email: "some@content", password: "secret"}
 
   setup %{conn: conn} do
-    user = Repo.insert! User.registration_changeset(%User{}, @valid_attrs)
+    user = Repo.insert! User.login_changeset(%User{}, @valid_attrs)
     {
       :ok,
       conn: put_req_header(conn, "accept", "application/json"),

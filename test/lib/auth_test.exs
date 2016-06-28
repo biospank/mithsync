@@ -6,7 +6,7 @@ defmodule Videosync.AuthTest do
   @valid_attrs %{email: "some@content", password: "secret"}
 
   setup %{conn: conn} do
-    Repo.insert! User.registration_changeset(%User{}, @valid_attrs)
+    Repo.insert! User.login_changeset(%User{}, @valid_attrs)
 
     {:ok, conn: conn}
   end

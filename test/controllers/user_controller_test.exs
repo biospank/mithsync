@@ -2,7 +2,11 @@ defmodule Videosync.UserControllerTest do
   use Videosync.ConnCase
 
   alias Videosync.User
-  @valid_attrs %{email: "some@content", password: "secret"}
+  @valid_attrs %{
+    email: "some@content",
+    password: "secret",
+    password_confirmation: "secret"
+  }
   @invalid_attrs %{}
 
   setup %{conn: conn} do
@@ -36,7 +40,7 @@ defmodule Videosync.UserControllerTest do
   end
 
   test "shows chosen resource", %{conn: conn} do
-    user = Repo.insert! User.registration_changeset(%User{}, @valid_attrs)
+    user = Repo.insert! User.login_changeset(%User{}, @valid_attrs)
     conn = get conn, user_path(conn, :show, user)
     assert json_response(conn, 200)["data"] ==
       %{"id" => user.id, "email" => user.email}

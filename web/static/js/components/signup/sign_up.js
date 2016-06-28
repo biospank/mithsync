@@ -1,8 +1,10 @@
 import mixinLayout from "../layout/mixin_layout";
 import textField from "../widgets/text_field";
+import feedbackButton from "../widgets/feedback_button";
+import User from "../../models/user";
 
 var signUp = (function() {
-  var content = function() {
+  var content = function(ctrl) {
     return [
       m("header", { class: "header-text row space-bottom" }, [
         m("hgroup", { class: "text-center col-md-8 col-md-offset-2" }, [
@@ -47,16 +49,39 @@ var signUp = (function() {
             m("h2", { class: "header text-center mgv20" }, "Sign Up"),
             m(".content", [
               m("form", { class: "light-form" }, [
-                m.component(textField, { type: 'email', placeholder: 'Enter your Email', id: 'email', dataLabel: 'Email' }),
-                m.component(textField, { type: 'password', placeholder: 'Enter Password', id: 'password', dataLabel: 'Password' }),
-                m.component(textField, { type: 'password', placeholder: 'Enter Password', id: 'password', dataLabel: 'Confirm Password' }),
+                m.component(textField, {
+                  type: 'email',
+                  placeholder: 'Enter your Email',
+                  id: 'email',
+                  dataLabel: 'Email',
+                  oninput: m.withAttr("value", User.model.email),
+                  error: ctrl.errors()['email']
+                }),
+                m.component(textField, {
+                  type: 'password',
+                  placeholder: 'Enter Password',
+                  id: 'password',
+                  dataLabel: 'Password',
+                  oninput: m.withAttr("value", User.model.password),
+                  error: ctrl.errors()['password']
+                }),
+                m.component(textField, {
+                  type: 'password',
+                  placeholder: 'Enter Password',
+                  id: 'password_confirmation',
+                  dataLabel: 'Confirm Password',
+                  oninput: m.withAttr("value", User.model.password_confirmation),
+                  error: ctrl.errors()['password_confirmation']
+                }),
                 m("div", { class: "text-center mgv30" }, [
-                  m("button[type=submit]", {
-                    class: 'btn btn-success btn-lg'
-                  }, "Send" )
+                  m.component(feedbackButton, {
+                    action: ctrl.createUser,
+                    label: 'Send',
+                    feedbackLabel: 'Authorizing...'
+                  })
                 ]),
                 m("p", { class: "text-center" }, "Already a member. ", [
-                  m("a", { class: "/signin", config: m.route }, "Get login!")
+                  m("a", { href: "/signin", config: m.route }, "Get login!")
                 ])
               ])
             ])
@@ -67,6 +92,18 @@ var signUp = (function() {
   };
 
   return {
+    controller: function(){
+      var ctrl = this;
+      ctrl.errors = m.prop({});
+
+      ctrl.createUser = function(args) {
+        return User.create(args).then(function() {
+          m.route("/dashboard");
+        }, function(response) {
+          ctrl.errors(response.errors);
+        })
+      };
+    },
     view: mixinLayout(content, 'login')
   };
 })();
