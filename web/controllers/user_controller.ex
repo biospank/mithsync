@@ -3,6 +3,8 @@ defmodule Videosync.UserController do
 
   alias Videosync.User
   alias Videosync.Auth
+  alias Videosync.Email
+  alias Videosync.Mailer
 
   plug :scrub_params, "user" when action in [:create, :update]
   # plug Guardian.Plug.EnsureAuthenticated,
@@ -20,6 +22,9 @@ defmodule Videosync.UserController do
     case Repo.insert(changeset) do
       {:ok, user} ->
         new_conn = Auth.login(conn, user)
+
+        Email.welcome_email |> Mailer.deliver_later
+
         new_conn
         |> put_status(:created)
         |> put_resp_header("location", user_path(new_conn, :show, user))

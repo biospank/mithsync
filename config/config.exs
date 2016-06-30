@@ -40,3 +40,13 @@ config :guardian, Guardian,
   verify_issuer: true,
   secret_key: System.get_env("GUARDIAN_SECRET_KEY"),
   serializer: Videosync.GuardianSerializer
+
+config :videosync, Videosync.Mailer,
+  adapter: Bamboo.SMTPAdapter,
+  server: "smtp.gmail.com", #System.get_env("BAMBOO_MAILER_SERVER"),
+  port: 587, #System.get_env("BAMBOO_MAILER_PORT"), # tls / 465 ssl
+  username: "fabio.petrucci@gmail.com", #System.get_env("BAMBOO_MAILER_USERNAME"),
+  password: "biospank9571", #System.get_env("BAMBOO_MAILER_PASSWORD"),
+  tls: :if_available, # can be `:always` or `:never`
+  ssl: false, # can be `true`
+  retries: 1
