@@ -2,11 +2,8 @@ defmodule Videosync.UserController do
   use Videosync.Web, :controller
 
   alias Videosync.User
-  alias Videosync.Auth
-  alias Videosync.Email
-  alias Videosync.Mailer
 
-  plug :scrub_params, "user" when action in [:create, :update]
+  plug :scrub_params, "user" when action in [:update]
   # plug Guardian.Plug.EnsureAuthenticated,
   #   [handler: Videosync.Token]
   #     when action in [:index, :show, :update, :delete]
@@ -14,26 +11,6 @@ defmodule Videosync.UserController do
   def index(conn, _params) do
     users = Repo.all(User)
     render(conn, "index.json", users: users)
-  end
-
-  def create(conn, %{"user" => user_params}) do
-    changeset = User.registration_changeset(%User{}, user_params)
-
-    case Repo.insert(changeset) do
-      {:ok, user} ->
-        new_conn = Auth.login(conn, user)
-
-        Email.welcome_email |> Mailer.deliver_later
-
-        new_conn
-        |> put_status(:created)
-        |> put_resp_header("location", user_path(new_conn, :show, user))
-        |> render("show.json", user: user)
-      {:error, changeset} ->
-        conn
-        |> put_status(:unprocessable_entity)
-        |> render(Videosync.ChangesetView, "error.json", changeset: changeset)
-    end
   end
 
   def show(conn, %{"id" => id}) do

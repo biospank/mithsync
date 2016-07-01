@@ -5,6 +5,8 @@ defmodule Videosync.Repo.Migrations.CreateUser do
     create table(:users) do
       add :email, :string
       add :password_hash, :string
+      add :activation_code, :string
+      add :active, :boolean, default: false
 
       timestamps
     end

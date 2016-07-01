@@ -1,12 +1,21 @@
 defmodule Videosync.Email do
-  import Bamboo.Email
+  use Bamboo.Phoenix, view: Videosync.EmailView
 
-  def welcome_email do
+  def welcome_email(%Videosync.User{email: email, activation_code: code}) do
+    base_email
+    |> to(email)
+    |> subject("Zinkroo registration")
+    |> html_body("""
+        Welcome to <strong>Zinkroo</strong>
+        <br />
+        Use the following activation code to enable your account.
+        <br />
+        Activation code: #{code}
+      """)
+  end
+
+  defp base_email do
     new_email
-    |> to("dirosa.ilaria@gmail.com")
     |> from("support@zinkroo.com")
-    |> subject("Welcome!!!")
-    |> html_body("<strong>Welcome</strong>")
-    |> text_body("welcome")
   end
 end

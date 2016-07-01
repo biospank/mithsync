@@ -17,3 +17,9 @@ config :videosync, Videosync.Repo,
   database: "videosync_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+# Configure Bamboo test
+config :bamboo, :refute_timeout, 10
+
+config :videosync, Videosync.Mailer,
+  adapter: Bamboo.TestAdapter

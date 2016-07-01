@@ -1,5 +1,6 @@
 defmodule Videosync.UserControllerTest do
   use Videosync.ConnCase
+  # use Bamboo.Test, shared: :true
 
   alias Videosync.User
   @valid_attrs %{
@@ -20,22 +21,6 @@ defmodule Videosync.UserControllerTest do
     |> put_req_header("accept", "application/json")
 
     {:ok, conn: conn, user: user, jwt: jwt, claims: full_claims}
-  end
-
-  @new_user %{
-    email: "some_other@content",
-    password: "secret",
-    password_confirmation: "secret"
-  }
-  test "creates and renders resource when data is valid", %{conn: conn} do
-    conn = post conn, user_path(conn, :create), user: @new_user
-    assert json_response(conn, 201)["data"]["id"]
-    assert Repo.get(User, json_response(conn, 201)["data"]["id"])
-  end
-
-  test "does not create resource and renders errors when data is invalid", %{conn: conn} do
-    conn = post conn, user_path(conn, :create), user: @invalid_attrs
-    assert json_response(conn, 422)["errors"] != %{}
   end
 
   test "lists all entries on index", %{conn: conn} do

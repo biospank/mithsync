@@ -1,7 +1,7 @@
 import mixinLayout from "../layout/mixin_layout";
 import textField from "../widgets/text_field";
 import feedbackButton from "../widgets/feedback_button";
-import User from "../../models/user";
+import Registration from "../../models/registration";
 
 var signUp = (function() {
   var content = function(ctrl) {
@@ -54,7 +54,7 @@ var signUp = (function() {
                   placeholder: 'Enter your Email',
                   id: 'email',
                   dataLabel: 'Email',
-                  oninput: m.withAttr("value", User.model.email),
+                  oninput: m.withAttr("value", Registration.model.email),
                   error: ctrl.errors()['email']
                 }),
                 m.component(textField, {
@@ -62,7 +62,7 @@ var signUp = (function() {
                   placeholder: 'Enter Password',
                   id: 'password',
                   dataLabel: 'Password',
-                  oninput: m.withAttr("value", User.model.password),
+                  oninput: m.withAttr("value", Registration.model.password),
                   error: ctrl.errors()['password']
                 }),
                 m.component(textField, {
@@ -70,7 +70,7 @@ var signUp = (function() {
                   placeholder: 'Enter Password',
                   id: 'password_confirmation',
                   dataLabel: 'Confirm Password',
-                  oninput: m.withAttr("value", User.model.password_confirmation),
+                  oninput: m.withAttr("value", Registration.model.password_confirmation),
                   error: ctrl.errors()['password_confirmation']
                 }),
                 m("div", { class: "text-center mgv30" }, [
@@ -97,7 +97,7 @@ var signUp = (function() {
       ctrl.errors = m.prop({});
 
       ctrl.createUser = function(args) {
-        return User.create(args).then(function() {
+        return Registration.create(args).then(function() {
           m.route("/dashboard");
         }, function(response) {
           ctrl.errors(response.errors);

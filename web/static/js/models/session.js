@@ -1,7 +1,7 @@
 import Videosync from '../videosync';
 
 var Session = {
-  url: '/sessions',
+  url: '/signin',
   extract: function(xhr, xhrOptions) {
     if (xhr.status === 201) {
       Session.token(

@@ -1,8 +1,8 @@
 import Videosync from '../videosync';
 import Session from './session'
 
-var User = {
-  url: '/users',
+var Registration = {
+  url: '/signup',
   extract: Session.extract,
   model: {
     email: m.prop(""),
@@ -24,4 +24,4 @@ var User = {
   }
 };
 
-export default User;
+export default Registration;
