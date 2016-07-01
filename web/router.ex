@@ -28,14 +28,15 @@ defmodule Videosync.Router do
   scope "/api", Videosync do
     pipe_through [:api]
 
-    resources "/users", UserController, only: [:create]
-    resources "/sessions", SessionController, only: [:create]
+    resources "/signup", RegistrationController, only: [:create]
+    resources "/signin", SessionController, only: [:create]
+    put "/activation/:code", ActivationController, :confirm
   end
 
   scope "/api", Videosync do
     pipe_through [:api, :api_auth]
 
     resources "/users", UserController, only: [:index, :show, :update, :delete]
-    resources "/sessions", SessionController, only: [:delete]
+    resources "/signout", SessionController, only: [:delete]
   end
 end

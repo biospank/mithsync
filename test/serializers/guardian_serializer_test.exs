@@ -6,7 +6,7 @@ defmodule Videosync.GuardianSerializerTest do
   alias Videosync.GuardianSerializer
 
   setup do
-    user = Repo.insert!(%User{})
+    user = Repo.insert!(%User{active: false})
     {:ok, user: user}
   end
 

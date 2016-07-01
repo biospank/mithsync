@@ -18,8 +18,15 @@ defmodule Videosync.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Videosync, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy,
-                    :logger, :gettext, :phoenix_ecto, :postgrex]]
+     applications: [:phoenix,
+                    :phoenix_pubsub,
+                    :phoenix_html,
+                    :cowboy,
+                    :logger,
+                    :gettext,
+                    :phoenix_ecto,
+                    :postgrex,
+                    :bamboo]]
   end
 
   # Specifies which paths to compile per environment.
@@ -40,7 +47,8 @@ defmodule Videosync.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:comeonin, "~> 2.4"},
-     {:guardian, "~> 0.12.0"}]
+     {:guardian, "~> 0.12.0"},
+     {:bamboo_smtp, "~> 1.0"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.
@@ -52,6 +60,6 @@ defmodule Videosync.Mixfile do
   defp aliases do
     ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
      "ecto.reset": ["ecto.drop", "ecto.setup"],
-     "test": ["ecto.create --quiet", "ecto.migrate", "test"]]
+     "test": ["ecto.drop --quiet", "ecto.create --quiet", "ecto.migrate", "test"]]
   end
 end

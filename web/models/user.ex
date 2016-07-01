@@ -5,6 +5,8 @@ defmodule Videosync.User do
     field :email, :string
     field :password, :string, virtual: true
     field :password_hash, :string
+    field :activation_code, :string
+    field :active, :boolean
 
     timestamps
   end
@@ -37,6 +39,11 @@ defmodule Videosync.User do
     |> validate_length(:password, min: 6)
     |> validate_confirmation(:password, required: true, message: "does not match password")
     |> put_password_hash()
+    |> put_activation_code()
+  end
+
+  def activation_changeset(model) do
+    Ecto.Changeset.change(model, active: true)
   end
 
   defp put_password_hash(changeset) do
@@ -46,5 +53,18 @@ defmodule Videosync.User do
       _ ->
         changeset
     end
+  end
+
+  defp put_activation_code(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true} ->
+        put_change(changeset, :activation_code, random_string(32))
+      _ ->
+        changeset
+    end
+  end
+
+  def random_string(length) do
+    :crypto.strong_rand_bytes(length) |> Base.url_encode64 |> binary_part(0, length)
   end
 end

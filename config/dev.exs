@@ -40,3 +40,14 @@ config :videosync, Videosync.Repo,
   database: "videosync_dev",
   hostname: "localhost",
   pool_size: 10
+
+# Configure Bamboo dev
+config :videosync, Videosync.Mailer,
+  adapter: Bamboo.SMTPAdapter,
+  server: System.get_env("BAMBOO_MAILER_SERVER"),
+  port: 587, # tls / 465 ssl
+  username: System.get_env("BAMBOO_MAILER_USERNAME"),
+  password: System.get_env("BAMBOO_MAILER_PASSWORD"),
+  tls: :if_available, # can be `:always` or `:never`
+  ssl: false, # can be `true`
+  retries: 1
