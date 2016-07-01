@@ -16,7 +16,7 @@ var feedbackButton = {
 
   view: function(ctrl, attrs) {
     return m("button[type=submit]", {
-              class: 'btn btn-success btn-lg',
+              class: attrs.style, //'btn btn-success btn-lg',
               onclick: ctrl.actionWithFeedback
             }, ctrl.label());
   }

@@ -34,7 +34,8 @@ var signIn = (function() {
                 m.component(feedbackButton, {
                   action: ctrl.createSession,
                   label: 'Login',
-                  feedbackLabel: 'Authenticating...'
+                  feedbackLabel: 'Authenticating...',
+                  style: 'btn btn-success btn-lg'
                 })
               ]),
               m("p", { class: "text-center" }, "Haven't you got an account yet? ", [

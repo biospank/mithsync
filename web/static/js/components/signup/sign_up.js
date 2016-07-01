@@ -76,12 +76,13 @@ var signUp = (function() {
                 m("div", { class: "text-center mgv30" }, [
                   m.component(feedbackButton, {
                     action: ctrl.createUser,
-                    label: 'Send',
-                    feedbackLabel: 'Authorizing...'
+                    label: 'Register',
+                    feedbackLabel: 'Signing up...',
+                    style: 'btn btn-success btn-lg'
                   })
                 ]),
                 m("p", { class: "text-center" }, "Already a member. ", [
-                  m("a", { href: "/signin", config: m.route }, "Get login!")
+                  m("a", { href: "/signin", config: m.route }, "Login!")
                 ])
               ])
             ])
@@ -98,7 +99,7 @@ var signUp = (function() {
 
       ctrl.createUser = function(args) {
         return Registration.create(args).then(function() {
-          m.route("/dashboard");
+          m.route("/activate");
         }, function(response) {
           ctrl.errors(response.errors);
         })

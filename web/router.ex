@@ -30,7 +30,7 @@ defmodule Videosync.Router do
 
     resources "/signup", RegistrationController, only: [:create]
     resources "/signin", SessionController, only: [:create]
-    put "/activation/:code", ActivationController, :confirm
+    put "/activate/:code", ActivationController, :confirm
   end
 
   scope "/api", Videosync do

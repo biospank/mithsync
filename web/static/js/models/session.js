@@ -3,7 +3,7 @@ import Videosync from '../videosync';
 var Session = {
   url: '/signin',
   extract: function(xhr, xhrOptions) {
-    if (xhr.status === 201) {
+    // if (xhr.status >= 200 || xhr.status >= 200) {
       Session.token(
         _.last(
           _.split(
@@ -12,7 +12,7 @@ var Session = {
           )
         )
       );
-    }
+    // }
 
     return xhr.response;
 

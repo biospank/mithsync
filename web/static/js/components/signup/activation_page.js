@@ -1,8 +1,10 @@
 import mixinLayout from "../layout/mixin_layout";
 import textField from "../widgets/text_field";
+import feedbackButton from "../widgets/feedback_button";
+import Activation from "../../models/activation";
 
-var retrievePsw = (function() {
-  var content = function() {
+var activationPage = (function() {
+  var content = function(ctrl) {
     return [
       m("header", { class: "header-text row space-bottom" }, [
         m("hgroup", { class: "text-center col-md-8 col-md-offset-2" }, [
@@ -13,11 +15,20 @@ var retrievePsw = (function() {
       ]),
       m("div", { class: "col-sm-6 center-block" }, [
         m("form", { class: "light-form" }, [
-          m.component(textField, { type: 'text', placeholder: 'Enter your code', id: 'activation_code' }),
+          m.component(textField, {
+            type: 'text',
+            placeholder: 'Enter your code',
+            id: 'activation_code',
+            oninput: m.withAttr("value", Activation.model.activation_code),
+            error: ctrl.errors()['activation_code']
+          }),
           m("div", { class: "text-center mgv30" }, [
-            m("button[type=submit]", {
-              class: 'btn btn-success contour btn-lg'
-            }, "Send" )
+            m.component(feedbackButton, {
+              action: ctrl.activateUser,
+              label: 'Activate',
+              feedbackLabel: 'Activating...',
+              style: 'btn btn-success contour btn-lg'
+            })
           ])
         ])
       ])
@@ -25,8 +36,20 @@ var retrievePsw = (function() {
   };
 
   return {
+    controller: function(){
+      var ctrl = this;
+      ctrl.errors = m.prop({});
+
+      ctrl.activateUser = function(args) {
+        return Activation.confirm(args).then(function() {
+          m.route("/dashboard");
+        }, function(response) {
+          ctrl.errors(response.errors);
+        })
+      };
+    },
     view: mixinLayout(content, 'login')
   };
 })();
 
-export default retrievePsw;
+export default activationPage;
