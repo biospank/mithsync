@@ -67,8 +67,11 @@ var signIn = (function() {
       ctrl.errors = m.prop({});
 
       ctrl.createSession = function(args) {
-        return Session.create(args).then(function() {
-          m.route("/dashboard");
+        return Session.create(args).then(function(data) {
+          if(data.active)
+            m.route("/dashboard");
+          else
+            m.route("/activate");
         }, function(response) {
           ctrl.errors(response.errors);
         })

@@ -3,7 +3,6 @@ import Session from './session'
 
 var Registration = {
   url: '/signup',
-  extract: Session.extract,
   model: {
     email: m.prop(""),
     password: m.prop(""),
@@ -17,8 +16,7 @@ var Registration = {
         config: function(xhr) {
           xhr.setRequestHeader("accept", "application/json");
           xhr.setRequestHeader("content-type", "application/json");
-        },
-        extract: this.extract
+        }
       }, args)
     );
   }
