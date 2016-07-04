@@ -8,7 +8,7 @@ var activationPage = (function() {
     return [
       m("header", { class: "header-text row space-bottom" }, [
         m("hgroup", { class: "text-center col-md-8 col-md-offset-2" }, [
-          m("h1", { class: "header-text__title" }, "We've send you an email with your activation code"),
+          m("h1", { class: "header-text__title" }, m.trust("We've sent you an email <br> with your activation code")),
           m("h2", { class: "header-text__subtitle" }, "You need to insert it below to active the account"),
           m("hr", { class: "header-text__separator" })
         ])
@@ -29,6 +29,10 @@ var activationPage = (function() {
               feedbackLabel: 'Activating...',
               style: 'btn btn-success contour btn-lg'
             })
+          ]),
+          m("p", { class: "text-center" }, [
+            m("span", "I didn't get the activation code, "),
+            m("a", { href: "#" }, "resend it to me")
           ])
         ])
       ])
