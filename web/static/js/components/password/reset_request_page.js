@@ -1,7 +1,7 @@
 import mixinLayout from "../layout/mixin_layout";
 import textField from "../widgets/text_field";
 
-var retrievePsw = (function() {
+var resetRequestPage = (function() {
   var content = function() {
     return [
       m("header", { class: "header-text row space-bottom" }, [
@@ -17,7 +17,7 @@ var retrievePsw = (function() {
           m("div", { class: "text-center mgv30" }, [
             m("button[type=submit]", {
               class: 'btn btn-success contour btn-lg'
-            }, "Retrive Password" )
+            }, "Send instructions" )
           ])
         ])
       ])
@@ -25,8 +25,20 @@ var retrievePsw = (function() {
   };
 
   return {
+    controller: function(){
+      var ctrl = this;
+      ctrl.errors = m.prop({});
+
+      ctrl.createSession = function(args) {
+        return Session.create(args).then(function(data) {
+          m.route("/password/reset");
+        }, function(response) {
+          ctrl.errors(response.errors);
+        })
+      };
+    },
     view: mixinLayout(content, 'login')
   };
 })();
 
-export default retrievePsw;
+export default resetRequestPage;

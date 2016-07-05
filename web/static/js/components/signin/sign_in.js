@@ -28,7 +28,7 @@ var signIn = (function() {
                 error: ctrl.errors()['password']
               }),
               m("p", [
-                m("a", { href: "/retrievepsw", config: m.route }, "Forgot password?")
+                m("a", { href: "/password/request", config: m.route }, "Forgot password?")
               ]),
               m("div", { class: "text-center mgv30" }, [
                 m.component(feedbackButton, {
