@@ -13,7 +13,7 @@ defmodule Videosync.User do
   end
 
   @required_fields ~w(email password)
-  @required_fields ~w(password)
+  @required_reset_fields ~w(password)
   @optional_fields ~w()
 
   @doc """
