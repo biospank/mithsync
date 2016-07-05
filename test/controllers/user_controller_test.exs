@@ -31,7 +31,7 @@ defmodule Videosync.UserControllerTest do
   test "shows chosen resource", %{conn: conn, user: user} do
     conn = get conn, user_path(conn, :show, user)
     assert json_response(conn, 200)["data"] ==
-      %{"id" => user.id, "email" => user.email}
+      %{"id" => user.id, "email" => user.email, "active" => false}
   end
 
   test "does not show resource and instead throw error when id is nonexistent", %{conn: conn} do
