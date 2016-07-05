@@ -6,12 +6,14 @@ defmodule Videosync.User do
     field :password, :string, virtual: true
     field :password_hash, :string
     field :activation_code, :string
+    field :reset_code, :string
     field :active, :boolean
 
     timestamps
   end
 
   @required_fields ~w(email password)
+  @required_fields ~w(password)
   @optional_fields ~w()
 
   @doc """
@@ -24,6 +26,11 @@ defmodule Videosync.User do
     model
     |> cast(params, @required_fields, @optional_fields)
     |> validate_format(:email, ~r/@/)
+  end
+
+  def reset_changeset(model, params \\ %{}) do
+    model
+    |> cast(params, @required_reset_fields, @optional_fields)
   end
 
   def login_changeset(model, params \\ %{}) do
@@ -40,6 +47,18 @@ defmodule Videosync.User do
     |> validate_confirmation(:password, required: true, message: "does not match password")
     |> put_password_hash()
     |> put_activation_code()
+  end
+
+  def code_reset_changeset(model) do
+    Ecto.Changeset.change(model, reset_code: random_string(32))
+  end
+
+  def password_reset_changeset(model, params \\ %{}) do
+    model
+    |> reset_changeset(params)
+    |> validate_length(:password, min: 6)
+    |> validate_confirmation(:password, required: true, message: "does not match password")
+    |> put_password_hash()
   end
 
   def activation_changeset(model) do
@@ -64,7 +83,7 @@ defmodule Videosync.User do
     end
   end
 
-  def random_string(length) do
+  defp random_string(length) do
     :crypto.strong_rand_bytes(length) |> Base.url_encode64 |> binary_part(0, length)
   end
 end

@@ -6,6 +6,7 @@ defmodule Videosync.Repo.Migrations.CreateUser do
       add :email, :string
       add :password_hash, :string
       add :activation_code, :string
+      add :reset_code, :string
       add :active, :boolean, default: false
 
       timestamps
