@@ -5,7 +5,7 @@ var Activation = {
   url: '/activate/',
   extract: Session.extract,
   model: {
-    activation_code: m.prop("")
+    activation_code: m.prop("invalid-code")
   },
   confirm: function(args) {
     return m.request(_.assign({

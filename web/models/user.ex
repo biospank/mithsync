@@ -14,6 +14,7 @@ defmodule Videosync.User do
 
   @required_fields ~w(email password)
   @required_reset_fields ~w(password)
+  @required_reset_request_fields ~w(email)
   @optional_fields ~w()
 
   @doc """
@@ -30,7 +31,8 @@ defmodule Videosync.User do
 
   def reset_changeset(model, params \\ %{}) do
     model
-    |> cast(params, @required_reset_fields, @optional_fields)
+    |> cast(params, @required_reset_request_fields, @optional_fields)
+    |> validate_format(:email, ~r/@/)
   end
 
   def login_changeset(model, params \\ %{}) do
@@ -49,13 +51,13 @@ defmodule Videosync.User do
     |> put_activation_code()
   end
 
-  def code_reset_changeset(model) do
+  def gen_code_reset_changeset(model) do
     Ecto.Changeset.change(model, reset_code: random_string(32))
   end
 
   def password_reset_changeset(model, params \\ %{}) do
     model
-    |> reset_changeset(params)
+    |> cast(params, @required_reset_fields, @optional_fields)
     |> validate_length(:password, min: 6)
     |> validate_confirmation(:password, required: true, message: "does not match password")
     |> put_password_hash()

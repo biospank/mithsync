@@ -18,7 +18,7 @@ export default m.route(document.getElementById('app'), "/", {
 
   "/password/request": resetRequestPage,
 
-  "/password/reset": resetPage,
+  "/password/reset/:code": resetPage,
 
   "/userprofile": userProfile
 

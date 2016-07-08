@@ -14,6 +14,10 @@ var activationPage = (function() {
         ])
       ]),
       m("div", { class: "col-sm-6 center-block" }, [
+        m("div", {
+          class: "alert alert-warning",
+          role: "alert"
+        }, "An email has just been sent with the instructions to follow. Please insert the code below to activate your account"),
         m("form", { class: "light-form" }, [
           m.component(textField, {
             type: 'text',
@@ -32,7 +36,7 @@ var activationPage = (function() {
           ]),
           m("p", { class: "text-center" }, [
             m("span", "I didn't get the activation code, "),
-            m("a", { href: "#" }, "resend it to me")
+            m("a", { href: "#" }, "resend activation email")
           ])
         ])
       ])
