@@ -8,6 +8,7 @@ defmodule Videosync.User do
     field :activation_code, :string
     field :reset_code, :string
     field :active, :boolean
+    has_many :videos, Videosync.Video
 
     timestamps
   end

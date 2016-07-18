@@ -34,7 +34,7 @@ defmodule Videosync.PasswordResetControllerTest do
     {:ok, conn: conn, user: user}
   end
 
-  test "password reset for a valid email", %{conn: conn, user: user} do
+  test "password reset for a valid email", %{conn: conn} do
     post conn, password_reset_path(conn, :create), user: %{email: @valid_email}
     user = Repo.get_by(User, email: @valid_email)
     # assert(Plug.Conn.get_resp_header(conn, "location")) == ["http://localhost:4001/?/reset"]
