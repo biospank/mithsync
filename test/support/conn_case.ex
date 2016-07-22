@@ -26,6 +26,7 @@ defmodule Videosync.ConnCase do
       import Ecto.Query, only: [from: 1, from: 2]
 
       import Videosync.Router.Helpers
+      import Videosync.TestHelpers
 
       # The default endpoint for testing
       @endpoint Videosync.Endpoint

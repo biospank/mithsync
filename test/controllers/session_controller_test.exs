@@ -32,6 +32,14 @@ defmodule Videosync.SessionControllerTest do
       user: @invalid_email
     )
     assert json_response(conn, 404)
+
+    # assert_error_sent :not_found, fn -> 
+    #   conn = post(
+    #     conn,
+    #     session_path(conn, :create),
+    #     user: @invalid_email
+    #   )
+    # end
   end
 
   @invalid_password %{email: "some@content", password: "pass"}
