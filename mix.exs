@@ -48,7 +48,8 @@ defmodule Videosync.Mixfile do
      {:cowboy, "~> 1.0"},
      {:comeonin, "~> 2.4"},
      {:guardian, "~> 0.12.0"},
-     {:bamboo_smtp, "~> 1.0"}]
+     {:bamboo_smtp, "~> 1.0"},
+     {:arc, "~> 0.5.3"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.

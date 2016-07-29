@@ -2,10 +2,11 @@ import mixinLayout from "../layout/mixin_layout";
 import textField from "../widgets/text_field";
 import projects from "./projects";
 import Session from "../../models/session";
+import Dropper from "../../models/dropper";
 
 var dashboard = (function() {
 
-  var content = function() {
+  var content = function(ctrl) {
     return [
       m(".row", [
         m(".col-md-4", {}, [
@@ -33,6 +34,7 @@ var dashboard = (function() {
             m("p", { class: "ibox__description" }, [
               m("small", "Your Library Archive")
             ]),
+            m("p", { class: "dropzone", id: "dropper", config: ctrl.initializeDropper}),
             m("div", { class: "ibox__footer" }, [
               m("a", { class: "btn btn-success" }, "Go to the Library")
             ])
@@ -44,8 +46,16 @@ var dashboard = (function() {
 
   return {
     controller: function() {
-      if(!Session.token())
+      var ctrl = this;
+
+      if(!Session.token()) {
         m.route("/signin");
+      }
+
+      ctrl.initializeDropper = function() {
+        Dropper.init("p#dropper");
+      };
+
     },
     view: mixinLayout(content)
   };
