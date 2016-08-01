@@ -4,8 +4,8 @@
   @include size(260px, 100%);
   min-height: 100%;
   display: block;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  @include gradient-vertical(#FFA534, rgba(236, 22, 87, 0.6), 0%, 150%);
+  // background-repeat: no-repeat;
+  // background-attachment: fixed;
+  // @include gradient-vertical(#FFA534, rgba(236, 22, 87, 0.6), 0%, 150%);
   // @include gradient-vertical(#81afd3, #006dbe, 0%, 100%);
 }

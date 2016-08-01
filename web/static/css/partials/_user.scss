@@ -1,7 +1,7 @@
 .user {
   padding: 20px 0;
-  color: white;
-  @include border(rgba(255, 255, 255, 0.2), 1px, bottom);
+  // color: white;
+  // @include border(rgba(255, 255, 255, 0.2), 1px, bottom);
   &.internal {
     color: #333333;
     font-weight: 300;
@@ -30,31 +30,31 @@
     text-align: center;
     padding: 15px 15px 0 15px;
   }
-  &__name {
-    color: white;
-    margin-bottom: 10px;
-    display: block;
-    &:hover, &:focus {
-      text-decoration: none;
-      color: white;
-    }
-    .caret {
-      margin-left: 8px;
-    }
-  }
-  &__nav {
-    ul {
-      li {
-        a {
-          color: white;
-          @include transition(all 0.3s ease-out);
-          &:hover {
-            text-decoration: none;
-            background: rgba(255, 255, 255, 0.13);
-            border-radius: 4px;
-          }
-        }
-      }
-    }
-  }
+  // &__name {
+  //   color: white;
+  //   margin-bottom: 10px;
+  //   display: block;
+  //   &:hover, &:focus {
+  //     text-decoration: none;
+  //     color: white;
+  //   }
+  //   .caret {
+  //     margin-left: 8px;
+  //   }
+  // }
+  // &__nav {
+  //   ul {
+  //     li {
+  //       a {
+  //         color: white;
+  //         @include transition(all 0.3s ease-out);
+  //         &:hover {
+  //           text-decoration: none;
+  //           background: rgba(255, 255, 255, 0.13);
+  //           border-radius: 4px;
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 }

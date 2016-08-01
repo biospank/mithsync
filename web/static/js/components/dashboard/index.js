@@ -1,6 +1,6 @@
 import mixinLayout from "../layout/mixin_layout";
 import textField from "../widgets/text_field";
-import projects from "./projects";
+import recentVideo from "./recent_videos";
 import Session from "../../models/session";
 import Dropper from "../../models/dropper";
 
@@ -26,7 +26,19 @@ var dashboard = (function() {
           ])
         ]),
         m(".col-md-4", {}, [
-          m.component(projects)
+          m(".ibox", [
+            m("h4", { class: "ibox__head" }, "Projects list" ),
+            m("p", { class: "ibox__description" }, [
+              m("small", "Here, You can get the last 4 projects")
+            ]),
+            m("div", { class: "ibox__body" }, [
+              m.component(recentVideo)
+            ]),
+            m("footer", { class: "ibox__footer" }, [
+              m("a", { href: "/video", class: "btn btn-success", role: "button", config: m.route }, "View all"),
+              m("a", { href: "/video/new", class: "btn btn-primary", role: "button", config: m.route }, "Create NEW")
+            ])
+          ])
         ]),
         m(".col-md-4", {}, [
           m(".ibox", [
@@ -36,7 +48,7 @@ var dashboard = (function() {
             ]),
             m("p", { class: "dropzone", id: "dropper", config: ctrl.initializeDropper}),
             m("div", { class: "ibox__footer" }, [
-              m("a", { class: "btn btn-success" }, "Go to the Library")
+              m("a", { href: "/library", class: "btn btn-success", config: m.route }, "Go to the Library")
             ])
           ])
         ])
