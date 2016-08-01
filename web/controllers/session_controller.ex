@@ -5,7 +5,7 @@ defmodule Videosync.SessionController do
 
   def create(conn, %{"user" => user_params}) do
     case Auth.login_by_email_and_password(conn, user_params["email"], user_params["password"], repo: Repo) do
-      {:ok, user, new_conn} ->
+      {:ok, user, _} ->
         Auth.login(conn, user)
         |> put_status(:created)
         |> render(Videosync.UserView, "show.json", user: user)

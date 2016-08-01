@@ -37,7 +37,7 @@ defmodule Videosync.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.1.4"},
+    [{:phoenix, "~> 1.2.0"},
      {:phoenix_pubsub, "~> 1.0"},
      {:postgrex, ">= 0.0.0"},
      {:ecto, "~> 2.0.1"},
@@ -46,9 +46,9 @@ defmodule Videosync.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
-     {:comeonin, "~> 2.4"},
+     {:comeonin, "~> 2.5.2"},
      {:guardian, "~> 0.12.0"},
-     {:bamboo_smtp, "~> 1.0"},
+     {:bamboo_smtp, "~> 1.1"},
      {:arc, "~> 0.5.3"}]
   end
 
