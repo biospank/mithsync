@@ -1,8 +1,10 @@
 import mixinLayout from "../layout/mixin_layout";
+import Session from "../../models/session";
+import Slider from "../../models/slider";
 
 var editVideo = (function() {
 
-  var content = function() {
+  var content = function(ctrl) {
     return [
       m("header", { class: "text-right" }, [
         m("a", { class: "btn btn-success" }, "Save"),
@@ -20,6 +22,9 @@ var editVideo = (function() {
           ])
         ])
       ]),
+      m(".clearfix", [
+        m("div", { id: "slider", config: ctrl.initializeSlider })
+      ]),
       m("footer", { class: "text-right" }, [
         m("a", { class: "btn btn-success" }, "Add Contents")
       ])
@@ -27,7 +32,18 @@ var editVideo = (function() {
   };
 
   return {
-    controller: function() {},
+    controller: function() {
+      var ctrl = this;
+
+      if(!Session.token()) {
+        m.route("/signin");
+      }
+
+      ctrl.initializeSlider = function() {
+        Slider.init("slider");
+      };
+
+    },
     view: mixinLayout(content)
   };
 })();
