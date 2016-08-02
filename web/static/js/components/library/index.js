@@ -1,15 +1,16 @@
 import mixinLayout from "../layout/mixin_layout";
+import Session from "../../models/session";
+import Dropper from "../../models/dropper";
 
 var library = (function() {
 
-  var content = function() {
+  var content = function(ctrl) {
     return [
-      m("div", { class: "row" }, [
-        m("h5", "Get file from your computer"),
-        m("form", { class: "col-sm-7" }, [
-          m("input", { type: "file" })
-        ])
-      ]),
+      m("div", {
+        class: "dropzone needsclick dz-clickable",
+        id: "dropper",
+        config: ctrl.initializeDropper
+      }),
       m("div", { class: "clearfix" }, [
         m("div", { class: "pull-left" }, [
           m("form", { class: "navbar-form search-form", role: "search" }, [
@@ -196,7 +197,27 @@ var library = (function() {
   };
 
   return {
-    controller: function() {},
+    controller: function() {
+      var ctrl = this;
+      ctrl.images = m.prop([]);
+      ctrl.errors = m.prop({});
+
+      if(!Session.token()) {
+        m.route("/signin");
+      }
+
+      ctrl.initializeDropper = function() {
+        Dropper.init("#dropper");
+      };
+
+      ctrl.getImages = function(params, args) {
+        return Image.all(params, args).then(function(images) {
+          ctrl.images = images;
+        }, function(response) {
+          ctrl.errors(response.errors);
+        })
+      };
+    },
     view: mixinLayout(content)
   };
 })();
