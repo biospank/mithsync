@@ -14,11 +14,17 @@ defmodule Videosync.ImageController do
     )
   end
 
-  def index(conn, _params, user) do
+  def index(conn, params, user) do
     case File.ls(ArcImage.storage_dir(:thumb, {nil, user})) do
       {:ok, files} ->
-        images = Image.map_all(files, user)
-        render(conn, "index.json", images: images)
+        paged_images = Image.map_all(files, user)
+          |> Scrivener.paginate(
+            %{
+              page: params["page"] || 1,
+              page_size: 5
+            }
+          )
+        render(conn, "index.json", page: paged_images)
       {:error, _} ->
         conn
         |> put_status(404)
