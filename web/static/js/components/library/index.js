@@ -4,10 +4,10 @@ import Dropper from "../../models/dropper";
 import Image from "../../models/image";
 import thumbItem from "./thumb_item";
 import pagination from "../widgets/pagination";
+import confirmDialog from "../widgets/confirm_dialog";
 
 var library = (function() {
   var paginate = function(ctrl) {
-    console.log(ctrl.pageInfo);
     // to use pagination component you need to provide the following params:
     // 1. pagination (the component)
     // 2. a json configuration options
@@ -41,6 +41,7 @@ var library = (function() {
         id: "dropper",
         config: ctrl.initializeDropper
       }),
+      m(confirmDialog),
       m("div", { class: "clearfix" }, [
         m("div", { class: "pull-left" }, [
           m("form", { class: "navbar-form search-form", role: "search" }, [
@@ -53,14 +54,11 @@ var library = (function() {
               m("input", { type: "text", class: "form-control", placeholder: "Search for..." })
             ])
           ])
-        ]),
-        m("div", { class: "pull-right" }, [
-          m("a", { class: "btn btn-success" }, "Create content")
         ])
       ]),
       m("div", { class: "row" }, [
         ctrl.images().map(function(image) {
-          return m(thumbItem, image);
+          return m(thumbItem, image, ctrl);
         })
       ]),
       paginate(ctrl)
@@ -94,9 +92,19 @@ var library = (function() {
         m.route("/signin");
       }
 
-      ctrl.initializeDropper = function() {
-        Dropper.init("#dropper");
-      };
+      ctrl.initializeDropper = _.once(function() {
+        Dropper.init("#dropper", {
+          onQueueComplete: function() {
+            ctrl.getImages(
+              _.assign(
+                ctrl.pageInfo.defaultParams || {},
+                { page: ctrl.pageInfo.pageNumber }
+              ),
+              ctrl.requestOptions
+            );
+          }
+        });
+      });
 
       ctrl.getImages = function(params, args) {
         return Image.all(params, args).then(function(images) {

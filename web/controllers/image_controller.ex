@@ -17,13 +17,17 @@ defmodule Videosync.ImageController do
   def index(conn, params, user) do
     case File.ls(ArcImage.storage_dir(:thumb, {nil, user})) do
       {:ok, files} ->
-        paged_images = Image.map_all(files, user)
-          |> Scrivener.paginate(
-            %{
-              page: params["page"] || 1,
-              page_size: 5
-            }
-          )
+        images = Image.map_all(files, user)
+        paged_images = paginate(images, params["page"] || 1)
+
+        paged_images =
+        case paged_images do
+          %Scrivener.Page{entries: [], total_entries: total} when total > 0 ->
+            paginate(images, String.to_integer(params["page"]) - 1)
+          _ ->
+            paged_images
+        end
+
         render(conn, "index.json", page: paged_images)
       {:error, _} ->
         conn
@@ -49,5 +53,15 @@ defmodule Videosync.ImageController do
   def delete(conn, %{"id" => filename}, user) do
     ArcImage.delete {filename, user}
     send_resp(conn, :no_content, "")
+  end
+
+  defp paginate(items, page) do
+    Scrivener.paginate(
+      items,
+      %{
+        page: page,
+        page_size: 5
+      }
+    )
   end
 end

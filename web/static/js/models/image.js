@@ -15,6 +15,19 @@ var Image = {
         }
       }, args)
     );
+  },
+  delete: function(filename) {
+    return m.request(
+      {
+        method: "DELETE",
+        url: Videosync.apiBaseUrl() +
+          this.url + "/" + filename,
+        config: function(xhr) {
+          xhr.setRequestHeader("accept", "application/json");
+          xhr.setRequestHeader("Authorization", Videosync.realm + " " + Session.token())
+        }
+      }
+    );
   }
 };
 

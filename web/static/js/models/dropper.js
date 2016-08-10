@@ -2,7 +2,8 @@ import Videosync from '../videosync';
 import Session from './session'
 
 var Dropper = {
-  init: function(element) {
+  init: function(element, opts) {
+    this.opts = opts;
     Dropzone.autoDiscover = false;
 
     var dropzone = new Dropzone(element, {
@@ -13,8 +14,13 @@ var Dropper = {
       maxFilesize: 1,
       parallelUploads: 2,
       acceptedFiles: "image/*",
-      maxFiles: 5
+      maxFiles: 20
     });
+
+    dropzone.on("queuecomplete", function(event) {
+      if(this.opts.onQueueComplete)
+        this.opts.onQueueComplete();
+    }.bind(this));
   }
   // Dropzone.options.dropFile = {
   //   url: function() {
