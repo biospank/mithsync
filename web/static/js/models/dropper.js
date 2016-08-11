@@ -21,6 +21,12 @@ var Dropper = {
       if(this.opts.onQueueComplete)
         this.opts.onQueueComplete();
     }.bind(this));
+
+    dropzone.on("success", function(file) {
+      _.delay(function(file) {
+        dropzone.removeFile(file);
+      }, 3000, file);
+    });
   }
   // Dropzone.options.dropFile = {
   //   url: function() {

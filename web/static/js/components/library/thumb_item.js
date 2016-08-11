@@ -31,11 +31,10 @@ var thumbItem = {
   view: function(ctrl, image){
     ctrl.image = image;
     return m(".col-xs-6 .col-sm-4 .col-md-3", [
-      m("a", { href: "#" }, [
+      m("a", {}, [
         m("img", { src: ctrl.image.path, class: "img-responsive" }),
         m("div", { class: "btn-group", role: "group" }, [
           m("button", {
-            href: "#",
             onclick: ctrl.delete,
             type: "button",
             class: "btn btn-default"

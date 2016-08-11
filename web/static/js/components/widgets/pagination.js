@@ -60,6 +60,8 @@ var pagination = {
           ])
         ))
       ])
+    } else {
+      return m('br');
     }
   }
 }
