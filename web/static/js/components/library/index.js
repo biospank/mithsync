@@ -47,11 +47,26 @@ var library = (function() {
           m("form", { class: "navbar-form search-form", role: "search" }, [
             m(".input-group", [
               m("span", { class: "input-group-btn" }, [
-                m("button", { class: "btn btn-default", type: "button" }, [
+                m("button[type=submit]", {
+                  class: "btn btn-default",
+                  onclick: function(event) {
+                    event.preventDefault();
+
+                    ctrl.getImages({
+                      page: 1,
+                      filter: ctrl.filter()
+                    }, ctrl.requestOptions);
+                  }
+                }, [
                   m("i", { class: "fa fa-search" })
                 ])
               ]),
-              m("input", { type: "text", class: "form-control", placeholder: "Search for..." })
+              m("input", {
+                type: "text",
+                class: "form-control",
+                placeholder: "Search for...",
+                oninput: m.withAttr("value", ctrl.filter)
+              })
             ])
           ])
         ])
@@ -71,6 +86,7 @@ var library = (function() {
 
       ctrl.images = m.prop([]);
       ctrl.errors = m.prop({});
+      ctrl.filter = m.prop("");
       ctrl.requestOptions = {
         unwrapSuccess: function(response) {
           if(response) {

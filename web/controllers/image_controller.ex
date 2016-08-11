@@ -17,7 +17,7 @@ defmodule Videosync.ImageController do
   def index(conn, params, user) do
     case File.ls(ArcImage.storage_dir(:thumb, {nil, user})) do
       {:ok, files} ->
-        images = Image.map_all(files, user)
+        images = Image.map_all(files, user, params["filter"])
         paged_images = paginate(images, params["page"] || 1)
 
         paged_images =

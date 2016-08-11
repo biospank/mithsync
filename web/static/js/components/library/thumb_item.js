@@ -32,7 +32,11 @@ var thumbItem = {
     ctrl.image = image;
     return m(".col-xs-6 .col-sm-4 .col-md-3", [
       m("a", {}, [
-        m("img", { src: ctrl.image.path, class: "img-responsive" }),
+        m("img", {
+          src: ctrl.image.path,
+          title: ctrl.image.name,
+          class: "img-responsive"
+        }),
         m("div", { class: "btn-group", role: "group" }, [
           m("button", {
             onclick: ctrl.delete,
