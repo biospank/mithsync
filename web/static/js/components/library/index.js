@@ -3,6 +3,7 @@ import Session from "../../models/session";
 import Dropper from "../../models/dropper";
 import Image from "../../models/image";
 import thumbItem from "./thumb_item";
+import searchForm from "../widgets/search_form";
 import pagination from "../widgets/pagination";
 import confirmDialog from "../widgets/confirm_dialog";
 
@@ -27,7 +28,7 @@ var library = (function() {
             ctrl.getImages(params, ctrl.requestOptions);
           },
           defaultParams: {
-            //archived: false
+            filter: ctrl.filter()
           }
         }
       )
@@ -44,31 +45,19 @@ var library = (function() {
       m(confirmDialog),
       m("div", { class: "clearfix" }, [
         m("div", { class: "pull-left" }, [
-          m("form", { class: "navbar-form search-form", role: "search" }, [
-            m(".input-group", [
-              m("span", { class: "input-group-btn" }, [
-                m("button[type=submit]", {
-                  class: "btn btn-default",
-                  onclick: function(event) {
-                    event.preventDefault();
+          m(searchForm, {
+            action: function(event) {
+              event.preventDefault();
 
-                    ctrl.getImages({
-                      page: 1,
-                      filter: ctrl.filter()
-                    }, ctrl.requestOptions);
-                  }
-                }, [
-                  m("i", { class: "fa fa-search" })
-                ])
-              ]),
-              m("input", {
-                type: "text",
-                class: "form-control",
-                placeholder: "Search for...",
-                oninput: m.withAttr("value", ctrl.filter)
-              })
-            ])
-          ])
+              ctrl.getImages(
+                _.assign(
+                  ctrl.pageInfo.defaultParams || {},
+                  { page: 1 }
+                ), ctrl.requestOptions
+              );
+            },
+            filter: ctrl.filter
+          })
         ])
       ]),
       m("div", { class: "row" }, [
@@ -130,7 +119,10 @@ var library = (function() {
         })
       };
 
-      ctrl.getImages({}, ctrl.requestOptions);
+      ctrl.getImages(
+        ctrl.pageInfo.defaultParams || {},
+        ctrl.requestOptions
+      );
     },
     view: mixinLayout(content)
   };
