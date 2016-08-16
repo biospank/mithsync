@@ -15,9 +15,23 @@ defmodule Videosync.VideoController do
     )
   end
 
-  def index(conn, _params, user) do
-    videos = Repo.all(user_videos(user))
-    render(conn, "index.json", videos: videos)
+  def index(conn, params, user) do
+    videos =
+      Video.own_by(user)
+      |> Video.filter_by(params["filter"])
+      |> Repo.all
+
+    paged_videos = paginate(videos, params["page"])
+
+    paged_videos =
+    case paged_videos do
+      %Scrivener.Page{entries: [], total_entries: total} when total > 0 ->
+        paginate(videos, String.to_integer(params["page"]) - 1)
+      _ ->
+        paged_videos
+    end
+
+    render(conn, "index.json", page: paged_videos)
   end
 
   def create(conn, %{"video" => video_params}, user) do
@@ -39,12 +53,12 @@ defmodule Videosync.VideoController do
   end
 
   def show(conn, %{"id" => id}, user) do
-    video = Repo.get!(user_videos(user), id)
+    video = Repo.get!(Video.own_by(user), id)
     render(conn, "show.json", video: video)
   end
 
   def update(conn, %{"id" => id, "video" => video_params}, user) do
-    video = Repo.get!(user_videos(user), id)
+    video = Repo.get!(Video.own_by(user), id)
     changeset = Video.changeset(video, video_params)
 
     case Repo.update(changeset) do
@@ -58,7 +72,7 @@ defmodule Videosync.VideoController do
   end
 
   def delete(conn, %{"id" => id}, user) do
-    video = Repo.get!(user_videos(user), id)
+    video = Repo.get!(Video.own_by(user), id)
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
@@ -67,7 +81,13 @@ defmodule Videosync.VideoController do
     send_resp(conn, :no_content, "")
   end
 
-  defp user_videos(user) do
-    assoc(user, :videos)
+  defp paginate(items, page) do
+    Scrivener.paginate(
+      items,
+      %{
+        page: page || 1,
+        page_size: 4
+      }
+    )
   end
 end

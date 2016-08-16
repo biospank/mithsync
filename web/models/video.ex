@@ -23,4 +23,14 @@ defmodule Videosync.Video do
     model
     |> cast(params, @required_fields, @optional_fields)
   end
+
+  def filter_by(query, filter) do
+    from v in query,
+      where: ilike(v.title, ^"%#{filter || ""}%") or
+        ilike(v.description, ^"%#{filter || ""}%")
+  end
+
+  def own_by(user) do
+    assoc(user, :videos)
+  end
 end

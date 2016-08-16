@@ -1,37 +1,46 @@
 import mixinLayout from "../layout/mixin_layout";
+import textField from "../widgets/text_field";
+import feedbackButton from "../widgets/feedback_button";
+import Video from "../../models/video";
 
 var newVideo = (function() {
 
-  var content = function() {
+  var content = function(ctrl) {
     return [
       m(".row", [
         m(".col-sm-6", [
           m("form", { role: "form" }, [
-            m(".form-group", [
-              m("label", "Title"),
-              m("input", { type: "text", placeholder: "Title", class: "form-control" } )
-            ]),
-            m(".form-group", [
-              m("label", "Description"),
-              m("textarea", { placeholder: "Description", rows: 9, class: "form-control" } ),
-            ]),
-            m(".form-group", [
-              m("label", "Video Link"),
-              m("input", { type: "link", placeholder: "Insert video link", class: "form-control" } )
-            ]),
-            m(".radio", [
-              m("label", [
-                m("input", { type: "radio", name: "video_type" }),
-                m("span", "Public")
-              ])
-            ]),
-            m(".radio", [
-              m("label", [
-                m("input", { type: "radio", name: "video_type" }),
-                m("span", "Private")
-              ])
-            ]),
-            m("button", { type: "submit", class: "btn btn-info" }, "Create")
+            m.component(textField, {
+              type: 'text',
+              placeholder: 'Title',
+              id: 'title',
+              dataLabel: 'Title',
+              oninput: m.withAttr("value", Video.model.title),
+              error: ctrl.errors()['title']
+            }),
+            m.component(textField, {
+              field: 'textarea',
+              rows: 9,
+              placeholder: 'Description',
+              id: 'description',
+              dataLabel: 'Description',
+              oninput: m.withAttr("value", Video.model.description),
+              error: ctrl.errors()['description']
+            }),
+            m.component(textField, {
+              type: 'link',
+              placeholder: 'link to video',
+              id: 'url',
+              dataLabel: 'Video Link',
+              oninput: m.withAttr("value", Video.model.url),
+              error: ctrl.errors()['url']
+            }),
+            m.component(feedbackButton, {
+              action: ctrl.createVideo,
+              label: 'Create',
+              feedbackLabel: 'Creating...',
+              style: 'btn btn-info'
+            })
           ])
         ]),
         m(".col-sm-6", [])
@@ -40,7 +49,18 @@ var newVideo = (function() {
   };
 
   return {
-    controller: function() {},
+    controller: function(){
+      var ctrl = this;
+      ctrl.errors = m.prop({});
+
+      ctrl.createVideo = function(args) {
+        return Video.create(args).then(function() {
+          m.route("/video/edit");
+        }, function(response) {
+          ctrl.errors(response.errors);
+        })
+      };
+    },
     view: mixinLayout(content)
   };
 })();

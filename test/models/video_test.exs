@@ -15,4 +15,9 @@ defmodule Videosync.VideoTest do
     changeset = Video.changeset(%Video{}, @invalid_attrs)
     refute changeset.valid?
   end
+
+  # test "filter_by with a filter" do
+  #   query = Video.filter_by(Video, "test")
+  #   assert query == Ecto.Queryable
+  # end
 end
