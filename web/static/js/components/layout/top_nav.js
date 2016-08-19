@@ -20,7 +20,7 @@ var topNav = {
           m('a', { class: 'navbar-brand', href: '#' }, "Sinkroo")
         ]),
         m('.collapse navbar-collapse navbar-right',
-          searchForm()
+          m("a", { href: "#", class: "btn btn-success" }, "Create new")
         )
       ])
     ]);
