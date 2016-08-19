@@ -35,7 +35,7 @@ var editVideo = (function() {
     controller: function() {
       var ctrl = this;
 
-      if(!Session.token()) {
+      if(Session.isExpired()) {
         m.route("/signin");
       }
 

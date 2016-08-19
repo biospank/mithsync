@@ -4,13 +4,9 @@ defmodule Videosync.Auth do
   @realm "Videosync"
 
   def login(conn, user) do
-    new_conn = Guardian.Plug.api_sign_in(conn, user)
-    jwt = Guardian.Plug.current_token(new_conn)
-    # {:ok, claims} = Guardian.Plug.claims(new_conn)
-    # exp = Map.get(claims, "exp")
-
-    Plug.Conn.put_resp_header(new_conn, "authorization", "#{@realm} #{jwt}")
-    # |> put_resp_header("x-expires", exp)
+    Guardian.Plug.api_sign_in(conn, user)
+    |> set_authorization_header
+    |> set_expire_header
   end
 
   def login_by_email_and_password(conn, email, given_pass, opts) do
@@ -26,5 +22,17 @@ defmodule Videosync.Auth do
         dummy_checkpw()
         {:error, :not_found, conn}
     end
+  end
+
+  defp set_authorization_header(conn) do
+    jwt = Guardian.Plug.current_token(conn)
+    Plug.Conn.put_resp_header(conn, "authorization", "#{@realm} #{jwt}")
+  end
+
+  defp set_expire_header(conn) do
+    {:ok, claims} = Guardian.Plug.claims(conn)
+    exp = Map.get(claims, "exp")
+
+    Plug.Conn.put_resp_header(conn, "x-expires", "#{exp}")
   end
 end

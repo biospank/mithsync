@@ -12,6 +12,7 @@ var Session = {
           )
         )
       );
+      Session.expires(xhr.getResponseHeader("x-expires"));
     }
 
     return xhr.response;
@@ -22,6 +23,28 @@ var Session = {
       store.set('token', value)
 
     return store.get('token')
+  },
+  expires: function(value) {
+    if (arguments.length)
+      store.set('expires', value)
+
+    return store.get('expires')
+  },
+  isValid: function() {
+    if(_.isEmpty(this.token())) {
+      return false;
+    } else {
+      var unixTs = Number.parseInt(this.expires());
+
+      if(_.isNaN(unixTs)) {
+        return false;
+      } else {
+        return (unixTs*1000) > _.now();
+      }
+    }
+  },
+  isExpired: function() {
+    return !this.isValid();
   },
   model: {
     email: m.prop(""),

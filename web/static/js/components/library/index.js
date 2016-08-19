@@ -93,7 +93,7 @@ var library = (function() {
       };
       ctrl.pageInfo = {};
 
-      if(!Session.token()) {
+      if(Session.isExpired()) {
         m.route("/signin");
       }
 

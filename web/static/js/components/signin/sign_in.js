@@ -76,8 +76,8 @@ var signIn = (function() {
           ctrl.errors(response.errors);
         })
         // User.create().then(function() {
-        //   update.bind(this);
-        // })
+        //   update();
+        // }.bind(this));
       };
     },
     view: mixinLayout(content, 'login')

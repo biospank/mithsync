@@ -64,7 +64,7 @@ var userProfile = (function() {
 
   return {
     controller: function() {
-      if(!Session.token())
+      if(Session.isExpired())
         m.route("/signin");
     },
     view: mixinLayout(content)

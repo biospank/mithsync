@@ -46,7 +46,7 @@ var videoList = {
       }
     };
 
-    if(!Session.token()) {
+    if(Session.isExpired()) {
       m.route("/signin");
     }
 
