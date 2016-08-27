@@ -1,0 +1,16 @@
+.pagination {
+  & > li:first-child > a {
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+  }
+  & > li:last-child > a {
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+  }
+  & > .active > a {
+    border-color: none;
+  }
+  & > li > a, & > li > span {
+    padding: 8px 15px;
+  }
+}

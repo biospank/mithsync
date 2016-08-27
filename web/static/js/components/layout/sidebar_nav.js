@@ -14,47 +14,47 @@ var sidebarNav = {
     return m("nav", { class: "main-nav" }, [
       m("ul", { class: "nav nav-pills nav-stacked" }, [
         m("li", { class: "active" }, [
-          m("a", { href: "/dashboard", config: m.route }, [
-            m("i", { class: "fa fa-dashboard" }),
-            m("span", {}, "Dashboard")
+          m("a", { href: "/dashboard", config: m.route, class: "main-nav__tab" }, [
+            m("i", { class: "fa fa-dashboard main-nav__icon" }),
+            m("span", { class: "main-nav__voice" }, "Dashboard")
           ])
         ]),
         m("li", [
-          m("a", { href: "/library", config: m.route }, [
-            m("i", { class: "fa fa-picture-o" }),
-            m("span", {}, "Library")
+          m("a", { href: "/library", config: m.route, class: "main-nav__tab" }, [
+            m("i", { class: "fa fa-picture-o main-nav__icon" }),
+            m("span", { class: "main-nav__voice" }, "Library")
           ])
         ]),
         m("li", [
-          m("a", { href: "#collapseProjectNav", class: "collapsed user__name", "aria-expanded": false, "data-toggle": "collapse" }, [
-            m("i", { class: "fa fa-film" }),
-            m("span", {}, "Projects"),
+          m("a", { href: "#collapseProjectNav", class: "collapsed main-nav__tab", "aria-expanded": false, "data-toggle": "collapse" }, [
+            m("i", { class: "fa fa-film main-nav__icon" }),
+            m("span", { class: "main-nav__voice" }, "Projects"),
             m("i", { class: "caret" })
           ]),
           m("nav", { class: "collapse", id: "collapseProjectNav", "aria-expanded": false }, [
             m("ul", { class: "nav" }, [
               m("li", [
-                m("a", { href: "/video", config: m.route }, "List")
+                m("a", { href: "/video", config: m.route, class: "main-nav__subtab" }, "List")
               ]),
               m("li", [
-                m("a", { href: "/video/new", config: m.route }, "New")
+                m("a", { href: "/video/new", config: m.route, class: "main-nav__subtab" }, "New")
               ])
             ])
           ])
         ]),
         m("li", [
-          m("a", { href: "#collapseUserNav", class: "collapsed user__name", "aria-expanded": false, "data-toggle": "collapse" }, [
-            m("i", { class: "fa fa-cog" }),
-            m("span", {}, "Account"),
+          m("a", { href: "#collapseUserNav", class: "collapsed main-nav__tab", "aria-expanded": false, "data-toggle": "collapse" }, [
+            m("i", { class: "fa fa-cog main-nav__icon" }),
+            m("span", { class: "main-nav__voice" }, "Account"),
             m("i", { class: "caret" })
           ]),
-          m("nav", { class: "collapse user__nav", id: "collapseUserNav", "aria-expanded": false }, [
+          m("nav", { class: "collapse", id: "collapseUserNav", "aria-expanded": false }, [
             m("ul", { class: "nav" }, [
               m("li", [
-                m("a", { href: "/userprofile", config: m.route }, "Edit profile")
+                m("a", { href: "/userprofile", config: m.route, class: "main-nav__subtab" }, "Edit profile")
               ]),
               m("li", [
-                m("a", { href: "#", onclick: ctrl.logout }, "Logout")
+                m("a", { href: "#", onclick: ctrl.logout, class: "main-nav__subtab" }, "Logout")
               ])
             ])
           ])

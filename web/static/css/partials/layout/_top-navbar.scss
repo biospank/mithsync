@@ -2,7 +2,8 @@
   background-color: rgba(255,255,255,0.97);
   @include box-shadow(0 1px 5px rgba(0,0,0,0.18));
   border: none;
-  padding: 20px 0;
+  padding: 30px 15px;
+  height: 100px;
   &.navbar-fixed-top {
     left: 260px;
   }

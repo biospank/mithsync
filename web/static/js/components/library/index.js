@@ -37,29 +37,25 @@ var library = (function() {
 
   var content = function(ctrl) {
     return [
+      m(searchForm, {
+        action: function(event) {
+          event.preventDefault();
+
+          ctrl.getImages(
+            _.assign(
+              ctrl.pageInfo.defaultParams || {},
+              { page: 1 }
+            ), ctrl.requestOptions
+          );
+        },
+        filter: ctrl.filter
+      }),
       m("div", {
         class: "dropzone needsclick dz-clickable",
         id: "dropper",
         config: ctrl.initializeDropper
       }),
       m(confirmDialog),
-      m("div", { class: "clearfix" }, [
-        m("div", { class: "pull-left" }, [
-          m(searchForm, {
-            action: function(event) {
-              event.preventDefault();
-
-              ctrl.getImages(
-                _.assign(
-                  ctrl.pageInfo.defaultParams || {},
-                  { page: 1 }
-                ), ctrl.requestOptions
-              );
-            },
-            filter: ctrl.filter
-          })
-        ])
-      ]),
       m("div", { class: "row" }, [
         ctrl.images().map(function(image) {
           return m(thumbItem, image, ctrl);

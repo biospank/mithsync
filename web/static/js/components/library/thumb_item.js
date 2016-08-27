@@ -30,8 +30,8 @@ var thumbItem = {
   },
   view: function(ctrl, image){
     ctrl.image = image;
-    return m(".col-xs-6 .col-sm-4 .col-md-3", [
-      m("a", {}, [
+    return m(".col-xs-6 .col-sm-4 .col-lg-2", [
+      m("figure", { class: "thumb_libraryitem" }, [
         m("img", {
           src: ctrl.image.path,
           title: ctrl.image.name,
@@ -41,14 +41,14 @@ var thumbItem = {
           m("button", {
             onclick: ctrl.delete,
             type: "button",
-            class: "btn btn-default"
+            class: "btn btn-danger"
           }, [
             m("i", { class: "fa fa-trash", "aria-hidden": true })
           ]),
-          m("button", { type: "button", class: "btn btn-default" }, [
+          m("button", { type: "button", class: "btn btn-primary" }, [
             m("i", { class: "fa fa-pencil-square-o", "aria-hidden": true })
           ]),
-          m("button", { type: "button", class: "btn btn-default" }, [
+          m("button", { type: "button", class: "btn btn-success" }, [
             m("i", { class: "fa fa-check", "aria-hidden": true })
           ])
         ])

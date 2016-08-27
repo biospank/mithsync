@@ -18,7 +18,7 @@ defmodule Videosync.ArcImage do
 
   # Define a thumbnail transformation:
   def transform(:thumb, _) do
-    {:convert, "-strip -thumbnail 100x100^ -gravity center -extent 100x100 -format png", :png}
+    {:convert, "-strip -thumbnail 100x100^ -gravity center -extent 150x150 -format png", :png}
   end
 
   # Override the persisted filenames:

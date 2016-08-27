@@ -1,34 +1,41 @@
 .user {
-  padding: 20px 0;
-  // color: white;
-  // @include border(rgba(255, 255, 255, 0.2), 1px, bottom);
-  &.internal {
-    color: #333333;
-    font-weight: 300;
-    .user__name {
-      @include font-style(22px, #333333);
-    }
-    .user__lightext {
-      color: #9A9A9A;
-    }
-    .user__avatar {
-      @include size(150px, 150px);
-      border-color: #EEEEEE;
-    }
-  }
+  padding: 25px;
+  background: rgba(255,255,255,0.05);
+  position: relative;
+  height: 100px;
+  // &.internal {
+  //   color: #333333;
+  //   font-weight: 300;
+  //   .user__name {
+  //     @include font-style(22px, #333333);
+  //   }
+  //   .user__lightext {
+  //     color: #9A9A9A;
+  //   }
+  //   .user__avatar {
+  //     @include size(150px, 150px);
+  //     border-color: #EEEEEE;
+  //   }
+  // }
   &__avatar {
-    @include size(80px, 80px);
+    @include size(50px, 50px);
     border-radius: 50%;
     overflow: hidden;
-    @include border(rgba(255, 255, 255, 0.3), 4px);
-    margin: 0 auto;
+    @include border(rgba(255, 255, 255, 0.3), 2px);
+    // margin: 0 auto;
     img {
       width: 100%;
     }
   }
   &__info {
-    text-align: center;
-    padding: 15px 15px 0 15px;
+    padding: 43px 15px 0 90px;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    // text-transform: uppercase;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
   // &__name {
   //   color: white;

@@ -60,7 +60,7 @@ defmodule Videosync.ImageController do
       items,
       %{
         page: page,
-        page_size: 5
+        page_size: 12
       }
     )
   end

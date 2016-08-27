@@ -1,0 +1,31 @@
+$btn-succes: #ff9510;
+$btn-primary: #69c0af;
+
+.btn {
+  //font-weight: 300;
+  border: none;
+  border-radius: 0;
+  @include transition(background-color 0.3s ease-out);
+  &-success {
+    background-color: $btn-succes;
+    &:hover, &:focus {
+      background-color: lighten($btn-succes, 10%);
+    }
+  }
+  &-primary {
+    background-color: $btn-primary;
+    &:hover, &:focus {
+      background-color: lighten($btn-primary, 10%);
+    }
+  }
+  &-xs {}
+  &-sm {}
+  &-md {
+    padding: 10px 25px;
+  }
+  &-lg {
+    min-width: 180px;
+    font-size: 15px;
+  }
+  &-xl {}
+}

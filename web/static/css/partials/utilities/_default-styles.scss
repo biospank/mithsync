@@ -6,9 +6,8 @@ body {
   height: 100%;
   margin: 0;
   min-height: 100%;
-  background-color: #F5F5F5;
-  // background-color: red;
-  -webkit-font-smoothing: antialiased;
+  background-color: #f1f1f1;
+  // -webkit-font-smoothing: antialiased;
   font-family: 'Lato', sans-serif;
   color: #313131;
 }
@@ -49,16 +48,21 @@ body {
   margin-bottom: 20px;
 }
 
+.mgv25 {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
 .mgv30 {
   margin-top: 30px;
   margin-bottom: 30px;
 }
 
-.space-top {
+.mgt30 {
   margin-top: 30px;
 }
 
-.space-bottom {
+.mgb30 {
   margin-bottom: 30px;
 }
 
