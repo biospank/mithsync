@@ -23,7 +23,7 @@ defmodule Videosync.ChannelCase do
       alias Videosync.Repo
       import Ecto
       import Ecto.Changeset
-      import Ecto.Query, only: [from: 1, from: 2]
+      import Ecto.Query
 
 
       # The default endpoint for testing
@@ -32,8 +32,10 @@ defmodule Videosync.ChannelCase do
   end
 
   setup tags do
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Videosync.Repo)
+
     unless tags[:async] do
-      Ecto.Adapters.SQL.restart_test_transaction(Videosync.Repo, [])
+      Ecto.Adapters.SQL.Sandbox.mode(Videosync.Repo, {:shared, self()})
     end
 
     :ok

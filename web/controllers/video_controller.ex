@@ -19,6 +19,7 @@ defmodule Videosync.VideoController do
     videos =
       Video.own_by(user)
       |> Video.filter_by(params["filter"])
+      |> Video.order_by(:title)
       |> Repo.all
 
     paged_videos = paginate(videos, params["page"])

@@ -30,6 +30,10 @@ defmodule Videosync.Video do
         ilike(v.description, ^"%#{filter || ""}%")
   end
 
+  def order_by(query, order) do
+    from v in query, order_by: field(v, ^order)
+  end
+
   def own_by(user) do
     assoc(user, :videos)
   end

@@ -37,7 +37,11 @@ var listItem = {
         m("p", { class: "projects-list__body" }, video.description),
         m("small", { class: "projects-list__info" }, "16-05-2016"),
         m("div", [
-          m("a", { href: "/video/edit", class: "btn btn-default", config: m.route }, "Edit"),
+          m("a", {
+            href: "/video/" + video.id + "/edit",
+            class: "btn btn-default",
+            config: m.route 
+          }, "Edit"),
           m("button", {
             onclick: ctrl.delete,
             type: "button",
