@@ -1,4 +1,7 @@
 .light-form {
+  a{
+    color: #69c0af;
+  }
   .form-group {
     label {
       @include font-style(12px, #888888);

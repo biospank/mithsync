@@ -47,9 +47,6 @@ var thumbItem = {
           ]),
           m("button", { type: "button", class: "btn btn-primary" }, [
             m("i", { class: "fa fa-pencil-square-o", "aria-hidden": true })
-          ]),
-          m("button", { type: "button", class: "btn btn-success" }, [
-            m("i", { class: "fa fa-check", "aria-hidden": true })
           ])
         ])
       ])

@@ -8,7 +8,7 @@ var signIn = (function() {
     return [
       m('.col-xs-12 .col-sm-7 .col-md-4 .center-block .space-top', [
         m('.wrapper', [
-          m("h2", { class: "header text-center mgv20" }, "Sign In"),
+          //m("h2", { class: "header text-center mgv20" }, "Sign In"),
           m(".content", [
             m("form", { class: "light-form" }, [
               m.component(textField, {
@@ -35,7 +35,7 @@ var signIn = (function() {
                   action: ctrl.createSession,
                   label: 'Login',
                   feedbackLabel: 'Authenticating...',
-                  style: 'btn btn-success btn-lg'
+                  style: 'btn btn-primary btn-lg'
                 })
               ]),
               m("p", { class: "text-center" }, "Haven't you got an account yet? ", [

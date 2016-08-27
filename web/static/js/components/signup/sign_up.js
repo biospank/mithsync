@@ -46,7 +46,7 @@ var signUp = (function() {
         ]),
         m("div", { class: "col-md-4 col-md-offset-s1" }, [
           m('.wrapper', [
-            m("h2", { class: "header text-center mgv20" }, "Sign Up"),
+            //m("h2", { class: "header text-center mgv20" }, "Sign Up"),
             m(".content", [
               m("form", { class: "light-form" }, [
                 m.component(textField, {
@@ -78,7 +78,7 @@ var signUp = (function() {
                     action: ctrl.createUser,
                     label: 'Register',
                     feedbackLabel: 'Signing up...',
-                    style: 'btn btn-success btn-lg'
+                    style: 'btn btn-primary btn-lg'
                   })
                 ]),
                 m("p", { class: "text-center" }, "Already a member. ", [

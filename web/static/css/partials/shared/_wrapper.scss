@@ -17,19 +17,19 @@
   // }
 }
 
-.ibox {
-  background-color: white;
-  @include border(#e7eaec, 3px, top);
-  &__head {
-    @include spaces(15px 15px 0, 0);
-    @include font-style(22px, #313131);
-  }
-  &__description {
-    color: #cbcbcc;
-    @include spaces(0 15px 15px, 0);
-  }
-  &__body {}
-  &__footer {
-    @include spaces(0 15px 15px 15px, 0);
-  }
-}
+// .ibox {
+//   background-color: white;
+//   @include border(#e7eaec, 3px, top);
+//   &__head {
+//     @include spaces(15px 15px 0, 0);
+//     @include font-style(22px, #313131);
+//   }
+//   &__description {
+//     color: #cbcbcc;
+//     @include spaces(0 15px 15px, 0);
+//   }
+//   &__body {}
+//   &__footer {
+//     @include spaces(0 15px 15px 15px, 0);
+//   }
+// }

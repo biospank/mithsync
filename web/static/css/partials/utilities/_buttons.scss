@@ -6,6 +6,9 @@ $btn-primary: #69c0af;
   border: none;
   border-radius: 0;
   @include transition(background-color 0.3s ease-out);
+  &:hover {
+    z-index: 0 !important;
+  }
   &-success {
     background-color: $btn-succes;
     &:hover, &:focus {

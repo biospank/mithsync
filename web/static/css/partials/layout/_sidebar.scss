@@ -3,6 +3,9 @@
   z-index: 1;
   @include size(260px, 100%);
   min-height: 100%;
-  display: block;
+  display: none;
   background-color: #2b2e33;
+  @include respond-to(min-width, 769px) {
+    display: block;
+  }
 }

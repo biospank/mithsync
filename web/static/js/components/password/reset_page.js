@@ -32,7 +32,7 @@ var resetPage = (function() {
                   action: ctrl.resetPassword,
                   label: 'Reset',
                   feedbackLabel: 'Executing...',
-                  style: 'btn btn-success btn-lg'
+                  style: 'btn btn-primary btn-lg'
                 })
               ])
             ])

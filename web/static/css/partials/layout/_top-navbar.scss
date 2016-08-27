@@ -5,10 +5,14 @@
   padding: 30px 15px;
   height: 100px;
   &.navbar-fixed-top {
-    left: 260px;
+    left: 0;
+    @include respond-to(min-width, 769px) {
+      left: 260px;
+    }
   }
   .navbar-brand {
     padding: 0 15px;
     height: auto;
+    margin-top: 10px;
   }
 }
