@@ -31,7 +31,7 @@ export default m.route(document.getElementById('app'), "/", {
 
   "/video/new": newVideo,
 
-  "/video/edit": editVideo,
+  "/video/:videoId/edit": editVideo,
 
   "/video/view": viewVideo,
 

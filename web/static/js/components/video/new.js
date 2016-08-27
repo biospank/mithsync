@@ -54,8 +54,8 @@ var newVideo = (function() {
       ctrl.errors = m.prop({});
 
       ctrl.createVideo = function(args) {
-        return Video.create(args).then(function() {
-          m.route("/video/edit");
+        return Video.create(args).then(function(response) {
+          m.route("/video/" + response.data.id + "/edit");
         }, function(response) {
           ctrl.errors(response.errors);
         })
