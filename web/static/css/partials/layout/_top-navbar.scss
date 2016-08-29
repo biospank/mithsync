@@ -14,5 +14,16 @@
     padding: 0 15px;
     height: auto;
     margin-top: 10px;
+    @include font-style(22px, #4a4a4a !important);
+  }
+  .navbar-toggle {
+    background-color: #69c0af;
+    border-radius: 0;
+    border: none;
+    @include transition(all 0.3s ease-out);
+    @include spaces(10px 15px, 0 10px 0 0);
+    .fa {
+      color: white;
+    }
   }
 }

@@ -1,6 +1,35 @@
 import searchForm from "./search_form";
 
 var topNav = {
+  controller: function(){
+    var ctrl = this;
+    var humanMap = {
+      "/": "Dashboard",
+      "/signup": "Sign Up",
+
+      //"/activate": activationPage,
+
+      //"/password/request": resetRequestPage,
+
+      //"/password/reset/:code": resetPage,
+
+      "/userprofile": "Profile",
+
+      "/video": "Video",
+
+      "/video/new": "Video",
+
+      "/video/:videoId/edit": "Video",
+
+      "/video/view": "Video",
+
+      "/library": "Library"
+    };
+
+    ctrl.humanPath = function() {
+      return humanMap[m.route()] || "";
+    }
+  },
   view: function(ctrl) {
     return m('nav', { class: 'top-navbar navbar navbar-default navbar-fixed-top' }, [
       m('.container-fluid', [
@@ -17,7 +46,7 @@ var topNav = {
               // m('span', { class: 'icon-bar' }),
               // m('span', { class: 'icon-bar' })
             ]),
-          m('a', { class: 'navbar-brand' }, "Sinkroo")
+          m('h2', { class: 'navbar-brand' }, ctrl.humanPath())
         ]),
         m('.collapse navbar-collapse navbar-right',
           m("a", { href: "/video/new", config: m.route, class: "btn btn-primary btn-md text-uppercase" }, "Create new")
