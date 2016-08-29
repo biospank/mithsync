@@ -17,7 +17,7 @@ var topNav = {
               // m('span', { class: 'icon-bar' }),
               // m('span', { class: 'icon-bar' })
             ]),
-          m('a', { class: 'navbar-brand', href: '#' }, "Sinkroo")
+          m('a', { class: 'navbar-brand' }, "Sinkroo")
         ]),
         m('.collapse navbar-collapse navbar-right',
           m("a", { href: "/video/new", config: m.route, class: "btn btn-primary btn-md text-uppercase" }, "Create new")

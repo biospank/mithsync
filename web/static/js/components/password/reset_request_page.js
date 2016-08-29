@@ -8,7 +8,7 @@ var resetRequestPage = (function() {
     return [
       m("header", { class: "header-text row space-bottom" }, [
         m("hgroup", { class: "text-center col-md-8 col-md-offset-2" }, [
-          m("h1", { class: "header-text__title" }, "Have you lost your password"),
+          m("h1", { class: "header-text__title" }, "Have you lost your password?"),
           m("h2", { class: "header-text__subtitle" }, "Insert your email below, you will receive an email by us to reset the password."),
           m("hr", { class: "header-text__separator" })
         ])

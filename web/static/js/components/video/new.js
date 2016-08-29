@@ -9,7 +9,7 @@ var newVideo = (function() {
     return [
       m(".row", [
         m(".col-sm-6", [
-          m("form", { role: "form" }, [
+          m("form", { class: "light-form", role: "form" }, [
             m.component(textField, {
               type: 'text',
               placeholder: 'Title',
@@ -39,7 +39,7 @@ var newVideo = (function() {
               action: ctrl.createVideo,
               label: 'Create',
               feedbackLabel: 'Creating...',
-              style: 'btn btn-info'
+              style: 'btn btn-primary btn-lg'
             })
           ])
         ]),
