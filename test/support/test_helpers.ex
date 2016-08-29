@@ -19,4 +19,10 @@ defmodule Videosync.TestHelpers do
     |> Ecto.build_assoc(:videos, attrs)
     |> Repo.insert!
   end
+
+  def insert_slide(user, video, attrs \\ %{}) do
+    user
+    |> Ecto.build_assoc(:slides, Map.merge(attrs, %{video_id: video.id}))
+    |> Repo.insert!
+  end
 end

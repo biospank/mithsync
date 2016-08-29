@@ -6,6 +6,7 @@ defmodule Videosync.Video do
     field :title, :string
     field :description, :string
     belongs_to :user, Videosync.User
+    has_many :slides, Videosync.Slide
 
     timestamps
   end

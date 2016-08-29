@@ -54,8 +54,11 @@ defmodule Videosync.VideoController do
   end
 
   def show(conn, %{"id" => id}, user) do
-    video = Repo.get!(Video.own_by(user), id)
-    render(conn, "show.json", video: video)
+    video = Video.own_by(user)
+      |> Repo.get!(id)
+      |> Repo.preload(:slides)
+
+    render(conn, "show_video_with_slides.json", video: video)
   end
 
   def update(conn, %{"id" => id, "video" => video_params}, user) do

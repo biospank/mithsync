@@ -16,8 +16,8 @@ defmodule Videosync.VideoControllerTest do
       {:ok, jwt, full_claims} = Guardian.encode_and_sign(user)
 
       conn = conn
-      |> put_req_header("authorization", "Videosync #{jwt}")
-      |> put_req_header("accept", "application/json")
+        |> put_req_header("authorization", "Videosync #{jwt}")
+        |> put_req_header("accept", "application/json")
 
       {:ok, conn: conn, user: user, jwt: jwt, claims: full_claims}
     else
@@ -47,12 +47,14 @@ defmodule Videosync.VideoControllerTest do
   @tag :logged_in
   test "shows chosen resource", %{conn: conn, user: user} do
     video = insert_video(user, %Video{})
+      |> Repo.preload(:slides)
     conn = get conn, video_path(conn, :show, video)
     assert json_response(conn, 200)["data"] == %{"id" => video.id,
       "user_id" => video.user_id,
       "url" => video.url,
       "title" => video.title,
-      "description" => video.description}
+      "description" => video.description,
+      "slides" => video.slides}
   end
 
   @tag :logged_in

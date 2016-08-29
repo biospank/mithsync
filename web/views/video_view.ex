@@ -16,10 +16,27 @@ defmodule Videosync.VideoView do
   end
 
   def render("video.json", %{video: video}) do
-    %{id: video.id,
+    %{
+      id: video.id,
       user_id: video.user_id,
       url: video.url,
       title: video.title,
-      description: video.description}
+      description: video.description
+    }
+  end
+
+  def render("show_video_with_slides.json", %{video: video}) do
+    %{data: render_one(video, Videosync.VideoView, "video_with_slides.json")}
+  end
+
+  def render("video_with_slides.json", %{video: video}) do
+    %{
+      id: video.id,
+      user_id: video.user_id,
+      url: video.url,
+      title: video.title,
+      description: video.description,
+      slides: render_many(video.slides, Videosync.SlideView, "slide.json")
+    }
   end
 end
