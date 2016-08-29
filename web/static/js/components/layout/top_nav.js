@@ -36,16 +36,17 @@ var topNav = {
         m('.navbar-header', [
           m('button', {
             type: 'button',
-            class: 'navbar-toggle collapsed',
-            id: 'btn-mobile',
+            class: 'navbar-toggle',
             'data-toggle': 'collapse',
-            'data-target': '#sidebarNav', 'aria-expanded': 'false'},
-            [
-              m('span', { class: 'sr-only' }, 'Toggle navigation'),
-              m('span', { class: 'fa fa-list' })
-              // m('span', { class: 'icon-bar' }),
-              // m('span', { class: 'icon-bar' })
-            ]),
+            'data-target': '#sidebarNav'
+          },
+          [
+            m('span', { class: 'sr-only' }, 'Toggle navigation'),
+            m('span', { class: 'fa fa-list' }),
+            // m('span', { class: 'icon-bar' }),
+            // m('span', { class: 'icon-bar' }),
+            // m('span', { class: 'icon-bar' })
+          ]),
           m('h2', { class: 'navbar-brand' }, ctrl.humanPath())
         ]),
         m('.collapse navbar-collapse navbar-right',

@@ -22,7 +22,7 @@
     border: none;
     @include transition(all 0.3s ease-out);
     @include spaces(10px 15px, 0 10px 0 0);
-    .fa {
+    .fa, .icon-bar {
       color: white;
     }
   }

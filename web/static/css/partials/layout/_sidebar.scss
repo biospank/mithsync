@@ -1,11 +1,8 @@
 .sidebar {
   @include position(left, 0, top, 0, fixed);
-  z-index: 1;
+  z-index: 2000;
   @include size(260px, 100%);
   min-height: 100%;
-  display: none;
+  padding: 0;
   background-color: #2b2e33;
-  @include respond-to(min-width, 769px) {
-    display: block;
-  }
 }
