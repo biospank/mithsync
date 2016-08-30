@@ -13,7 +13,24 @@ var editVideo = (function() {
       m(".row", [
         m(".col-sm-6", [
           m("div", [
-            m("img", { src: "/images/videoplaceholder.jpg", class: "img-responsive" })
+            m("video",
+              {
+                id: "example_video",
+                class: "video-js vjs-default-skin",
+                controls: "",
+                preload: "metadata",
+                width: "440",
+                height: "264",
+                "data-setup": '{"controls":true}'
+              },
+            [
+              m("source",
+                {
+                  src: "https://www.youtube.com/watch?v=_WgrfEaAM4Y",
+                  type: "video/mp4"
+                }
+              )
+            ])
           ])
         ]),
         m(".col-sm-6", [
