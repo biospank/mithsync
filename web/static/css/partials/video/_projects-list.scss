@@ -40,4 +40,12 @@
     color: #828282;
     font-weight: normal;
   }
+  &__buttons {
+    text-align: right;
+    a, button {
+      .fa {
+        margin-right: 10px;
+      }
+    }
+  }
 }

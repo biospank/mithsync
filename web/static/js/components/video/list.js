@@ -82,13 +82,23 @@ var videoList = {
             filter: ctrl.filter
           })
         ])
+        // m("div", { class: "pull-right" }, [
+        //   m("button", { class: "btn btn-warning btn-lg text-uppercase" }, "Delete selected")
+        // ])
       ]),
       m("ul", { class: "list-unstyled projects-list" }, [
         ctrl.videos().map(function(video) {
           return m(listItem, video, ctrl);
         })
       ]),
-      paginate(ctrl)
+      m("div", { class: "clearfix" }, [
+        m("div", { class: "pull-left" }, [
+          paginate(ctrl)
+        ]),
+        m("div", { class: "pull-right" }, [
+          m("button", { class: "btn btn-warning btn-lg text-uppercase mgv20" }, "Delete selected")
+        ])
+      ])
     ]);
   }
 }

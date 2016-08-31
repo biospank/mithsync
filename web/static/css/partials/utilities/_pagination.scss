@@ -8,9 +8,16 @@
     border-bottom-right-radius: 100px;
   }
   & > .active > a {
-    border-color: none;
+    border-color: #dddddd;
+    background-color: $mainColor;
+    &:hover {
+      border-color: inherit;
+      background-color: darken($mainColor, 10%);
+    }
   }
   & > li > a, & > li > span {
     padding: 8px 15px;
+    color: black;
+    @include transition(all 0.3s ease-out);
   }
 }

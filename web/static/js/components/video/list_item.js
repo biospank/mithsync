@@ -41,7 +41,7 @@ var listItem = {
           m("h5", { class: "projects-list__title" }, video.title),
           m("p", { class: "projects-list__description" }, video.description),
           m("label", { class: "projects-list__date" }, "16-05-2016"),
-          m("div", [
+          m("div", { class: "projects-list__buttons" }, [
             m("a", {
               href: "/video/" + video.id + "/edit",
               class: "btn btn-default",

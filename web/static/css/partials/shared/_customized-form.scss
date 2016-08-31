@@ -28,4 +28,7 @@
       @include border(#AAAAAA);
     }
   }
+  textarea {
+    min-height: 200px;
+  }
 }
