@@ -50,9 +50,10 @@ var topNav = {
           m('h2', { class: 'navbar-brand' }, ctrl.humanPath())
         ]),
         m('.collapse navbar-collapse navbar-right',
-          m("a", { href: "/video/new", config: m.route, class: "btn btn-primary btn-md text-uppercase" }, [
-            m("i", { class: 'fa fa-plus' })
-          ], "Create new")
+          m("a", { href: "/video/new", config: m.route, class: "btn btn-primary btn-md text-uppercase icon-left" }, [
+            m("i", { class: 'fa fa-plus' }),
+            m("span", {}, "Create new")
+          ])
         )
       ])
     ]);

@@ -96,7 +96,11 @@ var videoList = {
           paginate(ctrl)
         ]),
         m("div", { class: "pull-right" }, [
-          m("button", { class: "btn btn-warning btn-lg text-uppercase mgv20" }, "Delete selected")
+          m("button", { href: "/video/new", config: m.route, class: "btn btn-warning btn-lg text-uppercase mgv20 icon-left" }, [
+            m("i", { class: 'fa fa-trash' }),
+            m("span", {}, "Delete selected")
+          ])
+          // m("button", { class: "btn btn-warning btn-lg text-uppercase mgv20" }, "Delete selected")
         ])
       ])
     ]);
