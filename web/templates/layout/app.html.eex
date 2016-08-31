@@ -10,9 +10,13 @@
     <title>Hello Videosync!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     <link href='http://fonts.googleapis.com/css?family=Lato:400,100,300,700' rel='stylesheet' type='text/css'>
+    <!-- empty script needed to allows plyr.js to work correctly -->
+    <script></script>
   </head>
 
   <body id="app">
+    <!-- <script src="https://www.youtube.com/iframe_api"></script> -->
+    <!-- <script src="https://player.vimeo.com/api/player.js"></script> -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
