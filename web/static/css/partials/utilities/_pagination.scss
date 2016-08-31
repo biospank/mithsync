@@ -1,11 +1,11 @@
 .pagination {
   & > li:first-child > a {
-    border-top-left-radius: 100px;
-    border-bottom-left-radius: 100px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
   }
   & > li:last-child > a {
-    border-top-right-radius: 100px;
-    border-bottom-right-radius: 100px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
   }
   & > .active > a {
     border-color: #dddddd;
@@ -16,7 +16,7 @@
     }
   }
   & > li > a, & > li > span {
-    padding: 8px 15px;
+    padding: 10px 20px;
     color: black;
     @include transition(all 0.3s ease-out);
   }

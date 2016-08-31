@@ -61,6 +61,7 @@ var library = (function() {
           return m(thumbItem, image, ctrl);
         })
       ]),
+      m("hr"),
       paginate(ctrl)
     ];
   };
