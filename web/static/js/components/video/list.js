@@ -58,10 +58,17 @@ var videoList = {
       })
     };
 
+    ctrl.showVideos = function() {
+      return ctrl.videos().map(function(video) {
+        return m(listItem, video, ctrl);
+      })
+    };
+
     ctrl.getVideos(
       ctrl.pageInfo.defaultParams || {},
       ctrl.requestOptions
     );
+
   },
   view: function(ctrl) {
     return m("div", [
@@ -87,23 +94,33 @@ var videoList = {
         // ])
       ]),
       m("ul", { class: "list-unstyled projects-list" }, [
-        ctrl.videos().map(function(video) {
-          return m(listItem, video, ctrl);
-        })
+        _.isEmpty(ctrl.videos()) ? m("li", {}, [
+          m("figure", { class: "text-center" }, [
+            m("img", { src: "images/no-list.svg", with: "100", height: "100" })
+          ]),
+          m("p", { class: "text-center mgv20" }, "You have no lists")
+        ]) : ctrl.showVideos()
       ]),
       m("div", { class: "clearfix" }, [
         m("div", { class: "pull-left" }, [
           paginate(ctrl)
         ]),
-        m("div", { class: "pull-right" }, [
-          m("button", { href: "/video/new", config: m.route, class: "btn btn-warning btn-lg text-uppercase mgv20 icon-left" }, [
-            m("i", { class: 'fa fa-trash' }),
-            m("span", {}, "Delete selected")
-          ])
-          // m("button", { class: "btn btn-warning btn-lg text-uppercase mgv20" }, "Delete selected")
-        ])
+        this.deleteSelectedButton(ctrl)
       ])
     ]);
+  },
+  deleteSelectedButton: function(ctrl) {
+    if(!_.isEmpty(ctrl.videos())) {
+      return m("div", { class: "pull-right" }, [
+        m("button", { href: "/video/new", config: m.route, class: "btn btn-warning btn-lg text-uppercase mgv20 icon-left" }, [
+          m("i", { class: 'fa fa-trash' }),
+          m("span", {}, "Delete selected")
+        ])
+        // m("button", { class: "btn btn-warning btn-lg text-uppercase mgv20" }, "Delete selected")
+      ])
+    } else {
+      return m("")
+    }
   }
 }
 
