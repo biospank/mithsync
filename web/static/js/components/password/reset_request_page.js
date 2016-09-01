@@ -24,15 +24,17 @@ var resetRequestPage = (function() {
             placeholder: 'Enter your Email',
             id: 'email',
             oninput: m.withAttr("value", Password.model.email),
-            error: ctrl.errors()['email']
+            error: ctrl.errors()['email'],
+            dataLabel: 'Email'
           }),
-          m("div", { class: "text-center mgv30" }, [
+          m("div", { class: "mgv30" }, [
             m.component(feedbackButton, {
               action: ctrl.passwordResetRequest,
               label: 'Send instructions',
               feedbackLabel: 'Sending...',
               style: 'btn btn-primary contour btn-lg'
-            })
+            }),
+            m("a", { href: "/signin", config: m.route, class: "btn btn-lg" }, "Return to login")
           ])
         ])
       ])
