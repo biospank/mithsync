@@ -16,19 +16,14 @@ var editVideo = (function() {
         m(".col-sm-6", [
           m(videoPlayback, {
             provider: ctrl.videoInfo().provider,
-            videoId: ctrl.videoInfo().id,
+            videoId: ctrl.videoInfo().videoId,
             onReady: ctrl.initPlayer
           })
           // m(".video_player",
           //   {
           //     "data-type": "youtube", //"vimeo",
           //     "data-video-id": "_WgrfEaAM4Y", //"180519312",
-          //     config: function(element, isInitialised, context) {
-          //       console.log(element);
-          //       console.log(isInitialised);
-          //       console.log(context);
-          //       plyr.setup('.video_player');
-          //     }
+          //     config: ctrl.initPlayer
           //   }
           // )
         ]),
@@ -76,7 +71,7 @@ var editVideo = (function() {
           // ctrl.player = plyr.setup('.video_player');
           ctrl.player = plyr.setup('.video_player', {
             //['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'fullscreen']
-            controls: ['play', 'progress', 'current-time', 'mute', 'volume']
+            controls: ['play', 'progress', 'current-time']
           })[0];
 
           ctrl.player.on('ready', function(event) {
@@ -116,12 +111,13 @@ var editVideo = (function() {
         return Video.show(videoId).then(function(video) {
           ctrl.video(video.data);
           ctrl.videoInfo(Video.info(ctrl.video().url));
+          // console.log(ctrl.videoInfo());
         }, function(response) {
           ctrl.errors(response.errors);
         })
       };
 
-      Video.init();
+      Video.bindProviders();
 
       ctrl.getVideo(m.route.param("videoId"));
 
