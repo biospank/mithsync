@@ -6,6 +6,7 @@ import thumbItem from "./thumb_item";
 import searchForm from "../widgets/search_form";
 import pagination from "../widgets/pagination";
 import confirmDialog from "../widgets/confirm_dialog";
+import recordNotFound from "../widgets/404";
 
 var library = (function() {
   var paginate = function(ctrl) {
@@ -57,9 +58,13 @@ var library = (function() {
       }),
       m(confirmDialog),
       m("div", { class: "row" }, [
-        ctrl.images().map(function(image) {
+        _.isEmpty(ctrl.images()) ? m(recordNotFound) : ctrl.images().map(function(image) {
           return m(thumbItem, image, ctrl);
         })
+
+        // ctrl.images().map(function(image) {
+        //   return m(thumbItem, image, ctrl);
+        // })
       ]),
       m("hr"),
       paginate(ctrl)
