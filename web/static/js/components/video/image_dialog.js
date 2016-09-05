@@ -3,9 +3,10 @@ import pagination from "../widgets/pagination";
 import Image from "../../models/image";
 import imageItem from "./image_item";
 
-var imageDialog = function() {
+var imageDialog = (function() {
   var images = m.prop([]);
   var errors = m.prop({});
+  var filter = m.prop("");
   var pageInfo = {};
   var requestOptions = {
     unwrapSuccess: function(response) {
@@ -22,7 +23,6 @@ var imageDialog = function() {
       return response.error;
     }
   };
-  var filter = m.prop("");
 
   var getImages = function(params, args) {
     return Image.all(params, args).then(function(ims) {
@@ -43,24 +43,30 @@ var imageDialog = function() {
     );
   };
 
+  var selectCallback = function() {}
+
   return {
-    show: function() {
-      console.log("show");
+    show: function(opts) {
+      selectCallback = function(image) {
+        opts['selectCallback'](image);
+        $("#imageDialog").hide();
+      }
+
       $("#imageDialog").fadeIn( "fast" );
       // $("#imageDialog").modal('show');
-      // getImages(
-      //   _.assign(
-      //     pageInfo.defaultParams || {},
-      //     { page: 1 }
-      //   ), requestOptions
-      // );
+      getImages(
+        _.assign(
+          pageInfo.defaultParams || {},
+          { page: 1 }
+        ), requestOptions
+      );
     },
     controller: function() {
       return {
       }
     },
     view: function(ctrl) {
-      return m(".modal fade bs-example-modal-lg", {
+      return m(".modal image-modal-lg", {
         "tabindex": "-1",
         "role": "dialog",
         "id": "imageDialog"
@@ -84,7 +90,7 @@ var imageDialog = function() {
               }),
               m("div", { class: "row" }, [
                 images().map(function(image) {
-                  return m(imageItem, image);
+                  return m(imageItem, image, selectCallback);
                 })
               ]),
               m.component(pagination,
@@ -106,6 +112,6 @@ var imageDialog = function() {
       ])
     }
   }
-}
+})();
 
 export default imageDialog;

@@ -16,7 +16,7 @@ var editVideo = (function() {
         m("a", { class: "btn btn-success" }, "Save"),
         m("a", { class: "btn btn-success" }, "Save and Exit")
       ]),
-      m(imageDialog()),
+      m(imageDialog),
       m(".row", [
         m(".col-sm-6", [
           m(videoPlayback, {
@@ -45,14 +45,17 @@ var editVideo = (function() {
           // })
           m("div", [
             m("a", {
-              href: "#",
               onclick: function(event) {
                 event.preventDefault();
-                imageDialog().show();
+                imageDialog.show({
+                  selectCallback: function(image) {
+                    ctrl.currentImage(image);
+                  }
+                });
               }
             }, [
               m("img", {
-                src: "/images/contentplaceholder.png",
+                src: ctrl.currentImage().path,
                 class: "img-responsive"
               })
             ])
@@ -74,7 +77,7 @@ var editVideo = (function() {
             dots: true,
             centerMode: true,
             focusOnSelect: true,
-            infinite: false
+            infinite: true
           }
         })
       ]),
@@ -90,11 +93,14 @@ var editVideo = (function() {
 
       ctrl.video = m.prop({});
       ctrl.videoInfo = m.prop({});
+      ctrl.currentImage = m.prop({
+        path: "/images/contentplaceholder.png"}
+      );
       ctrl.errors = m.prop({});
       ctrl.player = {};
       ctrl.slider = m.prop();
       ctrl.svalue = m.prop("00:00:00");
-      ctrl.evalue = m.prop("00:00:30");
+      ctrl.evalue = m.prop("00:00:40");
 
       if(Session.isExpired()) {
         m.route("/signin");
@@ -127,11 +133,14 @@ var editVideo = (function() {
               })
             );
 
-            ctrl.slider().on('update', function(values, handle, unencodedValues){
+            ctrl.slider().on('change', function(values, handle, unencodedValues) {
               var currentValue = _.round(values[handle])
-              // ctrl.player.seek(currentValue);
+              ctrl.player.seek(currentValue);
+              console.log(currentValue);
+            });
 
-              // console.log(currentValue);
+            ctrl.slider().on('update', function(values, handle, unencodedValues) {
+              var currentValue = _.round(values[handle])
 
               var duration = new Date(currentValue * 1000).toISOString().substr(11, 8);
 

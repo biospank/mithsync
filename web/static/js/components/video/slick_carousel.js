@@ -1,11 +1,11 @@
 var slickCarousel = {
   controller: function(args, slides) {
-    var ctrl = this;
-
-    ctrl.onReady = function(element, isInitialized, context) {
-      if(!isInitialized)
-        $(element).slick(args['opts']);
-    };
+    return {
+      onReady: function(element, isInitialized, context) {
+        if(!isInitialized)
+          $(element).slick(args['opts']);
+      }
+    }
   },
   view: function(ctrl, args, slides) {
     return m("", { class: args['class'], config: ctrl.onReady }, [

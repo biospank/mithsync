@@ -12,7 +12,6 @@ var confirmDialog = (function() {
   };
 
   return {
-    options: null,
     init: function(opts) {
       msg = opts.msg || msg;
       cbConfirm = opts.cbConfirm || cbConfirm;

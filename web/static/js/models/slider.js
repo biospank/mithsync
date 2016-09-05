@@ -11,6 +11,7 @@ var Slider = {
     return noUiSlider.create(sliderContainer, {
     	start: [0, 30],
       connect: true,
+      behaviour: 'drag',
       margin: 5,
       step: 1,
       // tooltips: [
