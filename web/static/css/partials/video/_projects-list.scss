@@ -36,11 +36,6 @@
     @include respond-to(min-width, 768px) {
       .magic {
         &-checkbox {
-          // & + label:hover {
-          //   .magic-checkbox + label::before {
-          //     @include border(1px, red);
-          //   }
-          // }
           & + label:before {
             margin-top: 12px;
           }
@@ -55,11 +50,6 @@
           }
         }
         &-radio {
-          // & + label:hover {
-          //   .magic-radio+label:before {
-          //     @include border(1px, red);
-          //   }
-          // }
           & + label:before {
             margin-top: 12px;
           }
