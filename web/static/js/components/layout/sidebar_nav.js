@@ -11,7 +11,7 @@ var sidebarNav = {
     };
   },
   view: function(ctrl) {
-    return m("nav", { class: "main-nav" }, [
+    return m("nav", { class: "main-nav"}, [
       m("ul", { class: "nav nav-pills nav-stacked" }, [
         m("li", { class: "active" }, [
           m("a", { href: "/dashboard", config: m.route, class: "main-nav__tab" }, [

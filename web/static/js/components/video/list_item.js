@@ -33,20 +33,67 @@ var listItem = {
 
     return m("li", [
       m("div", { class: "projects-list__content" }, [
-        m("h5", { class: "projects-list__head" }, video.title),
-        m("p", { class: "projects-list__body" }, video.description),
-        m("small", { class: "projects-list__info" }, "16-05-2016"),
         m("div", [
-          m("a", {
-            href: "/video/" + video.id + "/edit",
-            class: "btn btn-default",
-            config: m.route 
-          }, "Edit"),
-          m("button", {
-            onclick: ctrl.delete,
-            type: "button",
-            class: "btn btn-default"
-          }, "Delete")
+          m("input", { class: "magic-radio", type: "checkbox", name: video.id, id: video.id }),
+          m("label", { for: video.id })
+        ]),
+        m(".projects-list__body clearfix", [
+          m("h5", { class: "projects-list__title" }, video.title),
+          //m("p", { class: "projects-list__description" }, video.description),
+          //m("label", { class: "projects-list__date" }, "16-05-2016"),
+          m("div", { class: "projects-list__buttons" }, [
+            m("a", {
+              href: "/video/" + video.id + "/edit",
+              class: "btn btn-info icon-left",
+              config: m.route
+            }, [
+              m("i", { class: "fa fa-info", "aria-hidden": true }),
+              m("span", {}, "Info")
+            ]),
+            m("a", {
+              href: "/video/" + video.id + "/edit",
+              class: "btn btn-primary icon-left",
+              config: m.route
+            }, [
+              m("i", { class: "fa fa-pencil", "aria-hidden": true }),
+              m("span", {}, "Edit")
+            ]),
+            m("button", {
+              onclick: "",
+              type: "button",
+              class: "btn btn-default icon-left"
+            }, [
+              m("i", { class: "fa fa-copy", "aria-hidden": true }),
+              m("span", {}, "Duplicate")
+            ]),
+            m("button", {
+              onclick: "",
+              type: "button",
+              class: "btn btn-success icon-left"
+            }, [
+              m("i", { class: "fa fa-download", "aria-hidden": true }),
+              m("span", {}, "Export")
+            ]),
+            m("button", {
+              onclick: ctrl.delete,
+              type: "button",
+              class: "btn btn-danger icon-left"
+            }, [
+              m("i", { class: "fa fa-trash", "aria-hidden": true }),
+              m("span", {}, "Delete")
+            ])
+
+
+
+            // m("button", {
+            //   onclick: ctrl.delete,
+            //   type: "button",
+            //   class: "btn btn-danger icon-left"
+            // }, [
+            //   m("i", { class: "fa fa-trash", "aria-hidden": true }),
+            //   m("span", {}, "Delete")
+            // ])
+          ])
         ])
       ])
     ]);

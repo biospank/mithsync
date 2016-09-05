@@ -82,13 +82,27 @@ var videoList = {
             filter: ctrl.filter
           })
         ])
+        // m("div", { class: "pull-right" }, [
+        //   m("button", { class: "btn btn-warning btn-lg text-uppercase" }, "Delete selected")
+        // ])
       ]),
       m("ul", { class: "list-unstyled projects-list" }, [
         ctrl.videos().map(function(video) {
           return m(listItem, video, ctrl);
         })
       ]),
-      paginate(ctrl)
+      m("div", { class: "clearfix" }, [
+        m("div", { class: "pull-left" }, [
+          paginate(ctrl)
+        ]),
+        m("div", { class: "pull-right" }, [
+          m("button", { href: "/video/new", config: m.route, class: "btn btn-warning btn-lg text-uppercase mgv20 icon-left" }, [
+            m("i", { class: 'fa fa-trash' }),
+            m("span", {}, "Delete selected")
+          ])
+          // m("button", { class: "btn btn-warning btn-lg text-uppercase mgv20" }, "Delete selected")
+        ])
+      ])
     ]);
   }
 }

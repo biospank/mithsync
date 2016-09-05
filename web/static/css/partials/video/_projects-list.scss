@@ -1,36 +1,98 @@
 .projects-list {
-  background-color: #f4f6fa;
-  li:nth-child(odd) {
-    padding: 15px;
-    background-color: #f9f9fb;
-    @include transition(all 0.3s ease-out);
-    &:hover {
-      background-color: darken(#f9f9fb, 5%);
-    }
-  }
-  li:nth-child(even) {
-    padding: 15px;
-    background-color: #ffffff;
-    &:hover {
-      background-color: darken(#ffffff, 5%);
-    }
+  background-color: #ffffff;
+  @include box-shadow(0 0 0 1px #dee1e5);
+  padding: 15px 15px 0 15px;
+  li {
+    padding-bottom: 15px;
   }
   &__content {
     display: block;
     color: #313131;
-  }
-  &__content:hover {
-    color: #313131;
-    text-decoration: none;
-  }
-  &__head {
-    @include font-style(16px, $mainColor, 400);
-    margin-top: 0;
+    &:hover {
+      color: #313131;
+      text-decoration: none;
+      @include respond-to(min-width, 768px) {
+        .projects-list__buttons {
+          visibility: visible;
+        }
+      }
+    }
+    @include respond-to(min-width, 768px) {
+      .magic {
+        &-checkbox {
+          & + label:before {
+            margin-top: 12px;
+          }
+          & + label:after {
+            top: 18px;
+          }
+        }
+        &-radio {
+          & + label:before {
+            margin-top: 12px;
+          }
+          & + label:after {
+            top: 18px;
+          }
+        }
+      }
+    }
   }
   &__body {
-    color: #939297;
+    margin-left: 35px;
   }
-  &__info {
-    color: #cbcbcc;
+  &__title {
+    @include font-style(16px, $mainColor);
+    margin: 0 0 15px 0;
+    text-transform: uppercase;
+    @include respond-to(min-width, 768px) {
+      float: left;
+      margin: 13px 0 0 0;
+    }
+  }
+  &__description {
+    color: black;
+  }
+  &__date {
+    color: #828282;
+    font-weight: normal;
+  }
+  &__buttons {
+    @include respond-to(min-width, 768px) {
+      float: right;
+      visibility: hidden;
+    }
+    .btn {
+      font-size: 15px;
+    }
+    a, button {
+      @include respond-to(min-width, 768px) {
+        overflow: hidden;
+        @include transition(width 0.3s ease-out);
+        &:hover {
+          overflow: auto;
+          width: 202px;
+        }
+      }
+      width: 42px;
+      margin-right: 7px;
+      display: inline-block;
+      &:last-child {
+        margin-right: 0;
+      }
+      i {
+        @include transition(background 0.3s ease-out);
+        color: white;
+        width: 42px;
+      }
+      @include respond-to(max-width, 767px) {
+        &:hover i {
+          background: darken(#dee1e5, 10%);
+        }
+        span {
+          display: none !important;
+        }
+      }
+    }
   }
 }

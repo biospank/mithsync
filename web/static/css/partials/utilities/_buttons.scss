@@ -31,4 +31,16 @@ $btn-primary: #69c0af;
     font-size: 15px;
   }
   &-xl {}
+  &.icon-left, &.icon-right {
+    padding: 0;
+    i {
+      padding: 15px;
+      background-color: #dee1e5;
+    }
+    span {
+      padding: 10px;
+      min-width: 160px;
+      display: inline-block;
+    }
+  }
 }

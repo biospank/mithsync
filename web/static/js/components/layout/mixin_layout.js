@@ -16,7 +16,7 @@ var mixinLayout = function(content, layout) {
     standard: function(content) {
       return [
         m.component(topNav),
-        m('aside', { class: 'sidebar' }, [
+        m('aside', { class: 'sidebar navbar-collapse collapse slideInLeft animated', id: 'sidebarNav', 'aria-expanded': 'false' }, [
           m.component(user),
           m.component(sidebarNav)
         ]),
