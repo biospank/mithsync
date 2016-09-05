@@ -13,7 +13,7 @@ var topNav = {
 
       //"/password/reset/:code": resetPage,
 
-      "/userprofile": "Profile",
+      "/userprofile": "Account Settings",
 
       "/video": "Video",
 

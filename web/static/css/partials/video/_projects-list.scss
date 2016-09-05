@@ -1,9 +1,25 @@
 .projects-list {
   background-color: #ffffff;
   @include box-shadow(0 0 0 1px #dee1e5);
-  padding: 15px 15px 0 15px;
+  // padding: 15px 15px 0 15px;
   li {
-    padding-bottom: 15px;
+    // padding-bottom: 15px;
+    padding: 15px;
+    &:hover {
+      background-color: #f7f7f7;
+      .magic {
+        &-checkbox {
+          & + label:before {
+            background-color: white;
+          }
+        }
+        &-radio {
+          & + label:before {
+            background-color: white;
+          }
+        }
+      }
+    }
   }
   &__content {
     display: block;
@@ -20,19 +36,41 @@
     @include respond-to(min-width, 768px) {
       .magic {
         &-checkbox {
+          // & + label:hover {
+          //   .magic-checkbox + label::before {
+          //     @include border(1px, red);
+          //   }
+          // }
           & + label:before {
             margin-top: 12px;
           }
           & + label:after {
             top: 18px;
+            background: $mainColor;
+          }
+          &:checked {
+            & + label:before {
+              @include border(1px, $mainColor);
+            }
           }
         }
         &-radio {
+          // & + label:hover {
+          //   .magic-radio+label:before {
+          //     @include border(1px, red);
+          //   }
+          // }
           & + label:before {
             margin-top: 12px;
           }
           & + label:after {
             top: 18px;
+            background: $mainColor;
+          }
+          &:checked {
+            & + label:before {
+              @include border(1px, $mainColor);
+            }
           }
         }
       }
@@ -42,7 +80,7 @@
     margin-left: 35px;
   }
   &__title {
-    @include font-style(16px, $mainColor);
+    @include font-style(16px, #2b2e33);
     margin: 0 0 15px 0;
     text-transform: uppercase;
     @include respond-to(min-width, 768px) {

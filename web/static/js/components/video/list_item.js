@@ -44,7 +44,7 @@ var listItem = {
           m("div", { class: "projects-list__buttons" }, [
             m("a", {
               href: "/video/" + video.id + "/edit",
-              class: "btn btn-info icon-left",
+              class: "btn btn-primary icon-left",
               config: m.route
             }, [
               m("i", { class: "fa fa-info", "aria-hidden": true }),
@@ -61,7 +61,7 @@ var listItem = {
             m("button", {
               onclick: "",
               type: "button",
-              class: "btn btn-default icon-left"
+              class: "btn btn-primary icon-left"
             }, [
               m("i", { class: "fa fa-copy", "aria-hidden": true }),
               m("span", {}, "Duplicate")
@@ -69,7 +69,7 @@ var listItem = {
             m("button", {
               onclick: "",
               type: "button",
-              class: "btn btn-success icon-left"
+              class: "btn btn-primary icon-left"
             }, [
               m("i", { class: "fa fa-download", "aria-hidden": true }),
               m("span", {}, "Export")
