@@ -4,6 +4,7 @@ import listItem from "./list_item";
 import searchForm from "../widgets/search_form";
 import pagination from "../widgets/pagination";
 import confirmDialog from "../widgets/confirm_dialog";
+import recordNotFound from "../widgets/404";
 
 var paginate = function(ctrl) {
   return m.component(pagination,
@@ -95,10 +96,7 @@ var videoList = {
       ]),
       m("ul", { class: "list-unstyled projects-list" }, [
         _.isEmpty(ctrl.videos()) ? m("li", {}, [
-          m("figure", { class: "text-center" }, [
-            m("img", { src: "images/no-list.svg", with: "100", height: "100" })
-          ]),
-          m("p", { class: "text-center mgv20" }, "You have no lists")
+          m(recordNotFound)
         ]) : ctrl.showVideos()
       ]),
       m("div", { class: "clearfix" }, [
