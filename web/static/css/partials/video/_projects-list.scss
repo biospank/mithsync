@@ -98,7 +98,7 @@
         overflow: hidden;
         @include transition(width 0.3s ease-out);
         &:hover {
-          overflow: auto;
+          overflow: visible;
           width: 202px;
         }
       }

@@ -40,14 +40,14 @@ var thumbItem = {
         m("div", { class: "btn-group", role: "group" }, [
           m("button", {
             type: "button",
-            class: "btn btn-primary"
+            class: "btn"
           }, [
             m("i", { class: "fa fa-pencil-square-o", "aria-hidden": true })
           ]),
           m("button", {
             onclick: ctrl.delete,
             type: "button",
-            class: "btn btn-danger"
+            class: "btn"
           }, [
             m("i", { class: "fa fa-trash", "aria-hidden": true })
           ])
