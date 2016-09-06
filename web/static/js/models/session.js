@@ -36,8 +36,6 @@ var Session = {
     } else {
       var unixTs = Number.parseInt(this.expires());
 
-      console.log("unixTs: %s", unixTs);
-      
       if(_.isNaN(unixTs)) {
         return false;
       } else {
