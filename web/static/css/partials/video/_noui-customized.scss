@@ -1,0 +1,20 @@
+.noUi {
+  &-horizontal {
+    .noUi-handle {
+      width: 10px;
+      left: -5px;
+      &:before {
+        left: 2px;
+      }
+      &:after {
+        left: 5px;
+      }
+    }
+  }
+  &-connect {
+    background-color: $mainColor;
+  }
+  &-value {
+    margin-top: 10px;
+  }
+}

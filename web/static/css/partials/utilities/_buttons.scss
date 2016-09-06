@@ -11,14 +11,14 @@ $btn-primary: #69c0af;
   }
   &-success {
     background-color: $btn-succes;
-    &:hover, &:focus {
-      background-color: lighten($btn-succes, 10%);
+    &:hover, &:focus, &:active {
+      background-color: lighten($btn-succes, 10%) !important;
     }
   }
   &-primary {
     background-color: $btn-primary;
-    &:hover, &:focus {
-      background-color: lighten($btn-primary, 10%);
+    &:hover, &:focus, &:active {
+      background-color: lighten($btn-primary, 10%) !important;
     }
   }
   &-xs {}

@@ -1,0 +1,13 @@
+.placeholder {
+  background-color: #ababab;
+  position: relative;
+  a {
+    display: block;
+  }
+  // &__text {
+  //   text-align: center;
+  //   @include position(left, 155px, bottom, 60px);
+  //   @include font-style(15px, white);
+  //   text-transform: uppercase;
+  // }
+}

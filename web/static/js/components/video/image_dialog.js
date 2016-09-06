@@ -71,7 +71,10 @@ var imageDialog = (function() {
         "role": "dialog",
         "id": "imageDialog"
       }, [
-        m(".modal-dialog modal-lg", {role: "document"}, [
+        m(".modal-dialog modal-lg", {
+          role: "document",
+          class: "bounceIn animated"
+        }, [
           m(".modal-content", [
             m(".modal-header", [
               m("button.close", {

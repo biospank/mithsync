@@ -12,10 +12,10 @@ var editVideo = (function() {
 
   var content = function(ctrl) {
     return [
-      m("header", { class: "text-right" }, [
-        m("a", { class: "btn btn-success" }, "Save"),
-        m("a", { class: "btn btn-success" }, "Save and Exit")
-      ]),
+      // m("header", { class: "text-right" }, [
+      //   m("a", { class: "btn btn-success" }, "Save"),
+      //   m("a", { class: "btn btn-success" }, "Save and Exit")
+      // ]),
       m(imageDialog),
       m(".row", [
         m(".col-sm-6", [
@@ -43,7 +43,7 @@ var editVideo = (function() {
           //     asNavFor: '.slider-nav'
           //   }
           // })
-          m("div", [
+          m("div", { class: "placeholder" }, [
             m("a", {
               onclick: function(event) {
                 event.preventDefault();
@@ -59,14 +59,15 @@ var editVideo = (function() {
                 class: "img-responsive"
               })
             ])
+            // m("p", { class: "placeholder__text" }, "Image placeholder")
           ])
         ])
       ]),
       m(".clearfix .mgv25", [
-        m("p", "Start: " + ctrl.svalue()),
-        m("p", "End: " + ctrl.evalue()),
-        m("#slider")
+        m("p", { class: "pull-left" }, "Start: " + ctrl.svalue()),
+        m("p", { class: "pull-right" }, "End: " + ctrl.evalue()),
       ]),
+      m("#slider"),
       m(".col-sm-12 .mgv25", {}, [
         m(slickCarousel, {
           class: 'slider-nav',
@@ -80,10 +81,10 @@ var editVideo = (function() {
             infinite: true
           }
         })
-      ]),
-      m("footer", { class: "text-right" }, [
-        m("a", { class: "btn btn-success" }, "Add Contents")
       ])
+      // m("footer", { class: "text-right" }, [
+      //   m("a", { class: "btn btn-success" }, "Add Contents")
+      // ])
     ];
   };
 
