@@ -1,5 +1,5 @@
-import Videosync from '../videosync';
-import Session from './session'
+import Videosync from '../../videosync';
+import Session from '../../models/session'
 
 var Slider = {
   encoder: function(value) {

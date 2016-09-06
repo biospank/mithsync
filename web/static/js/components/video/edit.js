@@ -1,8 +1,8 @@
 import mixinLayout from "../layout/mixin_layout";
 import Session from "../../models/session";
 import Video from "../../models/video";
-import Slider from "../../models/slider";
-//import videoSlider from "./video_slider"
+import Slide from "../../models/slide";
+import Slider from "./slider";
 import imageDialog from "./image_dialog";
 import videoPlayback from "./video_playback";
 import slickCarousel from "./slick_carousel";
@@ -49,13 +49,13 @@ var editVideo = (function() {
                 event.preventDefault();
                 imageDialog.show({
                   selectCallback: function(image) {
-                    ctrl.currentImage(image);
+                    ctrl.slide().url(image.path)
                   }
                 });
               }
             }, [
               m("img", {
-                src: ctrl.currentImage().path,
+                src: ctrl.slide().url(),
                 class: "img-responsive"
               })
             ])
@@ -93,9 +93,7 @@ var editVideo = (function() {
 
       ctrl.video = m.prop({});
       ctrl.videoInfo = m.prop({});
-      ctrl.currentImage = m.prop({
-        path: "/images/contentplaceholder.png"}
-      );
+      ctrl.slide = m.prop(Slide.model);
       ctrl.errors = m.prop({});
       ctrl.player = {};
       ctrl.slider = m.prop();
@@ -136,6 +134,11 @@ var editVideo = (function() {
             ctrl.slider().on('change', function(values, handle, unencodedValues) {
               var currentValue = _.round(values[handle])
               ctrl.player.seek(currentValue);
+              if(handle === 0) {
+                ctrl.slide().start(currentValue);
+              } else {
+                ctrl.slide().end(currentValue);
+              }
               console.log(currentValue);
             });
 
