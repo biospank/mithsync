@@ -5,12 +5,8 @@ defmodule Videosync.SlideControllerTest do
   alias Videosync.Video
 
   @valid_attrs %{
-    end: %{
-      hour: 14, min: 0, sec: 0
-    },
-    start: %{
-      hour: 14, min: 0, sec: 0
-    },
+  end: 60,
+    start: 20,
     url: "http://mydomain/url/to/image"
   }
   @invalid_attrs %{}
