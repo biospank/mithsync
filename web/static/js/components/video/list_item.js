@@ -38,9 +38,12 @@ var listItem = {
           m("label", { for: video.id })
         ]),
         m(".projects-list__body clearfix", [
-          m("h5", { class: "projects-list__title" }, video.title),
+          m("h5", { class: "projects-list__title" }, [
+            video.title,
+            m("small", { class: "projects-list__date" }, "Created at: " + "16-05-2016")
+          ]),
           //m("p", { class: "projects-list__description" }, video.description),
-          //m("label", { class: "projects-list__date" }, "16-05-2016"),
+          // m("label", { class: "projects-list__date" }, "16-05-2016"),
           m("div", { class: "projects-list__buttons" }, [
             m("a", {
               href: "/video/" + video.id + "/edit",
