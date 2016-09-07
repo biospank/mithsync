@@ -6,6 +6,7 @@ import Slider from "./slider";
 import imageDialog from "./image_dialog";
 import videoPlayback from "./video_playback";
 import slickCarousel from "./slick_carousel";
+import feedbackButton from "../widgets/feedback_button";
 
 
 var editVideo = (function() {
@@ -33,29 +34,19 @@ var editVideo = (function() {
           // )
         ]),
         m(".col-sm-6", [
-          // m(slickCarousel, {
-          //   class: 'slider-for',
-          //   opts: {
-          //     slidesToShow: 1,
-          //     slidesToScroll: 1,
-          //     arrows: false,
-          //     fade: true,
-          //     asNavFor: '.slider-nav'
-          //   }
-          // })
           m("div", [
             m("a", {
               onclick: function(event) {
                 event.preventDefault();
                 imageDialog.show({
                   selectCallback: function(image) {
-                    ctrl.slide().url(image.path)
+                    ctrl.currentSlide().url = image.path
                   }
                 });
               }
             }, [
               m("img", {
-                src: ctrl.slide().url(),
+                src: ctrl.currentSlide().url,
                 class: "img-responsive"
               })
             ])
@@ -70,19 +61,37 @@ var editVideo = (function() {
       m(".col-sm-12 .mgv25", {}, [
         m(slickCarousel, {
           class: 'slider-nav',
+          clickCallback: function(slide) {
+            console.log(slide);
+            // m.startComputation();
+            ctrl.currentSlide(Slide.resetModel(slide));
+            // ctrl.slider().set([ctrl.currentSlide().start, ctrl.currentSlide().end]);
+            // m.endComputation();
+          },
           opts: {
             slidesToShow: 3,
             slidesToScroll: 1,
-            // asNavFor: '.slider-for',
+            arrows: false,
             dots: true,
-            centerMode: true,
+            // centerMode: true,
             focusOnSelect: true,
             infinite: true
           }
-        })
+        }, ctrl.video().slides)
       ]),
       m("footer", { class: "text-right" }, [
-        m("a", { class: "btn btn-success" }, "Add Contents")
+        m.component(feedbackButton, {
+          action: ctrl.deleteSlide,
+          label: 'Delete',
+          feedbackLabel: 'Deleting...',
+          style: 'btn btn-warning btn-lg' + (Slide.isNewRecord() ? ' disabled' : '')
+        }),
+        m.component(feedbackButton, {
+          action: ctrl.saveSlide,
+          label: 'Save',
+          feedbackLabel: 'Saving...',
+          style: 'btn btn-primary btn-lg'
+        })
       ])
     ];
   };
@@ -93,7 +102,7 @@ var editVideo = (function() {
 
       ctrl.video = m.prop({});
       ctrl.videoInfo = m.prop({});
-      ctrl.slide = m.prop(Slide.model);
+      ctrl.currentSlide = m.prop(Slide.resetModel());
       ctrl.errors = m.prop({});
       ctrl.player = {};
       ctrl.slider = m.prop();
@@ -120,7 +129,7 @@ var editVideo = (function() {
           // ctrl.player = plyr.setup('.video_player');
           ctrl.player = plyr.setup('.video_player', {
             //['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'fullscreen']
-            controls: ['play', 'progress', 'current-time']
+            controls: ['play', 'mute', 'volume', 'current-time']
           })[0];
 
           ctrl.player.on('ready', function(event) {
@@ -133,11 +142,11 @@ var editVideo = (function() {
 
             ctrl.slider().on('change', function(values, handle, unencodedValues) {
               var currentValue = _.round(values[handle])
-              ctrl.player.seek(currentValue);
+              // ctrl.player.seek(currentValue);
               if(handle === 0) {
-                ctrl.slide().start(currentValue);
+                ctrl.currentSlide().start = currentValue;
               } else {
-                ctrl.slide().end(currentValue);
+                ctrl.currentSlide().end = currentValue;
               }
               console.log(currentValue);
             });
@@ -162,14 +171,14 @@ var editVideo = (function() {
             // });
           });
 
-          ctrl.player.on('error', function(error) {
-            console.log(error);
-          });
-
-          ctrl.player.on('stalled', function(event) {
-            console.log(event);
-            console.log("stalled");
-          });
+          // ctrl.player.on('error', function(error) {
+          //   console.log(error);
+          // });
+          //
+          // ctrl.player.on('stalled', function(event) {
+          //   console.log(event);
+          //   console.log("stalled");
+          // });
         }
       };
 
@@ -181,6 +190,38 @@ var editVideo = (function() {
           ctrl.errors(response.errors);
         })
       };
+
+      ctrl.saveSlide = function() {
+        if(Slide.isNewRecord()) {
+          return Slide.create(ctrl.video().id).then(function(response) {
+            console.log("slide created!");
+            slickCarousel.addSlide(response.data);
+            ctrl.currentSlide(Slide.resetModel());
+            ctrl.slider().set([ctrl.currentSlide().start, ctrl.currentSlide().end]);
+          }, function(response) {
+            ctrl.errors(response.errors);
+          })
+        } else {
+          return Slide.update(ctrl.video().id, ctrl.currentSlide().id).then(function(response) {
+            console.log("slide updated!");
+          }, function(response) {
+            ctrl.errors(response.errors);
+          })
+        }
+      }
+
+      ctrl.deleteSlide = function() {
+        console.log(ctrl.video().id);
+        console.log(ctrl.currentSlide().id);
+        return Slide.delete(ctrl.video().id, ctrl.currentSlide().id).then(function(response) {
+          console.log("slide deleted!");
+          slickCarousel.removeSlide();
+          ctrl.currentSlide(Slide.resetModel());
+          ctrl.slider().set([ctrl.currentSlide().start, ctrl.currentSlide().end]);
+        }, function(response) {
+          ctrl.errors(response.errors);
+        })
+      }
 
       Video.bindProviders();
 
