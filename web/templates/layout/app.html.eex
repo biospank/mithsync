@@ -18,13 +18,5 @@
     <!-- <script src="https://www.youtube.com/iframe_api"></script> -->
     <!-- <script src="https://player.vimeo.com/api/player.js"></script> -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-    <!-- <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        m.startComputation();
-        $("#wrapper").toggleClass("toggled");
-        m.endComputation();
-    });
-    </script> -->
   </body>
 </html>
