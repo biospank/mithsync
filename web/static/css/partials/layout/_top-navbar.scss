@@ -7,7 +7,7 @@
   &.navbar-fixed-top {
     left: 0;
     @include respond-to(min-width, 769px) {
-      left: 260px;
+      padding-left: 265px;
     }
   }
   .navbar-brand {

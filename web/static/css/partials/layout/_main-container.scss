@@ -1,8 +1,7 @@
-.main-container {
+#page-content-wrapper {
   @include spaces(0, 100px 0 0);
   background-color: #f1f1f1;
   height: 100%;
-  position: relative;
   z-index: 2;
   &.middle {
     padding-top: 180px;
@@ -14,7 +13,7 @@
   // }
   &.centered{
     @include respond-to(min-width, 768px) {
-      margin-left: 260px;
+      margin-left: 250px;
     }
   }
   .wrap {
@@ -22,13 +21,5 @@
   }
   .modal {
     position: absolute;
-  }
-}
-
-// isotope style
-.grid-item {
-  width: 25%;
-  &--width2 {
-    width: 50%;
   }
 }

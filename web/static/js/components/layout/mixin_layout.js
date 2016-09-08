@@ -14,13 +14,20 @@ var mixinLayout = function(content, layout) {
       ]
     },
     standard: function(content) {
-      return [
+      return m("#wrapper", {
+        config: function() {
+          $("#menu-toggle").click(function(e) {
+              e.preventDefault();
+              $("#wrapper").toggleClass("toggled");
+          });
+        }
+      }, [
         m.component(topNav),
-        m('aside', { class: 'sidebar navbar-collapse collapse slideInLeft animated', id: 'sidebarNav', 'aria-expanded': 'false' }, [
+        m('aside', { class: 'sidebar', id: 'sidebar-wrapper' }, [
           m.component(user),
           m.component(sidebarNav)
         ]),
-        m('main', { class: 'main-container centered'}, [
+        m('main', { class: 'main-container', id: "page-content-wrapper" }, [
           // m("section", { class: "breadcrumb-bar" }, [
           //   m(".container-fluid", breadcrumbBar())
           // ]),
@@ -31,7 +38,7 @@ var mixinLayout = function(content, layout) {
             m(".container-fluid", content)
           ])
         ])
-      ]
+      ])
     }
   };
 

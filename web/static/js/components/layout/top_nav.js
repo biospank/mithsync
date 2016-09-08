@@ -34,11 +34,13 @@ var topNav = {
     return m('nav', { class: 'top-navbar navbar navbar-default navbar-fixed-top' }, [
       m('.container-fluid', [
         m('.navbar-header', [
-          m('button', {
-            type: 'button',
+          m('a', {
+            href: '#menu-toggle',
             class: 'navbar-toggle',
-            'data-toggle': 'collapse',
-            'data-target': '#sidebarNav'
+            id: "menu-toggle",
+            //class: "btn btn-default"
+            //'data-toggle': 'collapse'
+            // 'data-target': '#sidebarNav'
           },
           [
             m('span', { class: 'sr-only' }, 'Toggle navigation'),
