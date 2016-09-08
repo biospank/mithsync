@@ -60,6 +60,17 @@ var newVideo = (function() {
           ctrl.errors(response.errors);
         })
       };
+
+      ctrl.checkVideoUrl = function(url) {
+        var urlParser = new UrlParser();
+        // urlParser.addProvider('vimeo');
+        urlParser.addProvider('youtube');
+        var infoUrl = urlParser.parse(url);
+        if( infoUrl.provider === "unknown" ) {
+          console.log("Link errato");
+        }
+      };
+
     },
     view: mixinLayout(content)
   };
