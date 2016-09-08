@@ -9,7 +9,7 @@ var Slider = {
     var sliderContainer = document.getElementById(element);
 
     return noUiSlider.create(sliderContainer, {
-    	start: [0, 30],
+    	start: [0, 40],
       connect: true,
       behaviour: 'drag',
       margin: 5,

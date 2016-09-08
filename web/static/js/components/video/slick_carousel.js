@@ -1,46 +1,41 @@
+import slickItem from './slick_item';
+import Slide from "../../models/slide";
+
 var slickCarousel = (function() {
-  var slides = m.prop([]);
-  var carousel = m.prop();
-  var thumbnail = m.prop('<div class="thumbnail"><img src="url"></img></div>');
+  var carousel = {};
+
+  carousel.slides = [];
+  carousel.currentSlide = Slide.resetModel();
 
   return {
-    addSlide: function(sl) {
-      slides(_.concat(slides(), sl));
-      carousel().slick('slickAdd', _.replace(thumbnail(), 'url', sl.url));
+    currentSlide: function(slide) {
+      if (arguments.length)
+        carousel.currentSlide = slide;
+
+      return carousel.currentSlide;
+    },
+    addSlide: function(slide) {
+      carousel.slides.push(slide);
     },
     removeSlide: function() {
-      var current = carousel().slick('slickCurrentSlide');
-      console.log(current);
-      _.pull(slides(), _.nth(slides(), current));
-      carousel().slick('slickRemove', current);
-    },
-    controller: function(args, sls) {
-      slides(sls);
-
-      return {
-        onReady: function(element, isInitialized, context) {
-          if(!isInitialized) {
-            carousel(
-              // $(element).slick(args['opts'])
-              $(element).on('click', '.slick-slide', function(event, slick, index) {
-                var index = $(event.currentTarget).data('slick-index')
-                // console.log(slides()[index]);
-                // args['clickCallback'].apply(this, [slides()[index]]);
-                args['clickCallback'](slides()[index]);
-              }).slick(args['opts'])
-            );
-          }
-        }
-      }
+      _.remove(carousel.slides, function(slide) {
+        return slide.id === carousel.currentSlide.id;
+      });
     },
     view: function(ctrl, args, slides) {
-      return m("", { class: args['class'], config: ctrl.onReady }, [
-        slides.map(function(slide) {
-          return m(".thumbnail", [
-            m("img", {
-              src: slide.url
-            })
-          ]);
+      carousel.slides = slides;
+
+      return m(".container", { style: 'overflow-x: scroll;', config: ctrl.onReady }, [
+        carousel.slides.map(function(slide) {
+          return m(slickItem, {
+            selectCallback: function(slide) {
+              carousel.currentSlide = slide;
+
+              if(args.selectCallback)
+                args.selectCallback(slide);
+
+            }
+          }, slide);
         })
       ]);
     }

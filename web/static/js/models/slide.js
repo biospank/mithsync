@@ -6,9 +6,6 @@ var Slide = (function() {
   var model = {};
 
   return {
-    isNewRecord: function() {
-      return _.isNil(model.id);
-    },
     resetModel: function(slide) {
       if(slide !== undefined) {
         model = slide;
