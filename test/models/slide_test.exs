@@ -3,7 +3,7 @@ defmodule Videosync.SlideTest do
 
   alias Videosync.Slide
 
-  @valid_attrs %{end: %{hour: 14, min: 0, sec: 0}, start: %{hour: 14, min: 0, sec: 0}, url: "some content"}
+  @valid_attrs %{end: 60, start: 20, url: "some content"}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

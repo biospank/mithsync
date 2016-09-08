@@ -3,8 +3,8 @@ defmodule Videosync.Slide do
 
   schema "slides" do
     field :url, :string
-    field :start, Ecto.Time
-    field :end, Ecto.Time
+    field :start, :integer
+    field :end, :integer
     belongs_to :video, Videosync.Video
     belongs_to :user, Videosync.User
 
