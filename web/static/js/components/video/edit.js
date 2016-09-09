@@ -7,8 +7,6 @@ import imageDialog from "./image_dialog";
 import videoPlayback from "./video_playback";
 import slickCarousel from "./slick_carousel";
 import feedbackButton from "../widgets/feedback_button";
-import confirmDialog from "../widgets/confirm_dialog";
-
 
 var editVideo = (function() {
 
@@ -19,7 +17,6 @@ var editVideo = (function() {
       //   m("a", { class: "btn btn-success" }, "Save and Exit")
       // ]),
       m(imageDialog),
-      m(confirmDialog),
       m(".row", [
         m(".col-sm-6", [
           m(videoPlayback, {
@@ -52,7 +49,6 @@ var editVideo = (function() {
                 class: "img-responsive"
               })
             ])
-            // m("p", { class: "placeholder__text" }, "Image placeholder")
           ])
         ])
       ]),
@@ -75,23 +71,27 @@ var editVideo = (function() {
           class: 'btn btn-primary btn-lg'
         }, 'New'),
         m("button[type=submit]", {
-          onclick: ctrl.deleteSlide,
+          onclick: function() {
+            swal({
+              title: 'Are you sure?',
+              text: "You won't be able to revert this!",
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes, delete it!'
+            }).then(function() {
+              ctrl.deleteSlide();
+              ctrl.isNewRecord(true);
+            })
+          },
           class: 'btn btn-danger btn-lg' + (ctrl.isNewRecord() ? ' disabled' : ''),
           disabled: ctrl.isNewRecord()
         }, 'Delete'),
-        // m.component(feedbackButton, {
-        //   confirm: ctrl.deleteSlide,
-        //   disabled: ctrl.isNewRecord(),
-        //   label: 'Delete',
-        //   feedbackLabel: 'Deleting...',
-        //   style: 'btn btn-danger btn-lg'
-        // }),
-        m.component(feedbackButton, {
-          action: ctrl.saveSlide,
-          label: 'Save',
-          feedbackLabel: 'Saving...',
-          style: 'btn btn-primary btn-lg'
-        })
+        m("button[type=submit]", {
+          onclick: ctrl.saveSlide,
+          class: 'btn btn-primary btn-lg'
+        }, 'Save')
       ])
       // m("footer", { class: "text-right" }, [
       //   m("a", { class: "btn btn-success" }, "Add Contents")
@@ -186,26 +186,36 @@ var editVideo = (function() {
 
       ctrl.saveSlide = function() {
         if(ctrl.isNewRecord()) {
-          return Slide.create(ctrl.video().id).then(function(response) {
-            slickCarousel.addSlide(response.data);
-            slickCarousel.currentSlide(Slide.resetModel());
-            ctrl.slider().set([slickCarousel.currentSlide().start, slickCarousel.currentSlide().end]);
-            ctrl.isNewRecord(true)
-          }, function(response) {
-            ctrl.errors(response.errors);
-          })
+          if(Slide.validate()) {
+            return Slide.create(ctrl.video().id).then(function(response) {
+              slickCarousel.addSlide(response.data);
+              slickCarousel.currentSlide(Slide.resetModel());
+              ctrl.slider().set([slickCarousel.currentSlide().start, slickCarousel.currentSlide().end]);
+              ctrl.isNewRecord(true);
+            }, function(response) {
+              ctrl.errors(response.errors);
+            })
+          } else {
+            swal({
+              title: 'Select a slide',
+              text: "Click on thumbnail's placeholder to select an image",
+              type: 'info',
+              // confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Ok'
+            })
+          }
         } else {
           return Slide.update(ctrl.video().id, slickCarousel.currentSlide().id).then(function(response) {
             slickCarousel.currentSlide(Slide.resetModel());
             ctrl.slider().set([slickCarousel.currentSlide().start, slickCarousel.currentSlide().end]);
-            ctrl.isNewRecord(true)
+            ctrl.isNewRecord(true);
           }, function(response) {
             ctrl.errors(response.errors);
           })
         }
       }
 
-      ctrl.confirmAction = function() {
+      ctrl.deleteSlide = function(event) {
         return Slide.delete(ctrl.video().id, slickCarousel.currentSlide().id).then(function(response) {
           slickCarousel.removeSlide();
           slickCarousel.currentSlide(Slide.resetModel());
@@ -213,22 +223,9 @@ var editVideo = (function() {
         }, function(response) {
           ctrl.errors(response.errors);
         })
-      };
-      ctrl.cancelAction = function() {
-      };
-
-      ctrl.deleteSlide = function(event) {
-        confirmDialog.init(
-          {
-            msg: "Confirm slide deletion?",
-            cbConfirm: ctrl.confirmAction,
-            cbCancel: ctrl.cancelAction
-          }
-        );
       }
 
       ctrl.newSlide = function(event) {
-        // event.preventDefault();
         slickCarousel.currentSlide(Slide.resetModel());
         ctrl.slider().set([slickCarousel.currentSlide().start, slickCarousel.currentSlide().end]);
         ctrl.isNewRecord(true);

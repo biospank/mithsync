@@ -5,7 +5,6 @@ import Image from "../../models/image";
 import thumbItem from "./thumb_item";
 import searchForm from "../widgets/search_form";
 import pagination from "../widgets/pagination";
-import confirmDialog from "../widgets/confirm_dialog";
 import recordNotFound from "../widgets/404";
 
 var library = (function() {
@@ -56,7 +55,6 @@ var library = (function() {
         id: "dropper",
         config: ctrl.initializeDropper
       }),
-      m(confirmDialog),
       m("div", { class: "row" }, [
         _.isEmpty(ctrl.images()) ? m(recordNotFound) : ctrl.images().map(function(image) {
           return m(thumbItem, image, ctrl);

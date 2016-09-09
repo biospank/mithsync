@@ -3,7 +3,6 @@ import Video from "../../models/video";
 import listItem from "./list_item";
 import searchForm from "../widgets/search_form";
 import pagination from "../widgets/pagination";
-import confirmDialog from "../widgets/confirm_dialog";
 import recordNotFound from "../widgets/404";
 
 var paginate = function(ctrl) {
@@ -73,7 +72,6 @@ var videoList = {
   },
   view: function(ctrl) {
     return m("div", [
-      m(confirmDialog),
       m("div", { class: "clearfix" }, [
         m("div", { class: "pull-left" }, [
           m(searchForm, {

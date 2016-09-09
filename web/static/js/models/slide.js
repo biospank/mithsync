@@ -2,16 +2,24 @@ import Videosync from '../videosync';
 import Session from './session';
 
 var Slide = (function() {
+  const slidePlaceHolder = "/images/contentplaceholder.png";
   var url = '/videos/videoId/slides';
   var model = {};
 
   return {
+    validate: function() {
+      if(model.url === slidePlaceHolder) {
+        return false;
+      } else {
+        return true;
+      }
+    },
     resetModel: function(slide) {
       if(slide !== undefined) {
         model = slide;
       } else {
         model = {
-          url: "/images/contentplaceholder.png",
+          url: slidePlaceHolder,
           start: 0,
           end: 40
         };
