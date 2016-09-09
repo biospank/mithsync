@@ -1,11 +1,10 @@
-import confirmDialog from "../widgets/confirm_dialog";
 import Video from "../../models/video";
 
 var listItem = {
   controller: function(video, parent){
     var ctrl = this;
 
-    ctrl.cbConfirm = function() {
+    ctrl.delete = function() {
       Video.delete(ctrl.video.id).then(function() {
         parent.getVideos(
           _.assign(
@@ -15,17 +14,6 @@ var listItem = {
           parent.requestOptions
         );
       });
-    };
-    ctrl.cbCancel = function() {
-    };
-    ctrl.delete = function() {
-      confirmDialog.init(
-        {
-          msg: "Are you sure?",
-          cbConfirm: ctrl.cbConfirm,
-          cbCancel: ctrl.cbCancel
-        }
-      );
     };
   },
   view: function(ctrl, video){
@@ -78,7 +66,19 @@ var listItem = {
               m("span", {}, "Export")
             ]),
             m("button", {
-              onclick: ctrl.delete,
+              onclick: function() {
+                swal({
+                  title: 'Are you sure?',
+                  text: "You won't be able to revert this!",
+                  type: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Yes, delete it!'
+                }).then(function() {
+                  ctrl.delete();
+                })
+              },
               type: "button",
               class: "btn btn-danger icon-left"
             }, [

@@ -1,5 +1,5 @@
-import Videosync from '../videosync';
-import Session from './session'
+import Videosync from '../../videosync';
+import Session from '../../models/session'
 
 var Slider = {
   encoder: function(value) {
@@ -9,7 +9,7 @@ var Slider = {
     var sliderContainer = document.getElementById(element);
 
     return noUiSlider.create(sliderContainer, {
-    	start: [0, 30],
+    	start: [0, 40],
       connect: true,
       behaviour: 'drag',
       margin: 5,

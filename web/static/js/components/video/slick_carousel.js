@@ -1,19 +1,45 @@
-var slickCarousel = {
-  controller: function(args, slides) {
-    return {
-      onReady: function(element, isInitialized, context) {
-        if(!isInitialized)
-          $(element).slick(args['opts']);
-      }
+import slickItem from './slick_item';
+import Slide from "../../models/slide";
+
+var slickCarousel = (function() {
+  var carousel = {};
+
+  carousel.slides = [];
+  carousel.currentSlide = Slide.resetModel();
+
+  return {
+    currentSlide: function(slide) {
+      if (arguments.length)
+        carousel.currentSlide = slide;
+
+      return carousel.currentSlide;
+    },
+    addSlide: function(slide) {
+      carousel.slides.push(slide);
+    },
+    removeSlide: function() {
+      _.remove(carousel.slides, function(slide) {
+        return slide.id === carousel.currentSlide.id;
+      });
+    },
+    view: function(ctrl, args, slides) {
+      carousel.slides = slides;
+
+      return m(".container", { style: 'overflow-x: scroll;', config: ctrl.onReady }, [
+        carousel.slides.map(function(slide) {
+          return m(slickItem, {
+            selectCallback: function(slide) {
+              carousel.currentSlide = slide;
+
+              if(args.selectCallback)
+                args.selectCallback(slide);
+
+            }
+          }, slide);
+        })
+      ]);
     }
-  },
-  view: function(ctrl, args, slides) {
-    return m("", { class: args['class'], config: ctrl.onReady }, [
-      [1,2,3,4,5,6,7,8,9].map(function(element) {
-        return m("h3.active", element);
-      })
-    ]);
   }
-};
+})();
 
 export default slickCarousel;

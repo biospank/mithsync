@@ -6,6 +6,7 @@ var feedbackButton = {
 
     ctrl.actionWithFeedback = function(event) {
       event.preventDefault();
+
       ctrl.label(attrs.feedbackLabel);
       ctrl.style(ctrl.style() + ' disabled');
 
@@ -15,11 +16,14 @@ var feedbackButton = {
         m.redraw();
       });
     }
-  },
 
+  },
   view: function(ctrl, attrs) {
+    ctrl.disabled = m.prop(attrs.disabled || false);
+
     return m("button[type=submit]", {
-              class: ctrl.style(), //'btn btn-success btn-lg',
+              disabled: ctrl.disabled(),
+              class: ctrl.style() + (ctrl.disabled() ? ' disabled' : ''), //'btn btn-success btn-lg',
               onclick: ctrl.actionWithFeedback
             }, ctrl.label());
   }

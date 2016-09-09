@@ -1,11 +1,10 @@
-import confirmDialog from "../widgets/confirm_dialog";
 import Image from "../../models/image";
 
 var thumbItem = {
   controller: function(image, parent){
     var ctrl = this;
 
-    ctrl.cbConfirm = function() {
+    ctrl.delete = function() {
       Image.delete(ctrl.image.name).then(function() {
         parent.getImages(
           _.assign(
@@ -16,22 +15,11 @@ var thumbItem = {
         );
       });
     };
-    ctrl.cbCancel = function() {
-    };
-    ctrl.delete = function() {
-      confirmDialog.init(
-        {
-          msg: "Are you sure?",
-          cbConfirm: ctrl.cbConfirm,
-          cbCancel: ctrl.cbCancel
-        }
-      );
-    };
   },
   view: function(ctrl, image){
     ctrl.image = image;
     return m(".col-xs-6 .col-sm-4 .col-lg-2", [
-      m("figure", { class: "thumb_libraryitem" }, [
+      m("figure", { class: "thumbnail thumb_libraryitem" }, [
         m("img", {
           src: ctrl.image.path,
           title: ctrl.image.name,
@@ -45,7 +33,20 @@ var thumbItem = {
             m("i", { class: "fa fa-pencil-square-o", "aria-hidden": true })
           ]),
           m("button", {
-            onclick: ctrl.delete,
+            onclick: function() {
+              swal({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                showLoaderOnConfirm: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+              }).then(function() {
+                ctrl.delete();
+              })
+            },
             type: "button",
             class: "btn"
           }, [

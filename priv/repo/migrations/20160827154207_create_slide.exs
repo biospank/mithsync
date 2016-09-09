@@ -4,8 +4,8 @@ defmodule Videosync.Repo.Migrations.CreateSlide do
   def change do
     create table(:slides) do
       add :url, :string
-      add :start, :time
-      add :end, :time
+      add :start, :integer
+      add :end, :integer
       add :video_id, references(:videos, on_delete: :nothing)
       add :user_id, references(:users, on_delete: :nothing)
 
