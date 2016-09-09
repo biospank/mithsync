@@ -14,7 +14,7 @@ var slickItem = {
       m("img", {
         src: ctrl.slide.url,
         class: "img-responsive"
-      }),
+      })
     ]);
   }
 }

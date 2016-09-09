@@ -11,3 +11,14 @@
   //   text-transform: uppercase;
   // }
 }
+
+.slidesheet {
+  @include border(#69c0af, 3px, nil, dashed);
+  @include spaces(20px, 30px 0);
+  background-color: white;
+  .thumbnail {
+    display: inline-block;
+    margin-bottom: 10px;
+    margin-right: 10px;
+  }
+}

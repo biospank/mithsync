@@ -33,7 +33,7 @@ var editVideo = (function() {
           // )
         ]),
         m(".col-sm-6", [
-          m("div", [
+          m("figure", { class: "placeholder" }, [
             m("a", {
               onclick: function(event) {
                 event.preventDefault();
@@ -42,7 +42,8 @@ var editVideo = (function() {
                     slickCarousel.currentSlide().url = image.path
                   }
                 });
-              }
+              },
+              href: "#"
             }, [
               m("img", {
                 src: slickCarousel.currentSlide().url,
@@ -57,18 +58,10 @@ var editVideo = (function() {
         m("p", { class: "pull-right" }, "End: " + ctrl.evalue()),
       ]),
       m("#slider"),
-      m(".col-sm-12 .mgv25", {}, [
-        m(slickCarousel, {
-          selectCallback: function(slide) {
-            ctrl.slider().set([slide.start, slide.end]);
-            ctrl.isNewRecord(false)
-          }
-        }, ctrl.video().slides)
-      ]),
       m("footer", { class: "text-right" }, [
         m("button", {
           onclick: ctrl.newSlide,
-          class: 'btn btn-primary btn-lg'
+          class: 'btn btn-primary btn-md'
         }, 'New'),
         m("button[type=submit]", {
           onclick: function() {
@@ -86,17 +79,23 @@ var editVideo = (function() {
               ctrl.isNewRecord(true);
             })
           },
-          class: 'btn btn-danger btn-lg' + (ctrl.isNewRecord() ? ' disabled' : ''),
+          class: 'btn btn-danger btn-md' + (ctrl.isNewRecord() ? ' disabled' : ''),
           disabled: ctrl.isNewRecord()
-        }, 'Delete'),
+        }, [
+          m("i", { class: "fa fa-trash-o" }),
+          m("span", "Delete")
+        ]),
         m("button[type=submit]", {
           onclick: ctrl.saveSlide,
-          class: 'btn btn-primary btn-lg'
+          class: 'btn btn-primary btn-md'
         }, 'Save')
-      ])
-      // m("footer", { class: "text-right" }, [
-      //   m("a", { class: "btn btn-success" }, "Add Contents")
-      // ])
+      ]),
+      m(slickCarousel, {
+        selectCallback: function(slide) {
+          ctrl.slider().set([slide.start, slide.end]);
+          ctrl.isNewRecord(false)
+        }
+      }, ctrl.video().slides)
     ];
   };
 

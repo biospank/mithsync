@@ -25,7 +25,7 @@ var slickCarousel = (function() {
     view: function(ctrl, args, slides) {
       carousel.slides = slides;
 
-      return m(".container", { style: 'overflow-x: scroll;', config: ctrl.onReady }, [
+      return m("div", { class: "slidesheet", config: ctrl.onReady }, [
         carousel.slides.map(function(slide) {
           return m(slickItem, {
             selectCallback: function(slide) {

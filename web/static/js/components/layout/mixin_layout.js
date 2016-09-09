@@ -27,16 +27,14 @@ var mixinLayout = function(content, layout) {
           m.component(user),
           m.component(sidebarNav)
         ]),
-        m('main', { class: 'main-container', id: "page-content-wrapper" }, [
+        m('main', { id: "page-content-wrapper" }, [
           // m("section", { class: "breadcrumb-bar" }, [
           //   m(".container-fluid", breadcrumbBar())
           // ]),
           // m("section", [
           //   m("div", content)
           // ])
-          m("section", { class: "wrap clearfix" }, [
-            m(".container-fluid", content)
-          ])
+          content
         ])
       ])
     }
