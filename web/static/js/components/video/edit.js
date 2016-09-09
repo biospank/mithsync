@@ -77,6 +77,7 @@ var editVideo = (function() {
               text: "You won't be able to revert this!",
               type: 'warning',
               showCancelButton: true,
+              showLoaderOnConfirm: true,
               confirmButtonColor: '#3085d6',
               cancelButtonColor: '#d33',
               confirmButtonText: 'Yes, delete it!'
