@@ -1,9 +1,9 @@
-.main-container {
+#page-content-wrapper {
   @include spaces(0, 100px 0 0);
   background-color: #f1f1f1;
   height: 100%;
-  position: relative;
   z-index: 2;
+  padding: 30px;
   &.middle {
     padding-top: 180px;
   }
@@ -12,23 +12,12 @@
   //   background-attachment: fixed;
   //   @include gradient-vertical(#FFA534, rgba(236, 22, 87, 0.6), 0%, 150%);
   // }
-  &.centered{
-    @include respond-to(min-width, 768px) {
-      margin-left: 260px;
-    }
-  }
-  .wrap {
-    padding: 25px 15px;
-  }
+  // &.centered{
+  //   @include respond-to(min-width, 768px) {
+  //     margin-left: 250px;
+  //   }
+  // }
   .modal {
     position: absolute;
-  }
-}
-
-// isotope style
-.grid-item {
-  width: 25%;
-  &--width2 {
-    width: 50%;
   }
 }

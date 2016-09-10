@@ -1,8 +1,9 @@
-.sidebar {
-  @include position(left, 0, top, 0, fixed);
-  z-index: 2000;
-  @include size(260px, 100%);
-  min-height: 100%;
-  padding: 0;
+#sidebar-wrapper {
+  //@include position(left, 0, top, 0, fixed);
+  z-index: 1040;
+  top: 0;
+  //@include size(260px, 100%);
+  //min-height: 100%;
+  //padding: 0;
   background-color: #2b2e33;
 }

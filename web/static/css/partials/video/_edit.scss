@@ -1,13 +1,35 @@
+#video-container {
+  background-color: #dee1e5;
+  padding: 20px;
+}
+
 .placeholder {
-  background-color: #ababab;
+  //background-color: #ababab;
+  background-color: white;
   position: relative;
   a {
     display: block;
   }
-  // &__text {
-  //   text-align: center;
-  //   @include position(left, 155px, bottom, 60px);
-  //   @include font-style(15px, white);
-  //   text-transform: uppercase;
-  // }
+}
+
+.slidesheet {
+  @include spaces(0, 40px 0 30px);
+  .img-thumbnail {
+    height: 130px;
+    overflow-y: hidden;
+    @include border(1px, #D4D4D4);
+    @include box-shadow(0 1px 4px rgba(0, 0, 0, 0.065));
+    margin-bottom: 20px;
+    padding: 0;
+    a {
+      display: block;
+      cursor: pointer;
+      img {
+        width: 100%;
+      }
+    }
+    &.active, &:hover {
+      border-color: #69c0af;
+    }
+  }
 }

@@ -43,4 +43,14 @@ $btn-primary: #69c0af;
       display: inline-block;
     }
   }
+  &.icon-inside-left {
+    i {
+      margin-right: 10px;
+    }
+  }
+  &.icon-inside-right {
+    i {
+      margin-left: 10px;
+    }
+  }
 }
