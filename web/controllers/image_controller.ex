@@ -56,7 +56,7 @@ defmodule Videosync.ImageController do
 
     q = from s in Slide,
       select: count(s.id),
-      where: s.url == ^path
+      where: s.url == ^path and s.user_id == ^user.id
 
     case Repo.one(q) do
       0 ->
@@ -65,7 +65,7 @@ defmodule Videosync.ImageController do
       num when num > 0 ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render(Videosync.ErrorView, :"422", errors: %{reason: 'The image is being referenced by one or more slides.'})
+        |> render(Videosync.ErrorView, :"422", errors: %{reason: "The image is being used by one or more videos."})
     end
   end
 
