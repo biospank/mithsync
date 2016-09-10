@@ -79,7 +79,7 @@ var editVideo = (function() {
               ctrl.isNewRecord(true);
             })
           },
-          class: 'btn btn-danger btn-md' + (ctrl.isNewRecord() ? ' disabled' : ''),
+          class: 'btn btn-danger btn-md icon-inside-left' + (ctrl.isNewRecord() ? ' disabled' : ''),
           disabled: ctrl.isNewRecord()
         }, [
           m("i", { class: "fa fa-trash-o" }),
@@ -90,6 +90,7 @@ var editVideo = (function() {
           class: 'btn btn-primary btn-md'
         }, 'Save')
       ]),
+      m("hr"),
       m(slickCarousel, {
         selectCallback: function(slide) {
           ctrl.slider().set([slide.start, slide.end]);
