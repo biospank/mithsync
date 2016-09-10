@@ -1,7 +1,8 @@
 .thumb_libraryitem {
   position: relative;
   margin-bottom: 30px;
-  // @include border(white, 4px);
+  height: 130px;
+  overflow-y: hidden;
   & > img {
     width: 100%;
   }
