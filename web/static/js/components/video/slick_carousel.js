@@ -35,7 +35,7 @@ var slickCarousel = (function() {
                 args.selectCallback(slide);
 
             }
-          }, slide);
+          }, slide, _.isEqual(slide, carousel.currentSlide));
         })
       ]);
     }
