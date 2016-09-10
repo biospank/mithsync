@@ -1,9 +1,10 @@
 var slickItem = {
-  view: function(ctrl, args, slide){
+  view: function(ctrl, args, slide, active){
     ctrl.slide = slide;
+    ctrl.active = active;
 
     return m("figure", {
-      class: "pull-left thumbnail",
+      class: "pull-left thumbnail" + (ctrl.active ? ' active' : ''),
       style: "cursor: pointer;",
       onclick: function() {
         if(args.selectCallback)
