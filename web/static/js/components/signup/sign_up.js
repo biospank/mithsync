@@ -55,7 +55,9 @@ var signUp = (function() {
                   id: 'email',
                   dataLabel: 'Email',
                   oninput: m.withAttr("value", Registration.model.email),
-                  error: ctrl.errors()['email']
+                  error: ctrl.errors()['email'],
+                  typeForm: "group",
+                  icon: "fa fa-user"
                 }),
                 m.component(textField, {
                   type: 'password',
@@ -63,7 +65,9 @@ var signUp = (function() {
                   id: 'password',
                   dataLabel: 'Password',
                   oninput: m.withAttr("value", Registration.model.password),
-                  error: ctrl.errors()['password']
+                  error: ctrl.errors()['password'],
+                  typeForm: "group",
+                  icon: "fa fa-unlock-alt"
                 }),
                 m.component(textField, {
                   type: 'password',
@@ -71,7 +75,9 @@ var signUp = (function() {
                   id: 'password_confirmation',
                   dataLabel: 'Confirm Password',
                   oninput: m.withAttr("value", Registration.model.password_confirmation),
-                  error: ctrl.errors()['password_confirmation']
+                  error: ctrl.errors()['password_confirmation'],
+                  typeForm: "group",
+                  icon: "fa fa-unlock-alt"
                 }),
                 m("div", { class: "text-center mgv30" }, [
                   m.component(feedbackButton, {

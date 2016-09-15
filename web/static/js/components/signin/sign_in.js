@@ -17,7 +17,9 @@ var signIn = (function() {
                 id: 'email',
                 dataLabel: 'Email',
                 oninput: m.withAttr("value", Session.model.email),
-                error: ctrl.errors()['email']
+                error: ctrl.errors()['email'],
+                typeForm: "group",
+                icon: "fa fa-user"
               }),
               m.component(textField, {
                 type: 'password',
@@ -25,7 +27,9 @@ var signIn = (function() {
                 id: 'password',
                 dataLabel: 'Password',
                 oninput: m.withAttr("value", Session.model.password),
-                error: ctrl.errors()['password']
+                error: ctrl.errors()['password'],
+                typeForm: "group",
+                icon: "fa fa-unlock-alt"
               }),
               m("p", [
                 m("a", { href: "/password/request", config: m.route }, "Forgot password?")
