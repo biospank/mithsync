@@ -8,6 +8,7 @@ import userProfile from "./components/user/user_profile";
 import videoPage from "./components/video/index";
 import newVideo from "./components/video/new";
 import editVideo from "./components/video/edit";
+import infoVideo from "./components/video/info";
 import viewVideo from "./components/video/view";
 import library from "./components/library/index";
 
@@ -32,6 +33,8 @@ export default m.route(document.getElementById('app'), "/", {
   "/video/new": newVideo,
 
   "/video/:videoId/edit": editVideo,
+
+  "/video/:videoId/info": infoVideo,
 
   "/video/view": viewVideo,
 
