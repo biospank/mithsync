@@ -13,6 +13,12 @@ var thumbItem = {
           ),
           parent.requestOptions
         );
+      }, function(response) {
+        swal(
+          'Delete error',
+          response.errors.reason,
+          'error'
+        );
       });
     };
   },

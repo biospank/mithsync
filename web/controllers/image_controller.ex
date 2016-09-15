@@ -3,6 +3,7 @@ defmodule Videosync.ImageController do
 
   alias Videosync.Image
   alias Videosync.ArcImage
+  alias Videosync.Slide
 
   def action(conn, _) do
     apply(__MODULE__, action_name(conn),
@@ -51,8 +52,21 @@ defmodule Videosync.ImageController do
   end
 
   def delete(conn, %{"id" => filename}, user) do
-    ArcImage.delete {filename, user}
-    send_resp(conn, :no_content, "")
+    path = ArcImage.url({filename, user}, :thumb)
+
+    q = from s in Slide,
+      select: count(s.id),
+      where: s.url == ^path and s.user_id == ^user.id
+
+    case Repo.one(q) do
+      0 ->
+        ArcImage.delete {filename, user}
+        send_resp(conn, :no_content, "")
+      num when num > 0 ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(Videosync.ErrorView, :"422", errors: %{reason: "The image is being used by one or more videos."})
+    end
   end
 
   defp paginate(items, page) do

@@ -2,14 +2,16 @@ import Image from "../../models/image";
 
 var thumbItem = {
   controller: function(image, callback){
-    return {
-      selectImage: function() {
-        callback(image);
-      }
-    }
+    var ctrl = this;
+    ctrl.currentImage = m.prop({});
+
+    ctrl.selectImage = function() {
+      callback(ctrl.currentImage());
+    };
   },
   view: function(ctrl, image){
-    ctrl.image = image;
+    ctrl.currentImage(image);
+
     return m(".col-xs-6 .col-sm-4 .col-lg-2", [
       m("figure", { class: "thumb_libraryitem" }, [
         m("a", {
@@ -17,8 +19,8 @@ var thumbItem = {
           onclick: ctrl.selectImage
         }, [
           m("img", {
-            src: ctrl.image.path,
-            title: ctrl.image.name,
+            src: ctrl.currentImage().path,
+            title: ctrl.currentImage().name,
             class: "img-responsive"
           })
         ])
