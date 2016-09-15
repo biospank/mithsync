@@ -6,7 +6,7 @@ import Password from "../../models/password";
 var resetPage = (function() {
   var content = function(ctrl) {
     return [
-      m('.col-xs-12 .col-sm-7 .col-md-4 .center-block .space-top', [
+      m('.col-xs-12 .col-sm-7 .col-md-4 .center-block .mgv30', [
         m('.wrapper', [
           m("h2", { class: "header text-center mgv20" }, "Reset Password"),
           m(".content", [

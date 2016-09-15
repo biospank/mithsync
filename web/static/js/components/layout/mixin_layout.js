@@ -8,7 +8,7 @@ var mixinLayout = function(content, layout) {
     login: function(content) {
       return [
         //m.component(topNav),
-        m('main', { class: 'main-container with-bg'}, [
+        m('main', { class: 'main-container'}, [
           m('.container', content)
         ])
       ]

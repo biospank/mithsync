@@ -6,7 +6,7 @@ import Session from "../../models/session";
 var signIn = (function() {
   var content = function(ctrl) {
     return [
-      m('.col-xs-12 .col-sm-7 .col-md-4 .center-block .space-top', [
+      m('.col-xs-12 .col-sm-7 .col-md-4 .center-block', [
         m('.wrapper', [
           //m("h2", { class: "header text-center mgv20" }, "Sign In"),
           m(".content", [

@@ -4,20 +4,11 @@
   height: 100%;
   z-index: 2;
   padding: 30px;
-  &.middle {
-    padding-top: 180px;
-  }
-  // &.with-bg{
-  //   background-repeat: no-repeat;
-  //   background-attachment: fixed;
-  //   @include gradient-vertical(#FFA534, rgba(236, 22, 87, 0.6), 0%, 150%);
-  // }
-  // &.centered{
-  //   @include respond-to(min-width, 768px) {
-  //     margin-left: 250px;
-  //   }
-  // }
   .modal {
     position: absolute;
   }
+}
+
+.main-container {
+  margin: 30px 0;
 }
