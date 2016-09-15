@@ -3,7 +3,7 @@ var slickItem = {
     ctrl.slide = slide;
     ctrl.active = active;
 
-    return m(".col-xs-6 .col-sm-4 .col-md-2", [
+    return m(".col-xs-6 .col-sm-4 .col-lg-2", [
       m("figure", {
         class: "img-thumbnail" + (ctrl.active ? ' active' : ''),
         onclick: function() {

@@ -36,6 +36,9 @@ $btn-primary: #75c4cb; //#69c0af
     i {
       padding: 15px;
       background-color: #dee1e5;
+      &::before {
+        text-shadow: 0px 2px 3px #000000;
+      }
     }
     span {
       padding: 10px;
