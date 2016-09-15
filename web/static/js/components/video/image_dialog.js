@@ -50,7 +50,7 @@ var imageDialog = (function() {
       selectCallback = function(image) {
         if(opts['selectCallback'] !== undefined)
           opts['selectCallback'](image);
-          
+
         $("#imageDialog").hide();
       }
 

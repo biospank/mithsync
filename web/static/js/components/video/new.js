@@ -2,6 +2,7 @@ import mixinLayout from "../layout/mixin_layout";
 import textField from "../widgets/text_field";
 import feedbackButton from "../widgets/feedback_button";
 import Video from "../../models/video";
+import UrlParser from "../../util/urlParser"
 
 var newVideo = (function() {
 
@@ -54,21 +55,40 @@ var newVideo = (function() {
       ctrl.errors = m.prop({});
 
       ctrl.createVideo = function(args) {
-        return Video.create(args).then(function(response) {
-          m.route("/video/" + response.data.id + "/edit");
-        }, function(response) {
-          ctrl.errors(response.errors);
-        })
+        if(ctrl.isValidUrl(Video.model.url())) {
+          return Video.create(args).then(function(response) {
+            m.route("/video/" + response.data.id + "/edit");
+          }, function(response) {
+            ctrl.errors(response.errors);
+          })
+        } else {
+          return ctrl.rejectUrlVideo().then(function(value) {
+          }, function(value) {
+            ctrl.errors({
+              url: value
+            });
+          })
+        }
       };
 
-      ctrl.checkVideoUrl = function(url) {
+      ctrl.isValidUrl = function(url) {
         var urlParser = new UrlParser();
         // urlParser.addProvider('vimeo');
         urlParser.addProvider('youtube');
         var infoUrl = urlParser.parse(url);
         if( infoUrl.provider === "unknown" ) {
-          console.log("Link errato");
+          return false;
+        } else {
+          return true;
         }
+      };
+
+      ctrl.rejectUrlVideo = function() {
+        var deferred = m.deferred();
+        setTimeout(function() {
+          deferred.reject("Invalid url for youtube video");
+        }, 1000);
+        return deferred.promise;
       };
 
     },
