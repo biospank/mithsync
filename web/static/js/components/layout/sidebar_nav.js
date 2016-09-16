@@ -7,19 +7,24 @@ var sidebarNav = {
         event.preventDefault();
         Session.reset();
         m.route("/signin");
+      },
+      isActive: function(path) {
+        console.log("path %s", path)
+        console.log("route %s", m.route())
+        return _.isEqual(path, m.route());
       }
     };
   },
   view: function(ctrl) {
     return m("nav", { class: "main-nav"}, [
       m("ul", { class: "nav nav-pills nav-stacked" }, [
-        m("li", { class: "active" }, [
+        m("li", { class: (ctrl.isActive("/") ? 'active' : '') }, [
           m("a", { href: "/dashboard", config: m.route, class: "main-nav__tab" }, [
             m("i", { class: "fa fa-dashboard main-nav__icon" }),
             m("span", { class: "main-nav__voice" }, "Dashboard")
           ])
         ]),
-        m("li", [
+        m("li", { class:  (ctrl.isActive("/library") ? 'active' : '')}, [
           m("a", { href: "/library", config: m.route, class: "main-nav__tab" }, [
             m("i", { class: "fa fa-picture-o main-nav__icon" }),
             m("span", { class: "main-nav__voice" }, "Library")
@@ -33,16 +38,16 @@ var sidebarNav = {
           ]),
           m("nav", { class: "collapse", id: "collapseProjectNav", "aria-expanded": false }, [
             m("ul", { class: "nav" }, [
-              m("li", [
+              m("li", { class: (ctrl.isActive("/video") ? 'active' : '') }, [
                 m("a", { href: "/video", config: m.route, class: "main-nav__subtab" }, "List")
               ]),
-              m("li", [
+              m("li", { class: (ctrl.isActive("/video/new") ? 'active' : '') }, [
                 m("a", { href: "/video/new", config: m.route, class: "main-nav__subtab" }, "New")
               ])
             ])
           ])
         ]),
-        m("li", [
+        m("li", { class: (ctrl.isActive("/faq") ? 'active' : '') }, [
           m("a", { href: "/faq", config: m.route, class: "main-nav__tab" }, [
             m("i", { class: "fa fa-question-circle-o main-nav__icon" }),
             m("span", { class: "main-nav__voice" }, "Faq")
@@ -56,7 +61,7 @@ var sidebarNav = {
           ]),
           m("nav", { class: "collapse", id: "collapseUserNav", "aria-expanded": false }, [
             m("ul", { class: "nav" }, [
-              m("li", [
+              m("li", { class: (ctrl.isActive("/userprofile") ? 'active' : '') }, [
                 m("a", { href: "/userprofile", config: m.route, class: "main-nav__subtab" }, "Edit profile")
               ]),
               m("li", [
