@@ -93,10 +93,12 @@ var imageDialog = (function() {
                 action: filterImages,
                 filter: filter
               }),
-              m("div", { class: "row" }, [
-                images().map(function(image) {
-                  return m(imageItem, image, selectCallback);
-                })
+              m("section", { class: "slidesheet" }, [
+                m("div", { class: "row" }, [
+                  images().map(function(image) {
+                    return m(imageItem, image, selectCallback);
+                  })
+                ])
               ]),
               m.component(pagination,
                 _.assign(

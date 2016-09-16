@@ -16,7 +16,7 @@
   @include spaces(0, 40px 0 30px);
   .img-thumbnail {
     height: 130px;
-    overflow-y: hidden;
+    overflow: hidden;
     @include border(1px, #D4D4D4);
     @include box-shadow(0 1px 4px rgba(0, 0, 0, 0.065));
     margin-bottom: 20px;

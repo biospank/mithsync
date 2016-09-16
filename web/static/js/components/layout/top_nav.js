@@ -25,7 +25,7 @@ var topNav = {
 
       "/library": "Library",
 
-      "/faq": "Question"
+      "/faq": "Questions"
     };
 
     ctrl.humanPath = function() {

@@ -13,7 +13,7 @@ var thumbItem = {
     ctrl.currentImage(image);
 
     return m(".col-xs-6 .col-sm-4 .col-lg-2", [
-      m("figure", { class: "thumb_libraryitem" }, [
+      m("figure", { class: "img-thumbnail" }, [
         m("a", {
           href: "#",
           onclick: ctrl.selectImage
