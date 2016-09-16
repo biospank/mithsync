@@ -31,7 +31,7 @@ var thumbItem = {
           title: ctrl.image.name,
           class: "img-responsive"
         }),
-        m("div", { class: "btn-group", role: "group" }, [
+        m("div", { class: "img-thumbnail__buttons" }, [
           m("button", {
             type: "button",
             class: "btn"
