@@ -1,0 +1,11 @@
+.swal2 {
+  &-icon {
+    color: $mainColor !important;
+    &.swal2-warning {
+      border-color: $mainColor !important;
+    }
+  }
+  &-confirm {
+    //color: $mainColor !important;
+  }
+}

@@ -12,6 +12,10 @@ body {
   color: #313131;
 }
 
+:focus {
+  outline: 0;
+}
+
 .center-block {
   float: none;
 }

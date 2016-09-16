@@ -46,8 +46,8 @@ var thumbItem = {
                 type: 'warning',
                 showCancelButton: true,
                 showLoaderOnConfirm: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
+                confirmButtonColor: '#75c4cb',
+                cancelButtonColor: '#9b0202',
                 confirmButtonText: 'Yes, delete it!'
               }).then(function() {
                 ctrl.delete();

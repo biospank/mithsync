@@ -1,5 +1,6 @@
 $btn-succes: #ff9510;
 $btn-primary: #75c4cb; //#69c0af
+$btn-danger: #9b0202;
 
 .btn {
   //font-weight: 300;
@@ -19,6 +20,12 @@ $btn-primary: #75c4cb; //#69c0af
     background-color: $btn-primary;
     &:hover, &:focus, &:active {
       background-color: lighten($btn-primary, 10%) !important;
+    }
+  }
+  &-danger {
+    background-color: $btn-danger;
+    &:hover, &:focus, &:active {
+      background-color: lighten($btn-danger, 10%) !important;
     }
   }
   &-xs {}
