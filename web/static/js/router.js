@@ -11,6 +11,7 @@ import editVideo from "./components/video/edit";
 import infoVideo from "./components/video/info";
 import viewVideo from "./components/video/view";
 import library from "./components/library/index";
+import faq from "./components/faq/index";
 
 export default m.route(document.getElementById('app'), "/", {
   // Login routing
@@ -38,6 +39,8 @@ export default m.route(document.getElementById('app'), "/", {
 
   "/video/view": viewVideo,
 
-  "/library": library
+  "/library": library,
+
+  "/faq": faq
 
 });

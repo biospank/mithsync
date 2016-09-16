@@ -23,7 +23,9 @@ var topNav = {
 
       "/video/view": "Video",
 
-      "/library": "Library"
+      "/library": "Library",
+
+      "/faq": "Question"
     };
 
     ctrl.humanPath = function() {

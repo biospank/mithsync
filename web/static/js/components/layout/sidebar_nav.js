@@ -43,6 +43,12 @@ var sidebarNav = {
           ])
         ]),
         m("li", [
+          m("a", { href: "/faq", config: m.route, class: "main-nav__tab" }, [
+            m("i", { class: "fa fa-question-circle-o main-nav__icon" }),
+            m("span", { class: "main-nav__voice" }, "Faq")
+          ])
+        ]),
+        m("li", [
           m("a", { href: "#collapseUserNav", class: "collapsed main-nav__tab", "aria-expanded": false, "data-toggle": "collapse" }, [
             m("i", { class: "fa fa-cog main-nav__icon" }),
             m("span", { class: "main-nav__voice" }, "Account"),
