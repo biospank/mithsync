@@ -55,14 +55,12 @@ var library = (function() {
         id: "dropper",
         config: ctrl.initializeDropper
       }),
-      m("div", { class: "row" }, [
-        _.isEmpty(ctrl.images()) ? m(recordNotFound) : ctrl.images().map(function(image) {
-          return m(thumbItem, image, ctrl);
-        })
-
-        // ctrl.images().map(function(image) {
-        //   return m(thumbItem, image, ctrl);
-        // })
+      m("section", { class: "slidesheet" }, [
+        m("div", { class: "row" }, [
+          _.isEmpty(ctrl.images()) ? m(recordNotFound) : ctrl.images().map(function(image) {
+            return m(thumbItem, image, ctrl);
+          })
+        ])
       ]),
       m("hr"),
       paginate(ctrl)

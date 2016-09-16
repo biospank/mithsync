@@ -1,5 +1,5 @@
 $btn-succes: #ff9510;
-$btn-primary: #69c0af;
+$btn-primary: #75c4cb; //#69c0af
 
 .btn {
   //font-weight: 300;
@@ -36,6 +36,9 @@ $btn-primary: #69c0af;
     i {
       padding: 15px;
       background-color: #dee1e5;
+      &::before {
+        text-shadow: 0px 2px 3px #ccc;
+      }
     }
     span {
       padding: 10px;

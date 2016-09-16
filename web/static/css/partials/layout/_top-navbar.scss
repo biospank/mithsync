@@ -17,7 +17,7 @@
     @include font-style(22px, #4a4a4a !important);
   }
   .navbar-toggle {
-    background-color: #69c0af;
+    background-color: $mainColor;
     border-radius: 0;
     border: none;
     @include transition(all 0.3s ease-out);

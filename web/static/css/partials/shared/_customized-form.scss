@@ -1,6 +1,7 @@
 .light-form {
   a{
-    color: #69c0af;
+    color: $mainColor;
+    -webkit-font-smoothing: antialiased;
   }
   .form-group {
     label {
@@ -24,11 +25,31 @@
     height: 40px;
     @include box-shadow(none);
     @include placeholder(#E3E3E3);
+    -webkit-font-smoothing: antialiased;
     &:focus, &:hover {
       @include border(#AAAAAA);
     }
   }
   textarea {
     min-height: 200px;
+  }
+  .input-group {
+    // @include border(#E3E3E3);
+    @include border(#e6e6e6);
+    @include transition(all 0.3s ease-out);
+    border-radius: 4px;
+    &-addon {
+      border: none;
+      background-color: transparent;
+      .fa {
+        color: #e4e4e4
+      }
+    }
+    .form-control {
+      border: none;
+    }
+    &:focus, &:hover {
+      @include border(#cdcdcd);
+    }
   }
 }

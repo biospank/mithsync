@@ -5,15 +5,15 @@ import Password from "../../models/password";
 
 var resetRequestPage = (function() {
   var content = function(ctrl) {
-    return [
+    return m("section", [
       m("header", { class: "header-text row space-bottom" }, [
         m("hgroup", { class: "text-center col-md-8 col-md-offset-2" }, [
           m("h1", { class: "header-text__title" }, "Have you lost your password?"),
-          m("h2", { class: "header-text__subtitle" }, "Insert your email below, you will receive an email by us to reset the password."),
+          m("h2", { class: "header-text__subtitle" }, "Insert your email below, you will receive an email by us to reset it."),
           m("hr", { class: "header-text__separator" })
         ])
       ]),
-      m("div", { class: "col-sm-6 center-block" }, [
+      m("div", { class: "col-sm-6 center-block wrapper" }, [
         m("div", {
           class: "alert alert-warning " + (ctrl.showMsg() ? "show" : "hidden"),
           role: "alert"
@@ -27,7 +27,7 @@ var resetRequestPage = (function() {
             error: ctrl.errors()['email'],
             dataLabel: 'Email'
           }),
-          m("div", { class: "mgv30" }, [
+          m("div", { class: "mgt30" }, [
             m.component(feedbackButton, {
               action: ctrl.passwordResetRequest,
               label: 'Send instructions',
@@ -38,7 +38,7 @@ var resetRequestPage = (function() {
           ])
         ])
       ])
-		];
+    ])
   };
 
   return {

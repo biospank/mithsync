@@ -34,7 +34,7 @@ var listItem = {
           // m("label", { class: "projects-list__date" }, "16-05-2016"),
           m("div", { class: "projects-list__buttons" }, [
             m("a", {
-              href: "/video/" + video.id + "/edit",
+              href: "/video/" + video.id + "/info",
               class: "btn btn-primary icon-left",
               config: m.route
             }, [
