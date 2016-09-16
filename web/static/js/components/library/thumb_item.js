@@ -27,7 +27,7 @@ var thumbItem = {
     return m(".col-xs-6 .col-sm-4 .col-lg-2", [
       m("figure", { class: "thumbnail thumb_libraryitem" }, [
         m("img", {
-          src: ctrl.image.path,
+          src: ctrl.image.thumb_url,
           title: ctrl.image.name,
           class: "img-responsive"
         }),
