@@ -1,0 +1,6 @@
+.badge {
+  @include size(25px, 25px);
+  border-radius: 50%;
+  @include spaces(7px, 0 10px);
+  background-color: lighten($mainColor, 30%);
+}

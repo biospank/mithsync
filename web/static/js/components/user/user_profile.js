@@ -48,7 +48,7 @@ var userProfile = (function() {
           ])
         ]),
         m(".col-md-4", [
-          m('.wrapper', { class: "mgv25" }, [
+          m('.wrapper bordered', { class: "mgv25" }, [
             m(".user .internal", [
               m("figure", { class: "user__avatar" }, [
                 m("img", { src: "/images/avatar.png", alt: "Avatar" })
