@@ -4,7 +4,7 @@ defmodule Videosync.ArcImage do
   # Include ecto support (requires package arc_ecto installed):
   # use Arc.Ecto.Definition
 
-  @versions [:original, :thumb]
+  @versions [:original, :thumb, :slide]
 
   def __storage, do: Arc.Storage.Local
 
@@ -13,12 +13,17 @@ defmodule Videosync.ArcImage do
 
   # Whitelist file extensions:
   def validate({file, _}) do
-    ~w(.jpg .jpeg .gif .png) |> Enum.member?(Path.extname(file.file_name))
+    ~w(.jpg .jpeg .gif .png) |> Enum.member?(String.downcase(Path.extname(file.file_name)))
   end
 
   # Define a thumbnail transformation:
   def transform(:thumb, _) do
     {:convert, "-strip -thumbnail 250x250^ -gravity center -extent 250x250 -format png", :png}
+  end
+
+  # Define a slide transformation:
+  def transform(:slide, _) do
+    {:convert, "-strip -resize 500x281^ -gravity center -extent 500x281^ -format png", :png}
   end
 
   # Override the persisted filenames:

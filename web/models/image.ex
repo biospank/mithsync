@@ -3,7 +3,8 @@ defmodule Videosync.Image do
 
   schema "images" do
     field :name, :string, virtual: true
-    field :path, :string, virtual: true
+    field :thumb_url, :string, virtual: true
+    field :slide_url, :string, virtual: true
   end
 
   @required_fields ~w()
@@ -20,12 +21,13 @@ defmodule Videosync.Image do
     |> cast(params, @required_fields, @optional_fields)
   end
 
-  def map_all(files, user, filter, type \\ :thumb) do
+  def map_all(files, user, filter) do
     Enum.filter(files, fn(name) -> String.contains?(name, filter || "") end)
     |> Enum.map(fn(file_name) ->
       %Videosync.Image{
         name: file_name,
-        path: Videosync.ArcImage.url({file_name, user}, type)
+        thumb_url: Videosync.ArcImage.url({file_name, user}, :thumb),
+        slide_url: Videosync.ArcImage.url({file_name, user}, :slide)
       }
     end)
   end

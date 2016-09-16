@@ -20,6 +20,7 @@ var Slide = (function() {
       } else {
         model = {
           url: slidePlaceHolder,
+          thumb_url: '',
           start: 0,
           end: 40
         };

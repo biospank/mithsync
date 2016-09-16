@@ -19,7 +19,7 @@ var thumbItem = {
           onclick: ctrl.selectImage
         }, [
           m("img", {
-            src: ctrl.currentImage().path,
+            src: ctrl.currentImage().thumb_url,
             title: ctrl.currentImage().name,
             class: "img-responsive"
           })

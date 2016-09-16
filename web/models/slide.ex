@@ -3,6 +3,7 @@ defmodule Videosync.Slide do
 
   schema "slides" do
     field :url, :string
+    field :thumb_url, :string
     field :start, :integer
     field :end, :integer
     belongs_to :video, Videosync.Video
@@ -16,8 +17,8 @@ defmodule Videosync.Slide do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:url, :start, :end])
-    |> validate_required([:url, :start, :end])
+    |> cast(params, [:url, :thumb_url, :start, :end])
+    |> validate_required([:url, :thumb_url, :start, :end])
   end
 
   def own_by(user, video) do

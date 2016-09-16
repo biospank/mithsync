@@ -43,11 +43,17 @@ defmodule Videosync.ImageController do
         conn
         |> put_status(:created)
         |> put_resp_header("location", ArcImage.url({file, user}))
-        |> render("show.json", image: %Image{name: file, path: ArcImage.url({file, user})})
+        |> render("show.json",
+          image: %Image{
+            name: file,
+            thumb_url: ArcImage.url({file, user}, :thumb),
+            slide_url: ArcImage.url({file, user}, :slide)
+          }
+        )
       {:error, reason} ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render(Videosync.ErrorView, :"404", errors: %{reason: reason})
+        |> render(Videosync.ErrorView, :"422", errors: %{reason: reason})
     end
   end
 

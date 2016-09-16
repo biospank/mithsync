@@ -40,7 +40,8 @@ var editVideo = (function() {
                   event.preventDefault();
                   imageDialog.show({
                     selectCallback: function(image) {
-                      slickCarousel.currentSlide().url = image.path
+                      slickCarousel.currentSlide().url = image.slide_url
+                      slickCarousel.currentSlide().thumb_url = image.thumb_url
                     }
                   });
                 },
@@ -94,6 +95,7 @@ var editVideo = (function() {
       ]),
       m(slickCarousel, {
         selectCallback: function(slide) {
+          Slide.resetModel(slide);
           ctrl.slider().set([slide.start, slide.end]);
           ctrl.isNewRecord(false)
         }
@@ -200,7 +202,7 @@ var editVideo = (function() {
           } else {
             swal({
               title: 'Select a slide',
-              text: "Click on thumbnail's placeholder to select an image",
+              text: "Click on placeholder to select an image",
               type: 'info',
               // confirmButtonColor: '#3085d6',
               confirmButtonText: 'Ok'

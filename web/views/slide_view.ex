@@ -12,6 +12,7 @@ defmodule Videosync.SlideView do
   def render("slide.json", %{slide: slide}) do
     %{id: slide.id,
       url: slide.url,
+      thumb_url: slide.thumb_url,
       start: slide.start,
       end: slide.end,
       video_id: slide.video_id}

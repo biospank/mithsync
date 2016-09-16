@@ -13,7 +13,7 @@ var slickItem = {
       }, [
         m("a", {}, [
           m("img", {
-            src: ctrl.slide.url,
+            src: ctrl.slide.thumb_url,
             class: "img-responsive"
           })
         ])
