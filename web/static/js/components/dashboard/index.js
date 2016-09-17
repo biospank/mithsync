@@ -3,6 +3,7 @@ import textField from "../widgets/text_field";
 import recentVideo from "./recent_videos";
 import Session from "../../models/session";
 import Dropper from "../../models/dropper";
+import Video from "../../models/video";
 
 var dashboard = (function() {
 
@@ -12,8 +13,8 @@ var dashboard = (function() {
         m(".col-md-6", {}, [
           m(".wrapper bordered", [
             m("h3", { class: "no-margin-top" }, [
-              "Projects list ",
-              m("span", { class: "badge" }, "2")
+              "Projects ",
+              m("span", { class: "badge" }, ctrl.pageInfo.totalEntries || 0)
             ]),
             m("p", "Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li assemblò per preparare un testo campione."),
             m("a", { href: "/video", config: m.route, class: "btn btn-primary btn-lg" }, "Go to the projects list section")
@@ -47,6 +48,24 @@ var dashboard = (function() {
     controller: function() {
       var ctrl = this;
 
+      ctrl.pageInfo = {};
+
+      ctrl.requestOptions = {
+        unwrapSuccess: function(response) {
+          if(response) {
+            ctrl.pageInfo = {
+              totalEntries: response.total_entries,
+              totalPages: response.total_pages,
+              pageNumber: response.page_number
+            };
+            return response.data;
+          }
+        },
+        unwrapError: function(response) {
+          return response.error;
+        }
+      };
+
       if(Session.isExpired()) {
         m.route("/signin");
       }
@@ -54,6 +73,12 @@ var dashboard = (function() {
       ctrl.initializeDropper = function() {
         Dropper.init("p#dropper");
       };
+
+      ctrl.countVideos = function(params, args) {
+        return Video.all(params, args);
+      };
+
+      ctrl.countVideos({}, ctrl.requestOptions);
 
     },
     view: mixinLayout(content)

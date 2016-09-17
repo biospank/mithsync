@@ -9,8 +9,6 @@ var sidebarNav = {
         m.route("/signin");
       },
       isActive: function(path) {
-        console.log("path %s", path)
-        console.log("route %s", m.route())
         return _.isEqual(path, m.route());
       }
     };
