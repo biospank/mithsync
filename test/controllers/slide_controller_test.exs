@@ -5,9 +5,10 @@ defmodule Videosync.SlideControllerTest do
   alias Videosync.Video
 
   @valid_attrs %{
-  end: 60,
+    end: 60,
     start: 20,
-    url: "http://mydomain/url/to/image"
+    url: "/upload/33/images/slide/one",
+    thumb_url: "/upload/33/images/thumb/one"
   }
   @invalid_attrs %{}
 
