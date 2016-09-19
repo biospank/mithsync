@@ -13,7 +13,7 @@ var sidebarNav = {
   view: function(ctrl) {
     return m("nav", { class: "main-nav"}, [
       m("ul", { class: "nav nav-pills nav-stacked" }, [
-        m("li", { class: "active" }, [
+        m("li", { class: "" }, [
           m("a", { href: "/dashboard", config: m.route, class: "main-nav__tab" }, [
             m("i", { class: "fa fa-dashboard main-nav__icon" }),
             m("span", { class: "main-nav__voice" }, "Dashboard")
@@ -25,18 +25,18 @@ var sidebarNav = {
             m("span", { class: "main-nav__voice" }, "Library")
           ])
         ]),
-        m("li", [
-          m("a", { href: "#collapseProjectNav", class: "collapsed main-nav__tab", "aria-expanded": false, "data-toggle": "collapse" }, [
+        m("li", { class: "active" }, [
+          m("a", { href: "#collapseProjectNav", class: "collapsed main-nav__tab", "aria-expanded": false, "data-toggle": "collapse", "data-parent": "#collapseProjectNav" }, [
             m("i", { class: "fa fa-film main-nav__icon" }),
             m("span", { class: "main-nav__voice" }, "Projects"),
             m("i", { class: "caret" })
           ]),
           m("nav", { class: "collapse", id: "collapseProjectNav", "aria-expanded": false }, [
             m("ul", { class: "nav" }, [
-              m("li", [
+              m("li", { class: "" }, [
                 m("a", { href: "/video", config: m.route, class: "main-nav__subtab" }, "List")
               ]),
-              m("li", [
+              m("li", { class: "active" }, [
                 m("a", { href: "/video/new", config: m.route, class: "main-nav__subtab" }, "New")
               ])
             ])
