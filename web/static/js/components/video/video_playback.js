@@ -1,6 +1,6 @@
 var videoPlayback = {
   view: function(ctrl, opts) {
-    return m(".video_player",
+    return m((opts['class'] || ".video_player"),
       {
         "data-type": opts['provider'],
         "data-video-id": opts['videoId'],
