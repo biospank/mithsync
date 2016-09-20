@@ -62,44 +62,48 @@ var editVideo = (function() {
           m("p", { class: "pull-right" }, "End: " + ctrl.evalue()),
         ]),
         m("#slider"),
-        m("footer", { class: "text-right" }, [
-          m("button", {
-            onclick: ctrl.newSlide,
-            class: 'btn btn-primary btn-md'
-          }, 'New'),
-          m("button[type=submit]", {
-            onclick: function() {
-              swal({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                type: 'warning',
-                showCancelButton: true,
-                showLoaderOnConfirm: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-              }).then(function() {
-                ctrl.deleteSlide();
-                ctrl.isNewRecord(true);
-              })
-            },
-            class: 'btn btn-danger btn-md icon-inside-left' + (ctrl.isNewRecord() ? ' disabled' : ''),
-            disabled: ctrl.isNewRecord()
-          }, [
-            m("i", { class: "fa fa-trash-o" }),
-            m("span", "Delete")
+        m("footer", { class: "buttons clearfix" }, [
+          m("div", { class: "pull-left" }, [
+            m("button", {
+              onclick: ctrl.newSlide,
+              class: 'btn btn-primary btn-md'
+            }, 'New'),
+            m("button[type=submit]", {
+              onclick: function() {
+                swal({
+                  title: 'Are you sure?',
+                  text: "You won't be able to revert this!",
+                  type: 'warning',
+                  showCancelButton: true,
+                  showLoaderOnConfirm: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Yes, delete it!'
+                }).then(function() {
+                  ctrl.deleteSlide();
+                  ctrl.isNewRecord(true);
+                })
+              },
+              class: 'btn btn-danger btn-md icon-inside-left' + (ctrl.isNewRecord() ? ' disabled' : ''),
+              disabled: ctrl.isNewRecord()
+            }, [
+              m("i", { class: "fa fa-trash-o" }),
+              m("span", "Delete")
+            ]),
+            m("button[type=submit]", {
+              onclick: ctrl.saveSlide,
+              class: 'btn btn-primary btn-md'
+            }, 'Save')
           ]),
-          m("button[type=submit]", {
-            onclick: ctrl.saveSlide,
-            class: 'btn btn-primary btn-md'
-          }, 'Save'),
-          m("button[type=submit]", {
-            onclick: function(event) {
-              event.preventDefault();
-              videoPreview.show(ctrl.video());
-            },
-            class: 'btn btn-primary btn-md'
-          }, 'Preview')
+          m("div", { class: "pull-right" }, [
+            m("button[type=submit]", {
+              onclick: function(event) {
+                event.preventDefault();
+                videoPreview.show(ctrl.video());
+              },
+              class: 'btn btn-default btn-md'
+            }, 'Preview')
+          ])
         ])
       ]),
       m(slickCarousel, {
