@@ -1,5 +1,5 @@
 import topNav from "./top_nav";
-import sidebarNav from "./sidebar_nav";
+import mainNav from "./main_nav";
 import user from "./user";
 
 var mixinLayout = function(content, layout) {
@@ -25,7 +25,7 @@ var mixinLayout = function(content, layout) {
         m.component(topNav),
         m('aside', { class: 'sidebar', id: 'sidebar-wrapper' }, [
           m.component(user),
-          m.component(sidebarNav)
+          m.component(mainNav)
         ]),
         m('main', { id: "page-content-wrapper" }, [
           // m("section", { class: "breadcrumb-bar" }, [

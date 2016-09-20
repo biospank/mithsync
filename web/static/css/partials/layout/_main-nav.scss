@@ -10,17 +10,11 @@
       text-decoration: none;
     }
   }
-  &__subtab {
-    color: #828282;
-    padding: 5px 15px 5px 45px !important;
-    text-transform: uppercase;
-    &:hover, &:focus {
-      background-color: transparent !important;
-      color: white;
-    }
+  &__icon {
+    width: 20px;
   }
   &__voice {
-    padding-left: 15px;
+    padding-left: 10px;
     padding-right: 5px;
   }
   li.active {
@@ -28,18 +22,33 @@
       background-color: transparent;
     }
   }
-  // ul {
-  //   li {
-  //     &.active {
-  //       a {
-  //         background-color: transparent;
-  //         color: #ffffff;
-  //         &:hover, &:focus {
-  //           background-color: transparent;
-  //           color: #ffffff;
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
+}
+
+.sub-nav {
+  margin-left: 55px;
+  &__tab {
+    color: #828282;
+    text-transform: uppercase;
+    @include transition(all 0.3s ease-out);
+    padding: 0 0 7px 0 !important;
+    &:hover, &:focus {
+      background-color: transparent !important;
+      color: white;
+      text-decoration: none;
+    }
+  }
+  &__icon {
+    // width: 20px;
+    font-size: 10px;
+  }
+  &__voice {
+    padding-left: 10px;
+    padding-right: 5px;
+  }
+  li.active {
+    .sub-nav__tab {
+      background-color: transparent;
+      color: white;
+    }
+  }
 }

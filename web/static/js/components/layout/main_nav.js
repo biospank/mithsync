@@ -1,6 +1,6 @@
 import Session from "../../models/session"
 
-var sidebarNav = {
+var mainNav = {
   controller: function(ctrl) {
     return {
       logout: function(event) {
@@ -34,7 +34,7 @@ var sidebarNav = {
             m("span", { class: "main-nav__voice" }, "Projects"),
             m("i", { class: "caret" })
           ]),
-          m("nav", { class: "collapse", id: "collapseProjectNav", "aria-expanded": false }, [
+          m("nav", { class: "collapse sub-nav", id: "collapseProjectNav", "aria-expanded": false }, [
             m("ul", { class: "nav" }, [
               m("li", { class: (ctrl.isActive("/video") ? 'active' : '') }, [
                 m("a", { href: "/video", config: m.route, class: "main-nav__subtab" }, "List")
@@ -57,13 +57,16 @@ var sidebarNav = {
             m("span", { class: "main-nav__voice" }, "Account"),
             m("i", { class: "caret" })
           ]),
-          m("nav", { class: "collapse", id: "collapseUserNav", "aria-expanded": false }, [
+          m("nav", { class: "collapse sub-nav", id: "collapseUserNav", "aria-expanded": false }, [
             m("ul", { class: "nav" }, [
               m("li", { class: (ctrl.isActive("/userprofile") ? 'active' : '') }, [
                 m("a", { href: "/userprofile", config: m.route, class: "main-nav__subtab" }, "Edit profile")
               ]),
               m("li", [
-                m("a", { href: "#", onclick: ctrl.logout, class: "main-nav__subtab" }, "Logout")
+                m("a", { href: "#", onclick: ctrl.logout, class: "sub-nav__tab" }, [
+                  m("i", { class: "fa fa-angle-right sub-nav__icon" }),
+                  m("span", { class: "sub-nav__voice" }, "Logout")
+                ])
               ])
             ])
           ])
@@ -73,4 +76,4 @@ var sidebarNav = {
   }
 };
 
-export default sidebarNav;
+export default mainNav;

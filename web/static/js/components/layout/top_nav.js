@@ -42,7 +42,7 @@ var topNav = {
             id: "menu-toggle",
             //class: "btn btn-default"
             //'data-toggle': 'collapse'
-            // 'data-target': '#sidebarNav'
+            // 'data-target': '#mainNav'
           },
           [
             m('span', { class: 'sr-only' }, 'Toggle navigation'),
