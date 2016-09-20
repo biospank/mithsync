@@ -23,6 +23,7 @@ defmodule Videosync.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/watch/:id", WatchController, :show
   end
 
   scope "/api", Videosync do

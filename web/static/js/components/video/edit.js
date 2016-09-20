@@ -7,6 +7,7 @@ import imageDialog from "./image_dialog";
 import videoPlayback from "./video_playback";
 import slickCarousel from "./slick_carousel";
 import feedbackButton from "../widgets/feedback_button";
+import videoPreview from "./video_preview";
 
 var editVideo = (function() {
 
@@ -17,6 +18,7 @@ var editVideo = (function() {
       //   m("a", { class: "btn btn-success" }, "Save and Exit")
       // ]),
       m(imageDialog),
+      m(videoPreview),
       m("section", { id: "video-container" }, [
         m(".row", [
           m(".col-sm-6", [
@@ -90,7 +92,14 @@ var editVideo = (function() {
           m("button[type=submit]", {
             onclick: ctrl.saveSlide,
             class: 'btn btn-primary btn-md'
-          }, 'Save')
+          }, 'Save'),
+          m("button[type=submit]", {
+            onclick: function(event) {
+              event.preventDefault();
+              videoPreview.show(ctrl.video());
+            },
+            class: 'btn btn-primary btn-md'
+          }, 'Preview')
         ])
       ]),
       m(slickCarousel, {
@@ -217,7 +226,7 @@ var editVideo = (function() {
             ctrl.errors(response.errors);
           })
         }
-      }
+      };
 
       ctrl.deleteSlide = function(event) {
         return Slide.delete(ctrl.video().id, slickCarousel.currentSlide().id).then(function(response) {
@@ -227,13 +236,13 @@ var editVideo = (function() {
         }, function(response) {
           ctrl.errors(response.errors);
         })
-      }
+      };
 
       ctrl.newSlide = function(event) {
         slickCarousel.currentSlide(Slide.resetModel());
         ctrl.slider().set([slickCarousel.currentSlide().start, slickCarousel.currentSlide().end]);
         ctrl.isNewRecord(true);
-      }
+      };
 
       Video.bindProviders();
 
