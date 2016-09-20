@@ -21,6 +21,8 @@ var topNav = {
 
       "/video/:videoId/edit": "Video",
 
+      "/video/:videoId/info": "Information",
+
       "/video/view": "Video",
 
       "/library": "Library",

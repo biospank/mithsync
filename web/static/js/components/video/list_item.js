@@ -85,17 +85,6 @@ var listItem = {
               m("i", { class: "fa fa-trash", "aria-hidden": true }),
               m("span", {}, "Delete")
             ])
-
-
-
-            // m("button", {
-            //   onclick: ctrl.delete,
-            //   type: "button",
-            //   class: "btn btn-danger icon-left"
-            // }, [
-            //   m("i", { class: "fa fa-trash", "aria-hidden": true }),
-            //   m("span", {}, "Delete")
-            // ])
           ])
         ])
       ])
