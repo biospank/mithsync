@@ -1,40 +1,71 @@
-$btn-succes: #ff9510;
-$btn-primary: #1fb6ff; //#1fb6ff - //#75c4cb
+$btn-succes: #b3c833;
+$btn-primary: #e3a200; //#1fb6ff //#1fb6ff - //#75c4cb
 $btn-danger: #9b0202;
 
 .btn {
   //font-weight: 300;
   border: none;
   border-radius: 0;
+  position: relative;
   @include transition(background-color 0.3s ease-out);
+  &:after {
+    content: "";
+    @include position(right, 0, top, 0);
+    @include transition(all 0.3s);
+  }
   &:hover {
     z-index: 0 !important;
+    &:after {
+      @include size(50%, 250%);
+    }
   }
-  // &-default {
-  //   //background-color: $btn-succes;
-  //   @include border($mainColor);
-  //   &:hover, &:focus, &:active {
-  //     background-color: lighten($btn-primary, 10%) !important;
-  //     @include border($mainColor);
-  //     color: white;
-  //   }
-  // }
+  &-default {}
   &-success {
     background-color: $btn-succes;
     &:hover, &:focus, &:active {
-      background-color: lighten($btn-succes, 10%) !important;
+      background-color: lighten($btn-succes, 5%) !important;
+    }
+    &:after {
+      @include size(30%, 200%);
+      background: rgba(255,255,255,0.1);
+      z-index: 1;
+      right: 0;
+      top: -10px;
+      margin: 0;
+      @include rotate(-20deg);
+      transform-origin: 0 0;
     }
   }
   &-primary {
     background-color: $btn-primary;
     &:hover, &:focus, &:active {
-      background-color: lighten($btn-primary, 10%) !important;
+      background-color: lighten($btn-primary, 5%) !important;
+    }
+    &:after {
+      @include size(30%, 200%);
+      background: rgba(255,255,255,0.1);
+      z-index: 1;
+      right: 0;
+      top: -10px;
+      margin: 0;
+      @include rotate(-20deg);
+      transform-origin: 0 0;
     }
   }
   &-danger {
     background-color: $btn-danger;
     &:hover, &:focus, &:active {
-      background-color: lighten($btn-danger, 10%) !important;
+      background-color: lighten($btn-danger, 5%) !important;
+    }
+    &:after {
+      @include size(30%, 200%);
+      background: rgba(255,255,255,0.1);
+      z-index: 1;
+      right: 0;
+      top: -10px;
+      margin: 0;
+      @include rotate(-20deg);
+      transform-origin: 0 0;
     }
   }
   &-xs {}

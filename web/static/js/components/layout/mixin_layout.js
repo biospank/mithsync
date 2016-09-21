@@ -14,29 +14,32 @@ var mixinLayout = function(content, layout) {
       ]
     },
     standard: function(content) {
-      return m("#wrapper", {
-        config: function() {
-          $("#menu-toggle").click(function(e) {
-              e.preventDefault();
-              $("#wrapper").toggleClass("toggled");
-          });
-        }
-      }, [
-        m.component(topNav),
-        m('aside', { class: 'sidebar', id: 'sidebar-wrapper' }, [
-          m.component(user),
-          m.component(mainNav)
-        ]),
-        m('main', { id: "page-content-wrapper" }, [
-          // m("section", { class: "breadcrumb-bar" }, [
-          //   m(".container-fluid", breadcrumbBar())
-          // ]),
-          // m("section", [
-          //   m("div", content)
-          // ])
-          content
+      return [
+        m("#wrapper", {
+          config: function() {
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+          }
+        }, [
+          m.component(topNav),
+          m('aside', { class: 'sidebar', id: 'sidebar-wrapper' }, [
+            m.component(user),
+            m.component(mainNav)
+          ]),
+          m('main', { id: "page-content-wrapper" }, [
+            // m("section", { class: "breadcrumb-bar" }, [
+            //   m(".container-fluid", breadcrumbBar())
+            // ]),
+            // m("section", [
+            //   m("div", content)
+            // ])
+            content
+          ])
+          //m("footer", { class: "footer text-center" }, "Prova")
         ])
-      ])
+      ]
     }
   };
 

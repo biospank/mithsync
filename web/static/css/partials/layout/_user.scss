@@ -1,6 +1,7 @@
 .user {
   padding: 25px;
-  background: rgba(255,255,255,0.05);
+  //background: rgba(255,255,255,0.05);
+  background: #67717a;
   position: relative;
   height: 100px;
   &.internal {
@@ -34,10 +35,11 @@
     }
   }
   &__info {
-    padding: 43px 15px 0 90px;
+    padding: 40px 15px 0 90px;
     color: white;
-    font-size: 12px;
-    font-weight: bold;
+    font-size: 15px;
+    //font-weight: bold;
+    text-transform: uppercase;
     position: absolute;
     top: 0;
     left: 0;
