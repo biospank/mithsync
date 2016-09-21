@@ -17,17 +17,17 @@ var dashboard = (function() {
               m("span", { class: "badge" }, ctrl.pageInfo.totalEntries || 0)
             ]),
             m("p", "Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li assemblò per preparare un testo campione."),
-            m("a", { href: "/video", config: m.route, class: "btn btn-primary btn-lg" }, "Go to the projects list section")
+            m("a", { href: "/video", config: m.route, class: "btn btn-primary effect btn-lg" }, "Go to the projects list section")
           ]),
           m(".wrapper bordered", [
             m("h3", { class: "no-margin-top" }, "Titolo sezione"),
             m("p", "Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa."),
-            m("a", { class: "btn btn-success btn-lg" }, "Link sezione")
+            m("a", { class: "btn btn-success effect btn-lg" }, "Link sezione")
           ]),
           m(".wrapper bordered", [
             m("h3", { class: "no-margin-top" }, "Titolo sezione"),
             m("p", "Testo sezione"),
-            m("a", { class: "btn btn-primary btn-lg" }, "Link sezione")
+            m("a", { class: "btn btn-primary effect btn-lg" }, "Link sezione")
           ])
         ]),
         m(".col-md-6", {}, [
@@ -37,7 +37,7 @@ var dashboard = (function() {
             "<br>" +  "Before you can use  image in the project, you have to upload it here." + "<br><br>" +
             "You can start by section below as well!")),
             m("p", { class: "dropzone", id: "dropper", config: ctrl.initializeDropper}),
-            m("a", { href: "/library", config: m.route, class: "btn btn-primary btn-lg" }, "Go to the library section")
+            m("a", { href: "/library", config: m.route, class: "btn btn-primary effect btn-lg" }, "Go to the library section")
           ])
         ])
       ])

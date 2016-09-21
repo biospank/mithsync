@@ -49,18 +49,18 @@ var listItem = {
               m("i", { class: "fa fa-pencil", "aria-hidden": true }),
               m("span", {}, "Edit")
             ]),
+            // m("button", {
+            //   onclick: "",
+            //   type: "button",
+            //   class: "btn btn-primary icon-left"
+            // }, [
+            //   m("i", { class: "fa fa-copy", "aria-hidden": true }),
+            //   m("span", {}, "Duplicate")
+            // ]),
             m("button", {
               onclick: "",
               type: "button",
-              class: "btn btn-primary icon-left"
-            }, [
-              m("i", { class: "fa fa-copy", "aria-hidden": true }),
-              m("span", {}, "Duplicate")
-            ]),
-            m("button", {
-              onclick: "",
-              type: "button",
-              class: "btn btn-primary icon-left"
+              class: "btn btn-success icon-left"
             }, [
               m("i", { class: "fa fa-download", "aria-hidden": true }),
               m("span", {}, "Export")
