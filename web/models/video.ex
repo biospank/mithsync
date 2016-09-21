@@ -38,4 +38,8 @@ defmodule Videosync.Video do
   def own_by(user) do
     assoc(user, :videos)
   end
+
+  def preload_slides(query, preload_query) do
+    from v in query, preload: [slides: ^preload_query]
+  end
 end
