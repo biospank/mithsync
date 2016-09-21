@@ -6,7 +6,7 @@ defmodule Videosync.ArcImage do
 
   @versions [:original, :thumb, :slide]
 
-  def __storage, do: Arc.Storage.Local
+  def __storage, do: Arc.Storage.S3
 
   # To add a thumbnail version:
   # @versions [:original, :thumb]
@@ -46,7 +46,7 @@ defmodule Videosync.ArcImage do
   #    :content_encoding, :content_length, :content_type,
   #    :expect, :expires, :storage_class, :website_redirect_location]
   #
-  # def s3_object_headers(version, {file, scope}) do
-  #   [content_type: Plug.MIME.path(file.file_name)]
-  # end
+  def s3_object_headers(version, {file, scope}) do
+    [content_type: Plug.MIME.path(file.file_name)]
+  end
 end

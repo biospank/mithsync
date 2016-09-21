@@ -26,6 +26,8 @@ defmodule Videosync.Mixfile do
                     :gettext,
                     :phoenix_ecto,
                     :postgrex,
+                    :ex_aws,
+                    :httpoison,
                     :bamboo]]
   end
 
@@ -50,6 +52,9 @@ defmodule Videosync.Mixfile do
      {:guardian, "~> 0.12.0"},
      {:bamboo_smtp, "~> 1.1"},
      {:arc, "~> 0.5.3"},
+     {:ex_aws, "~> 0.5.0"},
+     {:httpoison, "~> 0.7"},
+     {:poison, "~> 1.2"},
      {:scrivener_list, "~> 1.0"}]
   end
 
