@@ -73,6 +73,6 @@ config :ex_aws,
   region: "eu-west-1",
   s3: [
     scheme: "https://",
-    host: "s3.eu-west-1.amazonaws.com",
+    host: "s3-eu-west-1.amazonaws.com",
     region: "eu-west-1"
   ]
