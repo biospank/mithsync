@@ -33,7 +33,7 @@ defmodule Videosync.ImageController do
       {:error, _} ->
         conn
         |> put_status(404)
-        |> render(Videosync.ErrorView, :"404", errors: %{path: "Not found"})
+        |> render(Videosync.ErrorView, :"404", errors: %{path: ArcImage.storage_dir(:thumb, {nil, user}), reason: "Not found"})
     end
   end
 
