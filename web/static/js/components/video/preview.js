@@ -68,8 +68,12 @@ var preview = {
             touch: false,
             // Enables touch navigation on devices with touch input
             help: false,
+            // Transition style
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+            // Transition speed
+            transitionSpeed: 'slow', // default/fast/slow
             // Transition style for full page slide backgrounds
-            backgroundTransition: 'none',
+            // backgroundTransition: 'none',
             // Number of slides away from the current that are visible
             viewDistance: 1,
             width: 'auto',

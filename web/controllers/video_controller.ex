@@ -2,6 +2,7 @@ defmodule Videosync.VideoController do
   use Videosync.Web, :controller
 
   alias Videosync.Video
+  alias Videosync.Slide
 
   plug :scrub_params, "video" when action in [:create, :update]
 
@@ -55,8 +56,9 @@ defmodule Videosync.VideoController do
 
   def show(conn, %{"id" => id}, user) do
     video = Video.own_by(user)
+      |> Video.preload_slides(Slide.order_by(:start))
       |> Repo.get!(id)
-      |> Repo.preload(:slides)
+      # |> Repo.preload(:slides)
 
     render(conn, "show_video_with_slides.json", video: video)
   end
