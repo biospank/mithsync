@@ -5,15 +5,18 @@ import Password from "../../models/password";
 
 var resetRequestPage = (function() {
   var content = function(ctrl) {
-    return m("section", [
-      m("header", { class: "header-text row space-bottom" }, [
-        m("hgroup", { class: "text-center col-md-8 col-md-offset-2" }, [
-          m("h1", { class: "header-text__title" }, "Have you lost your password?"),
+    return m(".col-xs-12 .col-sm-7 .center-block", [
+      m("figure", { class: "text-center", id: "logo" }, [
+        m("img", { src: "/images/logo.png", alt: "Zinkroo" })
+      ]),
+      m("header", { class: "header-text space-bottom" }, [
+        m("hgroup", { class: "text-center" }, [
+          m("h1", { class: "header-text__title no-margin-top" }, "Have you lost your password?"),
           m("h2", { class: "header-text__subtitle" }, "Insert your email below, you will receive an email by us to reset it."),
           m("hr", { class: "header-text__separator" })
         ])
       ]),
-      m("div", { class: "col-sm-6 center-block wrapper" }, [
+      m("div", { class: "" }, [
         m("div", {
           class: "alert alert-warning " + (ctrl.showMsg() ? "show" : "hidden"),
           role: "alert"
@@ -34,7 +37,7 @@ var resetRequestPage = (function() {
               feedbackLabel: 'Sending...',
               style: 'btn btn-primary contour btn-lg'
             }),
-            m("a", { href: "/signin", config: m.route, class: "btn btn-lg" }, "Return to login")
+            m("a", { href: "/signin", config: m.route, class: "btn btn-link btn-lg" }, "Return to login")
           ])
         ])
       ])

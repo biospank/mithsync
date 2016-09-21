@@ -5,15 +5,18 @@ import Activation from "../../models/activation";
 
 var activationPage = (function() {
   var content = function(ctrl) {
-    return [
-      m("header", { class: "header-text row space-bottom" }, [
-        m("hgroup", { class: "text-center col-md-8 col-md-offset-2" }, [
+    return m(".col-xs-12 .col-sm-7 .center-block", [
+      m("figure", { class: "text-center", id: "logo" }, [
+        m("img", { src: "/images/logo.png", alt: "Zinkroo" })
+      ]),,
+      m("header", { class: "header-text space-bottom" }, [
+        m("hgroup", { class: "text-center" }, [
           m("h1", { class: "header-text__title" }, m.trust("We've sent you an email <br> with your activation code")),
           m("h2", { class: "header-text__subtitle" }, "You need to insert it below to active the account"),
           m("hr", { class: "header-text__separator" })
         ])
       ]),
-      m("div", { class: "col-sm-6 center-block" }, [
+      m("div", { class: "" }, [
         m("div", {
           class: "alert alert-warning",
           role: "alert"
@@ -31,7 +34,7 @@ var activationPage = (function() {
               action: ctrl.activateUser,
               label: 'Activate',
               feedbackLabel: 'Activating...',
-              style: 'btn btn-success contour btn-lg'
+              style: 'btn btn-primary contour btn-lg'
             })
           ]),
           m("p", { class: "text-center" }, [
@@ -40,7 +43,7 @@ var activationPage = (function() {
           ])
         ])
       ])
-		];
+    ])
   };
 
   return {
