@@ -1,14 +1,36 @@
 .user {
-  padding: 25px;
+  padding: 20px;
   //background: rgba(255,255,255,0.05);
   // background: #67717a;
   background-color: $mainColor;
   position: relative;
   height: 100px;
+  &__avatar {
+    @include size(60px, 60px);
+    border-radius: 50%;
+    overflow: hidden;
+    //@include border(rgba(255, 255, 255, 0.3), 2px);
+    position: relative;
+    @include box-shadow(0px 1px 2px rgba(0,0,0, 0.5));
+    img {
+      width: 100%;
+    }
+  }
+  &__info {
+    padding: 40px 15px 0 90px;
+    color: white;
+    font-size: 15px;
+    //font-weight: bold;
+    text-transform: uppercase;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
   &.internal {
     color: #333333;
     font-weight: 300;
     height: auto;
+    background-color: transparent;
     .user__name {
       @include font-style(22px, #333333);
     }
@@ -25,25 +47,5 @@
       text-align: center;
       padding: 0;
     }
-  }
-  &__avatar {
-    @include size(50px, 50px);
-    border-radius: 50%;
-    overflow: hidden;
-    @include border(rgba(255, 255, 255, 0.3), 2px);
-    position: relative;
-    img {
-      width: 100%;
-    }
-  }
-  &__info {
-    padding: 40px 15px 0 90px;
-    color: white;
-    font-size: 15px;
-    //font-weight: bold;
-    text-transform: uppercase;
-    position: absolute;
-    top: 0;
-    left: 0;
   }
 }
