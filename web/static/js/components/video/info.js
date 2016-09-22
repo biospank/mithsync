@@ -11,7 +11,7 @@ var infoVideo = (function() {
           m(".col-md-6", [
             m("div", { class: "form-group" }, [
               m("label", { class: "text-uppercase" }, "Name"),
-              m("p", { class: "form-control" }, "Principessa")
+              m("input", { class: "form-control", value: "Principessa" })
             ])
           ]),
           m(".col-md-6", [
@@ -23,7 +23,7 @@ var infoVideo = (function() {
         ]),
         m("div", { class: "form-group" }, [
           m("label", { class: "text-uppercase" }, "Description"),
-          m("textarea", { readonly: "readonly", class: "form-control" }, "Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li assemblò per preparare un testo campione.")
+          m("textarea", { class: "form-control" }, "Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li assemblò per preparare un testo campione.")
         ]),
         m("div", { class: "row" }, [
           m(".col-md-8", [
@@ -40,13 +40,16 @@ var infoVideo = (function() {
           ])
         ])
       ]),
-      m("a", {
-        //href: "/video/" + video.id + "/edit",
-        class: "btn btn-primary effect btn-md icon-left text-uppercase mgt30",
-        config: m.route }, [
-          m("i", { class: "fa fa-reply", "aria-hidden": true }),
-          m("span", "Back to project")
-        ])
+      m(".clearfix", [
+        m("a", {
+          //href: "/video/" + video.id + "/edit",
+          class: "btn btn-primary effect btn-md icon-left text-uppercase mgt30 pull-left",
+          config: m.route }, [
+            m("i", { class: "fa fa-reply", "aria-hidden": true }),
+            m("span", "Back to project")
+          ]),
+        m("button", { class: "btn btn-success effect btn-md text-uppercase mgt30 pull-right" }, "Save")
+      ])
     ])
   };
 
