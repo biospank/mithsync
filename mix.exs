@@ -55,6 +55,7 @@ defmodule Videosync.Mixfile do
      {:ex_aws, "~> 0.5.0"},
      {:httpoison, "~> 0.7"},
      {:poison, "~> 1.2"},
+     {:sweet_xml, "~> 0.6.1"},
      {:scrivener_list, "~> 1.0"}]
   end
 
