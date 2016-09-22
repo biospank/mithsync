@@ -6,17 +6,47 @@ var infoVideo = (function() {
 
   var content = function(ctrl, video) {
     return m("section", [
-      m(".wrapper bordered", [
-        m("div", [
-          m("label", "Name"),
-          m("p", "Principessa")
+      m("div", { class: "light-form" }, [
+        m("div", { class: "row" }, [
+          m(".col-md-6", [
+            m("div", { class: "form-group" }, [
+              m("label", { class: "text-uppercase" }, "Name"),
+              m("p", { class: "form-control" }, "Principessa")
+            ])
+          ]),
+          m(".col-md-6", [
+            m("div", { class: "form-group" }, [
+              m("label", { class: "text-uppercase" }, "Create date"),
+              m("p", { class: "form-control" }, "2016-09-15")
+            ])
+          ])
+        ]),
+        m("div", { class: "form-group" }, [
+          m("label", { class: "text-uppercase" }, "Description"),
+          m("textarea", { readonly: "readonly", class: "form-control" }, "Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li assemblò per preparare un testo campione.")
+        ]),
+        m("div", { class: "row" }, [
+          m(".col-md-8", [
+            m("div", { class: "form-group" }, [
+              m("label", { class: "text-uppercase" }, "Url Youtube"),
+              m("p", { class: "form-control" }, "https://www.youtube.com/watch?v=dBlIFzJIN2A")
+            ])
+          ]),
+          m(".col-md-4", [
+            m("div", { class: "form-group" }, [
+              m("label", { class: "text-uppercase" }, "Video time"),
+              m("p", { class: "form-control" }, "10min.")
+            ])
+          ])
         ])
       ]),
       m("a", {
         //href: "/video/" + video.id + "/edit",
-        class: "btn btn-primary btn-md text-uppercase",
-        //class: "btn btn-primary icon-left",
-        config: m.route }, "Back to project")
+        class: "btn btn-primary effect btn-md icon-left text-uppercase mgt30",
+        config: m.route }, [
+          m("i", { class: "fa fa-reply", "aria-hidden": true }),
+          m("span", "Back to project")
+        ])
     ])
   };
 
