@@ -52,3 +52,19 @@ config :videosync, Videosync.Mailer,
   tls: :if_available, # can be `:always` or `:never`
   ssl: false, # can be `true`
   retries: 1
+
+# arc/ex_aws configuration
+# enable for S3 storage mode
+# config :arc,
+#   bucket: "zinkroo",
+#   virtual_host: true
+#
+# config :ex_aws,
+#   access_key_id: [{:system, "AWS_ACCESS_KEY_ID"}, :instance_role],
+#   secret_access_key: [{:system, "AWS_SECRET_ACCESS_KEY"}, :instance_role],
+#   region: "eu-west-1",
+#   s3: [
+#     scheme: "https://",
+#     host: "s3-eu-west-1.amazonaws.com",
+#     region: "eu-west-1"
+#   ]
