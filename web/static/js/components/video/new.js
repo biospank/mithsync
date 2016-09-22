@@ -40,7 +40,7 @@ var newVideo = (function() {
               action: ctrl.createVideo,
               label: 'Create',
               feedbackLabel: 'Creating...',
-              style: 'btn btn-primary btn-lg'
+              style: 'btn btn-primary effect btn-lg'
             })
           ])
         ]),
