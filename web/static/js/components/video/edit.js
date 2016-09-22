@@ -63,11 +63,12 @@ var editVideo = (function() {
           m("p", { class: "pull-right" }, "End: " + ctrl.evalue()),
         ]),
         m("#slider"),
-        m("footer", { class: "buttons clearfix" }, [
-          m("div", { class: "pull-left" }, [
+        m("footer", { class: "buttons row" }, [
+          m("div", { class: "col-sm-7" }, [
             m("button", {
               onclick: ctrl.newSlide,
-              class: 'btn btn-primary btn-md'
+              class: 'btn btn-primary',
+              title: "New slide"
             }, 'New'),
             m("button[type=submit]", {
               onclick: function() {
@@ -85,24 +86,46 @@ var editVideo = (function() {
                   ctrl.isNewRecord(true);
                 })
               },
-              class: 'btn btn-danger btn-md icon-inside-left' + (ctrl.isNewRecord() ? ' disabled' : ''),
-              disabled: ctrl.isNewRecord()
+              class: 'btn btn-danger' + (ctrl.isNewRecord() ? ' disabled' : ''),
+              disabled: ctrl.isNewRecord(),
+              title: "Delete",
+              "data-toggle": "tooltip",
+              "data-placement": "top",
+              config: function(element, isInit, context) {
+                if (!isInit)
+                  $(element).tooltip()
+              }
             }, [
-              m("i", { class: "fa fa-trash-o" }),
-              m("span", "Delete")
+              m("i", { class: "fa fa-trash-o" })
+              //m("span", "Delete")
             ]),
             m("button[type=submit]", {
               onclick: ctrl.saveSlide,
-              class: 'btn btn-primary btn-md'
+              class: 'btn btn-success',
+              title: "Save"
             }, 'Save')
           ]),
-          m("div", { class: "pull-right" }, [
+          m("div", { class: "col-sm-5 text-right" }, [
+            m("a", {
+              href: "",
+              class: 'btn btn-primary',
+              title: "Informations",
+              "data-toggle": "tooltip",
+              "data-placement": "top",
+              config: function(element, isInit, context) {
+                if (!isInit)
+                  $(element).tooltip()
+              }
+            }, [
+              m("i", { class: "fa fa-info" })
+            ]),
             m("button[type=submit]", {
               onclick: function(event) {
                 event.preventDefault();
                 videoPreview.show(ctrl.video());
               },
-              class: 'btn btn-default btn-md'
+              class: 'btn btn-success',
+              title: "Preview"
             }, 'Preview')
           ])
         ])
