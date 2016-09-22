@@ -43,9 +43,8 @@ defmodule Videosync.ImageProxy do
   end
 
   defp get_file_names(path_files) do
-    Enum.map(path_files, fn(file) ->
-      IO.puts(inspect(file))
-      String.split(file, "/") |> List.last
+    Enum.map(path_files, fn(%{key: file_path}) ->
+      String.split(file_path, "/") |> List.last
     end)
   end
 end
