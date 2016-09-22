@@ -19,7 +19,14 @@
   }
   li.active {
     .main-nav__tab {
-      background-color: transparent;
+      background-color: darken(#343a46, 5%);
+      border-radius: 0;
+      &:hover {
+        background-color: darken(#343a46, 5%) !important;
+      }
+      .main-nav__icon {
+        color: $mainColor;
+      }
     }
   }
 }

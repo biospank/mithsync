@@ -1,7 +1,8 @@
 .user {
   padding: 25px;
   //background: rgba(255,255,255,0.05);
-  background: #67717a;
+  // background: #67717a;
+  background-color: $mainColor;
   position: relative;
   height: 100px;
   &.internal {
@@ -30,6 +31,7 @@
     border-radius: 50%;
     overflow: hidden;
     @include border(rgba(255, 255, 255, 0.3), 2px);
+    position: relative;
     img {
       width: 100%;
     }

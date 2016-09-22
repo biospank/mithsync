@@ -49,7 +49,6 @@ var mainNav = {
               m("li", { class: (ctrl.isActive("/video") ? 'active' : '') }, [
                 m("a", {
                   href: "/video",
-                  //onclick: ctrl.keepOpen,
                   config: m.route,
                   class: "sub-nav__tab" }, [
                   m("i", { class: "fa fa-angle-right sub-nav__icon" }),
