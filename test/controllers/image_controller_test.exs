@@ -93,7 +93,7 @@ defmodule Videosync.ImageControllerTest do
   test "does not delete resource referenced by video", %{conn: conn, user: user} do
     {:ok, file} = Videosync.ArcImage.store({@valid_attrs, user})
     video = insert_video(user, %Videosync.Video{})
-    insert_slide(user, video, %Videosync.Slide{url: ArcImage.url({file, user}, :thumb)})
+    insert_slide(user, video, %Videosync.Slide{thumb_url: ArcImage.url({file, user}, :thumb)})
     conn = delete conn, image_path(conn, :delete, "dummy.jpg")
     assert response(conn, 422)
   end
