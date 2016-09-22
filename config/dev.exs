@@ -54,7 +54,8 @@ config :videosync, Videosync.Mailer,
   retries: 1
 
 # config :arc,
-#   bucket: "zinkroo"
+#   bucket: "zinkroo",
+#   virtual_host: true
 #
 # config :ex_aws,
 #   access_key_id: [{:system, "AWS_ACCESS_KEY_ID"}, :instance_role],

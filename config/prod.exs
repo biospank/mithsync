@@ -65,7 +65,8 @@ config :logger, level: :info
 # import_config "prod.secret.exs"
 
 config :arc,
-  bucket: "zinkroo"
+  bucket: "zinkroo",
+  virtual_host: true
 
 config :ex_aws,
   access_key_id: [{:system, "AWS_ACCESS_KEY_ID"}, :instance_role],
