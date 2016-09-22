@@ -58,11 +58,11 @@ defmodule Videosync.ImageController do
   end
 
   def delete(conn, %{"id" => filename}, user) do
-    path = ArcImage.url({filename, user}, :thumb)
+    url = ArcImage.url({filename, user}, :thumb)
 
     q = from s in Slide,
       select: count(s.id),
-      where: s.url == ^path and s.user_id == ^user.id
+      where: s.thumb_url == ^url and s.user_id == ^user.id
 
     case Repo.one(q) do
       0 ->
