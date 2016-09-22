@@ -53,6 +53,8 @@ config :videosync, Videosync.Mailer,
   ssl: false, # can be `true`
   retries: 1
 
+# arc/ex_aws configuration
+# enable for S3 storage mode
 # config :arc,
 #   bucket: "zinkroo",
 #   virtual_host: true

@@ -64,6 +64,8 @@ config :logger, level: :info
 # which should be versioned separately.
 # import_config "prod.secret.exs"
 
+# arc/ex_aws configuration
+# enable for S3 storage mode
 config :arc,
   bucket: "zinkroo",
   virtual_host: true
