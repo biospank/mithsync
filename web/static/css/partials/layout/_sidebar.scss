@@ -7,5 +7,7 @@
   //padding: 0;
   // background-color: #2b2e33;
   //background-color: #43455c;
-  background-color: #343a46;
+  //background-color: #343a46;
+  //@include gradient-vertical(#485b89, #4c467a, 0%, 100%);
+  @include gradient-vertical(#343a46, #465779, 0%, 100%);
 }
