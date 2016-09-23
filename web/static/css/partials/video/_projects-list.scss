@@ -1,12 +1,17 @@
 .projects-list {
   background-color: #ffffff;
   @include box-shadow(0 0 0 1px #dee1e5);
-  // padding: 15px 15px 0 15px;
   li {
-    // padding-bottom: 15px;
     padding: 15px;
     &:hover {
       background-color: #f7f7f7;
+      &:hover {
+        @include respond-to(min-width, 768px) {
+          .projects-list__buttons {
+            visibility: visible;
+          }
+        }
+      }
       .magic {
         &-checkbox {
           & + label:before {
@@ -22,17 +27,6 @@
     }
   }
   &__content {
-    display: block;
-    color: #313131;
-    &:hover {
-      color: #313131;
-      text-decoration: none;
-      @include respond-to(min-width, 768px) {
-        .projects-list__buttons {
-          visibility: visible;
-        }
-      }
-    }
     @include respond-to(min-width, 768px) {
       .magic {
         &-checkbox {
@@ -78,9 +72,6 @@
       // margin: 13px 0 0 0;
       margin: 0;
     }
-  }
-  &__description {
-    color: black;
   }
   &__date {
     //@include font(13px, #2b2e33, 400);

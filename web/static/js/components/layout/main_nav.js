@@ -10,13 +10,13 @@ var mainNav = {
       },
       isActive: function(path) {
         return _.isEqual(path, m.route());
-      },
-      keepOpen: function(event, path) {
-        console.log(event.target);
-        event.preventDefault();
-        $(event.target).closest(".sub-nav").addClass("in");
-        m.route(path);
       }
+      // keepOpen: function(event, path) {
+      //   console.log(event.target);
+      //   event.preventDefault();
+      //   $(event.target).closest(".sub-nav").addClass("in");
+      //   m.route(path);
+      // }
     };
   },
   view: function(ctrl) {
@@ -34,7 +34,7 @@ var mainNav = {
             m("span", { class: "main-nav__voice" }, "Library")
           ])
         ]),
-        m("li", [
+        m("li", { class: "" }, [
           m("a", { href: "#collapseProjectNav", class: "collapsed main-nav__tab", "aria-expanded": false, "data-toggle": "collapse" }, [
             m("i", { class: "fa fa-film main-nav__icon" }),
             m("span", { class: "main-nav__voice" }, "Projects"),
@@ -50,16 +50,10 @@ var mainNav = {
                 m("a", {
                   href: "/video",
                   config: m.route,
-                  class: "sub-nav__tab" }, [
-                  m("i", { class: "fa fa-angle-right sub-nav__icon" }),
-                  m("span", { class: "sub-nav__voice" }, "List")
-                ])
+                  class: "sub-nav__tab" }, "List")
               ]),
               m("li", { class: (ctrl.isActive("/video/new") ? 'active' : '') }, [
-                m("a", { href: "/video/new", onclick: ctrl.keepOpen, class: "sub-nav__tab" }, [
-                  m("i", { class: "fa fa-angle-right sub-nav__icon" }),
-                  m("span", { class: "sub-nav__voice" }, "New")
-                ])
+                m("a", { href: "/video/new", config: m.route, class: "sub-nav__tab" }, "New")
               ])
             ])
           ])
@@ -79,16 +73,10 @@ var mainNav = {
           m("nav", { class: "collapse sub-nav", id: "collapseUserNav", "aria-expanded": false }, [
             m("ul", { class: "nav" }, [
               m("li", { class: (ctrl.isActive("/userprofile") ? 'active' : '') }, [
-                m("a", { href: "/userprofile", config: m.route, class: "sub-nav__tab" }, [
-                  m("i", { class: "fa fa-angle-right sub-nav__icon" }),
-                  m("span", { class: "sub-nav__voice" }, "Edit profile")
-                ])
+                m("a", { href: "/userprofile", config: m.route, class: "sub-nav__tab" }, "Edit profile")
               ]),
               m("li", [
-                m("a", { href: "#", onclick: ctrl.logout, class: "sub-nav__tab" }, [
-                  m("i", { class: "fa fa-angle-right sub-nav__icon" }),
-                  m("span", { class: "sub-nav__voice" }, "Logout")
-                ])
+                m("a", { href: "#", onclick: ctrl.logout, class: "sub-nav__tab" }, "Logout")
               ])
             ])
           ])

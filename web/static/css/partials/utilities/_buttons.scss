@@ -10,7 +10,7 @@
   @each $btn, $bg-color in
                 (default, transparent),
                 (success, #b3c833),
-                (primary, #1fb6ff),
+                (primary, #07cbec),
                 (danger, #9b0202),
                 (warning, #e3a200) {
     &-#{$btn} {
