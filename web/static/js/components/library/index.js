@@ -37,8 +37,12 @@ var library = (function() {
 
   var imageView = function(ctrl) {
     if(!ctrl.images()) {
-      return m('.loader-inner ball-pulse', [
-        // m('div', {style: "background: red;"})
+      return m(".loader", [
+        m('.loader-inner ball-pulse', [
+          m('div'),
+          m('div'),
+          m('div')
+        ])
       ]);
     } else {
       return _.isEmpty(ctrl.images()) ? m(recordNotFound) : ctrl.images().map(function(image) {
@@ -75,7 +79,6 @@ var library = (function() {
           // })
         ])
       ]),
-      m("hr"),
       paginate(ctrl)
     ];
   };
