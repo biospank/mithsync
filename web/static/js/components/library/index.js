@@ -5,6 +5,7 @@ import Image from "../../models/image";
 import thumbItem from "./thumb_item";
 import searchForm from "../widgets/search_form";
 import pagination from "../widgets/pagination";
+import loader from "../widgets/loader";
 import recordNotFound from "../widgets/404";
 
 var library = (function() {
@@ -37,13 +38,7 @@ var library = (function() {
 
   var imageView = function(ctrl) {
     if(!ctrl.images()) {
-      return m(".loader", [
-        m('.loader-inner ball-pulse', [
-          m('div'),
-          m('div'),
-          m('div')
-        ])
-      ]);
+      return m(loader);
     } else {
       return _.isEmpty(ctrl.images()) ? m(recordNotFound) : ctrl.images().map(function(image) {
         return m(thumbItem, image, ctrl);
@@ -74,9 +69,6 @@ var library = (function() {
       m("section", { class: "slidesheet" }, [
         m("div", { class: "row" }, [
           imageView(ctrl)
-          // _.isEmpty(ctrl.images()) ? m(recordNotFound) : ctrl.images().map(function(image) {
-          //   return m(thumbItem, image, ctrl);
-          // })
         ])
       ]),
       paginate(ctrl)
