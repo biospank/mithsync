@@ -6,7 +6,7 @@
     @include transition(all 0.3s ease-out);
     padding: 15px 20px !important;
     &:hover, &:focus {
-      background-color: darken($dark, 5%) !important;
+      background-color: darken($light, 10%) !important;
       color: white;
       border-radius: 0;
     }
@@ -25,10 +25,10 @@
   }
   li.active {
     .main-nav__tab {
-      background-color: darken($dark, 5%);
+      background-color: darken($dark, 2%);
       border-radius: 0;
       &:hover {
-        background-color: darken($dark, 5%) !important;
+        background-color: darken($dark, 2%) !important;
       }
       .main-nav__icon {
         color: $mainColor;
