@@ -35,6 +35,18 @@ var library = (function() {
     )
   };
 
+  var imageView = function(ctrl) {
+    if(!ctrl.images()) {
+      return m('.loader-inner ball-pulse', [
+        // m('div', {style: "background: red;"})
+      ]);
+    } else {
+      return _.isEmpty(ctrl.images()) ? m(recordNotFound) : ctrl.images().map(function(image) {
+        return m(thumbItem, image, ctrl);
+      });
+    }
+  };
+
   var content = function(ctrl) {
     return [
       m(searchForm, {
@@ -57,9 +69,10 @@ var library = (function() {
       }),
       m("section", { class: "slidesheet" }, [
         m("div", { class: "row" }, [
-          _.isEmpty(ctrl.images()) ? m(recordNotFound) : ctrl.images().map(function(image) {
-            return m(thumbItem, image, ctrl);
-          })
+          imageView(ctrl)
+          // _.isEmpty(ctrl.images()) ? m(recordNotFound) : ctrl.images().map(function(image) {
+          //   return m(thumbItem, image, ctrl);
+          // })
         ])
       ]),
       m("hr"),
@@ -71,7 +84,7 @@ var library = (function() {
     controller: function() {
       var ctrl = this;
 
-      ctrl.images = m.prop([]);
+      ctrl.images = m.prop(undefined);
       ctrl.errors = m.prop({});
       ctrl.filter = m.prop("");
       ctrl.requestOptions = {
@@ -110,8 +123,12 @@ var library = (function() {
       });
 
       ctrl.getImages = function(params, args) {
-        return Image.all(params, args).then(function(images) {
+        ctrl.images(undefined);
+
+        return Image.all(params,
+                        _.assign(args, { background: true })).then(function(images) {
           ctrl.images(images);
+          m.redraw();
         }, function(response) {
           ctrl.errors(response.errors);
         })
