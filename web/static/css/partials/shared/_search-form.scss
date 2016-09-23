@@ -6,8 +6,7 @@
     padding: 10px 20px;
     .input-group-btn {
       .btn {
-        // @include font-style(16px, #E3E3E3);
-        @include font-style(16px, black);
+        @include font-style(16px, $light);
         background-color: transparent;
       }
     }
@@ -15,6 +14,10 @@
       border: none;
       @include box-shadow(none);
       background-color: transparent;
+    }
+    &.small {
+      padding: 5px 10px;
+      border-radius: 50px;
     }
   }
 }

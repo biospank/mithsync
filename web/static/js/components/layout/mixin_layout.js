@@ -1,4 +1,4 @@
-import topNav from "./top_nav";
+import topBar from "./top_bar";
 import mainNav from "./main_nav";
 import user from "./user";
 
@@ -23,21 +23,14 @@ var mixinLayout = function(content, layout) {
             });
           }
         }, [
-          m.component(topNav),
+          m.component(topBar),
           m('aside', { class: 'sidebar', id: 'sidebar-wrapper' }, [
             m.component(user),
             m.component(mainNav)
           ]),
           m('main', { id: "page-content-wrapper" }, [
-            // m("section", { class: "breadcrumb-bar" }, [
-            //   m(".container-fluid", breadcrumbBar())
-            // ]),
-            // m("section", [
-            //   m("div", content)
-            // ])
             content
           ])
-          //m("footer", { class: "footer text-center" }, "Prova")
         ])
       ]
     }

@@ -1,6 +1,6 @@
 import searchForm from "./search_form";
 
-var topNav = {
+var topBar = {
   controller: function(){
     var ctrl = this;
     var humanMap = {
@@ -32,26 +32,20 @@ var topNav = {
 
     ctrl.humanPath = function() {
       return humanMap[m.route()] || "";
-    }
+    };
   },
   view: function(ctrl) {
-    return m('nav', { class: 'top-navbar navbar navbar-default navbar-fixed-top' }, [
+    return m('section', { class: 'top-bar navbar navbar-default navbar-fixed-top' }, [
       m('.container-fluid', [
         m('.navbar-header', [
           m('a', {
             href: '#menu-toggle',
             class: 'navbar-toggle',
-            id: "menu-toggle",
-            //class: "btn btn-default"
-            //'data-toggle': 'collapse'
-            // 'data-target': '#mainNav'
+            id: "menu-toggle"
           },
           [
             m('span', { class: 'sr-only' }, 'Toggle navigation'),
-            m('span', { class: 'fa fa-list' }),
-            // m('span', { class: 'icon-bar' }),
-            // m('span', { class: 'icon-bar' }),
-            // m('span', { class: 'icon-bar' })
+            m('span', { class: 'fa fa-list' })
           ]),
           m('h2', { class: 'navbar-brand' }, ctrl.humanPath())
         ]),
@@ -62,8 +56,8 @@ var topNav = {
           ])
         )
       ])
-    ]);
+    ])
   }
 }
 
-export default topNav;
+export default topBar;
