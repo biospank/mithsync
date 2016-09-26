@@ -35,7 +35,11 @@ var mainNav = {
           ])
         ]),
         m("li", {  class: (ctrl.isActive(["/video", "/video/new"]) ? 'active' : '') }, [
-          m("a", { href: "#collapseProjectNav", class: "collapsed main-nav__tab", "aria-expanded": false, "data-toggle": "collapse" }, [
+          m("a", {
+            href: "#collapseProjectNav",
+            class: "collapsed main-nav__tab",
+            "aria-expanded": false,
+            "data-toggle": "collapse" }, [
             m("i", { class: "fa fa-film main-nav__icon" }),
             m("span", { class: "main-nav__voice" }, "Projects"),
             m("i", { class: "fa fa-chevron-down" })
@@ -68,10 +72,15 @@ var mainNav = {
           ])
         ]),
         m("li", {  class: (ctrl.isActive("/userprofile") ? 'active' : '') }, [
-          m("a", { href: "#collapseUserNav", class: "collapsed main-nav__tab", "aria-expanded": false, "data-toggle": "collapse" }, [
+          m("a", {
+            href: "#collapseUserNav",
+            class: "collapsed main-nav__tab",
+            "aria-expanded": false,
+            "data-toggle": "collapse" }, [
             m("i", { class: "fa fa-cog main-nav__icon" }),
             m("span", { class: "main-nav__voice" }, "Account"),
-            m("i", { class: "caret" })
+            // m("i", { class: "caret" })
+            m("i", { class: "fa fa-chevron-down" })
           ]),
           m("nav", { class: "collapse sub-nav", id: "collapseUserNav", "aria-expanded": false }, [
             m("ul", { class: "nav" }, [

@@ -7,7 +7,7 @@ var userProfile = (function() {
   var content = function() {
     return [
       m(".row", [
-        m('.col-md-8', [
+        m('.col-md-7 col-lg-8', [
           m('div', { class: "bordered" }, [
             //m("h2", { class: "header space-bottom no-margin-top" }, "Edit Profile"),
             m(".content", [
@@ -47,7 +47,7 @@ var userProfile = (function() {
             ])
           ])
         ]),
-        m(".col-md-4", [
+        m(".col-md-5 col-lg-4", [
           m('.wrapper bordered', { class: "mgv25" }, [
             m(".user .internal", [
               m("figure", { class: "user__avatar" }, [
