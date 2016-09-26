@@ -1,0 +1,31 @@
+.dropzone {
+  border: 2px dashed #a5b2c3;
+  border-radius: 5px;
+  // min-height: 250px;
+  min-height: 345px;
+  margin-bottom: 25px;
+  .dz-message {
+    //margin: 120px auto 20px auto;
+    margin: 155px auto 80px auto;
+    font-size: 25px;
+    color: #646C7F;
+    font-weight: 600;
+    position: relative;
+    &:before {
+      width: 130px;
+      height: 84px;
+      content: " ";
+      background-image: url(/images/cloud-upload.png);
+      position: absolute;
+      left: 50%;
+      top: -100px;
+      margin-left: -60px;
+    }
+    &:after {
+      content: "Max allowed file size 1 MB";
+      display: block;
+      @include font-style(15px, #646C7F);
+      margin-top: 10px;
+    }
+  }
+}

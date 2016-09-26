@@ -62,7 +62,6 @@ var library = (function() {
           })
         ])
       ]),
-      m("hr"),
       paginate(ctrl)
     ];
   };
