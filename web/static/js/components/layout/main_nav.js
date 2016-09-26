@@ -38,7 +38,7 @@ var mainNav = {
           m("a", { href: "#collapseProjectNav", class: "collapsed main-nav__tab", "aria-expanded": false, "data-toggle": "collapse" }, [
             m("i", { class: "fa fa-film main-nav__icon" }),
             m("span", { class: "main-nav__voice" }, "Projects"),
-            m("i", { class: "caret" })
+            m("i", { class: "fa fa-chevron-down" })
           ]),
           m("nav", {
               class: "collapse sub-nav",

@@ -51,11 +51,11 @@ var userProfile = (function() {
           m('.wrapper bordered', { class: "mgv25" }, [
             m(".user .internal", [
               m("figure", { class: "user__avatar" }, [
-                m("img", { src: "/images/avatar.png", alt: "Avatar" })
+                m("img", { src: "/images/avatar.jpg", alt: "Avatar" })
               ]),
               m(".user__info", [
-                m("h4", { class: "user__name" }, "Ilaria Di Rosa"),
-                m("p", { class: "user__lightext" }, "dirosa.ilaria@gmail.com")
+                m("h4", { class: "user__name" }, "Paolo Branco"),
+                m("p", { class: "user__lightext" }, "paolo.branco@gmail.com")
               ])
             ])
           ])
