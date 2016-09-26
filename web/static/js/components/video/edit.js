@@ -22,12 +22,11 @@ var editVideo = (function() {
       m("section", { id: "video-container" }, [
         m(".row", [
           m(".col-sm-6", [
-            // m(videoPlayback, {
-            //   provider: ctrl.videoInfo().provider,
-            //   videoId: ctrl.videoInfo().videoId,
-            //   onReady: ctrl.initPlayer
-            // })
-            m("div")
+            m(videoPlayback, {
+              provider: ctrl.videoInfo().provider,
+              videoId: ctrl.videoInfo().videoId,
+              onReady: ctrl.initPlayer
+            })
             // m(".video_player",
             //   {
             //     "data-type": "youtube", //"vimeo",
