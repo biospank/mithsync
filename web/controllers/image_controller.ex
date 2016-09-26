@@ -2,6 +2,7 @@ defmodule Videosync.ImageController do
   use Videosync.Web, :controller
 
   alias Videosync.Image
+  alias Videosync.ImageProxy
   alias Videosync.ArcImage
   alias Videosync.Slide
 
@@ -16,9 +17,8 @@ defmodule Videosync.ImageController do
   end
 
   def index(conn, params, user) do
-    case File.ls(ArcImage.storage_dir(:thumb, {nil, user})) do
-      {:ok, files} ->
-        images = Image.map_all(files, user, params["filter"])
+    case ImageProxy.list(%{ user: user, filter: params["filter"] }) do
+      {:ok, images} ->
         paged_images = paginate(images, params["page"] || 1)
 
         paged_images =
@@ -30,10 +30,10 @@ defmodule Videosync.ImageController do
         end
 
         render(conn, "index.json", page: paged_images)
-      {:error, _} ->
+      {:error, reason} ->
         conn
         |> put_status(404)
-        |> render(Videosync.ErrorView, :"404", errors: %{path: "Not found"})
+        |> render(Videosync.ErrorView, :"404", errors: %{reason: reason})
     end
   end
 
@@ -58,11 +58,11 @@ defmodule Videosync.ImageController do
   end
 
   def delete(conn, %{"id" => filename}, user) do
-    path = ArcImage.url({filename, user}, :thumb)
+    url = ArcImage.url({filename, user}, :thumb)
 
     q = from s in Slide,
       select: count(s.id),
-      where: s.url == ^path and s.user_id == ^user.id
+      where: s.thumb_url == ^url and s.user_id == ^user.id
 
     case Repo.one(q) do
       0 ->

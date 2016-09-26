@@ -1,0 +1,9 @@
+.loader {
+  margin-top: 30px;
+  &-inner {
+    text-align: center;
+    & > div {
+      background: $mainColor;
+    }
+  }
+}

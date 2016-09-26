@@ -1,10 +1,12 @@
 import searchForm from "../widgets/search_form";
 import pagination from "../widgets/pagination";
+import loader from "../widgets/loader";
+import recordNotFound from "../widgets/404";
 import Image from "../../models/image";
 import imageItem from "./image_item";
 
 var imageDialog = (function() {
-  var images = m.prop([]);
+  var images = m.prop(undefined);
   var errors = m.prop({});
   var filter = m.prop("");
   var pageInfo = {};
@@ -25,8 +27,11 @@ var imageDialog = (function() {
   };
 
   var getImages = function(params, args) {
-    return Image.all(params, args).then(function(ims) {
+    images(undefined);
+    
+    return Image.all(params, _.assign(args, { background: true })).then(function(ims) {
       images(ims);
+      m.redraw();
     }, function(response) {
       errors(response.errors);
     })
@@ -43,7 +48,17 @@ var imageDialog = (function() {
     );
   };
 
-  var selectCallback = function() {}
+  var selectCallback = function() {};
+
+  var imageView = function() {
+    if(!images()) {
+      return m(loader);
+    } else {
+      return _.isEmpty(images()) ? m(recordNotFound) : images().map(function(image) {
+        return m(imageItem, image, selectCallback);
+      });
+    }
+  };
 
   return {
     show: function(opts) {
@@ -95,9 +110,7 @@ var imageDialog = (function() {
               }),
               m("section", { class: "slidesheet" }, [
                 m("div", { class: "row" }, [
-                  images().map(function(image) {
-                    return m(imageItem, image, selectCallback);
-                  })
+                  imageView()
                 ])
               ]),
               m.component(pagination,

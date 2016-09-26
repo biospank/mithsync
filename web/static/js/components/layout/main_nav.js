@@ -9,13 +9,13 @@ var mainNav = {
         m.route("/signin");
       },
       isActive: function(path) {
-        return _.isEqual(path, m.route());
-      },
-      keepOpen: function(event, path) {
-        console.log(event.target);
-        event.preventDefault();
-        $(event.target).closest(".sub-nav").addClass("in");
-        m.route(path);
+        if(_.isArray(path)) {
+          return _.find(path, function(p) {
+            return _.isEqual(p, m.route());
+          });
+        } else {
+          return _.isEqual(path, m.route());
+        }
       }
     };
   },
@@ -28,13 +28,13 @@ var mainNav = {
             m("span", { class: "main-nav__voice" }, "Dashboard")
           ])
         ]),
-        m("li", { class:  (ctrl.isActive("/library") ? 'active' : '')}, [
+        m("li", { class: (ctrl.isActive("/library") ? 'active' : '') }, [
           m("a", { href: "/library", config: m.route, class: "main-nav__tab" }, [
             m("i", { class: "fa fa-picture-o main-nav__icon" }),
             m("span", { class: "main-nav__voice" }, "Library")
           ])
         ]),
-        m("li", [
+        m("li", {  class: (ctrl.isActive(["/video", "/video/new"]) ? 'active' : '') }, [
           m("a", { href: "#collapseProjectNav", class: "collapsed main-nav__tab", "aria-expanded": false, "data-toggle": "collapse" }, [
             m("i", { class: "fa fa-film main-nav__icon" }),
             m("span", { class: "main-nav__voice" }, "Projects"),
@@ -46,7 +46,7 @@ var mainNav = {
               "aria-expanded": false
             }, [
             m("ul", { class: "nav" }, [
-              m("li", { class: (ctrl.isActive("/video") ? 'active' : '') }, [
+              m("li", [
                 m("a", {
                   href: "/video",
                   config: m.route,
@@ -55,8 +55,8 @@ var mainNav = {
                   m("span", { class: "sub-nav__voice" }, "List")
                 ])
               ]),
-              m("li", { class: (ctrl.isActive("/video/new") ? 'active' : '') }, [
-                m("a", { href: "/video/new", onclick: ctrl.keepOpen, class: "sub-nav__tab" }, [
+              m("li", [
+                m("a", { href: "/video/new", config: m.route, class: "sub-nav__tab" }, [
                   m("i", { class: "fa fa-angle-right sub-nav__icon" }),
                   m("span", { class: "sub-nav__voice" }, "New")
                 ])
