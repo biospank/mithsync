@@ -38,8 +38,13 @@
 }
 
 .sub-nav {
-  padding: 20px 20px 20px 26px;
+  padding-left: 26px;
+  padding-right: 26px;
   background-color: $light;
+  & > .nav {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
   &__tab {
     color: white;
     //text-transform: uppercase;
