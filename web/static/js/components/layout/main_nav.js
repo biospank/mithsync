@@ -46,17 +46,17 @@ var mainNav = {
               "aria-expanded": false
             }, [
             m("ul", { class: "nav" }, [
-              m("li", [
+              m("li", { class: (ctrl.isActive("/video") ? 'active' : '') }, [
                 m("a", {
                   href: "/video",
                   config: m.route,
                   class: "sub-nav__tab" }, "List")
               ]),
-              m("li", [
-                m("a", { href: "/video/new", config: m.route, class: "sub-nav__tab" }, [
-                  m("i", { class: "fa fa-angle-right sub-nav__icon" }),
-                  m("span", { class: "sub-nav__voice" }, "New")
-                ])
+              m("li", { class: (ctrl.isActive("/video/new") ? 'active' : '') }, [
+                m("a", {
+                  href: "/video/new",
+                  config: m.route,
+                  class: "sub-nav__tab" }, "New")
               ])
             ])
           ])
@@ -67,7 +67,7 @@ var mainNav = {
             m("span", { class: "main-nav__voice" }, "Faq")
           ])
         ]),
-        m("li", [
+        m("li", {  class: (ctrl.isActive("/userprofile") ? 'active' : '') }, [
           m("a", { href: "#collapseUserNav", class: "collapsed main-nav__tab", "aria-expanded": false, "data-toggle": "collapse" }, [
             m("i", { class: "fa fa-cog main-nav__icon" }),
             m("span", { class: "main-nav__voice" }, "Account"),
@@ -76,10 +76,16 @@ var mainNav = {
           m("nav", { class: "collapse sub-nav", id: "collapseUserNav", "aria-expanded": false }, [
             m("ul", { class: "nav" }, [
               m("li", { class: (ctrl.isActive("/userprofile") ? 'active' : '') }, [
-                m("a", { href: "/userprofile", config: m.route, class: "sub-nav__tab" }, "Edit profile")
+                m("a", {
+                  href: "/userprofile",
+                  config: m.route,
+                  class: "sub-nav__tab" }, "Edit profile")
               ]),
               m("li", [
-                m("a", { href: "#", onclick: ctrl.logout, class: "sub-nav__tab" }, "Logout")
+                m("a", {
+                  href: "#",
+                  onclick: ctrl.logout,
+                  class: "sub-nav__tab" }, "Logout")
               ])
             ])
           ])
