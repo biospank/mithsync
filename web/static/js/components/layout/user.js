@@ -13,10 +13,10 @@ var user = {
   view: function(ctrl) {
     return m(".user", [
       m("figure", { class: "user__avatar" }, [
-        m("img", { src: "/images/avatar.png", alt: "Avatar" })
+        m("img", { src: "/images/avatar.jpg", alt: "Avatar" })
       ]),
       m(".user__info", [
-        m("span", "iladiro")
+        m("span", "nhilbanda")
       ])
     ]);
   }

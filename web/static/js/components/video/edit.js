@@ -37,7 +37,7 @@ var editVideo = (function() {
             // )
           ]),
           m(".col-sm-6", [
-            m("figure", { class: "placeholder" }, [
+            m("figure", { class: "placeholderSlide" }, [
               m("a", {
                 onclick: function(event) {
                   event.preventDefault();

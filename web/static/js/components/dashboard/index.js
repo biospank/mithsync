@@ -11,7 +11,7 @@ var dashboard = (function() {
     return [
       m(".row", [
         m(".col-md-6", {}, [
-          m(".wrapper bordered", [
+          m(".wrapper simple", [
             m("h3", { class: "no-margin-top" }, [
               "Projects ",
               m("span", { class: "badge" }, ctrl.pageInfo.totalEntries || 0)
@@ -19,19 +19,19 @@ var dashboard = (function() {
             m("p", "Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li assemblò per preparare un testo campione."),
             m("a", { href: "/video", config: m.route, class: "btn btn-primary effect btn-lg" }, "Go to the projects list section")
           ]),
-          m(".wrapper bordered", [
+          m(".wrapper simple", [
             m("h3", { class: "no-margin-top" }, "Titolo sezione"),
             m("p", "Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa."),
             m("a", { class: "btn btn-success effect btn-lg" }, "Link sezione")
           ]),
-          m(".wrapper bordered", [
+          m(".wrapper simple", [
             m("h3", { class: "no-margin-top" }, "Titolo sezione"),
             m("p", "Testo sezione"),
             m("a", { class: "btn btn-primary effect btn-lg" }, "Link sezione")
           ])
         ]),
         m(".col-md-6", {}, [
-          m(".wrapper bordered", [
+          m(".wrapper simple", [
             m("h3", { class: "no-margin-top" }, "Library"),
             m("p", m.trust("Into the library section you can upload every image you need." +
             "<br>" +  "Before you can use  image in the project, you have to upload it here." + "<br><br>" +
@@ -42,6 +42,41 @@ var dashboard = (function() {
         ])
       ])
     ];
+
+
+
+    // return m(".row", [
+    //   m(".col-md-4", {}, [
+    //     m(".wrapper simple", [
+    //       m("h3", { class: "no-margin-top" }, [
+    //         "Projects ",
+    //         m("span", { class: "badge" }, ctrl.pageInfo.totalEntries || 0)
+    //       ]),
+    //       m("p", "Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li assemblò per preparare un testo campione."),
+    //       m("a", { href: "/video", config: m.route, class: "btn btn-primary effect btn-lg" }, "Go to the projects list section")
+    //     ])
+    //   ]),
+    //   m(".col-md-4", {}, [
+    //     m(".wrapper simple", [
+    //       m("h3", { class: "no-margin-top" }, [
+    //         "Projects ",
+    //         m("span", { class: "badge" }, ctrl.pageInfo.totalEntries || 0)
+    //       ]),
+    //       m("p", "Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li assemblò per preparare un testo campione."),
+    //       m("a", { href: "/video", config: m.route, class: "btn btn-primary effect btn-lg" }, "Go to the projects list section")
+    //     ])
+    //   ]),
+    //   m(".col-md-4", {}, [
+    //     m(".wrapper simple", [
+    //       m("h3", { class: "no-margin-top" }, [
+    //         "Projects ",
+    //         m("span", { class: "badge" }, ctrl.pageInfo.totalEntries || 0)
+    //       ]),
+    //       m("p", "Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li assemblò per preparare un testo campione."),
+    //       m("a", { href: "/video", config: m.route, class: "btn btn-primary effect btn-lg" }, "Go to the projects list section")
+    //     ])
+    //   ])
+    // ])
   };
 
   return {

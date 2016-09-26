@@ -7,14 +7,15 @@
 @import "./partials/utilities/pagination";
 @import "./partials/utilities/bootstrap-bug";
 @import "./partials/utilities/badge";
-@import "./partials/layout/top-navbar";
+@import "./partials/layout/top-bar";
 @import "./partials/layout/sidebar";
 @import "./partials/layout/user";
 @import "./partials/layout/main-container";
 @import "./partials/layout/main-nav";
-@import "./partials/shared/dropzone";
 @import "./partials/shared/search-form";
 @import "./partials/shared/socials-group";
+@import "./partials/shared/slidesheet";
+@import "./partials/shared/customized-dropzone";
 @import "./partials/shared/customized-form";
 @import "./partials/shared/customized-sweetalert";
 @import "./partials/shared/customized-reveal";

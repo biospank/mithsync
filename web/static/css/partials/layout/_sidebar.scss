@@ -1,11 +1,11 @@
+$dark: #2b415d;
+$light: #456894;
+
+// $dark: #456893;
+// $light: #4c467b;
+
 #sidebar-wrapper {
-  //@include position(left, 0, top, 0, fixed);
   z-index: 1040;
   top: 0;
-  //@include size(260px, 100%);
-  //min-height: 100%;
-  //padding: 0;
-  // background-color: #2b2e33;
-  //background-color: #43455c;
-  background-color: #343a46;
+  @include gradient-vertical($light, $dark, 0%, 100%);
 }

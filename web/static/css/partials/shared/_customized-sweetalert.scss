@@ -1,11 +1,14 @@
 .swal2 {
   &-icon {
-    color: $mainColor !important;
     &.swal2-warning {
-      border-color: $mainColor !important;
+      border-color: #e3a200 !important;
+      color: #e3a200 !important;
     }
   }
   &-confirm {
-    //color: $mainColor !important;
+    &.swal2-confirm {
+      border-color: #b3c833 !important;
+      color: #b3c833 !important;
+    }
   }
 }

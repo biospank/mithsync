@@ -1,6 +1,9 @@
 .btn {
   border-radius: 0;
   position: relative;
+  //border-radius: 3px;
+  //border: 0;
+  //@include box-shadow(0px -1px 0px 0px rgba(0, 0, 0, 0.2) inset, 0px 1px 1px 0px rgba(0, 0, 0, 0.2));
   @include transition(background-color 0.3s ease-out);
   &:after {
     content: "";
@@ -10,7 +13,7 @@
   @each $btn, $bg-color in
                 (default, transparent),
                 (success, #b3c833),
-                (primary, #1fb6ff),
+                (primary, #45b6f1),
                 (danger, #9b0202),
                 (warning, #e3a200) {
     &-#{$btn} {
@@ -40,8 +43,6 @@
       }
     }
   }
-  &-xs {}
-  &-sm {}
   &-md {
     padding: 10px 25px;
   }
@@ -49,7 +50,6 @@
     min-width: 180px;
     font-size: 15px;
   }
-  &-xl {}
   &.icon-left, &.icon-right {
     padding: 0;
     border: none !important;

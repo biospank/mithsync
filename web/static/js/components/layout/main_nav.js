@@ -38,7 +38,7 @@ var mainNav = {
           m("a", { href: "#collapseProjectNav", class: "collapsed main-nav__tab", "aria-expanded": false, "data-toggle": "collapse" }, [
             m("i", { class: "fa fa-film main-nav__icon" }),
             m("span", { class: "main-nav__voice" }, "Projects"),
-            m("i", { class: "caret" })
+            m("i", { class: "fa fa-chevron-down" })
           ]),
           m("nav", {
               class: "collapse sub-nav",
@@ -50,10 +50,7 @@ var mainNav = {
                 m("a", {
                   href: "/video",
                   config: m.route,
-                  class: "sub-nav__tab" }, [
-                  m("i", { class: "fa fa-angle-right sub-nav__icon" }),
-                  m("span", { class: "sub-nav__voice" }, "List")
-                ])
+                  class: "sub-nav__tab" }, "List")
               ]),
               m("li", [
                 m("a", { href: "/video/new", config: m.route, class: "sub-nav__tab" }, [
@@ -79,16 +76,10 @@ var mainNav = {
           m("nav", { class: "collapse sub-nav", id: "collapseUserNav", "aria-expanded": false }, [
             m("ul", { class: "nav" }, [
               m("li", { class: (ctrl.isActive("/userprofile") ? 'active' : '') }, [
-                m("a", { href: "/userprofile", config: m.route, class: "sub-nav__tab" }, [
-                  m("i", { class: "fa fa-angle-right sub-nav__icon" }),
-                  m("span", { class: "sub-nav__voice" }, "Edit profile")
-                ])
+                m("a", { href: "/userprofile", config: m.route, class: "sub-nav__tab" }, "Edit profile")
               ]),
               m("li", [
-                m("a", { href: "#", onclick: ctrl.logout, class: "sub-nav__tab" }, [
-                  m("i", { class: "fa fa-angle-right sub-nav__icon" }),
-                  m("span", { class: "sub-nav__voice" }, "Logout")
-                ])
+                m("a", { href: "#", onclick: ctrl.logout, class: "sub-nav__tab" }, "Logout")
               ])
             ])
           ])

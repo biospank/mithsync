@@ -2,7 +2,8 @@
   padding: 20px;
   //background: rgba(255,255,255,0.05);
   // background: #67717a;
-  background-color: $mainColor;
+  //background-color: $mainColor;
+  background-color: $light;
   position: relative;
   height: 100px;
   &__avatar {
@@ -21,7 +22,7 @@
     color: white;
     font-size: 15px;
     //font-weight: bold;
-    text-transform: uppercase;
+    //text-transform: uppercase;
     position: absolute;
     top: 0;
     left: 0;
@@ -31,6 +32,7 @@
     font-weight: 300;
     height: auto;
     background-color: transparent;
+    overflow: hidden;
     .user__name {
       @include font-style(22px, #333333);
     }
@@ -46,6 +48,7 @@
       position: static;
       text-align: center;
       padding: 0;
+      margin-top: 25px;
     }
   }
 }
