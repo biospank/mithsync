@@ -34,7 +34,7 @@ var Session = {
     if(_.isEmpty(this.token())) {
       return false;
     } else {
-      var unixTs = Number.parseInt(this.expires());
+      var unixTs = _.parseInt(this.expires());
 
       if(_.isNaN(unixTs)) {
         return false;
