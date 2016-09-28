@@ -60,9 +60,9 @@
       }
     }
   }
-  &__body {
-    margin-left: 35px;
-  }
+  // &__body {
+  //   margin-left: 35px;
+  // }
   &__title {
     @include font-style(16px, #2b2e33);
     margin: 0 0 15px 0;

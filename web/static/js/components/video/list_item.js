@@ -21,10 +21,10 @@ var listItem = {
 
     return m("li", [
       m("div", { class: "projects-list__content" }, [
-        m("div", [
-          m("input", { class: "magic-radio", type: "checkbox", name: video.id, id: video.id }),
-          m("label", { for: video.id })
-        ]),
+        // m("div", [
+        //   m("input", { class: "magic-radio", type: "checkbox", name: video.id, id: video.id }),
+        //   m("label", { for: video.id })
+        // ]),
         m(".projects-list__body clearfix", [
           m("h5", { class: "projects-list__title" }, [
             video.title,
