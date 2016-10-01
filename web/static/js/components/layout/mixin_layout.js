@@ -76,7 +76,7 @@ var mixinLayout = function(content, layout) {
           //   content
           // ])
         ]),
-        m("footer", { class: "text-center", style: "min-width: 970px; position: absolute; bottom: 0; left: 0; right: 0; z-index: 99999; background-color: yellow" }, [
+        m("footer", { id: "page-footer" }, [
           m(".container", "Footer")
         ])
       ]
