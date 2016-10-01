@@ -46,7 +46,7 @@ var mixinLayout = function(content, layout) {
             });
           }
         }, [
-          m("aside", { style: "background-color: blue", id: "sidebar-wrapper" }, [
+          m("aside", { id: "sidebar-wrapper" }, [
             // m.component(user),
             m("figure", [
               m("img", { src: "" }, [])
@@ -63,7 +63,7 @@ var mixinLayout = function(content, layout) {
               ])
             ])
           ]),
-          m("section", { style: "padding: 0", id: "page-content-wrapper" }, [
+          m("section", { id: "page-content-wrapper" }, [
             m.component(topBar),
             content
           ])

@@ -1,0 +1,20 @@
+#wrapper {
+  padding-left: 250px;
+}
+
+#sidebar-wrapper {
+  @include position(left, 0, top, 51px, fixed);
+  @include size(250px, 100%);
+  z-index: 1000;
+  overflow-y: auto;
+  @include gradient-vertical($light, $dark, 0%, 100%);
+}
+
+#page-content-wrapper {
+  padding: 0px;
+  position: relative;
+}
+
+// .main-container {
+//   margin: 30px 0;
+// }
