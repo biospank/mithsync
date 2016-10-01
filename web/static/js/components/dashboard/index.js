@@ -113,7 +113,7 @@ var dashboard = (function() {
         return Video.all(params, args);
       };
 
-      ctrl.countVideos({}, ctrl.requestOptions);
+      // ctrl.countVideos({}, ctrl.requestOptions);
 
     },
     view: mixinLayout(content)

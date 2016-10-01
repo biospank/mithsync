@@ -19,6 +19,7 @@ defmodule Videosync.VideoView do
     %{
       id: video.id,
       user_id: video.user_id,
+      project_id: video.project_id,
       url: video.url,
       title: video.title,
       description: video.description
@@ -33,6 +34,7 @@ defmodule Videosync.VideoView do
     %{
       id: video.id,
       user_id: video.user_id,
+      project_id: video.project_id,
       url: video.url,
       title: video.title,
       description: video.description,

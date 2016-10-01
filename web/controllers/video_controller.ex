@@ -18,7 +18,7 @@ defmodule Videosync.VideoController do
 
   def index(conn, params, user) do
     videos =
-      Video.own_by(user)
+      Video.own_by(user, params["project_id"])
       |> Video.filter_by(params["filter"])
       |> Video.order_by(:title)
       |> Repo.all
@@ -36,16 +36,16 @@ defmodule Videosync.VideoController do
     render(conn, "index.json", page: paged_videos)
   end
 
-  def create(conn, %{"video" => video_params}, user) do
+  def create(conn, %{"project_id" => project, "video" => video_params}, user) do
     changeset = user
-      |> build_assoc(:videos)
+      |> build_assoc(:videos, %{project_id: String.to_integer(project)})
       |> Video.changeset(video_params)
 
     case Repo.insert(changeset) do
       {:ok, video} ->
         conn
         |> put_status(:created)
-        |> put_resp_header("location", video_path(conn, :show, video))
+        |> put_resp_header("location", project_video_path(conn, :show, project, video))
         |> render("show.json", video: video)
       {:error, changeset} ->
         conn
@@ -54,8 +54,8 @@ defmodule Videosync.VideoController do
     end
   end
 
-  def show(conn, %{"id" => id}, user) do
-    video = Video.own_by(user)
+  def show(conn, %{"project_id" => project, "id" => id}, user) do
+    video = Video.own_by(user, project)
       |> Video.preload_slides(Slide.order_by(:start))
       |> Repo.get!(id)
       # |> Repo.preload(:slides)
@@ -63,8 +63,8 @@ defmodule Videosync.VideoController do
     render(conn, "show_video_with_slides.json", video: video)
   end
 
-  def update(conn, %{"id" => id, "video" => video_params}, user) do
-    video = Repo.get!(Video.own_by(user), id)
+  def update(conn, %{"project_id" => project, "id" => id, "video" => video_params}, user) do
+    video = Repo.get!(Video.own_by(user, project), id)
     changeset = Video.changeset(video, video_params)
 
     case Repo.update(changeset) do
@@ -77,8 +77,8 @@ defmodule Videosync.VideoController do
     end
   end
 
-  def delete(conn, %{"id" => id}, user) do
-    video = Repo.get!(Video.own_by(user), id)
+  def delete(conn, %{"project_id" => project, "id" => id}, user) do
+    video = Repo.get!(Video.own_by(user, project), id)
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).

@@ -3,6 +3,7 @@ defmodule Videosync.SlideControllerTest do
 
   alias Videosync.Slide
   alias Videosync.Video
+  alias Videosync.Project
 
   @valid_attrs %{
     end: 60,
@@ -29,9 +30,9 @@ defmodule Videosync.SlideControllerTest do
 
   test "requires user authentication on all actions", %{conn: conn} do
     Enum.each([
-        put(conn, video_slide_path(conn, :update, 12, 34, %{})),
-        post(conn, video_slide_path(conn, :create, 12, %{})),
-        delete(conn, video_slide_path(conn, :delete, 12, 34))
+        put(conn, project_video_slide_path(conn, :update, 4, 12, 34, %{})),
+        post(conn, project_video_slide_path(conn, :create, 4, 12, %{})),
+        delete(conn, project_video_slide_path(conn, :delete, 4, 12, 34))
       ], fn conn ->
         assert json_response(conn, 401)
         assert conn.halted
@@ -40,31 +41,34 @@ defmodule Videosync.SlideControllerTest do
 
   @tag :logged_in
   test "creates and renders resource when data is valid", %{conn: conn, user: user} do
+    project = insert_project(user, %Project{})
     video = insert_video(user, %Video{})
-    conn = post conn, video_slide_path(conn, :create, video.id), slide: @valid_attrs
+    conn = post conn, project_video_slide_path(conn, :create, project, video), slide: @valid_attrs
     assert json_response(conn, 201)["data"]["id"]
     assert Repo.get_by(Slide, @valid_attrs)
   end
 
   @tag :logged_in
   test "does not create resource and renders errors when data is invalid", %{conn: conn, user: user} do
+    project = insert_project(user, %Project{})
     video = insert_video(user, %Video{})
-    conn = post conn, video_slide_path(conn, :create, video.id), slide: @invalid_attrs
+    conn = post conn, project_video_slide_path(conn, :create, project, video), slide: @invalid_attrs
     assert json_response(conn, 422)["errors"] != %{}
   end
 
   @tag :logged_in
   test "does not create resource and raise errors on missing video association", %{conn: conn} do
     assert_raise Ecto.ConstraintError, fn ->
-      post conn, video_slide_path(conn, :create, 300), slide: @valid_attrs
+      post conn, project_video_slide_path(conn, :create, 200, 300), slide: @valid_attrs
     end
   end
 
   @tag :logged_in
   test "updates and renders chosen resource when data is valid", %{conn: conn, user: user} do
+    project = insert_project(user, %Project{})
     video = insert_video(user, %Video{})
     slide = insert_slide(user, video, %Slide{})
-    conn = put conn, video_slide_path(conn, :update, video, slide), slide: @valid_attrs
+    conn = put conn, project_video_slide_path(conn, :update, project, video, slide), slide: @valid_attrs
     assert json_response(conn, 200)["data"]["id"]
     assert Repo.get_by(Slide,
             Map.merge(@valid_attrs, %{user_id: user.id, video_id: video.id}))
@@ -72,17 +76,19 @@ defmodule Videosync.SlideControllerTest do
 
   @tag :logged_in
   test "does not update chosen resource and renders errors when data is invalid", %{conn: conn, user: user} do
+    project = insert_project(user, %Project{})
     video = insert_video(user, %Video{})
     slide = insert_slide(user, video, %Slide{})
-    conn = put conn, video_slide_path(conn, :update, video, slide), slide: @invalid_attrs
+    conn = put conn, project_video_slide_path(conn, :update, project, video, slide), slide: @invalid_attrs
     assert json_response(conn, 422)["errors"] != %{}
   end
 
   @tag :logged_in
   test "deletes chosen resource", %{conn: conn, user: user} do
+    project = insert_project(user, %Project{})
     video = insert_video(user, %Video{})
     slide = insert_slide(user, video, %Slide{})
-    conn = delete conn, video_slide_path(conn, :delete, video, slide)
+    conn = delete conn, project_video_slide_path(conn, :delete, project, video, slide)
     assert response(conn, 204)
     refute Repo.get(Slide.own_by(user, video.id), slide.id)
   end

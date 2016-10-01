@@ -6,6 +6,7 @@ defmodule Videosync.Video do
     field :title, :string
     field :description, :string
     belongs_to :user, Videosync.User
+    belongs_to :project, Videosync.Project
     has_many :slides, Videosync.Slide
 
     timestamps
@@ -35,8 +36,9 @@ defmodule Videosync.Video do
     from v in query, order_by: field(v, ^order)
   end
 
-  def own_by(user) do
-    assoc(user, :videos)
+  def own_by(user, project) do
+    query = assoc(user, :videos)
+    from v in query, where: v.project_id == ^project
   end
 
   def preload_slides(query, preload_query) do

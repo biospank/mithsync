@@ -3,7 +3,7 @@ import Session from './session';
 import UrlParser from '../util/urlParser';
 
 var Video = {
-  url: '/videos',
+  url: '/projects/projectId/videos',
   urlParser: {},
   model: {
     title: m.prop(""),
@@ -23,11 +23,12 @@ var Video = {
       }, args)
     );
   },
-  all: function(params, args) {
+  all: function(projectId, params, args) {
     return m.request(_.assign({
         method: "GET",
         url: Videosync.apiBaseUrl() +
-          this.url + "?" + m.route.buildQueryString(params),
+          _.replace(this.url, 'projectId', projectId) + 
+          "?" + m.route.buildQueryString(params),
         config: function(xhr) {
           xhr.setRequestHeader("accept", "application/json");
           xhr.setRequestHeader("Authorization", Videosync.realm + " " + Session.token())

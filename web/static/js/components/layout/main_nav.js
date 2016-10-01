@@ -34,35 +34,10 @@ var mainNav = {
             m("span", { class: "main-nav__voice" }, "Library")
           ])
         ]),
-        m("li", {  class: (ctrl.isActive(["/video", "/video/new"]) ? 'active' : '') }, [
-          m("a", {
-            href: "#collapseProjectNav",
-            class: "collapsed main-nav__tab",
-            "aria-expanded": false,
-            "data-toggle": "collapse" }, [
+        m("li", {  class: (ctrl.isActive("/project") ? 'active' : '') }, [
+          m("a", { href: "/projects", config: m.route, class: "main-nav__tab" }, [
             m("i", { class: "fa fa-film main-nav__icon" }),
-            m("span", { class: "main-nav__voice" }, "Projects"),
-            m("i", { class: "fa fa-chevron-down" })
-          ]),
-          m("nav", {
-              class: "collapse sub-nav",
-              id: "collapseProjectNav",
-              "aria-expanded": false
-            }, [
-            m("ul", { class: "nav" }, [
-              m("li", { class: (ctrl.isActive("/video") ? 'active' : '') }, [
-                m("a", {
-                  href: "/video",
-                  config: m.route,
-                  class: "sub-nav__tab" }, "List")
-              ]),
-              m("li", { class: (ctrl.isActive("/video/new") ? 'active' : '') }, [
-                m("a", {
-                  href: "/video/new",
-                  config: m.route,
-                  class: "sub-nav__tab" }, "New")
-              ])
-            ])
+            m("span", { class: "main-nav__voice" }, "Projects")
           ])
         ]),
         m("li", { class: (ctrl.isActive("/faq") ? 'active' : '') }, [

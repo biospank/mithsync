@@ -1,9 +1,10 @@
-import Session from "../../models/session";
-import Video from "../../models/video";
-import listItem from "./list_item";
+import mixinLayout from "../layout/mixin_layout";
 import searchForm from "../widgets/search_form";
 import pagination from "../widgets/pagination";
+import listItem from "./list_item";
 import recordNotFound from "../widgets/404";
+import Session from "../../models/session";
+import Project from "../../models/project";
 
 var paginate = function(ctrl) {
   return m.component(pagination,
@@ -11,7 +12,7 @@ var paginate = function(ctrl) {
       ctrl.pageInfo,
       {
         xhr: function(params) {
-          ctrl.getVideos(params, ctrl.requestOptions);
+          ctrl.getProjects(params, ctrl.requestOptions);
         },
         defaultParams: {
           filter: ctrl.filter()
@@ -21,11 +22,11 @@ var paginate = function(ctrl) {
   );
 }
 
-var videoList = {
+var projectList = {
   controller: function() {
     var ctrl = this;
 
-    ctrl.videos = m.prop([]);
+    ctrl.projects = m.prop([]);
     ctrl.errors = m.prop({});
     ctrl.filter = m.prop("");
     ctrl.pageInfo = {};
@@ -50,27 +51,27 @@ var videoList = {
       m.route("/signin");
     }
 
-    ctrl.getVideos = function(params, args) {
-      return Video.all(m.route.param("projectId"), params, args).then(function(videos) {
-        ctrl.videos(videos);
+    ctrl.getProjects = function(params, args) {
+      return Project.all(params, args).then(function(projects) {
+        ctrl.projects(projects);
       }, function(response) {
         ctrl.errors(response.errors);
       })
     };
 
-    ctrl.showVideos = function() {
-      return ctrl.videos().map(function(video) {
-        return m(listItem, video, ctrl);
+    ctrl.showProjects = function() {
+      return ctrl.projects().map(function(project) {
+        return m(listItem, project, ctrl);
       })
     };
 
-    ctrl.getVideos(
+    ctrl.getProjects(
       ctrl.pageInfo.defaultParams || {},
       ctrl.requestOptions
     );
 
   },
-  view: function(ctrl) {
+  view: mixinLayout(function(ctrl) {
     return m("div", [
       m("div", { class: "clearfix" }, [
         m("div", { class: "pull-left" }, [
@@ -78,7 +79,7 @@ var videoList = {
             action: function(event) {
               event.preventDefault();
 
-              ctrl.getVideos(
+              ctrl.getProjects(
                 _.assign(
                   ctrl.pageInfo.defaultParams || {},
                   { page: 1 }
@@ -88,36 +89,19 @@ var videoList = {
             filter: ctrl.filter
           })
         ])
-        // m("div", { class: "pull-right" }, [
-        //   m("button", { class: "btn btn-warning btn-lg text-uppercase" }, "Delete selected")
-        // ])
       ]),
       m("ul", { class: "list-unstyled projects-list" }, [
-        _.isEmpty(ctrl.videos()) ? m("li", {}, [
+        _.isEmpty(ctrl.projects()) ? m("li", {}, [
           m(recordNotFound)
-        ]) : ctrl.showVideos()
+        ]) : ctrl.showProjects()
       ]),
       m("div", { class: "clearfix" }, [
         m("div", { class: "pull-left" }, [
           paginate(ctrl)
-        ]),
-        this.deleteSelectedButton(ctrl)
+        ])
       ])
     ]);
-  },
-  deleteSelectedButton: function(ctrl) {
-    if(!_.isEmpty(ctrl.videos())) {
-      return m("div", { class: "pull-right" }, [
-        // m("button", { href: "/video/new", config: m.route, class: "btn btn-warning btn-lg text-uppercase mgv20 icon-left" }, [
-        //   m("i", { class: 'fa fa-trash' }),
-        //   m("span", {}, "Delete selected")
-        // ])
-        // m("button", { class: "btn btn-warning btn-lg text-uppercase mgv20" }, "Delete selected")
-      ])
-    } else {
-      return m("")
-    }
-  }
-}
+  })
+};
 
-export default videoList;
+export default projectList;

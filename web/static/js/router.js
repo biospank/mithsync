@@ -5,6 +5,7 @@ import resetRequestPage from "./components/password/reset_request_page";
 import resetPage from "./components/password/reset_page";
 import dashboard from "./components/dashboard/index";
 import userProfile from "./components/user/user_profile";
+import projectList from "./components/project/index";
 import videoPage from "./components/video/index";
 import newVideo from "./components/video/new";
 import editVideo from "./components/video/edit";
@@ -29,15 +30,17 @@ export default m.route(document.getElementById('app'), "/", {
 
   "/userprofile": userProfile,
 
-  "/video": videoPage,
+  "/projects": projectList,
 
-  "/video/new": newVideo,
+  "/projects/:projectId/videos": videoPage,
 
-  "/video/:videoId/edit": editVideo,
+  "/videos/new": newVideo,
 
-  "/video/:videoId/info": infoVideo,
+  "/videos/:videoId/edit": editVideo,
 
-  "/video/view": viewVideo,
+  "/videos/:videoId/info": infoVideo,
+
+  "/videos/view": viewVideo,
 
   "/library": library,
 

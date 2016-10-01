@@ -1,39 +1,7 @@
 import searchForm from "./search_form";
+import breadcrumb from "./breadcrumb";
 
 var topBar = {
-  controller: function(){
-    var ctrl = this;
-    var humanMap = {
-      "/": "Dashboard",
-      "/signup": "Sign Up",
-
-      //"/activate": activationPage,
-
-      //"/password/request": resetRequestPage,
-
-      //"/password/reset/:code": resetPage,
-
-      "/userprofile": "Account Settings",
-
-      "/video": "Video",
-
-      "/video/new": "Video",
-
-      "/video/:videoId/edit": "Video",
-
-      "/video/:videoId/info": "Information",
-
-      "/video/view": "Video",
-
-      "/library": "Library",
-
-      "/faq": "Questions"
-    };
-
-    ctrl.humanPath = function() {
-      return humanMap[m.route()] || "";
-    };
-  },
   view: function(ctrl) {
     return m('section', { class: 'top-bar navbar navbar-default navbar-fixed-top' }, [
       m('.container-fluid', [
@@ -47,7 +15,7 @@ var topBar = {
             m('span', { class: 'sr-only' }, 'Toggle navigation'),
             m('span', { class: 'fa fa-list' })
           ]),
-          m('h2', { class: 'navbar-brand' }, ctrl.humanPath())
+          m(breadcrumb)
         ]),
         m('.collapse navbar-collapse navbar-right',
           m("a", { href: "/video/new", config: m.route, class: "btn btn-primary effect btn-md text-uppercase icon-left" }, [

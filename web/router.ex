@@ -40,8 +40,10 @@ defmodule Videosync.Router do
 
     resources "/signout", SessionController, only: [:delete]
     resources "/users", UserController, only: [:index, :show, :update, :delete]
-    resources "/videos", VideoController, only: [:index, :show, :create, :update, :delete] do
-      resources "/slides", SlideController, only: [:create, :update, :delete]
+    resources "/projects", ProjectController, only: [:index, :create, :update, :delete] do
+      resources "/videos", VideoController, only: [:index, :show, :create, :update, :delete] do
+        resources "/slides", SlideController, only: [:create, :update, :delete]
+      end
     end
     resources "/images", ImageController, only: [:index, :create, :delete]
   end

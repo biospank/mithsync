@@ -14,9 +14,15 @@ defmodule Videosync.TestHelpers do
     |> Repo.insert!
   end
 
-  def insert_video(user, attrs \\ %{}) do
+  def insert_project(user, attrs \\ %{}) do
     user
-    |> Ecto.build_assoc(:videos, attrs)
+    |> Ecto.build_assoc(:projects, attrs)
+    |> Repo.insert!
+  end
+
+  def insert_video(user, project, attrs \\ %{}) do
+    user
+    |> Ecto.build_assoc(:videos, Map.merge(attrs, %{project_id: project.id}))
     |> Repo.insert!
   end
 
