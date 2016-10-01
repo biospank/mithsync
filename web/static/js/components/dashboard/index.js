@@ -9,35 +9,42 @@ var dashboard = (function() {
 
   var content = function(ctrl) {
     return [
-      m(".row", [
-        m(".col-md-6", {}, [
-          m(".wrapper simple", [
-            m("h3", { class: "no-margin-top" }, [
-              "Projects ",
-              m("span", { class: "badge" }, ctrl.pageInfo.totalEntries || 0)
-            ]),
-            m("p", "Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li assemblò per preparare un testo campione."),
-            m("a", { href: "/video", config: m.route, class: "btn btn-primary effect btn-lg" }, "Go to the projects list section")
+      m("main", { style: "padding: 20px; height:900px;" }, [
+        m("section", { class: "row" }, [
+          m("article", { class: "col-xs-3" }, [
+            m("div", { style: "background-color: pink" }, "column 1")
           ]),
-          m(".wrapper simple", [
-            m("h3", { class: "no-margin-top" }, "Titolo sezione"),
-            m("p", "Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa."),
-            m("a", { class: "btn btn-success effect btn-lg" }, "Link sezione")
+          m("article", { class: "col-xs-3" }, [
+            m("div", { style: "background-color: pink" }, "column 2")
           ]),
-          m(".wrapper simple", [
-            m("h3", { class: "no-margin-top" }, "Titolo sezione"),
-            m("p", "Testo sezione"),
-            m("a", { class: "btn btn-primary effect btn-lg" }, "Link sezione")
+          m("article", { class: "col-xs-3" }, [
+            m("div", { style: "background-color: pink" }, "column 3")
+          ]),
+          m("article", { class: "col-xs-3" }, [
+            m("div", { style: "background-color: pink" }, "column 4")
           ])
         ]),
-        m(".col-md-6", {}, [
-          m(".wrapper simple", [
-            m("h3", { class: "no-margin-top" }, "Library"),
-            m("p", m.trust("Into the library section you can upload every image you need." +
-            "<br>" +  "Before you can use  image in the project, you have to upload it here." + "<br><br>" +
-            "You can start by section below as well!")),
-            m("p", { class: "dropzone", id: "dropper", config: ctrl.initializeDropper}),
-            m("a", { href: "/library", config: m.route, class: "btn btn-primary effect btn-lg" }, "Go to the library section")
+        m(".row", [
+          m("section", { class: "col-xs-8" }, [
+            m("ol", { style: "background-color: red" }, [
+              m("li", [
+                m("a", "Testo")
+              ]),
+              m("li", [
+                m("a", "Testo")
+              ]),m("li", [
+                m("a", "Testo")
+              ]),m("li", [
+                m("a", "Testo")
+              ])
+            ])
+          ]),
+          m("div", { class: "col-xs-4" }, [
+            m("div", { style: "background-color: violet" }, [
+              m("h3", { class: "no-margin-top" }, "Titolo"),
+              m("p", "Testo"),
+              m("a", "Bottone")
+            ])
           ])
         ])
       ])

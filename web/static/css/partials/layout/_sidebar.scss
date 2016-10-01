@@ -6,6 +6,6 @@ $light: #456894;
 
 #sidebar-wrapper {
   z-index: 1040;
-  top: 0;
+  top: 51px;
   @include gradient-vertical($light, $dark, 0%, 100%);
 }

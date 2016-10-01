@@ -35,26 +35,29 @@ var topBar = {
     };
   },
   view: function(ctrl) {
-    return m('section', { class: 'top-bar navbar navbar-default navbar-fixed-top' }, [
-      m('.container-fluid', [
-        m('.navbar-header', [
-          m('a', {
-            href: '#menu-toggle',
-            class: 'navbar-toggle',
-            id: "menu-toggle"
-          },
-          [
-            m('span', { class: 'sr-only' }, 'Toggle navigation'),
-            m('span', { class: 'fa fa-list' })
-          ]),
-          m('h2', { class: 'navbar-brand' }, ctrl.humanPath())
+    // return m('section', { class: 'top-bar' }, [
+    return m('header', { class: "", style: "background-color: brown" }, [
+      m('.container clearfix', [
+        m('div', { class: "pull-left" }, [
+          m("ol", { class: "breadcrumb" }, [
+            m("li", [
+              m("a", { href: "#" }, "Link")
+            ]),
+            m("li", [
+              m("a", { href: "#" }, "Link")
+            ]),
+            m("li", { class: "active" }, [
+              m("a", "Link")
+            ])
+          ])
         ]),
-        m('.collapse navbar-collapse navbar-right',
-          m("a", { href: "/video/new", config: m.route, class: "btn btn-primary effect btn-md text-uppercase icon-left" }, [
-            m("i", { class: 'fa fa-plus' }),
+        m("div", { class: "pull-right" }, [
+          // m("a", { href: "/video/new", config: m.route, class: "btn btn-primary effect btn-md text-uppercase icon-left" }, [
+          m("a", { href: "/video/new", config: m.route, class: "btn btn-primary" }, [
+            // m("i", { class: 'fa fa-plus' }),
             m("span", {}, "Create new")
           ])
-        )
+        ])
       ])
     ])
   }
