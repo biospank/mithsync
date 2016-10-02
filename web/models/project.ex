@@ -24,7 +24,12 @@ defmodule Videosync.Project do
   end
 
   def order_by(query, order) do
-    from p in query, order_by: field(p, ^order)
+    case order do
+      :inserted_at ->
+        from p in query, order_by: [desc: field(p, ^order)]
+      _ ->
+        from p in query, order_by: field(p, ^order)
+    end
   end
 
   def own_by(user) do

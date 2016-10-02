@@ -65,6 +65,13 @@ var projectList = {
       })
     };
 
+    ctrl.updateProject = function(project) {
+      Project.update(project.id).then(function(response) {
+        var index = _.findIndex(ctrl.projects(), { id: response.data.id })
+        ctrl.projects()[index] = response.data;
+      });
+    };
+
     ctrl.getProjects(
       ctrl.pageInfo.defaultParams || {},
       ctrl.requestOptions

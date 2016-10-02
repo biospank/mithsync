@@ -1,28 +1,20 @@
 import Project from "../../models/project";
 
 var listItem = {
-  controller: function(prj) {
+  controller: function(prj, parent) {
     return {
       project: m.prop(prj),
       editMode: m.prop(false),
-      updateItem: function(project) {
-        Project.update(project().id).then(function(response) {
-          console.log(response.data);
-          return response.data;
-        })
-      },
       showItem: function() {
         if(this.editMode()) {
           return m("input.form-control", {
             type: 'text',
-            // value: project().name,
             placeholder: this.project().name,
             oninput: m.withAttr("value", Project.model.name),
             onkeyup: function(e) {
               if(e.keyCode === 13) {
-                this.project(this.updateItem(this.project));
+                parent.updateProject(this.project());
                 this.editMode(false);
-                // m.redraw();
               }
 
               if(e.keyCode === 27)
