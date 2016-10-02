@@ -22,7 +22,7 @@ var Project = {
     return m.request({
       method: "PUT",
       url: Videosync.apiBaseUrl() + this.url + "/" + id,
-      data: { project: model },
+      data: { project: this.model },
       config: function(xhr) {
         xhr.setRequestHeader("accept", "application/json");
         xhr.setRequestHeader("content-type", "application/json");
