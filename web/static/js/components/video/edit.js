@@ -217,7 +217,7 @@ var editVideo = (function() {
       };
 
       ctrl.getVideo = function(videoId) {
-        return Video.show(videoId).then(function(video) {
+        return Video.show(m.route.param('projectId'), videoId).then(function(video) {
           ctrl.video(video.data);
           ctrl.videoInfo(Video.info(ctrl.video().url));
         }, function(response) {

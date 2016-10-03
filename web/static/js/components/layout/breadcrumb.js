@@ -22,7 +22,7 @@ var breadcrumb = {
     return {
       crumbs: _.once(function() {
         return _.filter(_.uniq(_.split(m.route(), '/')), function(crumb) {
-          return _.isNaN(_.parseInt(crumb));
+          return !_.includes(['new', 'edit'], crumb) && _.isNaN(_.parseInt(crumb));
         });
       }),
       slugFor: function(slug) {

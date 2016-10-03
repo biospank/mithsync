@@ -56,8 +56,9 @@ var newVideo = (function() {
 
       ctrl.createVideo = function(args) {
         if(ctrl.isValidUrl(Video.model.url())) {
-          return Video.create(args).then(function(response) {
-            m.route("/video/" + response.data.id + "/edit");
+          var projectId = m.route.param('projectId');
+          return Video.create(projectId, args).then(function(response) {
+            m.route("/projects/" + projectId + "/videos/" + response.data.id + "/edit");
           }, function(response) {
             ctrl.errors(response.errors);
           })

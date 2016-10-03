@@ -34,11 +34,11 @@ export default m.route(document.getElementById('app'), "/", {
 
   "/projects/:projectId/videos": videoPage,
 
-  "/videos/new": newVideo,
+  "/projects/:projectId/videos/new": newVideo,
 
-  "/videos/:videoId/edit": editVideo,
+  "/projects/:projectId/videos/:videoId/edit": editVideo,
 
-  "/videos/:videoId/info": infoVideo,
+  "/projects/:projectId/videos/:videoId/info": infoVideo,
 
   "/videos/view": viewVideo,
 
