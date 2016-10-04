@@ -28,12 +28,21 @@ var imageDialog = (function() {
 
   var getImages = function(params, args) {
     images(undefined);
-    
-    return Image.all(params, _.assign(args, { background: true })).then(function(ims) {
+
+    return Image.all(
+      {
+        projectId: m.route.param('projectId'),
+        videoId: m.route.param('videoId')
+      },
+      params,
+      _.assign(args, { background: true })).then(function(ims) {
       images(ims);
       m.redraw();
     }, function(response) {
-      errors(response.errors);
+      // in case of 404 http status code
+      // response is undefined: (cannot extract json data)
+      images([]);
+      m.redraw();
     })
   };
 
