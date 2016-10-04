@@ -1,6 +1,10 @@
 defmodule Videosync.ImageControllerTest do
   use Videosync.ConnCase
+
   alias Videosync.ArcImage
+  alias Videosync.Project
+  alias Videosync.Video
+  alias Videosync.Scope
 
   @valid_attrs %Plug.Upload{
     content_type: "image/jpg",
@@ -30,9 +34,9 @@ defmodule Videosync.ImageControllerTest do
 
   test "requires user authentication on all actions", %{conn: conn} do
     Enum.each([
-        get(conn, image_path(conn, :index)),
-        post(conn, image_path(conn, :create, %{})),
-        delete(conn, image_path(conn, :delete, "123")),
+        get(conn, project_video_image_path(conn, :index, 5, 12)),
+        post(conn, project_video_image_path(conn, :create, 5, 12, %{})),
+        delete(conn, project_video_image_path(conn, :delete, 5, 12, "dummy.jpg")),
       ], fn conn ->
       assert json_response(conn, 401)
       assert conn.halted
@@ -40,61 +44,50 @@ defmodule Videosync.ImageControllerTest do
   end
 
   @tag :logged_in
-  test "lists all entries on index", %{conn: conn} do
-    conn = get conn, image_path(conn, :index)
+  test "lists all entries on index", %{conn: conn, user: user} do
+    project = insert_project(user, %Project{})
+    video = insert_video(user, project, %Video{})
+    conn = get conn, project_video_image_path(conn, :index, project, video)
     # assert json_response(conn, 404)["errors"]
     assert json_response(conn, 200)["data"]
   end
 
-  # test "shows chosen resource", %{conn: conn} do
-  #   image = Repo.insert! %Image{}
-  #   conn = get conn, image_path(conn, :show, image)
-  #   assert json_response(conn, 200)["data"] == %{"id" => image.id}
-  # end
-  #
-  # test "does not show resource and instead throw error when id is nonexistent", %{conn: conn} do
-  #   assert_error_sent 404, fn ->
-  #     get conn, image_path(conn, :show, -1)
-  #   end
-  # end
-
   @tag :logged_in
-  test "creates and renders resource when data is valid", %{conn: conn} do
-    conn = post conn, image_path(conn, :create), file: @valid_attrs
+  test "creates and renders resource when data is valid", %{conn: conn, user: user} do
+    project = insert_project(user, %Project{})
+    video = insert_video(user, project, %Video{})
+    conn = post conn, project_video_image_path(conn, :create, project, video), file: @valid_attrs
     assert json_response(conn, 201)["data"]
   end
 
   @tag :logged_in
-  test "does not create resource and renders errors when data is invalid", %{conn: conn} do
-    conn = post conn, image_path(conn, :create), file: @invalid_attrs
+  test "does not create resource and renders errors when data is invalid", %{conn: conn, user: user} do
+    project = insert_project(user, %Project{})
+    video = insert_video(user, project, %Video{})
+    conn = post conn, project_video_image_path(conn, :create, project, video), file: @invalid_attrs
     assert json_response(conn, 422)["errors"] != %{}
   end
 
-  # test "updates and renders chosen resource when data is valid", %{conn: conn} do
-  #   image = Repo.insert! %Image{}
-  #   conn = put conn, image_path(conn, :update, image), image: @valid_attrs
-  #   assert json_response(conn, 200)["data"]["id"]
-  #   assert Repo.get_by(Image, @valid_attrs)
-  # end
-  #
-  # test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
-  #   image = Repo.insert! %Image{}
-  #   conn = put conn, image_path(conn, :update, image), image: @invalid_attrs
-  #   assert json_response(conn, 422)["errors"] != %{}
-  # end
-
   @tag :logged_in
-  test "deletes chosen resource", %{conn: conn} do
-    conn = delete conn, image_path(conn, :delete, "dummy.jpg")
+  test "deletes chosen resource", %{conn: conn, user: user} do
+    project = insert_project(user, %Project{})
+    video = insert_video(user, project, %Video{})
+    conn = delete conn, project_video_image_path(conn, :delete, project, video, "dummy.jpg")
     assert response(conn, 204)
   end
 
   @tag :logged_in
   test "does not delete resource referenced by video", %{conn: conn, user: user} do
-    {:ok, file} = Videosync.ArcImage.store({@valid_attrs, user})
-    video = insert_video(user, %Videosync.Video{})
-    insert_slide(user, video, %Videosync.Slide{thumb_url: ArcImage.url({file, user}, :thumb)})
-    conn = delete conn, image_path(conn, :delete, "dummy.jpg")
+    project = insert_project(user, %Project{})
+    video = insert_video(user, project, %Video{})
+    {:ok, file} = Videosync.ArcImage.store({@valid_attrs, %Scope{ user_id: user.id, project_id: project.id, video_id: video.id }})
+    insert_slide(
+      user,
+      video,
+      %Videosync.Slide{
+        thumb_url: ArcImage.url({file, %Scope{ user_id: user.id, project_id: project.id, video_id: video.id }}, :thumb)
+      })
+    conn = delete conn, project_video_image_path(conn, :delete, project, video, "dummy.jpg")
     assert response(conn, 422)
   end
 

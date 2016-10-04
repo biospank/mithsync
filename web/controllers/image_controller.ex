@@ -5,19 +5,26 @@ defmodule Videosync.ImageController do
   alias Videosync.ImageProxy
   alias Videosync.ArcImage
   alias Videosync.Slide
+  alias Videosync.Scope
 
   def action(conn, _) do
     apply(__MODULE__, action_name(conn),
       [
         conn,
         conn.params,
-        Guardian.Plug.current_resource(conn)
+        %Scope{
+          user_id: Guardian.Plug.current_resource(conn).id,
+          project_id: conn.params["project_id"],
+          video_id: conn.params["video_id"]
+        }
+
+        # Guardian.Plug.current_resource(conn)
       ]
     )
   end
 
-  def index(conn, params, user) do
-    case ImageProxy.list(%{ user: user, filter: params["filter"] }) do
+  def index(conn, params, scope) do
+    case ImageProxy.list(%{ scope: scope, filter: params["filter"] }) do
       {:ok, images} ->
         paged_images = paginate(images, params["page"] || 1)
 
@@ -37,17 +44,17 @@ defmodule Videosync.ImageController do
     end
   end
 
-  def create(conn, %{"file" => image_params}, user) do
-    case ArcImage.store({image_params, user}) do
+  def create(conn, %{"file" => image_params}, scope) do
+    case ArcImage.store({image_params, scope}) do
       {:ok, file} ->
         conn
         |> put_status(:created)
-        |> put_resp_header("location", ArcImage.url({file, user}))
+        |> put_resp_header("location", ArcImage.url({file, scope}))
         |> render("show.json",
           image: %Image{
             name: file,
-            thumb_url: ArcImage.url({file, user}, :thumb),
-            slide_url: ArcImage.url({file, user}, :slide)
+            thumb_url: ArcImage.url({file, scope}, :thumb),
+            slide_url: ArcImage.url({file, scope}, :slide)
           }
         )
       {:error, reason} ->
@@ -57,16 +64,16 @@ defmodule Videosync.ImageController do
     end
   end
 
-  def delete(conn, %{"id" => filename}, user) do
-    url = ArcImage.url({filename, user}, :thumb)
+  def delete(conn, %{"id" => filename}, scope) do
+    url = ArcImage.url({filename, scope}, :thumb)
 
     q = from s in Slide,
       select: count(s.id),
-      where: s.thumb_url == ^url and s.user_id == ^user.id
+      where: s.thumb_url == ^url and s.user_id == ^scope.user_id
 
     case Repo.one(q) do
       0 ->
-        ArcImage.delete {filename, user}
+        ArcImage.delete {filename, scope}
         send_resp(conn, :no_content, "")
       num when num > 0 ->
         conn

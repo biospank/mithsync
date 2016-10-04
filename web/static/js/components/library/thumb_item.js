@@ -5,7 +5,13 @@ var thumbItem = {
     var ctrl = this;
 
     ctrl.delete = function() {
-      Image.delete(ctrl.image.name).then(function() {
+      Image.delete(
+        {
+          projectId: m.route.param('projectId'),
+          videoId: m.route.param('videoId')
+        },
+        ctrl.image.name
+      ).then(function() {
         parent.getImages(
           _.assign(
             parent.pageInfo.defaultParams || {},

@@ -5,20 +5,20 @@ defmodule Videosync.ImageProxy do
   def list(opts \\ %{}) do
     case ArcImage.__storage do
       Arc.Storage.S3 ->
-        {:ok, user} = Map.fetch(opts, :user)
-        list(:s3, Map.merge(%{prefix: "uploads/#{user.id}/images/thumb"}, opts))
+        {:ok, scope} = Map.fetch(opts, :scope)
+        list(:s3, Map.merge(%{prefix: "uploads/#{scope.user_id}/#{scope.project_id}/#{scope.video_id}/images/thumb"}, opts))
       Arc.Storage.Local ->
         list(:local, opts)
     end
   end
 
   defp list(:local, opts) do
-    {:ok, user} = Map.fetch(opts, :user)
+    {:ok, scope} = Map.fetch(opts, :scope)
     {:ok, filter} = Map.fetch(opts, :filter)
 
-    case File.ls(ArcImage.storage_dir(:thumb, {nil, user})) do
+    case File.ls(ArcImage.storage_dir(:thumb, {nil, scope})) do
       {:ok, files} ->
-        images = Image.map_all(files, user, filter)
+        images = Image.map_all(files, scope, filter)
         {:ok, images}
       {:error, _} ->
         {:error, "no records found"}
@@ -26,7 +26,7 @@ defmodule Videosync.ImageProxy do
   end
 
   defp list(:s3, opts) do
-    {:ok, user} = Map.fetch(opts, :user)
+    {:ok, scope} = Map.fetch(opts, :scope)
     {:ok, prefix} = Map.fetch(opts, :prefix)
     {:ok, filter} = Map.fetch(opts, :filter)
     {:ok, bucket} = Application.fetch_env(:arc, :bucket)
@@ -37,7 +37,7 @@ defmodule Videosync.ImageProxy do
       {:ok, %{body: %{contents: contents}}} ->
         images =
           get_file_names(contents)
-          |> Image.map_all(user, filter)
+          |> Image.map_all(scope, filter)
         {:ok, images}
     end
   end

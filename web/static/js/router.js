@@ -42,7 +42,7 @@ export default m.route(document.getElementById('app'), "/", {
 
   "/videos/view": viewVideo,
 
-  "/library": library,
+  "/projects/:projectId/videos/:videoId/library": library,
 
   "/faq": faq
 

@@ -7,7 +7,9 @@ var Dropper = {
     Dropzone.autoDiscover = false;
 
     var dropzone = new Dropzone(element, {
-      url: Videosync.apiBaseUrl() + "/images",
+      url: Videosync.apiBaseUrl() +
+        "/projects/" + this.opts.urlParams['projectId'] +
+        "/videos/" + this.opts.urlParams['videoId'] + "/images",
       headers: {
         "Authorization" : Videosync.realm + " " + Session.token()
       },

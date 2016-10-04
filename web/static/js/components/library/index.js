@@ -105,6 +105,10 @@ var library = (function() {
 
       ctrl.initializeDropper = _.once(function() {
         Dropper.init("#dropper", {
+          urlParams: {
+            projectId: m.route.param('projectId'),
+            videoId: m.route.param('videoId')
+          },
           onQueueComplete: function() {
             ctrl.getImages(
               _.assign(
@@ -120,12 +124,21 @@ var library = (function() {
       ctrl.getImages = function(params, args) {
         ctrl.images(undefined);
 
-        return Image.all(params,
-                        _.assign(args, { background: true })).then(function(images) {
+        return Image.all(
+            {
+              projectId: m.route.param('projectId'),
+              videoId: m.route.param('videoId')
+            },
+            params,
+            _.assign(args, { background: true })
+        ).then(function(images) {
           ctrl.images(images);
           m.redraw();
         }, function(response) {
-          ctrl.errors(response.errors);
+          // in case of 404 http status code
+          // response is undefined: (cannot extract json data)
+          ctrl.images([]);
+          m.redraw();
         })
       };
 

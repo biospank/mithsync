@@ -19,6 +19,18 @@ var editVideo = (function() {
       // ]),
       m(imageDialog),
       m(videoPreview),
+      m(".clearfix", [
+        m("div.pull-right", [
+          m("a", {
+            href: '/projects/' + m.route.param('projectId') + '/videos/' + m.route.param('videoId') + '/library',
+            config: m.route,
+            class: "btn btn-primary effect btn-md text-uppercase icon-left"
+          }, [
+            m("i", { class: 'fa fa-plus' }),
+            m("span", {}, "Library")
+          ])
+        ])
+      ]),
       m("section", { id: "video-container" }, [
         m(".row", [
           m(".col-sm-6", [

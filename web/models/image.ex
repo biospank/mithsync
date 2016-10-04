@@ -21,13 +21,13 @@ defmodule Videosync.Image do
     |> cast(params, @required_fields, @optional_fields)
   end
 
-  def map_all(files, user, filter) do
+  def map_all(files, scope, filter) do
     Enum.filter(files, fn(name) -> String.contains?(name, filter || "") end)
     |> Enum.map(fn(file_name) ->
       %Videosync.Image{
         name: file_name,
-        thumb_url: Videosync.ArcImage.url({file_name, user}, :thumb),
-        slide_url: Videosync.ArcImage.url({file_name, user}, :slide)
+        thumb_url: Videosync.ArcImage.url({file_name, scope}, :thumb),
+        slide_url: Videosync.ArcImage.url({file_name, scope}, :slide)
       }
     end)
   end

@@ -2,12 +2,13 @@ import Videosync from '../videosync';
 import Session from './session'
 
 var Image = {
-  url: '/images',
-  all: function(params, args) {
+  url: '/projects/projectId/videos/videoId/images',
+  all: function(urlParams, params, args) {
     return m.request(_.assign({
         method: "GET",
         url: Videosync.apiBaseUrl() +
-          this.url + "?" + m.route.buildQueryString(params),
+          _.replace(_.replace(this.url, 'projectId', urlParams['projectId']), 'videoId',  urlParams['videoId']) +
+          "?" + m.route.buildQueryString(params),
         config: function(xhr) {
           xhr.setRequestHeader("accept", "application/json");
           xhr.setRequestHeader("Authorization", Videosync.realm + " " + Session.token())
@@ -15,12 +16,13 @@ var Image = {
       }, args)
     );
   },
-  delete: function(filename) {
+  delete: function(urlParams, filename) {
     return m.request(
       {
         method: "DELETE",
         url: Videosync.apiBaseUrl() +
-          this.url + "/" + filename,
+          _.replace(_.replace(this.url, 'projectId', urlParams['projectId']), 'videoId',  urlParams['videoId']) +
+           "/" + filename,
         config: function(xhr) {
           xhr.setRequestHeader("accept", "application/json");
           xhr.setRequestHeader("Authorization", Videosync.realm + " " + Session.token())

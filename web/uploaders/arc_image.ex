@@ -35,7 +35,7 @@ defmodule Videosync.ArcImage do
 
   # Override the storage directory:
   def storage_dir(version, {_, scope}) do
-    "uploads/#{scope.id}/images/#{version}"
+    "uploads/#{scope.user_id}/#{scope.project_id}/#{scope.video_id}/images/#{version}"
   end
 
   # Provide a default URL if there hasn't been a file uploaded
