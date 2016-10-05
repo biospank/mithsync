@@ -3,6 +3,7 @@ defmodule Videosync.Project do
 
   schema "projects" do
     field :name, :string
+    field :video_count, :integer
     belongs_to :user, Videosync.User
     has_many :videos, Videosync.Video
 

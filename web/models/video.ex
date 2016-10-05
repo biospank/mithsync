@@ -1,6 +1,8 @@
 defmodule Videosync.Video do
   use Videosync.Web, :model
 
+  alias Videosync.Repo
+
   schema "videos" do
     field :url, :string
     field :title, :string
@@ -24,6 +26,26 @@ defmodule Videosync.Video do
   def changeset(model, params \\ %{}) do
     model
     |> cast(params, @required_fields, @optional_fields)
+  end
+
+  def create_changeset(struct, params \\ %{}) do
+    changeset(struct, params)
+    |> prepare_changes(fn(change) ->
+        assoc(change.data, :project)
+        |> Repo.update_all(inc: [video_count: 1])
+
+        change
+      end)
+  end
+
+  def delete_changeset(struct) do
+    change(struct)
+    |> prepare_changes(fn(change) ->
+        assoc(change.data, :project)
+        |> Repo.update_all(inc: [video_count: -1])
+
+        change
+      end)
   end
 
   def filter_by(query, filter) do
