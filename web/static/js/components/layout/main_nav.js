@@ -28,13 +28,7 @@ var mainNav = {
             m("span", { class: "main-nav__voice" }, "Dashboard")
           ])
         ]),
-        m("li", { class: (ctrl.isActive("/library") ? 'active' : '') }, [
-          m("a", { href: "/library", config: m.route, class: "main-nav__tab" }, [
-            m("i", { class: "fa fa-picture-o main-nav__icon" }),
-            m("span", { class: "main-nav__voice" }, "Library")
-          ])
-        ]),
-        m("li", {  class: (ctrl.isActive("/project") ? 'active' : '') }, [
+        m("li", {  class: (ctrl.isActive("/projects") ? 'active' : '') }, [
           m("a", { href: "/projects", config: m.route, class: "main-nav__tab" }, [
             m("i", { class: "fa fa-film main-nav__icon" }),
             m("span", { class: "main-nav__voice" }, "Projects")
