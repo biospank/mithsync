@@ -19,7 +19,7 @@ var mixinLayout = function(content, layout) {
           m(".container", [
             m(".clearfix", {}, [
               m(".pull-left", [
-                m("a", { class: "navbar-brand" }, [
+                m("a", { href: "#", class: "navbar-brand" }, [
                   m("img", { src: "/images/logo.jpg", alt: "Zinkroo" })
                 ]),
                 m("button", { class: "navbar-button" }, [
@@ -28,15 +28,19 @@ var mixinLayout = function(content, layout) {
               ]),
               m(".pull-right", [
                 // m.component(user),
-                m(".dropdown", { id: "user-avatar" }, [
+                m(".dropdown", { class: "user-avatar" }, [
                   m("a", {
                     "data-toggle": "dropdown",
                     class: "dropdown-toggle",
                     href: "#",
                     "aria-expanded": false }, [
-                      m("img", { src: "", alt: "" }),
-                      m("span", "Ilaria Di Rosa"),
-                      m("i", { class: "fa fa-angle-down", "aria-hidden": true })
+                      m("figure", { class: "user-avatar__photo" }, [
+                        m("img", { src: "/images/avatar.jpg", alt: "Ilaria Di Rosa" })
+                      ]),
+                      m("div", { class: "user-avatar__name" }, [
+                        m("span", "Ilaria Di Rosa"),
+                        m("i", { class: "fa fa-caret-down", "aria-hidden": true })
+                      ])
                     ]),
                   m("ul", { class: "dropdown-menu list-unstyled" }, [
                     m("li", [
