@@ -69,13 +69,12 @@ var mixinLayout = function(content, layout) {
                 m("input", { type: "text", class: "form-control", placeholder: "Search" }),
                 m("span", { class: "input-group-btn" }, [
                   m("button", { type: "submit", class: "btn btn-default" }, [
-                    //m("i", { class: "fa fa-search", "aria-hidden": true })
                     m("img", { src: "/images/icons/search.png" })
                   ])
                 ])
               ])
             ]),
-            m("nav", [
+            m("nav", { class: "main-nav" }, [
               m("ul", { class: "nav" }, [
                 m("li", [
                   m("a", { href: "#" }, "Link")
