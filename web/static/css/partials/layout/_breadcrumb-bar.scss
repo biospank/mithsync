@@ -1,0 +1,11 @@
+.breadcrumb-bar {
+  background-color: #f6f8f8;
+  @include border(#dce0e6, 1px, bottom);
+  padding-top: 15px;
+  padding-bottom: 15px;
+  .section-title {
+    @include font-style(21px, #424856);
+    font-weight: 400;
+    margin: 0;
+  }
+}

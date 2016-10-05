@@ -1,4 +1,4 @@
-import subBar from "./sub_bar";
+import breadcrumbBar from "./breadcrumb_bar";
 import mainNav from "./main_nav";
 import topBar from "./top_bar";
 
@@ -38,7 +38,7 @@ var mixinLayout = function(content, layout) {
             m.component(mainNav)
           ]),
           m("section", { id: "page-content-wrapper" }, [
-            m.component(subBar),
+            m.component(breadcrumbBar),
             content
           ])
         ]),
