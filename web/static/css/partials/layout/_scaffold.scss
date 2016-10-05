@@ -1,6 +1,6 @@
 #wrapper {
   padding-left: 250px;
-  
+
   // add style for footer fixting
   min-height: 100%;
   /* equal to footer height */
@@ -13,7 +13,7 @@
 }
 
 #sidebar-wrapper {
-  @include position(left, 0, top, 51px, fixed);
+  @include position(left, 0, top, 65px, fixed);
   @include size(250px, 100%);
   z-index: 1000;
   overflow-y: auto;

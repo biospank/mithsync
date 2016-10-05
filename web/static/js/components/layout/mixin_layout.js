@@ -64,11 +64,16 @@ var mixinLayout = function(content, layout) {
           }
         }, [
           m("aside", { id: "sidebar-wrapper" }, [
-            m("form", { class: "navbar-form navbar-left" }, [
-              m(".form-group", [
-                m("input", { type: "text", class: "form-control", placeholder: "Search" })
-              ]),
-              m("button", { type: "submit", class: "btn btn-default" }, "submit")
+            m("form", { class: "navbar-form page-search-form" }, [
+              m(".input-group", [
+                m("input", { type: "text", class: "form-control", placeholder: "Search" }),
+                m("span", { class: "input-group-btn" }, [
+                  m("button", { type: "submit", class: "btn btn-default" }, [
+                    //m("i", { class: "fa fa-search", "aria-hidden": true })
+                    m("img", { src: "/images/icons/search.png" })
+                  ])
+                ])
+              ])
             ]),
             m("nav", [
               m("ul", { class: "nav" }, [
