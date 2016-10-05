@@ -35,7 +35,7 @@ defmodule Videosync.UserControllerTest do
   test "shows chosen resource", %{conn: conn, user: user} do
     conn = get conn, user_path(conn, :show, user)
     assert json_response(conn, 200)["data"] ==
-      %{"id" => user.id, "email" => user.email, "active" => false}
+      %{"id" => user.id, "email" => user.email, "active" => false, "project_count" => 0}
   end
 
   @tag :logged_in

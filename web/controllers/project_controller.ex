@@ -36,7 +36,7 @@ defmodule Videosync.ProjectController do
   def create(conn, %{"project" => project_params}, user) do
     changeset = user
       |> build_assoc(:projects)
-      |> Project.changeset(project_params)
+      |> Project.create_changeset(project_params)
 
     case Repo.insert(changeset) do
       {:ok, project} ->
@@ -69,7 +69,8 @@ defmodule Videosync.ProjectController do
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
-    Repo.delete!(project)
+    Project.delete_changeset(project)
+    |> Repo.delete!
 
     send_resp(conn, :no_content, "")
   end

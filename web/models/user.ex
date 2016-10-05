@@ -8,6 +8,7 @@ defmodule Videosync.User do
     field :activation_code, :string
     field :reset_code, :string
     field :active, :boolean
+    field :project_count, :integer
     has_many :projects, Videosync.Project
     has_many :videos, Videosync.Video
     has_many :slides, Videosync.Slide

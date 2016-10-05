@@ -77,6 +77,15 @@ defmodule Videosync.VideoControllerTest do
   end
 
   @tag :logged_in
+  test "increment project's video counter cache on a valid transaction", %{conn: conn, user: user} do
+    project = insert_project(user, %Project{})
+    post conn, project_video_path(conn, :create, project), video: @valid_attrs
+
+    counter_cache = Repo.get(Project, project.id).video_count
+    assert counter_cache == 1
+  end
+
+  @tag :logged_in
   test "does not create resource and renders errors when data is invalid", %{conn: conn, user: user} do
     project = insert_project(user, %Project{})
     conn = post conn, project_video_path(conn, :create, project), video: @invalid_attrs
@@ -107,5 +116,15 @@ defmodule Videosync.VideoControllerTest do
     conn = delete conn, project_video_path(conn, :delete, project, video)
     assert response(conn, 204)
     refute Repo.get(Video, video.id)
+  end
+
+  @tag :logged_in
+  test "decrement project's video counter cache on a valid transaction", %{conn: conn, user: user} do
+    project = insert_project(user, %Project{})
+    post_conn = post conn, project_video_path(conn, :create, project), video: @valid_attrs
+    delete conn, project_video_path(conn, :delete, project, json_response(post_conn, 201)["data"]["id"])
+
+    counter_cache = Repo.get(Project, project.id).video_count
+    assert counter_cache == 0
   end
 end
