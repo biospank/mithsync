@@ -37,26 +37,27 @@ var topBar = {
   view: function(ctrl) {
     // return m('section', { class: 'top-bar' }, [
     return m('header', { class: "", style: "background-color: brown" }, [
-      m('.container clearfix', [
-        m('div', { class: "pull-left" }, [
-          m("ol", { class: "breadcrumb" }, [
-            m("li", [
-              m("a", { href: "#" }, "Link")
-            ]),
-            m("li", [
-              m("a", { href: "#" }, "Link")
-            ]),
-            m("li", { class: "active" }, [
-              m("a", "Link")
+      m('.container', [
+        m(".clearfix", [
+          m("h2", { class: "pull-left" } "Titolo sezione"),
+          m('div', { class: "pull-right" }, [
+            m("ol", { class: "breadcrumb" }, [
+              m("li", [
+                m("a", { href: "#" }, "Link")
+              ]),
+              m("li", [
+                m("a", { href: "#" }, "Link")
+              ]),
+              m("li", { class: "active" }, [
+                m("a", "Link")
+              ])
             ])
           ])
-        ]),
-        m("div", { class: "pull-right" }, [
-          // m("a", { href: "/video/new", config: m.route, class: "btn btn-primary effect btn-md text-uppercase icon-left" }, [
-          m("a", { href: "/video/new", config: m.route, class: "btn btn-primary" }, [
-            // m("i", { class: 'fa fa-plus' }),
-            m("span", {}, "Create new")
-          ])
+          // m("div", { class: "pull-right" }, [
+          //   m("a", { href: "/video/new", config: m.route, class: "btn btn-primary" }, [
+          //     m("span", {}, "Create new")
+          //   ])
+          // ])
         ])
       ])
     ])

@@ -17,22 +17,33 @@ var mixinLayout = function(content, layout) {
       return [
         m("nav", { class: "navbar navbar-default navbar-fixed-top" }, [
           m(".container", [
-            m("#navbar", {}, [
-              m("form", { class: "navbar-form navbar-left" }, [
-                m(".form-group", [
-                  m("input", { type: "text", class: "form-control", placeholder: "Search" })
-                ]),
-                m("button", { type: "submit", class: "btn btn-default" }, "submit")
+            m(".clearfix", {}, [
+              m(".pull-left", [
+                m("a", "Zinkroo"),
+                m("button", [
+                  m("i", { class: "fa fa-bars", "aria-hidden": true })
+                ])
               ]),
-              m("ul", { class: "nav navbar-nav navbar-right" }, [
-                m("li", [
-                  m("a", { href: "#" }, "Link")
-                ]),
-                m("li", [
-                  m("a", { href: "#" }, "Link")
-                ]),
-                m("li", [
-                  m("a", { href: "#" }, "Link")
+              m(".pull-right", [
+                // m.component(user),
+                m(".dropdown", { id: "user-avatar" }, [
+                  m("a", {
+                    "data-toggle": "dropdown",
+                    class: "dropdown-toggle",
+                    href: "#",
+                    "aria-expanded": false }, [
+                      m("img", { src: "", alt: "" }),
+                      m("span", "Ilaria Di Rosa"),
+                      m("i", { class: "fa fa-angle-down", "aria-hidden": true })
+                    ]),
+                  m("ul", { class: "dropdown-menu list-unstyled" }, [
+                    m("li", [
+                      m("a", { class: "", href: "#" }, "link")
+                    ]),
+                    m("li", [
+                      m("a", { class: "", href: "#" }, "link")
+                    ])
+                  ])
                 ])
               ])
             ])
@@ -47,19 +58,23 @@ var mixinLayout = function(content, layout) {
           }
         }, [
           m("aside", { id: "sidebar-wrapper" }, [
-            // m.component(user),
-            m("figure", [
-              m("img", { src: "" }, [])
+            m("form", { class: "navbar-form navbar-left" }, [
+              m(".form-group", [
+                m("input", { type: "text", class: "form-control", placeholder: "Search" })
+              ]),
+              m("button", { type: "submit", class: "btn btn-default" }, "submit")
             ]),
-            m("ul", { class: "nav" }, [
-              m("li", [
-                m("a", { href: "#" }, "Link")
-              ]),
-              m("li", [
-                m("a", { href: "#" }, "Link")
-              ]),
-              m("li", [
-                m("a", { href: "#" }, "Link")
+            m("nav", [
+              m("ul", { class: "nav" }, [
+                m("li", [
+                  m("a", { href: "#" }, "Link")
+                ]),
+                m("li", [
+                  m("a", { href: "#" }, "Link")
+                ]),
+                m("li", [
+                  m("a", { href: "#" }, "Link")
+                ])
               ])
             ])
           ]),
@@ -77,7 +92,7 @@ var mixinLayout = function(content, layout) {
           // ])
         ]),
         m("footer", { id: "page-footer" }, [
-          m(".container", "Footer")
+          m(".container", "© Company 2016. All rights reserved. Terms of Service | Privacy Policy")
         ])
       ]
     }
