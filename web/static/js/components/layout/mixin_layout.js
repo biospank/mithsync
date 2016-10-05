@@ -15,12 +15,14 @@ var mixinLayout = function(content, layout) {
     },
     standard: function(content) {
       return [
-        m("nav", { class: "navbar navbar-default navbar-fixed-top" }, [
+        m("nav", { class: "topbar navbar-fixed-top" }, [
           m(".container", [
             m(".clearfix", {}, [
               m(".pull-left", [
-                m("a", "Zinkroo"),
-                m("button", [
+                m("a", { class: "navbar-brand" }, [
+                  m("img", { src: "/images/logo.jpg", alt: "Zinkroo" })
+                ]),
+                m("button", { class: "navbar-button" }, [
                   m("i", { class: "fa fa-bars", "aria-hidden": true })
                 ])
               ]),

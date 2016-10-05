@@ -39,7 +39,7 @@ var topBar = {
     return m('header', { class: "", style: "background-color: brown" }, [
       m('.container', [
         m(".clearfix", [
-          m("h2", { class: "pull-left" } "Titolo sezione"),
+          m("h2", { class: "pull-left" }, "Titolo sezione"),
           m('div', { class: "pull-right" }, [
             m("ol", { class: "breadcrumb" }, [
               m("li", [
