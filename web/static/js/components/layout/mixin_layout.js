@@ -27,30 +27,7 @@ var mixinLayout = function(content, layout) {
                 ])
               ]),
               m(".pull-right", [
-                // m.component(user),
-                m(".dropdown", { class: "user-avatar" }, [
-                  m("a", {
-                    "data-toggle": "dropdown",
-                    class: "dropdown-toggle",
-                    href: "#",
-                    "aria-expanded": false }, [
-                      m("figure", { class: "user-avatar__photo" }, [
-                        m("img", { src: "/images/avatar.jpg", alt: "Ilaria Di Rosa" })
-                      ]),
-                      m("div", { class: "user-avatar__name" }, [
-                        m("span", "Ilaria Di Rosa"),
-                        m("i", { class: "fa fa-caret-down", "aria-hidden": true })
-                      ])
-                    ]),
-                  m("ul", { class: "dropdown-menu list-unstyled" }, [
-                    m("li", [
-                      m("a", { class: "", href: "#" }, "link")
-                    ]),
-                    m("li", [
-                      m("a", { class: "", href: "#" }, "link")
-                    ])
-                  ])
-                ])
+                m.component(user)
               ])
             ])
           ])
@@ -74,32 +51,12 @@ var mixinLayout = function(content, layout) {
                 ])
               ])
             ]),
-            m("nav", { class: "main-nav" }, [
-              m("ul", { class: "nav" }, [
-                m("li", [
-                  m("a", { href: "#" }, "Link")
-                ]),
-                m("li", [
-                  m("a", { href: "#" }, "Link")
-                ]),
-                m("li", [
-                  m("a", { href: "#" }, "Link")
-                ])
-              ])
-            ])
+            m.component(mainNav)
           ]),
           m("section", { id: "page-content-wrapper" }, [
             m.component(topBar),
             content
           ])
-          //m.component(topBar),
-          // m('aside', { class: 'sidebar', id: 'sidebar-wrapper' }, [
-          //   m.component(user),
-          //   m.component(mainNav)
-          // ]),
-          // m('main', { id: "page-content-wrapper" }, [
-          //   content
-          // ])
         ]),
         m("footer", { id: "page-footer" }, [
           m(".container", "© Company 2016. All rights reserved. Terms of Service | Privacy Policy")

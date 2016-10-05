@@ -19,9 +19,13 @@
   }
   &__icon {
     width: 20px;
+    color: #213147;
   }
   &__voice {
     padding: 0 10px;
+  }
+  &__arrow {
+    font-size: 11px;
   }
   li.active {
     .main-nav__tab {
