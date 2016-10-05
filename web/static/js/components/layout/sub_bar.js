@@ -1,6 +1,6 @@
 import searchForm from "./search_form";
 
-var topBar = {
+var subBar = {
   controller: function(){
     var ctrl = this;
     var humanMap = {
@@ -64,4 +64,4 @@ var topBar = {
   }
 }
 
-export default topBar;
+export default subBar;

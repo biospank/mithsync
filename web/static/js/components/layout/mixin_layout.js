@@ -1,4 +1,4 @@
-import topBar from "./top_bar";
+import subBar from "./sub_bar";
 import mainNav from "./main_nav";
 import user from "./user";
 
@@ -54,7 +54,7 @@ var mixinLayout = function(content, layout) {
             m.component(mainNav)
           ]),
           m("section", { id: "page-content-wrapper" }, [
-            m.component(topBar),
+            m.component(subBar),
             content
           ])
         ]),
