@@ -9,7 +9,7 @@ var dashboard = (function() {
 
   var content = function(ctrl) {
     return [
-      m("main", { style: "padding: 20px; height:900px;" }, [
+      m("main", { style: "padding: 20px;" }, [
         m("section", { class: "row" }, [
           m("article", { class: "col-xs-3" }, [
             m("div", { style: "background-color: pink" }, "column 1")
