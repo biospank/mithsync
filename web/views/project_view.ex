@@ -16,7 +16,10 @@ defmodule Videosync.ProjectView do
   end
 
   def render("project.json", %{project: project}) do
-    %{id: project.id,
-      name: project.name}
+    %{
+      id: project.id,
+      name: project.name,
+      video_count: project.video_count
+    }
   end
 end

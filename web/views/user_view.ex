@@ -13,7 +13,8 @@ defmodule Videosync.UserView do
     %{
       id: user.id,
       email: user.email,
-      active: user.active
+      active: user.active,
+      project_count: user.project_count
     }
   end
 end

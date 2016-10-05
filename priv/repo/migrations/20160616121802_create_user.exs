@@ -8,6 +8,7 @@ defmodule Videosync.Repo.Migrations.CreateUser do
       add :activation_code, :string
       add :reset_code, :string
       add :active, :boolean, default: false
+      add :project_count, :integer, default: 0
 
       timestamps
     end

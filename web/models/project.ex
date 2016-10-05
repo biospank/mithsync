@@ -1,6 +1,8 @@
 defmodule Videosync.Project do
   use Videosync.Web, :model
 
+  alias Videosync.Repo
+  
   schema "projects" do
     field :name, :string
     field :video_count, :integer
@@ -17,6 +19,26 @@ defmodule Videosync.Project do
     struct
     |> cast(params, [:name])
     |> validate_required([:name])
+  end
+
+  def create_changeset(struct, params \\ %{}) do
+    changeset(struct, params)
+    |> prepare_changes(fn(change) ->
+        assoc(change.data, :user)
+        |> Repo.update_all(inc: [project_count: 1])
+
+        change
+      end)
+  end
+
+  def delete_changeset(struct) do
+    change(struct)
+    |> prepare_changes(fn(change) ->
+        assoc(change.data, :user)
+        |> Repo.update_all(inc: [project_count: -1])
+
+        change
+      end)
   end
 
   def filter_by(query, term) do
