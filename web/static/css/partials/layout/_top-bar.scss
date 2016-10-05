@@ -1,29 +1,17 @@
-.top-bar {
-  background-color: rgba(255,255,255,0.97);
-  @include box-shadow(0 1px 5px rgba(0,0,0,0.18));
-  border: none;
-  padding: 30px 15px;
-  height: 100px;
-  &.navbar-fixed-top {
-    left: 0;
-    @include respond-to(min-width, 769px) {
-      padding-left: 265px;
-    }
-  }
+.topbar {
+  background-color: white;
+  @include box-shadow(8px 10px 12px rgba(63,65,72,0.18));
+  padding: 15px 0;
   .navbar-brand {
-    padding: 0 15px;
-    height: auto;
-    margin-top: 10px;
-    @include font-style(22px, #4a4a4a !important);
+    @include spaces(0, 0 40px 0 0);
   }
-  .navbar-toggle {
-    background-color: $mainColor;
-    border-radius: 0;
-    border: none;
-    @include transition(all 0.3s ease-out);
-    @include spaces(10px 15px, 0 10px 0 0);
+  .navbar-button {
+    border: 0;
+    background-color: transparent;
+    padding: 0 10px;
+    height: 35px;
     .fa, .icon-bar {
-      color: white;
+      color: #dce0e6;
     }
   }
 }

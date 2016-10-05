@@ -6,11 +6,13 @@
 @import "./partials/utilities/modals";
 @import "./partials/utilities/pagination";
 @import "./partials/utilities/bootstrap-bug";
+@import "./partials/utilities/not-responsive";
 @import "./partials/utilities/badge";
 @import "./partials/layout/top-bar";
-@import "./partials/layout/sidebar";
-@import "./partials/layout/user";
-@import "./partials/layout/main-container";
+@import "./partials/layout/page-search-form";
+//@import "./partials/layout/side-bar-nav";
+@import "./partials/layout/user-avatar";
+@import "./partials/layout/scaffold";
 @import "./partials/layout/main-nav";
 @import "./partials/shared/search-form";
 @import "./partials/shared/socials-group";

@@ -55,7 +55,7 @@ var mainNav = {
             m("i", { class: "fa fa-cog main-nav__icon" }),
             m("span", { class: "main-nav__voice" }, "Account"),
             // m("i", { class: "caret" })
-            m("i", { class: "fa fa-chevron-down" })
+            m("i", { class: "fa fa-chevron-down main-nav__arrow" })
           ]),
           m("nav", { class: "collapse sub-nav", id: "collapseUserNav", "aria-expanded": false }, [
             m("ul", { class: "nav" }, [

@@ -1,6 +1,6 @@
-import topBar from "./top_bar";
+import subBar from "./sub_bar";
 import mainNav from "./main_nav";
-import user from "./user";
+import topBar from "./top_bar";
 
 var mixinLayout = function(content, layout) {
 
@@ -15,7 +15,8 @@ var mixinLayout = function(content, layout) {
     },
     standard: function(content) {
       return [
-        m("#wrapper", {
+        m.component(topBar),
+        m("section", { class: "clearfix", id: "wrapper" }, {
           config: function() {
             $("#menu-toggle").click(function(e) {
                 e.preventDefault();
@@ -23,14 +24,26 @@ var mixinLayout = function(content, layout) {
             });
           }
         }, [
-          m.component(topBar),
-          m('aside', { class: 'sidebar', id: 'sidebar-wrapper' }, [
-            m.component(user),
+          m("aside", { id: "sidebar-wrapper" }, [
+            m("form", { class: "navbar-form page-search-form" }, [
+              m(".input-group", [
+                m("input", { type: "text", class: "form-control", placeholder: "Search" }),
+                m("span", { class: "input-group-btn" }, [
+                  m("button", { type: "submit", class: "btn btn-default" }, [
+                    m("img", { src: "/images/icons/search.png" })
+                  ])
+                ])
+              ])
+            ]),
             m.component(mainNav)
           ]),
-          m('main', { id: "page-content-wrapper" }, [
+          m("section", { id: "page-content-wrapper" }, [
+            m.component(subBar),
             content
           ])
+        ]),
+        m("footer", { id: "page-footer" }, [
+          m(".container", "© Company 2016. All rights reserved. Terms of Service | Privacy Policy")
         ])
       ]
     }
