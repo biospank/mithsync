@@ -31,7 +31,8 @@ var mainNav = {
         m("li", {  class: (ctrl.isActive("/projects") ? 'active' : '') }, [
           m("a", { href: "/projects", config: m.route, class: "main-nav__tab" }, [
             m("i", { class: "fa fa-film main-nav__icon" }),
-            m("span", { class: "main-nav__voice" }, "Projects")
+            m("span", { class: "main-nav__voice" }, "Projects"),
+            m("span", { class: "badge" }, "2")
           ])
         ]),
         m("li", { class: (ctrl.isActive("/faq") ? 'active' : '') }, [

@@ -171,41 +171,6 @@ var dashboard = (function() {
         ])
       ])
     ];
-
-
-
-    // return m(".row", [
-    //   m(".col-md-4", {}, [
-    //     m(".wrapper simple", [
-    //       m("h3", { class: "no-margin-top" }, [
-    //         "Projects ",
-    //         m("span", { class: "badge" }, ctrl.pageInfo.totalEntries || 0)
-    //       ]),
-    //       m("p", "Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li assemblò per preparare un testo campione."),
-    //       m("a", { href: "/video", config: m.route, class: "btn btn-primary effect btn-lg" }, "Go to the projects list section")
-    //     ])
-    //   ]),
-    //   m(".col-md-4", {}, [
-    //     m(".wrapper simple", [
-    //       m("h3", { class: "no-margin-top" }, [
-    //         "Projects ",
-    //         m("span", { class: "badge" }, ctrl.pageInfo.totalEntries || 0)
-    //       ]),
-    //       m("p", "Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li assemblò per preparare un testo campione."),
-    //       m("a", { href: "/video", config: m.route, class: "btn btn-primary effect btn-lg" }, "Go to the projects list section")
-    //     ])
-    //   ]),
-    //   m(".col-md-4", {}, [
-    //     m(".wrapper simple", [
-    //       m("h3", { class: "no-margin-top" }, [
-    //         "Projects ",
-    //         m("span", { class: "badge" }, ctrl.pageInfo.totalEntries || 0)
-    //       ]),
-    //       m("p", "Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li assemblò per preparare un testo campione."),
-    //       m("a", { href: "/video", config: m.route, class: "btn btn-primary effect btn-lg" }, "Go to the projects list section")
-    //     ])
-    //   ])
-    // ])
   };
 
   return {
