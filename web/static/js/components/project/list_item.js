@@ -7,24 +7,30 @@ var listItem = {
       editMode: m.prop(false),
       showItem: function() {
         if(this.editMode()) {
-          return m("input.form-control", {
-            type: 'text',
-            placeholder: this.project().name,
-            oninput: m.withAttr("value", Project.model.name),
-            onkeyup: function(e) {
-              if(e.keyCode === 13) {
-                parent.updateProject(this.project());
-                this.editMode(false);
-              }
+          return m(".input-group", [
+            m("input", {
+              type: "text",
+              class: "form-control",
+              placeholder: this.project().name,
+              "aria-describedby": "change-text",
+              oninput: m.withAttr("value", Project.model.name),
+              onkeyup: function(e) {
+                if(e.keyCode === 13) {
+                  parent.updateProject(this.project());
+                  this.editMode(false);
+                }
 
-              if(e.keyCode === 27)
-                this.editMode(false);
-            }.bind(this),
-            config: function(element, isInit) {
-              if(!isInit)
-                $(element).focus()
-            }
-          })
+                if(e.keyCode === 27)
+                  this.editMode(false);
+              }.bind(this),
+              config: function(element, isInit) {
+                if(!isInit)
+                  $(element).focus()
+              }}),
+            m("a", { href: "#", class: "input-group-addon", id: "change-text" }, [
+              m("i", { class: "fa fa-close" })
+            ])
+          ])
         } else {
           return [
             m("a", {

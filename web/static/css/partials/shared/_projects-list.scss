@@ -1,5 +1,6 @@
 .projects-list {
   &__row {
+    height: 89px;
     position: relative;
     @include spaces(10px 15px, 0 0 4px 0);
     background-color: white;
@@ -12,6 +13,32 @@
       background-color: #eaeaea;
     }
     .projects-list__body {
+      & > .input-group {
+        margin-top: 16px;
+        .form-control {
+          @include box-shadow(none);
+          border-color: $mainColor;
+          border-right: 0;
+          &:focus {
+            border-color: $mainColor;
+          }
+        }
+        .input-group-addon {
+          background-color: white;
+          border-color: $mainColor;
+          // @include box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.075));
+          @include box-shadow(none);
+          .fa, i, span {
+            font-size: 20px;
+            color: #2b415d;
+            @include transition(color 0.3s ease-out);
+            text-shadow: 1px 1px 1px #424856;
+            &:hover {
+              color: $mainColor;
+            }
+          }
+        }
+      }
       & > a {
         text-decoration: none;
       }
