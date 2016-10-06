@@ -1,11 +1,26 @@
 .box {
+  @include spaces(15px, 0 0 20px 0);
   padding: 15px;
   background-color: white;
   @include border(#eaeaea);
+  min-height: 140px;
   &__title {
     margin: 0 0 20px 0;
-    @include font-style(14px, #629ef4);
-    font-weight: 400;
+    @include font-style(14px, $coloured, 400);
+
     text-transform: uppercase;
+  }
+  &__counter {
+    text-align: center;
+    &-number {
+      @include font-style(49px, $coloured);
+      margin-right: 10px;
+    }
+    &-text {
+      display: inline-block;
+      @include font-style(12px, #5e6060);
+      text-align: left;
+      margin-bottom: 0;
+    }
   }
 }

@@ -12,72 +12,161 @@ var dashboard = (function() {
     return [
       m("main", { class: "main-container" }, [
         m("section", { class: "row" }, [
-          m("article", { class: "col-xs-3" }, [
+          m("article", { class: "col-xs-3 col-sm-3 col-md-3" }, [
             m("div", { class: "box" }, [
               m("h4", { class: "box__title" }, "Create new project"),
-              m("a", {
-                onclick: function() {
-                  swal({
-                    title: 'Project name',
-                    input: 'text',
-                    showCancelButton: true,
-                    confirmButtonText: 'Create',
-                    inputValidator: function(value) {
-                      return new Promise(function(resolve, reject) {
-                        if (value) {
-                          resolve();
-                        } else {
-                          reject('You need to write something!');
-                        }
-                      });
-                    },
-                  }).then(function(value) {
-                    Project.model.name(value);
-                    Project.create().then(function(data) {
-                      m.route("/projects");
-                    })
-                  }, function(dismiss) {
+              m("div", { class: "text-center" }, [
+                m("a", {
+                  onclick: function() {
+                    swal({
+                      title: 'Project name',
+                      input: 'text',
+                      showCancelButton: true,
+                      confirmButtonText: 'Create',
+                      inputValidator: function(value) {
+                        return new Promise(function(resolve, reject) {
+                          if (value) {
+                            resolve();
+                          } else {
+                            reject('You need to write something!');
+                          }
+                        });
+                      },
+                    }).then(function(value) {
+                      Project.model.name(value);
+                      Project.create().then(function(data) {
+                        m.route("/projects");
+                      })
+                    }, function(dismiss) {
 
-                  })
-                },
-                class: "text-center",
-                href: "#" }, [
-                m("img", { src: "/images/icons/add.png" })
+                    })
+                  },
+                  class: "btn",
+                  href: "#" }, [
+                  m("img", { src: "/images/icons/add.png" })
+                ])
               ])
             ])
           ]),
-          m("article", { class: "col-xs-3" }, [
-            m("div", { style: "background-color: pink" }, "column 2"),
-            m("ol", { style: "background-color: red" }, [
+          m("article", { class: "col-xs-4 col-sm-4 col-md-4" }, [
+            m("div", { class: "box" }, [
+              m("h4", { class: "box__title" }, "Projects"),
+              m("div", { class: "box__counter" }, [
+                m("span", { class: "box__counter-number" }, ctrl.pageInfo.totalEntries || 0),
+                m("p", { class: "box__counter-text" }, m.trust("You’ve " + (ctrl.pageInfo.totalEntries || 0) + "<br>projects created"))
+              ])
+            ]),
+            m("ol", { class: "projects-list list-unstyled" }, [
               m("li", [
-                m("a", "Testo")
+                m("a", { href: "#", class: "projects-list__row" }, [
+                  m("h5", { class: "title" }, "Lorem ipsum dolore"),
+                  m("p", { class: "creation-date" }, "5 Febbraio 2015"),
+                  m("span", { class: "videos-number"}, "1 video")
+                ])
               ]),
               m("li", [
-                m("a", "Testo")
-              ]),m("li", [
-                m("a", "Testo")
-              ]),m("li", [
-                m("a", "Testo")
-              ])
-            ])
-          ]),
-          m("article", { class: "col-xs-3" }, [
-            m("div", { style: "background-color: pink" }, "column 3"),
-            m("ol", { style: "background-color: red" }, [
-              m("li", [
-                m("a", "Testo")
+                m("a", { href: "#", class: "projects-list__row" }, [
+                  m("h5", { class: "title" }, "Lorem ipsum dolore"),
+                  m("p", { class: "creation-date" }, "5 Febbraio 2015"),
+                  m("span", { class: "videos-number"}, "1 video")
+                ])
               ]),
               m("li", [
-                m("a", "Testo")
-              ]),m("li", [
-                m("a", "Testo")
-              ]),m("li", [
-                m("a", "Testo")
+                m("a", { href: "#", class: "projects-list__row" }, [
+                  m("h5", { class: "title" }, "Lorem ipsum dolore"),
+                  m("p", { class: "creation-date" }, "5 Febbraio 2015"),
+                  m("span", { class: "videos-number"}, "1 video")
+                ])
+              ]),
+              m("li", [
+                m("a", { href: "#", class: "projects-list__row" }, [
+                  m("h5", { class: "title" }, "Lorem ipsum dolore"),
+                  m("p", { class: "creation-date" }, "5 Febbraio 2015"),
+                  m("span", { class: "videos-number"}, "1 video")
+                ])
               ])
             ])
           ]),
-          m("article", { class: "col-xs-3" }, [
-            m("div", { style: "background-color: pink" }, "column 4")
+          m("article", { class: "col-xs-5 col-sm-5 col-md-5" }, [
+            m("div", { class: "box" }, [
+              m("h4", { class: "box__title" }, "Video"),
+              m("div", { class: "box__counter" }, [
+                m("span", { class: "box__counter-number" }, ctrl.pageInfo.totalEntries || 0),
+                m("p", { class: "box__counter-text" }, m.trust("You’ve " + (ctrl.pageInfo.totalEntries || 0) + "<br>video created"))
+              ])
+            ]),
+            m("ol", { class: "video-list list-unstyled" }, [
+              m("li", [
+                m("a", { href: "#", class: "video-list__row media" }, [
+                  m("figure", { class: "poster media-left" }, [
+                    m("a", { href: "#" }, [
+                      m("img", { src: "/images/thumb-clouderma.png", class: "media-object" })
+                    ])
+                  ]),
+                  m("div", { class: "media-body" }, [
+                    m("h5", { class: "title" }, "Lorem ipsum dolore"),
+                    m("p", { class: "description" }, "Lorem ipsum"),
+                    m("span", { class: "video-time"}, "02:30")
+                  ])
+                ])
+              ]),
+              m("li", [
+                m("a", { href: "#", class: "video-list__row media" }, [
+                  m("figure", { class: "poster media-left" }, [
+                    m("a", { href: "#" }, [
+                      m("img", { src: "/images/thumb-clouderma.png", class: "media-object" })
+                    ])
+                  ]),
+                  m("div", { class: "media-body" }, [
+                    m("h5", { class: "title" }, "Lorem ipsum dolore"),
+                    m("p", { class: "description" }, "Lorem ipsum"),
+                    m("span", { class: "video-time"}, "02:30")
+                  ])
+                ])
+              ]),
+              m("li", [
+                m("a", { href: "#", class: "video-list__row media" }, [
+                  m("figure", { class: "poster media-left" }, [
+                    m("a", { href: "#" }, [
+                      m("img", { src: "/images/thumb-clouderma.png", class: "media-object" })
+                    ])
+                  ]),
+                  m("div", { class: "media-body" }, [
+                    m("h5", { class: "title" }, "Lorem ipsum dolore"),
+                    m("p", { class: "description" }, "Lorem ipsum"),
+                    m("span", { class: "video-time"}, "02:30")
+                  ])
+                ])
+              ]),
+              m("li", [
+                m("a", { href: "#", class: "video-list__row media" }, [
+                  m("figure", { class: "poster media-left" }, [
+                    m("a", { href: "#" }, [
+                      m("img", { src: "/images/thumb-clouderma.png", class: "media-object" })
+                    ])
+                  ]),
+                  m("div", { class: "media-body" }, [
+                    m("h5", { class: "title" }, "Lorem ipsum dolore"),
+                    m("p", { class: "description" }, "Lorem ipsum"),
+                    m("span", { class: "video-time"}, "02:30")
+                  ])
+                ])
+              ]),
+              m("li", [
+                m("a", { href: "#", class: "video-list__row media" }, [
+                  m("figure", { class: "poster media-left" }, [
+                    m("a", { href: "#" }, [
+                      m("img", { src: "/images/thumb-clouderma.png", class: "media-object" })
+                    ])
+                  ]),
+                  m("div", { class: "media-body" }, [
+                    m("h5", { class: "title" }, "Lorem ipsum dolore"),
+                    m("p", { class: "description" }, "Lorem ipsum"),
+                    m("span", { class: "video-time"}, "02:30")
+                  ])
+                ])
+              ])
+            ])
           ])
         ])
       ])
