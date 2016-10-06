@@ -1,5 +1,6 @@
 .projects-list {
   &__row {
+    position: relative;
     @include spaces(10px 15px, 0 0 4px 0);
     background-color: white;
     @include border(#eaeaea);
@@ -10,20 +11,28 @@
       text-decoration: none;
       background-color: #eaeaea;
     }
-    .title {
-      text-transform: uppercase;
-      margin-top: 0;
-      margin-bottom: 8px;
-      @include font-style(12px, $grey-dark);
+    .projects-list__body {
+      & > a {
+        text-decoration: none;
+      }
+      .title {
+        text-transform: uppercase;
+        margin-top: 0;
+        margin-bottom: 8px;
+        @include font-style(12px, $grey-dark);
+      }
+      .creation-date {
+        @include font-style(12px, $grey-light);
+        text-transform: uppercase;
+        margin-top: 0;
+      }
+      .videos-number {
+        @include font-style(12px, $coloured, 500);
+        text-transform: uppercase;
+      }
     }
-    .creation-date {
-      @include font-style(12px, $grey-light);
-      text-transform: uppercase;
-      margin-top: 0;
-    }
-    .videos-number {
-      @include font-style(12px, $coloured, 500);
-      text-transform: uppercase;
+    .projects-list__buttons {
+      @include position(right, 22px, top, 22px);
     }
   }
 }

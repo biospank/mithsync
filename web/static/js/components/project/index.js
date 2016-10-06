@@ -79,7 +79,7 @@ var projectList = {
 
   },
   view: mixinLayout(function(ctrl) {
-    return m("div", [
+    return m("main", { class: "main-container" }, [
       m("div", { class: "clearfix" }, [
         m("div", { class: "pull-left" }, [
           m(searchForm, {
@@ -95,6 +95,9 @@ var projectList = {
             },
             filter: ctrl.filter
           })
+        ]),
+        m("div", { class: "pull-right" }, [
+          m("button", { class: "btn btn-success btn-md" }, "New project")
         ])
       ]),
       m("ul", { class: "list-unstyled projects-list" }, [

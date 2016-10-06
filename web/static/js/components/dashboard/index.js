@@ -59,30 +59,38 @@ var dashboard = (function() {
             m("ol", { class: "projects-list list-unstyled" }, [
               m("li", [
                 m("a", { href: "#", class: "projects-list__row" }, [
-                  m("h5", { class: "title" }, "Lorem ipsum dolore"),
-                  m("p", { class: "creation-date" }, "5 Febbraio 2015"),
-                  m("span", { class: "videos-number"}, "1 video")
+                  m(".projects-list__body", [
+                    m("h5", { class: "title" }, "Lorem ipsum dolore"),
+                    m("p", { class: "creation-date" }, "5 Febbraio 2015"),
+                    m("span", { class: "videos-number"}, "1 video")
+                  ])
                 ])
               ]),
               m("li", [
                 m("a", { href: "#", class: "projects-list__row" }, [
-                  m("h5", { class: "title" }, "Lorem ipsum dolore"),
-                  m("p", { class: "creation-date" }, "5 Febbraio 2015"),
-                  m("span", { class: "videos-number"}, "1 video")
+                  m(".projects-list__body", [
+                    m("h5", { class: "title" }, "Lorem ipsum dolore"),
+                    m("p", { class: "creation-date" }, "5 Febbraio 2015"),
+                    m("span", { class: "videos-number"}, "1 video")
+                  ])
                 ])
               ]),
               m("li", [
                 m("a", { href: "#", class: "projects-list__row" }, [
-                  m("h5", { class: "title" }, "Lorem ipsum dolore"),
-                  m("p", { class: "creation-date" }, "5 Febbraio 2015"),
-                  m("span", { class: "videos-number"}, "1 video")
+                  m(".projects-list__body", [
+                    m("h5", { class: "title" }, "Lorem ipsum dolore"),
+                    m("p", { class: "creation-date" }, "5 Febbraio 2015"),
+                    m("span", { class: "videos-number"}, "1 video")
+                  ])
                 ])
               ]),
               m("li", [
                 m("a", { href: "#", class: "projects-list__row" }, [
-                  m("h5", { class: "title" }, "Lorem ipsum dolore"),
-                  m("p", { class: "creation-date" }, "5 Febbraio 2015"),
-                  m("span", { class: "videos-number"}, "1 video")
+                  m(".projects-list__body", [
+                    m("h5", { class: "title" }, "Lorem ipsum dolore"),
+                    m("p", { class: "creation-date" }, "5 Febbraio 2015"),
+                    m("span", { class: "videos-number"}, "1 video")
+                  ])
                 ])
               ])
             ])

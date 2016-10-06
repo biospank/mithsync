@@ -1,50 +1,36 @@
 .btn {
-  border-radius: 0;
+  border-radius: 5px;
   position: relative;
-  //border-radius: 3px;
-  //border: 0;
-  //@include box-shadow(0px -1px 0px 0px rgba(0, 0, 0, 0.2) inset, 0px 1px 1px 0px rgba(0, 0, 0, 0.2));
-  @include transition(background-color 0.3s ease-out);
-  &:after {
-    content: "";
-    @include position(right, 0, top, 0);
-    @include transition(all 0.3s);
-  }
-  @each $btn, $bg-color in
-                (default, transparent),
-                (success, #b3c833),
-                (primary, #45b6f1),
-                (danger, #9b0202),
-                (warning, #e3a200) {
+  font-size: 13px;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: 0;
+  @include box-shadow(1px 2px 3px #d5d5d5);
+  @include transition(all 0.3s ease-out);
+  @each $btn, $bg-color-start, $bg-color-end  in
+                (success, #bcd454, #a5c53f),
+                (primary, #aac7f2, #8eb7f2),
+                (danger, #fac851, #f0b14d),
+                (warning, #ece96b, #e6d14e) {
     &-#{$btn} {
-      background-color: $bg-color;
-      border-color: $bg-color;
+      @include gradient-vertical($start-color: $bg-color-start, $end-color: $bg-color-end, $start-percent: 0%, $end-percent: 100%);
       &:hover, &:focus, &:active {
-        background-color: lighten($bg-color, 10%) !important;
-        border-color: $bg-color !important;
-      }
-      &.effect {
-        &:after {
-          @include size(30%, 200%);
-          background: rgba(255,255,255,0.1);
-          z-index: 1;
-          right: 0;
-          top: -10px;
-          margin: 0;
-          @include rotate(-20deg);
-          transform-origin: 0 0;
-        }
-        &:hover {
-          z-index: 0 !important;
-          &:after {
-            @include size(50%, 250%);
-          }
-        }
+        @include gradient-vertical($start-color: $bg-color-end, $end-color: $bg-color-start, $start-percent: 0%, $end-percent: 100%);
       }
     }
   }
+  &-default {}
+  &-square {
+    margin-left: 5px;
+    @include size(40px, 40px);
+    .fa, i, span {
+      font-size: 22px;
+      padding-top: 2px;
+    }
+  }
   &-md {
-    padding: 10px 25px;
+    padding: 10px;
   }
   &-lg {
     min-width: 180px;
