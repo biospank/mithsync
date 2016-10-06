@@ -20,71 +20,50 @@ var listItem = {
     ctrl.video = video;
 
     return m("li", [
-      m("div", { class: "projects-list__content" }, [
-        // m("div", [
-        //   m("input", { class: "magic-radio", type: "checkbox", name: video.id, id: video.id }),
-        //   m("label", { for: video.id })
-        // ]),
-        m(".projects-list__body clearfix", [
-          m("h5", { class: "projects-list__title" }, [
-            video.title,
-            m("small", { class: "projects-list__date" }, "Created at: " + "16-05-2016")
+      m("div", { class: "video-list__row media" }, [
+        m("figure", { class: "poster media-left" }, [
+          m("a", [
+            m("img", { src: "/images/thumb-clouderma.png", class: "media-object" })
+          ])
+        ]),
+        m("div", { class: "video-list__body media-body" }, [
+          m("h5", { class: "title" }, video.title),
+          m("p", { class: "description" }, "Lorem ipsum"),
+          m("span", { class: "video-time"}, "02:30")
+        ]),
+        m(".video-list__buttons", [
+          m("a", {
+            href: "/projects/" + m.route.param('projectId') + "/videos/" + video.id + "/edit",
+            class: "btn btn-primary btn-square",
+            config: m.route
+          }, [
+            m("i", { class: "fa fa-pencil", "aria-hidden": true })
           ]),
-          //m("p", { class: "projects-list__description" }, video.description),
-          // m("label", { class: "projects-list__date" }, "16-05-2016"),
-          m("div", { class: "projects-list__buttons" }, [
-            m("a", {
-              href: "/projects/" + m.route.param('projectId') + "/videos/" + video.id + "/info",
-              class: "btn btn-primary icon-left",
-              config: m.route
-            }, [
-              m("i", { class: "fa fa-info", "aria-hidden": true }),
-              m("span", {}, "Info")
-            ]),
-            m("a", {
-              href: "/projects/" + m.route.param('projectId') + "/videos/" + video.id + "/edit",
-              class: "btn btn-primary icon-left",
-              config: m.route
-            }, [
-              m("i", { class: "fa fa-pencil", "aria-hidden": true }),
-              m("span", {}, "Edit")
-            ]),
-            // m("button", {
-            //   onclick: "",
-            //   type: "button",
-            //   class: "btn btn-primary icon-left"
-            // }, [
-            //   m("i", { class: "fa fa-copy", "aria-hidden": true }),
-            //   m("span", {}, "Duplicate")
-            // ]),
-            m("button", {
-              onclick: "",
-              type: "button",
-              class: "btn btn-success icon-left"
-            }, [
-              m("i", { class: "fa fa-download", "aria-hidden": true }),
-              m("span", {}, "Export")
-            ]),
-            m("button", {
-              onclick: function() {
-                swal({
-                  title: 'Are you sure?',
-                  text: "You won't be able to revert this!",
-                  type: 'warning',
-                  showCancelButton: true,
-                  confirmButtonColor: '#3085d6',
-                  cancelButtonColor: '#d33',
-                  confirmButtonText: 'Yes, delete it!'
-                }).then(function() {
-                  ctrl.delete();
-                })
-              },
-              type: "button",
-              class: "btn btn-danger icon-left"
-            }, [
-              m("i", { class: "fa fa-trash", "aria-hidden": true }),
-              m("span", {}, "Delete")
-            ])
+          m("button", {
+            onclick: "",
+            type: "button",
+            class: "btn btn-success btn-square"
+          }, [
+            m("i", { class: "fa fa-download", "aria-hidden": true })
+          ]),
+          m("button", {
+            onclick: function() {
+              swal({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+              }).then(function() {
+                ctrl.delete();
+              })
+            },
+            type: "button",
+            class: "btn btn-danger btn-square"
+          }, [
+            m("i", { class: "fa fa-trash", "aria-hidden": true })
           ])
         ])
       ])

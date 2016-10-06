@@ -111,7 +111,7 @@ var dashboard = (function() {
                       m("img", { src: "/images/thumb-clouderma.png", class: "media-object" })
                     ])
                   ]),
-                  m("div", { class: "media-body" }, [
+                  m("div", { class: "video-list__body media-body" }, [
                     m("h5", { class: "title" }, "Lorem ipsum dolore"),
                     m("p", { class: "description" }, "Lorem ipsum"),
                     m("span", { class: "video-time"}, "02:30")
@@ -125,7 +125,7 @@ var dashboard = (function() {
                       m("img", { src: "/images/thumb-clouderma.png", class: "media-object" })
                     ])
                   ]),
-                  m("div", { class: "media-body" }, [
+                  m("div", { class: "video-list__body media-body" }, [
                     m("h5", { class: "title" }, "Lorem ipsum dolore"),
                     m("p", { class: "description" }, "Lorem ipsum"),
                     m("span", { class: "video-time"}, "02:30")
@@ -139,7 +139,7 @@ var dashboard = (function() {
                       m("img", { src: "/images/thumb-clouderma.png", class: "media-object" })
                     ])
                   ]),
-                  m("div", { class: "media-body" }, [
+                  m("div", { class: "video-list__body media-body" }, [
                     m("h5", { class: "title" }, "Lorem ipsum dolore"),
                     m("p", { class: "description" }, "Lorem ipsum"),
                     m("span", { class: "video-time"}, "02:30")
@@ -153,7 +153,7 @@ var dashboard = (function() {
                       m("img", { src: "/images/thumb-clouderma.png", class: "media-object" })
                     ])
                   ]),
-                  m("div", { class: "media-body" }, [
+                  m("div", { class: "video-list__body media-body" }, [
                     m("h5", { class: "title" }, "Lorem ipsum dolore"),
                     m("p", { class: "description" }, "Lorem ipsum"),
                     m("span", { class: "video-time"}, "02:30")
@@ -167,7 +167,7 @@ var dashboard = (function() {
                       m("img", { src: "/images/thumb-clouderma.png", class: "media-object" })
                     ])
                   ]),
-                  m("div", { class: "media-body" }, [
+                  m("div", { class: "video-list__body media-body" }, [
                     m("h5", { class: "title" }, "Lorem ipsum dolore"),
                     m("p", { class: "description" }, "Lorem ipsum"),
                     m("span", { class: "video-time"}, "02:30")

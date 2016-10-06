@@ -9,10 +9,14 @@
     border-radius: 5px;
     @include transition(all 0.3s ease-out);
     &:hover {
-      text-decoration: none;
       background-color: #eaeaea;
+      text-decoration: none;
     }
     .projects-list__body {
+      display: block;
+      &:hover {
+        text-decoration: none;
+      }
       & > .input-group {
         margin-top: 16px;
         .form-control {

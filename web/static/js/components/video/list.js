@@ -71,17 +71,7 @@ var videoList = {
 
   },
   view: function(ctrl) {
-    return m("div", [
-      m("div.pull-right", [
-        m("a", {
-          href: m.route() + '/new',
-          config: m.route,
-          class: "btn btn-primary effect btn-md text-uppercase icon-left"
-        }, [
-          m("i", { class: 'fa fa-plus' }),
-          m("span", {}, "New video")
-        ])
-      ]),
+    return m("main", { class: "main-container" }, [
       m("div", { class: "clearfix" }, [
         m("div", { class: "pull-left" }, [
           m(searchForm, {
@@ -97,12 +87,16 @@ var videoList = {
             },
             filter: ctrl.filter
           })
+        ]),
+        m("div", { class: "pull-right" }, [
+          m("a", {
+            href: m.route() + '/new',
+            config: m.route,
+            class: "btn btn-success btn-md"
+          }, "New video")
         ])
-        // m("div", { class: "pull-right" }, [
-        //   m("button", { class: "btn btn-warning btn-lg text-uppercase" }, "Delete selected")
-        // ])
       ]),
-      m("ul", { class: "list-unstyled projects-list" }, [
+      m("ol", { class: "video-list list-unstyled" }, [
         _.isEmpty(ctrl.videos()) ? m("li", {}, [
           m(recordNotFound)
         ]) : ctrl.showVideos()

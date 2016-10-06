@@ -7,35 +7,38 @@ var listItem = {
       editMode: m.prop(false),
       showItem: function() {
         if(this.editMode()) {
-          return m(".input-group", [
-            m("input", {
-              type: "text",
-              class: "form-control",
-              placeholder: this.project().name,
-              "aria-describedby": "change-text",
-              oninput: m.withAttr("value", Project.model.name),
-              onkeyup: function(e) {
-                if(e.keyCode === 13) {
-                  parent.updateProject(this.project());
-                  this.editMode(false);
-                }
+          return m(".projects-list__body", [
+            m(".input-group", [
+              m("input", {
+                type: "text",
+                class: "form-control",
+                placeholder: this.project().name,
+                "aria-describedby": "change-text",
+                oninput: m.withAttr("value", Project.model.name),
+                onkeyup: function(e) {
+                  if(e.keyCode === 13) {
+                    parent.updateProject(this.project());
+                    this.editMode(false);
+                  }
 
-                if(e.keyCode === 27)
-                  this.editMode(false);
-              }.bind(this),
-              config: function(element, isInit) {
-                if(!isInit)
-                  $(element).focus()
-              }}),
-            m("a", { href: "#", class: "input-group-addon", id: "change-text" }, [
-              m("i", { class: "fa fa-close" })
+                  if(e.keyCode === 27)
+                    this.editMode(false);
+                }.bind(this),
+                config: function(element, isInit) {
+                  if(!isInit)
+                    $(element).focus()
+                }}),
+              m("a", { href: "#", class: "input-group-addon", id: "change-text" }, [
+                m("i", { class: "fa fa-close" })
+              ])
             ])
           ])
         } else {
           return [
             m("a", {
               href: "/projects/" + this.project().id + "/videos",
-              config: m.route
+              config: m.route,
+              class: "projects-list__body"
             }, [
               m("h5", { class: "title" }, [
                 this.project().name,
@@ -71,9 +74,7 @@ var listItem = {
 
     return m("li", [
       m("div", { class: "projects-list__row" }, [
-        m(".projects-list__body", [
-          ctrl.showItem()
-        ])
+        ctrl.showItem()
       ])
     ]);
   }
