@@ -20,21 +20,13 @@
   @include gradient-vertical($light, $dark, 0%, 100%);
 }
 
-#sidebar-video-edit {
-  @include position(right, 0, top, 119px, fixed);
-  @include size(410px, 100%);
-  z-index: 1000;
-  overflow-y: auto;
-  @include gradient-vertical($light, $dark, 0%, 100%);
-}
-
 body {
   &.edit-layout {
     .breadcrumb-bar {
       padding-top: 30px;
     }
     #wrapper {
-      padding-right: 410px;
+      padding-right: 409px;
       padding-left: 0;
       margin-top: 0;
     }

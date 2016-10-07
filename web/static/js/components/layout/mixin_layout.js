@@ -63,7 +63,42 @@ var mixinLayout = function(content, layout) {
             content
           ]),
           m("aside", { id: "sidebar-video-edit" }, [
-            m.component(mainNav)
+            m("ul", {  class: "nav nav-tabs", role: "tablist" }, [
+              m("li", {  role: "presentation", class: "active" }, [
+                m("a", {
+                  href: "#info",
+                  "aria-controls": "info",
+                  role: "tab",
+                  "data-toggle": "tab",
+                  class: "info"
+                }, "Info")
+              ]),
+              m("li", {  role: "presentation" }, [
+                m("a", {
+                  href: "#layout",
+                  "aria-controls": "layout",
+                  role: "tab",
+                  "data-toggle": "tab",
+                  class: "layout"
+                }, "Layout")
+              ]),
+              m("li", {  role: "presentation" }, [
+                m("a", {
+                  href: "#library",
+                  "aria-controls": "library",
+                  role: "tab",
+                  "data-toggle": "tab",
+                  class: "library"
+                }, "Library")
+              ])
+            ]),
+            m(".tab-content", [
+              m("section", { role: "tabpanel", class: "tab-pane active", id: "info" }, []),
+              m("section", { role: "tabpanel", class: "tab-pane active", id: "layout" }, []),
+              m("section", { role: "tabpanel", class: "tab-pane active", id: "library" }, [
+                m("")
+              ])
+            ])
           ])
         ]),
         m("footer", { id: "page-footer" }, [

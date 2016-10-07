@@ -1,0 +1,60 @@
+#sidebar-video-edit {
+  @include position(right, 0, top, 119px, fixed);
+  @include size(409px, 100%);
+  z-index: 1000;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+  @include border(#dce0e6, 1px, left);
+  .nav-tabs {
+    border: 0;
+    li {
+      width: 136px;
+      a {
+        @each $icon, $x, $y  in
+                      (info, 0px, 21px),
+                      (layout, 42px, 21px),
+                      (library, 21px, 21px) {
+          &.#{$icon} {
+            &:before {
+              @include position(left, 15px, top, 12px);
+              content: "";
+              background: url(/images/icons/sprites.png);
+              background-position: $x $y;
+              display: inline-block;
+              @include size(21px, 21px);
+            }
+          }
+        }
+        border-radius: 0;
+        margin-right: 0;
+        position: relative;
+        @include border(#c0c5c9);
+        border-right: 0;
+        border-top: 0;
+        background-color: #d5d8dc;
+        text-decoration: none;
+        text-transform: uppercase;
+        min-height: 38px;
+        padding: 14px 14px 14px 45px;
+        @include font-style(12px, #93989a, 500);
+      }
+      &.active {
+        a {
+          @each $icon, $x, $y  in
+                        (info, 0px, 0px),
+                        (layout, 42px, 0px),
+                        (library, 21px, 0px) {
+            &.#{$icon} {
+              &:before {
+                background-position: $x $y;
+              }
+            }
+          }
+          background-color: transparent;
+          color: #424856;
+          border: 0;
+        }
+      }
+    }
+  }
+}
