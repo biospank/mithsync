@@ -1,31 +1,26 @@
 .dropzone {
   border: 2px dashed #a5b2c3;
   border-radius: 5px;
-  // min-height: 250px;
-  min-height: 345px;
   margin-bottom: 25px;
+  overflow: hidden;
   .dz-message {
-    //margin: 120px auto 20px auto;
-    margin: 155px auto 80px auto;
-    font-size: 25px;
-    color: #646C7F;
-    font-weight: 600;
+    margin: 70px auto 25px auto;
+    @include font-style(25px, #646C7F, 600);
     position: relative;
+    font-size: 18px;
     &:before {
-      width: 130px;
-      height: 84px;
+      $width: 70px;
+      @include size(70px, 100%);
       content: " ";
-      background-image: url(/images/cloud-upload.png);
-      position: absolute;
-      left: 50%;
-      top: -100px;
-      margin-left: -60px;
+      background: url(/images/icons/cloud-upload.png) no-repeat;
+      @include position(left, 50%, top, -60px);
+      margin-left: -($width / 2);
     }
     &:after {
       content: "Max allowed file size 1 MB";
       display: block;
-      @include font-style(15px, #646C7F);
-      margin-top: 10px;
+      @include font-style(13px, #646C7F);
+      margin-top: 3px;
     }
   }
 }

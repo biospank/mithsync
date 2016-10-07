@@ -30,7 +30,7 @@ var imageItem = {
   },
   view: function(ctrl, image){
     ctrl.image = image;
-    return m(".col-xs-6 .col-sm-4 .col-lg-2", [
+    return m(".col-xs-3", [
       m("figure", { class: "img-thumbnail" }, [
         m("img", {
           src: ctrl.image.thumb_url,

@@ -65,7 +65,7 @@ var mixinLayout = function(content, layout) {
           ]),
           m("aside", { id: "sidebar-video-edit" }, [
             m("ul", {  class: "nav nav-tabs", role: "tablist" }, [
-              m("li", {  role: "presentation", class: "active" }, [
+              m("li", {  role: "presentation" }, [
                 m("a", {
                   href: "#info",
                   "aria-controls": "info",
@@ -83,7 +83,7 @@ var mixinLayout = function(content, layout) {
                   class: "layout"
                 }, "Layout")
               ]),
-              m("li", {  role: "presentation" }, [
+              m("li", {  role: "presentation", class: "active" }, [
                 m("a", {
                   href: "#library",
                   "aria-controls": "library",
@@ -94,7 +94,7 @@ var mixinLayout = function(content, layout) {
               ])
             ]),
             m(".tab-content", [
-              m("section", { role: "tabpanel", class: "tab-pane active", id: "info" }, []),
+              m("section", { role: "tabpanel", class: "tab-pane", id: "info" }, []),
               m("section", { role: "tabpanel", class: "tab-pane", id: "layout" }, [
                 m("div", { class: "panel panel-default theme-layout" }, [
                   m(".panel-body", { class: "row" }, [
@@ -139,7 +139,7 @@ var mixinLayout = function(content, layout) {
                   ])
                 ])
               ]),
-              m("section", { role: "tabpanel", class: "tab-pane", id: "library" }, [
+              m("section", { role: "tabpanel", class: "tab-pane active", id: "library" }, [
                 m(imageLibrary)
               ])
             ])
