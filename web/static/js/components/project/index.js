@@ -97,7 +97,33 @@ var projectList = {
           })
         ]),
         m("div", { class: "pull-right" }, [
-          m("button", { class: "btn btn-success btn-md" }, "New project")
+          m("button", { 
+            class: "btn btn-success btn-md",
+            onclick: function() {
+              swal({
+                title: 'Project name',
+                input: 'text',
+                showCancelButton: true,
+                confirmButtonText: 'Create',
+                inputValidator: function(value) {
+                  return new Promise(function(resolve, reject) {
+                    if (value) {
+                      resolve();
+                    } else {
+                      reject('You need to write something!');
+                    }
+                  });
+                },
+              }).then(function(value) {
+                Project.model.name(value);
+                Project.create().then(function(data) {
+                  m.route("/projects");
+                })
+              }, function(dismiss) {
+
+              })
+            }
+          }, "New project")
         ])
       ]),
       m("ul", { class: "list-unstyled projects-list" }, [

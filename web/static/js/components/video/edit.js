@@ -19,126 +19,118 @@ var editVideo = (function() {
       // ]),
       m(imageDialog),
       m(videoPreview),
-      m(".clearfix", [
-        m("div.pull-right", [
-          m("a", {
-            href: '/projects/' + m.route.param('projectId') + '/videos/' + m.route.param('videoId') + '/library',
-            config: m.route,
-            class: "btn btn-primary effect btn-md text-uppercase icon-left"
-          }, [
-            m("i", { class: 'fa fa-plus' }),
-            m("span", {}, "Library")
-          ])
-        ])
-      ]),
-      m("section", { id: "video-container" }, [
-        m(".row", [
-          m(".col-sm-6", [
-            // m(videoPlayback, {
-            //   provider: ctrl.videoInfo().provider,
-            //   videoId: ctrl.videoInfo().videoId,
-            //   onReady: ctrl.initPlayer
-            // })
-            m("div")
-            // m(".video_player",
-            //   {
-            //     "data-type": "youtube", //"vimeo",
-            //     "data-video-id": "_WgrfEaAM4Y", //"180519312",
-            //     config: ctrl.initPlayer
-            //   }
-            // )
-          ]),
-          m(".col-sm-6", [
-            m("figure", { class: "placeholderSlide" }, [
-              m("a", {
-                onclick: function(event) {
-                  event.preventDefault();
-                  imageDialog.show({
-                    selectCallback: function(image) {
-                      slickCarousel.currentSlide().url = image.slide_url
-                      slickCarousel.currentSlide().thumb_url = image.thumb_url
-                    }
-                  });
-                },
-                href: "#"
-              }, [
-                m("img", {
-                  src: slickCarousel.currentSlide().url,
-                  class: "img-responsive"
-                })
+      // m(".clearfix", [
+      //   m("div.pull-right", [
+      //     m("a", {
+      //       href: '/projects/' + m.route.param('projectId') + '/videos/' + m.route.param('videoId') + '/library',
+      //       config: m.route,
+      //       class: "btn btn-primary effect btn-md text-uppercase icon-left"
+      //     }, [
+      //       m("i", { class: 'fa fa-plus' }),
+      //       m("span", {}, "Library")
+      //     ])
+      //   ])
+      // ]),
+      m("main", { class: "main-container" }, [
+        m("section", { id: "video-container" }, [
+          m(".row", [
+            m(".col-sm-6", [
+              // m(videoPlayback, {
+              //   provider: ctrl.videoInfo().provider,
+              //   videoId: ctrl.videoInfo().videoId,
+              //   onReady: ctrl.initPlayer
+              // })
+              m("div")
+              // m(".video_player",
+              //   {
+              //     "data-type": "youtube", //"vimeo",
+              //     "data-video-id": "_WgrfEaAM4Y", //"180519312",
+              //     config: ctrl.initPlayer
+              //   }
+              // )
+            ]),
+            m(".col-sm-6", [
+              m("figure", { class: "placeholderSlide" }, [
+                m("a", {
+                  onclick: function(event) {
+                    event.preventDefault();
+                    imageDialog.show({
+                      selectCallback: function(image) {
+                        slickCarousel.currentSlide().url = image.slide_url
+                        slickCarousel.currentSlide().thumb_url = image.thumb_url
+                      }
+                    });
+                  },
+                  href: "#"
+                }, [
+                  m("img", {
+                    src: slickCarousel.currentSlide().url,
+                    class: "img-responsive"
+                  })
+                ])
               ])
             ])
-          ])
-        ]),
-        m(".clearfix .mgv25", [
-          m("p", { class: "pull-left" }, "Start: " + ctrl.svalue()),
-          m("p", { class: "pull-right" }, "End: " + ctrl.evalue()),
-        ]),
-        m("#slider"),
-        m("footer", { class: "buttons row" }, [
-          m("div", { class: "col-sm-7" }, [
-            m("button", {
-              onclick: ctrl.newSlide,
-              class: 'btn btn-primary',
-              title: "New slide"
-            }, 'New'),
-            m("button[type=submit]", {
-              onclick: function() {
-                swal({
-                  title: 'Are you sure?',
-                  text: "You won't be able to revert this!",
-                  type: 'warning',
-                  showCancelButton: true,
-                  showLoaderOnConfirm: true,
-                  confirmButtonColor: '#3085d6',
-                  cancelButtonColor: '#d33',
-                  confirmButtonText: 'Yes, delete it!'
-                }).then(function() {
-                  ctrl.deleteSlide();
-                  ctrl.isNewRecord(true);
-                })
-              },
-              class: 'btn btn-danger' + (ctrl.isNewRecord() ? ' disabled' : ''),
-              disabled: ctrl.isNewRecord(),
-              title: "Delete",
-              "data-toggle": "tooltip",
-              "data-placement": "top",
-              config: function(element, isInit, context) {
-                if (!isInit)
-                  $(element).tooltip()
-              }
-            }, [
-              m("i", { class: "fa fa-trash-o" })
-              //m("span", "Delete")
-            ]),
-            m("button[type=submit]", {
-              onclick: ctrl.saveSlide,
-              class: 'btn btn-success',
-              title: "Save"
-            }, 'Save')
           ]),
-          m("div", { class: "col-sm-5 text-right" }, [
-            m("a", {
-              href: "",
-              class: 'btn btn-primary',
-              title: "Informations",
-              "data-toggle": "tooltip",
-              "data-placement": "top",
-              config: function(element, isInit, context) {
-                if (!isInit)
-                  $(element).tooltip()
-              }
-            }, [
-              m("i", { class: "fa fa-info" })
+          m(".clearfix .mgv25", [
+            m("p", { class: "text-left" }, "Start: " + ctrl.svalue())
+          ]),
+          m("#slider"),
+          m("footer", { class: "buttons row" }, [
+            m("div", { class: "col-xs-7" }, [
+              m("button", {
+                onclick: ctrl.newSlide,
+                class: 'btn btn-primary btn-square',
+                title: "New slide"
+              }, [
+                m("i", { class: "fa fa-plus" })
+              ]),
+              m("button[type=submit]", {
+                onclick: function() {
+                  swal({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    showLoaderOnConfirm: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                  }).then(function() {
+                    ctrl.deleteSlide();
+                    ctrl.isNewRecord(true);
+                  })
+                },
+                class: 'btn btn-danger btn-square' + (ctrl.isNewRecord() ? ' disabled' : ''),
+                disabled: ctrl.isNewRecord(),
+                title: "Delete",
+                "data-toggle": "tooltip",
+                "data-placement": "top",
+                config: function(element, isInit, context) {
+                  if (!isInit)
+                    $(element).tooltip()
+                }
+              }, [
+                m("i", { class: "fa fa-trash-o" })
+                //m("span", "Delete")
+              ])
             ]),
-            m("button[type=submit]", {
-              onclick: function(event) {
-                event.preventDefault();
-                videoPreview.show(ctrl.video());
-              },
-              class: 'btn btn-success',
-              title: "Preview"
-            }, 'Preview')
+            m("div", { class: "col-xs-5 text-right" }, [
+              m("button[type=submit]", {
+                onclick: ctrl.saveSlide,
+                class: 'btn btn-success btn-md',
+                title: "Save"
+              }, 'Save slide'),
+              m("button[type=submit]", {
+                onclick: function(event) {
+                  event.preventDefault();
+                  videoPreview.show(ctrl.video());
+                },
+                class: 'btn btn-success btn-square',
+                title: "Preview"
+              }, [
+                m("i", { class: "fa fa-eye" })
+              ])
+            ])
           ])
         ])
       ]),
@@ -289,7 +281,7 @@ var editVideo = (function() {
       ctrl.getVideo(m.route.param("videoId"));
 
     },
-    view: mixinLayout(content)
+    view: mixinLayout(content, 'edit')
   };
 })();
 

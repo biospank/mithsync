@@ -46,6 +46,30 @@ var mixinLayout = function(content, layout) {
           m(".container", "© Company 2016. All rights reserved. Terms of Service | Privacy Policy")
         ])
       ]
+    },
+    edit: function(content) {
+      return [
+        m.component(topBar),
+        m.component(breadcrumbBar),
+        m("section", { class: "clearfix", id: "wrapper" }, {
+          config: function() {
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+          }
+        }, [
+          m("section", { id: "page-content-wrapper" }, [
+            content
+          ]),
+          m("aside", { id: "sidebar-video-edit" }, [
+            m.component(mainNav)
+          ])
+        ]),
+        m("footer", { id: "page-footer" }, [
+          m(".container", "© Company 2016. All rights reserved. Terms of Service | Privacy Policy")
+        ])
+      ]
     }
   };
 
