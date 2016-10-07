@@ -13,7 +13,7 @@ var pagination = {
     this.pageInfo = pageInfo;
 
     if(this.pageInfo.totalPages > 1) {
-      return m("nav", {}, [
+      return m("nav", { class: "text-right" }, [
         m("ul", { class: "pagination" }, [].concat(
           m("li", {}, [
             m("a", {
