@@ -35,3 +35,26 @@
     @content;
   }
 }
+
+@mixin animation($animation, $iteration-count, $transform-origin, $animation-fill-mode) {
+  animation: $animation;
+  animation-iteration-count: $iteration-count;
+  transform-origin: $transform-origin;
+  animation-fill-mode:$animation-fill-mode; /*when the spec is finished*/
+  -webkit-animation: $animation;
+  -webkit-animation-iteration-count: $iteration-count;
+  -webkit-transform-origin: $transform-origin;
+  -webkit-animation-fill-mode:$animation-fill-mode; /*Chrome 16+, Safari 4+*/
+  -moz-animation: $animation;
+  -moz-animation-iteration-count: $iteration-count;
+  -moz-transform-origin: $transform-origin;
+  -moz-animation-fill-mode:$animation-fill-mode; /*FF 5+*/
+  -o-animation: $animation;
+  -o-animation-iteration-count: $iteration-count;
+  -o-transform-origin: $transform-origin;
+  -o-animation-fill-mode:$animation-fill-mode; /*Not implemented yet*/
+  -ms-animation: $animation;
+  -ms-animation-iteration-count: $iteration-count;
+  -ms-transform-origin: $transform-origin;
+  -ms-animation-fill-mode:$animation-fill-mode; /*IE 10+*/
+}

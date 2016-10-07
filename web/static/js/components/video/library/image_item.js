@@ -39,12 +39,6 @@ var imageItem = {
         }),
         m("div", { class: "img-thumbnail__buttons" }, [
           m("button", {
-            type: "button",
-            class: "btn"
-          }, [
-            m("i", { class: "fa fa-pencil-square-o", "aria-hidden": true })
-          ]),
-          m("button", {
             onclick: function() {
               swal({
                 title: 'Are you sure?',
