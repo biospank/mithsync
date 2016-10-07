@@ -94,7 +94,50 @@ var mixinLayout = function(content, layout) {
             ]),
             m(".tab-content", [
               m("section", { role: "tabpanel", class: "tab-pane active", id: "info" }, []),
-              m("section", { role: "tabpanel", class: "tab-pane active", id: "layout" }, []),
+              m("section", { role: "tabpanel", class: "tab-pane active", id: "layout" }, [
+                m("div", { class: "panel panel-default layout-panel" }, [
+                  m(".panel-body", { class: "row" }, [
+                    m("div", { class: "col-xs-6" }, [
+                      m("div", { class: "panel-body__col" }, [
+                        m("span")
+                      ])
+                    ]),
+                    m("div", { class: "col-xs-6" }, [
+                      m("div", { class: "panel-body__col" }, [
+                        m("span")
+                      ])
+                    ])
+                  ])
+                ]),
+                m("div", { class: "panel panel-default layout-panel" }, [
+                  m(".panel-body", { class: "row" }, [
+                    m("div", { class: "col-xs-4" }, [
+                      m("div", { class: "panel-body__col" }, [
+                        m("span")
+                      ])
+                    ]),
+                    m("div", { class: "col-xs-8" }, [
+                      m("div", { class: "panel-body__col" }, [
+                        m("span")
+                      ])
+                    ])
+                  ])
+                ]),
+                m("div", { class: "panel panel-default layout-panel" }, [
+                  m(".panel-body", { class: "row" }, [
+                    m("div", { class: "col-xs-8" }, [
+                      m("div", { class: "panel-body__col" }, [
+                        m("span")
+                      ])
+                    ]),
+                    m("div", { class: "col-xs-4" }, [
+                      m("div", { class: "panel-body__col" }, [
+                        m("span")
+                      ])
+                    ])
+                  ])
+                ])
+              ]),
               m("section", { role: "tabpanel", class: "tab-pane active", id: "library" }, [
                 m("")
               ])

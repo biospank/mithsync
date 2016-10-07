@@ -57,4 +57,33 @@
       }
     }
   }
+  .tab-content {
+    padding: 15px;
+  }
+}
+
+.layout-panel {
+  &.panel {
+    .panel-body {
+      & > div {
+        &:first-child {
+          padding-right: 7px;
+        }
+        &:last-child {
+          padding-left: 7px;
+        }
+      }
+      .panel-body__col {
+        background-color: #e0e0e0;
+        padding: 10px 15px;
+        span {
+          background-color: #d3d3d3;
+          border: 2px dashed #c3c3c3;
+          padding: 15px;
+          width: 100%;
+          display: block;
+        }
+      }
+    }
+  }
 }
