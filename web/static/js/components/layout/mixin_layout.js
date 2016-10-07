@@ -1,6 +1,7 @@
 import breadcrumbBar from "./breadcrumb_bar";
 import mainNav from "./main_nav";
 import topBar from "./top_bar";
+import imageLibrary from "../video/library/image_library";
 
 var mixinLayout = function(content, layout) {
 
@@ -94,8 +95,8 @@ var mixinLayout = function(content, layout) {
             ]),
             m(".tab-content", [
               m("section", { role: "tabpanel", class: "tab-pane active", id: "info" }, []),
-              m("section", { role: "tabpanel", class: "tab-pane active", id: "layout" }, [
-                m("div", { class: "panel panel-default layout-panel" }, [
+              m("section", { role: "tabpanel", class: "tab-pane", id: "layout" }, [
+                m("div", { class: "panel panel-default theme-layout" }, [
                   m(".panel-body", { class: "row" }, [
                     m("div", { class: "col-xs-6" }, [
                       m("div", { class: "panel-body__col" }, [
@@ -109,7 +110,7 @@ var mixinLayout = function(content, layout) {
                     ])
                   ])
                 ]),
-                m("div", { class: "panel panel-default layout-panel" }, [
+                m("div", { class: "panel panel-default theme-layout" }, [
                   m(".panel-body", { class: "row" }, [
                     m("div", { class: "col-xs-4" }, [
                       m("div", { class: "panel-body__col" }, [
@@ -123,7 +124,7 @@ var mixinLayout = function(content, layout) {
                     ])
                   ])
                 ]),
-                m("div", { class: "panel panel-default layout-panel" }, [
+                m("div", { class: "panel panel-default theme-layout" }, [
                   m(".panel-body", { class: "row" }, [
                     m("div", { class: "col-xs-8" }, [
                       m("div", { class: "panel-body__col" }, [
@@ -138,8 +139,8 @@ var mixinLayout = function(content, layout) {
                   ])
                 ])
               ]),
-              m("section", { role: "tabpanel", class: "tab-pane active", id: "library" }, [
-                m("")
+              m("section", { role: "tabpanel", class: "tab-pane", id: "library" }, [
+                m(imageLibrary)
               ])
             ])
           ])
