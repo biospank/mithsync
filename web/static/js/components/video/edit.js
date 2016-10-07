@@ -34,7 +34,7 @@ var editVideo = (function() {
       m("main", { class: "main-container" }, [
         m("section", { id: "video-container" }, [
           m(".row", [
-            m(".col-sm-6", [
+            m(".col-xs-6", [
               // m(videoPlayback, {
               //   provider: ctrl.videoInfo().provider,
               //   videoId: ctrl.videoInfo().videoId,
@@ -49,7 +49,7 @@ var editVideo = (function() {
               //   }
               // )
             ]),
-            m(".col-sm-6", [
+            m(".col-xs-6", [
               m("figure", { class: "placeholderSlide" }, [
                 m("a", {
                   onclick: function(event) {

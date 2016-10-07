@@ -1,14 +1,22 @@
 #sidebar-video-edit {
+  $width: 408px;
   @include position(right, 0, top, 119px, fixed);
-  @include size(409px, 100%);
+  @include size($width, 100%);
   z-index: 1000;
-  overflow-y: auto;
+  // overflow-y: auto;
   background-color: #f9f9f9;
   @include border(#dce0e6, 1px, left);
   .nav-tabs {
     border: 0;
     li {
-      width: 136px;
+      &[class^="col"] {
+        padding: 0;
+      }
+      &:first-child {
+        a {
+          border-left: 0;
+        }
+      }
       a {
         @each $icon, $x, $y  in
                       (info, 0px, 21px),
@@ -64,6 +72,10 @@
 
 .theme-layout {
   &.panel {
+    @include transition(all 0.3s ease);
+    &:hover {
+      @include box-shadow(0 6px 10px rgba(0,0,0,.35));
+    }
     .panel-body {
       & > div {
         &:first-child {
