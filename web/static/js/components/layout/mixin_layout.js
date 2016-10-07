@@ -2,6 +2,7 @@ import breadcrumbBar from "./breadcrumb_bar";
 import mainNav from "./main_nav";
 import topBar from "./top_bar";
 import imageLibrary from "../video/library/image_library";
+import textField from "../widgets/text_field";
 
 var mixinLayout = function(content, layout) {
 
@@ -94,7 +95,46 @@ var mixinLayout = function(content, layout) {
               ])
             ]),
             m(".tab-content", [
-              m("section", { role: "tabpanel", class: "tab-pane", id: "info" }, []),
+              m("section", { role: "tabpanel", class: "tab-pane", id: "info" }, [
+                m("form", { class: "light-form" }, [
+                  m.component(textField, {
+                    type: 'text',
+                    placeholder: 'Name',
+                    id: 'video-name',
+                    dataLabel: 'Name',
+                    // typeForm: "group",
+                    // icon: "fa fa-user"
+                  }),
+                  m.component(textField, {
+                    field: 'textarea',
+                    rows: 9,
+                    placeholder: 'Description',
+                    id: 'description',
+                    dataLabel: 'Description'
+                  }),
+                  m.component(textField, {
+                    type: 'text',
+                    placeholder: 'Creation date',
+                    id: 'creation-date',
+                    dataLabel: 'Creation date'
+                  }),
+                  m.component(textField, {
+                    type: 'url',
+                    placeholder: 'Url',
+                    id: 'vide-url',
+                    dataLabel: 'Url'
+                  }),
+                  m.component(textField, {
+                    type: 'text',
+                    placeholder: 'Video Time',
+                    id: 'vide-time',
+                    dataLabel: 'Time'
+                  }),
+                  m("div", { class: "text-right" }, [
+                    m("button", { class: "btn btn-success btn-md btn-rectangular" }, "Update")
+                  ])
+                ])
+              ]),
               m("section", { role: "tabpanel", class: "tab-pane", id: "layout" }, [
                 m("div", { class: "panel panel-default theme-layout" }, [
                   m(".panel-body", { class: "row" }, [
