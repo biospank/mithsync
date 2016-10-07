@@ -34,12 +34,12 @@ var editVideo = (function() {
       m("section", { id: "video-container" }, [
         m(".row", [
           m(".col-sm-6", [
-            // m(videoPlayback, {
-            //   provider: ctrl.videoInfo().provider,
-            //   videoId: ctrl.videoInfo().videoId,
-            //   onReady: ctrl.initPlayer
-            // })
-            m("div")
+            m(videoPlayback, {
+              provider: ctrl.videoInfo().provider,
+              videoId: ctrl.videoInfo().videoId,
+              onReady: ctrl.initPlayer
+            })
+            // m("div")
             // m(".video_player",
             //   {
             //     "data-type": "youtube", //"vimeo",
@@ -72,7 +72,6 @@ var editVideo = (function() {
         ]),
         m(".clearfix .mgv25", [
           m("p", { class: "pull-left" }, "Start: " + ctrl.svalue()),
-          m("p", { class: "pull-right" }, "End: " + ctrl.evalue()),
         ]),
         m("#slider"),
         m("footer", { class: "buttons row" }, [
@@ -98,8 +97,7 @@ var editVideo = (function() {
                   ctrl.isNewRecord(true);
                 })
               },
-              class: 'btn btn-danger' + (ctrl.isNewRecord() ? ' disabled' : ''),
-              disabled: ctrl.isNewRecord(),
+              class: 'btn btn-danger',
               title: "Delete",
               "data-toggle": "tooltip",
               "data-placement": "top",
@@ -144,9 +142,7 @@ var editVideo = (function() {
       ]),
       m(slickCarousel, {
         selectCallback: function(slide) {
-          Slide.resetModel(slide);
-          ctrl.slider().set([slide.start, slide.end]);
-          ctrl.isNewRecord(false)
+          ctrl.setCurrentSlide(slide)
         }
       }, ctrl.video().slides)
     ];
@@ -163,11 +159,27 @@ var editVideo = (function() {
       ctrl.player = {};
       ctrl.slider = m.prop();
       ctrl.svalue = m.prop("00:00:00");
-      ctrl.evalue = m.prop("00:00:40");
 
       if(Session.isExpired()) {
         m.route("/signin");
       }
+
+      ctrl.onChangeSlider = function(values, handle, unencodedValues) {
+        var currentValue = _.round(values[handle]);
+        slickCarousel.currentSlide().start = currentValue;
+        // ctrl.player.seek(currentValue);
+      };
+
+      ctrl.onUpdateSlider = function(values, handle, unencodedValues) {
+        var currentValue = _.round(values[handle])
+
+        var duration = new Date(currentValue * 1000).toISOString().substr(11, 8);
+
+        m.startComputation();
+        ctrl.svalue(duration);
+        m.endComputation();
+
+      };
 
       // the first argument is the DOM element;
       // the second argument is false if the element has just been created and true otherwise;
@@ -177,45 +189,32 @@ var editVideo = (function() {
       // is that config is a bit like DOM ready
       ctrl.initPlayer = function(element, init, context) {
         if( !init ) {
-          ctrl.player = plyr.setup('.video_player', {
-            //['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'fullscreen']
-            controls: ['play', 'mute', 'volume', 'current-time']
-          })[0];
+          // ctrl.player = plyr.setup('.video_player', {
+          //   //['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'fullscreen']
+          //   controls: ['play', 'mute', 'volume', 'current-time']
+          // })[0];
+          //
+          // ctrl.player.on('ready', function(event) {
+          //   ctrl.slider(Slider.init('slider', {
+          //     start: ctrl.video().slides.map(function(slide) {
+          //       return slide.start;
+          //     }),
+          //     max: ctrl.player.getDuration(),
+          //     onChange: ctrl.onChangeSlider,
+          //     onUpdate: ctrl.onUpdateSlider
+          //   }));
+          // });
 
-          ctrl.player.on('ready', function(event) {
-            ctrl.slider(
-              Slider.init('slider', {
-                max: ctrl.player.getDuration()
-              })
-            );
+          ctrl.slider(Slider.init('slider', {
+            start: ctrl.video().slides.map(function(slide) {
+              return slide.start;
+            }),
+            max: 180,
+            onChange: ctrl.onChangeSlider,
+            onUpdate: ctrl.onUpdateSlider
+          }));
 
-            ctrl.slider().on('change', function(values, handle, unencodedValues) {
-              var currentValue = _.round(values[handle]);
-              ctrl.player.seek(currentValue);
-            });
-
-            ctrl.slider().on('update', function(values, handle, unencodedValues) {
-              var currentValue = _.round(values[handle])
-
-              var currentValue = _.round(values[handle])
-
-              var duration = new Date(currentValue * 1000).toISOString().substr(11, 8);
-
-              m.startComputation();
-              if(handle === 0) {
-                ctrl.svalue(duration);
-              } else {
-                ctrl.evalue(duration);
-              }
-              m.endComputation();
-
-              if(handle === 0) {
-                slickCarousel.currentSlide().start = currentValue;
-              } else {
-                slickCarousel.currentSlide().end = currentValue;
-              }
-            });
-          });
+          ctrl.setCurrentSlide(_.first(ctrl.video().slides));
 
           // ctrl.player.on('error', function(error) {
           //   console.log(error);
@@ -232,19 +231,23 @@ var editVideo = (function() {
         return Video.show(m.route.param('projectId'), videoId).then(function(video) {
           ctrl.video(video.data);
           ctrl.videoInfo(Video.info(ctrl.video().url));
+          // this is important to be here: it renders correctly
+          // the current slide
+          slickCarousel.currentSlide(_.first(ctrl.video().slides));
         }, function(response) {
           ctrl.errors(response.errors);
         })
       };
 
       ctrl.saveSlide = function() {
+        Slide.resetModel(slickCarousel.currentSlide());
+
         if(ctrl.isNewRecord()) {
           if(Slide.validate()) {
-            return Slide.create(ctrl.video().id).then(function(response) {
-              slickCarousel.addSlide(response.data);
-              slickCarousel.currentSlide(Slide.resetModel());
-              ctrl.slider().set([slickCarousel.currentSlide().start, slickCarousel.currentSlide().end]);
-              ctrl.isNewRecord(true);
+            return Slide.create(ctrl.video()).then(function(response) {
+              // slickCarousel.addSlide(response.data);
+              // slickCarousel.currentSlide(Slide.resetModel());
+              // ctrl.isNewRecord(true);
             }, function(response) {
               ctrl.errors(response.errors);
             })
@@ -258,10 +261,11 @@ var editVideo = (function() {
             })
           }
         } else {
-          return Slide.update(ctrl.video().id, slickCarousel.currentSlide().id).then(function(response) {
-            slickCarousel.currentSlide(Slide.resetModel());
-            ctrl.slider().set([slickCarousel.currentSlide().start, slickCarousel.currentSlide().end]);
-            ctrl.isNewRecord(true);
+          return Slide.update(ctrl.video()).then(function(response) {
+            swal({
+              type: 'success',
+              title: 'Slide saved!',
+            });
           }, function(response) {
             ctrl.errors(response.errors);
           })
@@ -269,19 +273,96 @@ var editVideo = (function() {
       };
 
       ctrl.deleteSlide = function(event) {
-        return Slide.delete(ctrl.video().id, slickCarousel.currentSlide().id).then(function(response) {
+        Slide.resetModel(slickCarousel.currentSlide());
+
+        if(ctrl.newRecord()) {
           slickCarousel.removeSlide();
-          slickCarousel.currentSlide(Slide.resetModel());
-          ctrl.slider().set([slickCarousel.currentSlide().start, slickCarousel.currentSlide().end]);
-        }, function(response) {
-          ctrl.errors(response.errors);
-        })
+          ctrl.refreshSlider(ctrl.video().slides)
+          var slide = _.first(ctrl.video().slides)
+          slickCarousel.currentSlide(slide);
+          ctrl.setCurrentSlide(slide);
+        } else {
+          Slide.delete(ctrl.video()).then(function(response) {
+            slickCarousel.removeSlide();
+            ctrl.refreshSlider(ctrl.video().slides)
+            var slide = _.first(ctrl.video().slides)
+            slickCarousel.currentSlide(slide);
+            ctrl.setCurrentSlide(slide);
+          }, function(response) {
+            ctrl.errors(response.errors);
+          })
+        }
       };
 
       ctrl.newSlide = function(event) {
-        slickCarousel.currentSlide(Slide.resetModel());
-        ctrl.slider().set([slickCarousel.currentSlide().start, slickCarousel.currentSlide().end]);
-        ctrl.isNewRecord(true);
+        event.preventDefault();
+
+        if(ctrl.isNewRecord()) {
+          swal(
+            'Current slide',
+            'has not been saved',
+            'warning'
+          );
+
+          return;
+        }
+
+        var handles = ctrl.slider().get();
+        var lastValue = 0;
+
+        if(_.isArray(handles)) {
+          lastValue = _.round(_.last(handles));
+        } else {
+          lastValue = _.round(handles);
+        }
+
+        var slide = Slide.resetModel({
+          start: lastValue + 10
+        });
+
+        slickCarousel.addSlide(slide);
+        slickCarousel.currentSlide(slide);
+        ctrl.refreshSlider(
+          ctrl.video().slides
+          // _.concat(ctrl.video().slides, slide)
+        );
+        ctrl.setCurrentSlide(slide);
+      };
+
+      ctrl.setCurrentSlide = function(slide) {
+        var duration = new Date(slide.start * 1000).toISOString().substr(11, 8);
+
+        m.startComputation();
+        ctrl.svalue(duration);
+        m.endComputation();
+
+        Slide.resetModel(slide);
+        ctrl.focusHandle(_.findIndex(ctrl.video().slides, slide));
+        ctrl.isNewRecord(false);
+      };
+
+      ctrl.refreshSlider = function(slides) {
+        console.log(slides);
+        ctrl.slider().destroy();
+        ctrl.slider(Slider.init('slider', {
+          start: slides.map(function(slide) {
+            return slide.start;
+          }),
+          max: 180, // ctrl.player.getDuration(),
+          onChange: ctrl.onChangeSlider,
+          onUpdate: ctrl.onUpdateSlider
+        }));
+      };
+
+      ctrl.focusHandle = function(index) {
+        var origins = ctrl.slider().target.getElementsByClassName('noUi-origin');
+        _.forEach(origins, function(element, idx) {
+          if(idx !== index) {
+            element.setAttribute('disabled', true);
+          } else {
+            element.removeAttribute('disabled');
+          }
+        });
       };
 
       Video.bindProviders();

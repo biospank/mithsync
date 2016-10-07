@@ -9,8 +9,10 @@ var slickCarousel = (function() {
 
   return {
     currentSlide: function(slide) {
-      if (arguments.length)
+      if (arguments.length) {
         carousel.currentSlide = slide;
+        m.redraw();
+      }
 
       return carousel.currentSlide;
     },

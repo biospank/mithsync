@@ -14,7 +14,6 @@ defmodule Videosync.SlideView do
       url: slide.url,
       thumb_url: slide.thumb_url,
       start: slide.start,
-      end: slide.end,
       video_id: slide.video_id}
   end
 end
