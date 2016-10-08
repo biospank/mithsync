@@ -131,6 +131,7 @@ var editVideo = (function() {
             m("button[type=submit]", {
               onclick: function(event) {
                 event.preventDefault();
+                // recuperare il video aggiornato con le slides
                 videoPreview.show(ctrl.video());
               },
               class: 'btn btn-success',
@@ -141,9 +142,9 @@ var editVideo = (function() {
       ]),
       m(slickCarousel, {
         selectCallback: function(slide) {
-          ctrl.setCurrentSlide(slide)
+          ctrl.highlightSlide(slide)
         }
-      }, ctrl.video().slides)
+      }, slickCarousel.slides())
     ];
   };
 
@@ -194,7 +195,7 @@ var editVideo = (function() {
           //
           // ctrl.player.on('ready', function(event) {
           //   ctrl.slider(Slider.init('slider', {
-          //     start: ctrl.video().slides.map(function(slide) {
+          //     start: slickCarousel.slides().map(function(slide) {
           //       return slide.start;
           //     }),
           //     max: ctrl.player.getDuration(),
@@ -204,7 +205,7 @@ var editVideo = (function() {
           // });
 
           ctrl.slider(Slider.init('slider', {
-            start: ctrl.video().slides.map(function(slide) {
+            start: slickCarousel.slides().map(function(slide) {
               return slide.start;
             }),
             max: 180,
@@ -212,7 +213,7 @@ var editVideo = (function() {
             onUpdate: ctrl.onUpdateSlider
           }));
 
-          ctrl.setCurrentSlide(_.first(ctrl.video().slides));
+          ctrl.highlightSlide(_.first(slickCarousel.slides()));
 
           // ctrl.player.on('error', function(error) {
           //   console.log(error);
@@ -231,7 +232,8 @@ var editVideo = (function() {
           ctrl.videoInfo(Video.info(ctrl.video().url));
           // this is important to be here: it renders correctly
           // the current slide
-          slickCarousel.currentSlide(_.first(ctrl.video().slides));
+          slickCarousel.slides(video.data.slides)
+          slickCarousel.currentSlide(_.first(slickCarousel.slides()));
         }, function(response) {
           ctrl.errors(response.errors);
         })
@@ -243,8 +245,10 @@ var editVideo = (function() {
         if(Slide.isNewRecord()) {
           if(Slide.validate()) {
             return Slide.create(ctrl.video()).then(function(response) {
-              // slickCarousel.addSlide(response.data);
-              // slickCarousel.currentSlide(Slide.resetModel());
+              swal({
+                type: 'success',
+                title: 'Slide saved!',
+              });
             }, function(response) {
               ctrl.errors(response.errors);
             })
@@ -274,17 +278,17 @@ var editVideo = (function() {
 
         if(Slide.isNewRecord()) {
           slickCarousel.removeSlide();
-          ctrl.refreshSlider(ctrl.video().slides)
-          var slide = _.first(ctrl.video().slides)
+          ctrl.refreshSlider(slickCarousel.slides())
+          var slide = _.first(slickCarousel.slides())
           slickCarousel.currentSlide(slide);
-          ctrl.setCurrentSlide(slide);
+          ctrl.highlightSlide(slide);
         } else {
           Slide.delete(ctrl.video()).then(function(response) {
             slickCarousel.removeSlide();
-            ctrl.refreshSlider(ctrl.video().slides)
-            var slide = _.first(ctrl.video().slides)
+            ctrl.refreshSlider(slickCarousel.slides())
+            var slide = _.first(slickCarousel.slides())
             slickCarousel.currentSlide(slide);
-            ctrl.setCurrentSlide(slide);
+            ctrl.highlightSlide(slide);
           }, function(response) {
             ctrl.errors(response.errors);
           })
@@ -294,24 +298,7 @@ var editVideo = (function() {
       ctrl.newSlide = function(event) {
         event.preventDefault();
 
-        if(Slide.isNewRecord()) {
-          swal(
-            'Current slide',
-            'has not been saved',
-            'warning'
-          );
-
-          return;
-        }
-
-        var handles = ctrl.slider().get();
-        var lastValue = 0;
-
-        if(_.isArray(handles)) {
-          lastValue = _.round(_.last(handles));
-        } else {
-          lastValue = _.round(handles);
-        }
+        var lastValue = _.last(slickCarousel.slides()).start;
 
         var slide = Slide.resetModel({
           start: lastValue + 10
@@ -320,13 +307,12 @@ var editVideo = (function() {
         slickCarousel.addSlide(slide);
         slickCarousel.currentSlide(slide);
         ctrl.refreshSlider(
-          ctrl.video().slides
-          // _.concat(ctrl.video().slides, slide)
+          slickCarousel.slides()
         );
-        ctrl.setCurrentSlide(slide);
+        ctrl.highlightSlide(slide);
       };
 
-      ctrl.setCurrentSlide = function(slide) {
+      ctrl.highlightSlide = function(slide) {
         var duration = new Date(slide.start * 1000).toISOString().substr(11, 8);
 
         m.startComputation();
@@ -334,11 +320,10 @@ var editVideo = (function() {
         m.endComputation();
 
         Slide.resetModel(slide);
-        ctrl.focusHandle(_.findIndex(ctrl.video().slides, slide));
+        ctrl.focusHandle(_.findIndex(slickCarousel.slides(), slide));
       };
 
       ctrl.refreshSlider = function(slides) {
-        console.log(slides);
         ctrl.slider().destroy();
         ctrl.slider(Slider.init('slider', {
           start: slides.map(function(slide) {

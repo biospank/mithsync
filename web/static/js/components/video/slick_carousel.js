@@ -17,7 +17,6 @@ var slickCarousel = (function() {
     currentSlide: function(slide) {
       if (arguments.length) {
         carousel.currentSlide = slide;
-        // m.redraw();
       }
 
       return carousel.currentSlide;
@@ -26,9 +25,7 @@ var slickCarousel = (function() {
       carousel.slides.push(slide);
     },
     removeSlide: function() {
-      _.remove(carousel.slides, function(slide) {
-        return slide.id === carousel.currentSlide.id;
-      });
+      _.remove(carousel.slides, carousel.currentSlide);
     },
     view: function(ctrl, args, slides) {
       carousel.slides = slides;
