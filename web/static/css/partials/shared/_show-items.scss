@@ -1,0 +1,15 @@
+.show-items {
+  margin-bottom: 25px;
+  a, button {
+    background-color: transparent;
+    border: 0;
+    border-radius: 3px;
+    @include spaces(5px 10px, 0 0 0 10px);
+    @include box-shadow(1px 2px 3px #d5d5d5);
+    @include font-style(18px, $grey-superdark);
+    @include transition(color 0.3s ease);
+    &:hover, &.active {
+      color: $mainColor;
+    }
+  }
+}

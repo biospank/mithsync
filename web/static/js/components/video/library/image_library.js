@@ -147,6 +147,14 @@ var imageLibrary = (function() {
           config: ctrl.initializeDropper
         }),
         m("section", { class: "slidesheet" }, [
+          m("div", { class: "show-items text-right" }, [
+            m("button", { class: "active" }, [
+              m("i", { class: "fa fa-th-large" })
+            ]),
+            m("button", [
+              m("i", { class: "fa fa-th-list" })
+            ])
+          ]),
           m("div", { class: "row" }, [
             imageView(ctrl)
           ])

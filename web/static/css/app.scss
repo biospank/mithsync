@@ -1,21 +1,26 @@
 @import "../vendor/css/bootstrap";
 @import "./mixin/custom-mixin";
-@import "./partials/utilities/default-styles";
-@import "./partials/utilities/variables";
-@import "./partials/utilities/buttons";
-@import "./partials/utilities/modals";
-@import "./partials/utilities/pagination";
-@import "./partials/utilities/bootstrap-bug";
-@import "./partials/utilities/not-responsive";
-@import "./partials/utilities/badge";
+@import "./partials/default-styles";
+@import "./partials/variables";
+
+@import "./partials/widgets/buttons";
+@import "./partials/widgets/modals";
+@import "./partials/widgets/pagination";
+@import "./partials/widgets/badge";
+
+@import "./partials/bugfix/bootstrap-bug";
+@import "./partials/bugfix/not-responsive";
+
+@import "./partials/shared/show-items";
+
 @import "./partials/layout/top-bar";
 @import "./partials/layout/breadcrumb-bar";
 @import "./partials/layout/breadcrumb";
 @import "./partials/layout/page-search-form";
-//@import "./partials/layout/side-bar-nav";
 @import "./partials/layout/user-avatar";
 @import "./partials/layout/scaffold";
 @import "./partials/layout/main-nav";
+
 @import "./partials/shared/search-form";
 @import "./partials/shared/socials-group";
 @import "./partials/shared/slidesheet";
@@ -25,14 +30,14 @@
 @import "./partials/shared/customized-reveal";
 @import "./partials/shared/customized-loader";
 @import "./partials/shared/wrapper";
-@import "./partials/shared/projects-list";
-@import "./partials/shared/videos-list";
+
+@import "./partials/projects/projects-list";
+
 //@import "./partials/library/thumb-libraryitem";
 
-//@import "./partials/video/projects-list";
+@import "./partials/video/videos-list";
 @import "./partials/video/noui-customized";
 @import "./partials/video/edit";
 @import "./partials/video/sidebar-video-edit";
-// @import "./partials/shared/plus-list";
 
 @import "./partials/dashboard/dashboard";
