@@ -48,12 +48,12 @@ var Video = {
       }
     });
   },
-  delete: function(id) {
+  delete: function(video) {
     return m.request(
       {
         method: "DELETE",
         url: Videosync.apiBaseUrl() +
-          this.url + "/" + id,
+          _.replace(this.url, 'projectId', video.project_id) + "/" + video.id,
         config: function(xhr) {
           xhr.setRequestHeader("accept", "application/json");
           xhr.setRequestHeader("Authorization", Videosync.realm + " " + Session.token())

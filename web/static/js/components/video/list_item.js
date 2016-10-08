@@ -5,7 +5,7 @@ var listItem = {
     var ctrl = this;
 
     ctrl.delete = function() {
-      Video.delete(ctrl.video.id).then(function() {
+      Video.delete(ctrl.video).then(function() {
         parent.getVideos(
           _.assign(
             parent.pageInfo.defaultParams || {},

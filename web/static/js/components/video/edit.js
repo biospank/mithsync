@@ -35,12 +35,12 @@ var editVideo = (function() {
         m("section", { id: "video-container" }, [
           m(".row", [
             m(".col-xs-6", [
-              // m(videoPlayback, {
-              //   provider: ctrl.videoInfo().provider,
-              //   videoId: ctrl.videoInfo().videoId,
-              //   onReady: ctrl.initPlayer
-              // })
-              m("div")
+              m(videoPlayback, {
+                provider: ctrl.videoInfo().provider,
+                videoId: ctrl.videoInfo().videoId,
+                onReady: ctrl.initPlayer
+              })
+              // m("div")
               // m(".video_player",
               //   {
               //     "data-type": "youtube", //"vimeo",
@@ -64,7 +64,7 @@ var editVideo = (function() {
                   href: "#"
                 }, [
                   m("img", {
-                    src: slickCarousel.currentSlide().url,
+                    src: slickCarousel.currentSlide() ? slickCarousel.currentSlide().url : "/images/contentplaceholder.png",
                     class: "img-responsive"
                   })
                 ])
@@ -97,11 +97,9 @@ var editVideo = (function() {
                     confirmButtonText: 'Yes, delete it!'
                   }).then(function() {
                     ctrl.deleteSlide();
-                    ctrl.isNewRecord(true);
                   })
                 },
-                class: 'btn btn-danger btn-square' + (ctrl.isNewRecord() ? ' disabled' : ''),
-                disabled: ctrl.isNewRecord(),
+                class: 'btn btn-danger btn-square',
                 title: "Delete",
                 "data-toggle": "tooltip",
                 "data-placement": "top",
@@ -197,6 +195,15 @@ var editVideo = (function() {
           //     onUpdate: ctrl.onUpdateSlider
           //   }));
           // });
+
+          if(_.isEmpty(slickCarousel.slides())) {
+            var slide = Slide.resetModel({
+              start: 0
+            });
+
+            slickCarousel.addSlide(slide);
+            slickCarousel.currentSlide(slide);
+          }
 
           ctrl.slider(Slider.init('slider', {
             start: slickCarousel.slides().map(function(slide) {
