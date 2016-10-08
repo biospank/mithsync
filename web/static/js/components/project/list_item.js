@@ -65,8 +65,19 @@ var listItem = {
               m("a", {
                 class: "btn btn-danger btn-square",
                 onclick: function() {
-                  //this.editMode(true);
-                }
+                  swal({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    showLoaderOnConfirm: true,
+                    confirmButtonColor: '#75c4cb',
+                    cancelButtonColor: '#9b0202',
+                    confirmButtonText: 'Yes, delete it!'
+                  }).then(function() {
+                    parent.deleteProject(this.project())
+                  }.bind(this), function() {})
+                }.bind(this)
               }, [
                 m("i", { class: "fa fa-trash", "aria-hidden": true })
               ])

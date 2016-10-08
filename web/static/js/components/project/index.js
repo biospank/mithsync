@@ -72,6 +72,14 @@ var projectList = {
       });
     };
 
+    ctrl.deleteProject = function(project) {
+      return Project.delete(project.id).then(function() {
+        m.route('/projects');
+      }, function(response) {
+        ctrl.errors(response.errors);
+      })
+    };
+
     ctrl.getProjects(
       ctrl.pageInfo.defaultParams || {},
       ctrl.requestOptions
@@ -97,7 +105,7 @@ var projectList = {
           })
         ]),
         m("div", { class: "pull-right" }, [
-          m("button", { 
+          m("button", {
             class: "btn btn-success btn-md",
             onclick: function() {
               swal({
