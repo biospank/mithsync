@@ -16,6 +16,14 @@ var breadcrumb = {
       'library' : {
         'name'  : 'Library',
         'urlTemplate'   : "/projects/<%= m.route.param('projectId') %>/videos/<%= m.route.param('videoId') %>/library"
+      },
+      'faq' : {
+        'name' : 'Faq',
+        'urlTemplate'  : '/faq'
+      },
+      'userprofile' : {
+        'name' : 'User',
+        'urlTemplate'  : '/userprofile'
       }
     };
 
