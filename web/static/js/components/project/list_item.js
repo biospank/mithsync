@@ -27,8 +27,15 @@ var listItem = {
                 config: function(element, isInit) {
                   if(!isInit)
                     $(element).focus()
-                }}),
-              m("a", { href: "#", class: "input-group-addon", id: "change-text" }, [
+                }
+              }),
+              m("a", {
+                onclick: function() {
+                  this.editMode(false);
+                }.bind(this),
+                class: "input-group-addon",
+                id: "change-text"
+              }, [
                 m("i", { class: "fa fa-close" })
               ])
             ])
