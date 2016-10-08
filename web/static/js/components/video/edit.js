@@ -86,18 +86,20 @@ var editVideo = (function() {
               ]),
               m("button[type=submit]", {
                 onclick: function() {
-                  swal({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    type: 'warning',
-                    showCancelButton: true,
-                    showLoaderOnConfirm: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-                  }).then(function() {
-                    ctrl.deleteSlide();
-                  })
+                  if(slickCarousel.slides().length > 1) {
+                    swal({
+                      title: 'Are you sure?',
+                      text: "You won't be able to revert this!",
+                      type: 'warning',
+                      showCancelButton: true,
+                      showLoaderOnConfirm: true,
+                      confirmButtonColor: '#3085d6',
+                      cancelButtonColor: '#d33',
+                      confirmButtonText: 'Yes, delete it!'
+                    }).then(function() {
+                      ctrl.deleteSlide();
+                    })
+                  }
                 },
                 class: 'btn btn-danger btn-square',
                 title: "Delete",
@@ -278,22 +280,22 @@ var editVideo = (function() {
         Slide.resetModel(slickCarousel.currentSlide());
 
         if(Slide.isNewRecord()) {
-          slickCarousel.removeSlide();
-          ctrl.refreshSlider(slickCarousel.slides())
-          var slide = _.first(slickCarousel.slides())
-          slickCarousel.currentSlide(slide);
-          ctrl.highlightSlide(slide);
+          ctrl.postDeleteAction();
         } else {
           Slide.delete(ctrl.video()).then(function(response) {
-            slickCarousel.removeSlide();
-            ctrl.refreshSlider(slickCarousel.slides())
-            var slide = _.first(slickCarousel.slides())
-            slickCarousel.currentSlide(slide);
-            ctrl.highlightSlide(slide);
+            ctrl.postDeleteAction();
           }, function(response) {
             ctrl.errors(response.errors);
           })
         }
+      };
+
+      ctrl.postDeleteAction = function() {
+        slickCarousel.removeSlide();
+        ctrl.refreshSlider(slickCarousel.slides())
+        var slide = _.first(slickCarousel.slides())
+        slickCarousel.currentSlide(slide);
+        ctrl.highlightSlide(slide);
       };
 
       ctrl.newSlide = function(event) {
