@@ -8,10 +8,10 @@ var Slider = {
   init: function(element, opts) {
     var sliderContainer = document.getElementById(element);
 
-    return noUiSlider.create(sliderContainer, {
-    	start: [0, 40],
-      connect: true,
-      behaviour: 'drag',
+    var slider = noUiSlider.create(sliderContainer, {
+    	start: opts.start,
+      connect: (opts.start.length > 1) ? _.concat(false, _.times(opts.start.length, _.constant(true))) :  true,
+      // behaviour: 'drag',
       margin: 5,
       step: 1,
       // tooltips: [
@@ -38,6 +38,11 @@ var Slider = {
     		// })
     	}
     });
+
+    slider.on('change', opts.onChange);
+    slider.on('update', opts.onUpdate);
+
+    return slider;
   }
 }
 

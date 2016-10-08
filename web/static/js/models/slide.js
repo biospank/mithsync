@@ -3,7 +3,7 @@ import Session from './session';
 
 var Slide = (function() {
   const slidePlaceHolder = "/images/contentplaceholder.png";
-  var url = '/videos/videoId/slides';
+  var url = '/projects/projectId/videos/videoId/slides';
   var model = {};
 
   return {
@@ -16,23 +16,32 @@ var Slide = (function() {
     },
     resetModel: function(slide) {
       if(slide !== undefined) {
-        model = slide;
+        model = _.assign({
+          url: slidePlaceHolder,
+          thumb_url: slidePlaceHolder,
+          start: 0
+        }, slide);
       } else {
         model = {
           url: slidePlaceHolder,
-          thumb_url: '',
-          start: 0,
-          end: 40
+          thumb_url: slidePlaceHolder,
+          start: 0
         };
       }
 
       return model;
     },
-    create: function(videoId) {
+    isNewRecord: function() {
+      return model.id ? false : true;
+    },
+    create: function(video) {
       return m.request({
         method: "POST",
         url: Videosync.apiBaseUrl() +
-          _.replace(url, 'videoId', videoId),
+          _.replace(
+            _.replace(url, 'projectId', video.project_id),
+            'videoId', video.id
+          ),
         data: { slide: model },
         config: function(xhr) {
           xhr.setRequestHeader("accept", "application/json");
@@ -41,11 +50,11 @@ var Slide = (function() {
         }
       });
     },
-    update: function(videoId, id) {
+    update: function(video) {
       return m.request({
         method: "PUT",
         url: Videosync.apiBaseUrl() +
-          _.replace(url, 'videoId', videoId) + "/" + id,
+          _.replace(_.replace(url, 'projectId', video.project_id), 'videoId', video.id) + "/" + model.id,
         data: { slide: model },
         config: function(xhr) {
           xhr.setRequestHeader("accept", "application/json");
@@ -54,26 +63,23 @@ var Slide = (function() {
         }
       });
     },
-    show: function(videoId, id) {
+    show: function(video) {
       return m.request({
         method: "GET",
         url: Videosync.apiBaseUrl() +
-          _.replace(url, 'videoId', videoId) + "/" + id,
+          _.replace(_.replace(url, 'projectId', video.project_id), 'videoId', video.id) + "/" + model.id,
         config: function(xhr) {
           xhr.setRequestHeader("accept", "application/json");
           xhr.setRequestHeader("Authorization", Videosync.realm + " " + Session.token())
         }
       });
     },
-    delete: function(videoId, id) {
-      // console.log(videoId);
-      // console.log(id);
-
+    delete: function(video) {
       return m.request(
         {
           method: "DELETE",
           url: Videosync.apiBaseUrl() +
-            _.replace(url, 'videoId', videoId) + "/" + id,
+            _.replace(_.replace(url, 'projectId', video.project_id), 'videoId', video.id) + "/" + model.id,
           config: function(xhr) {
             xhr.setRequestHeader("accept", "application/json");
             xhr.setRequestHeader("Authorization", Videosync.realm + " " + Session.token())

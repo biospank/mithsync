@@ -8,9 +8,16 @@ var slickCarousel = (function() {
   carousel.currentSlide = Slide.resetModel();
 
   return {
-    currentSlide: function(slide) {
+    slides: function(slides) {
       if (arguments.length)
+        carousel.slides = slides
+
+      return carousel.slides;
+    },
+    currentSlide: function(slide) {
+      if (arguments.length) {
         carousel.currentSlide = slide;
+      }
 
       return carousel.currentSlide;
     },
@@ -18,9 +25,7 @@ var slickCarousel = (function() {
       carousel.slides.push(slide);
     },
     removeSlide: function() {
-      _.remove(carousel.slides, function(slide) {
-        return slide.id === carousel.currentSlide.id;
-      });
+      _.remove(carousel.slides, carousel.currentSlide);
     },
     view: function(ctrl, args, slides) {
       carousel.slides = slides;
