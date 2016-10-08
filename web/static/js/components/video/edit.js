@@ -94,7 +94,6 @@ var editVideo = (function() {
                   confirmButtonText: 'Yes, delete it!'
                 }).then(function() {
                   ctrl.deleteSlide();
-                  ctrl.isNewRecord(true);
                 })
               },
               class: 'btn btn-danger',
@@ -153,7 +152,6 @@ var editVideo = (function() {
       var ctrl = this;
 
       ctrl.video = m.prop({});
-      ctrl.isNewRecord = m.prop(true);
       ctrl.videoInfo = m.prop({});
       ctrl.errors = m.prop({});
       ctrl.player = {};
@@ -242,12 +240,11 @@ var editVideo = (function() {
       ctrl.saveSlide = function() {
         Slide.resetModel(slickCarousel.currentSlide());
 
-        if(ctrl.isNewRecord()) {
+        if(Slide.isNewRecord()) {
           if(Slide.validate()) {
             return Slide.create(ctrl.video()).then(function(response) {
               // slickCarousel.addSlide(response.data);
               // slickCarousel.currentSlide(Slide.resetModel());
-              // ctrl.isNewRecord(true);
             }, function(response) {
               ctrl.errors(response.errors);
             })
@@ -275,7 +272,7 @@ var editVideo = (function() {
       ctrl.deleteSlide = function(event) {
         Slide.resetModel(slickCarousel.currentSlide());
 
-        if(ctrl.newRecord()) {
+        if(Slide.isNewRecord()) {
           slickCarousel.removeSlide();
           ctrl.refreshSlider(ctrl.video().slides)
           var slide = _.first(ctrl.video().slides)
@@ -297,7 +294,7 @@ var editVideo = (function() {
       ctrl.newSlide = function(event) {
         event.preventDefault();
 
-        if(ctrl.isNewRecord()) {
+        if(Slide.isNewRecord()) {
           swal(
             'Current slide',
             'has not been saved',
@@ -338,7 +335,6 @@ var editVideo = (function() {
 
         Slide.resetModel(slide);
         ctrl.focusHandle(_.findIndex(ctrl.video().slides, slide));
-        ctrl.isNewRecord(false);
       };
 
       ctrl.refreshSlider = function(slides) {

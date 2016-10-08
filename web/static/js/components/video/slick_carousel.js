@@ -8,10 +8,16 @@ var slickCarousel = (function() {
   carousel.currentSlide = Slide.resetModel();
 
   return {
+    slides: function(slides) {
+      if (arguments.length)
+        carousel.slides = slides
+
+      return carousel.slides;
+    },
     currentSlide: function(slide) {
       if (arguments.length) {
         carousel.currentSlide = slide;
-        m.redraw();
+        // m.redraw();
       }
 
       return carousel.currentSlide;

@@ -31,6 +31,9 @@ var Slide = (function() {
 
       return model;
     },
+    isNewRecord: function() {
+      return model.id ? false : true;
+    },
     create: function(video) {
       return m.request({
         method: "POST",
