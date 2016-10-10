@@ -98,7 +98,7 @@ var editVideo = (function() {
                       confirmButtonText: 'Yes, delete it!'
                     }).then(function() {
                       ctrl.deleteSlide();
-                    })
+                    }, function() {})
                   }
                 },
                 class: 'btn btn-danger btn-square',
@@ -200,7 +200,8 @@ var editVideo = (function() {
 
           if(_.isEmpty(slickCarousel.slides())) {
             var slide = Slide.resetModel({
-              start: 0
+              start: 0,
+              connectColor: ctrl.randomColor()
             });
 
             slickCarousel.addSlide(slide);
@@ -217,6 +218,8 @@ var editVideo = (function() {
           }));
 
           ctrl.highlightSlide(_.first(slickCarousel.slides()));
+
+          ctrl.paintConnects();
 
           // ctrl.player.on('error', function(error) {
           //   console.log(error);
@@ -304,7 +307,8 @@ var editVideo = (function() {
         var lastValue = _.last(slickCarousel.slides()).start;
 
         var slide = Slide.resetModel({
-          start: lastValue + 10
+          start: lastValue + 10,
+          connectColor: ctrl.randomColor()
         });
 
         slickCarousel.addSlide(slide);
@@ -336,6 +340,8 @@ var editVideo = (function() {
           onChange: ctrl.onChangeSlider,
           onUpdate: ctrl.onUpdateSlider
         }));
+
+        ctrl.paintConnects();
       };
 
       ctrl.focusHandle = function(index) {
@@ -346,6 +352,20 @@ var editVideo = (function() {
           } else {
             element.removeAttribute('disabled');
           }
+        });
+      };
+
+      ctrl.paintConnects = function() {
+        var connects = ctrl.slider().target.getElementsByClassName('noUi-connect');
+        _.forEach(connects, function(element, idx) {
+          element.style.backgroundColor = slickCarousel.slides()[idx].connectColor;
+        });
+      };
+
+      ctrl.randomColor = function() {
+        return randomColor({
+          luminosity: 'bright',
+          hue: 'random'
         });
       };
 

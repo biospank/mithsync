@@ -9,8 +9,16 @@ var slickCarousel = (function() {
 
   return {
     slides: function(slides) {
-      if (arguments.length)
-        carousel.slides = slides
+      if (arguments.length) {
+        carousel.slides = slides.map(function(slide) {
+          slide.connectColor = randomColor({
+            luminosity: 'bright',
+            hue: 'random'
+          });
+
+          return slide;
+        })
+      }
 
       return carousel.slides;
     },
