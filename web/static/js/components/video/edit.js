@@ -132,13 +132,13 @@ var editVideo = (function() {
               ])
             ])
           ])
-        ])
-      ]),
-      m(slickCarousel, {
-        selectCallback: function(slide) {
-          ctrl.highlightSlide(slide)
-        }
-      }, slickCarousel.slides())
+        ]),
+        m(slickCarousel, {
+          selectCallback: function(slide) {
+            ctrl.highlightSlide(slide)
+          }
+        }, slickCarousel.slides())
+      ])
     ];
   };
 

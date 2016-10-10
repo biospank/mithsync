@@ -146,7 +146,7 @@ var imageLibrary = (function() {
           id: "dropper",
           config: ctrl.initializeDropper
         }),
-        m("section", { class: "slidesheet" }, [
+        m("section", { class: "library" }, [
           m("div", { class: "show-items text-right" }, [
             m("button", { class: "active" }, [
               m("i", { class: "fa fa-th-large" })

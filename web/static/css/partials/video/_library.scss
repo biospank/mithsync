@@ -1,0 +1,157 @@
+.library {
+  @include spaces(0, 0 0 0);
+  .row {
+    margin-left: -5px;
+    margin-right: -5px;
+    & > div[class^="col"] {
+      padding: 0 5px;
+    }
+  }
+  .img-thumbnail {
+    max-height: 130px;
+    //@include size(100%, 110px);
+    overflow: hidden;
+    @include border(1px, #D4D4D4);
+    @include box-shadow(0 1px 4px rgba(0, 0, 0, 0.065));
+    margin-bottom: 5px;
+    padding: 0;
+    position: relative;
+    a {
+      display: block;
+      cursor: pointer;
+      @include size(100%, 100%);
+      img {
+        @include size(100%, 100%);
+      }
+    }
+    &.active, &:hover {
+      @include border($mainColor, 2px);
+      @include box-shadow(1px 2px 10px #000);
+    }
+    &__buttons {
+      display: none;
+      @include position(left, 50%, top, 50%);
+      margin-left: -13px;
+      margin-top: -13px;
+      .btn {
+        border-radius: 2px;
+        background-color: $mainColor;
+        padding: 0;
+        @include size(25px, 25px);
+        @include box-shadow(none);
+        .fa {
+          font-size: 10px;
+          color: white;
+          line-height: 25px;
+        }
+        &:hover {
+          background-color: darken($mainColor, 30%);
+        }
+      }
+    }
+    &:hover {
+      .img-thumbnail__buttons {
+        display: block;
+        .btn {
+          &:first-child {
+            @include animation(animationFramesFirst ease 0.5s, 1, 50% 50%, forwards);
+          }
+        }
+      }
+
+      //Btn from left
+      @keyframes animationFramesFirst{
+        0% {
+          transform: translate(-354px,0px);
+        }
+        100% {
+          transform: translate(0px,0px);
+        }
+      }
+
+      @-moz-keyframes animationFramesFirst{
+        0% {
+          -moz-transform: translate(-354px,0px);
+        }
+        100% {
+          -moz-transform: translate(0px,0px);
+        }
+      }
+
+      @-webkit-keyframes animationFramesFirst {
+        0% {
+          -webkit-transform: translate(-354px,0px);
+        }
+        100% {
+          -webkit-transform: translate(0px,0px);
+        }
+      }
+
+      @-o-keyframes animationFramesFirst {
+        0% {
+          -o-transform: translate(-354px,0px);
+        }
+        100% {
+          -o-transform: translate(0px,0px);
+        }
+      }
+
+      @-ms-keyframes animationFramesFirst {
+        0% {
+          -ms-transform: translate(-354px,0px);
+        }
+        100% {
+          -ms-transform: translate(0px,0px);
+        }
+      }
+      //end
+
+      //Btn from right
+
+      @keyframes animationFramesLast{
+        0% {
+          transform: translate(303px,0px);
+        }
+        100% {
+          transform: translate(2px,0px);
+        }
+      }
+
+      @-moz-keyframes animationFramesLast{
+        0% {
+          -moz-transform: translate(303px,0px);
+        }
+        100% {
+          -moz-transform: translate(2px,0px);
+        }
+      }
+
+      @-webkit-keyframes animationFramesLast {
+        0% {
+          -webkit-transform: translate(303px,0px);
+        }
+        100% {
+          -webkit-transform: translate(2px,0px);
+        }
+      }
+
+      @-o-keyframes animationFramesLast {
+        0% {
+          -o-transform: translate(303px,0px);
+        }
+        100% {
+          -o-transform: translate(2px,0px);
+        }
+      }
+
+      @-ms-keyframes animationFramesLast {
+        0% {
+          -ms-transform: translate(303px,0px);
+        }
+        100% {
+          -ms-transform: translate(2px,0px);
+        }
+      }
+    }
+  }
+}
