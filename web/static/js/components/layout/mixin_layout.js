@@ -9,7 +9,6 @@ var mixinLayout = function(content, layout) {
   var layouts = {
     login: function(content) {
       return [
-        //m.component(topNav),
         m('main', { class: 'main-container'}, [
           m('.container', content)
         ])
@@ -18,14 +17,7 @@ var mixinLayout = function(content, layout) {
     standard: function(content) {
       return [
         m.component(topBar),
-        m("section", { class: "clearfix", id: "wrapper" }, {
-          config: function() {
-            $("#menu-toggle").click(function(e) {
-                e.preventDefault();
-                $("#wrapper").toggleClass("toggled");
-            });
-          }
-        }, [
+        m("section", { class: "clearfix", id: "wrapper" }, [
           m("aside", { id: "sidebar-wrapper" }, [
             m("form", { class: "navbar-form page-search-form" }, [
               m(".input-group", [
@@ -53,14 +45,20 @@ var mixinLayout = function(content, layout) {
       return [
         m.component(topBar),
         m.component(breadcrumbBar),
-        m("section", { class: "clearfix", id: "wrapper" }, {
-          config: function() {
-            $("#menu-toggle").click(function(e) {
-                e.preventDefault();
-                $("#wrapper").toggleClass("toggled");
-            });
-          }
-        }, [
+        m("section", { class: "clearfix", id: "wrapper" }, [
+          m("aside", { id: "sidebar-wrapper" }, [
+            m("form", { class: "navbar-form page-search-form" }, [
+              m(".input-group", [
+                m("input", { type: "text", class: "form-control", placeholder: "Search" }),
+                m("span", { class: "input-group-btn" }, [
+                  m("button", { type: "submit", class: "btn btn-default" }, [
+                    m("img", { src: "/images/icons/search.png" })
+                  ])
+                ])
+              ])
+            ]),
+            m.component(mainNav)
+          ]),
           m("section", { id: "page-content-wrapper" }, [
             content
           ]),
