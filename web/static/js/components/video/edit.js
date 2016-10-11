@@ -363,10 +363,27 @@ var editVideo = (function() {
       };
 
       ctrl.randomColor = function() {
-        return randomColor({
-          luminosity: 'bright',
-          hue: 'random'
-        });
+        return _.sample(
+          Please.make_color(
+            {
+              golden: false,
+              base_color: _.sample([
+                'LAVENDER',
+                'MEDIUMPURPLE',
+                'LIGHTSEAGREEN',
+                'MEDIUMTURQUOISE',
+                'LIGHTSTEELBLUE',
+                'LIGHTBLUE',
+                'DEEPSKYBLUE',
+                'GAINSBORO'
+              ]),
+              saturation: .2,
+              value: .8,
+              colors_returned: 10,
+              // format: 'rgb-string'
+            }
+          )
+        );
       };
 
       Video.bindProviders();
