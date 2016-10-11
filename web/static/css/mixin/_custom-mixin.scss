@@ -58,3 +58,15 @@
   -ms-transform-origin: $transform-origin;
   -ms-animation-fill-mode:$animation-fill-mode; /*IE 10+*/
 }
+
+@mixin zoom($val, $origin: 0 0) {
+  zoom: $val;
+  -moz-transform: scale($val);
+  -moz-transform-origin: $origin;
+  -o-transform: scale($val);
+  -o-transform-origin: $origin;
+  -webkit-transform: scale($val);
+  -webkit-transform-origin: $origin;
+  transform: scale($val); /* Standard Property */
+  transform-origin: $origin;  /* Standard Property */
+}

@@ -28,5 +28,16 @@
       @include border($mainColor, 2px);
       @include box-shadow(1px 2px 10px #000);
     }
+    .bookmark-color {
+      text-shadow: 1px 1px 1px #424856;
+      font-size: 20px;
+      @include position(left, 10px, top, -2px);
+      @include transition(all 0.3s ease);
+    }
+    &.active {
+      .bookmark-color {
+        @include zoom(1.3);
+      }
+    }
   }
 }
