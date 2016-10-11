@@ -37,7 +37,7 @@ var resetRequestPage = (function() {
               feedbackLabel: 'Sending...',
               style: 'btn btn-primary contour btn-lg'
             }),
-            m("a", { href: "/signin", config: m.route, class: "btn btn-link btn-lg" }, "Return to login")
+            m("a", { href: "/signin", config: m.route, class: "btn-link btn-md" }, "Return to login")
           ])
         ])
       ])

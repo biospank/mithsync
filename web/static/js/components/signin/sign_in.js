@@ -6,13 +6,13 @@ import Session from "../../models/session";
 var signIn = (function() {
   var content = function(ctrl) {
     return [
-      m("figure", { class: ".col-xs-12 .col-sm-7 .col-md-4 .center-block" }, [
+      m("figure", { class: ".col-xs-7 .col-sm-7 .col-md-4 .col-lg-3 .center-block" }, [
         m("div", { class: "text-center", id: "logo" }, [
           m("img", { src: "/images/logo.png", alt: "Zinkroo" })
         ])
       ]),
-      m(".col-xs-12 .col-sm-7 .col-md-4 .center-block", [
-        m('.wrapper', [
+      m(".col-xs-7 .col-sm-7 .col-md-4 .col-lg-3 .center-block", [
+        m('.card-wrapper', [
           m(".content", [
             m("form", { class: "light-form" }, [
               m.component(textField, {

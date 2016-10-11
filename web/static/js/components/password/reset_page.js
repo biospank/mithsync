@@ -5,11 +5,11 @@ import Password from "../../models/password";
 
 var resetPage = (function() {
   var content = function(ctrl) {
-    return m('.col-xs-12 .col-sm-7 .col-md-4 .center-block', [
+    return m('.col-xs-7 .col-sm-7 .col-md-4 .col-lg-3 .center-block', [
       m("figure", { class: "text-center", id: "logo" }, [
         m("img", { src: "/images/logo.png", alt: "Zinkroo" })
       ]),
-      m('.wrapper', [
+      m('.card-wrapper', [
         m("h2", { class: "header text-center mgv20" }, "Reset Password"),
         m(".content", [
           m("form", { class: "light-form" }, [
@@ -34,7 +34,7 @@ var resetPage = (function() {
                 action: ctrl.resetPassword,
                 label: 'Reset',
                 feedbackLabel: 'Executing...',
-                style: 'btn btn-primary btn-lg'
+                style: 'btn btn-success btn-lg'
               })
             ])
           ])
