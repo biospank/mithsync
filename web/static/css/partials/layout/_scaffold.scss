@@ -1,6 +1,6 @@
 #wrapper {
   padding-left: 250px;
-  margin-top: 15px;
+  //margin-top: 15px;
   // add style for footer fixting
   min-height: 100%;
   /* equal to footer height */
@@ -20,57 +20,6 @@
   @include gradient-vertical($light, $dark, 0%, 100%);
 }
 
-body {
-  &.edit-layout {
-    overflow: hidden;
-    #sidebar-wrapper {
-      width: 0;
-      @include transition(width 0.5s ease);
-    }
-    .breadcrumb-bar {
-      padding-top: 30px;
-      position: fixed;
-      right: 0;
-      left: 0;
-      z-index: 5;
-      min-width: $minWidthPage;
-    }
-    #wrapper {
-      padding-right: $sidebar-video-edit-width;
-      padding-left: 0;
-      margin-top: 70px;
-      position: relative;
-      margin-bottom: 0;
-      @include transition(all 0.5s ease);
-      &.toggled {
-        // padding-left: 250px;
-        #sidebar-wrapper {
-          width: 250px;
-        }
-      }
-    }
-    #page-footer {
-      padding-left: 0;
-      display: none;
-    }
-    #page-content-wrapper {
-      overflow-y: scroll;
-      height: 100%;
-      // margin-right: ($sidebar-video-edit-width + 8px);
-      margin-right: $sidebar-video-edit-width;
-      padding-bottom: 100px;
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      @include respond-to(max-width, 970px) {
-        margin-right: ($sidebar-video-edit-width - 100px);
-      }
-    }
-  }
-}
-
 #page-content-wrapper {
   padding: 0px;
   position: relative;
@@ -84,6 +33,56 @@ body {
 }
 
 .main-container {
-  // margin: 30px 0;
-  padding: 20px;
+  padding: 40px;
+}
+
+body {
+  .edit-layout {
+    height: 100%;
+    min-width: $minWidthPage;
+    overflow: hidden;
+    #sidebar-wrapper {
+      width: 0;
+      @include transition(width 0.5s ease);
+    }
+    .breadcrumb-bar {
+      padding-top: 15px;
+      position: fixed;
+      right: 0;
+      left: 0;
+      z-index: 5;
+      min-width: $minWidthPage;
+    }
+    #wrapper {
+      padding-right: $sidebar-video-edit-width;
+      padding-left: 0;
+      margin-top: 53px;
+      position: relative;
+      margin-bottom: 0;
+      @include transition(all 0.5s ease);
+      &.toggled {
+        #sidebar-wrapper {
+          width: 250px;
+        }
+      }
+    }
+    #page-footer {
+      padding-left: 0;
+      display: none;
+    }
+    #page-content-wrapper {
+      overflow-y: scroll;
+      height: 100%;
+      margin-right: $sidebar-video-edit-width;
+      padding-bottom: 100px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      @include respond-to(max-width, 970px) {
+        margin-right: ($sidebar-video-edit-width - 100px);
+      }
+    }
+  }
 }
