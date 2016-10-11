@@ -11,6 +11,18 @@
       }
     }
   }
+  &-origin {
+    &:not([disabled="true"]) {
+      .noUi-handle {
+        border-color: red;
+      }
+    }
+    // &[disabled="true"] {
+    //   .noUi-handle {
+    //     border-color: red;
+    //   }
+    // }
+  }
   &-connect {
     background-color: $mainColor;
   }
