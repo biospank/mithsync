@@ -1,16 +1,7 @@
-.wrapper {
+.card-wrapper {
   background-color: white;
-  margin-bottom: 30px;
   @include box-shadow(0 25px 30px -13px rgba(40, 40, 40, 0.4));
-  //border-radius: 10px;
-  padding: 25px;
-  .header {
-    @include font-style(22px, #333333);
-    // padding: 15px 15px 0px;
-  }
-  .content {
-    // padding: 15px;
-  }
+  padding: 20px;
   &.bordered {
     border-radius: 4px;
     @include border(#E3E3E3);
@@ -19,5 +10,19 @@
   &.simple {
     @include box-shadow(none);
     border-radius: 4px;
+  }
+}
+
+.profile-card {
+  position: relative;
+  &__photo {}
+  &__info {
+    @include position(left, 0, bottom, 0);
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    color: white;
+    .name {}
+    .email {}
   }
 }

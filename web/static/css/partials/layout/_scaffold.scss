@@ -33,7 +33,7 @@
 }
 
 .main-container {
-  padding: 40px;
+  padding: 20px;
 }
 
 body {
@@ -41,6 +41,9 @@ body {
     height: 100%;
     min-width: $minWidthPage;
     overflow: hidden;
+    .main-container {
+      padding: 40px;
+    }
     #sidebar-wrapper {
       width: 0;
       @include transition(width 0.5s ease);
