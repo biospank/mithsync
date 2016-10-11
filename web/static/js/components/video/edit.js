@@ -8,6 +8,7 @@ import videoPlayback from "./video_playback";
 import slickCarousel from "./slick_carousel";
 import feedbackButton from "../widgets/feedback_button";
 import videoPreview from "./video_preview";
+import Color from '../../models/color';
 
 var editVideo = (function() {
 
@@ -201,7 +202,7 @@ var editVideo = (function() {
           if(_.isEmpty(slickCarousel.slides())) {
             var slide = Slide.resetModel({
               start: 0,
-              connectColor: ctrl.randomColor()
+              connectColor: Color.sample()
             });
 
             slickCarousel.addSlide(slide);
@@ -308,7 +309,7 @@ var editVideo = (function() {
 
         var slide = Slide.resetModel({
           start: lastValue + 10,
-          connectColor: ctrl.randomColor()
+          connectColor: Color.sample()
         });
 
         slickCarousel.addSlide(slide);
@@ -360,30 +361,6 @@ var editVideo = (function() {
         _.forEach(connects, function(element, idx) {
           element.style.backgroundColor = slickCarousel.slides()[idx].connectColor;
         });
-      };
-
-      ctrl.randomColor = function() {
-        return _.sample(
-          Please.make_color(
-            {
-              golden: false,
-              base_color: _.sample([
-                'LAVENDER',
-                'MEDIUMPURPLE',
-                'LIGHTSEAGREEN',
-                'MEDIUMTURQUOISE',
-                'LIGHTSTEELBLUE',
-                'LIGHTBLUE',
-                'DEEPSKYBLUE',
-                'GAINSBORO'
-              ]),
-              saturation: .2,
-              value: .8,
-              colors_returned: 10,
-              // format: 'rgb-string'
-            }
-          )
-        );
       };
 
       Video.bindProviders();
