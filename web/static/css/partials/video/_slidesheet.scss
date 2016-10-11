@@ -37,6 +37,7 @@
     &.active {
       .bookmark-color {
         @include zoom(1.3);
+        top: -3px;
       }
     }
   }

@@ -1,27 +1,22 @@
 .noUi {
-  &-horizontal {
-    .noUi-handle {
-      width: 10px;
-      left: -5px;
-      &:before {
-        left: 2px;
-      }
-      &:after {
-        left: 5px;
+  &-origin {
+    &[disabled="true"] {
+      .noUi-handle {
+        width: 10px;
+        left: -5px;
+        &:before {
+          left: 2px;
+        }
+        &:after {
+          left: 5px;
+        }
       }
     }
-  }
-  &-origin {
     &:not([disabled="true"]) {
       .noUi-handle {
-        border-color: red;
+        @include box-shadow(2px 2px 3px #424856);
       }
     }
-    // &[disabled="true"] {
-    //   .noUi-handle {
-    //     border-color: red;
-    //   }
-    // }
   }
   &-connect {
     background-color: $mainColor;
