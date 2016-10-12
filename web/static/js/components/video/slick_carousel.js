@@ -1,5 +1,6 @@
 import slickItem from './slick_item';
 import Slide from "../../models/slide";
+import Color from '../../models/color';
 
 var slickCarousel = (function() {
   var carousel = {};
@@ -11,10 +12,7 @@ var slickCarousel = (function() {
     slides: function(slides) {
       if (arguments.length) {
         carousel.slides = slides.map(function(slide) {
-          slide.connectColor = randomColor({
-            luminosity: 'bright',
-            hue: 'random'
-          });
+          slide.connectColor = Color.sample();
 
           return slide;
         })
