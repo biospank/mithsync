@@ -23,7 +23,10 @@ var listItem = {
       m("div", { class: "video-list__row media" }, [
         m("figure", { class: "poster media-left" }, [
           m("a", [
-            m("img", { src: "/images/thumb-clouderma.png", class: "media-object" })
+            m("img", {
+              src: _.isEmpty(ctrl.video.slides) ? '/images/contentplaceholder.png' : _.first(ctrl.video.slides).thumb_url, 
+              class: "media-object"
+            })
           ])
         ]),
         m("div", { class: "video-list__body media-body" }, [

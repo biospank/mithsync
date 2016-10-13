@@ -21,6 +21,7 @@ defmodule Videosync.VideoController do
       Video.own_by(user, params["project_id"])
       |> Video.filter_by(params["filter"])
       |> Video.order_by(:title)
+      |> Video.preload_slides(Slide.order_by(:start))
       |> Repo.all
 
     paged_videos = paginate(videos, params["page"])

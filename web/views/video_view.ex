@@ -3,7 +3,7 @@ defmodule Videosync.VideoView do
 
   def render("index.json", %{page: page}) do
     %{
-      data: render_many(page.entries, Videosync.VideoView, "video.json"),
+      data: render_many(page.entries, Videosync.VideoView, "video_with_slides.json"),
       page_number: page.page_number,
       page_size: page.page_size,
       total_pages: page.total_pages,
