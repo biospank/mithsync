@@ -1,8 +1,22 @@
-import Session from "../../models/session"
+import Session from "../../models/session";
+import User from "../../models/user";
 
 var mainNav = {
-  controller: function(ctrl) {
+  getCurrentUser: _.once(function() {
+    return User.getCurrent({
+      background: true,
+      initialValue: { data: { project_count: 0 } }
+    });
+  }),
+  controller: function() {
+    var user = mainNav.getCurrentUser();
+
+    user.then(m.redraw);
+
     return {
+      projectCount: function() {
+        return user().data.project_count;
+      },
       logout: function(event) {
         event.preventDefault();
         Session.reset();
@@ -32,7 +46,9 @@ var mainNav = {
           m("a", { href: "/projects", config: m.route, class: "main-nav__tab" }, [
             m("i", { class: "fa fa-film main-nav__icon" }),
             m("span", { class: "main-nav__voice" }, "Projects"),
-            m("span", { class: "badge" }, "2")
+            m("span", {
+              class: "badge"
+            }, ctrl.projectCount())
           ])
         ]),
         m("li", { class: (ctrl.isActive("/faq") ? 'active' : '') }, [

@@ -18,6 +18,11 @@ defmodule Videosync.UserController do
     render(conn, "show.json", user: user)
   end
 
+  def current(conn, _params) do
+    user = Guardian.Plug.current_resource(conn)
+    render(conn, "show.json", user: user)
+  end
+
   def update(conn, %{"id" => id, "user" => user_params}) do
     user = Repo.get!(User, id)
     changeset = User.registration_changeset(user, user_params)

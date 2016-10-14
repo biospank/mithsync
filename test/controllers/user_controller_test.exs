@@ -39,6 +39,13 @@ defmodule Videosync.UserControllerTest do
   end
 
   @tag :logged_in
+  test "shows current user", %{conn: conn, user: user} do
+    conn = get conn, current_user_path(conn, :current)
+    assert json_response(conn, 200)["data"] ==
+      %{"id" => user.id, "email" => user.email, "active" => false, "project_count" => 0}
+  end
+
+  @tag :logged_in
   test "does not show resource and instead throw error when id is nonexistent", %{conn: conn} do
     assert_error_sent 404, fn ->
       get conn, user_path(conn, :show, -1)

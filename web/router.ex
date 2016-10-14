@@ -39,6 +39,7 @@ defmodule Videosync.Router do
     pipe_through [:api, :api_auth]
 
     resources "/signout", SessionController, only: [:delete]
+    get "/users/current", UserController, :current, as: :current_user
     resources "/users", UserController, only: [:index, :show, :update, :delete]
     resources "/projects", ProjectController, only: [:index, :create, :update, :delete] do
       resources "/videos", VideoController, only: [:index, :show, :create, :update, :delete] do
