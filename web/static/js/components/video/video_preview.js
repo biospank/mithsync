@@ -1,11 +1,12 @@
 import preview from './preview';
 
 var videoPreview = (function() {
-  var currentVideo = undefined;
+  var currentVideo, currentSlides = undefined;
 
   return {
-    show: function(video) {
+    show: function(video, slides) {
       currentVideo = video;
+      currentSlides = slides;
       $("#videoPreview").fadeIn( "fast" );
     },
     controller: function() {
@@ -35,7 +36,7 @@ var videoPreview = (function() {
               m("h4.modal-title", "Video preview")
             ]),
             m(".modal-body", [
-              currentVideo ? m(preview, currentVideo) : ""
+              currentVideo ? m(preview, currentVideo, currentSlides) : ""
             ])
           ])
         ])

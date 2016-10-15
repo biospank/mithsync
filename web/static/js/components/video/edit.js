@@ -124,7 +124,7 @@ var editVideo = (function() {
               m("button[type=submit]", {
                 onclick: function(event) {
                   event.preventDefault();
-                  videoPreview.show(ctrl.video());
+                  videoPreview.show(ctrl.video(), slickCarousel.slides());
                 },
                 class: 'btn btn-success btn-square',
                 title: "Preview"
@@ -161,7 +161,8 @@ var editVideo = (function() {
       ctrl.onChangeSlider = function(values, handle, unencodedValues) {
         var currentValue = _.round(values[handle]);
         slickCarousel.currentSlide().start = currentValue;
-        // ctrl.player.seek(currentValue);
+        // to enable video
+        ctrl.player.seek(currentValue);
       };
 
       ctrl.onUpdateSlider = function(values, handle, unencodedValues) {
@@ -183,44 +184,59 @@ var editVideo = (function() {
       // is that config is a bit like DOM ready
       ctrl.initPlayer = function(element, init, context) {
         if( !init ) {
-          // ctrl.player = plyr.setup('.video_player', {
-          //   //['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'fullscreen']
-          //   controls: ['play', 'mute', 'volume', 'current-time']
-          // })[0];
+          // to enable video
+          ctrl.player = plyr.setup('.video_player', {
+            //['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'fullscreen']
+            controls: ['play', 'mute', 'volume', 'current-time']
+          })[0];
+
+          ctrl.player.on('ready', function(event) {
+            if(_.isEmpty(slickCarousel.slides())) {
+              var slide = Slide.resetModel({
+                start: 0,
+                connectColor: Color.sample()
+              });
+
+              slickCarousel.addSlide(slide);
+              slickCarousel.currentSlide(slide);
+            }
+
+            ctrl.slider(Slider.init('slider', {
+              start: slickCarousel.slides().map(function(slide) {
+                return slide.start;
+              }),
+              max: 180,
+              onChange: ctrl.onChangeSlider,
+              onUpdate: ctrl.onUpdateSlider
+            }));
+
+            ctrl.highlightSlide(_.first(slickCarousel.slides()));
+
+            ctrl.paintConnects();
+          });
+
+          // if(_.isEmpty(slickCarousel.slides())) {
+          //   var slide = Slide.resetModel({
+          //     start: 0,
+          //     connectColor: Color.sample()
+          //   });
           //
-          // ctrl.player.on('ready', function(event) {
-          //   ctrl.slider(Slider.init('slider', {
-          //     start: slickCarousel.slides().map(function(slide) {
-          //       return slide.start;
-          //     }),
-          //     max: ctrl.player.getDuration(),
-          //     onChange: ctrl.onChangeSlider,
-          //     onUpdate: ctrl.onUpdateSlider
-          //   }));
-          // });
-
-          if(_.isEmpty(slickCarousel.slides())) {
-            var slide = Slide.resetModel({
-              start: 0,
-              connectColor: Color.sample()
-            });
-
-            slickCarousel.addSlide(slide);
-            slickCarousel.currentSlide(slide);
-          }
-
-          ctrl.slider(Slider.init('slider', {
-            start: slickCarousel.slides().map(function(slide) {
-              return slide.start;
-            }),
-            max: 180,
-            onChange: ctrl.onChangeSlider,
-            onUpdate: ctrl.onUpdateSlider
-          }));
-
-          ctrl.highlightSlide(_.first(slickCarousel.slides()));
-
-          ctrl.paintConnects();
+          //   slickCarousel.addSlide(slide);
+          //   slickCarousel.currentSlide(slide);
+          // }
+          //
+          // ctrl.slider(Slider.init('slider', {
+          //   start: slickCarousel.slides().map(function(slide) {
+          //     return slide.start;
+          //   }),
+          //   max: ctrl.player.getDuration(),
+          //   onChange: ctrl.onChangeSlider,
+          //   onUpdate: ctrl.onUpdateSlider
+          // }));
+          //
+          // ctrl.highlightSlide(_.first(slickCarousel.slides()));
+          //
+          // ctrl.paintConnects();
 
           // ctrl.player.on('error', function(error) {
           //   console.log(error);
@@ -255,6 +271,7 @@ var editVideo = (function() {
               swal({
                 type: 'success',
                 title: 'Slide saved!',
+                timer: 1500
               });
             }, function(response) {
               ctrl.errors(response.errors);
@@ -273,6 +290,7 @@ var editVideo = (function() {
             swal({
               type: 'success',
               title: 'Slide saved!',
+              timer: 1500
             });
           }, function(response) {
             ctrl.errors(response.errors);

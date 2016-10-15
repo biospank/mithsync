@@ -11,7 +11,7 @@ var Slider = {
     var slider = noUiSlider.create(sliderContainer, {
     	start: opts.start,
       connect: (opts.start.length > 1) ? _.concat(false, _.times(opts.start.length, _.constant(true))) :  true,
-      // behaviour: 'drag',
+      behaviour: 'none',
       margin: 5,
       step: 1,
       // tooltips: [

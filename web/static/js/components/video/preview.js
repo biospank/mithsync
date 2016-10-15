@@ -4,26 +4,35 @@ import Video from '../../models/video';
 import videoPlayback from './video_playback';
 
 var preview = {
-  controller: function(video) {
+  controller: function(video, slides) {
     var videoInfo = Video.info(video.url);
     var currentSlide = undefined;
+    var timeVector = slides.map(function(slide) { return slide.start; });
+
+    var inRange = function(progress, idx1, idx2) {
+      return _.inRange(progress, timeVector[idx1], (timeVector[idx2] || 100000));
+    };
 
     var updateSlide = function(event) {
       var currentSec = _.floor(event.detail.plyr.getCurrentTime());
 
-      if(currentSlide)
-        if(_.inRange(currentSec, currentSlide.start, (currentSlide.end + 1)))
-          return;
+      if(currentSlide) {
+        var currentSlideIndex = _.findIndex(slides, currentSlide);
 
-      currentSlide = _.find(video.slides, function(slide, index, collection) {
-        if(_.inRange(currentSec, slide.start, (slide.end + 1))) {
+        if(inRange(currentSec, currentSlideIndex, (currentSlideIndex + 1))) {
+          return;
+        }
+      }
+
+      currentSlide = _.find(slides, function(slide, index, collection) {
+        if(inRange(currentSec, index, (index + 1))) {
           Reveal.slide(index);
           return true;
         }
 
         return false;
       });
-    }
+    };
 
     return {
       onReady: function(element, isInit, context) {
@@ -86,7 +95,7 @@ var preview = {
       }
     };
   },
-  view: function(ctrl, video) {
+  view: function(ctrl, video, slides) {
     return m(".row", [
       m(".col-sm-6", [
         m(videoPlayback, {
@@ -99,7 +108,7 @@ var preview = {
       m(".col-sm-6", [
         m(".reveal", {}, [
           m(".slides", [
-            video.slides.map(function(slide) {
+            slides.map(function(slide) {
               return m("section", [
                 m("img", {
                   src: slide.url
