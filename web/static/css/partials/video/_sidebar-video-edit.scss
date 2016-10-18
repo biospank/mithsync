@@ -88,6 +88,10 @@
 }
 
 .theme-layout {
+  cursor: pointer;
+  &.active {
+    @include box-shadow(0 6px 10px rgba(0,0,0,.35));
+  }
   &.panel {
     @include transition(all 0.3s ease);
     &:hover {

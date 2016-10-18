@@ -65,7 +65,7 @@ var editVideo = (function() {
                   href: "#"
                 }, [
                   m("img", {
-                    src: slickCarousel.currentSlide() ? slickCarousel.currentSlide().url : "/images/contentplaceholder.png",
+                    src: slickCarousel.currentSlide() ? slickCarousel.currentSlide().url : "/images/slide-placeholder.png",
                     class: "img-responsive"
                   })
                 ])

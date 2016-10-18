@@ -16,7 +16,7 @@ var viewVideo = (function() {
         ]),
         m(".col-sm-6", [
           m("div", [
-            m("img", { src: "/images/contentplaceholder.png", class: "img-responsive" })
+            m("img", { src: "/images/slide-placeholder.png", class: "img-responsive" })
           ])
         ])
       ])

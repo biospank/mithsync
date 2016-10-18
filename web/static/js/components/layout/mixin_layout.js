@@ -148,7 +148,7 @@ var mixinLayout = function(content, layout) {
                     ])
                   ])
                 ]),
-                m("div", { class: "panel panel-default theme-layout" }, [
+                m("div", { class: "panel panel-default theme-layout active" }, [
                   m(".panel-body", { class: "row" }, [
                     m("div", { class: "col-xs-4" }, [
                       m("div", { class: "panel-body__col" }, [

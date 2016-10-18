@@ -2,7 +2,8 @@ import Videosync from '../videosync';
 import Session from './session';
 
 var Slide = (function() {
-  const slidePlaceHolder = "/images/contentplaceholder.png";
+  const slidePlaceHolder = "/images/slide-placeholder.png";
+  const thumbPlaceHolder = "/images/thumb-placeholder.png";
   var url = '/projects/projectId/videos/videoId/slides';
   var model = {};
 
@@ -18,13 +19,13 @@ var Slide = (function() {
       if(slide !== undefined) {
         model = _.assign({
           url: slidePlaceHolder,
-          thumb_url: slidePlaceHolder,
+          thumb_url: thumbPlaceHolder,
           start: 0
         }, slide);
       } else {
         model = {
           url: slidePlaceHolder,
-          thumb_url: slidePlaceHolder,
+          thumb_url: thumbPlaceHolder,
           start: 0
         };
       }
