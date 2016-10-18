@@ -37,8 +37,9 @@
       border-radius: 5px;
     }
     .dz-progress {
-      width: 60px;
       margin-left: -30px;
+      @include size(45px, 10px);
+      border-radius: 5px;
     }
     .dz-error-message {
       font-size: 10px;
