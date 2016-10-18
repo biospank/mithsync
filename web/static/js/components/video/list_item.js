@@ -24,7 +24,7 @@ var listItem = {
         m("figure", { class: "poster media-left" }, [
           m("a", [
             m("img", {
-              src: _.isEmpty(ctrl.video.slides) ? '/images/contentplaceholder.png' : _.first(ctrl.video.slides).thumb_url, 
+              src: _.isEmpty(ctrl.video.slides) ? '/images/placeholder-no-image.png' : _.first(ctrl.video.slides).thumb_url, 
               class: "media-object"
             })
           ])
