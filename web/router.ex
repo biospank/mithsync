@@ -41,6 +41,8 @@ defmodule Videosync.Router do
     resources "/signout", SessionController, only: [:delete]
     get "/users/current", UserController, :current, as: :current_user
     resources "/users", UserController, only: [:index, :show, :update, :delete]
+    get "/projects/recent", ProjectController, :recent, as: :recent_projects
+    get "/videos/recent", VideoController, :recent, as: :recent_videos
     resources "/projects", ProjectController, only: [:index, :create, :update, :delete] do
       resources "/videos", VideoController, only: [:index, :show, :create, :update, :delete] do
         resources "/slides", SlideController, only: [:create, :update, :delete]

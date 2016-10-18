@@ -3,6 +3,7 @@ import Session from './session';
 
 var Project = {
   url: '/projects',
+  recent_url: '/projects/recent',
   model: {
     name: m.prop("")
   },
@@ -35,6 +36,17 @@ var Project = {
         method: "GET",
         url: Videosync.apiBaseUrl() +
           this.url + "?" + m.route.buildQueryString(params),
+        config: function(xhr) {
+          xhr.setRequestHeader("accept", "application/json");
+          xhr.setRequestHeader("Authorization", Videosync.realm + " " + Session.token())
+        }
+      }, args)
+    );
+  },
+  recent: function(args) {
+    return m.request(_.assign({
+        method: "GET",
+        url: Videosync.apiBaseUrl() + this.recent_url,
         config: function(xhr) {
           xhr.setRequestHeader("accept", "application/json");
           xhr.setRequestHeader("Authorization", Videosync.realm + " " + Session.token())

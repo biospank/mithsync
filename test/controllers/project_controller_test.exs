@@ -3,7 +3,7 @@ defmodule Videosync.ProjectControllerTest do
 
   alias Videosync.Project
   alias Videosync.User
-  
+
   @valid_attrs %{name: "some content"}
   @invalid_attrs %{}
 
@@ -24,6 +24,7 @@ defmodule Videosync.ProjectControllerTest do
 
   test "requires user authentication on all route actions", %{conn: conn} do
     Enum.each([
+        get(conn, recent_projects_path(conn, :recent)),
         get(conn, project_path(conn, :index)),
         put(conn, project_path(conn, :update, "123", %{})),
         post(conn, project_path(conn, :create, %{})),
@@ -32,6 +33,12 @@ defmodule Videosync.ProjectControllerTest do
       assert json_response(conn, 401)
       assert conn.halted
     end)
+  end
+
+  @tag :logged_in
+  test "lists recent projects", %{conn: conn} do
+    conn = get conn, recent_projects_path(conn, :recent)
+    assert json_response(conn, 200)["data"] == []
   end
 
   @tag :logged_in

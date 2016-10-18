@@ -58,9 +58,12 @@ defmodule Videosync.Video do
     from v in query, order_by: field(v, ^order)
   end
 
-  def own_by(user, project) do
-    query = assoc(user, :videos)
-    from v in query, where: v.project_id == ^project
+  def own_by(user) do
+    assoc(user, :videos)
+  end
+
+  def belongs_to_model(query, model, value) do
+    from v in query, where: field(v, ^model) == ^value
   end
 
   def preload_slides(query, preload_query) do

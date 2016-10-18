@@ -13,6 +13,25 @@ defmodule Videosync.ProjectController do
     )
   end
 
+  def recent(conn, params, user) do
+    projects =
+      Project.own_by(user)
+      |> Project.order_by(:inserted_at)
+      |> Repo.all
+
+    paged_projects = paginate(projects, params["page"])
+
+    paged_projects =
+    case paged_projects do
+      %Scrivener.Page{entries: [], total_entries: total} when total > 0 ->
+        paginate(projects, String.to_integer(params["page"]) - 1)
+      _ ->
+        paged_projects
+    end
+
+    render(conn, "index.json", page: paged_projects)
+  end
+
   def index(conn, params, user) do
     projects =
       Project.own_by(user)

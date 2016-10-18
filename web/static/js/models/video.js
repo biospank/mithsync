@@ -4,6 +4,7 @@ import UrlParser from '../util/urlParser';
 
 var Video = {
   url: '/projects/projectId/videos',
+  recent_url: '/videos/recent',
   urlParser: {},
   model: {
     title: m.prop(""),
@@ -30,6 +31,17 @@ var Video = {
         url: Videosync.apiBaseUrl() +
           _.replace(this.url, 'projectId', projectId) +
           "?" + m.route.buildQueryString(params),
+        config: function(xhr) {
+          xhr.setRequestHeader("accept", "application/json");
+          xhr.setRequestHeader("Authorization", Videosync.realm + " " + Session.token())
+        }
+      }, args)
+    );
+  },
+  recent: function(args) {
+    return m.request(_.assign({
+        method: "GET",
+        url: Videosync.apiBaseUrl() + this.recent_url,
         config: function(xhr) {
           xhr.setRequestHeader("accept", "application/json");
           xhr.setRequestHeader("Authorization", Videosync.realm + " " + Session.token())

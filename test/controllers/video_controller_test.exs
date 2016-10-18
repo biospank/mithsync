@@ -28,6 +28,7 @@ defmodule Videosync.VideoControllerTest do
 
   test "requires user authentication on all actions", %{conn: conn} do
     Enum.each([
+        get(conn, recent_videos_path(conn, :recent)),
         get(conn, project_video_path(conn, :index, 5)),
         get(conn, project_video_path(conn, :show, 5, 123)),
         put(conn, project_video_path(conn, :update, 5, 123, %{})),
@@ -37,6 +38,12 @@ defmodule Videosync.VideoControllerTest do
       assert json_response(conn, 401)
       assert conn.halted
     end)
+  end
+
+  @tag :logged_in
+  test "lists recent videos", %{conn: conn} do
+    conn = get conn, recent_videos_path(conn, :recent)
+    assert json_response(conn, 200)["data"] == []
   end
 
   @tag :logged_in

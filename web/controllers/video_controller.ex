@@ -16,9 +16,30 @@ defmodule Videosync.VideoController do
     )
   end
 
+  def recent(conn, params, user) do
+    videos =
+      Video.own_by(user)
+      |> Video.order_by(:inserted_at)
+      |> Video.preload_slides(Slide.order_by(:start))
+      |> Repo.all
+
+    paged_videos = paginate(videos, params["page"])
+
+    paged_videos =
+    case paged_videos do
+      %Scrivener.Page{entries: [], total_entries: total} when total > 0 ->
+        paginate(videos, String.to_integer(params["page"]) - 1)
+      _ ->
+        paged_videos
+    end
+
+    render(conn, "index.json", page: paged_videos)
+  end
+
   def index(conn, params, user) do
     videos =
-      Video.own_by(user, params["project_id"])
+      Video.own_by(user)
+      |> Video.belongs_to_model(:project_id, params["project_id"])
       |> Video.filter_by(params["filter"])
       |> Video.order_by(:title)
       |> Video.preload_slides(Slide.order_by(:start))
@@ -56,7 +77,8 @@ defmodule Videosync.VideoController do
   end
 
   def show(conn, %{"project_id" => project, "id" => id}, user) do
-    video = Video.own_by(user, project)
+    video = Video.own_by(user)
+      |> Video.belongs_to_model(:project_id, project)
       |> Video.preload_slides(Slide.order_by(:start))
       |> Repo.get!(id)
       # |> Repo.preload(:slides)
@@ -65,7 +87,10 @@ defmodule Videosync.VideoController do
   end
 
   def update(conn, %{"project_id" => project, "id" => id, "video" => video_params}, user) do
-    video = Repo.get!(Video.own_by(user, project), id)
+    video = Video.own_by(user)
+      |> Video.belongs_to_model(:project_id, project)
+      |> Repo.get!(id)
+
     changeset = Video.changeset(video, video_params)
 
     case Repo.update(changeset) do
@@ -79,7 +104,9 @@ defmodule Videosync.VideoController do
   end
 
   def delete(conn, %{"project_id" => project, "id" => id}, user) do
-    video = Repo.get!(Video.own_by(user, project), id)
+    video = Video.own_by(user)
+      |> Video.belongs_to_model(:project_id, project)
+      |> Repo.get!(id)
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
