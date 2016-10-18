@@ -268,6 +268,7 @@ var editVideo = (function() {
         if(Slide.isNewRecord()) {
           if(Slide.validate()) {
             return Slide.create(ctrl.video()).then(function(response) {
+              slickCarousel.currentSlide(response.data);
               swal({
                 type: 'success',
                 title: 'Slide saved!',
