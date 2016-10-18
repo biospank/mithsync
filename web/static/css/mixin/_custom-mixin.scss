@@ -30,11 +30,18 @@
   #{$y}: $Yval;
 }
 
-@mixin respond-to($type, $query){
-  @media($type: $query){
-    @content;
+@mixin respond-to($type-1, $query-1, $type-2: 'nil', $query-2: 'nil') {
+  @if ($type-2 == 'nil') {
+    @media($type-1: $query-1) {
+      @content;
+    }
+  } @else {
+    @media($type-1: $query-1) and ($type-2: $query-2){
+      @content;
+    }
   }
 }
+
 
 @mixin animation($animation, $iteration-count, $transform-origin, $animation-fill-mode) {
   animation: $animation;

@@ -21,27 +21,33 @@ var listItem = {
 
     return m("li", [
       m("div", { class: "video-list__row media" }, [
-        m("figure", { class: "poster media-left" }, [
-          m("a", [
-            m("img", {
-              src: _.isEmpty(ctrl.video.slides) ? '/images/contentplaceholder.png' : _.first(ctrl.video.slides).thumb_url, 
-              class: "media-object"
-            })
+        m("a", {
+          href: "/projects/" + m.route.param('projectId') + "/videos/" + video.id + "/edit",
+          config: m.route,
+          class: "video-list__body"
+        }, [
+          m("figure", { class: "poster media-left" }, [
+            m("a", [
+              m("img", {
+                src: _.isEmpty(ctrl.video.slides) ? '/images/placeholder-no-image.png' : _.first(ctrl.video.slides).thumb_url,
+                class: "media-object"
+              })
+            ])
+          ]),
+          m("div", { class: "media-body" }, [
+            m("h5", { class: "title" }, video.title),
+            m("p", { class: "description" }, "Lorem ipsum"),
+            m("span", { class: "video-time"}, "02:30")
           ])
         ]),
-        m("div", { class: "video-list__body media-body" }, [
-          m("h5", { class: "title" }, video.title),
-          m("p", { class: "description" }, "Lorem ipsum"),
-          m("span", { class: "video-time"}, "02:30")
-        ]),
         m(".video-list__buttons", [
-          m("a", {
-            href: "/projects/" + m.route.param('projectId') + "/videos/" + video.id + "/edit",
-            class: "btn btn-primary btn-square",
-            config: m.route
-          }, [
-            m("i", { class: "fa fa-pencil", "aria-hidden": true })
-          ]),
+          // m("a", {
+          //   href: "/projects/" + m.route.param('projectId') + "/videos/" + video.id + "/edit",
+          //   class: "btn btn-primary btn-square",
+          //   config: m.route
+          // }, [
+          //   m("i", { class: "fa fa-pencil", "aria-hidden": true })
+          // ]),
           m("button", {
             onclick: "",
             type: "button",

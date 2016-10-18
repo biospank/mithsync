@@ -56,7 +56,7 @@ var imageItem = {
             type: "button",
             class: "btn"
           }, [
-            m("i", { class: "fa fa-trash", "aria-hidden": true })
+            m("i", { class: "fa fa-times-circle", "aria-hidden": true })
           ])
         ])
       ])

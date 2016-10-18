@@ -4,8 +4,12 @@
   margin-top: 10px;
   margin-bottom: 25px;
   overflow: hidden;
+  padding: 16px 8px 8px 16px;
+  .dz-details {
+    display: none;
+  }
   .dz-message {
-    margin: 70px auto 25px auto;
+    margin: 80px auto 40px auto;
     @include font-style(25px, #646C7F, 600);
     position: relative;
     font-size: 18px;
@@ -22,6 +26,35 @@
       display: block;
       @include font-style(13px, #646C7F);
       margin-top: 3px;
+    }
+  }
+  .dz-preview {
+    @include spaces(0 8px 8px 0px, 0);
+    min-height: auto;
+    .dz-image {
+      // @include size(60px, 60px);
+      @include size(57px, 57px);
+      border-radius: 5px;
+    }
+    .dz-progress {
+      margin-left: -30px;
+      @include size(45px, 10px);
+      border-radius: 5px;
+    }
+    .dz-error-message {
+      font-size: 10px;
+      top: 63px;
+      width: 95px;
+      &:after {
+        left: 10px;
+      }
+    }
+    .dz-success-mark, .dz-error-mark {
+      margin-left: -13px;
+      margin-top: -13px;
+      svg {
+        @include size(20px, 20px);
+      }
     }
   }
 }

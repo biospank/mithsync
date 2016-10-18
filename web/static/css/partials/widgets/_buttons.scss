@@ -30,9 +30,10 @@
   &-square {
     margin-left: 5px;
     @include size(40px, 40px);
+    line-height: 40px;
+    padding: 0;
     .fa, i, span {
-      font-size: 17px;
-      padding-top: 2px;
+      font-size: 16px;
     }
   }
   &-rectangular {

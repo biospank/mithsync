@@ -16,6 +16,7 @@
     margin-bottom: 5px;
     padding: 0;
     position: relative;
+    cursor: move;
     a {
       display: block;
       cursor: pointer;
@@ -30,22 +31,28 @@
     }
     &__buttons {
       display: none;
-      @include position(left, 50%, top, 50%);
-      margin-left: -13px;
-      margin-top: -13px;
+      @include position(right, 0, top, 0);
+      // @include position(left, 50%, top, 50%);
+      // margin-left: -13px;
+      // margin-top: -13px;
       .btn {
-        border-radius: 2px;
-        background-color: $mainColor;
+        // border-radius: 2px;
+        border-radius: 0px;
+        background-color: transparent;
         padding: 0;
         @include size(25px, 25px);
+        // @include box-shadow(-1px 2px 2px #999);
         @include box-shadow(none);
         .fa {
-          font-size: 10px;
-          color: white;
+          font-size: 20px;
+          color: $mainColor;
           line-height: 25px;
+          //text-shadow: 1px 2px 2px black;
         }
         &:hover {
-          background-color: darken($mainColor, 30%);
+          .fa {
+            color: $mainColor;
+          }
         }
       }
     }

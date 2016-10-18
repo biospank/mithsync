@@ -1,6 +1,7 @@
 .video-list {
   &__row {
-    height: 89px;
+    $row-height: 89px;
+    height: $row-height;
     @include spaces(0, 0 0 4px 0);
     background-color: white;
     @include border(#eaeaea);
@@ -11,26 +12,27 @@
     position: relative;
     &:hover {
       text-decoration: none;
-      background-color: #eaeaea;
+      background-color: #eeeeee;
     }
     .poster {
       padding: 0;
-      a {
+      height: $row-height;
+      //background-color: #eeeeee;
+      & > a {
         display: block;
         position: relative;
         overflow: hidden;
-        width: 116px;
-        &:before {
-          content: "";
-          @include size(30px, 30px);
-          @include position(left, 50%, top, 50%);
-          margin-left: -15px;
-          margin-top: -15px;
-          background: url("/images/icons/player.png") no-repeat;
-        }
+        @include size(116px, $row-height);
+        // &:before {
+        //   content: "";
+        //   @include size(40px, 40px);
+        //   @include position(left, 50%, top, 50%);
+        //   margin-left: -20px;
+        //   margin-top: -20px;
+        //   background: url("/images/icons/player-blue.png") no-repeat;
+        // }
         img {
-          width: 116px;
-          height: auto;
+          @include size(116px, auto);
         }
       }
       @include respond-to(max-width, 1190px) {
@@ -38,21 +40,25 @@
       }
     }
     .video-list__body {
-      padding: 8px 15px 8px 15px;
-      .title {
-        text-transform: uppercase;
-        margin-top: 0;
-        margin-bottom: 8px;
-        @include font-style(12px, $grey-dark);
-      }
-      .description {
-        @include font-style(12px, $grey-light);
-        text-transform: uppercase;
-        margin-top: 0;
-      }
-      .video-time {
-        @include font-style(12px, $coloured, 500);
-        text-transform: uppercase;
+      display: block;
+      text-decoration: none;
+      .media-body {
+        padding: 8px 15px 8px 15px;
+        .title {
+          text-transform: uppercase;
+          margin-top: 0;
+          margin-bottom: 8px;
+          @include font-style(12px, $grey-dark);
+        }
+        .description {
+          @include font-style(12px, $grey-light);
+          text-transform: uppercase;
+          margin-top: 0;
+        }
+        .video-time {
+          @include font-style(12px, $coloured, 500);
+          text-transform: uppercase;
+        }
       }
     }
     .video-list__buttons {
