@@ -18,7 +18,7 @@
       padding: 0;
       height: $row-height;
       //background-color: #eeeeee;
-      a {
+      & > a {
         display: block;
         position: relative;
         overflow: hidden;
@@ -32,8 +32,7 @@
         //   background: url("/images/icons/player-blue.png") no-repeat;
         // }
         img {
-          width: 116px;
-          height: auto;
+          @include size(116px, auto);
         }
       }
       @include respond-to(max-width, 1190px) {
@@ -41,21 +40,25 @@
       }
     }
     .video-list__body {
-      padding: 8px 15px 8px 15px;
-      .title {
-        text-transform: uppercase;
-        margin-top: 0;
-        margin-bottom: 8px;
-        @include font-style(12px, $grey-dark);
-      }
-      .description {
-        @include font-style(12px, $grey-light);
-        text-transform: uppercase;
-        margin-top: 0;
-      }
-      .video-time {
-        @include font-style(12px, $coloured, 500);
-        text-transform: uppercase;
+      display: block;
+      text-decoration: none;
+      .media-body {
+        padding: 8px 15px 8px 15px;
+        .title {
+          text-transform: uppercase;
+          margin-top: 0;
+          margin-bottom: 8px;
+          @include font-style(12px, $grey-dark);
+        }
+        .description {
+          @include font-style(12px, $grey-light);
+          text-transform: uppercase;
+          margin-top: 0;
+        }
+        .video-time {
+          @include font-style(12px, $coloured, 500);
+          text-transform: uppercase;
+        }
       }
     }
     .video-list__buttons {
