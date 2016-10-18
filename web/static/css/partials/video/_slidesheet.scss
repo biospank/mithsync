@@ -5,6 +5,10 @@
     margin-right: -5px;
     & > div[class^="col"] {
       padding: 0 5px;
+      @include transition(width 0.3s ease);
+      @include respond-to(min-width, 1000px, max-width, 1450px) {
+        width: 16.66667%;
+      }
     }
   }
   .img-thumbnail {

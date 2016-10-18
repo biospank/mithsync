@@ -80,7 +80,7 @@ var editVideo = (function() {
             m("div", { class: "col-xs-7" }, [
               m("button", {
                 onclick: ctrl.newSlide,
-                class: 'btn btn-primary btn-square',
+                class: 'btn btn-primary btn-square no-margin-left',
                 title: "New slide"
               }, [
                 m("i", { class: "fa fa-plus" })
