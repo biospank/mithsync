@@ -51,7 +51,9 @@ var listItem = {
                 this.project().name,
               ]),
               m("p", { class: "creation-date" }, "5 febbraio 2016"),
-              m("span", { class: "videos-number" }, "1 video")
+              m("span", {
+                class: "videos-number"
+              }, this.project().video_count + (_.gt(this.project().video_count, 1) ? " videos" : " video"))
             ]),
             m(".projects-list__buttons", [
               m("a", {

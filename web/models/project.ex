@@ -2,7 +2,7 @@ defmodule Videosync.Project do
   use Videosync.Web, :model
 
   alias Videosync.Repo
-  
+
   schema "projects" do
     field :name, :string
     field :video_count, :integer
@@ -53,6 +53,10 @@ defmodule Videosync.Project do
       _ ->
         from p in query, order_by: field(p, ^order)
     end
+  end
+
+  def limit(query, size) do
+    from v in query, limit: ^size
   end
 
   def own_by(user) do

@@ -63,8 +63,10 @@ defmodule Videosync.VideoControllerTest do
       "user_id" => user.id,
       "project_id" => project.id,
       "url" => video.url,
+      "poster_url" => nil,
       "title" => video.title,
       "description" => video.description,
+      "slide_count" => 0,
       "slides" => video.slides}
   end
 

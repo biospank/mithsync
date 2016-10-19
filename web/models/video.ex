@@ -5,8 +5,10 @@ defmodule Videosync.Video do
 
   schema "videos" do
     field :url, :string
+    field :poster_url, :string
     field :title, :string
     field :description, :string
+    field :slide_count, :integer
     belongs_to :user, Videosync.User
     belongs_to :project, Videosync.Project
     has_many :slides, Videosync.Slide
@@ -56,6 +58,10 @@ defmodule Videosync.Video do
 
   def order_by(query, order) do
     from v in query, order_by: field(v, ^order)
+  end
+
+  def limit(query, size) do
+    from v in query, limit: ^size
   end
 
   def own_by(user) do

@@ -18,7 +18,7 @@ defmodule Videosync.SlideController do
   def create(conn, %{"video_id" => video, "slide" => slide_params}, user) do
     changeset = user
       |> build_assoc(:slides, %{video_id: String.to_integer(video)})
-      |> Slide.changeset(slide_params)
+      |> Slide.create_changeset(slide_params)
 
     case Repo.insert(changeset) do
       {:ok, slide} ->
@@ -53,7 +53,8 @@ defmodule Videosync.SlideController do
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
-    Repo.delete!(slide)
+    Slide.delete_changeset(slide)
+    |> Repo.delete!
 
     send_resp(conn, :no_content, "")
   end
