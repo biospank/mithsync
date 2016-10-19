@@ -21,7 +21,6 @@ defmodule Videosync.VideoView do
       user_id: video.user_id,
       project_id: video.project_id,
       url: video.url,
-      poster_url: video.poster_url,
       title: video.title,
       description: video.description,
       slide_count: video.slide_count
@@ -38,7 +37,6 @@ defmodule Videosync.VideoView do
       user_id: video.user_id,
       project_id: video.project_id,
       url: video.url,
-      poster_url: video.poster_url,
       title: video.title,
       description: video.description,
       slide_count: video.slide_count,

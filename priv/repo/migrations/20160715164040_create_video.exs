@@ -4,7 +4,6 @@ defmodule Videosync.Repo.Migrations.CreateVideo do
   def change do
     create table(:videos) do
       add :url, :string
-      add :poster_url, :string
       add :title, :string
       add :description, :text
       add :slide_count, :integer, null: false, default: 0

@@ -5,7 +5,6 @@ defmodule Videosync.Video do
 
   schema "videos" do
     field :url, :string
-    field :poster_url, :string
     field :title, :string
     field :description, :string
     field :slide_count, :integer
@@ -18,7 +17,6 @@ defmodule Videosync.Video do
 
   @required_fields ~w(url title description)
   @optional_fields ~w()
-
   @doc """
   Creates a changeset based on the `model` and `params`.
 

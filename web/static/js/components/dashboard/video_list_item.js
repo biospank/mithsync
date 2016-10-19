@@ -9,7 +9,7 @@ var videoListItem = {
           m("figure", { class: "poster media-left" }, [
             m("a", { href: "#" }, [
               m("img", {
-                src: _.isEmpty(video.slides) ? '/images/placeholder-no-image.png' : _.first(video.slides).thumb_url,
+                src: _.isEmpty(video.slides) ? '/images/thumb-placeholder.png' : _.first(video.slides).thumb_url,
                 class: "media-object"
               })
             ])
