@@ -35,8 +35,8 @@ var listItem = {
             ])
           ]),
           m("div", { class: "media-body" }, [
-            m("h5", { class: "title" }, video.title),
-            m("p", { class: "description" }, "Lorem ipsum"),
+            m("h5", { class: "title" }, _.truncate(video.title, 20)),
+            m("p", { class: "description" }, _.truncate(video.description, 20)),
             m("span", {
               class: "video-time"
             }, ctrl.video.slide_count + (_.gt(ctrl.video.slide_count, 1) ? " slides" : " slide"))
