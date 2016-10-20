@@ -136,7 +136,7 @@ var editVideo = (function() {
         ]),
         m(slickCarousel, {
           selectCallback: function(slide) {
-            ctrl.highlightSlide(slide)
+            ctrl.highlightSlide(slide);
           }
         }, slickCarousel.slides())
       ])
@@ -268,12 +268,17 @@ var editVideo = (function() {
         if(Slide.isNewRecord()) {
           if(Slide.validate()) {
             return Slide.create(ctrl.video()).then(function(response) {
-              slickCarousel.currentSlide(response.data);
+              slickCarousel.updateSlide(slickCarousel.currentSlide(), response.data);
+              slickCarousel.currentSlide(
+                _.assign(slickCarousel.currentSlide(), response.data)
+              );
+
               swal({
                 type: 'success',
                 title: 'Slide saved!',
                 timer: 1500
               });
+
             }, function(response) {
               ctrl.errors(response.errors);
             })
@@ -288,11 +293,17 @@ var editVideo = (function() {
           }
         } else {
           return Slide.update(ctrl.video()).then(function(response) {
+            slickCarousel.updateSlide(slickCarousel.currentSlide(), response.data);
+            slickCarousel.currentSlide(
+              _.assign(slickCarousel.currentSlide(), response.data)
+            );
+
             swal({
               type: 'success',
               title: 'Slide saved!',
               timer: 1500
             });
+
           }, function(response) {
             ctrl.errors(response.errors);
           })
@@ -333,9 +344,7 @@ var editVideo = (function() {
 
         slickCarousel.addSlide(slide);
         slickCarousel.currentSlide(slide);
-        ctrl.refreshSlider(
-          slickCarousel.slides()
-        );
+        ctrl.refreshSlider(slickCarousel.slides());
         ctrl.highlightSlide(slide);
       };
 
@@ -356,6 +365,7 @@ var editVideo = (function() {
           start: slides.map(function(slide) {
             return slide.start;
           }),
+          // to enable video
           max: 180, // ctrl.player.getDuration(),
           onChange: ctrl.onChangeSlider,
           onUpdate: ctrl.onUpdateSlider

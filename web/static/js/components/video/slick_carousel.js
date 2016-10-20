@@ -33,6 +33,9 @@ var slickCarousel = (function() {
     removeSlide: function() {
       _.remove(carousel.slides, carousel.currentSlide);
     },
+    updateSlide: function(oldSlide, newSlide) {
+      _.assign(_.find(carousel.slides, oldSlide), newSlide);
+    },
     view: function(ctrl, args, slides) {
       carousel.slides = slides;
 
