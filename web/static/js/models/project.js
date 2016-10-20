@@ -7,6 +7,7 @@ var Project = {
   model: {
     name: m.prop("")
   },
+  current: m.prop({}),
   create: function() {
     return m.request({
       method: "POST",

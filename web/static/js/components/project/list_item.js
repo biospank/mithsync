@@ -43,8 +43,12 @@ var listItem = {
         } else {
           return [
             m("a", {
-              href: "/projects/" + this.project().id + "/videos",
-              config: m.route,
+              href: "",
+              onclick: function(event) {
+                event.preventDefault();
+                Project.current(this.project());
+                m.route("/projects/" + this.project().id + "/videos");
+              }.bind(this),
               class: "projects-list__body"
             }, [
               m("h5", { class: "title" }, [

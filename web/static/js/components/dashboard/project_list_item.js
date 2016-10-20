@@ -1,9 +1,15 @@
+import Project from "../../models/project";
+
 var projectListItem = {
   view: function(ctrl, project){
     return m("li", [
       m("a", {
-        href: "/projects/" + project.id + "/videos",
-        config: m.route,
+        href: "",
+        onclick: function(event) {
+          event.preventDefault();
+          Project.current(project);
+          m.route("/projects/" + project.id + "/videos");
+        },
         class: "projects-list__row"
       }, [
         m(".projects-list__body", [

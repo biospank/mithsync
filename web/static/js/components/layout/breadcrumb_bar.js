@@ -11,7 +11,7 @@ var breadcrumbBar = {
           m("div", { class: "pull-right" }, [
             m("div", { class: "breadcrumb-container" }, [
               m("span", { class: "location-text" }, "You are here:"),
-              m(breadcrumb)
+              m(breadcrumb, Project.current())
             ])
           ])
         ])

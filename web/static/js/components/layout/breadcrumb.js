@@ -1,5 +1,5 @@
 var breadcrumb = {
-  controller: function(url) {
+  controller: function(project) {
     var slugMapping = {
       ''         : {
         'name' : 'Home',
@@ -10,6 +10,7 @@ var breadcrumb = {
         'urlTemplate'  : '/projects'
       },
       'videos' : {
+        'project' : project,
         'name' : 'Videos',
         'urlTemplate'   : "/projects/<%= m.route.param('projectId') %>/videos"
       },
@@ -35,23 +36,41 @@ var breadcrumb = {
       }),
       slugFor: function(slug) {
         return slugMapping[slug];
+      },
+      projectNameSlug: function() {
+        var project = this.slugFor(_.last(this.crumbs())).project;
+
+        if(project)
+          return m("li", [
+            m("a", {
+              href: "/projects/" + project.id + "/videos",
+              config: m.route
+            }, project.name)
+          ]);
+        else
+          return "";
+
       }
     };
   },
   view: function(ctrl) {
     return m("ol.breadcrumb", [
-      _.concat(_.initial(ctrl.crumbs()).map(function(crumb) {
-        var slug = ctrl.slugFor(crumb);
+      _.concat(
+        _.initial(ctrl.crumbs()).map(function(crumb) {
+          var slug = ctrl.slugFor(crumb);
 
-        if(slug) {
-          return m("li", [
-            m("a", {
-              href: _.template(slug['urlTemplate'])(),
-              config: m.route
-            }, slug['name'])
-          ]);
-        }
-      }), m("li", ctrl.slugFor(_.last(ctrl.crumbs()))['name']))
+          if(slug) {
+            return m("li", [
+              m("a", {
+                href: _.template(slug['urlTemplate'])(),
+                config: m.route
+              }, slug['name'])
+            ]);
+          }
+        }),
+        ctrl.projectNameSlug(),
+        m("li", ctrl.slugFor(_.last(ctrl.crumbs()))['name'])
+      )
     ]);
   }
 }
