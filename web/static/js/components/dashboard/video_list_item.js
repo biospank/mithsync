@@ -1,10 +1,16 @@
+import Video from "../../models/video";
+
 var videoListItem = {
   view: function(ctrl, video){
     return m("li", [
       m(".video-list__row", [
         m("a", {
-          href: "/projects/" + video.project_id + "/videos/" + video.id + "/edit",
-          config: m.route,
+          href: "",
+          onclick: function(event) {
+            event.preventDefault();
+            Video.current(video);
+            m.route("/projects/" + video.project_id + "/videos/" + video.id + "/edit");
+          },
           class: "video-list__body media" }, [
           m("figure", { class: "poster media-left" }, [
             m("a", { href: "#" }, [

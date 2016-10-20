@@ -1,13 +1,15 @@
 import searchForm from "./search_form";
 import breadcrumb from "./breadcrumb";
+import title from "./title";
 import Project from "../../models/project";
+import Video from "../../models/video";
 
 var breadcrumbBar = {
   view: function(ctrl) {
     return m('nav', { class: 'breadcrumb-bar' }, [
       m('.container', [
         m(".clearfix", [
-          m("h2", { class: "section-title pull-left" }, "Section title"),
+          m(title, Video.current()),
           m("div", { class: "pull-right" }, [
             m("div", { class: "breadcrumb-container" }, [
               m("span", { class: "location-text" }, "You are here:"),

@@ -11,6 +11,7 @@ var Video = {
     description: m.prop(""),
     url: m.prop("")
   },
+  current: m.prop({}),
   create: function(projectId, args) {
     return m.request(_.assign({
         method: "POST",

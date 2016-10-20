@@ -22,8 +22,12 @@ var listItem = {
     return m("li", [
       m("div", { class: "video-list__row media" }, [
         m("a", {
-          href: "/projects/" + m.route.param('projectId') + "/videos/" + video.id + "/edit",
-          config: m.route,
+          href: "",
+          onclick: function(event) {
+            event.preventDefault();
+            Video.current(video);
+            m.route("/projects/" + m.route.param('projectId') + "/videos/" + video.id + "/edit");
+          },
           class: "video-list__body"
         }, [
           m("figure", { class: "poster media-left" }, [
