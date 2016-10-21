@@ -35,7 +35,13 @@ var imageItem = {
         m("img", {
           src: ctrl.image.thumb_url,
           title: ctrl.image.name,
-          class: "img-responsive"
+          class: "img-responsive",
+          onmousedown: function() {
+            var clickEvent = new CustomEvent("library:image:select", {
+              detail: ctrl.image
+            });
+            document.body.dispatchEvent(clickEvent);
+          }
         }),
         m("div", { class: "img-thumbnail__buttons" }, [
           m("button", {

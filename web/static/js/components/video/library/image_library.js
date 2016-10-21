@@ -6,6 +6,7 @@ import searchForm from "../../widgets/search_form";
 import pagination from "../../widgets/pagination";
 import loader from "../../widgets/loader";
 import recordNotFound from "../../widgets/404";
+import {} from "../../../util/polyfill_custom_event";
 
 var imageLibrary = (function() {
   var paginate = function(ctrl) {
@@ -155,7 +156,7 @@ var imageLibrary = (function() {
               m("i", { class: "fa fa-th-list" })
             ])
           ]),
-          m("div", { class: "row" }, [
+          m("div#image-library", { class: "row" }, [
             imageView(ctrl)
           ])
         ]),

@@ -9,6 +9,7 @@ import slickCarousel from "./slick_carousel";
 import feedbackButton from "../widgets/feedback_button";
 import videoPreview from "./video_preview";
 import Color from '../../models/color';
+import dragger from '../../models/dragger';
 
 var editVideo = (function() {
 
@@ -51,7 +52,11 @@ var editVideo = (function() {
               // )
             ]),
             m(".col-xs-6", [
-              m("figure", { class: "placeholderSlide" }, [
+              m("figure", {
+                class: "placeholderSlide",
+                id: "slide-placeholder",
+                config: ctrl.initDragger
+              }, [
                 m("a", {
                   onclick: function(event) {
                     event.preventDefault();
@@ -149,15 +154,27 @@ var editVideo = (function() {
 
       ctrl.video = m.prop({});
       ctrl.videoInfo = m.prop({});
+      ctrl.currentLibraryImage = m.prop();
       ctrl.errors = m.prop({});
       ctrl.player = {};
       ctrl.slider = m.prop();
       ctrl.svalue = m.prop("00:00:00");
+      ctrl.drake = m.prop();
 
       if(Session.isExpired()) {
         m.route("/signin");
       }
 
+      document.body.addEventListener("library:image:select", function(e) {
+        ctrl.currentLibraryImage(e.detail);
+      }, false);
+
+      ctrl.selectLibraryImage = function() {
+        m.startComputation()
+        slickCarousel.currentSlide().url = ctrl.currentLibraryImage().slide_url
+        slickCarousel.currentSlide().thumb_url = ctrl.currentLibraryImage().thumb_url
+        m.endComputation();
+      },
       ctrl.onChangeSlider = function(values, handle, unencodedValues) {
         var currentValue = _.round(values[handle]);
         slickCarousel.currentSlide().start = currentValue;
@@ -174,6 +191,22 @@ var editVideo = (function() {
         ctrl.svalue(duration);
         m.endComputation();
 
+      };
+
+      ctrl.initDragger = function(element, init, context) {
+        if( !init ) {
+          ctrl.drake(
+            dragger.init({
+              containers: {
+                from: 'image-library',
+                to: 'slide-placeholder'
+              },
+              onDropCallback: function() {
+                ctrl.selectLibraryImage();
+              }
+            })
+          );
+        }
       };
 
       // the first argument is the DOM element;
