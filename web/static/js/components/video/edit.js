@@ -179,7 +179,7 @@ var editVideo = (function() {
         var currentValue = _.round(values[handle]);
         slickCarousel.currentSlide().start = currentValue;
         // to enable video
-        // ctrl.player.seek(currentValue);
+        ctrl.player.seek(currentValue);
       };
 
       ctrl.onUpdateSlider = function(values, handle, unencodedValues) {
@@ -218,58 +218,58 @@ var editVideo = (function() {
       ctrl.initPlayer = function(element, init, context) {
         if( !init ) {
           // to enable video
-          // ctrl.player = plyr.setup('.video_player', {
-          //   //['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'fullscreen']
-          //   controls: ['play', 'mute', 'volume', 'current-time']
-          // })[0];
-          //
-          // ctrl.player.on('ready', function(event) {
-          //   if(_.isEmpty(slickCarousel.slides())) {
-          //     var slide = Slide.resetModel({
-          //       start: 0,
-          //       connectColor: Color.sample()
-          //     });
-          //
-          //     slickCarousel.addSlide(slide);
-          //     slickCarousel.currentSlide(slide);
-          //   }
-          //
-          //   ctrl.slider(Slider.init('slider', {
-          //     start: slickCarousel.slides().map(function(slide) {
-          //       return slide.start;
-          //     }),
-          //     max: 180,
-          //     onChange: ctrl.onChangeSlider,
-          //     onUpdate: ctrl.onUpdateSlider
-          //   }));
-          //
-          //   ctrl.highlightSlide(_.first(slickCarousel.slides()));
-          //
-          //   ctrl.paintConnects();
-          // });
+          ctrl.player = plyr.setup('.video_player', {
+            //['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'fullscreen']
+            controls: ['play', 'mute', 'volume', 'current-time']
+          })[0];
 
-          if(_.isEmpty(slickCarousel.slides())) {
-            var slide = Slide.resetModel({
-              start: 0,
-              connectColor: Color.sample()
-            });
+          ctrl.player.on('ready', function(event) {
+            if(_.isEmpty(slickCarousel.slides())) {
+              var slide = Slide.resetModel({
+                start: 0,
+                connectColor: Color.sample()
+              });
 
-            slickCarousel.addSlide(slide);
-            slickCarousel.currentSlide(slide);
-          }
+              slickCarousel.addSlide(slide);
+              slickCarousel.currentSlide(slide);
+            }
 
-          ctrl.slider(Slider.init('slider', {
-            start: slickCarousel.slides().map(function(slide) {
-              return slide.start;
-            }),
-            max: 180, // ctrl.player.getDuration(),
-            onChange: ctrl.onChangeSlider,
-            onUpdate: ctrl.onUpdateSlider
-          }));
+            ctrl.slider(Slider.init('slider', {
+              start: slickCarousel.slides().map(function(slide) {
+                return slide.start;
+              }),
+              max: 180,
+              onChange: ctrl.onChangeSlider,
+              onUpdate: ctrl.onUpdateSlider
+            }));
 
-          ctrl.highlightSlide(_.first(slickCarousel.slides()));
+            ctrl.highlightSlide(_.first(slickCarousel.slides()));
 
-          ctrl.paintConnects();
+            ctrl.paintConnects();
+          });
+
+          // if(_.isEmpty(slickCarousel.slides())) {
+          //   var slide = Slide.resetModel({
+          //     start: 0,
+          //     connectColor: Color.sample()
+          //   });
+          //
+          //   slickCarousel.addSlide(slide);
+          //   slickCarousel.currentSlide(slide);
+          // }
+          //
+          // ctrl.slider(Slider.init('slider', {
+          //   start: slickCarousel.slides().map(function(slide) {
+          //     return slide.start;
+          //   }),
+          //   max: 180, // ctrl.player.getDuration(),
+          //   onChange: ctrl.onChangeSlider,
+          //   onUpdate: ctrl.onUpdateSlider
+          // }));
+          //
+          // ctrl.highlightSlide(_.first(slickCarousel.slides()));
+          //
+          // ctrl.paintConnects();
 
           // ctrl.player.on('error', function(error) {
           //   console.log(error);
@@ -399,7 +399,7 @@ var editVideo = (function() {
             return slide.start;
           }),
           // to enable video
-          max: 180, // ctrl.player.getDuration(),
+          ctrl.player.getDuration(), // max: 180,
           onChange: ctrl.onChangeSlider,
           onUpdate: ctrl.onUpdateSlider
         }));
