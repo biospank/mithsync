@@ -2,12 +2,12 @@ import Session from "../../models/session";
 import User from "../../models/user";
 
 var mainNav = {
-  getCurrentUser: _.once(function() {
+  getCurrentUser: _.throttle(function() {
     return User.getCurrent({
       background: true,
       initialValue: { data: { project_count: 0 } }
     });
-  }),
+  }, 10000),
   controller: function() {
     var user = mainNav.getCurrentUser();
 
