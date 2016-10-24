@@ -6,9 +6,9 @@ import Activation from "../../models/activation";
 var activationPage = (function() {
   var content = function(ctrl) {
     return m(".col-xs-12 .col-sm-7 .center-block", [
-      m("figure", { class: "text-center", id: "logo" }, [
-        m("img", { src: "/images/logo.png", alt: "Zinkroo" })
-      ]),,
+      // m("figure", { class: "text-center", id: "logo" }, [
+      //   m("img", { src: "/images/logo.png", alt: "Zinkroo" })
+      // ]),
       m("header", { class: "header-text space-bottom" }, [
         m("hgroup", { class: "text-center" }, [
           m("h1", { class: "header-text__title" }, m.trust("We've sent you an email <br> with your activation code")),

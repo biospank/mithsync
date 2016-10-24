@@ -71,7 +71,7 @@ var videoList = {
 
   },
   view: function(ctrl) {
-    return m("main", { class: "main-container" }, [
+    return m("div", [
       m("div", { class: "clearfix" }, [
         m("div", { class: "pull-left" }, [
           m(searchForm, {

@@ -87,7 +87,7 @@ var projectList = {
 
   },
   view: mixinLayout(function(ctrl) {
-    return m("main", { class: "main-container" }, [
+    return [
       m("div", { class: "clearfix" }, [
         m("div", { class: "pull-left" }, [
           m(searchForm, {
@@ -144,7 +144,7 @@ var projectList = {
           paginate(ctrl)
         ])
       ])
-    ]);
+    ]
   })
 };
 

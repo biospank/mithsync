@@ -7,7 +7,7 @@ import Video from "../../models/video";
 var breadcrumbBar = {
   view: function(ctrl) {
     return m('nav', { class: 'breadcrumb-bar' }, [
-      m('.container', [
+      m('.main-container', [
         m(".clearfix", [
           m(title, Video.current()),
           m("div", { class: "pull-right" }, [

@@ -51,12 +51,12 @@ var mainNav = {
             }, ctrl.projectCount())
           ])
         ]),
-        m("li", { class: (ctrl.isActive("/faq") ? 'active' : '') }, [
-          m("a", { href: "/faq", config: m.route, class: "main-nav__tab" }, [
-            m("i", { class: "fa fa-question-circle-o main-nav__icon" }),
-            m("span", { class: "main-nav__voice" }, "Faq")
-          ])
-        ]),
+        // m("li", { class: (ctrl.isActive("/faq") ? 'active' : '') }, [
+        //   m("a", { href: "/faq", config: m.route, class: "main-nav__tab" }, [
+        //     m("i", { class: "fa fa-question-circle-o main-nav__icon" }),
+        //     m("span", { class: "main-nav__voice" }, "Faq")
+        //   ])
+        // ]),
         m("li", {  class: (ctrl.isActive("/userprofile") ? 'active' : '') }, [
           m("a", {
             href: "#collapseUserNav",
@@ -70,12 +70,12 @@ var mainNav = {
           ]),
           m("nav", { class: "collapse sub-nav", id: "collapseUserNav", "aria-expanded": false }, [
             m("ul", { class: "nav" }, [
-              m("li", { class: (ctrl.isActive("/userprofile") ? 'active' : '') }, [
-                m("a", {
-                  href: "/userprofile",
-                  config: m.route,
-                  class: "sub-nav__tab" }, "Edit profile")
-              ]),
+              // m("li", { class: (ctrl.isActive("/userprofile") ? 'active' : '') }, [
+              //   m("a", {
+              //     href: "/userprofile",
+              //     config: m.route,
+              //     class: "sub-nav__tab" }, "Edit profile")
+              // ]),
               m("li", [
                 m("a", {
                   href: "#",

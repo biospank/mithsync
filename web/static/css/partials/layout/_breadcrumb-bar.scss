@@ -1,11 +1,14 @@
 .breadcrumb-bar {
-  background-color: #f6f8f8;
-  @include border(#dce0e6, 1px, bottom);
-  padding-top: 15px;
-  padding-bottom: 15px;
+  // background-color: #f6f8f8;
+  // @include border(#dce0e6, 1px, bottom);
+  // padding-top: 15px;
+  // padding-bottom: 15px;
+  .main-container {
+    padding-bottom: 0;
+  }
   .section-title {
     @include font-style(21px, #424856);
-    font-weight: 400;
+    //font-weight: 400;
     margin: 0;
   }
 }

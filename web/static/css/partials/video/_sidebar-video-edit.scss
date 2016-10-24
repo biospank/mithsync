@@ -1,5 +1,5 @@
 #sidebar-video-edit {
-  @include position(right, 0, top, 119px, fixed);
+  @include position(right, 0, top, 129px, fixed);
   //@include size($width, 100%);
   z-index: 999;
   width: $sidebar-video-edit-width;

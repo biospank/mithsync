@@ -42,24 +42,29 @@ body {
     min-width: $minWidthPage;
     overflow: hidden;
     .main-container {
-      padding: 40px;
+      //padding: 40px;
     }
     #sidebar-wrapper {
       @include transition(all 0.5s ease);
       @include translate(-100%, 0);
     }
     .breadcrumb-bar {
-      padding-top: 15px;
+      //padding-top: 15px;
       position: fixed;
       right: 0;
       left: 0;
       z-index: 5;
       min-width: $minWidthPage;
+      background-color: #f6f8f8;
+      @include border(#dce0e6, 1px, bottom);
+      .main-container {
+        padding-bottom: 20px;
+      }
     }
     #wrapper {
       padding-right: $sidebar-video-edit-width;
       padding-left: 0;
-      margin-top: 53px;
+      margin-top: 65px;
       position: relative;
       margin-bottom: 0;
       @include transition(all 0.5s ease);

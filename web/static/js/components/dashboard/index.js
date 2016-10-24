@@ -8,24 +8,22 @@ var dashboard = (function() {
 
   var content = function(ctrl) {
     return [
-      m("main", { class: "main-container" }, [
-        m("section", { class: "row" }, [
-          m("article", { class: "col-xs-3 col-sm-3 col-md-3" }, [
-            m("div", { class: "box" }, [
-              m("h4", { class: "box__title" }, "Create new project"),
-              m("div", { class: "text-center" }, [
-                m("a", {
-                  onclick: ctrl.newProject,
-                  class: "btn",
-                  href: "#" }, [
-                  m("img", { src: "/images/icons/add.png" })
-                ])
+      m("section", { class: "row" }, [
+        m("article", { class: "col-xs-3 col-sm-3 col-md-3" }, [
+          m("div", { class: "box" }, [
+            m("h4", { class: "box__title" }, "Create new project"),
+            m("div", { class: "text-center" }, [
+              m("a", {
+                onclick: ctrl.newProject,
+                class: "btn btn-default",
+                href: "#" }, [
+                m("img", { src: "/images/icons/add.png" })
               ])
             ])
-          ]),
-          m(recentProjects),
-          m(recentVideos)
-        ])
+          ])
+        ]),
+        m(recentProjects),
+        m(recentVideos)
       ])
     ];
   };

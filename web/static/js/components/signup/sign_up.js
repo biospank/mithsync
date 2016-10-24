@@ -6,11 +6,11 @@ import Registration from "../../models/registration";
 var signUp = (function() {
   var content = function(ctrl) {
     return [
-      m("figure", { class: ".col-xs-7 .col-sm-7 .col-md-4 .col-lg-3 .center-block" }, [
-        m("div", { class: "text-center", id: "logo" }, [
-          m("img", { src: "/images/logo.png", alt: "Zinkroo" })
-        ])
-      ]),
+      // m("figure", { class: ".col-xs-7 .col-sm-7 .col-md-4 .col-lg-3 .center-block" }, [
+      //   m("div", { class: "text-center", id: "logo" }, [
+      //     m("img", { src: "/images/logo.png", alt: "Zinkroo" })
+      //   ])
+      // ]),
       m("header", { class: "header-text space-bottom" }, [
         m("hgroup", { class: "text-center" }, [
           m("h1", { class: "header-text__title no-margin-top" }, "Create your account"),
