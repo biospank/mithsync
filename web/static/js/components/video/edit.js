@@ -16,24 +16,8 @@ var editVideo = (function() {
 
   var content = function(ctrl) {
     return [
-      // m("header", { class: "text-right" }, [
-      //   m("a", { class: "btn btn-success" }, "Save"),
-      //   m("a", { class: "btn btn-success" }, "Save and Exit")
-      // ]),
       m(imageDialog),
       m(videoPreview),
-      // m(".clearfix", [
-      //   m("div.pull-right", [
-      //     m("a", {
-      //       href: '/projects/' + m.route.param('projectId') + '/videos/' + m.route.param('videoId') + '/library',
-      //       config: m.route,
-      //       class: "btn btn-primary effect btn-md text-uppercase icon-left"
-      //     }, [
-      //       m("i", { class: 'fa fa-plus' }),
-      //       m("span", {}, "Library")
-      //     ])
-      //   ])
-      // ]),
       m("main", { class: "main-container" }, [
         m("section", { id: "video-container" }, [
           m(".row", [
@@ -43,14 +27,6 @@ var editVideo = (function() {
                 videoId: ctrl.videoInfo().videoId,
                 onReady: ctrl.initPlayer
               })
-              // m("div")
-              // m(".video_player",
-              //   {
-              //     "data-type": "youtube", //"vimeo",
-              //     "data-video-id": "_WgrfEaAM4Y", //"180519312",
-              //     config: ctrl.initPlayer
-              //   }
-              // )
             ]),
             m(".col-xs-6", [
               m("figure", {
