@@ -143,6 +143,8 @@ var editVideo = (function() {
         m(slickCarousel, {
           selectCallback: function(slide) {
             ctrl.highlightSlide(slide);
+            // to enable video
+            ctrl.player.seek(slide.start);
           }
         }, slickCarousel.slides())
       ])
