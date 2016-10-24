@@ -57,7 +57,7 @@ var listItem = {
           m("button", {
             onclick: "",
             type: "button",
-            class: "btn btn-success btn-square"
+            class: "btn btn-square"
           }, [
             m("i", { class: "fa fa-download", "aria-hidden": true })
           ]),
@@ -76,7 +76,7 @@ var listItem = {
               })
             },
             type: "button",
-            class: "btn btn-danger btn-square"
+            class: "btn btn-square"
           }, [
             m("i", { class: "fa fa-trash", "aria-hidden": true })
           ])

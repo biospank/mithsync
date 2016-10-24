@@ -1,20 +1,31 @@
 .user-avatar {
-  min-width: 150px;
-  &__photo {
-    border-radius: 50%;
+  //min-width: 150px;
+  height: 65px;
+  padding: 18px 14px;
+  img {
+    border-radius: 30px;
     @include size(30px, 30px);
     display: inline-block;
     overflow: hidden;
-    img {
-      width: 100%;
-    }
+    margin-right: 10px;
   }
+  // &__photo {
+  //   border-radius: 50%;
+  //   @include size(30px, 30px);
+  //   display: inline-block;
+  //   overflow: hidden;
+  //   img {
+  //     width: 100%;
+  //   }
+  // }
   &__name {
-    @include position(left, 40px, top, 5px);
-    color: #3f4148;
-    .fa {
-      margin-left: 7px;
-      color: #3d5c83;
-    }
+    //@include position(left, 40px, top, 5px);
+    //color: #3f4148;
+    color: $mainColor;
+    margin-right: 5px;
+    // .fa {
+    //   margin-left: 7px;
+    //   color: #3d5c83;
+    // }
   }
 }

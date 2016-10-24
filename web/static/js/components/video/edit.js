@@ -78,7 +78,7 @@ var editVideo = (function() {
             ])
           ]),
           m(".clearfix .mgv25", [
-            m("p", { class: "text-left" }, "Start: " + ctrl.svalue())
+            m("p", { class: "text-left no-margin-bottom" }, "Start: " + ctrl.svalue())
           ]),
           m("#slider"),
           m("footer", { class: "buttons row" }, [

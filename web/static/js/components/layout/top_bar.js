@@ -24,18 +24,16 @@ var topBar = {
   },
   view: function(ctrl) {
     return m("nav", { class: "topbar navbar-fixed-top" }, [
-      m(".container", [
-        m(".clearfix", {}, [
-          m(".pull-left", [
-            // m("a", { href: "#", class: "navbar-brand" }, [
-            //   m("img", { src: "/images/logo.jpg", alt: "Zinkroo" })
-            // ]),
-            m("a", { href: "#", class: "navbar-brand" }, "Zinkroo"),
-            this.showMenuButton()
-          ]),
-          m(".pull-right", [
-            m.component(user)
-          ])
+      m(".clearfix", {}, [
+        m(".pull-left", [
+          // m("a", { href: "#", class: "navbar-brand" }, [
+          //   m("img", { src: "/images/logo.jpg", alt: "Zinkroo" })
+          // ]),
+          m("a", { href: "#", class: "navbar-brand" }, "Zinkroo"),
+          this.showMenuButton()
+        ]),
+        m(".pull-right", [
+          m.component(user)
         ])
       ])
     ])

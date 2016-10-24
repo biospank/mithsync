@@ -61,7 +61,7 @@ var listItem = {
             ]),
             m(".projects-list__buttons", [
               m("a", {
-                class: "btn btn-primary btn-square",
+                class: "btn btn-square",
                 onclick: function() {
                   this.editMode(true);
                 }.bind(this)
@@ -69,7 +69,7 @@ var listItem = {
                 m("i", { class: "fa fa-pencil", "aria-hidden": true })
               ]),
               m("a", {
-                class: "btn btn-danger btn-square",
+                class: "btn btn-square",
                 onclick: function() {
                   swal({
                     title: 'Are you sure?',

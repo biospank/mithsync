@@ -49,7 +49,6 @@ body {
       @include translate(-100%, 0);
     }
     .breadcrumb-bar {
-      //padding-top: 15px;
       position: fixed;
       right: 0;
       left: 0;
@@ -57,9 +56,6 @@ body {
       min-width: $minWidthPage;
       background-color: #f6f8f8;
       @include border(#dce0e6, 1px, bottom);
-      .main-container {
-        padding-bottom: 20px;
-      }
     }
     #wrapper {
       padding-right: $sidebar-video-edit-width;
