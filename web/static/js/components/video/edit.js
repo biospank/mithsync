@@ -238,7 +238,7 @@ var editVideo = (function() {
               start: slickCarousel.slides().map(function(slide) {
                 return slide.start;
               }),
-              max: 180,
+              max: ctrl.player.getDuration(),
               onChange: ctrl.onChangeSlider,
               onUpdate: ctrl.onUpdateSlider
             }));
