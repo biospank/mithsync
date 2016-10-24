@@ -1,5 +1,6 @@
 import mixinLayout from "../layout/mixin_layout";
 import Session from "../../models/session";
+import Project from "../../models/project";
 import Video from "../../models/video";
 import Slide from "../../models/slide";
 import Slider from "./slider";
@@ -286,9 +287,11 @@ var editVideo = (function() {
         return Video.show(m.route.param('projectId'), videoId).then(function(video) {
           ctrl.video(video.data);
           ctrl.videoInfo(Video.info(ctrl.video().url));
+          Video.current(video.data);
+          Project.current(video.data.project);
           // this is important to be here: it renders correctly
           // the current slide
-          slickCarousel.slides(video.data.slides)
+          slickCarousel.slides(video.data.slides);
           slickCarousel.currentSlide(_.first(slickCarousel.slides()));
         }, function(response) {
           ctrl.errors(response.errors);

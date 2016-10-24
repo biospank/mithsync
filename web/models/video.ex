@@ -70,6 +70,10 @@ defmodule Videosync.Video do
     from v in query, where: field(v, ^model) == ^value
   end
 
+  def preload_project(query) do
+    from v in query, preload: [:project]
+  end
+
   def preload_slides(query, preload_query) do
     from v in query, preload: [slides: ^preload_query]
   end
