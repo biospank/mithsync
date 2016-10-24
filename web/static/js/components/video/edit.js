@@ -399,7 +399,7 @@ var editVideo = (function() {
             return slide.start;
           }),
           // to enable video
-          ctrl.player.getDuration(), // max: 180,
+          max: ctrl.player.getDuration(), // max: 180,
           onChange: ctrl.onChangeSlider,
           onUpdate: ctrl.onUpdateSlider
         }));
