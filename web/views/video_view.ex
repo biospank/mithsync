@@ -43,4 +43,22 @@ defmodule Videosync.VideoView do
       slides: render_many(video.slides, Videosync.SlideView, "slide.json")
     }
   end
+
+  def render("show_video_with_project_and_slides.json", %{video: video}) do
+    %{data: render_one(video, Videosync.VideoView, "video_with_project_and_slides.json")}
+  end
+
+  def render("video_with_project_and_slides.json", %{video: video}) do
+    %{
+      id: video.id,
+      user_id: video.user_id,
+      project_id: video.project_id,
+      project: render_one(video.project, Videosync.ProjectView, "project.json"),
+      url: video.url,
+      title: video.title,
+      description: video.description,
+      slide_count: video.slide_count,
+      slides: render_many(video.slides, Videosync.SlideView, "slide.json")
+    }
+  end
 end

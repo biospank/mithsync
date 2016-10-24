@@ -34,7 +34,6 @@ var newVideo = (function() {
               id: 'url',
               dataLabel: 'Video Link',
               oninput: m.withAttr("value", Video.model.url),
-              value: "https://www.youtube.com/watch?v=ZBCJOU48qXc",
               error: ctrl.errors()['url']
             }),
             m.component(feedbackButton, {

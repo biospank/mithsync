@@ -22,12 +22,11 @@ var dragger = {
       drake.cancel();
       if(opts.onDropCallback)
         opts.onDropCallback(el.querySelector('img').src)
-    })
-    // drake.on('over', function (el, container) {
-    //   container.className += ' ex-over';
-    // }).on('out', function (el, container) {
-    //   container.className = container.className.replace('ex-over', '');
-    // });
+    }).on('over', function (el, container) {
+      container.className += ' ex-over';
+    }).on('out', function (el, container) {
+      container.className = container.className.replace(' ex-over', '');
+    });
 
     return drake;
   }

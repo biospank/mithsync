@@ -1,5 +1,6 @@
 import mixinLayout from "../layout/mixin_layout";
 import Session from "../../models/session";
+import Project from "../../models/project";
 import Video from "../../models/video";
 import Slide from "../../models/slide";
 import Slider from "./slider";
@@ -15,24 +16,8 @@ var editVideo = (function() {
 
   var content = function(ctrl) {
     return [
-      // m("header", { class: "text-right" }, [
-      //   m("a", { class: "btn btn-success" }, "Save"),
-      //   m("a", { class: "btn btn-success" }, "Save and Exit")
-      // ]),
       m(imageDialog),
       m(videoPreview),
-      // m(".clearfix", [
-      //   m("div.pull-right", [
-      //     m("a", {
-      //       href: '/projects/' + m.route.param('projectId') + '/videos/' + m.route.param('videoId') + '/library',
-      //       config: m.route,
-      //       class: "btn btn-primary effect btn-md text-uppercase icon-left"
-      //     }, [
-      //       m("i", { class: 'fa fa-plus' }),
-      //       m("span", {}, "Library")
-      //     ])
-      //   ])
-      // ]),
       m("main", { class: "main-container" }, [
         m("section", { id: "video-container" }, [
           m(".row", [
@@ -42,14 +27,6 @@ var editVideo = (function() {
                 videoId: ctrl.videoInfo().videoId,
                 onReady: ctrl.initPlayer
               })
-              // m("div")
-              // m(".video_player",
-              //   {
-              //     "data-type": "youtube", //"vimeo",
-              //     "data-video-id": "_WgrfEaAM4Y", //"180519312",
-              //     config: ctrl.initPlayer
-              //   }
-              // )
             ]),
             m(".col-xs-6", [
               m("figure", {
@@ -142,6 +119,8 @@ var editVideo = (function() {
         m(slickCarousel, {
           selectCallback: function(slide) {
             ctrl.highlightSlide(slide);
+            // to enable video
+            ctrl.player.seek(slide.start);
           }
         }, slickCarousel.slides())
       ])
@@ -238,7 +217,7 @@ var editVideo = (function() {
               start: slickCarousel.slides().map(function(slide) {
                 return slide.start;
               }),
-              max: 180,
+              max: ctrl.player.getDuration(),
               onChange: ctrl.onChangeSlider,
               onUpdate: ctrl.onUpdateSlider
             }));
@@ -286,9 +265,11 @@ var editVideo = (function() {
         return Video.show(m.route.param('projectId'), videoId).then(function(video) {
           ctrl.video(video.data);
           ctrl.videoInfo(Video.info(ctrl.video().url));
+          Video.current(video.data);
+          Project.current(video.data.project);
           // this is important to be here: it renders correctly
           // the current slide
-          slickCarousel.slides(video.data.slides)
+          slickCarousel.slides(video.data.slides);
           slickCarousel.currentSlide(_.first(slickCarousel.slides()));
         }, function(response) {
           ctrl.errors(response.errors);
