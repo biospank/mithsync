@@ -17,7 +17,7 @@ var editVideo = (function() {
   var content = function(ctrl) {
     return [
       m(imageDialog),
-      m(videoPreview),
+      m(videoPreview, ctrl.video(), slickCarousel.slides()),
       m("main", { class: "main-container" }, [
         m("section", { id: "video-container" }, [
           m(".row", [
@@ -106,7 +106,7 @@ var editVideo = (function() {
               m("button[type=submit]", {
                 onclick: function(event) {
                   event.preventDefault();
-                  videoPreview.show(ctrl.video(), slickCarousel.slides());
+                  videoPreview.show();
                 },
                 class: 'btn btn-success btn-square',
                 title: "Preview"
