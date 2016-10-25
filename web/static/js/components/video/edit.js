@@ -350,9 +350,22 @@ var editVideo = (function() {
         event.preventDefault();
 
         var lastValue = _.last(slickCarousel.slides()).start;
+        var newValue = lastValue + 10;
+        var videoDuration = ctrl.player.getDuration();
+
+        if(lastValue === videoDuration) {
+          swal({
+            title: 'Slide time exceeded',
+            text: "You reached maximum allowed time for this video",
+            type: 'info',
+            confirmButtonText: 'Ok'
+          });
+
+          return;
+        }
 
         var slide = Slide.resetModel({
-          start: lastValue + 10,
+          start: ((newValue < videoDuration) ? newValue : videoDuration),
           connectColor: Color.sample()
         });
 
