@@ -11,10 +11,11 @@
   }
 }
 
-@mixin font-style($size, $color, $weight: 300){
+@mixin font-style($size, $color, $weight: 300, $line-height: inherit){
   font-size: $size;
   color: $color;
   font-weight: $weight;
+  line-height: inherit;
 }
 
 @mixin bg-size($size: cover){

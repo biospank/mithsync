@@ -7,7 +7,7 @@ var listItem = {
       editMode: m.prop(false),
       showItem: function() {
         if(this.editMode()) {
-          return m(".projects-list__body", [
+          return m(".projects-list__body", { class: "status" }, [
             m(".input-group", [
               m("input", {
                 type: "text",

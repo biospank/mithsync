@@ -99,7 +99,7 @@ defmodule Videosync.ProjectController do
       items,
       %{
         page: page || 1,
-        page_size: 4
+        page_size: 8
       }
     )
   end
