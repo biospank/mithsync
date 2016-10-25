@@ -112,6 +112,7 @@ var projectList = {
                 title: 'Project name',
                 input: 'text',
                 showCancelButton: true,
+                showCloseButton: true,
                 confirmButtonText: 'Create',
                 inputValidator: function(value) {
                   return new Promise(function(resolve, reject) {

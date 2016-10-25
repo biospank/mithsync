@@ -83,6 +83,7 @@
 
 .projects-list {
   &__row {
+    height: 56px;
     &:before {
       content: "";
       display: inline-block;
@@ -142,20 +143,20 @@
       .title {
         @include font-style(12px, $grey-superdark, 400, 12px);
         text-transform: uppercase;
-        margin: 8px 50px 0px 0px;
+        margin: 11px 50px 0px 0px;
         float: left;
         width: 200px;
       }
       .creation-date {
         @include font-style(12px, $grey-light, 300, 12px);
         text-transform: uppercase;
-        margin: 8px 20px 0px 0px;
+        margin: 11px 20px 0px 0px;
         float: left;
       }
       .videos-number {
         @include font-style(12px, $coloured, 500, 12px);
         text-transform: uppercase;
-        margin: 8px 20px 0px 0px;
+        margin: 11px 20px 0px 0px;
         float: left;
       }
     }
@@ -163,17 +164,6 @@
       @include position(right, 12px, top, 12px);
       .btn {
         margin-left: 10px;
-        background-color: transparent;
-        @include box-shadow(0px 0px 6px #d5d5d5);
-        .fa {
-          color: #d2dfe9;
-          @include transition(color 0.3s ease);
-        }
-        &:hover {
-          .fa {
-            color: $mainColor;
-          }
-        }
         &.btn-square {
           @include size(32px, 32px);
           line-height: 32px;
