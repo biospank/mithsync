@@ -28,6 +28,7 @@ var videoPreview = (function() {
             m(".modal-header", [
               m("button.close", {
                 onclick: function() {
+                  preview.pause();
                   $("#videoPreview").hide();
                 }
               }, [
