@@ -9,10 +9,24 @@
     }
   }
   &-confirm {
-    &.swal2-confirm {
-      border-color: #b3c833 !important;
-      //color: #b3c833 !important;
-      @extend .btn-success;
+    border-color: #b3c833 !important;
+    //color: #b3c833 !important;
+    @extend .btn-success;
+  }
+  &-cancel {
+    @extend .btn-danger;
+  }
+  &-overlay {
+    background-color: white !important;
+  }
+  &-close {
+    border-radius: 50%;
+    @include size(40px, 40px);
+    background: transparent;
+    @include transition(background 0.3s ease !important);
+    &:hover {
+      color: white !important;
+      background: #cfcfcf !important;
     }
   }
 }

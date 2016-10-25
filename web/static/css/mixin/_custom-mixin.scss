@@ -15,7 +15,7 @@
   font-size: $size;
   color: $color;
   font-weight: $weight;
-  line-height: inherit;
+  line-height: $line-height;
 }
 
 @mixin bg-size($size: cover){

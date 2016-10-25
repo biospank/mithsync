@@ -10,7 +10,7 @@ var searchForm = {
         }),
         m("span", { class: "input-group-btn" }, [
           m("button[type=submit]", {
-            class: "btn btn-default",
+            class: "btn btn-none",
             onclick: attrs.action
           }, [
             m("i", { class: "fa fa-search" })

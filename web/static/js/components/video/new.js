@@ -8,43 +8,42 @@ var newVideo = (function() {
 
   var content = function(ctrl) {
     return [
-      m(".row", [
-        m(".col-sm-6", [
-          m("form", { class: "light-form", role: "form" }, [
-            m.component(textField, {
-              type: 'text',
-              placeholder: 'Title',
-              id: 'title',
-              dataLabel: 'Title',
-              oninput: m.withAttr("value", Video.model.title),
-              error: ctrl.errors()['title']
-            }),
-            m.component(textField, {
-              field: 'textarea',
-              rows: 9,
-              placeholder: 'Description',
-              id: 'description',
-              dataLabel: 'Description',
-              oninput: m.withAttr("value", Video.model.description),
-              error: ctrl.errors()['description']
-            }),
-            m.component(textField, {
-              type: 'link',
-              placeholder: 'link to video',
-              id: 'url',
-              dataLabel: 'Video Link',
-              oninput: m.withAttr("value", Video.model.url),
-              error: ctrl.errors()['url']
-            }),
-            m.component(feedbackButton, {
-              action: ctrl.createVideo,
-              label: 'Create',
-              feedbackLabel: 'Creating...',
-              style: 'btn btn-primary effect btn-lg'
-            })
-          ])
-        ]),
-        m(".col-sm-6", [])
+      m(".col-sm-6 center-block", [
+        m("h3", "Create a new Video"),
+        m("p", "Channels are where your team communicates. They’re best when organized around a topic — #leads, for example."),
+        m("form", { class: "light-form", role: "form" }, [
+          m.component(textField, {
+            type: 'text',
+            placeholder: 'Title',
+            id: 'title',
+            dataLabel: 'Title',
+            oninput: m.withAttr("value", Video.model.title),
+            error: ctrl.errors()['title']
+          }),
+          m.component(textField, {
+            field: 'textarea',
+            rows: 9,
+            placeholder: 'Description',
+            id: 'description',
+            dataLabel: 'Description',
+            oninput: m.withAttr("value", Video.model.description),
+            error: ctrl.errors()['description']
+          }),
+          m.component(textField, {
+            type: 'link',
+            placeholder: 'link to video',
+            id: 'url',
+            dataLabel: 'Video Link',
+            oninput: m.withAttr("value", Video.model.url),
+            error: ctrl.errors()['url']
+          }),
+          m.component(feedbackButton, {
+            action: ctrl.createVideo,
+            label: 'Create',
+            feedbackLabel: 'Creating...',
+            style: 'btn btn-primary effect btn-lg'
+          })
+        ])
       ])
     ];
   };

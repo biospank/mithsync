@@ -3,5 +3,5 @@
   border-radius: 3px;
   @include spaces(7px, 0 10px);
   background-color: $mainColor;
-  @include font-style(10px, white, 700);
+  @include font-style(10px, white, 700, 10px);
 }
