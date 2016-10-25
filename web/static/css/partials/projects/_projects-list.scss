@@ -1,97 +1,17 @@
-// .projects-list {
-//   &__row {
-//     height: 89px;
-//     position: relative;
-//     @include spaces(10px 15px, 0 0 15px 0);
-//     background-color: white;
-//     @include box-shadow(0px 0px 10px #dfe4ee);
-//     display: block;
-//     border-radius: 5px;
-//     @include transition(all 0.3s ease-out);
-//     &:hover {
-//       text-decoration: none;
-//     }
-//     .projects-list__body {
-//       display: block;
-//       &:hover {
-//         text-decoration: none;
-//       }
-//       & > .input-group {
-//         margin-top: 16px;
-//         .form-control {
-//           @include box-shadow(none);
-//           border-color: $mainColor;
-//           border-right: 0;
-//           &:focus {
-//             border-color: $mainColor;
-//           }
-//         }
-//         .input-group-addon {
-//           background-color: white;
-//           border-color: $mainColor;
-//           @include box-shadow(none);
-//           .fa, i, span {
-//             font-size: 20px;
-//             color: #2b415d;
-//             @include transition(color 0.3s ease-out);
-//             text-shadow: 1px 1px 1px #424856;
-//             &:hover {
-//               color: $mainColor;
-//             }
-//           }
-//         }
-//       }
-//       & > a {
-//         text-decoration: none;
-//       }
-//       .title {
-//         text-transform: uppercase;
-//         margin-top: 0;
-//         margin-bottom: 8px;
-//         @include font-style(12px, $grey-dark);
-//       }
-//       .creation-date {
-//         @include font-style(12px, $grey-light);
-//         text-transform: uppercase;
-//         margin-top: 0;
-//       }
-//       .videos-number {
-//         @include font-style(12px, $coloured, 500);
-//         text-transform: uppercase;
-//       }
-//     }
-//     .projects-list__buttons {
-//       @include position(right, 22px, top, 27px);
-//       .btn {
-//         margin-left: 10px;
-//         background-color: transparent;
-//         @include box-shadow(0px 0px 6px #d5d5d5);
-//         .fa {
-//           color: #d2dfe9;
-//           @include transition(color 0.3s ease);
-//         }
-//         &:hover {
-//           .fa {
-//             color: $mainColor;
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
-
-
 .projects-list {
   &__row {
-    height: 56px;
-    &:before {
-      content: "";
-      display: inline-block;
-      background: url("/images/icons/folder.svg") 0 0 no-repeat;
-      @include size(32px, 32px);
-      @include position(left, 12px, top, 12px);
+    @include respond-to(min-width, 1920px) {
+      height: 56px;
     }
-    //height: 55px;
+    @include respond-to(min-width, 970px) {
+      &:before {
+        content: "";
+        display: inline-block;
+        background: url("/images/icons/folder.svg") 0 0 no-repeat;
+        @include size(32px, 32px);
+        @include position(left, 12px, top, 12px);
+      }
+    }
     position: relative;
     @include spaces(12px 12px, 0 0 15px 0);
     background-color: white;
@@ -103,8 +23,10 @@
       text-decoration: none;
     }
     .projects-list__body {
+      @include respond-to(min-width, 970px) {
+        margin-left: 50px;
+      }
       display: inline-block;
-      margin-left: 50px;
       @include size(100%, 100%);
       &:hover {
         text-decoration: none;
@@ -143,21 +65,28 @@
       .title {
         @include font-style(12px, $grey-superdark, 400, 12px);
         text-transform: uppercase;
-        margin: 11px 50px 0px 0px;
-        float: left;
-        width: 200px;
+        margin: 0 0 5px 0;
+        @include respond-to(min-width, 1920px) {
+          margin: 11px 50px 0px 0px;
+          float: left;
+          width: 200px;
+        }
       }
       .creation-date {
         @include font-style(12px, $grey-light, 300, 12px);
         text-transform: uppercase;
-        margin: 11px 20px 0px 0px;
-        float: left;
+        @include respond-to(min-width, 1200px) {
+          margin: 11px 20px 0px 0px;
+          float: left;
+        }
       }
       .videos-number {
         @include font-style(12px, $coloured, 500, 12px);
         text-transform: uppercase;
-        margin: 11px 20px 0px 0px;
-        float: left;
+        @include respond-to(min-width, 1200px) {
+          margin: 11px 20px 0px 0px;
+          float: left;
+        }
       }
     }
     .projects-list__buttons {
