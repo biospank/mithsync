@@ -15,7 +15,7 @@ var dashboard = (function() {
             m("div", { class: "text-center" }, [
               m("a", {
                 onclick: ctrl.newProject,
-                class: "btn btn-default",
+                class: "btn btn-none",
                 href: "#" }, [
                 m("img", { src: "/images/icons/add.png" })
               ])

@@ -23,7 +23,7 @@ var mixinLayout = function(content, layout) {
               m(".input-group", [
                 m("input", { type: "text", class: "form-control", placeholder: "Search" }),
                 m("span", { class: "input-group-btn" }, [
-                  m("button", { type: "submit", class: "btn btn-default" }, [
+                  m("button", { type: "submit", class: "btn btn-none" }, [
                     m("img", { src: "/images/icons/search.png" })
                   ])
                 ])
@@ -53,7 +53,7 @@ var mixinLayout = function(content, layout) {
               m(".input-group", [
                 m("input", { type: "text", class: "form-control", placeholder: "Search" }),
                 m("span", { class: "input-group-btn" }, [
-                  m("button", { type: "submit", class: "btn btn-default" }, [
+                  m("button", { type: "submit", class: "btn btn-none" }, [
                     m("img", { src: "/images/icons/search.png" })
                   ])
                 ])

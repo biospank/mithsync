@@ -21,6 +21,7 @@
       }
       &:hover, &:focus, &:active {
         background-color: $bg-color-hover !important;
+        @include box-shadow(none);
         .fa {
           color: $text-color;
         }
