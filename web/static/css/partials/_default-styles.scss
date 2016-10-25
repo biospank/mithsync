@@ -13,6 +13,14 @@ body {
   color: #313131;
 }
 
+p {
+  color: $grey-light;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $grey-dark;
+}
+
 *:focus {
   outline: 0 !important;
 }
@@ -33,60 +41,6 @@ body {
   font-weight: 400;
 }
 
-.mgv5 {
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-.mgv10 {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.mgv15 {
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-
-.mgv20 {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.mgv25 {
-  margin-top: 25px;
-  margin-bottom: 25px;
-}
-
-.mgv30 {
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
-
-.mgt30 {
-  margin-top: 30px;
-}
-
-.mgb30 {
-  margin-bottom: 30px;
-}
-
-.no-margin-top {
-  margin-top: 0;
-}
-
-.no-margin-bottom {
-  margin-bottom: 0;
-}
-
-.no-margin-left {
-  margin-left: 0 !important;
-}
-
-.no-margin-right {
-  margin-right: 0;
-}
-
 .header-text{
   // color: #69c0af;
   color: black;
@@ -98,12 +52,5 @@ body {
   }
   &__separator {
     opacity: 0.3;
-  }
-}
-
-#logo {
-  margin-bottom: 20px;
-  img {
-    width: 100px;
   }
 }

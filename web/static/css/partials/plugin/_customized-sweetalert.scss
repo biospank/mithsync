@@ -15,4 +15,7 @@
       @extend .btn-success;
     }
   }
+  &-overlay {
+    background-color: white !important;
+  }
 }
