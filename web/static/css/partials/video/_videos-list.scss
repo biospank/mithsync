@@ -4,7 +4,8 @@
     height: $row-height;
     @include spaces(0, 0 0 15px 0);
     background-color: white;
-    @include border(#eaeaea);
+    //@include border(#eaeaea);
+    @include box-shadow(0px 0px 10px #dfe4ee);
     display: block;
     border-radius: 5px;
     @include transition(all 0.3s ease-out);
@@ -12,27 +13,16 @@
     position: relative;
     &:hover {
       text-decoration: none;
-      //background-color: #eeeeee;
-      //@include box-shadow(0px 2px 3px rgba(63, 65, 72, 0.18));
     }
     .poster {
       padding: 0;
       height: $row-height;
       border-right: 1px solid #eaeaea;
-      //background-color: #eeeeee;
       & > a {
         display: block;
         position: relative;
         overflow: hidden;
         @include size(116px, $row-height);
-        // &:before {
-        //   content: "";
-        //   @include size(40px, 40px);
-        //   @include position(left, 50%, top, 50%);
-        //   margin-left: -20px;
-        //   margin-top: -20px;
-        //   background: url("/images/icons/player-blue.png") no-repeat;
-        // }
         img {
           @include size(116px, auto);
         }
