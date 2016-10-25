@@ -7,6 +7,7 @@
   @include box-shadow(0px 0px 6px #d5d5d5);
   @include transition(all 0.2s ease);
   @each $btn, $bg-color, $bg-color-hover, $text-color  in
+                (none, transparent, transparent, black),
                 (default, #ffffff, #ffffff, #d2dfe9),
                 (success, #bcd454, #a5c53f, #ffffff),
                 (primary, #aac7f2, #8eb7f2, #ffffff),
@@ -25,6 +26,9 @@
         }
       }
     }
+  }
+  &-none {
+    @include box-shadow(none);
   }
   &-default {
     &:hover {

@@ -7,7 +7,9 @@
     .input-group-btn {
       .btn {
         @include font-style(16px, $light);
-        background-color: transparent;
+        .fa {
+          color: $mainColor;
+        }
       }
     }
     .form-control {
