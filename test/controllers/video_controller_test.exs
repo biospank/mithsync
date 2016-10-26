@@ -59,19 +59,22 @@ defmodule Videosync.VideoControllerTest do
     video = insert_video(user, project, %Video{})
       |> Repo.preload(:slides)
     conn = get conn, project_video_path(conn, :show, project, video)
-    assert json_response(conn, 200)["data"] == %{"id" => video.id,
+    assert json_response(conn, 200)["data"] == %{
+      "id" => video.id,
       "user_id" => user.id,
       "project_id" => project.id,
       "project" => %{
         "id" => project.id,
         "name" => project.name,
-        "video_count" => 0
+        "video_count" => 0,
+        "inserted_at" => Ecto.DateTime.to_iso8601(project.inserted_at)
       },
       "url" => video.url,
       "title" => video.title,
       "description" => video.description,
       "slide_count" => 0,
-      "slides" => video.slides}
+      "slides" => video.slides
+    }
   end
 
   @tag :logged_in

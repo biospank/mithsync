@@ -19,7 +19,8 @@ defmodule Videosync.ProjectView do
     %{
       id: project.id,
       name: project.name,
-      video_count: project.video_count
+      video_count: project.video_count,
+      inserted_at: project.inserted_at
     }
   end
 end
