@@ -10,7 +10,7 @@ var mixinLayout = function(content, layout) {
     login: function(content) {
       return [
         m('main', { class: 'main-container'}, [
-          m('.container', content)
+          content
         ])
       ]
     },
