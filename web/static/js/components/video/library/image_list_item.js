@@ -30,7 +30,8 @@ var imageListItem = {
   },
   view: function(ctrl, image){
     ctrl.image = image;
-    return m("p", {
+    return m(".media", {
+      class: "list_libraryitem",
       'data-url': ctrl.image.thumb_url,
       onmousedown: function() {
         var selectEvent = new CustomEvent("library:image:select", {
@@ -39,25 +40,38 @@ var imageListItem = {
         document.body.dispatchEvent(selectEvent);
       }
     }, [
-      m("label", _.truncate(ctrl.image.name, 10)),
-      m("button", {
-        onclick: function() {
-          swal({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            type: 'warning',
-            showCancelButton: true,
-            showLoaderOnConfirm: true,
-            confirmButtonColor: '#75c4cb',
-            cancelButtonColor: '#9b0202',
-            confirmButtonText: 'Yes, delete it!'
-          }).then(function() {
-            ctrl.delete();
+      m("figure", { class: "media-left" }, [
+        m("a", { href: "#" }, [
+          m("img", {
+            src: ctrl.image.thumb_url,
+            class: "media-object"
           })
-        },
-        type: "button",
-        class: "btn"
-      })
+        ])
+      ]),
+      m(".media-body", [
+        m("h5", { class: "media-heading" }, _.truncate(ctrl.image.name, 10)),
+        m("p", { class: "media-text" }, "PNG · 309.04 KB · 1920 × 1080"),
+        m("button", {
+          onclick: function() {
+            swal({
+              title: 'Are you sure?',
+              text: "You won't be able to revert this!",
+              type: 'warning',
+              showCancelButton: true,
+              showLoaderOnConfirm: true,
+              confirmButtonColor: '#75c4cb',
+              cancelButtonColor: '#9b0202',
+              confirmButtonText: 'Yes, delete it!'
+            }).then(function() {
+              ctrl.delete();
+            })
+          },
+          type: "button",
+          class: "btn btn-none media-button"
+        }, [
+          m("i", { class: "fa fa-remove" })
+        ])
+      ])
     ]);
   }
 }
