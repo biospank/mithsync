@@ -54,7 +54,7 @@ var listItem = {
               m("h5", { class: "title" }, [
                 this.project().name,
               ]),
-              m("p", { class: "creation-date" }, "5 febbraio 2016"),
+              m("p", { class: "creation-date" }, moment(this.project().inserted_at).format('LLL')),
               m("span", {
                 class: "videos-number"
               }, this.project().video_count + (_.gt(this.project().video_count, 1) ? " videos" : " video"))

@@ -40,7 +40,8 @@ defmodule Videosync.VideoView do
       title: video.title,
       description: video.description,
       slide_count: video.slide_count,
-      slides: render_many(video.slides, Videosync.SlideView, "slide.json")
+      slides: render_many(video.slides, Videosync.SlideView, "slide.json"),
+      inserted_at: video.inserted_at
     }
   end
 
