@@ -8,16 +8,22 @@
       color: #e3a200 !important;
     }
   }
-  &-confirm {
-    border-color: #b3c833 !important;
-    //color: #b3c833 !important;
-    @extend .btn-success;
-  }
-  &-cancel {
-    @extend .btn-danger;
-  }
   &-overlay {
     background-color: white !important;
+  }
+  &-confirm {
+    background: #bcd454 !important;
+    @include transition(background 0.3s ease !important);
+    &:hover {
+      background: #a5c53f !important;
+    }
+  }
+  &-cancel {
+    background: #fac851 !important;
+    @include transition(background 0.3s ease !important);
+    &:hover {
+      background: #f0b14d !important;
+    }
   }
   &-close {
     border-radius: 50%;
