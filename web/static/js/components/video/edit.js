@@ -34,21 +34,25 @@ var editVideo = (function() {
                 id: "slide-placeholder",
                 config: ctrl.initDragger
               }, [
-                m("a", {
-                  onclick: function(event) {
-                    event.preventDefault();
-                    imageDialog.show({
-                      selectCallback: function(image) {
-                        ctrl.selectLibraryImage(image);
-                      }
-                    });
-                  },
-                  href: "#"
-                }, [
-                  m("img", {
-                    src: slickCarousel.currentSlide() ? slickCarousel.currentSlide().url : "/images/slide-placeholder.png",
-                    class: "img-responsive"
-                  })
+                m("img", {
+                  src: slickCarousel.currentSlide() ? slickCarousel.currentSlide().url : "/images/slide-placeholder.png",
+                  class: "img-responsive"
+                }),
+                m("div", { class: "placeholderSlide__text" }, [
+                  m("p", "Drop an image here or"),
+                  m("a", {
+                    onclick: function(event) {
+                      event.preventDefault();
+                      imageDialog.show({
+                        selectCallback: function(image) {
+                          slickCarousel.currentSlide().url = image.slide_url
+                          slickCarousel.currentSlide().thumb_url = image.thumb_url
+                        }
+                      });
+                    },
+                    href: "#",
+                    class: "btn btn-primary"
+                  }, "Browser")
                 ])
               ])
             ])
