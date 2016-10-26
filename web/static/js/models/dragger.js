@@ -21,7 +21,7 @@ var dragger = {
     drake.on('drop', function(el, target, source, sibling) {
       drake.cancel();
       if(opts.onDropCallback)
-        opts.onDropCallback(el.querySelector('img').src)
+        opts.onDropCallback(el.dataset.url)
     }).on('over', function (el, container) {
       container.className += ' ex-over';
     }).on('out', function (el, container) {
