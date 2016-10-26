@@ -21,8 +21,8 @@ var videoListItem = {
             ])
           ]),
           m("div", { class: "media-body" }, [
-            m("h5", { class: "title" }, _.truncate(video.title, 10)),
-            m("p", { class: "description" }, _.truncate(video.description, 10)),
+            m("h5", { class: "title" }, _.truncate(video.title, { length: 15 })),
+            m("p", { class: "description" }, _.truncate(video.description, { length: 20 })),
             m("span", {
               class: "video-time"
             }, video.slide_count + (_.gt(video.slide_count, 1) ? " slides" : " slide"))
