@@ -1,6 +1,6 @@
 import Image from "../../../models/image";
 
-var imageItem = {
+var imageThumbItem = {
   controller: function(image, parent){
     var ctrl = this;
 
@@ -30,17 +30,19 @@ var imageItem = {
   },
   view: function(ctrl, image){
     ctrl.image = image;
-    return m(".col-xs-3", [
+    return m(".col-xs-3", {
+      'data-url': ctrl.image.thumb_url,
+    }, [
       m("figure", { class: "img-thumbnail" }, [
         m("img", {
           src: ctrl.image.thumb_url,
           title: ctrl.image.name,
           class: "img-responsive",
           onmousedown: function() {
-            var clickEvent = new CustomEvent("library:image:select", {
+            var selectEvent = new CustomEvent("library:image:select", {
               detail: ctrl.image
             });
-            document.body.dispatchEvent(clickEvent);
+            document.body.dispatchEvent(selectEvent);
           }
         }),
         m("div", { class: "img-thumbnail__buttons" }, [
@@ -70,4 +72,4 @@ var imageItem = {
   }
 }
 
-export default imageItem;
+export default imageThumbItem;

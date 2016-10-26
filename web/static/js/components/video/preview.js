@@ -13,7 +13,7 @@ var preview = (function() {
     controller: function(video, slides) {
       var videoInfo = Video.info(video.url);
       var currentSlide = undefined;
-      var timeVector = slides.map(function(slide) { return slide.start; });
+      var timeVector = [];
 
       var inRange = function(progress, idx1, idx2) {
         return _.inRange(progress, timeVector[idx1], (timeVector[idx2] || 100000));
@@ -98,10 +98,15 @@ var preview = (function() {
         },
         videoInfo: function() {
           return videoInfo;
+        },
+        setTimeVector: function(slides) {
+          timeVector = slides.map(function(slide) { return slide.start; });
         }
       };
     },
     view: function(ctrl, video, slides) {
+      ctrl.setTimeVector(slides);
+
       return m(".row", [
         m(".col-sm-6", [
           m(videoPlayback, {
@@ -115,7 +120,11 @@ var preview = (function() {
           m(".reveal", {}, [
             m(".slides", [
               slides.map(function(slide) {
-                return m("section", [
+                return m("section[hidden]", {
+                  'class': 'future',
+                  'aria-hidden': true,
+                  'style': 'display: none;'
+                }, [
                   m("img", {
                     src: slide.url
                   })

@@ -17,7 +17,7 @@ var editVideo = (function() {
   var content = function(ctrl) {
     return [
       m(imageDialog),
-      m(videoPreview),
+      m(videoPreview, ctrl.video(), slickCarousel.slides()),
       m("main", { class: "main-container" }, [
         m("section", { id: "video-container" }, [
           m(".row", [
@@ -39,8 +39,7 @@ var editVideo = (function() {
                     event.preventDefault();
                     imageDialog.show({
                       selectCallback: function(image) {
-                        slickCarousel.currentSlide().url = image.slide_url
-                        slickCarousel.currentSlide().thumb_url = image.thumb_url
+                        ctrl.selectLibraryImage(image);
                       }
                     });
                   },
@@ -106,7 +105,7 @@ var editVideo = (function() {
               m("button[type=submit]", {
                 onclick: function(event) {
                   event.preventDefault();
-                  videoPreview.show(ctrl.video(), slickCarousel.slides());
+                  videoPreview.show();
                 },
                 class: 'btn btn-success btn-square',
                 title: "Preview"
@@ -148,10 +147,10 @@ var editVideo = (function() {
         ctrl.currentLibraryImage(e.detail);
       }, false);
 
-      ctrl.selectLibraryImage = function() {
+      ctrl.selectLibraryImage = function(image) {
         m.startComputation()
-        slickCarousel.currentSlide().url = ctrl.currentLibraryImage().slide_url
-        slickCarousel.currentSlide().thumb_url = ctrl.currentLibraryImage().thumb_url
+        slickCarousel.currentSlide().url = image.slide_url
+        slickCarousel.currentSlide().thumb_url = image.thumb_url
         m.endComputation();
       },
       ctrl.onChangeSlider = function(values, handle, unencodedValues) {
@@ -181,7 +180,7 @@ var editVideo = (function() {
                 to: 'slide-placeholder'
               },
               onDropCallback: function() {
-                ctrl.selectLibraryImage();
+                ctrl.selectLibraryImage(ctrl.currentLibraryImage());
               }
             })
           );
