@@ -6,6 +6,7 @@
   border: 0;
   @include box-shadow(0px 0px 6px #d5d5d5);
   @include transition(all 0.2s ease);
+  /* Buttons generator */
   @each $btn, $bg-color, $bg-color-hover, $text-color  in
                 (none, transparent, transparent, black),
                 (default, #ffffff, #ffffff, #d2dfe9),
@@ -15,31 +16,50 @@
                 (warning, #ece96b, #e6d14e, #ffffff) {
     &-#{$btn} {
       background-color: $bg-color !important;
+      &:after {
+        content: "";
+        @include position(left, 0, top, 0);
+        right: 0;
+        bottom: 0;
+        border-radius: 5px;
+        @include box-shadow(inset 0 -2px rgba(0,0,0,.25));
+      }
+      /* Delete default internal box-shadow on btn-none and btn-default */
+      @if ($btn == 'none') {
+        @include box-shadow(none);
+        &:hover, &:focus, &:active {
+          @include box-shadow(none);
+        }
+        &:after {
+          @include box-shadow(none);
+        }
+      } @else if ($btn == 'default') {
+        &:after {
+          @include box-shadow(none);
+        }
+      }
+      /* end if */
       .fa {
         @include transition(all 0.2s ease);
         color: $text-color;
       }
       &:hover, &:focus, &:active {
         background-color: $bg-color-hover !important;
-        .fa {
-          color: $text-color;
+        /* Set different color on btn-default */
+        @if ($btn == 'default') {
+          .fa {
+            color: $mainColor;
+          }
+        } @else {
+          .fa {
+            color: $text-color;
+          }
         }
+        /* end if */
       }
     }
   }
-  &-none {
-    @include box-shadow(none);
-    &:hover, &:focus, &:active {
-      @include box-shadow(none);
-    }
-  }
-  &-default {
-    &:hover {
-      .fa {
-        color: $mainColor;
-      }
-    }
-  }
+  /* end each */
   &-square {
     margin-left: 5px;
     @include size(40px, 40px);
