@@ -21,10 +21,10 @@ var videoListItem = {
             ])
           ]),
           m("div", { class: "media-body" }, [
-            m("h5", { class: "title" }, _.truncate(video.title, { length: 15 })),
-            m("p", { class: "description" }, _.truncate(video.description, { length: 20 })),
+            m("h5", { class: "title" }, _.truncate(video.title, { length: 25 })),
+            m("p", { class: "description" }, _.truncate(video.description, { length: 30 })),
             m("span", {
-              class: "video-time"
+              class: "video-slide"
             }, video.slide_count + (_.gt(video.slide_count, 1) ? " slides" : " slide"))
           ])
         ])
