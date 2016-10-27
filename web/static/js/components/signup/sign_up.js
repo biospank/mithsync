@@ -27,7 +27,7 @@ var signUp = (function() {
             dataLabel: 'Email',
             oninput: m.withAttr("value", Registration.model.email),
             error: ctrl.errors()['email'],
-            typeForm: "group",
+            fieldType: "group",
             icon: "fa fa-user"
           }),
           m.component(textField, {
@@ -37,7 +37,7 @@ var signUp = (function() {
             dataLabel: 'Password',
             oninput: m.withAttr("value", Registration.model.password),
             error: ctrl.errors()['password'],
-            typeForm: "group",
+            fieldType: "group",
             icon: "fa fa-unlock-alt"
           }),
           m.component(textField, {
@@ -47,7 +47,7 @@ var signUp = (function() {
             dataLabel: 'Confirm Password',
             oninput: m.withAttr("value", Registration.model.password_confirmation),
             error: ctrl.errors()['password_confirmation'],
-            typeForm: "group",
+            fieldType: "group",
             icon: "fa fa-unlock-alt"
           }),
           m("div", { class: "text-center mgv30" }, [

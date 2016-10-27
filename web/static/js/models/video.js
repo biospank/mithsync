@@ -61,6 +61,19 @@ var Video = {
       }
     });
   },
+  update: function(video) {
+    return m.request({
+      method: "PUT",
+      url: Videosync.apiBaseUrl() +
+        _.replace(this.url, 'projectId', video.project_id) + "/" + video.id,
+      data: { video: this.model },
+      config: function(xhr) {
+        xhr.setRequestHeader("accept", "application/json");
+        xhr.setRequestHeader("content-type", "application/json");
+        xhr.setRequestHeader("Authorization", Videosync.realm + " " + Session.token());
+      }
+    });
+  },
   delete: function(video) {
     return m.request(
       {
