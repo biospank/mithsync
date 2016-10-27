@@ -84,13 +84,18 @@ var editVideo = (function() {
           m("#slider"),
           m("footer", { class: "buttons row" }, [
             m("div", { class: "col-xs-7" }, [
+              // m("button", {
+              //   onclick: ctrl.newSlide,
+              //   class: 'btn btn-primary btn-square no-margin-left',
+              //   title: "New slide"
+              // }, [
+              //   m("i", { class: "fa fa-plus" })
+              // ]),
               m("button", {
                 onclick: ctrl.newSlide,
-                class: 'btn btn-primary btn-square no-margin-left',
+                class: 'btn btn-primary btn-md',
                 title: "New slide"
-              }, [
-                m("i", { class: "fa fa-plus" })
-              ]),
+              }, "Add new slide"),
               m("button[type=submit]", {
                 onclick: function() {
                   if(slickCarousel.slides().length > 1) {
@@ -108,7 +113,7 @@ var editVideo = (function() {
                     }, function() {})
                   }
                 },
-                class: 'btn btn-danger btn-square',
+                class: 'btn btn-danger btn-square btn-space',
                 title: "Delete",
                 "data-toggle": "tooltip",
                 "data-placement": "top",
@@ -127,16 +132,24 @@ var editVideo = (function() {
                 class: 'btn btn-success btn-md',
                 title: "Save"
               }, 'Save slide'),
+              // m("button[type=submit]", {
+              //   onclick: function(event) {
+              //     event.preventDefault();
+              //     videoPreview.show();
+              //   },
+              //   class: 'btn btn-success btn-square',
+              //   title: "Preview"
+              // }, [
+              //   m("i", { class: "fa fa-eye" })
+              // ])
               m("button[type=submit]", {
                 onclick: function(event) {
                   event.preventDefault();
                   videoPreview.show();
                 },
-                class: 'btn btn-success btn-square',
+                class: 'btn btn-success btn-md btn-space',
                 title: "Preview"
-              }, [
-                m("i", { class: "fa fa-eye" })
-              ])
+              }, "Show Preview")
             ])
           ])
         ]),

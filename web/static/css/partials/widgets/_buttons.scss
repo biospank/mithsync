@@ -61,7 +61,6 @@
   }
   /* end each */
   &-square {
-    margin-left: 5px;
     @include size(40px, 40px);
     line-height: 40px;
     padding: 0;
@@ -78,6 +77,9 @@
   &-lg {
     min-width: 180px;
     font-size: 15px;
+  }
+  &-space {
+    margin-left: 5px;
   }
   &.icon-left, &.icon-right {
     padding: 0;
