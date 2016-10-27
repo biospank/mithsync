@@ -163,9 +163,9 @@ var imageLibrary = (function() {
                 filter: ctrl.filter
               })
             ]),
-            m("div", { class: "show-items pull-right" }, [
+            m("div", { class: "show-items pull-right mgb25" }, [
               m("button", {
-                class: ctrl.asList() ? '' : 'active',
+                class: ctrl.asList() ? 'btn btn-square btn-default' : 'btn btn-square btn-default active',
                 onclick: function(event) {
                   ctrl.asList(false);
                 }
@@ -173,7 +173,7 @@ var imageLibrary = (function() {
                 m("i", { class: "fa fa-th-large" })
               ]),
               m("button", {
-                class: ctrl.asList() ? 'active' : '',
+                class: ctrl.asList() ? 'btn btn-square btn-default btn-space active' : 'btn btn-square btn-default btn-space',
                 onclick: function(event) {
                   ctrl.asList(true);
                 }

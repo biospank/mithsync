@@ -92,11 +92,6 @@ var editVideo = (function() {
                 m("i", { class: "fa fa-plus" }),
                 "Add new slide"
               ]),
-              // m("button", {
-              //   onclick: ctrl.newSlide,
-              //   class: 'btn btn-primary btn-md',
-              //   title: "New slide"
-              // }, "Add new slide"),
               m("button[type=submit]", {
                 onclick: function() {
                   if(slickCarousel.slides().length > 1) {
