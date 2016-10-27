@@ -13,7 +13,7 @@
       }
     }
     position: relative;
-    @include spaces(12px 12px, 0 0 15px 0);
+    @include spaces(0, 0 0 15px 0);
     background-color: white;
     @include box-shadow(0px 0px 10px #dfe4ee);
     display: block;
@@ -26,6 +26,7 @@
       @include respond-to(min-width, 970px) {
         margin-left: 50px;
       }
+      padding: 12px;
       display: inline-block;
       @include size(100%, 100%);
       &:hover {
