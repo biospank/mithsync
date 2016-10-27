@@ -14,6 +14,29 @@ import dragger from '../../models/dragger';
 
 var editVideo = (function() {
 
+  var showBrowse = function() {
+    if(slickCarousel.currentSlide()) {
+      if(slickCarousel.currentSlide().url === "/images/slide-placeholder.png") {
+        return m("div", { class: "placeholderSlide__text" }, [
+          m("p", m.trust("Drop an <b>image</b> here from <b>Library</b><br>or")),
+          m("a", {
+            onclick: function(event) {
+              event.preventDefault();
+              imageDialog.show({
+                selectCallback: function(image) {
+                  slickCarousel.currentSlide().url = image.slide_url
+                  slickCarousel.currentSlide().thumb_url = image.thumb_url
+                }
+              });
+            },
+            href: "#",
+            class: "btn btn-lg btn-primary"
+          }, "Browse")
+        ]);
+      }
+    }
+  }
+
   var content = function(ctrl) {
     return [
       m(imageDialog),
@@ -34,25 +57,23 @@ var editVideo = (function() {
                 id: "slide-placeholder",
                 config: ctrl.initDragger
               }, [
-                m("img", {
-                  src: slickCarousel.currentSlide() ? slickCarousel.currentSlide().url : "/images/slide-placeholder.png",
-                  class: "img-responsive"
-                }),
-                m("div", { class: "placeholderSlide__text" }, [
-                  m("p", "Drop an image here or"),
-                  m("a", {
-                    onclick: function(event) {
-                      event.preventDefault();
-                      imageDialog.show({
-                        selectCallback: function(image) {
-                          slickCarousel.currentSlide().url = image.slide_url
-                          slickCarousel.currentSlide().thumb_url = image.thumb_url
-                        }
-                      });
-                    },
-                    href: "#",
-                    class: "btn btn-primary"
-                  }, "Browser")
+                m("a", {
+                  onclick: function(event) {
+                    event.preventDefault();
+                    imageDialog.show({
+                      selectCallback: function(image) {
+                        slickCarousel.currentSlide().url = image.slide_url
+                        slickCarousel.currentSlide().thumb_url = image.thumb_url
+                      }
+                    });
+                  },
+                  href: "#",
+                }, [
+                  m("img", {
+                    src: slickCarousel.currentSlide() ? slickCarousel.currentSlide().url : "/images/slide-placeholder.png",
+                    class: "img-responsive"
+                  }),
+                  showBrowse()
                 ])
               ])
             ])

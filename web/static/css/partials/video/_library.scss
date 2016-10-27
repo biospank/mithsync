@@ -167,17 +167,17 @@
 .list_libraryitem {
   position: relative;
   padding: 0 5px;
-  &:hover {
-    .media-left {
-      & > a {
-        @include border(#629ef4, 2px);
-        @include box-shadow(1px 2px 10px #000);
+  &.media {
+    overflow: visible;
+    &:hover {
+      .media-left {
+        & > a {
+          @include border(#629ef4, 2px);
+          @include box-shadow(1px 2px 10px #000);
+        }
       }
     }
-  }
-  .media {
-    overflow: visible;
-    &-left {
+    .media-left {
       & > a {
         @include transition(all 0.3s ease);
         cursor: move;
@@ -192,7 +192,7 @@
         }
       }
     }
-    &-body {
+    .media-body {
       padding-top: 5px;
       .media-heading {
         color: #424856;
