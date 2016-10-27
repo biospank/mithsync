@@ -39,8 +39,8 @@ var listItem = {
             ])
           ]),
           m("div", { class: "media-body" }, [
-            m("h5", { class: "title" }, _.truncate(video.title, 20)),
-            m("p", { class: "description" }, _.truncate(video.description, 20)),
+            m("h5", { class: "title" }, _.truncate(video.title, { length: 30 })),
+            m("p", { class: "description" }, _.truncate(video.description, { length: 50 })),
             m("p", { class: "creation-date" }, moment(video.inserted_at).format('LLL')),
             m("span", {
               class: "video-time"

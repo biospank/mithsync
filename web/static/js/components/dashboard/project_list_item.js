@@ -13,7 +13,7 @@ var projectListItem = {
         class: "projects-list__row"
       }, [
         m(".projects-list__body", [
-          m("h5", { class: "title" }, _.truncate(project.name, 10)),
+          m("h5", { class: "title" }, _.truncate(project.name, { length: 15 })),
           m("p", { class: "creation-date" }, moment(project.inserted_at).format('LLL')),
           m("span", {
             class: "videos-number"

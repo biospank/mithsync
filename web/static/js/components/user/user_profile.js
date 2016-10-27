@@ -15,7 +15,7 @@ var userProfile = (function() {
                 placeholder: 'Enter your First name',
                 id: 'first_name',
                 dataLabel: 'First Name',
-                typeForm: "group",
+                fieldType: "group",
                 icon: "fa fa-user"
               })
             ]),
@@ -25,7 +25,7 @@ var userProfile = (function() {
                 placeholder: 'Enter your Last name',
                 id: 'last_name',
                 dataLabel: 'Last Name' ,
-                typeForm: "group",
+                fieldType: "group",
                 icon: "fa fa-user"
               })
             ]),
@@ -41,7 +41,7 @@ var userProfile = (function() {
                 placeholder: 'Enter your address',
                 id: 'address',
                 dataLabel: 'Address',
-                typeForm: "group",
+                fieldType: "group",
                 icon: "fa fa-map-marker"
               })
             ]),

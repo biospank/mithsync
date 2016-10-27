@@ -27,7 +27,7 @@ var signIn = (function() {
             dataLabel: 'Email',
             oninput: m.withAttr("value", Session.model.email),
             error: ctrl.errors()['email'],
-            typeForm: "group",
+            fieldType: "group",
             icon: "fa fa-user"
           }),
           m.component(textField, {
@@ -37,7 +37,7 @@ var signIn = (function() {
             dataLabel: 'Password',
             oninput: m.withAttr("value", Session.model.password),
             error: ctrl.errors()['password'],
-            typeForm: "group",
+            fieldType: "group",
             icon: "fa fa-unlock-alt"
           }),
           m("p", [
