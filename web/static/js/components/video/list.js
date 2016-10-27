@@ -1,6 +1,7 @@
 import Session from "../../models/session";
 import Video from "../../models/video";
 import listItem from "./list_item";
+import loader from "../widgets/loader";
 import searchForm from "../widgets/search_form";
 import pagination from "../widgets/pagination";
 import recordNotFound from "../widgets/404";
@@ -25,7 +26,7 @@ var videoList = {
   controller: function() {
     var ctrl = this;
 
-    ctrl.videos = m.prop([]);
+    ctrl.videos = m.prop(undefined);
     ctrl.errors = m.prop({});
     ctrl.filter = m.prop("");
     ctrl.pageInfo = {};
@@ -59,9 +60,17 @@ var videoList = {
     };
 
     ctrl.showVideos = function() {
-      return ctrl.videos().map(function(video) {
-        return m(listItem, video, ctrl);
-      })
+      if(!ctrl.videos()) {
+        return m(loader);
+      } else {
+        if(_.isEmpty(ctrl.videos())) {
+           return m(recordNotFound);
+        } else {
+          return ctrl.videos().map(function(video) {
+            return m(listItem, video, ctrl);
+          })
+        }
+      }
     };
 
     ctrl.getVideos(
@@ -97,9 +106,7 @@ var videoList = {
         ])
       ]),
       m("ol", { class: "video-list list-unstyled" }, [
-        _.isEmpty(ctrl.videos()) ? m("li", {}, [
-          m(recordNotFound)
-        ]) : ctrl.showVideos()
+        ctrl.showVideos()
       ]),
       m("div", { class: "clearfix" }, [
         m("div", { class: "pull-left" }, [

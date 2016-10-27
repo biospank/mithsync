@@ -2,6 +2,7 @@ import mixinLayout from "../layout/mixin_layout";
 import searchForm from "../widgets/search_form";
 import pagination from "../widgets/pagination";
 import listItem from "./list_item";
+import loader from "../widgets/loader";
 import recordNotFound from "../widgets/404";
 import Session from "../../models/session";
 import Project from "../../models/project";
@@ -26,7 +27,7 @@ var projectList = {
   controller: function() {
     var ctrl = this;
 
-    ctrl.projects = m.prop([]);
+    ctrl.projects = m.prop(undefined);
     ctrl.errors = m.prop({});
     ctrl.filter = m.prop("");
     ctrl.pageInfo = {};
@@ -60,9 +61,17 @@ var projectList = {
     };
 
     ctrl.showProjects = function() {
-      return ctrl.projects().map(function(project) {
-        return m(listItem, project, ctrl);
-      })
+      if(!ctrl.projects()) {
+        return m(loader);
+      } else {
+        if(_.isEmpty(ctrl.projects())) {
+           return m(recordNotFound);
+        } else {
+          return ctrl.projects().map(function(project) {
+            return m(listItem, project, ctrl);
+          })
+        }
+      }
     };
 
     ctrl.updateProject = function(project) {
@@ -136,9 +145,7 @@ var projectList = {
         ])
       ]),
       m("ul", { class: "list-unstyled projects-list" }, [
-        _.isEmpty(ctrl.projects()) ? m("li", {}, [
-          m(recordNotFound)
-        ]) : ctrl.showProjects()
+        ctrl.showProjects()
       ]),
       m("div", { class: "clearfix" }, [
         m("div", { class: "pull-left" }, [

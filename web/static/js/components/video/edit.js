@@ -4,6 +4,7 @@ import Project from "../../models/project";
 import Video from "../../models/video";
 import Slide from "../../models/slide";
 import Slider from "./slider";
+import loader from "../widgets/loader";
 import imageDialog from "./image_dialog";
 import videoPlayback from "./video_playback";
 import slickCarousel from "./slick_carousel";
@@ -81,7 +82,7 @@ var editVideo = (function() {
           m(".clearfix .mgv25", [
             m("p", { class: "text-left no-margin-bottom" }, "Start: " + ctrl.svalue())
           ]),
-          m("#slider"),
+          (ctrl.isPlayerReady()) ? m("#slider") : m(loader),
           m("footer", { class: "buttons row" }, [
             m("div", { class: "col-xs-7" }, [
               m("button", {
@@ -119,7 +120,6 @@ var editVideo = (function() {
                 }
               }, [
                 m("i", { class: "fa fa-trash-o" })
-                //m("span", "Delete")
               ])
             ]),
             m("div", { class: "col-xs-5 text-right" }, [
@@ -128,16 +128,6 @@ var editVideo = (function() {
                 class: 'btn btn-success btn-md',
                 title: "Save"
               }, 'Save slide'),
-              // m("button[type=submit]", {
-              //   onclick: function(event) {
-              //     event.preventDefault();
-              //     videoPreview.show();
-              //   },
-              //   class: 'btn btn-success btn-square',
-              //   title: "Preview"
-              // }, [
-              //   m("i", { class: "fa fa-eye" })
-              // ])
               m("button[type=submit]", {
                 onclick: function(event) {
                   event.preventDefault();
@@ -169,6 +159,7 @@ var editVideo = (function() {
       ctrl.currentLibraryImage = m.prop();
       ctrl.errors = m.prop({});
       ctrl.player = {};
+      ctrl.isPlayerReady = m.prop(false);
       ctrl.slider = m.prop();
       ctrl.svalue = m.prop("00:00:00");
       ctrl.drake = m.prop();
@@ -236,6 +227,10 @@ var editVideo = (function() {
           })[0];
 
           ctrl.player.on('ready', function(event) {
+            m.startComputation();
+            ctrl.isPlayerReady(true);
+            m.endComputation();
+
             if(_.isEmpty(slickCarousel.slides())) {
               var slide = Slide.resetModel({
                 start: 0,
