@@ -141,41 +141,45 @@ var imageLibrary = (function() {
           }
         }
       }, [
-        // m(searchForm, {
-        //   action: function(event) {
-        //     event.preventDefault();
-        //
-        //     ctrl.getImages(
-        //       _.assign(
-        //         ctrl.pageInfo.defaultParams || {},
-        //         { page: 1 }
-        //       ), ctrl.requestOptions
-        //     );
-        //   },
-        //   filter: ctrl.filter
-        // }),
         m("div", {
           class: "dropzone needsclick dz-clickable",
           id: "dropper",
           config: ctrl.initializeDropper
         }),
         m("section", { class: "library" }, [
-          m("div", { class: "show-items text-right" }, [
-            m("button", {
-              class: ctrl.asList() ? '' : 'active',
-              onclick: function(event) {
-                ctrl.asList(false);
-              }
-            }, [
-              m("i", { class: "fa fa-th-large" })
+          m("div", { class: "clearfix" }, [
+            m("div", { class: "pull-left" }, [
+              m(searchForm, {
+                action: function(event) {
+                  event.preventDefault();
+
+                  ctrl.getImages(
+                    _.assign(
+                      ctrl.pageInfo.defaultParams || {},
+                      { page: 1 }
+                    ), ctrl.requestOptions
+                  );
+                },
+                filter: ctrl.filter
+              })
             ]),
-            m("button", {
-              class: ctrl.asList() ? 'active' : '',
-              onclick: function(event) {
-                ctrl.asList(true);
-              }
-            }, [
-              m("i", { class: "fa fa-th-list" })
+            m("div", { class: "show-items pull-right" }, [
+              m("button", {
+                class: ctrl.asList() ? '' : 'active',
+                onclick: function(event) {
+                  ctrl.asList(false);
+                }
+              }, [
+                m("i", { class: "fa fa-th-large" })
+              ]),
+              m("button", {
+                class: ctrl.asList() ? 'active' : '',
+                onclick: function(event) {
+                  ctrl.asList(true);
+                }
+              }, [
+                m("i", { class: "fa fa-th-list" })
+              ])
             ])
           ]),
           m("div#image-library", { class: "row" }, [

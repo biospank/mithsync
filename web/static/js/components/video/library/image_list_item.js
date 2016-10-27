@@ -49,7 +49,7 @@ var imageListItem = {
         ])
       ]),
       m(".media-body", [
-        m("h5", { class: "media-heading" }, _.truncate(ctrl.image.name, { length: 15 })),
+        m("h5", { class: "media-heading" }, _.truncate(ctrl.image.name, { length: 25 })),
         m("p", { class: "media-text" }, "PNG · 309.04 KB · 1920 × 1080"),
         m("button", {
           onclick: function() {

@@ -1,7 +1,7 @@
 var searchForm = {
   view: function(ctrl, attrs) {
     return m("form", { class: "navbar-form search-form", role: "search" }, [
-      m(".input-group", [
+      m(".input-group .input-group--big", [
         m("input", {
           type: "text",
           class: "form-control",

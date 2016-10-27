@@ -29,6 +29,9 @@
     &:focus, &:hover {
       @include border(#AAAAAA);
     }
+    &[disabled] {
+      background-color: #eeeeee;
+    }
   }
   textarea {
     min-height: 200px;

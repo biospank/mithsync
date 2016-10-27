@@ -72,7 +72,9 @@
     min-width: 100px;
   }
   &-md {
-    padding: 10px;
+    padding: 0 10px;
+    height: 40px;
+    line-height: 40px;
   }
   &-lg {
     min-width: 180px;
@@ -81,7 +83,7 @@
   &-space {
     margin-left: 5px;
   }
-  &.icon-left, &.icon-right {
+  &.icon--left, &.icon--right {
     padding: 0;
     border: none !important;
     i {
@@ -97,12 +99,12 @@
       display: inline-block;
     }
   }
-  &.icon-inside-left {
+  &.icon-inside--left {
     i {
       margin-right: 10px;
     }
   }
-  &.icon-inside-right {
+  &.icon-inside--right {
     i {
       margin-left: 10px;
     }

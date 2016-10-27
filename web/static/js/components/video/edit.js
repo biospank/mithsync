@@ -84,18 +84,19 @@ var editVideo = (function() {
           m("#slider"),
           m("footer", { class: "buttons row" }, [
             m("div", { class: "col-xs-7" }, [
-              // m("button", {
-              //   onclick: ctrl.newSlide,
-              //   class: 'btn btn-primary btn-square no-margin-left',
-              //   title: "New slide"
-              // }, [
-              //   m("i", { class: "fa fa-plus" })
-              // ]),
               m("button", {
                 onclick: ctrl.newSlide,
-                class: 'btn btn-primary btn-md',
+                class: 'btn btn-primary btn-md icon-inside--left',
                 title: "New slide"
-              }, "Add new slide"),
+              }, [
+                m("i", { class: "fa fa-plus" }),
+                "Add new slide"
+              ]),
+              // m("button", {
+              //   onclick: ctrl.newSlide,
+              //   class: 'btn btn-primary btn-md',
+              //   title: "New slide"
+              // }, "Add new slide"),
               m("button[type=submit]", {
                 onclick: function() {
                   if(slickCarousel.slides().length > 1) {
