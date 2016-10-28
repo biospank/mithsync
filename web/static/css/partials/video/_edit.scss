@@ -1,26 +1,3 @@
 #video-container {
   margin-bottom: 50px;
 }
-
-.placeholderSlide {
-  @include border(#dce0e6);
-  background-color: white;
-  position: relative;
-  text-align: center;
-  img {
-    margin: 0 auto;
-    width: 100%;
-  }
-  &__text {
-    @include position(left, 50%, top, 50%);
-    margin-top: 6em;
-    @include translate(-50%, -50%);
-    & > p {
-      margin-bottom: 15px;
-      @include font-style(1.3em, #646C7F, 400);
-    }
-  }
-  &.ex-over {
-    border: 1px dashed $mainColor;
-  }
-}
