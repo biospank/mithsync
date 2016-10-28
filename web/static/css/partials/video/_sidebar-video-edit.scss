@@ -10,8 +10,10 @@
   padding-bottom: 70px;
   background-color: #f9f9f9;
   @include border(#dce0e6, 1px, left);
-  @include respond-to(max-width, 970px) {
+  @include transition(width 0.3s ease);
+  @include respond-to(max-width, 1200px) {
     width: ($sidebar-video-edit-width - 100px);
+    //display: none;
   }
   // &:hover {
   //   overflow: auto;

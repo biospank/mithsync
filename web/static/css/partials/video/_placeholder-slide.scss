@@ -24,11 +24,20 @@
       &.icon {
         @include size(80px, auto);
       }
+      @include respond-to(max-width, 1500px) {
+        display: none;
+      }
     }
     &--text {
-      margin-top: 30px;
+      margin-top: 20px;
+      @include respond-to(min-width, 1200px) {
+        margin-top: 30px;
+      }
       & > p {
-        @include font-style(15px, #646C7F, 400, 32px);
+        @include font-style(15px, #646C7F, 400);
+        @include respond-to(min-width, 1200px) {
+          line-height: 32px;
+        }
       }
     }
   }

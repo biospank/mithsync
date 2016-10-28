@@ -83,9 +83,9 @@ var editVideo = (function() {
               m("figure", {
                 class: "placeholderSlide",
                 id: "slide-placeholder",
-                config: function() {
-                  ctrl.initDragger,
-                  video.events()
+                config: function(element, isInit, context) {
+                  ctrl.initDragger(element, isInit, context);
+                  video.events();
                 }
               }, [
                 m("a", {
