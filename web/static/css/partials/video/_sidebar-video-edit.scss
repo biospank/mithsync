@@ -29,9 +29,9 @@
       }
       a {
         @each $icon, $x, $y  in
-                      (info, 0px, 21px),
-                      (layout, 42px, 21px),
-                      (library, 21px, 21px) {
+                      (info, 0px, 23px),
+                      (layout, 112px, 23px),
+                      (library, 91px, 23px) {
           &.#{$icon} {
             &:before {
               @include position(left, 15px, top, 12px);
@@ -59,9 +59,9 @@
       &.active {
         a {
           @each $icon, $x, $y  in
-                        (info, 0px, 0px),
-                        (layout, 42px, 0px),
-                        (library, 21px, 0px) {
+                        (info, 0px, -1px),
+                        (layout, 112px, -1px),
+                        (library, 91px, -1px) {
             &.#{$icon} {
               &:before {
                 background-position: $x $y;
