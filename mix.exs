@@ -28,7 +28,8 @@ defmodule Videosync.Mixfile do
                     :postgrex,
                     :ex_aws,
                     :httpoison,
-                    :bamboo]]
+                    :bamboo,
+                    :corsica]]
   end
 
   # Specifies which paths to compile per environment.
@@ -56,7 +57,8 @@ defmodule Videosync.Mixfile do
      {:httpoison, "~> 0.7"},
      {:poison, "~> 1.2"},
      {:sweet_xml, "~> 0.6.1"},
-     {:scrivener_list, "~> 1.0"}]
+     {:scrivener_list, "~> 1.0"},
+     {:corsica, "~> 0.5"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.

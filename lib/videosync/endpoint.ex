@@ -10,6 +10,8 @@ defmodule Videosync.Endpoint do
   plug Plug.Static,
     at: "/", from: :videosync, gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
+    # CORS ON ASSETS,
+    # headers: %{"Access-Control-Allow-Origin" => "*"}
 
   plug Plug.Static,
     at: "/uploads", from: Path.expand('./uploads'), gzip: false
@@ -37,6 +39,8 @@ defmodule Videosync.Endpoint do
     store: :cookie,
     key: "_videosync_key",
     signing_salt: "Dnp7i+Ep"
+
+  plug Videosync.CORS
 
   plug Videosync.Router
 end
