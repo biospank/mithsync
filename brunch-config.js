@@ -5,7 +5,7 @@ exports.config = {
       // joinTo: "js/app.js",
       joinTo: {
        "js/app.js": /^(web\/static\/js)|(web\/static\/vendor)|(deps)/,
-       "js/watch.js": /^(web\/static\/watch\/vendor)|(deps)|(priv\/static\/phoenix*)/
+       "js/watch.js": /^(web\/static\/watch)|(deps)|(priv\/static\/phoenix*)/
       },
 
       // To use a separate vendor.js bundle, specify two files path
@@ -60,13 +60,14 @@ exports.config = {
   plugins: {
     babel: {
       // Do not use ES6 compiler in vendor code
-      ignore: [/web\/static\/vendor|web\/static\/watch/]
+      ignore: [/web\/static\/vendor|web\/static\/watch\/vendor/]
     }
   },
 
   modules: {
     autoRequire: {
-      "js/app.js": ["web/static/js/app"]
+      "js/app.js": ["web/static/js/app"],
+      "js/watch.js": ["web/static/watch/app/js/watch"]
     }
   },
 
