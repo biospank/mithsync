@@ -1,4 +1,4 @@
-// import videoSlides from "./video_slides";
+import UrlParser from "./util/urlParser";
 
 document.addEventListener('DOMContentLoaded', function() {
   var slides = [];
@@ -29,6 +29,18 @@ document.addEventListener('DOMContentLoaded', function() {
       return false;
     });
   };
+
+  var playerTag = document.body.querySelector('.video-player-watch');
+
+  var urlParser = new UrlParser();
+
+  // urlParser.addProvider('vimeo');
+  urlParser.addProvider('youtube');
+
+  var videoInfo = urlParser.parse(playerTag.dataset.url);
+
+  playerTag.dataset.type = videoInfo.provider;
+  playerTag.dataset.videoId = videoInfo.videoId;
 
   document.body.querySelectorAll('img').forEach(function(img) {
     slides.push({
