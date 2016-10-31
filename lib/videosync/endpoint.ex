@@ -40,7 +40,8 @@ defmodule Videosync.Endpoint do
     key: "_videosync_key",
     signing_salt: "Dnp7i+Ep"
 
-  plug Videosync.CORS
+  # enable corsica
+  # plug Videosync.CORS
 
   plug Videosync.Router
 end
