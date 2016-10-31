@@ -5,7 +5,7 @@ exports.config = {
       // joinTo: "js/app.js",
       joinTo: {
        "js/app.js": /^(web\/static\/js)|(web\/static\/vendor)|(deps)/,
-       "js/watch.js": /^(web\/static\/watch\/vendor)/
+       "js/watch.js": /^(web\/static\/watch\/vendor)|(deps)|(priv\/static\/phoenix*)/
       },
 
       // To use a separate vendor.js bundle, specify two files path
