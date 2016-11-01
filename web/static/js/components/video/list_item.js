@@ -1,3 +1,4 @@
+import Videosync from "../../videosync";
 import Video from "../../models/video";
 
 var listItem = {
@@ -15,6 +16,17 @@ var listItem = {
         );
       });
     };
+
+    ctrl.exportCode = function() {
+      var code = '<div style="position: relative; padding-bottom: 56.25%; padding-top: 35px; height: 0; overflow: hidden;"> ' +
+        '<iframe style="position: absolute; top: 0; left: 0; height: 100%; width: 100%; " id="ifrm" frameborder="0" width="1000" height="450" src="<%= domain %>/watch/<%= video.id %>">Your browser doesn\'t support iframes.</iframe>' +
+      '</div>'
+
+      return _.template(code)({
+        domain: Videosync.domain,
+        video: ctrl.video
+      });
+    }
   },
   view: function(ctrl, video){
     ctrl.video = video;
@@ -58,9 +70,18 @@ var listItem = {
           m("button", {
             onclick: "",
             type: "button",
-            class: "btn btn-default btn-square"
+            class: "btn btn-default btn-square",
+            onclick: function() {
+              swal({
+                input: 'textarea',
+                inputValue: ctrl.exportCode()
+              }).catch(swal.noop)
+            }
           }, [
-            m("i", { class: "fa fa-download", "aria-hidden": true })
+            m("i", {
+              class: "fa fa-download",
+              "aria-hidden": true
+            })
           ]),
           m("button", {
             onclick: function() {

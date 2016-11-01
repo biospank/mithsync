@@ -12,8 +12,8 @@ defmodule Videosync.WatchController do
       |> Repo.get!(id)
 
     conn
-    |> remove_x_frame_options_header
-    |> render("show.html", video: video)
+      |> remove_x_frame_options_header
+      |> render("show.html", video: video)
   end
 
   defp remove_x_frame_options_header(conn) do
