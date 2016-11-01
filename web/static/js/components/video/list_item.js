@@ -95,7 +95,7 @@ var listItem = {
                 confirmButtonText: 'Yes, delete it!'
               }).then(function() {
                 ctrl.delete();
-              })
+              }).catch(swal.noop);
             },
             type: "button",
             class: "btn btn-default btn-square"

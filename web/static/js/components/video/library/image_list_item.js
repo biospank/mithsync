@@ -24,7 +24,7 @@ var imageListItem = {
           'Delete error',
           response.errors.reason,
           'error'
-        );
+        ).catch(swal.noop);
       });
     };
   },
@@ -64,7 +64,7 @@ var imageListItem = {
               confirmButtonText: 'Yes, delete it!'
             }).then(function() {
               ctrl.delete();
-            })
+            }).catch(swal.noop);
           },
           type: "button",
           class: "btn btn-none media-button"

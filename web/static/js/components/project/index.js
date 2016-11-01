@@ -137,9 +137,7 @@ var projectList = {
                 Project.create().then(function(data) {
                   m.route("/projects");
                 })
-              }, function(dismiss) {
-
-              })
+              }).catch(swal.noop)
             }
           }, "New project")
         ])

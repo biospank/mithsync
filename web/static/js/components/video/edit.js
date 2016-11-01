@@ -107,7 +107,7 @@ var editVideo = (function() {
                       confirmButtonText: 'Yes, delete it!'
                     }).then(function() {
                       ctrl.deleteSlide();
-                    }, function() {})
+                    }).catch(swal.noop)
                   }
                 },
                 class: 'btn btn-danger btn-square btn-space',
@@ -319,7 +319,7 @@ var editVideo = (function() {
                 type: 'success',
                 title: 'Slide saved!',
                 timer: 1500
-              });
+              }).catch(swal.noop);
 
             }, function(response) {
               ctrl.errors(response.errors);
@@ -331,7 +331,7 @@ var editVideo = (function() {
               type: 'info',
               // confirmButtonColor: '#3085d6',
               confirmButtonText: 'Ok'
-            })
+            }).catch(swal.noop);
           }
         } else {
           return Slide.update(ctrl.video()).then(function(response) {
@@ -344,7 +344,7 @@ var editVideo = (function() {
               type: 'success',
               title: 'Slide saved!',
               timer: 1500
-            });
+            }).catch(swal.noop);
 
           }, function(response) {
             ctrl.errors(response.errors);
@@ -387,7 +387,7 @@ var editVideo = (function() {
             text: "You reached maximum allowed time for this video",
             type: 'info',
             confirmButtonText: 'Ok'
-          });
+          }).catch(swal.noop);
 
           return;
         }

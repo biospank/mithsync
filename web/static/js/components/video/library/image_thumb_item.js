@@ -24,7 +24,7 @@ var imageThumbItem = {
           'Delete error',
           response.errors.reason,
           'error'
-        );
+        ).catch(swal.noop);
       });
     };
   },
@@ -59,7 +59,7 @@ var imageThumbItem = {
                 confirmButtonText: 'Yes, delete it!'
               }).then(function() {
                 ctrl.delete();
-              })
+              }).catch(swal.noop);
             },
             type: "button",
             class: "btn"

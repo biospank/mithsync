@@ -82,7 +82,7 @@ var listItem = {
                     confirmButtonText: 'Yes, delete it!'
                   }).then(function() {
                     parent.deleteProject(this.project())
-                  }.bind(this), function() {})
+                  }.bind(this)).catch(swal.noop)
                 }.bind(this)
               }, [
                 m("i", { class: "fa fa-trash", "aria-hidden": true })

@@ -16,7 +16,7 @@ var videoDetail = {
             type: 'success',
             title: 'Video saved!',
             timer: 1500
-          });
+          }).catch(swal.noop);
         }, function(response) {
           this.errors(response.errors);
         })
