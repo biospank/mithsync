@@ -7,6 +7,7 @@ defmodule Videosync.Video do
     field :url, :string
     field :title, :string
     field :description, :string
+    field :layout, :integer
     field :slide_count, :integer
     belongs_to :user, Videosync.User
     belongs_to :project, Videosync.Project
@@ -15,17 +16,13 @@ defmodule Videosync.Video do
     timestamps
   end
 
-  @required_fields ~w(url title description)
-  @optional_fields ~w()
   @doc """
-  Creates a changeset based on the `model` and `params`.
-
-  If no params are provided, an invalid changeset is returned
-  with no validation performed.
+  Builds a changeset based on the `struct` and `params`.
   """
-  def changeset(model, params \\ %{}) do
-    model
-    |> cast(params, @required_fields, @optional_fields)
+  def changeset(struct, params \\ %{}) do
+    struct
+    |> cast(params, [:url, :title, :description, :layout])
+    |> validate_required([:url, :title, :description])
   end
 
   def create_changeset(struct, params \\ %{}) do

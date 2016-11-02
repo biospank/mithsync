@@ -1,8 +1,7 @@
 defmodule Videosync.VideoController do
   use Videosync.Web, :controller
 
-  alias Videosync.Video
-  alias Videosync.Slide
+  alias Videosync.{Video, Slide}
 
   plug :scrub_params, "video" when action in [:create, :update]
 
