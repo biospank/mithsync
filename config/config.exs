@@ -36,7 +36,7 @@ config :guardian, Guardian,
   allowed_algos: ["HS512"],
   verify_module: Guardian.JWT,
   issuer: "Videosync",
-  ttl: { 30, :days},
+  ttl: { 1, :day},
   verify_issuer: true,
   secret_key: System.get_env("GUARDIAN_SECRET_KEY"),
   serializer: Videosync.GuardianSerializer
