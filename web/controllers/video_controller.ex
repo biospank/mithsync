@@ -1,7 +1,7 @@
 defmodule Videosync.VideoController do
   use Videosync.Web, :controller
 
-  alias Videosync.{Video, Slide}
+  alias Videosync.{Video, Slide, ImageProxy}
 
   plug :scrub_params, "video" when action in [:create, :update]
 
@@ -112,6 +112,10 @@ defmodule Videosync.VideoController do
     # it to always work (and if it does not, it will raise).
     Video.delete_changeset(video)
     |> Repo.delete!
+
+    ImageProxy.bulk_delete(%{
+      scope: "#{user.id}/#{project}/#{id}"
+    })
 
     send_resp(conn, :no_content, "")
   end
