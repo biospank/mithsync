@@ -32,8 +32,7 @@ defmodule Videosync.ImageProxy do
         do: {:ok, delete_all(:s3, objects)}
 
       Arc.Storage.Local ->
-        # todo
-        {:ok, ""}
+        delete_all(:local, opts)
     end
   end
 
@@ -58,6 +57,14 @@ defmodule Videosync.ImageProxy do
       {:ok, %{body: %{contents: contents}}} ->
         {:ok, contents}
     end
+  end
+
+  defp delete_all(:local, opts) do
+    {:ok, scope} = Map.fetch(opts, :scope)
+
+    prefix = "uploads/#{scope}"
+
+    File.rm_rf(prefix) 
   end
 
   defp delete_all(:s3, objects) do

@@ -73,7 +73,7 @@ var listItem = {
                 onclick: function() {
                   swal({
                     title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
+                    text: "All associated videos will be permanently removed.\nYou won't be able to revert this!",
                     type: 'warning',
                     showCancelButton: true,
                     showLoaderOnConfirm: true,
