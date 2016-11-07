@@ -23,14 +23,7 @@ defmodule Videosync.ImageProxy do
   def bulk_delete(opts \\ %{}) do
     case ArcImage.__storage do
       Arc.Storage.S3 ->
-        {:ok, scope} = Map.fetch(opts, :scope)
-
-        prefix = "uploads/#{scope}"
-
-        with {:ok, contents} <- list(:s3, Map.merge(%{prefix: prefix}, opts)),
-              {:ok, objects} <- get_key_names(contents),
-        do: {:ok, delete_all(:s3, objects)}
-
+        delete_all(:s3, opts)
       Arc.Storage.Local ->
         delete_all(:local, opts)
     end
@@ -64,13 +57,19 @@ defmodule Videosync.ImageProxy do
 
     prefix = "uploads/#{scope}"
 
-    File.rm_rf(prefix) 
+    File.rm_rf(prefix)
   end
 
-  defp delete_all(:s3, objects) do
+  defp delete_all(:s3, opts) do
+    {:ok, scope} = Map.fetch(opts, :scope)
     {:ok, bucket} = Application.fetch_env(:arc, :bucket)
 
-    ExAws.S3.delete_all_objects(bucket, objects)
+    prefix = "uploads/#{scope}"
+
+    with {:ok, contents} <- list(:s3, Map.merge(%{prefix: prefix}, opts)),
+          {:ok, objects} <- get_key_names(contents),
+    do: {:ok, ExAws.S3.delete_all_objects(bucket, objects)}
+
   end
 
   defp get_file_names([]), do: {:error, "no records found"}
