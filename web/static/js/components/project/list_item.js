@@ -76,13 +76,21 @@ var listItem = {
                     text: "All associated videos will be permanently removed.\nYou won't be able to revert this!",
                     type: 'warning',
                     showCancelButton: true,
-                    showLoaderOnConfirm: true,
                     confirmButtonColor: '#75c4cb',
                     cancelButtonColor: '#9b0202',
-                    confirmButtonText: 'Yes, delete it!'
-                  }).then(function() {
-                    parent.deleteProject(this.project())
-                  }.bind(this)).catch(swal.noop)
+                    confirmButtonText: 'Yes, delete it!',
+                    showLoaderOnConfirm: true,
+                    preConfirm: function() {
+                      return new Promise(function(resolve, reject) {
+                        parent.deleteProject(this.project())
+                        resolve()
+                        // setTimeout(function() {
+                        //   parent.deleteProject(this.project())
+                        //   resolve()
+                        // }.bind(this), 2000)
+                      }.bind(this))
+                    }.bind(this)
+                  }).catch(swal.noop)
                 }.bind(this)
               }, [
                 m("i", { class: "fa fa-trash", "aria-hidden": true })

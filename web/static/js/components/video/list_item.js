@@ -92,9 +92,14 @@ var listItem = {
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-              }).then(function() {
-                ctrl.delete();
+                confirmButtonText: 'Yes, delete it!',
+                showLoaderOnConfirm: true,
+                preConfirm: function() {
+                  return new Promise(function(resolve, reject) {
+                    ctrl.delete();
+                    resolve()
+                  })
+                }
               }).catch(swal.noop);
             },
             type: "button",

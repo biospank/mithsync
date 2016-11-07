@@ -101,12 +101,16 @@ var editVideo = (function() {
                       text: "You won't be able to revert this!",
                       type: 'warning',
                       showCancelButton: true,
-                      showLoaderOnConfirm: true,
                       confirmButtonColor: '#3085d6',
                       cancelButtonColor: '#d33',
-                      confirmButtonText: 'Yes, delete it!'
-                    }).then(function() {
-                      ctrl.deleteSlide();
+                      confirmButtonText: 'Yes, delete it!',
+                      showLoaderOnConfirm: true,
+                      preConfirm: function() {
+                        return new Promise(function(resolve, reject) {
+                          ctrl.deleteSlide();
+                          resolve()
+                        })
+                      }
                     }).catch(swal.noop)
                   }
                 },
