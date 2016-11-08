@@ -3,11 +3,11 @@ import Video from "../../models/video";
 import listItem from "./list_item";
 import loader from "../widgets/loader";
 import searchForm from "../widgets/search_form";
-import pagination from "../widgets/pagination";
+import Pagination from "../widgets/pagination";
 import recordNotFound from "../widgets/404";
 
 var paginate = function(ctrl) {
-  return m.component(pagination,
+  return m.component(new Pagination(),
     _.assign(
       ctrl.pageInfo,
       {
