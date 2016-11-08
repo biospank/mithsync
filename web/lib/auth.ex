@@ -3,8 +3,15 @@ defmodule Videosync.Auth do
 
   @realm "Videosync"
 
-  def login(conn, user) do
-    Guardian.Plug.api_sign_in(conn, user)
+  def login(conn, user, opts \\ []) do
+    conn = case opts do
+      [ttl: expires] ->
+        Guardian.Plug.api_sign_in(conn, user, :token, ttl: expires)
+      _ ->
+        Guardian.Plug.api_sign_in(conn, user)
+    end
+
+    conn
     |> set_authorization_header
     |> set_expire_header
   end

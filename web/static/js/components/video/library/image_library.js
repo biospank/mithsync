@@ -4,7 +4,7 @@ import Image from "../../../models/image";
 import imageThumbItem from "./image_thumb_item";
 import imageListItem from "./image_list_item";
 import searchForm from "../../widgets/search_form";
-import pagination from "../../widgets/pagination";
+import Pagination from "../../widgets/pagination";
 import loader from "../../widgets/loader";
 import recordNotFound from "../../widgets/404";
 import {} from "../../../util/polyfill_custom_event";
@@ -22,7 +22,7 @@ var imageLibrary = (function() {
     //         }
     //   2d. defaultParams: additional params to include on xhr callback (optional)
 
-    return m.component(pagination,
+    return m.component(new Pagination(),
       _.assign(
         ctrl.pageInfo,
         {

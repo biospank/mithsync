@@ -58,6 +58,7 @@ defmodule Videosync.VideoView do
       url: video.url,
       title: video.title,
       description: video.description,
+      layout: video.layout,
       slide_count: video.slide_count,
       slides: render_many(video.slides, Videosync.SlideView, "slide.json")
     }

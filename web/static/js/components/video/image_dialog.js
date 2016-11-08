@@ -1,5 +1,5 @@
 import searchForm from "../widgets/search_form";
-import pagination from "../widgets/pagination";
+import Pagination from "../widgets/pagination";
 import loader from "../widgets/loader";
 import recordNotFound from "../widgets/404";
 import Image from "../../models/image";
@@ -122,7 +122,7 @@ var imageDialog = (function() {
                   imageView()
                 ])
               ]),
-              m.component(pagination,
+              m.component(new Pagination(),
                 _.assign(
                   pageInfo,
                   {

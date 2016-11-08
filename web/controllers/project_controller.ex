@@ -1,7 +1,7 @@
 defmodule Videosync.ProjectController do
   use Videosync.Web, :controller
 
-  alias Videosync.Project
+  alias Videosync.{Project, ImageProxy}
 
   def action(conn, _) do
     apply(__MODULE__, action_name(conn),
@@ -90,6 +90,10 @@ defmodule Videosync.ProjectController do
     # it to always work (and if it does not, it will raise).
     Project.delete_changeset(project)
     |> Repo.delete!
+
+    ImageProxy.bulk_delete(%{
+      scope: "#{user.id}/#{id}"
+    })
 
     send_resp(conn, :no_content, "")
   end

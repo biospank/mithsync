@@ -128,13 +128,17 @@ var editVideo = (function() {
                       text: "You won't be able to revert this!",
                       type: 'warning',
                       showCancelButton: true,
-                      showLoaderOnConfirm: true,
                       confirmButtonColor: '#3085d6',
                       cancelButtonColor: '#d33',
-                      confirmButtonText: 'Yes, delete it!'
-                    }).then(function() {
-                      ctrl.deleteSlide();
-                    }, function() {})
+                      confirmButtonText: 'Yes, delete it!',
+                      showLoaderOnConfirm: true,
+                      preConfirm: function() {
+                        return new Promise(function(resolve, reject) {
+                          ctrl.deleteSlide();
+                          resolve()
+                        })
+                      }
+                    }).catch(swal.noop)
                   }
                 },
                 class: 'btn btn-danger btn-square btn-space',
@@ -346,7 +350,7 @@ var editVideo = (function() {
                 type: 'success',
                 title: 'Slide saved!',
                 timer: 1500
-              });
+              }).catch(swal.noop);
 
             }, function(response) {
               ctrl.errors(response.errors);
@@ -358,7 +362,7 @@ var editVideo = (function() {
               type: 'info',
               // confirmButtonColor: '#3085d6',
               confirmButtonText: 'Ok'
-            })
+            }).catch(swal.noop);
           }
         } else {
           return Slide.update(ctrl.video()).then(function(response) {
@@ -371,7 +375,7 @@ var editVideo = (function() {
               type: 'success',
               title: 'Slide saved!',
               timer: 1500
-            });
+            }).catch(swal.noop);
 
           }, function(response) {
             ctrl.errors(response.errors);
@@ -414,7 +418,7 @@ var editVideo = (function() {
             text: "You reached maximum allowed time for this video",
             type: 'info',
             confirmButtonText: 'Ok'
-          });
+          }).catch(swal.noop);
 
           return;
         }

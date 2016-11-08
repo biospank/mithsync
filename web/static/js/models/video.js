@@ -9,7 +9,8 @@ var Video = {
   model: {
     title: m.prop(""),
     description: m.prop(""),
-    url: m.prop("")
+    url: m.prop(""),
+    layout: m.prop("")
   },
   current: m.prop({}),
   create: function(projectId, args) {

@@ -24,7 +24,7 @@ var imageThumbItem = {
           'Delete error',
           response.errors.reason,
           'error'
-        );
+        ).catch(swal.noop);
       });
     };
   },
@@ -53,13 +53,17 @@ var imageThumbItem = {
                 text: "You won't be able to revert this!",
                 type: 'warning',
                 showCancelButton: true,
-                showLoaderOnConfirm: true,
                 confirmButtonColor: '#75c4cb',
                 cancelButtonColor: '#9b0202',
-                confirmButtonText: 'Yes, delete it!'
-              }).then(function() {
-                ctrl.delete();
-              })
+                confirmButtonText: 'Yes, delete it!',
+                showLoaderOnConfirm: true,
+                preConfirm: function() {
+                  return new Promise(function(resolve, reject) {
+                    ctrl.delete();
+                    resolve()
+                  })
+                }
+              }).catch(swal.noop);
             },
             type: "button",
             class: "btn"

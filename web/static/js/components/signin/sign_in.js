@@ -43,12 +43,16 @@ var signIn = (function() {
           m("p", [
             m("a", { href: "/password/request", config: m.route }, "Forgot password?")
           ]),
-          // m(".checkbox", [
-          //   m("label", [
-          //     m("input", { type: "checkbox", checked: "checked" }),
-          //     "Keep me signed in for 1 week"
-          //   ])
-          // ]),
+          m(".checkbox", [
+            m("label", [
+              m("input", {
+                type: "checkbox",
+                onclick: m.withAttr("checked", Session.model.remember_me),
+                checked: Session.model.remember_me()
+              }),
+              "Keep me signed in for 1 week"
+            ])
+          ]),
           m("div", { class: "text-center mgv30" }, [
             m.component(feedbackButton, {
               action: ctrl.createSession,
@@ -60,19 +64,19 @@ var signIn = (function() {
           m("p", { class: "text-center" }, "Haven't you got an account yet? ", [
             m("a", { href: "/signup", config: m.route }, "Click here")
           ]),
-          m("p", { class: "text-center" }, "Or" ),
-          m("ul", { class: "list-inline socials-group text-center" }, [
-            m("li", [
-              m("a", { href: "", class: "socials-group__item socials-group__item--facebook" }, [
-                m("i", { class: "fa fa-facebook", "aria-hidden": true })
-              ])
-            ]),
-            m("li", [
-              m("a", { href: "", class: "socials-group__item socials-group__item--twitter" }, [
-                m("i", { class: "fa fa-twitter", "aria-hidden": true })
-              ])
-            ])
-          ])
+          // m("p", { class: "text-center" }, "Or" ),
+          // m("ul", { class: "list-inline socials-group text-center" }, [
+          //   m("li", [
+          //     m("a", { href: "", class: "socials-group__item socials-group__item--facebook" }, [
+          //       m("i", { class: "fa fa-facebook", "aria-hidden": true })
+          //     ])
+          //   ]),
+          //   m("li", [
+          //     m("a", { href: "", class: "socials-group__item socials-group__item--twitter" }, [
+          //       m("i", { class: "fa fa-twitter", "aria-hidden": true })
+          //     ])
+          //   ])
+          // ])
         ])
       ])
     ]

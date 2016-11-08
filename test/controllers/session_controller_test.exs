@@ -1,18 +1,28 @@
 defmodule Videosync.SessionControllerTest do
   use Videosync.ConnCase
 
-  alias Videosync.Repo
-  alias Videosync.User
+  alias Videosync.{Repo, User}
 
-  @valid_attrs %{email: "some@content", password: "secret"}
+  @valid_attrs %{
+    email: "some@content",
+    password: "secret",
+    remember_me: true
+  }
 
-  setup %{conn: conn} do
-    user = Repo.insert! User.login_changeset(%User{}, @valid_attrs)
-    {
-      :ok,
-      conn: put_req_header(conn, "accept", "application/json"),
-      user: user
-    }
+  setup %{conn: conn} = config do
+    if config[:logged_in] do
+      user = insert_user()
+      {:ok, jwt, full_claims} = Guardian.encode_and_sign(user)
+
+      conn = conn
+        |> put_req_header("authorization", "Videosync #{jwt}")
+        |> put_req_header("accept", "application/json")
+
+      {:ok, conn: conn, user: user, jwt: jwt, claims: full_claims}
+    else
+      user = Repo.insert! User.login_changeset(%User{}, @valid_attrs)
+      {:ok, conn: conn, user: user}
+    end
   end
 
   test "login with valid credentials", %{conn: conn} do
@@ -33,7 +43,7 @@ defmodule Videosync.SessionControllerTest do
     )
     assert json_response(conn, 404)
 
-    # assert_error_sent :not_found, fn -> 
+    # assert_error_sent :not_found, fn ->
     #   conn = post(
     #     conn,
     #     session_path(conn, :create),
@@ -52,11 +62,7 @@ defmodule Videosync.SessionControllerTest do
     assert json_response(conn, 401)
   end
 
-  setup %{conn: conn, user: user} do
-    {:ok, jwt, full_claims} = Guardian.encode_and_sign(user)
-    conn = put_req_header(conn, "authorization", "Videosync #{jwt}")
-    {:ok, conn: conn, user: user, jwt: jwt, claims: full_claims}
-  end
+  @tag :logged_in
   test "logout", %{conn: conn, user: user} do
     conn = delete conn, session_path(conn, :delete, user)
     assert response(conn, 204)

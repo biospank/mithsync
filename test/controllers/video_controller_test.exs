@@ -72,6 +72,7 @@ defmodule Videosync.VideoControllerTest do
       "url" => video.url,
       "title" => video.title,
       "description" => video.description,
+      "layout" => 1,
       "slide_count" => 0,
       "slides" => video.slides
     }

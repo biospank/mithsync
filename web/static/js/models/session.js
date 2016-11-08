@@ -48,7 +48,8 @@ var Session = {
   },
   model: {
     email: m.prop(""),
-    password: m.prop("")
+    password: m.prop(""),
+    remember_me: m.prop(true)
   },
   create: function(args) {
     return m.request(_.assign({

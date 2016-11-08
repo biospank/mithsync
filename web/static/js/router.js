@@ -11,7 +11,6 @@ import newVideo from "./components/video/new";
 import editVideo from "./components/video/edit";
 import infoVideo from "./components/video/info";
 import viewVideo from "./components/video/view";
-import library from "./components/library/index";
 import faq from "./components/faq/index";
 
 export default m.route(document.getElementById('app'), "/", {
@@ -41,8 +40,6 @@ export default m.route(document.getElementById('app'), "/", {
   "/projects/:projectId/videos/:videoId/info": infoVideo,
 
   "/videos/view": viewVideo,
-
-  "/projects/:projectId/videos/:videoId/library": library,
 
   "/faq": faq
 

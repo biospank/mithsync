@@ -52,7 +52,7 @@ var dashboard = (function() {
           Project.create().then(function(data) {
             m.route("/projects");
           })
-        }, function(dismiss) {})
+        }).catch(swal.noop)
       };
 
       if(Session.isExpired()) {

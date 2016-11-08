@@ -2,7 +2,11 @@ exports.config = {
   // See http://brunch.io/#documentation for docs.
   files: {
     javascripts: {
-      joinTo: "js/app.js",
+      // joinTo: "js/app.js",
+      joinTo: {
+       "js/app.js": /^(web\/static\/js)|(web\/static\/vendor)|(deps)/,
+       "js/watch.js": /^(web\/static\/watch)|(deps)|(priv\/static\/phoenix*)/
+      },
 
       // To use a separate vendor.js bundle, specify two files path
       // https://github.com/brunch/brunch/blob/stable/docs/config.md#files
@@ -22,7 +26,11 @@ exports.config = {
       }
     },
     stylesheets: {
-      joinTo: "css/app.css"
+      // joinTo: "css/app.css"
+      joinTo: {
+       "css/app.css": /^(web\/static\/css)|(web\/static\/vendor)/,
+       "css/watch.css": /^(web\/static\/watch\/vendor)/
+      }
     },
     templates: {
       joinTo: "js/app.js"
@@ -52,13 +60,14 @@ exports.config = {
   plugins: {
     babel: {
       // Do not use ES6 compiler in vendor code
-      ignore: [/web\/static\/vendor/]
+      ignore: [/web\/static\/vendor|web\/static\/watch\/vendor/]
     }
   },
 
   modules: {
     autoRequire: {
-      "js/app.js": ["web/static/js/app"]
+      "js/app.js": ["web/static/js/app"],
+      "js/watch.js": ["web/static/watch/app/js/watch"]
     }
   },
 
