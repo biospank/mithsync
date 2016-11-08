@@ -69,7 +69,9 @@ defmodule Videosync.ImageController do
 
     q = from s in Slide,
       select: count(s.id),
-      where: s.thumb_url == ^url and s.user_id == ^scope.user_id
+      where: s.thumb_url == ^url and
+        s.user_id == ^scope.user_id and
+        s.video_id == ^scope.video_id
 
     case Repo.one(q) do
       0 ->
@@ -78,7 +80,7 @@ defmodule Videosync.ImageController do
       num when num > 0 ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render(Videosync.ErrorView, :"422", errors: %{reason: "The image is being used by one or more videos."})
+        |> render(Videosync.ErrorView, :"422", errors: %{reason: "The image is used by this videos."})
     end
   end
 
