@@ -5,16 +5,7 @@ defmodule Videosync.ImageProxy do
   def list(opts \\ %{}) do
     case ArcImage.__storage do
       Arc.Storage.S3 ->
-        {:ok, scope} = Map.fetch(opts, :scope)
-        {:ok, filter} = Map.fetch(opts, :filter)
-
-        prefix = "uploads/#{scope.user_id}/#{scope.project_id}/#{scope.video_id}/images/thumb"
-
-        with {:ok, contents} <- list(:s3, Map.merge(%{prefix: prefix}, opts)),
-             {:ok, keys} <- get_key_names(contents),
-             {:ok, names} <- get_file_names(keys),
-        do: {:ok, Image.map_all(names, scope, filter)}
-
+        list(:s3, opts)
       Arc.Storage.Local ->
         list(:local, opts)
     end
@@ -33,23 +24,23 @@ defmodule Videosync.ImageProxy do
     {:ok, scope} = Map.fetch(opts, :scope)
     {:ok, filter} = Map.fetch(opts, :filter)
 
-    case File.ls(ArcImage.storage_dir(:thumb, {nil, scope})) do
-      {:ok, files} ->
-        images = Image.map_all(files, scope, filter)
-        {:ok, images}
-      {:error, _} ->
-        {:error, "no records found"}
-    end
+    with {:ok, contents} <- File.ls(ArcImage.storage_dir(:thumb, {nil, scope})),
+         {:ok, files} <- get_files_info(:local, contents, scope),
+    do: {:ok, Image.map_all(files, scope, filter)}
+
   end
 
   defp list(:s3, opts) do
-    {:ok, prefix} = Map.fetch(opts, :prefix)
+    {:ok, scope} = Map.fetch(opts, :scope)
+    {:ok, filter} = Map.fetch(opts, :filter)
     {:ok, bucket} = Application.fetch_env(:arc, :bucket)
 
-    case ExAws.S3.list_objects(bucket, prefix: prefix) do
-      {:ok, %{body: %{contents: contents}}} ->
-        {:ok, contents}
-    end
+    prefix = "uploads/#{scope.user_id}/#{scope.project_id}/#{scope.video_id}/images/thumb"
+
+    with {:ok, %{body: %{contents: contents}}} = ExAws.S3.list_objects(bucket, prefix: prefix),
+         {:ok, files} <- get_files_info(:s3, contents, scope),
+    do: {:ok, Image.map_all(files, scope, filter)}
+
   end
 
   defp delete_all(:local, opts) do
@@ -72,22 +63,33 @@ defmodule Videosync.ImageProxy do
 
   end
 
-  defp get_file_names([]), do: {:error, "no records found"}
-  defp get_file_names(paths) do
-    {
-      :ok,
-      Enum.map(paths, fn(path) ->
-        String.split(path, "/") |> List.last
-      end)
-    }
-  end
-
   defp get_key_names([]), do: {:ok, []}
   defp get_key_names(contents) do
     {
       :ok,
       Enum.map(contents, fn(%{key: file_path}) ->
         file_path
+      end)
+    }
+  end
+
+  defp get_files_info(:s3, [], _), do: {:error, "no records found"}
+  defp get_files_info(:local, [], _), do: {:error, "no records found"}
+  defp get_files_info(:s3, contents, _) do
+    {
+      :ok,
+      Enum.map(contents, fn(%{key: path, size: size, last_modified: last_modified}) ->
+        { String.split(path, "/") |> List.last, size, last_modified }
+      end)
+    }
+  end
+  defp get_files_info(:local, files, scope) do
+    {
+      :ok,
+      Enum.map(files, fn(file) ->
+        {:ok, %File.Stat{size: size, mtime: {date, _time}}} = File.lstat(ArcImage.url({file, scope}, :thumb))
+
+        { file, Integer.to_string(size), Date.from_erl!(date) |> Date.to_iso8601 }
       end)
     }
   end

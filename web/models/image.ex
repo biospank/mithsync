@@ -3,8 +3,10 @@ defmodule Videosync.Image do
 
   schema "images" do
     field :name, :string, virtual: true
+    field :size, :string, virtual: true
     field :thumb_url, :string, virtual: true
     field :slide_url, :string, virtual: true
+    field :last_modified, :string, virtual: true
   end
 
   @required_fields ~w()
@@ -22,12 +24,16 @@ defmodule Videosync.Image do
   end
 
   def map_all(files, scope, filter) do
-    Enum.filter(files, fn(name) -> String.contains?(name, filter || "") end)
-    |> Enum.map(fn(file_name) ->
+    Stream.filter(files, fn({file_name, _, _}) ->
+      String.contains?(file_name, filter || "")
+    end)
+    |> Enum.map(fn({file_name, size, last_modified}) ->
       %Videosync.Image{
         name: file_name,
+        size: size,
         thumb_url: Videosync.ArcImage.url({file_name, scope}, :thumb),
-        slide_url: Videosync.ArcImage.url({file_name, scope}, :slide)
+        slide_url: Videosync.ArcImage.url({file_name, scope}, :slide),
+        last_modified: last_modified
       }
     end)
   end

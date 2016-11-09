@@ -18,8 +18,10 @@ defmodule Videosync.ImageView do
   def render("image.json", %{image: image}) do
     %{
       name: image.name,
+      size: image.size,
       thumb_url: image.thumb_url,
-      slide_url: image.slide_url
+      slide_url: image.slide_url,
+      last_modified: image.last_modified
     }
   end
 end
