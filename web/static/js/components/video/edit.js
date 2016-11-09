@@ -19,7 +19,6 @@ var editVideo = (function() {
     if(slickCarousel.currentSlide()) {
       if(slickCarousel.currentSlide().url === "/images/slide-placeholder.png") {
         return m("div", { class: "placeholderSlide__text" }, [
-          m("p", m.trust("Drop an <b>image</b> here from <b>Library</b><br>or")),
           m("a", {
             onclick: function(event) {
               event.preventDefault();
@@ -76,8 +75,8 @@ var editVideo = (function() {
                   m("img", {
                     src: slickCarousel.currentSlide() ? slickCarousel.currentSlide().url : "/images/slide-placeholder.png",
                     class: "img-responsive"
-                  }),
-                  showBrowse()
+                  })
+                  //showBrowse()
                 ])
               ])
             ])
