@@ -60,18 +60,11 @@ var listItem = {
           ])
         ]),
         m(".video-list__buttons", [
-          // m("a", {
-          //   href: "/projects/" + m.route.param('projectId') + "/videos/" + video.id + "/edit",
-          //   class: "btn btn-primary btn-square",
-          //   config: m.route
-          // }, [
-          //   m("i", { class: "fa fa-pencil", "aria-hidden": true })
-          // ]),
-          m("button", {
-            onclick: "",
-            type: "button",
+          m("a", {
+            href: "",
             class: "btn btn-default btn-square",
             onclick: function() {
+              event.preventDefault();
               swal({
                 input: 'textarea',
                 inputValue: ctrl.exportCode()
@@ -83,8 +76,10 @@ var listItem = {
               "aria-hidden": true
             })
           ]),
-          m("button", {
+          m("a", {
+            href: "",
             onclick: function() {
+              event.preventDefault();
               swal({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -102,7 +97,7 @@ var listItem = {
                 }
               }).catch(swal.noop);
             },
-            type: "button",
+            // type: "button",
             class: "btn btn-default btn-square"
           }, [
             m("i", { class: "fa fa-trash", "aria-hidden": true })
