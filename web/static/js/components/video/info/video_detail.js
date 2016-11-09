@@ -60,6 +60,16 @@ var videoDetail = {
         disabled: "disabled",
         value: moment(Video.current().inserted_at).format('LLL')
       }),
+      m.component(textField, {
+        field: 'textarea',
+        rows: 7,
+        placeholder: 'Notes',
+        id: 'notes',
+        dataLabel: 'Add notes'
+        // oninput: m.withAttr("value", Video.model.description),
+        // error: ctrl.errors()['description'],
+        // value: Video.model.description()
+      }),
       m("div", { class: "text-right" }, [
         m.component(feedbackButton, {
           action: ctrl.updateVideo,
