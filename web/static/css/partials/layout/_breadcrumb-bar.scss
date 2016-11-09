@@ -1,16 +1,10 @@
 .breadcrumb-bar {
-  // background-color: #f6f8f8;
   @include border(#eaeaea, 1px, bottom);
-  // padding-top: 15px;
   padding: 20px;
   background-color: white;
   height: 64px;
-  .main-container {
-    //padding-bottom: 0;
-  }
   .section-title {
-    @include font-style(21px, #424856);
-    //font-weight: 400;
+    @include font-style(21px, #424856, 300, 21px);
     margin: 0;
   }
 }
