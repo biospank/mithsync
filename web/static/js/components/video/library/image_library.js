@@ -155,7 +155,7 @@ var imageLibrary = (function() {
         }),
         m("section", { class: "library" }, [
           m("div", { class: "clearfix" }, [
-            m("div", { class: "pull-left reset-float" }, [
+            m("div", { class: "pull-left" }, [
               m(searchForm, {
                 action: function(event) {
                   event.preventDefault();
@@ -170,7 +170,7 @@ var imageLibrary = (function() {
                 filter: ctrl.filter
               })
             ]),
-            m("div", { class: "show-items pull-right mgb25 reset-float" }, [
+            m("div", { class: "show-items pull-right mgb25" }, [
               m("button", {
                 class: ctrl.asList() ? 'btn btn-square btn-default' : 'btn btn-square btn-default active',
                 onclick: function(event) {

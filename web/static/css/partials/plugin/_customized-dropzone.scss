@@ -17,10 +17,7 @@
       $width: 70px;
       @include size(70px, 100%);
       content: " ";
-      //background: url(/images/icons/cloud-upload.png) no-repeat;
-      background: url(/images/icons/sprites.png) no-repeat;
-      background-position: -63px 0px;
-      @include size(70px, 46px);
+      background: url(/images/icons/cloud-upload.png) no-repeat;
       @include position(left, 50%, top, -60px);
       margin-left: -($width / 2);
     }

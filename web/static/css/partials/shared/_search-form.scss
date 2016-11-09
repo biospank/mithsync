@@ -4,9 +4,6 @@
     border-radius: 5px;
     padding: 0px 3px;
     @include box-shadow(0 0 0 1px #dee1e5);
-    @include respond-to(max-width, 1200px) {
-      width: 100%;
-    }
     .input-group-btn {
       .btn {
         @include font-style(16px, $light);

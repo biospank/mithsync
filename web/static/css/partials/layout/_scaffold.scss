@@ -85,10 +85,8 @@ body {
       right: 0;
       top: 0;
       bottom: 0;
-      @include transition(margin 0.3s ease);
-      @include respond-to(max-width, 1200px) {
+      @include respond-to(max-width, 970px) {
         margin-right: ($sidebar-video-edit-width - 100px);
-        //margin-right: 0;
       }
     }
   }

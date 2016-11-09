@@ -2,8 +2,7 @@ import Videosync from '../videosync';
 import Session from './session';
 
 var Slide = (function() {
-  //const slidePlaceHolder = "/images/slide-placeholder.png";
-  const slidePlaceHolder = "/images/icons/download-light.png";
+  const slidePlaceHolder = "/images/slide-placeholder.png";
   const thumbPlaceHolder = "/images/thumb-placeholder.png";
   var url = '/projects/projectId/videos/videoId/slides';
   var model = {};
