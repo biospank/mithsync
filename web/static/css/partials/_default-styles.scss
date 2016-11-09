@@ -29,6 +29,13 @@ h1, h2, h3, h4, h5, h6 {
   float: none;
 }
 
+.reset-float {
+  @include respond-to(max-width, 1200px) {
+    float: none !important;
+  }
+}
+
+
 .navbar-brand {
   height: auto;
 }

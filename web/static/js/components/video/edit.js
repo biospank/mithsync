@@ -15,25 +15,52 @@ import dragger from '../../models/dragger';
 
 var editVideo = (function() {
 
+  var video = {
+    getHeight: function() {
+      var $videoHeight = $("#video").height();
+      $("#slide-placeholder").css("height", $videoHeight);
+    },
+    events: function() {
+      $( window ).ready(function() {
+        this.getHeight()
+      }.bind(this));
+
+      $( window ).resize(function() {
+        this.getHeight()
+      }.bind(this));
+    }
+  }
+
   var showBrowse = function() {
     if(slickCarousel.currentSlide()) {
-      if(slickCarousel.currentSlide().url === "/images/slide-placeholder.png") {
-        return m("div", { class: "placeholderSlide__text" }, [
-          m("p", m.trust("Drop an <b>image</b> here from <b>Library</b><br>or")),
-          m("a", {
-            onclick: function(event) {
-              event.preventDefault();
-              imageDialog.show({
-                selectCallback: function(image) {
-                  slickCarousel.currentSlide().url = image.slide_url
-                  slickCarousel.currentSlide().thumb_url = image.thumb_url
-                }
-              });
-            },
-            href: "#",
-            class: "btn btn-lg btn-primary"
-          }, "Browse")
-        ]);
+      if(slickCarousel.currentSlide().url === "/images/icons/download-light.png") {
+        return m(".placeholderSlide__content", [
+          m("img", {
+            src: slickCarousel.currentSlide() ? slickCarousel.currentSlide().url : "",
+            class: "img-responsive placeholderSlide__content--image icon"
+          }),
+          m("div", { class: "placeholderSlide__content--text" }, [
+            m("p", m.trust("Drop an <b>image</b> here from <b>Library</b><br>or")),
+            m("a", {
+              onclick: function(event) {
+                event.preventDefault();
+                imageDialog.show({
+                  selectCallback: function(image) {
+                    slickCarousel.currentSlide().url = image.slide_url
+                    slickCarousel.currentSlide().thumb_url = image.thumb_url
+                  }
+                });
+              },
+              href: "#",
+              class: "btn btn-primary"
+            }, "Browse")
+          ])
+        ])
+      } else {
+        return m("img", {
+          src: slickCarousel.currentSlide() ? slickCarousel.currentSlide().url : "",
+          class: "img-responsive placeholderSlide__content--image prova"
+        })
       }
     }
   }
@@ -45,7 +72,7 @@ var editVideo = (function() {
       m("main", { class: "main-container" }, [
         m("section", { id: "video-container" }, [
           m(".row", [
-            m(".col-xs-6", [
+            m(".col-xs-6", { id: "video" }, [
               m(videoPlayback, {
                 provider: ctrl.videoInfo().provider,
                 videoId: ctrl.videoInfo().videoId,
@@ -57,8 +84,12 @@ var editVideo = (function() {
                 class: "placeholderSlide",
                 id: "slide-placeholder",
                 config: function(element, isInit, context) {
-                  if( !isInit )
+                  // ctrl.initDragger(element, isInit, context);
+                  //video.events();
+                  if( !isInit ) {
                     ctrl.initDragger();
+                    video.events();
+                  }
                 }
               }, [
                 m("a", {
@@ -72,11 +103,8 @@ var editVideo = (function() {
                     });
                   },
                   href: "#",
+                  class: "placeholderSlide__clickable-area"
                 }, [
-                  m("img", {
-                    src: slickCarousel.currentSlide() ? slickCarousel.currentSlide().url : "/images/slide-placeholder.png",
-                    class: "img-responsive"
-                  }),
                   showBrowse()
                 ])
               ])

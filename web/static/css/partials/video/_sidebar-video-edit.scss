@@ -10,8 +10,10 @@
   padding-bottom: 70px;
   background-color: #f9f9f9;
   @include border(#dce0e6, 1px, left);
-  @include respond-to(max-width, 970px) {
+  @include transition(width 0.3s ease);
+  @include respond-to(max-width, 1200px) {
     width: ($sidebar-video-edit-width - 100px);
+    //display: none;
   }
   // &:hover {
   //   overflow: auto;
@@ -29,9 +31,9 @@
       }
       a {
         @each $icon, $x, $y  in
-                      (info, 0px, 21px),
-                      (layout, 42px, 21px),
-                      (library, 21px, 21px) {
+                      (info, 0px, 23px),
+                      (layout, 112px, 23px),
+                      (library, 91px, 23px) {
           &.#{$icon} {
             &:before {
               @include position(left, 15px, top, 12px);
@@ -59,9 +61,9 @@
       &.active {
         a {
           @each $icon, $x, $y  in
-                        (info, 0px, 0px),
-                        (layout, 42px, 0px),
-                        (library, 21px, 0px) {
+                        (info, 0px, -1px),
+                        (layout, 112px, -1px),
+                        (library, 91px, -1px) {
             &.#{$icon} {
               &:before {
                 background-position: $x $y;

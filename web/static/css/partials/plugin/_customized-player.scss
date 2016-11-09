@@ -1,0 +1,28 @@
+.plyr {
+  &--video {}
+  &__controls {
+    padding: 10px !important;
+    background: rgba(0,0,0, 0.5) !important;
+    button.tab-focus {
+      background: $mainColor !important;
+    }
+    button:hover {
+      background: $mainColor !important;
+    }
+  }
+  &__progress {
+    &--played {
+      color: $mainColor;
+    }
+  }
+  &__volume {
+    &--display {
+      color: $mainColor;
+    }
+  }
+}
+
+// class to hide youtube logo
+// .ytp-watermark .yt-uix-sessionlink {
+//   display: none;
+// }

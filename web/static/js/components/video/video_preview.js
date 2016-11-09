@@ -24,7 +24,7 @@ var videoPreview = {
             }, [
               m("span", { "aria-hidden": "true" }, m.trust("&times"))
             ]),
-            m("h4.modal-title", "Video preview")
+            m("h4.modal-title", video.title)
           ]),
           m(".modal-body", [
             m(preview, video, slides)
