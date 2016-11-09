@@ -29,7 +29,7 @@ exports.config = {
       // joinTo: "css/app.css"
       joinTo: {
        "css/app.css": /^(web\/static\/css)|(web\/static\/vendor)/,
-       "css/watch.css": /^(web\/static\/watch\/vendor)/
+       "css/watch.css": /^(web\/static\/watch\/app)|(web\/static\/watch\/vendor)/
       }
     },
     templates: {
