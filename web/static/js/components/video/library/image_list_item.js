@@ -50,7 +50,15 @@ var imageListItem = {
       ]),
       m(".media-body", [
         m("h5", { class: "media-heading" }, _.truncate(ctrl.image.name, { length: 25 })),
-        m("p", { class: "media-text" }, "PNG · 309.04 KB · 1920 × 1080"),
+        m("p", {
+          class: "media-text"
+        }, _.join(
+          [
+            _.toUpper(_.last(_.split(ctrl.image.name, '.'))),
+            _.join([_.floor(Math.log(ctrl.image.size) / Math.log(1024), 3), 'KB'], ' '),
+            moment(ctrl.image.last_modified).format('L')
+          ], ' · ')
+        ),
         m("button", {
           onclick: function() {
             swal({
