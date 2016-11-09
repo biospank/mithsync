@@ -11,11 +11,17 @@ var user = {
     };
   },
   view: function(ctrl) {
+
     return m(".user-avatar", [
-      m("img", { src: "/images/avatar.jpg", alt: "Ilaria Di Rosa" }),
-      m("span", { class: "user-avatar__name" }, "Ilaria Di Rosa")
-      //m("b", { class: "caret" })
-    ])
+      m("i", { class: "fa fa-user", "aria-hidden": "true" })
+    ]);
+
+    // return m(".user-avatar", [
+    //   m("img", { src: "/images/avatar.jpg", alt: "Ilaria Di Rosa" }),
+    //   m("span", { class: "user-avatar__name" }, "Ilaria Di Rosa")
+    //   //m("b", { class: "caret" })
+    // ])
+    
     // return m(".dropdown", { class: "user-avatar" }, [
     //   m("a", {
     //     "data-toggle": "dropdown",
