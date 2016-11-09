@@ -41,6 +41,27 @@ var preview = (function() {
       };
 
       return {
+        injectSlides: function(slides) {
+          if(_.isEmpty(slides)) {
+            return m("section[hidden]", {
+              'class': 'future',
+              'aria-hidden': true,
+              'style': 'display: none;'
+            })
+          } else {
+            return slides.map(function(slide) {
+              return m("section[hidden]", {
+                'class': 'future',
+                'aria-hidden': true,
+                'style': 'display: none;'
+              }, [
+                m("img", {
+                  src: slide.url
+                })
+              ])
+            });
+          }
+        },
         onReady: function(element, isInit, context) {
           if( !isInit ) {
             player = plyr.setup('.video-player-watch', {
@@ -119,17 +140,7 @@ var preview = (function() {
         m(".col-sm-6", [
           m(".reveal", {}, [
             m(".slides", [
-              slides.map(function(slide) {
-                return m("section[hidden]", {
-                  'class': 'future',
-                  'aria-hidden': true,
-                  'style': 'display: none;'
-                }, [
-                  m("img", {
-                    src: slide.url
-                  })
-                ])
-              })
+              ctrl.injectSlides(slides)
             ])
           ])
         ])

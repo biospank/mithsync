@@ -84,8 +84,12 @@ var editVideo = (function() {
                 class: "placeholderSlide",
                 id: "slide-placeholder",
                 config: function(element, isInit, context) {
-                  ctrl.initDragger(element, isInit, context);
-                  video.events();
+                  // ctrl.initDragger(element, isInit, context);
+                  //video.events();
+                  if( !isInit ) {
+                    ctrl.initDragger();
+                    video.events();
+                  }
                 }
               }, [
                 m("a", {
@@ -203,6 +207,10 @@ var editVideo = (function() {
         ctrl.currentLibraryImage(e.detail);
       }, false);
 
+      document.body.addEventListener("library:image:onQueueComplete", function(e) {
+        ctrl.initDragger();
+      }, false);
+
       ctrl.selectLibraryImage = function(image) {
         m.startComputation()
         slickCarousel.currentSlide().url = image.slide_url
@@ -227,20 +235,18 @@ var editVideo = (function() {
 
       };
 
-      ctrl.initDragger = function(element, init, context) {
-        if( !init ) {
-          ctrl.drake(
-            dragger.init({
-              containers: {
-                from: 'image-library',
-                to: 'slide-placeholder'
-              },
-              onDropCallback: function() {
-                ctrl.selectLibraryImage(ctrl.currentLibraryImage());
-              }
-            })
-          );
-        }
+      ctrl.initDragger = function() {
+        ctrl.drake(
+          dragger.init({
+            containers: {
+              from: 'image-library',
+              to: 'slide-placeholder'
+            },
+            onDropCallback: function() {
+              ctrl.selectLibraryImage(ctrl.currentLibraryImage());
+            }
+          })
+        );
       };
 
       // the first argument is the DOM element;

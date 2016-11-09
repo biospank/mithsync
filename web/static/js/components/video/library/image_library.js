@@ -86,23 +86,30 @@ var imageLibrary = (function() {
         m.route("/signin");
       }
 
-      ctrl.initializeDropper = _.once(function() {
-        Dropper.init("#dropper", {
-          urlParams: {
-            projectId: m.route.param('projectId'),
-            videoId: m.route.param('videoId')
-          },
-          onQueueComplete: function() {
-            ctrl.getImages(
-              _.assign(
-                ctrl.pageInfo.defaultParams || {},
-                { page: ctrl.pageInfo.pageNumber }
-              ),
-              ctrl.requestOptions
-            );
-          }
-        });
-      });
+      ctrl.initializeDropper = function(element, isInit, context) {
+        if(!isInit) {
+          Dropper.init("#dropper", {
+            urlParams: {
+              projectId: m.route.param('projectId'),
+              videoId: m.route.param('videoId')
+            },
+            onQueueComplete: function() {
+              ctrl.getImages(
+                _.assign(
+                  ctrl.pageInfo.defaultParams || {},
+                  { page: ctrl.pageInfo.pageNumber }
+                ),
+                ctrl.requestOptions
+              );
+
+              var queueEvent = new CustomEvent("library:image:onQueueComplete");
+
+              document.body.dispatchEvent(queueEvent);
+
+            }
+          });
+        }
+      };
 
       ctrl.getImages = function(params, args) {
         ctrl.images(undefined);

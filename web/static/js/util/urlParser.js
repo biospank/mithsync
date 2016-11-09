@@ -1,5 +1,5 @@
 var UrlParser = function() {
-  var providers = [];
+  var providers = ['youtu'];
 
   var parseProvider = function(url) {
     // 'use strict';
@@ -7,6 +7,7 @@ var UrlParser = function() {
     var match = url.match(
       /(?:(?:https?:)?\/\/)?(?:[^\.]+\.)?(\w+)\./i
     );
+
     return match ? match[1] : undefined;
   };
 
@@ -47,7 +48,7 @@ var UrlParser = function() {
       var provider = parseProvider(url);
 
       if(_.includes(providers, provider)) {
-        if(provider === 'youtube') {
+        if(_.startsWith(provider, 'youtu')) {
           var videoId = parseYoutubeVideoId(url);
 
           return {
