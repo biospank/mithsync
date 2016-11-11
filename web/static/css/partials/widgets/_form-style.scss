@@ -22,7 +22,6 @@
     background-color: white;
     color: #565656;
     padding: 8px 12px;
-    height: 40px;
     @include box-shadow(none);
     @include placeholder(#E3E3E3);
     -webkit-font-smoothing: antialiased;
@@ -33,11 +32,10 @@
       background-color: #eeeeee;
     }
   }
-  textarea {
-    min-height: 200px;
+  input.form-control {
+    height: 40px;
   }
   .input-group {
-    // @include border(#E3E3E3);
     @include border(#e6e6e6);
     @include transition(all 0.3s ease-out);
     border-radius: 4px;

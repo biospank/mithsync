@@ -10,7 +10,7 @@ var newVideo = (function() {
     return [
       m(".col-sm-6 center-block", [
         m("h3", "Create a new Video"),
-        m("p", "Channels are where your team communicates. They’re best when organized around a topic — #leads, for example."),
+        //m("p", "Channels are where your team communicates. They’re best when organized around a topic — #leads, for example."),
         m("form", { class: "light-form", role: "form" }, [
           m.component(textField, {
             type: 'text',

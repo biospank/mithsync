@@ -9,7 +9,7 @@
     display: none;
   }
   .dz-message {
-    margin: 80px auto 40px auto;
+    margin: 80px auto 30px auto;
     @include font-style(25px, #646C7F, 600);
     position: relative;
     font-size: 18px;
@@ -26,6 +26,14 @@
       display: block;
       @include font-style(13px, #646C7F);
       margin-top: 3px;
+    }
+    & > span {
+      &:after {
+        content: "Recommended WIDTH greater than 200 px";
+        display: block;
+        @include font-style(13px, #646C7F);
+        margin-top: 15px;
+      }
     }
   }
   .dz-preview {
