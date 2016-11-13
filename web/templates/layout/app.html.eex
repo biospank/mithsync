@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello Videosync!</title>
+    <title>Zinkroo</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     <link href='http://fonts.googleapis.com/css?family=Lato:400,100,300,700' rel='stylesheet' type='text/css'>
     <!-- empty script needed to allows plyr.js to work correctly -->

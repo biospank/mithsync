@@ -7,6 +7,7 @@ var videoDetail = {
     Video.model.title(Video.current().title);
     Video.model.description(Video.current().description);
     Video.model.url(Video.current().url);
+    Video.model.layout(Video.current().layout);
 
     return {
       errors: m.prop({}),
@@ -59,16 +60,6 @@ var videoDetail = {
         dataLabel: 'Creation date',
         disabled: "disabled",
         value: moment(Video.current().inserted_at).format('LLL')
-      }),
-      m.component(textField, {
-        field: 'textarea',
-        rows: 7,
-        placeholder: 'Notes',
-        id: 'notes',
-        dataLabel: 'Add notes'
-        // oninput: m.withAttr("value", Video.model.description),
-        // error: ctrl.errors()['description'],
-        // value: Video.model.description()
       }),
       m("div", { class: "text-right" }, [
         m.component(feedbackButton, {
