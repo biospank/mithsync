@@ -12,6 +12,38 @@ var Video = {
     url: m.prop(""),
     layout: m.prop("")
   },
+  playerColumnSize: function() {
+    var cols;
+    switch (parseInt(this.model.layout())) {
+      case 1:
+        cols = 6;
+        break;
+      case 2:
+        cols = 4;
+        break;
+      case 3:
+        cols = 8;
+        break;
+    }
+
+    return cols;
+  },
+  sliderColumnSize: function() {
+    var cols;
+    switch (this.model.layout()) {
+      case 1:
+        cols = 6;
+        break;
+      case 2:
+        cols = 8;
+        break;
+      case 3:
+        cols = 4;
+        break;
+    }
+
+    return cols;
+  },
   current: m.prop({}),
   create: function(projectId, args) {
     return m.request(_.assign({
