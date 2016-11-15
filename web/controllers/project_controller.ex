@@ -3,6 +3,8 @@ defmodule Videosync.ProjectController do
 
   alias Videosync.{Project, ImageProxy}
 
+  @max_recent_pagination 5
+
   def action(conn, _) do
     apply(__MODULE__, action_name(conn),
       [
@@ -19,12 +21,12 @@ defmodule Videosync.ProjectController do
       |> Project.order_by(:inserted_at)
       |> Repo.all
 
-    paged_projects = paginate(projects, params["page"])
+    paged_projects = paginate(projects, params["page"], @max_recent_pagination)
 
     paged_projects =
     case paged_projects do
       %Scrivener.Page{entries: [], total_entries: total} when total > 0 ->
-        paginate(projects, String.to_integer(params["page"]) - 1)
+        paginate(projects, String.to_integer(params["page"]) - 1, @max_recent_pagination)
       _ ->
         paged_projects
     end
@@ -98,12 +100,12 @@ defmodule Videosync.ProjectController do
     send_resp(conn, :no_content, "")
   end
 
-  defp paginate(items, page) do
+  defp paginate(items, page, page_size \\ 8) do
     Scrivener.paginate(
       items,
       %{
         page: page || 1,
-        page_size: 8
+        page_size: page_size
       }
     )
   end

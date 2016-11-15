@@ -52,7 +52,12 @@ defmodule Videosync.Video do
   end
 
   def order_by(query, order) do
-    from v in query, order_by: field(v, ^order)
+    case order do
+      :inserted_at ->
+        from v in query, order_by: [desc: field(v, ^order)]
+      _ ->
+        from v in query, order_by: field(v, ^order)
+    end
   end
 
   def limit(query, size) do
