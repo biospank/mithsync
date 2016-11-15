@@ -303,6 +303,12 @@ var editVideo = (function() {
           ctrl.videoInfo(Video.info(ctrl.video().url));
           Video.current(video.data);
           Project.current(video.data.project);
+
+          // needed to update data in video detail
+          // since it is rendered before loading video
+          var reloadEvent = new CustomEvent("video:edit:reload");
+          document.body.dispatchEvent(reloadEvent);
+
           // this is important to be here: it renders correctly
           // the current slide
           slickCarousel.slides(video.data.slides);

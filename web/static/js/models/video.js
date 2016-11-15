@@ -10,7 +10,17 @@ var Video = {
     title: m.prop(""),
     description: m.prop(""),
     url: m.prop(""),
-    layout: m.prop("")
+    layout: m.prop(""),
+    inserted_at: m.prop("")
+  },
+  resetModel: function(video) {
+    this.model.title(video.title);
+    this.model.description(video.description);
+    this.model.url(video.url);
+    this.model.layout(video.layout);
+    this.model.inserted_at(video.inserted_at);
+
+    return this.model;
   },
   playerColumnSize: function() {
     var cols;
