@@ -1,8 +1,7 @@
 defmodule Videosync.ActivationController do
   use Videosync.Web, :controller
 
-  alias Videosync.User
-  alias Videosync.Auth
+  alias Videosync.{User, Auth, Email, Mailer}
 
   def confirm(conn, %{"code" => activation_code}) do
     user = Repo.get_by(User, activation_code: activation_code)
@@ -19,6 +18,21 @@ defmodule Videosync.ActivationController do
         conn
         |> put_status(404)
         |> render(Videosync.ErrorView, :"404", errors: %{activation_code: "Code not found"})
+    end
+  end
+
+  def resend(conn, %{"email" => email}) do
+    user = Repo.get_by(User, email: email)
+
+    case user do
+      nil ->
+        conn
+        |> put_status(:not_found)
+        |> render(Videosync.ErrorView, :"404", errors: %{email: "Email not found"})
+      user ->
+        Email.welcome_email(user) |> Mailer.deliver_later
+
+        render(conn, Videosync.UserView, "show.json", user: user)
     end
   end
 end
