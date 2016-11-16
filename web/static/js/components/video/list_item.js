@@ -72,7 +72,7 @@ var listItem = {
             }
           }, [
             m("i", {
-              class: "fa fa-download",
+              class: "fa fa-code",
               "aria-hidden": true
             })
           ]),
