@@ -9,10 +9,13 @@ defmodule Videosync.Email do
         Welcome to <strong>Zinkroo</strong>
         <br />
         <br />
-        Use the following activation code to enable your account.
+        Please use the following code to activate your account.
         <br />
         <br />
         Activation code: #{code}
+        <br />
+        <br />
+        Please, ingnore this message if you're not the intended recipient.
       """)
   end
 
@@ -23,15 +26,18 @@ defmodule Videosync.Email do
     |> html_body("""
         A password reset has been requested.
         <br />
-        Use the following link to access password reset page: #{url}
+        Use the following link to access password reset page:
         <br />
         <br />
-        Please, ingnore this message if you're not the owner
+        #{url}
+        <br />
+        <br />
+        Please, ingnore this message if you're not the intended recipient.
       """)
   end
 
   defp base_email do
     new_email
-    |> from("support@zinkroo.com")
+    |> from("noreply@zinkroo.com")
   end
 end

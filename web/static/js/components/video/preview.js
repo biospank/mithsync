@@ -129,7 +129,7 @@ var preview = (function() {
       ctrl.setTimeVector(slides);
 
       return m(".row", [
-        m(".col-sm-6", [
+        m(".col-sm-" + Video.playerColumnSize(), [
           m(videoPlayback, {
             class: '.video-player-watch',
             provider: ctrl.videoInfo().provider,
@@ -137,7 +137,7 @@ var preview = (function() {
             onReady: ctrl.onReady
           })
         ]),
-        m(".col-sm-6", [
+        m(".col-sm-" + Video.sliderColumnSize(), [
           m(".reveal", {}, [
             m(".slides", [
               ctrl.injectSlides(slides)

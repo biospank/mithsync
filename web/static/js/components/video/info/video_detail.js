@@ -4,9 +4,13 @@ import Video from "../../../models/video";
 
 var videoDetail = {
   controller: function() {
-    Video.model.title(Video.current().title);
-    Video.model.description(Video.current().description);
-    Video.model.url(Video.current().url);
+    Video.resetModel(Video.current());
+
+    document.body.addEventListener("video:edit:reload", function(e) {
+      console.log("video:edit:reload");
+      Video.resetModel(Video.current());
+      m.redraw();
+    }, false);
 
     return {
       errors: m.prop({}),
@@ -31,12 +35,12 @@ var videoDetail = {
         id: 'video-name',
         dataLabel: 'Name',
         oninput: m.withAttr("value", Video.model.title),
-        error: ctrl.errors()['password'],
+        error: ctrl.errors()['title'],
         value: Video.model.title()
       }),
       m.component(textField, {
         field: 'textarea',
-        rows: 9,
+        rows: 5,
         placeholder: 'Description',
         id: 'description',
         dataLabel: 'Description',
@@ -50,7 +54,7 @@ var videoDetail = {
         id: 'video-url',
         dataLabel: 'Url',
         disabled: true,
-        value: Video.current().url
+        value: Video.model.url()
       }),
       m.component(textField, {
         type: 'text',
@@ -58,17 +62,7 @@ var videoDetail = {
         id: 'creation-date',
         dataLabel: 'Creation date',
         disabled: "disabled",
-        value: moment(Video.current().inserted_at).format('LLL')
-      }),
-      m.component(textField, {
-        field: 'textarea',
-        rows: 7,
-        placeholder: 'Notes',
-        id: 'notes',
-        dataLabel: 'Add notes'
-        // oninput: m.withAttr("value", Video.model.description),
-        // error: ctrl.errors()['description'],
-        // value: Video.model.description()
+        value: moment(Video.model.inserted_at()).format('LLL')
       }),
       m("div", { class: "text-right" }, [
         m.component(feedbackButton, {

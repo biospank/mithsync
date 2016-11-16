@@ -39,7 +39,7 @@ var activationPage = (function() {
           ]),
           m("p", { class: "text-center" }, [
             m("span", "I didn't get the activation code, "),
-            m("a", { href: "#" }, "resend activation email")
+            m("a", { href: "/activate/resend", config: m.route }, "resend activation email")
           ])
         ])
       ])

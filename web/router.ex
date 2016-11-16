@@ -32,6 +32,7 @@ defmodule Videosync.Router do
     resources "/signup", RegistrationController, only: [:create]
     resources "/signin", SessionController, only: [:create]
     put "/activate/:code", ActivationController, :confirm
+    get "/activate/resend", ActivationController, :resend, as: :resend_activation_code
     resources "/reset", PasswordResetController, only: [:show, :create, :update]
   end
 

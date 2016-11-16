@@ -14,7 +14,7 @@ var projectListItem = {
       }, [
         m(".projects-list__body", [
           m("h5", { class: "title" }, _.truncate(project.name, { length: 15 })),
-          m("p", { class: "creation-date" }, moment(project.inserted_at).format('LLL')),
+          m("p", { class: "creation-date" }, moment(project.inserted_at).format('lll')),
           m("span", {
             class: "videos-number"
           }, project.video_count + (_.gt(project.video_count, 1) ? " videos" : " video"))

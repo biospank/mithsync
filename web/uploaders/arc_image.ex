@@ -25,7 +25,8 @@ defmodule Videosync.ArcImage do
 
   # Define a slide transformation:
   def transform(:slide, _) do
-    {:convert, "-strip -resize 500x281^ -gravity center -extent 500x281^ -format png", :png}
+    # {:convert, "-strip -resize 500x281^ -gravity center -extent 500x281^ -format png", :png}
+    {:convert, "-strip -resize 800x450^ -gravity center -extent 800x450^ -format png", :png}
   end
 
   # Override the persisted filenames:

@@ -1,5 +1,5 @@
 var Videosync = {
-  domain: "http://localhost:4000",
+  domain: window.location.origin,
   apiBaseUrl: function() {
     return this.domain + "/api";
   },

@@ -5,6 +5,8 @@ defmodule Videosync.VideoController do
 
   plug :scrub_params, "video" when action in [:create, :update]
 
+  @max_recent_pagination 4
+
   def action(conn, _) do
     apply(__MODULE__, action_name(conn),
       [
@@ -22,12 +24,12 @@ defmodule Videosync.VideoController do
       |> Video.preload_slides(Slide.order_by(:start))
       |> Repo.all
 
-    paged_videos = paginate(videos, params["page"])
+    paged_videos = paginate(videos, params["page"], @max_recent_pagination)
 
     paged_videos =
     case paged_videos do
       %Scrivener.Page{entries: [], total_entries: total} when total > 0 ->
-        paginate(videos, String.to_integer(params["page"]) - 1)
+        paginate(videos, String.to_integer(params["page"]) - 1, @max_recent_pagination)
       _ ->
         paged_videos
     end
@@ -40,7 +42,7 @@ defmodule Videosync.VideoController do
       Video.own_by(user)
       |> Video.belongs_to_model(:project_id, params["project_id"])
       |> Video.filter_by(params["filter"])
-      |> Video.order_by(:title)
+      |> Video.order_by(:inserted_at)
       |> Video.preload_slides(Slide.order_by(:start))
       |> Repo.all
 
@@ -120,12 +122,12 @@ defmodule Videosync.VideoController do
     send_resp(conn, :no_content, "")
   end
 
-  defp paginate(items, page) do
+  defp paginate(items, page, page_size \\ 8) do
     Scrivener.paginate(
       items,
       %{
         page: page || 1,
-        page_size: 8
+        page_size: page_size
       }
     )
   end

@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Watch video</title>
+    <title>Zinkroo watch video</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/watch.css") %>">
     <!-- empty script needed to allows plyr.js to work correctly -->
     <script></script>

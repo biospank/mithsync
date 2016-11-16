@@ -148,8 +148,7 @@ var editVideo = (function() {
         m(slickCarousel, {
           selectCallback: function(slide) {
             ctrl.highlightSlide(slide);
-            // to enable video
-            ctrl.player.seek(slide.start);
+            ctrl.showVideoFrame(slide);
           }
         }, slickCarousel.slides())
       ])
@@ -303,6 +302,12 @@ var editVideo = (function() {
           ctrl.videoInfo(Video.info(ctrl.video().url));
           Video.current(video.data);
           Project.current(video.data.project);
+
+          // needed to update data in video detail
+          // since it is rendered before loading video
+          var reloadEvent = new CustomEvent("video:edit:reload");
+          document.body.dispatchEvent(reloadEvent);
+
           // this is important to be here: it renders correctly
           // the current slide
           slickCarousel.slides(video.data.slides);
@@ -409,7 +414,15 @@ var editVideo = (function() {
         slickCarousel.currentSlide(slide);
         ctrl.refreshSlider(slickCarousel.slides());
         ctrl.highlightSlide(slide);
+        ctrl.showVideoFrame(slide);
       };
+
+      ctrl.showVideoFrame = function(slide) {
+        // to enable video
+        ctrl.player.seek(slide.start);
+        ctrl.player.play();
+        ctrl.player.pause();
+      }
 
       ctrl.highlightSlide = function(slide) {
         var duration = new Date(slide.start * 1000).toISOString().substr(11, 8);

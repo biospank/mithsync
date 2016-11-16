@@ -1,39 +1,32 @@
 import mixinLayout from "../layout/mixin_layout";
 import textField from "../widgets/text_field";
 import feedbackButton from "../widgets/feedback_button";
-import Password from "../../models/password";
+import Activation from "../../models/activation";
 
-var resetRequestPage = (function() {
+var resendActivationPage = (function() {
   var content = function(ctrl) {
     return m(".col-xs-12 .col-sm-7 .center-block", [
-      // m("figure", { class: "text-center", id: "logo" }, [
-      //   m("img", { src: "/images/logo.png", alt: "Zinkroo" })
-      // ]),
       m("header", { class: "header-text space-bottom" }, [
         m("hgroup", { class: "text-center" }, [
-          m("h1", { class: "header-text__title no-margin-top" }, "Have you lost your password?"),
-          m("h2", { class: "header-text__subtitle" }, "Insert your email below, you will receive an email to reset your password."),
+          m("h1", { class: "header-text__title no-margin-top" }, "Didn't you get the activation code?"),
+          m("h2", { class: "header-text__subtitle" }, "Insert your email below, you will receive an email with activation code."),
           m("hr", { class: "header-text__separator" })
         ])
       ]),
       m("div", { class: "" }, [
-        m("div", {
-          class: "alert alert-warning " + (ctrl.showMsg() ? "show" : "hidden"),
-          role: "alert"
-        }, "An email has just been sent to the address provided. Please follow the instructions to reset your password."),
         m("form", { class: "light-form" }, [
           m.component(textField, {
             type: 'email',
             placeholder: 'Enter your Email',
             id: 'email',
-            oninput: m.withAttr("value", Password.model.email),
+            oninput: m.withAttr("value", Activation.model.email),
             error: ctrl.errors()['email'],
             dataLabel: 'Email'
           }),
-          m("div", { class: "mgt30" }, [
+          m("div", { class: "text-center mgv30" }, [
             m.component(feedbackButton, {
-              action: ctrl.passwordResetRequest,
-              label: 'Send instructions',
+              action: ctrl.sendActivationCode,
+              label: 'Send activation code',
               feedbackLabel: 'Sending...',
               style: 'btn btn-primary contour btn-lg'
             }),
@@ -48,11 +41,10 @@ var resetRequestPage = (function() {
     controller: function(){
       var ctrl = this;
       ctrl.errors = m.prop({});
-      ctrl.showMsg = m.prop(false);
 
-      ctrl.passwordResetRequest = function(args) {
-        return Password.resetRequest(args).then(function(data) {
-          ctrl.showMsg(true)
+      ctrl.sendActivationCode = function() {
+        return Activation.resend().then(function(data) {
+          m.route('/activate')
         }, function(response) {
           ctrl.errors(response.errors);
         })
@@ -62,4 +54,4 @@ var resetRequestPage = (function() {
   };
 })();
 
-export default resetRequestPage;
+export default resendActivationPage;
