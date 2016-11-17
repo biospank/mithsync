@@ -19,6 +19,7 @@ var videoLayout = {
           swal({
             type: 'success',
             title: 'Video saved!',
+            showConfirmButton: false,
             timer: 1000
           }).catch(swal.noop);
         })

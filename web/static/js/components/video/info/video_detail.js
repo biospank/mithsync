@@ -19,6 +19,7 @@ var videoDetail = {
           swal({
             type: 'success',
             title: 'Video saved!',
+            showConfirmButton: false,
             timer: 1000
           }).catch(swal.noop);
         }, function(response) {

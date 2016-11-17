@@ -331,6 +331,7 @@ var editVideo = (function() {
               swal({
                 type: 'success',
                 title: 'Slide saved!',
+                showConfirmButton: false,
                 timer: 1000
               }).catch(swal.noop);
 
@@ -356,6 +357,7 @@ var editVideo = (function() {
             swal({
               type: 'success',
               title: 'Slide saved!',
+              showConfirmButton: false,
               timer: 1000
             }).catch(swal.noop);
 
