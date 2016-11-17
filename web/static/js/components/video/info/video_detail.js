@@ -54,9 +54,6 @@ var videoDetail = {
             // console.error('Trigger:', e.trigger);
           });
         }
-      },
-      copyToClipboard: function(event) {
-        event.preventDefault();
       }
     };
   },
@@ -84,11 +81,15 @@ var videoDetail = {
       m('.form-group', [
         m('label.text-uppercase', 'Export'),
         m('pre', [
-          m('button.btn', {
-            config: ctrl.initClipboard,
-            onclick: ctrl.copyToClipboard
+          m("a", {
+            href: "#",
+            class: "btn btn-default btn-square",
+            config: ctrl.initClipboard
           }, [
-            m('i', { class: 'fa fa-copy' })
+            m("i", {
+              class: "fa fa-code",
+              "aria-hidden": true
+            })
           ]),
           m('code', { class: 'html' }, Video.export())
         ])

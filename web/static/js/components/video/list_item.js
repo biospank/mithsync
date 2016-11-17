@@ -17,9 +17,39 @@ var listItem = {
       });
     };
 
+    ctrl.initClipboard = function(element, isInit, context) {
+      if(!isInit) {
+        $(element).tooltip({
+          placement: 'left',
+          title: 'Copied!',
+          trigger: 'manual'
+        });
+
+        var clipboard = new Clipboard(element, {
+          text: function(btn) {
+            return Video.export();
+          }
+        });
+
+        clipboard.on('success', function(e) {
+          $(element).tooltip('show');
+
+          setTimeout(function() {
+            $(element).tooltip('hide');
+          }, 1000)
+
+        });
+
+        clipboard.on('error', function(e) {
+          // console.error('Action:', e.action);
+          // console.error('Trigger:', e.trigger);
+        });
+      }
+    };
+
     ctrl.exportCode = function() {
       return Video.export();
-    }
+    };
   },
   view: function(ctrl, video){
     ctrl.video = video;
@@ -54,18 +84,12 @@ var listItem = {
         ]),
         m(".video-list__buttons", [
           m("a", {
-            href: "",
+            href: "#",
             class: "btn btn-default btn-square",
-            onclick: function() {
-              event.preventDefault();
-              swal({
-                input: 'textarea',
-                inputValue: ctrl.exportCode()
-              }).catch(swal.noop)
-            }
+            config: ctrl.initClipboard
           }, [
             m("i", {
-              class: "fa fa-download",
+              class: "fa fa-code",
               "aria-hidden": true
             })
           ]),
