@@ -20,16 +20,16 @@ var mixinLayout = function(content, layout) {
         m.component(topBar),
         m("section", { class: "clearfix", id: "wrapper" }, [
           m("aside", { id: "sidebar-wrapper" }, [
-            m("form", { class: "navbar-form page-search-form" }, [
-              m(".input-group", [
-                m("input", { type: "text", class: "form-control", placeholder: "Search" }),
-                m("span", { class: "input-group-btn" }, [
-                  m("button", { type: "submit", class: "btn btn-none" }, [
-                    m("img", { src: "/images/icons/search.png" })
-                  ])
-                ])
-              ])
-            ]),
+            // m("form", { class: "navbar-form page-search-form" }, [
+            //   m(".input-group", [
+            //     m("input", { type: "text", class: "form-control", placeholder: "Search" }),
+            //     m("span", { class: "input-group-btn" }, [
+            //       m("button", { type: "submit", class: "btn btn-none" }, [
+            //         m("img", { src: "/images/icons/search.png" })
+            //       ])
+            //     ])
+            //   ])
+            // ]),
             m.component(mainNav)
           ]),
           m("section", { id: "page-content-wrapper" }, [
@@ -50,16 +50,16 @@ var mixinLayout = function(content, layout) {
         m.component(breadcrumbBar),
         m("section", { class: "clearfix", id: "wrapper" }, [
           m("aside", { id: "sidebar-wrapper" }, [
-            m("form", { class: "navbar-form page-search-form" }, [
-              m(".input-group", [
-                m("input", { type: "text", class: "form-control", placeholder: "Search" }),
-                m("span", { class: "input-group-btn" }, [
-                  m("button", { type: "submit", class: "btn btn-none" }, [
-                    m("img", { src: "/images/icons/search.png" })
-                  ])
-                ])
-              ])
-            ]),
+            // m("form", { class: "navbar-form page-search-form" }, [
+            //   m(".input-group", [
+            //     m("input", { type: "text", class: "form-control", placeholder: "Search" }),
+            //     m("span", { class: "input-group-btn" }, [
+            //       m("button", { type: "submit", class: "btn btn-none" }, [
+            //         m("img", { src: "/images/icons/search.png" })
+            //       ])
+            //     ])
+            //   ])
+            // ]),
             m.component(mainNav)
           ]),
           m("section", { id: "page-content-wrapper" }, [
