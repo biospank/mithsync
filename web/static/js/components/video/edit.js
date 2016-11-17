@@ -331,7 +331,7 @@ var editVideo = (function() {
               swal({
                 type: 'success',
                 title: 'Slide saved!',
-                timer: 1500
+                timer: 1000
               }).catch(swal.noop);
 
             }, function(response) {
@@ -356,7 +356,7 @@ var editVideo = (function() {
             swal({
               type: 'success',
               title: 'Slide saved!',
-              timer: 1500
+              timer: 1000
             }).catch(swal.noop);
 
           }, function(response) {
