@@ -130,18 +130,24 @@ var editVideo = (function() {
             ]),
             m("div", { class: "col-xs-5 text-right" }, [
               m("button[type=submit]", {
-                onclick: ctrl.saveSlide,
-                class: 'btn btn-success btn-md',
-                title: "Save"
-              }, 'Save slide'),
-              m("button[type=submit]", {
                 onclick: function(event) {
                   event.preventDefault();
                   videoPreview.show();
                 },
-                class: 'btn btn-success btn-md btn-space',
+                class: 'btn btn-success btn-md icon-inside--left',
                 title: "Preview"
-              }, "Show Preview")
+              }, [
+                m("i", { class: "fa fa-eye" }),
+                "Show Preview"
+              ]),
+              m("button[type=submit]", {
+                onclick: ctrl.saveAll,
+                class: 'btn btn-success btn-md btn-space icon-inside--left',
+                title: "Save"
+              }, [
+                m("i", { class: "fa fa-save" }),
+                "Save"
+              ])
             ])
           ])
         ]),
@@ -315,6 +321,25 @@ var editVideo = (function() {
         }, function(response) {
           ctrl.errors(response.errors);
         })
+      };
+
+      ctrl.saveAll = function() {
+        swal({
+          title: 'Saving ...',
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          showConfirmButton: false,
+          onOpen: function(progress) {
+            swal.showLoading();
+            return Slide.saveAll(ctrl.video(), slickCarousel.slides()).then(function(response) {
+              slickCarousel.slides(response.data);
+              swal.close();
+            }, function(response) {
+              ctrl.errors(response.errors);
+              swal.close();
+            })
+          }
+        }).catch(swal.noop);
       };
 
       ctrl.saveSlide = function() {

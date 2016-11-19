@@ -8,9 +8,9 @@
       color: #e3a200 !important;
     }
   }
-  &-overlay, &-in {
-    background-color: white !important;
-  }
+  // &-overlay, &-in {
+  //   background-color: white !important;
+  // }
   &-confirm {
     background: #bcd454 !important;
     @include transition(background 0.3s ease !important);
