@@ -4,10 +4,11 @@ import Video from "../../../models/video";
 
 var videoDetail = {
   controller: function() {
+    var clipboard;
+
     Video.resetModel(Video.current());
 
     document.body.addEventListener("video:edit:reload", function(e) {
-      console.log("video:edit:reload");
       Video.resetModel(Video.current());
       m.redraw();
     }, false);
@@ -25,6 +26,35 @@ var videoDetail = {
         }, function(response) {
           this.errors(response.errors);
         })
+      },
+      initClipboard: function(element, isInit, context) {
+        if(!isInit) {
+          $(element).tooltip({
+            placement: 'bottom',
+            title: 'Copied!',
+            trigger: 'manual'
+          });
+
+          clipboard = new Clipboard(element, {
+            text: function(btn) {
+              return Video.export();
+            }
+          });
+
+          clipboard.on('success', function(e) {
+            $(element).tooltip('show');
+
+            setTimeout(function() {
+              $(element).tooltip('hide');
+            }, 1000)
+
+          });
+
+          clipboard.on('error', function(e) {
+            // console.error('Action:', e.action);
+            // console.error('Trigger:', e.trigger);
+          });
+        }
       }
     };
   },
@@ -49,6 +79,17 @@ var videoDetail = {
         error: ctrl.errors()['description'],
         value: Video.model.description()
       }),
+      m('.form-group', [
+        m('label.text-uppercase', 'Export'),
+        m('pre', { class: "zero-clipboard" }, [
+          m("a", {
+            href: "#",
+            class: "btn btn-clipboard",
+            config: ctrl.initClipboard
+          }, "copy"),
+          m('code', { class: 'html' }, Video.export())
+        ])
+      ]),
       m.component(textField, {
         type: 'url',
         placeholder: 'Url',
