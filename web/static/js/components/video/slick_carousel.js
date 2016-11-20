@@ -27,6 +27,12 @@ var slickCarousel = (function() {
 
       return carousel.currentSlide;
     },
+    slideIndex: function(slide) {
+      return _.indexOf(carousel.slides, slide);
+    },
+    slideByIndex: function(index) {
+      return _.nth(carousel.slides, index);
+    },
     addSlide: function(slide) {
       carousel.slides.push(slide);
     },
