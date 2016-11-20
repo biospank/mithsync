@@ -80,17 +80,12 @@ var videoDetail = {
       }),
       m('.form-group', [
         m('label.text-uppercase', 'Export'),
-        m('pre', [
+        m('pre', { class: "zero-clipboard" }, [
           m("a", {
             href: "#",
-            class: "btn btn-default btn-square",
+            class: "btn btn-clipboard",
             config: ctrl.initClipboard
-          }, [
-            m("i", {
-              class: "fa fa-code",
-              "aria-hidden": true
-            })
-          ]),
+          }, "copy"),
           m('code', { class: 'html' }, Video.export())
         ])
       ]),
