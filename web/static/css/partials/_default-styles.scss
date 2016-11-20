@@ -61,7 +61,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .modal-dialog {
-  @include respond-to(max-width, $screen-sm-min)) {
+  @include respond-to(max-width, $screen-sm-min) {
     width: 600px;
     margin-left: auto;
     margin-right: auto;
