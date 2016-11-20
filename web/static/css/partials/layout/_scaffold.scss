@@ -5,10 +5,12 @@
   min-height: 100%;
   /* equal to footer height */
   margin-bottom: 40px;
-  &:after {
-    content: "";
-    display: block;
-    height: 40px;
+  @include respond-to(min-width, 971px) {
+    &:after {
+      content: "";
+      display: block;
+      height: 40px;
+    }
   }
 }
 
@@ -40,7 +42,9 @@ body {
   .edit-layout {
     height: 100%;
     min-width: $minWidthPage;
-    overflow: hidden;
+    @include respond-to(min-width, 971px) {
+      overflow: hidden;
+    }
     .main-container {
       //padding: 40px;
     }
@@ -58,9 +62,9 @@ body {
       @include border(#dce0e6, 1px, bottom);
     }
     #wrapper {
-      padding-right: $sidebar-video-edit-width - 100px;
+      //padding-right: $sidebar-video-edit-width - 100px;
       padding-left: 0;
-      margin-top: 65px;
+      padding-top: 64px;
       position: relative;
       margin-bottom: 0;
       @include transition(all 0.5s ease);
@@ -72,6 +76,8 @@ body {
       }
       @include respond-to(min-width, 971px) {
         padding-right: $sidebar-video-edit-width;
+        margin-top: 64px;
+        padding-top: 0;
       }
     }
     #page-footer {
@@ -79,17 +85,33 @@ body {
       display: none;
     }
     #page-content-wrapper {
-      overflow-y: scroll;
-      height: 100%;
-      margin-right: $sidebar-video-edit-width;
-      padding-bottom: 100px;
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
+      // overflow-y: scroll;
+      // height: 100%;
+      // margin-right: $sidebar-video-edit-width;
+      // padding-bottom: 100px;
+      // position: absolute;
+      // left: 0;
+      // right: 0;
+      // top: 0;
+      // bottom: 0;
+
+      // @include respond-to(max-width, 970px) {
+      //   margin-right: ($sidebar-video-edit-width - 100px);
+      // }
       @include respond-to(max-width, 970px) {
-        margin-right: ($sidebar-video-edit-width - 100px);
+        width: 66.66667%;
+        float: left;
+      }
+      @include respond-to(min-width, 971px) {
+        overflow-y: scroll;
+        height: 100%;
+        margin-right: $sidebar-video-edit-width;
+        padding-bottom: 100px;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
       }
     }
   }

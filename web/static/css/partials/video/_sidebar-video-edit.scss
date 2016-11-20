@@ -1,21 +1,23 @@
 #sidebar-video-edit {
-  @include position(right, 0, top, 129px, fixed);
-  //@include size($width, 100%);
-  z-index: 999;
-  width: $sidebar-video-edit-width;
-  //height: calc(100% + 110px);
+  // @include position(right, 0, top, 129px, fixed);
+  // z-index: 999;
+  // width: $sidebar-video-edit-width;
   height: 100%;
-  // overflow: auto;
   margin: 0;
-  padding-bottom: 70px;
+  padding-left: 0;
+  padding-right: 0;
+  // padding-bottom: 70px;
   background-color: #f9f9f9;
   @include border(#dce0e6, 1px, left);
-  @include respond-to(max-width, 970px) {
-    width: ($sidebar-video-edit-width - 100px);
-  }
-  // &:hover {
-  //   overflow: auto;
+  // @include respond-to(max-width, 970px) {
+  //   width: ($sidebar-video-edit-width - 100px);
   // }
+  @include respond-to(min-width, 971px) {
+    padding-bottom: 70px;
+    @include position(right, 0, top, 129px, fixed);
+    z-index: 999;
+    width: $sidebar-video-edit-width;
+  }
   .nav-tabs {
     border: 0;
     li {
@@ -82,13 +84,12 @@
   }
   .tab-content {
     height: 100%;
-    // overflow: hidden;
     overflow: scroll;
     @include transition(overflow 0.3s ease);
-    @include spaces(15px 15px 110px 15px, 0);
-    // &:hover {
-    //   overflow: auto;
-    // }
+    @include spaces(15px 15px 0px 15px, 0);
+    @include respond-to(min-width, 971px) {
+      padding-bottom: 110px;
+    }
   }
 }
 
