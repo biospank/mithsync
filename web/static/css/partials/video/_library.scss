@@ -1,5 +1,23 @@
 .library {
   @include spaces(0, 0 0 0);
+  &-fetuares {
+    .search-form {
+      @include respond-to(min-width, 971px) {
+        float: left;
+      }
+      @include respond-to(max-width, 970px) {
+        margin-bottom: 20px;
+        .input-group {
+          width: 100%;
+        }
+      }
+    }
+    .show-items {
+      @include respond-to(min-width, 971px) {
+        float: right;
+      }
+    }
+  }
   .row {
     min-height: 260px;
     @include respond-to(min-width, 971px) {

@@ -58,7 +58,7 @@ body {
       @include border(#dce0e6, 1px, bottom);
     }
     #wrapper {
-      padding-right: $sidebar-video-edit-width;
+      padding-right: $sidebar-video-edit-width - 100px;
       padding-left: 0;
       margin-top: 65px;
       position: relative;
@@ -69,6 +69,9 @@ body {
           //width: 250px;
           @include translate(0, 0);
         }
+      }
+      @include respond-to(min-width, 971px) {
+        padding-right: $sidebar-video-edit-width;
       }
     }
     #page-footer {

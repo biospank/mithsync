@@ -154,23 +154,21 @@ var imageLibrary = (function() {
           config: ctrl.initializeDropper
         }),
         m("section", { class: "library" }, [
-          m("div", { class: "clearfix" }, [
-            m("div", { class: "pull-left" }, [
-              m(searchForm, {
-                action: function(event) {
-                  event.preventDefault();
+          m("div", { class: "clearfix mb-25 library-fetuares" }, [
+            m(searchForm, {
+              action: function(event) {
+                event.preventDefault();
 
-                  ctrl.getImages(
-                    _.assign(
-                      ctrl.pageInfo.defaultParams || {},
-                      { page: 1 }
-                    ), ctrl.requestOptions
-                  );
-                },
-                filter: ctrl.filter
-              })
-            ]),
-            m("div", { class: "show-items pull-right mgb25" }, [
+                ctrl.getImages(
+                  _.assign(
+                    ctrl.pageInfo.defaultParams || {},
+                    { page: 1 }
+                  ), ctrl.requestOptions
+                );
+              },
+              filter: ctrl.filter
+            }),
+            m("div", { class: "show-items" }, [
               m("button", {
                 class: ctrl.asList() ? 'btn btn-square btn-default' : 'btn btn-square btn-default active',
                 onclick: function(event) {

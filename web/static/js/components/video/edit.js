@@ -81,12 +81,12 @@ var editVideo = (function() {
               ])
             ])
           ]),
-          m(".clearfix .mgv25", [
-            m("p", { class: "text-left no-margin-bottom" }, "Start: " + ctrl.svalue())
+          m(".clearfix .mboth-25", [
+            m("p", { class: "text-left mb-0" }, "Start: " + ctrl.svalue())
           ]),
           (ctrl.isPlayerReady()) ? m("#slider") : m(loader),
           m("footer", { class: "buttons row" }, [
-            m("div", { class: "col-xs-7" }, [
+            m("div", { class: "col-xs-6" }, [
               m("button", {
                 onclick: ctrl.newSlide,
                 class: 'btn btn-primary btn-md icon-inside--left',
@@ -128,7 +128,7 @@ var editVideo = (function() {
                 m("i", { class: "fa fa-trash-o" })
               ])
             ]),
-            m("div", { class: "col-xs-5 text-right" }, [
+            m("div", { class: "col-xs-6 text-right" }, [
               m("button[type=submit]", {
                 onclick: ctrl.saveSlide,
                 class: 'btn btn-success btn-md',

@@ -106,7 +106,7 @@ var videoDetail = {
         disabled: "disabled",
         value: moment(Video.model.inserted_at()).format('LLL')
       }),
-      m("div", { class: "text-right" }, [
+      m("div", { class: "text-right mb-60" }, [
         m.component(feedbackButton, {
           action: ctrl.updateVideo,
           label: 'Update',
