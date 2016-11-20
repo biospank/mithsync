@@ -51,7 +51,7 @@ var listItem = {
               }.bind(this),
               class: "projects-list__body"
             }, [
-              m("h5", { class: "title" }, [
+              m("h5", { class: "title mb-10" }, [
                 this.project().name,
               ]),
               m("p", { class: "creation-date" }, moment(this.project().inserted_at).format('LLL')),
@@ -64,7 +64,14 @@ var listItem = {
                 class: "btn btn-default btn-square",
                 onclick: function() {
                   this.editMode(true);
-                }.bind(this)
+                }.bind(this),
+                title: "Modify project name",
+                "data-toggle": "tooltip",
+                "data-placement": "top",
+                config: function(element, isInit, context) {
+                  if (!isInit)
+                    $(element).tooltip()
+                }
               }, [
                 m("i", { class: "fa fa-pencil", "aria-hidden": true })
               ]),

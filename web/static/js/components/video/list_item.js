@@ -76,10 +76,10 @@ var listItem = {
           m("div", { class: "media-body" }, [
             m("h5", { class: "title" }, _.truncate(video.title, { length: 30 })),
             m("p", { class: "description" }, _.truncate(video.description, { length: 50 })),
+            m("span", { class: "creation-date" }, moment(video.inserted_at).format('LLL')),
             m("span", {
               class: "video-slide"
-            }, ctrl.video.slide_count + (_.gt(ctrl.video.slide_count, 1) ? " slides" : " slide")),
-            m("span", { class: "creation-date" }, moment(video.inserted_at).format('LLL'))
+            }, ctrl.video.slide_count + (_.gt(ctrl.video.slide_count, 1) ? " slides" : " slide"))
           ])
         ]),
         m(".video-list__buttons", [
@@ -115,7 +115,7 @@ var listItem = {
               }).catch(swal.noop);
             },
             // type: "button",
-            class: "btn btn-default btn-square"
+            class: "btn btn-default btn-square btn-space--left-10"
           }, [
             m("i", { class: "fa fa-trash", "aria-hidden": true })
           ])

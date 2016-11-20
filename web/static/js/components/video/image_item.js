@@ -12,7 +12,7 @@ var thumbItem = {
   view: function(ctrl, image){
     ctrl.currentImage(image);
 
-    return m(".col-xs-6 .col-sm-4 .col-lg-2", [
+    return m(".col-xs-2", [
       m("figure", { class: "img-thumbnail" }, [
         m("a", {
           href: "#",

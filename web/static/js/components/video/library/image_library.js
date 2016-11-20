@@ -180,7 +180,7 @@ var imageLibrary = (function() {
                 m("i", { class: "fa fa-th-large" })
               ]),
               m("button", {
-                class: ctrl.asList() ? 'btn btn-square btn-default btn-space active' : 'btn btn-square btn-default btn-space',
+                class: ctrl.asList() ? 'btn btn-square btn-default btn-space--left-5 active' : 'btn btn-square btn-default btn-space--left-5',
                 onclick: function(event) {
                   ctrl.asList(true);
                 }

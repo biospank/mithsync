@@ -116,7 +116,7 @@ var editVideo = (function() {
                     }).catch(swal.noop)
                   }
                 },
-                class: 'btn btn-danger btn-square btn-space',
+                class: 'btn btn-danger btn-square btn-space--left-5',
                 title: "Delete",
                 "data-toggle": "tooltip",
                 "data-placement": "top",
@@ -139,7 +139,7 @@ var editVideo = (function() {
                   event.preventDefault();
                   videoPreview.show();
                 },
-                class: 'btn btn-success btn-md btn-space',
+                class: 'btn btn-success btn-md btn-space--left-5',
                 title: "Preview"
               }, "Show Preview")
             ])

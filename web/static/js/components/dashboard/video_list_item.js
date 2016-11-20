@@ -3,7 +3,7 @@ import Video from "../../models/video";
 var videoListItem = {
   view: function(ctrl, video){
     return m("li", [
-      m(".video-list__row", [
+      m(".video-list__row media", [
         m("a", {
           href: "",
           onclick: function(event) {
@@ -11,7 +11,7 @@ var videoListItem = {
             Video.current(video);
             m.route("/projects/" + video.project_id + "/videos/" + video.id + "/edit");
           },
-          class: "video-list__body media" }, [
+          class: "video-list__body" }, [
           m("figure", { class: "poster media-left" }, [
             m("a", { href: "#" }, [
               m("img", {
@@ -26,6 +26,18 @@ var videoListItem = {
             m("span", {
               class: "video-slide"
             }, video.slide_count + (_.gt(video.slide_count, 1) ? " slides" : " slide"))
+          ])
+        ]),
+        m(".video-list__buttons", [
+          m("a", {
+            href: "#",
+            class: "btn btn-default btn-square"
+            // config: ctrl.initClipboard
+          }, [
+            m("i", {
+              class: "fa fa-code",
+              "aria-hidden": true
+            })
           ])
         ])
       ])

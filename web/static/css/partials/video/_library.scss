@@ -1,6 +1,10 @@
 .library {
   @include spaces(0, 0 0 0);
   .row {
+    min-height: 260px;
+    @include respond-to(min-width, 971px) {
+      min-height: 360px;
+    }
     margin-left: -5px;
     margin-right: -5px;
     & > div[class^="col"] {

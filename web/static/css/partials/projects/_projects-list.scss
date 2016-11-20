@@ -77,7 +77,8 @@
         @include font-style(12px, $grey-light, 300, 12px);
         text-transform: uppercase;
         @include respond-to(min-width, 1200px) {
-          margin: 11px 20px 0px 0px;
+          margin-right: 20px;
+          margin-bottom: 0;
           float: left;
         }
       }
@@ -85,13 +86,13 @@
         @include font-style(12px, $coloured, 500, 12px);
         text-transform: uppercase;
         @include respond-to(min-width, 1200px) {
-          margin: 11px 20px 0px 0px;
+          margin-right: 20px;
           float: left;
         }
       }
     }
     .projects-list__buttons {
-      @include position(right, 12px, top, 12px);
+      @include position(right, 12px, top, 13px);
       .btn {
         margin-left: 10px;
         &.btn-square {

@@ -86,8 +86,11 @@
     min-width: 180px;
     font-size: 15px;
   }
-  &-space {
+  &-space--left-5 {
     margin-left: 5px;
+  }
+  &-space--left-10 {
+    margin-left: 10px;
   }
   &.icon--left, &.icon--right {
     padding: 0;

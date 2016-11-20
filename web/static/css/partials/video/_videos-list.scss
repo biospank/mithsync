@@ -1,6 +1,6 @@
 .video-list {
   &__row {
-    $row-height: 89px;
+    $row-height: 80px;
     height: $row-height;
     @include spaces(0, 0 0 15px 0);
     background-color: white;
@@ -9,7 +9,7 @@
     display: block;
     border-radius: 5px;
     @include transition(all 0.3s ease-out);
-    overflow: hidden;
+    //overflow: hidden;
     position: relative;
     &:hover {
       text-decoration: none;
@@ -38,8 +38,7 @@
         padding: 8px 15px;
         .title {
           text-transform: uppercase;
-          margin-top: 0;
-          margin-bottom: 8px;
+          margin: 0;
           @include font-style(12px, $grey-superdark, 400);
         }
         .description {
@@ -50,18 +49,16 @@
         .video-slide {
           @include font-style(12px, $coloured, 500);
           text-transform: uppercase;
-          margin-right: 10px;
         }
         .creation-date {
           @include font-style(12px, $grey-dark);
+          margin-right: 10px;
+          text-transform: uppercase;
         }
       }
     }
     .video-list__buttons {
-      @include position(right, 22px, top, 24px);
-      .btn {
-        margin-left: 10px;
-      }
+      @include position(right, 20px, top, 20px);
     }
   }
 }
