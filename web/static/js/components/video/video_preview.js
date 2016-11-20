@@ -10,9 +10,9 @@ var videoPreview = {
       "role": "dialog",
       "id": "videoPreview"
     }, [
-      m(".modal-dialog modal-lg", {
-        role: "document",
-        class: "bounceIn animated"
+      m(".modal-dialog modal-lg mt-100 pt-80", {
+        role: "document"
+        // class: "bounceIn animated"
       }, [
         m(".modal-content", [
           m(".modal-header", [
