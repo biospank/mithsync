@@ -1,4 +1,10 @@
 .slidesheet {
+  &.slidesheet-height {
+    min-height: 285px;
+    @include respond-to(min-width, $screen-md-min) {
+      min-height: 435px;
+    }
+  }
   @include spaces(0, 0 0 0);
   .row {
     margin-left: -5px;
@@ -12,7 +18,7 @@
     }
   }
   .img-thumbnail {
-    @include size(100%, 110px);
+    @include size(100%, auto);
     overflow: hidden;
     @include border(1px, #D4D4D4);
     @include box-shadow(0 1px 4px rgba(0, 0, 0, 0.065));
@@ -25,7 +31,7 @@
       cursor: pointer;
       @include size(100%, 100%);
       img {
-        @include size(100%, 100%);
+        @include size(100%, auto);
       }
     }
     &.active, &:hover {

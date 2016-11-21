@@ -17,16 +17,39 @@ var listItem = {
       });
     };
 
-    ctrl.exportCode = function() {
-      var code = '<div style="position: relative; padding-bottom: 56.25%; padding-top: 35px; height: 0; overflow: hidden;"> ' +
-        '<iframe style="position: absolute; top: 0; left: 0; height: 100%; width: 100%; " id="ifrm" frameborder="0" width="1000" height="450" src="<%= domain %>/watch/<%= video.id %>">Your browser doesn\'t support iframes.</iframe>' +
-      '</div>'
+    ctrl.initClipboard = function(element, isInit, context) {
+      if(!isInit) {
+        $(element).tooltip({
+          placement: 'left',
+          title: 'Copied!',
+          trigger: 'manual'
+        });
 
-      return _.template(code)({
-        domain: Videosync.domain,
-        video: ctrl.video
-      });
-    }
+        var clipboard = new Clipboard(element, {
+          text: function(btn) {
+            return Video.export();
+          }
+        });
+
+        clipboard.on('success', function(e) {
+          $(element).tooltip('show');
+
+          setTimeout(function() {
+            $(element).tooltip('hide');
+          }, 1000)
+
+        });
+
+        clipboard.on('error', function(e) {
+          // console.error('Action:', e.action);
+          // console.error('Trigger:', e.trigger);
+        });
+      }
+    };
+
+    ctrl.exportCode = function() {
+      return Video.export();
+    };
   },
   view: function(ctrl, video){
     ctrl.video = video;
@@ -53,26 +76,20 @@ var listItem = {
           m("div", { class: "media-body" }, [
             m("h5", { class: "title" }, _.truncate(video.title, { length: 30 })),
             m("p", { class: "description" }, _.truncate(video.description, { length: 50 })),
+            m("span", { class: "creation-date" }, moment(video.inserted_at).format('LLL')),
             m("span", {
               class: "video-slide"
-            }, ctrl.video.slide_count + (_.gt(ctrl.video.slide_count, 1) ? " slides" : " slide")),
-            m("span", { class: "creation-date" }, moment(video.inserted_at).format('LLL'))
+            }, ctrl.video.slide_count + (_.gt(ctrl.video.slide_count, 1) ? " slides" : " slide"))
           ])
         ]),
         m(".video-list__buttons", [
           m("a", {
-            href: "",
+            href: "#",
             class: "btn btn-default btn-square",
-            onclick: function() {
-              event.preventDefault();
-              swal({
-                input: 'textarea',
-                inputValue: ctrl.exportCode()
-              }).catch(swal.noop)
-            }
+            config: ctrl.initClipboard
           }, [
             m("i", {
-              class: "fa fa-download",
+              class: "fa fa-code",
               "aria-hidden": true
             })
           ]),
@@ -98,7 +115,7 @@ var listItem = {
               }).catch(swal.noop);
             },
             // type: "button",
-            class: "btn btn-default btn-square"
+            class: "btn btn-default btn-square btn-space--left-10"
           }, [
             m("i", { class: "fa fa-trash", "aria-hidden": true })
           ])

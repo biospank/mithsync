@@ -98,8 +98,8 @@ var imageDialog = (function() {
         "id": "imageDialog"
       }, [
         m(".modal-dialog modal-lg", {
-          role: "document",
-          class: "bounceIn animated"
+          role: "document"
+          // class: "bounceIn animated"
         }, [
           m(".modal-content", [
             m(".modal-header", [
@@ -110,14 +110,13 @@ var imageDialog = (function() {
               }, [
                 m("span", { "aria-hidden": "true" }, m.trust("&times"))
               ]),
-              m("h4.modal-title", "Select slide")
-            ]),
-            m(".modal-body", [
               m(searchForm, {
                 action: filterImages,
                 filter: filter
-              }),
-              m("section", { class: "slidesheet" }, [
+              })
+            ]),
+            m(".modal-body", [
+              m("section", { class: "slidesheet slidesheet-height" }, [
                 m("div", { class: "row" }, [
                   imageView()
                 ])

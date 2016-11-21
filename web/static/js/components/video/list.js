@@ -81,7 +81,7 @@ var videoList = {
   },
   view: function(ctrl) {
     return m("div", [
-      m("div", { class: "clearfix" }, [
+      m("div", { class: "clearfix mb-25" }, [
         m("div", { class: "pull-left" }, [
           m(searchForm, {
             action: function(event) {
