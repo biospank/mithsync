@@ -9,6 +9,7 @@ body {
   // background-color: #f1f4f7;
   background-color: #fafbfd;
   -webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
   font-family: 'Lato', sans-serif;
   color: #313131;
 }
@@ -27,6 +28,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .center-block {
   float: none;
+}
+
+.align-vertical-block {
+  @include position(left, 50%, top, 50%);
+  @include translate(-50%, -50%);
 }
 
 .navbar-brand {

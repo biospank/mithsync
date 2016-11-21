@@ -5,10 +5,10 @@ import Activation from "../../models/activation";
 
 var resendActivationPage = (function() {
   var content = function(ctrl) {
-    return m(".col-xs-12 .col-sm-7 .center-block", [
-      m("header", { class: "header-text space-bottom" }, [
+    return m(".col-xs-12 .col-sm-7 .center-block ", [
+      m("header", { class: "header-text" }, [
         m("hgroup", { class: "text-center" }, [
-          m("h1", { class: "header-text__title no-margin-top" }, "Didn't you get the activation code?"),
+          m("h1", { class: "header-text__title mt-0" }, "Didn't you get the activation code?"),
           m("h2", { class: "header-text__subtitle" }, "Insert your email below, you will receive an email with activation code."),
           m("hr", { class: "header-text__separator" })
         ])
@@ -23,7 +23,7 @@ var resendActivationPage = (function() {
             error: ctrl.errors()['email'],
             dataLabel: 'Email'
           }),
-          m("div", { class: "text-center mgv30" }, [
+          m("div", { class: "text-center mboth-30" }, [
             m.component(feedbackButton, {
               action: ctrl.sendActivationCode,
               label: 'Send activation code',
