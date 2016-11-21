@@ -1,6 +1,7 @@
 import mixinLayout from "../layout/mixin_layout";
 import textField from "../widgets/text_field";
 import feedbackButton from "../widgets/feedback_button";
+import Project from "../../models/project";
 import Video from "../../models/video";
 import UrlParser from "../../util/urlParser"
 
@@ -55,7 +56,7 @@ var newVideo = (function() {
 
       ctrl.createVideo = function(args) {
         if(ctrl.isValidUrl(Video.model.url())) {
-          var projectId = m.route.param('projectId');
+          var projectId = Project.current().id;
           return Video.create(projectId, args).then(function(response) {
             m.route("/projects/" + projectId + "/videos/" + response.data.id + "/edit");
           }, function(response) {

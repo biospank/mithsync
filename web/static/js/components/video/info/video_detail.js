@@ -60,7 +60,10 @@ var videoDetail = {
           m("a", {
             href: "#",
             class: "btn btn-clipboard",
-            config: ctrl.initClipboard
+            config: ctrl.initClipboard,
+            onclick: function(event) {
+              event.preventDefault();
+            }
           }, "copy"),
           m('code', { class: 'html' }, Video.export())
         ])

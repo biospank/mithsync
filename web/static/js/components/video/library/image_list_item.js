@@ -1,4 +1,6 @@
 import Image from "../../../models/image";
+import Project from "../../../models/project";
+import Video from "../../../models/video";
 
 var imageListItem = {
   controller: function(image, parent){
@@ -7,8 +9,8 @@ var imageListItem = {
     ctrl.delete = function() {
       Image.delete(
         {
-          projectId: m.route.param('projectId'),
-          videoId: m.route.param('videoId')
+          projectId: Project.current().id,
+          videoId: Video.current().id
         },
         ctrl.image.name
       ).then(function() {

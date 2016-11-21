@@ -1,4 +1,5 @@
 import Videosync from "../../videosync";
+import Project from "../../models/project";
 import Video from "../../models/video";
 import Clippy from "../../models/clippy";
 
@@ -34,7 +35,7 @@ var listItem = {
           onclick: function(event) {
             event.preventDefault();
             Video.current(video);
-            m.route("/projects/" + m.route.param('projectId') + "/videos/" + video.id + "/edit");
+            m.route("/projects/" + Project.current().id + "/videos/" + video.id + "/edit");
           },
           class: "video-list__body"
         }, [

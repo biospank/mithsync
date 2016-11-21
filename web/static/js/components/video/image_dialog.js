@@ -4,6 +4,8 @@ import loader from "../widgets/loader";
 import recordNotFound from "../widgets/404";
 import Image from "../../models/image";
 import imageItem from "./image_item";
+import Project from "../../models/project";
+import Video from "../../models/video";
 
 var imageDialog = (function() {
   var images = m.prop(undefined);
@@ -31,8 +33,8 @@ var imageDialog = (function() {
 
     return Image.all(
       {
-        projectId: m.route.param('projectId'),
-        videoId: m.route.param('videoId')
+        projectId: Project.current().id,
+        videoId: Video.current().id
       },
       _.assign(params, { page_size: 18 }),
       _.assign(args, { background: true })).then(function(ims) {
