@@ -31,11 +31,7 @@ var editVideo = (function() {
             m(".col-xs-6", [
               m("figure", {
                 class: "placeholderSlide",
-                id: "slide-placeholder",
-                config: function(element, isInit, context) {
-                  if( !isInit )
-                    ctrl.initDragger();
-                }
+                id: "slide-placeholder"
               }, [
                 m("a", {
                   onclick: function(event) {
@@ -148,7 +144,6 @@ var editVideo = (function() {
       ctrl.isPlayerReady = m.prop(false);
       ctrl.slider = m.prop();
       ctrl.svalue = m.prop("00:00:00");
-      ctrl.drake = m.prop();
       ctrl.unsaved = m.prop(false);
 
       if(Session.isExpired()) {
@@ -159,7 +154,7 @@ var editVideo = (function() {
         ctrl.currentLibraryImage(e.detail);
       }, false);
 
-      document.body.addEventListener("library:image:onQueueComplete", function(e) {
+      document.body.addEventListener("library:image:initDragger", function(e) {
         ctrl.initDragger();
       }, false);
 
@@ -209,17 +204,15 @@ var editVideo = (function() {
       }
 
       ctrl.initDragger = function() {
-        ctrl.drake(
-          dragger.init({
-            containers: {
-              from: 'image-library',
-              to: 'slide-placeholder'
-            },
-            onDropCallback: function() {
-              ctrl.selectLibraryImage(ctrl.currentLibraryImage());
-            }
-          })
-        );
+        dragger.init({
+          containers: {
+            from: 'image-library',
+            to: 'slide-placeholder'
+          },
+          onDropCallback: function() {
+            ctrl.selectLibraryImage(ctrl.currentLibraryImage());
+          }
+        });
       };
 
       // the first argument is the DOM element;
