@@ -18,7 +18,7 @@ var videoDetail = {
         return Video.update(Video.current()).then(function() {
           swal({
             type: 'success',
-            title: 'Video saved!',
+            title: 'Video info saved!',
             showConfirmButton: false,
             timer: 1000
           }).catch(swal.noop);
@@ -60,7 +60,10 @@ var videoDetail = {
           m("a", {
             href: "#",
             class: "btn btn-clipboard",
-            config: ctrl.initClipboard
+            config: ctrl.initClipboard,
+            onclick: function(event) {
+              event.preventDefault();
+            }
           }, "copy"),
           m('code', { class: 'html' }, Video.export())
         ])

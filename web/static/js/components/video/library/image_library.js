@@ -1,6 +1,8 @@
 import Session from "../../../models/session";
 import Dropper from "../../../models/dropper";
 import Image from "../../../models/image";
+import Project from "../../../models/project";
+import Video from "../../../models/video";
 import imageThumbItem from "./image_thumb_item";
 import imageListItem from "./image_list_item";
 import searchForm from "../../widgets/search_form";
@@ -90,8 +92,8 @@ var imageLibrary = (function() {
         if(!isInit) {
           Dropper.init("#dropper", {
             urlParams: {
-              projectId: m.route.param('projectId'),
-              videoId: m.route.param('videoId')
+              projectId: Project.current().id,
+              videoId: Video.current().id
             },
             onQueueComplete: function() {
               ctrl.getImages(
@@ -116,8 +118,8 @@ var imageLibrary = (function() {
 
         return Image.all(
             {
-              projectId: m.route.param('projectId'),
-              videoId: m.route.param('videoId')
+              projectId: Project.current().id,
+              videoId: Video.current().id
             },
             params,
             _.assign(args, { background: true })
