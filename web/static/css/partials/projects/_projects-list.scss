@@ -9,7 +9,7 @@
         display: inline-block;
         background: url("/images/icons/folder.svg") 0 0 no-repeat;
         @include size(32px, 32px);
-        @include position(left, 12px, top, 12px);
+        @include position(left, 10px, top, 10px);
       }
     }
     position: relative;
@@ -68,7 +68,7 @@
         text-transform: uppercase;
         margin: 0 0 5px 0;
         @include respond-to(min-width, 1900px) {
-          margin: 11px 50px 0px 0px;
+          margin: 9px 50px 0px 0px;
           float: left;
           width: 150px;
         }
@@ -82,7 +82,7 @@
           float: left;
         }
         @include respond-to(min-width, 1900px) {
-          margin-top: 11px;
+          margin-top: 9px;
         }
       }
       .videos-number {
@@ -93,7 +93,7 @@
           float: left;
         }
         @include respond-to(min-width, 1900px) {
-          margin-top: 11px;
+          margin-top: 9px;
         }
       }
     }
