@@ -52,4 +52,7 @@ defmodule Videosync.Slide do
   def order_by(order) do
     from s in Videosync.Slide, order_by: field(s, ^order)
   end
+  def order_by(query, order) do
+    from s in query, order_by: field(s, ^order)
+  end
 end

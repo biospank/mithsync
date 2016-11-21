@@ -102,9 +102,9 @@ var imageLibrary = (function() {
                 ctrl.requestOptions
               );
 
-              var queueEvent = new CustomEvent("library:image:onQueueComplete");
+              var initDraggerEvent = new CustomEvent("library:image:initDragger");
 
-              document.body.dispatchEvent(queueEvent);
+              document.body.dispatchEvent(initDraggerEvent);
 
             }
           });
@@ -187,7 +187,15 @@ var imageLibrary = (function() {
               ])
             ])
           ]),
-          m("div#image-library", { class: "row" }, [
+          m("div#image-library", {
+            class: "row",
+            config: function(element, isInit, context) {
+              if( !isInit ) {
+                var initDraggerEvent = new CustomEvent("library:image:initDragger");
+                document.body.dispatchEvent(initDraggerEvent);
+              }
+            }
+          }, [
             imageView(ctrl)
           ])
         ]),

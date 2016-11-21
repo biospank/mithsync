@@ -34,7 +34,7 @@ var imageDialog = (function() {
         projectId: m.route.param('projectId'),
         videoId: m.route.param('videoId')
       },
-      params,
+      _.assign(params, { page_size: 18 }),
       _.assign(args, { background: true })).then(function(ims) {
       images(ims);
       m.redraw();

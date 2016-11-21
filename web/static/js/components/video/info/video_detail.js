@@ -1,11 +1,10 @@
 import textField from "../../widgets/text_field";
 import feedbackButton from "../../widgets/feedback_button";
 import Video from "../../../models/video";
+import Clippy from "../../../models/clippy";
 
 var videoDetail = {
   controller: function() {
-    var clipboard;
-
     Video.resetModel(Video.current());
 
     document.body.addEventListener("video:edit:reload", function(e) {
@@ -29,31 +28,7 @@ var videoDetail = {
       },
       initClipboard: function(element, isInit, context) {
         if(!isInit) {
-          $(element).tooltip({
-            placement: 'bottom',
-            title: 'Copied!',
-            trigger: 'manual'
-          });
-
-          clipboard = new Clipboard(element, {
-            text: function(btn) {
-              return Video.export();
-            }
-          });
-
-          clipboard.on('success', function(e) {
-            $(element).tooltip('show');
-
-            setTimeout(function() {
-              $(element).tooltip('hide');
-            }, 1000)
-
-          });
-
-          clipboard.on('error', function(e) {
-            // console.error('Action:', e.action);
-            // console.error('Trigger:', e.trigger);
-          });
+          Clippy.init(element);
         }
       }
     };

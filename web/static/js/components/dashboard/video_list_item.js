@@ -1,6 +1,16 @@
 import Video from "../../models/video";
+import Clippy from "../../models/clippy";
 
 var videoListItem = {
+  controller: function() {
+    return {
+      initClipboard: function(element, isInit, context) {
+        if(!isInit) {
+          Clippy.init(element);
+        }
+      }
+    };
+  },
   view: function(ctrl, video){
     return m("li", [
       m(".video-list__row media", [
@@ -31,8 +41,11 @@ var videoListItem = {
         m(".video-list__buttons", [
           m("a", {
             href: "#",
-            class: "btn btn-default btn-square"
-            // config: ctrl.initClipboard
+            class: "btn btn-default btn-square",
+            config: ctrl.initClipboard,
+            onclick: function(e) {
+              e.preventDefault();
+            }
           }, [
             m("i", {
               class: "fa fa-code",

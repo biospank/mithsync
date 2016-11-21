@@ -31,6 +31,7 @@ defmodule Videosync.SlideControllerTest do
     Enum.each([
         put(conn, project_video_slide_path(conn, :update, 4, 12, 34, %{})),
         post(conn, project_video_slide_path(conn, :create, 4, 12, %{})),
+        post(conn, project_video_save_all_slides_path(conn, :save_all, 4, 12, [])),
         delete(conn, project_video_slide_path(conn, :delete, 4, 12, 34))
       ], fn conn ->
         assert json_response(conn, 401)
@@ -111,5 +112,64 @@ defmodule Videosync.SlideControllerTest do
 
     counter_cache = Repo.get(Video, video.id).slide_count
     assert counter_cache == 0
+  end
+
+  @tag :logged_in
+  test "save all with an empty payload", %{conn: conn, user: user} do
+    project = insert_project(user, %Project{})
+    video = insert_video(user, %Video{})
+    post_conn = post conn, project_video_save_all_slides_path(conn, :save_all, project, video), slides: []
+
+    assert json_response(post_conn, 200)["data"] |> Enum.empty?
+  end
+
+  @tag :logged_in
+  test "save all with a new slide", %{conn: conn, user: user} do
+    project = insert_project(user, %Project{})
+    video = insert_video(user, %Video{})
+    post_conn = post conn, project_video_save_all_slides_path(conn, :save_all, project, video), slides: [@valid_attrs]
+
+    result_data = json_response(post_conn, 200)["data"]
+
+    refute result_data |> Enum.empty?
+    [%{"id" => id} | _] = result_data
+    assert is_integer(id)
+  end
+
+  @tag :logged_in
+  @new_url "/upload/33/images/slide/two"
+  test "save all with an old slide", %{conn: conn, user: user} do
+    project = insert_project(user, %Project{})
+    video = insert_video(user, %Video{})
+    slide = insert_slide(user, video, @valid_attrs)
+      |> Map.from_struct
+      |> Map.put(:url, @new_url)
+    post_conn = post conn, project_video_save_all_slides_path(conn, :save_all, project, video), slides: [slide]
+
+    result_data = json_response(post_conn, 200)["data"]
+
+    refute result_data |> Enum.empty?
+    [%{"url" => url} | _] = result_data
+    assert url == @new_url
+  end
+
+  @tag :logged_in
+  @new_url "/upload/33/images/slide/two"
+  test "save all with old and new slides", %{conn: conn, user: user} do
+    project = insert_project(user, %Project{})
+    video = insert_video(user, %Video{})
+    new_slide = Map.merge(@valid_attrs, %{start: 40})
+    old_slide = insert_slide(user, video, @valid_attrs)
+      |> Map.from_struct
+      |> Map.put(:url, @new_url)
+    post_conn = post conn, project_video_save_all_slides_path(conn, :save_all, project, video), slides: [old_slide, new_slide]
+
+    result_data = json_response(post_conn, 200)["data"]
+
+    assert Enum.count(result_data) == 2
+    [%{"url" => url} | tail] = result_data
+    assert url == @new_url
+    [%{"id" => id} | _] = tail
+    assert is_integer(id)
   end
 end

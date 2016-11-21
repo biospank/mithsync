@@ -14,29 +14,6 @@ import Color from '../../models/color';
 import dragger from '../../models/dragger';
 
 var editVideo = (function() {
-
-  var showBrowse = function() {
-    if(slickCarousel.currentSlide()) {
-      if(slickCarousel.currentSlide().url === "/images/slide-placeholder.png") {
-        return m("div", { class: "placeholderSlide__text" }, [
-          m("a", {
-            onclick: function(event) {
-              event.preventDefault();
-              imageDialog.show({
-                selectCallback: function(image) {
-                  slickCarousel.currentSlide().url = image.slide_url
-                  slickCarousel.currentSlide().thumb_url = image.thumb_url
-                }
-              });
-            },
-            href: "#",
-            class: "btn btn-lg btn-primary"
-          }, "Browse")
-        ]);
-      }
-    }
-  }
-
   var content = function(ctrl) {
     return [
       m(imageDialog),
@@ -54,19 +31,14 @@ var editVideo = (function() {
             m(".col-xs-6", [
               m("figure", {
                 class: "placeholderSlide",
-                id: "slide-placeholder",
-                config: function(element, isInit, context) {
-                  if( !isInit )
-                    ctrl.initDragger();
-                }
+                id: "slide-placeholder"
               }, [
                 m("a", {
                   onclick: function(event) {
                     event.preventDefault();
                     imageDialog.show({
                       selectCallback: function(image) {
-                        slickCarousel.currentSlide().url = image.slide_url
-                        slickCarousel.currentSlide().thumb_url = image.thumb_url
+                        ctrl.selectLibraryImage(image)
                       }
                     });
                   },
@@ -76,7 +48,6 @@ var editVideo = (function() {
                     src: slickCarousel.currentSlide() ? slickCarousel.currentSlide().url : "/images/slide-placeholder.png",
                     class: "img-responsive"
                   })
-                  //showBrowse()
                 ])
               ])
             ])
@@ -130,18 +101,24 @@ var editVideo = (function() {
             ]),
             m("div", { class: "col-xs-6 text-right" }, [
               m("button[type=submit]", {
-                onclick: ctrl.saveSlide,
-                class: 'btn btn-success btn-md',
-                title: "Save"
-              }, 'Save slide'),
-              m("button[type=submit]", {
                 onclick: function(event) {
                   event.preventDefault();
                   videoPreview.show();
                 },
                 class: 'btn btn-success btn-md btn-space--left-5',
                 title: "Preview"
-              }, "Show Preview")
+              }, [
+                m("i", { class: "fa fa-eye" }),
+                "Show Preview"
+              ]),
+              m("button[type=submit]", {
+                onclick: ctrl.saveAll,
+                class: 'btn btn-success btn-md btn-space icon-inside--left',
+                title: "Save"
+              }, [
+                m("i", { class: "fa fa-save" }),
+                "Save"
+              ])
             ])
           ])
         ]),
@@ -167,7 +144,7 @@ var editVideo = (function() {
       ctrl.isPlayerReady = m.prop(false);
       ctrl.slider = m.prop();
       ctrl.svalue = m.prop("00:00:00");
-      ctrl.drake = m.prop();
+      ctrl.unsaved = m.prop(false);
 
       if(Session.isExpired()) {
         m.route("/signin");
@@ -177,7 +154,7 @@ var editVideo = (function() {
         ctrl.currentLibraryImage(e.detail);
       }, false);
 
-      document.body.addEventListener("library:image:onQueueComplete", function(e) {
+      document.body.addEventListener("library:image:initDragger", function(e) {
         ctrl.initDragger();
       }, false);
 
@@ -186,12 +163,15 @@ var editVideo = (function() {
         slickCarousel.currentSlide().url = image.slide_url
         slickCarousel.currentSlide().thumb_url = image.thumb_url
         m.endComputation();
-      },
+        ctrl.unsaved(true);
+      };
+
       ctrl.onChangeSlider = function(values, handle, unencodedValues) {
         var currentValue = _.round(values[handle]);
         slickCarousel.currentSlide().start = currentValue;
         // to enable video
         ctrl.player.seek(currentValue);
+        ctrl.unsaved(true);
       };
 
       ctrl.onUpdateSlider = function(values, handle, unencodedValues) {
@@ -205,18 +185,34 @@ var editVideo = (function() {
 
       };
 
+      ctrl.onunload = function(e) {
+        var requestedUrl = m.route();
+
+        if (ctrl.unsaved()) {
+          e.preventDefault();
+          swal({
+            type: 'warning',
+            title: 'Unsaved changes',
+            text: "Some changes has not been saved.\nDo you want to leave this page anyway?",
+            confirmButtonText: "Yes, don't save", // "Don't save!"
+            showCancelButton: true
+          }).then(function () {
+            ctrl.unsaved(false);
+            m.route(requestedUrl);
+          }).catch(swal.noop)
+        }
+      }
+
       ctrl.initDragger = function() {
-        ctrl.drake(
-          dragger.init({
-            containers: {
-              from: 'image-library',
-              to: 'slide-placeholder'
-            },
-            onDropCallback: function() {
-              ctrl.selectLibraryImage(ctrl.currentLibraryImage());
-            }
-          })
-        );
+        dragger.init({
+          containers: {
+            from: 'image-library',
+            to: 'slide-placeholder'
+          },
+          onDropCallback: function() {
+            ctrl.selectLibraryImage(ctrl.currentLibraryImage());
+          }
+        });
       };
 
       // the first argument is the DOM element;
@@ -317,54 +313,39 @@ var editVideo = (function() {
         })
       };
 
-      ctrl.saveSlide = function() {
-        Slide.resetModel(slickCarousel.currentSlide());
-
-        if(Slide.isNewRecord()) {
-          if(Slide.validate()) {
-            return Slide.create(ctrl.video()).then(function(response) {
-              slickCarousel.updateSlide(slickCarousel.currentSlide(), response.data);
-              slickCarousel.currentSlide(
-                _.assign(slickCarousel.currentSlide(), response.data)
-              );
-
+      ctrl.saveAll = function() {
+        var slideIndex = slickCarousel.slideIndex(slickCarousel.currentSlide())
+        swal({
+          title: 'Saving...',
+          width: '400px',
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          showConfirmButton: false,
+          onOpen: function(progress) {
+            swal.showLoading();
+            return Slide.saveAll(ctrl.video(), slickCarousel.slides()).then(function(response) {
+              slickCarousel.slides(response.data);
+              slickCarousel.currentSlide(slickCarousel.slideByIndex(slideIndex));
+              swal.close();
               swal({
                 type: 'success',
-                title: 'Slide saved!',
+                width: '400px',
                 showConfirmButton: false,
                 timer: 1000
               }).catch(swal.noop);
-
+              ctrl.unsaved(false);
             }, function(response) {
-              ctrl.errors(response.errors);
+              swal.close();
+              swal({
+                type: 'error',
+                title: 'Oops!! something went wrong',
+                text: 'Please, try again later or let us know about that',
+                showCloseButton: true,
+                showConfirmButton: false
+              }).catch(swal.noop);
             })
-          } else {
-            swal({
-              title: 'Select a slide',
-              text: "Click on placeholder to select an image",
-              type: 'info',
-              // confirmButtonColor: '#3085d6',
-              confirmButtonText: 'Ok'
-            }).catch(swal.noop);
           }
-        } else {
-          return Slide.update(ctrl.video()).then(function(response) {
-            slickCarousel.updateSlide(slickCarousel.currentSlide(), response.data);
-            slickCarousel.currentSlide(
-              _.assign(slickCarousel.currentSlide(), response.data)
-            );
-
-            swal({
-              type: 'success',
-              title: 'Slide saved!',
-              showConfirmButton: false,
-              timer: 1000
-            }).catch(swal.noop);
-
-          }, function(response) {
-            ctrl.errors(response.errors);
-          })
-        }
+        }).catch(swal.noop);
       };
 
       ctrl.deleteSlide = function(event) {
@@ -417,6 +398,7 @@ var editVideo = (function() {
         ctrl.refreshSlider(slickCarousel.slides());
         ctrl.highlightSlide(slide);
         ctrl.showVideoFrame(slide);
+        ctrl.unsaved(true);
       };
 
       ctrl.showVideoFrame = function(slide) {
