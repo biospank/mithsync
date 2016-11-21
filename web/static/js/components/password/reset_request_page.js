@@ -9,9 +9,9 @@ var resetRequestPage = (function() {
       // m("figure", { class: "text-center", id: "logo" }, [
       //   m("img", { src: "/images/logo.png", alt: "Zinkroo" })
       // ]),
-      m("header", { class: "header-text space-bottom" }, [
+      m("header", { class: "header-text" }, [
         m("hgroup", { class: "text-center" }, [
-          m("h1", { class: "header-text__title no-margin-top" }, "Have you lost your password?"),
+          m("h1", { class: "header-text__title mt-0" }, "Have you lost your password?"),
           m("h2", { class: "header-text__subtitle" }, "Insert your email below, you will receive an email to reset your password."),
           m("hr", { class: "header-text__separator" })
         ])
@@ -30,7 +30,7 @@ var resetRequestPage = (function() {
             error: ctrl.errors()['email'],
             dataLabel: 'Email'
           }),
-          m("div", { class: "mgt30" }, [
+          m("div", { class: "mt-30" }, [
             m.component(feedbackButton, {
               action: ctrl.passwordResetRequest,
               label: 'Send instructions',

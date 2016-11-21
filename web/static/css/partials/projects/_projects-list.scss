@@ -67,7 +67,7 @@
         @include font-style(12px, $grey-superdark, 400, 12px);
         text-transform: uppercase;
         margin: 0 0 5px 0;
-        @include respond-to(min-width, 1920px) {
+        @include respond-to(min-width, 1900px) {
           margin: 11px 50px 0px 0px;
           float: left;
           width: 150px;
@@ -81,6 +81,9 @@
           margin-bottom: 0;
           float: left;
         }
+        @include respond-to(min-width, 1900px) {
+          margin-top: 11px;
+        }
       }
       .videos-number {
         @include font-style(12px, $coloured, 500, 12px);
@@ -88,6 +91,9 @@
         @include respond-to(min-width, 1200px) {
           margin-right: 20px;
           float: left;
+        }
+        @include respond-to(min-width, 1900px) {
+          margin-top: 11px;
         }
       }
     }

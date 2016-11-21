@@ -11,7 +11,7 @@ var activationPage = (function() {
       // ]),
       m("header", { class: "header-text space-bottom" }, [
         m("hgroup", { class: "text-center" }, [
-          m("h1", { class: "header-text__title" }, m.trust("We've sent you an email <br> with your activation code")),
+          m("h1", { class: "header-text__title" }, m.trust("We've sent you an email with your activation code")),
           m("h2", { class: "header-text__subtitle" }, "You need to insert it below to active the account"),
           m("hr", { class: "header-text__separator" })
         ])
@@ -29,7 +29,7 @@ var activationPage = (function() {
             oninput: m.withAttr("value", Activation.model.activation_code),
             error: ctrl.errors()['activation_code']
           }),
-          m("div", { class: "text-center mgv30" }, [
+          m("div", { class: "text-center mboth-30" }, [
             m.component(feedbackButton, {
               action: ctrl.activateUser,
               label: 'Activate',
