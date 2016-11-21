@@ -29,7 +29,11 @@ var topBar = {
           // m("a", { href: "#", class: "navbar-brand" }, [
           //   m("img", { src: "/images/logo.jpg", alt: "Zinkroo" })
           // ]),
-          m("a", { href: "#", class: "navbar-brand" }, "Zinkroo"),
+          m("a", {
+            href: "/dashboard",
+            config: m.route,
+            class: "navbar-brand"
+          }, "Zinkroo"),
           this.showMenuButton()
         ]),
         m(".pull-right", [
