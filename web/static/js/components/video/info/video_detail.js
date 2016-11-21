@@ -18,7 +18,7 @@ var videoDetail = {
         return Video.update(Video.current()).then(function() {
           swal({
             type: 'success',
-            title: 'Video saved!',
+            title: 'Video info saved!',
             showConfirmButton: false,
             timer: 1000
           }).catch(swal.noop);
