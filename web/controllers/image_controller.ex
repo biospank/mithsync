@@ -85,7 +85,6 @@ defmodule Videosync.ImageController do
   end
 
   defp paginate(items, page, page_size) do
-    IO.puts inspect(page_size)
     Scrivener.paginate(
       items,
       %{
