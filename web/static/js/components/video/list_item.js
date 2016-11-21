@@ -71,8 +71,8 @@ var listItem = {
             })
           ]),
           m("a", {
-            href: "",
-            onclick: function() {
+            href: "#",
+            onclick: function(event) {
               event.preventDefault();
               swal({
                 title: 'Are you sure?',
