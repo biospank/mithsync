@@ -5,7 +5,7 @@ defmodule Videosync.VideoController do
 
   plug :scrub_params, "video" when action in [:create, :update]
 
-  @max_recent_pagination 4
+  @max_recent_pagination 5
 
   def action(conn, _) do
     apply(__MODULE__, action_name(conn),
