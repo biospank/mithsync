@@ -1,5 +1,6 @@
 import Videosync from "../../videosync";
 import Video from "../../models/video";
+import Clippy from "../../models/clippy";
 
 var listItem = {
   controller: function(video, parent){
@@ -19,36 +20,8 @@ var listItem = {
 
     ctrl.initClipboard = function(element, isInit, context) {
       if(!isInit) {
-        $(element).tooltip({
-          placement: 'left',
-          title: 'Copied!',
-          trigger: 'manual'
-        });
-
-        var clipboard = new Clipboard(element, {
-          text: function(btn) {
-            return Video.export();
-          }
-        });
-
-        clipboard.on('success', function(e) {
-          $(element).tooltip('show');
-
-          setTimeout(function() {
-            $(element).tooltip('hide');
-          }, 1000)
-
-        });
-
-        clipboard.on('error', function(e) {
-          // console.error('Action:', e.action);
-          // console.error('Trigger:', e.trigger);
-        });
+        Clippy.init(element);
       }
-    };
-
-    ctrl.exportCode = function() {
-      return Video.export();
     };
   },
   view: function(ctrl, video){
@@ -86,7 +59,10 @@ var listItem = {
           m("a", {
             href: "#",
             class: "btn btn-default btn-square",
-            config: ctrl.initClipboard
+            config: ctrl.initClipboard,
+            onclick: function(e) {
+              e.preventDefault();
+            }
           }, [
             m("i", {
               class: "fa fa-code",
