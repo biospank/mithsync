@@ -26,12 +26,12 @@ defmodule Videosync.ImageController do
   def index(conn, params, scope) do
     case ImageProxy.list(%{ scope: scope, filter: params["filter"] }) do
       {:ok, images} ->
-        paged_images = paginate(images, params["page"] || 1)
+        paged_images = paginate(images, params["page"] || 1, params["page_size"])
 
         paged_images =
         case paged_images do
           %Scrivener.Page{entries: [], total_entries: total} when total > 0 ->
-            paginate(images, String.to_integer(params["page"]) - 1)
+            paginate(images, String.to_integer(params["page"]) - 1, params["page_size"])
           _ ->
             paged_images
         end
@@ -84,12 +84,13 @@ defmodule Videosync.ImageController do
     end
   end
 
-  defp paginate(items, page) do
+  defp paginate(items, page, page_size) do
+    IO.puts inspect(page_size)
     Scrivener.paginate(
       items,
       %{
         page: page,
-        page_size: 16
+        page_size: page_size || 16
       }
     )
   end
