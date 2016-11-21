@@ -26,22 +26,23 @@ var videoListItem = {
             m("a", { href: "#" }, [
               m("img", {
                 src: _.isEmpty(video.slides) ? '/images/thumb-placeholder.png' : _.first(video.slides).thumb_url,
-                class: "media-object"
+                class: "media-object",
+                width: "53"
               })
             ])
           ]),
           m("div", { class: "media-body" }, [
             m("h5", { class: "title" }, _.truncate(video.title, { length: 25 })),
-            m("p", { class: "description" }, _.truncate(video.description, { length: 30 })),
-            m("span", {
-              class: "video-slide"
-            }, video.slide_count + (_.gt(video.slide_count, 1) ? " slides" : " slide"))
+            m("p", { class: "description mb-0" }, _.truncate(video.description, { length: 30 }))
+            // m("span", {
+            //   class: "video-slide"
+            // }, video.slide_count + (_.gt(video.slide_count, 1) ? " slides" : " slide"))
           ])
         ]),
-        m(".video-list__buttons", [
+        m(".video-list__buttons dashboard", [
           m("a", {
             href: "#",
-            class: "btn btn-default btn-square",
+            class: "btn btn-default btn-square btn-square--32",
             config: ctrl.initClipboard,
             onclick: function(e) {
               e.preventDefault();

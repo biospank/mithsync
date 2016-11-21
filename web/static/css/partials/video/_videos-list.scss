@@ -1,7 +1,7 @@
 .video-list {
   &__row {
     $row-height: 80px;
-    height: $row-height;
+    // height: $row-height;
     @include spaces(0, 0 0 15px 0);
     background-color: white;
     //@include border(#eaeaea);
@@ -16,16 +16,16 @@
     }
     .poster {
       padding: 0;
-      height: $row-height;
+      //height: $row-height;
       border-right: 1px solid #eaeaea;
       & > a {
         display: block;
         position: relative;
         overflow: hidden;
-        @include size(116px, $row-height);
-        img {
-          @include size(116px, auto);
-        }
+        // @include size(116px, $row-height);
+        // img {
+        //   @include size(116px, auto);
+        // }
       }
       @include respond-to(max-width, 1190px) {
         display: none;
@@ -35,7 +35,7 @@
       display: block;
       text-decoration: none;
       .media-body {
-        padding: 8px 15px;
+        padding: 8px 55px 8px 10px;
         .title {
           text-transform: uppercase;
           margin: 0;
@@ -59,6 +59,10 @@
     }
     .video-list__buttons {
       @include position(right, 20px, top, 20px);
+      &.dashboard {
+        top: 10px;
+        right: 10px;
+      }
     }
   }
 }

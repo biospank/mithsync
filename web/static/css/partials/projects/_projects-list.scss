@@ -93,13 +93,6 @@
     }
     .projects-list__buttons {
       @include position(right, 12px, top, 13px);
-      .btn {
-        margin-left: 10px;
-        &.btn-square {
-          @include size(32px, 32px);
-          line-height: 32px;
-        }
-      }
     }
   }
 }
