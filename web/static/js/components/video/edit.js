@@ -194,8 +194,9 @@ var editVideo = (function() {
             type: 'warning',
             title: 'Unsaved changes',
             text: "Some changes has not been saved.\nDo you want to leave this page anyway?",
-            confirmButtonText: "Yes, don't save", // "Don't save!"
-            showCancelButton: true
+            confirmButtonText: "Yes, leave this page!", // "Don't save!"
+            showCancelButton: true,
+            focusCancel: true
           }).then(function () {
             ctrl.unsaved(false);
             m.route(requestedUrl);
