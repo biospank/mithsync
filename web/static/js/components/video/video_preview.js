@@ -11,8 +11,8 @@ var videoPreview = {
       "id": "videoPreview"
     }, [
       m(".modal-dialog modal-lg", {
-        role: "document",
-        class: "bounceIn animated"
+        role: "document"
+        // class: "bounceIn animated"
       }, [
         m(".modal-content", [
           m(".modal-header", [

@@ -55,7 +55,7 @@ var userProfile = (function() {
               m.component(textField, { type: 'text', placeholder: 'Enter your post code', id: 'postcode', dataLabel: 'Post code' })
             ])
           ]),
-          m("div", { class: "text-right mgv20" }, [
+          m("div", { class: "text-right mboth-20" }, [
             m("button[type=submit]", {
               class: 'btn btn-primary btn-lg'
             }, "Update Profile" )
@@ -63,7 +63,7 @@ var userProfile = (function() {
         ])
       ]),
       m(".col-xs-5 col-lg-3", [
-        m('.card-wrapper bordered mgv25', [
+        m('.card-wrapper bordered mboth-25', [
           m(".profile-card", [
             m("figure", { class: "profile-card__photo" }, [
               m("img", { src: "/images/avatar.jpg", alt: "Avatar", class: "img-responsive" })

@@ -22,6 +22,16 @@ var Video = {
 
     return this.model;
   },
+  export: function() {
+    var code = '<div style="position: relative; padding-bottom: 56.25%; padding-top: 35px; height: 0; overflow: hidden;"> ' +
+      '<iframe style="position: absolute; top: 0; left: 0; height: 100%; width: 100%; " id="ifrm" frameborder="0" width="1000" height="450" src="<%= domain %>/watch/<%= video.id %>">Your browser doesn\'t support iframes.</iframe>' +
+    '</div>'
+
+    return _.template(code)({
+      domain: Videosync.domain,
+      video: this.current()
+    });
+  },
   playerColumnSize: function() {
     var cols;
     switch (parseInt(this.model.layout())) {

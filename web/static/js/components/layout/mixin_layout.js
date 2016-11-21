@@ -62,10 +62,10 @@ var mixinLayout = function(content, layout) {
             // ]),
             m.component(mainNav)
           ]),
-          m("section", { id: "page-content-wrapper" }, [
+          m("section", { id: "page-content-wrapper", class: "pp" }, [
             content
           ]),
-          m("aside", { id: "sidebar-video-edit" }, [
+          m("aside", { id: "sidebar-video-edit", class: "pp" }, [
             m("ul", {  class: "nav nav-tabs", role: "tablist" }, [
               m("li", { class: "col-xs-4", role: "presentation" }, [
                 m("a", {

@@ -12,7 +12,7 @@ var slickItem = {
             args.selectCallback(ctrl.slide);
         }
       }, [
-        m("i", { class: "fa fa-bookmark bookmark-color", "aria-hidden": true, style: "color: " + ctrl.slide.connectColor }),
+        // m("i", { class: "fa fa-bookmark bookmark-color", "aria-hidden": true, style: "color: " + ctrl.slide.connectColor }),
         m("a", {}, [
           m("img", {
             src: ctrl.slide.thumb_url,

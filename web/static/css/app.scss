@@ -3,7 +3,7 @@
 @import "./partials/variables";
 @import "./partials/default-styles";
 
-@import "./partials/widgets/margins";
+// @import "./partials/widgets/margins";
 @import "./partials/widgets/buttons";
 @import "./partials/widgets/modals";
 @import "./partials/widgets/pagination";
@@ -25,10 +25,11 @@
 @import "./partials/shared/search-form";
 @import "./partials/shared/socials-group";
 
-@import "./partials/plugin/customized-dropzone";
-@import "./partials/plugin/customized-sweetalert";
-@import "./partials/plugin/customized-reveal";
-@import "./partials/plugin/customized-loader";
+@import "./partials/plugins/customized-dropzone";
+@import "./partials/plugins/customized-sweetalert";
+@import "./partials/plugins/customized-reveal";
+@import "./partials/plugins/customized-loader";
+@import "./partials/plugins/customized-clipboard";
 
 @import "./partials/projects/projects-list";
 
