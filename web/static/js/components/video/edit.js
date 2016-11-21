@@ -14,28 +14,6 @@ import Color from '../../models/color';
 import dragger from '../../models/dragger';
 
 var editVideo = (function() {
-
-  var showBrowse = function() {
-    if(slickCarousel.currentSlide()) {
-      if(slickCarousel.currentSlide().url === "/images/slide-placeholder.png") {
-        return m("div", { class: "placeholderSlide__text" }, [
-          m("a", {
-            onclick: function(event) {
-              event.preventDefault();
-              imageDialog.show({
-                selectCallback: function(image) {
-                  ctrl.selectLibraryImage(image);
-                }
-              });
-            },
-            href: "#",
-            class: "btn btn-lg btn-primary"
-          }, "Browse")
-        ]);
-      }
-    }
-  }
-
   var content = function(ctrl) {
     return [
       m(imageDialog),
@@ -74,7 +52,6 @@ var editVideo = (function() {
                     src: slickCarousel.currentSlide() ? slickCarousel.currentSlide().url : "/images/slide-placeholder.png",
                     class: "img-responsive"
                   })
-                  //showBrowse()
                 ])
               ])
             ])
