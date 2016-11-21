@@ -105,7 +105,7 @@ var editVideo = (function() {
                   event.preventDefault();
                   videoPreview.show();
                 },
-                class: 'btn btn-success btn-md btn-space--left-5',
+                class: 'btn btn-success btn-md icon-inside--left',
                 title: "Preview"
               }, [
                 m("i", { class: "fa fa-eye" }),
@@ -113,7 +113,7 @@ var editVideo = (function() {
               ]),
               m("button[type=submit]", {
                 onclick: ctrl.saveAll,
-                class: 'btn btn-success btn-md btn-space icon-inside--left',
+                class: 'btn btn-success btn-md btn-space--left-5 icon-inside--left',
                 title: "Save"
               }, [
                 m("i", { class: "fa fa-save" }),

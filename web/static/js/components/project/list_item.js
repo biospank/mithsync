@@ -61,7 +61,7 @@ var listItem = {
             ]),
             m(".projects-list__buttons", [
               m("a", {
-                class: "btn btn-default btn-square",
+                class: "btn btn-default btn-square btn-square--32 btn-space--left-10",
                 onclick: function() {
                   this.editMode(true);
                 }.bind(this),
@@ -76,7 +76,7 @@ var listItem = {
                 m("i", { class: "fa fa-pencil", "aria-hidden": true })
               ]),
               m("a", {
-                class: "btn btn-default btn-square",
+                class: "btn btn-default btn-square btn-square btn-square--32 btn-space--left-10",
                 onclick: function() {
                   swal({
                     title: 'Are you sure?',
