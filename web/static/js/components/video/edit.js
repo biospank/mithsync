@@ -52,10 +52,9 @@ var editVideo = (function() {
               ])
             ])
           ]),
-          m(".clearfix .mboth-25", [
-            m("p", { class: "text-left mb-0" }, "Start: " + ctrl.svalue())
+          m(".mt-60", [
+            (ctrl.isPlayerReady()) ? m("#slider") : m(loader),
           ]),
-          (ctrl.isPlayerReady()) ? m("#slider") : m(loader),
           m("footer", { class: "buttons row" }, [
             m("div", { class: "col-xs-6" }, [
               m("button", {
@@ -143,7 +142,6 @@ var editVideo = (function() {
       ctrl.player = {};
       ctrl.isPlayerReady = m.prop(false);
       ctrl.slider = m.prop();
-      ctrl.svalue = m.prop("00:00:00");
       ctrl.unsaved = m.prop(false);
 
       if(Session.isExpired()) {
@@ -175,13 +173,13 @@ var editVideo = (function() {
       };
 
       ctrl.onUpdateSlider = function(values, handle, unencodedValues) {
-        var currentValue = _.round(values[handle])
-
-        var duration = new Date(currentValue * 1000).toISOString().substr(11, 8);
-
-        m.startComputation();
-        ctrl.svalue(duration);
-        m.endComputation();
+        // var currentValue = _.round(values[handle])
+        //
+        // var duration = new Date(currentValue * 1000).toISOString().substr(11, 8);
+        //
+        // m.startComputation();
+        // ctrl.svalue(duration);
+        // m.endComputation();
 
       };
 
@@ -410,11 +408,11 @@ var editVideo = (function() {
       }
 
       ctrl.highlightSlide = function(slide) {
-        var duration = new Date(slide.start * 1000).toISOString().substr(11, 8);
-
-        m.startComputation();
-        ctrl.svalue(duration);
-        m.endComputation();
+        // var duration = new Date(slide.start * 1000).toISOString().substr(11, 8);
+        //
+        // m.startComputation();
+        // ctrl.svalue(duration);
+        // m.endComputation();
 
         Slide.resetModel(slide);
         ctrl.focusHandle(_.findIndex(slickCarousel.slides(), slide));
