@@ -29,7 +29,7 @@
     }
     & > span {
       &:after {
-        content: "Recommended WIDTH greater than 200 px";
+        content: "Recommended minimum image size 800 x 450";
         display: block;
         @include font-style(13px, #646C7F);
         margin-top: 15px;

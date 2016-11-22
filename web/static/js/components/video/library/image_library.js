@@ -148,7 +148,8 @@ var imageLibrary = (function() {
               ctrl.requestOptions
             );
           }
-        }
+        },
+        class: "pb-90"
       }, [
         m("div", {
           class: "dropzone needsclick dz-clickable",

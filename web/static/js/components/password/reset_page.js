@@ -5,38 +5,40 @@ import Password from "../../models/password";
 
 var resetPage = (function() {
   var content = function(ctrl) {
-    return m('.col-xs-7 .col-sm-7 .col-md-4 .col-lg-3 .center-block', [
+    return m('.col-xs-7 .col-sm-7 .col-md-4 .col-lg-3 .center-block ', [
       // m("figure", { class: "text-center", id: "logo" }, [
       //   m("img", { src: "/images/logo.png", alt: "Zinkroo" })
       // ]),
-      m('.card-wrapper', [
-        m("h2", { class: "header text-center mgv20" }, "Reset Password"),
-        m(".content", [
-          m("form", { class: "light-form" }, [
-            m.component(textField, {
-              type: 'password',
-              placeholder: 'Enter Password',
-              id: 'password',
-              dataLabel: 'Password',
-              oninput: m.withAttr("value", Password.model.password),
-              error: ctrl.errors()['password']
-            }),
-            m.component(textField, {
-              type: 'password',
-              placeholder: 'Enter Password',
-              id: 'password_confirmation',
-              dataLabel: 'Confirm Password',
-              oninput: m.withAttr("value", Password.model.password_confirmation),
-              error: ctrl.errors()['password_confirmation']
-            }),
-            m("div", { class: "text-center mgv30" }, [
-              m.component(feedbackButton, {
-                action: ctrl.resetPassword,
-                label: 'Reset',
-                feedbackLabel: 'Executing...',
-                style: 'btn btn-primary contour btn-lg'
-              })
-            ])
+      m("header", { class: "header-text mb-20" }, [
+        m("hgroup", { class: "text-center" }, [
+          m("h2", { class: "header-text__title mboth-0" }, "Reset Password"),
+        ])
+      ]),
+      m('.card-wrapper sign bordered center-block', [
+        m("form", { class: "light-form" }, [
+          m.component(textField, {
+            type: 'password',
+            placeholder: 'Enter Password',
+            id: 'password',
+            dataLabel: 'Password',
+            oninput: m.withAttr("value", Password.model.password),
+            error: ctrl.errors()['password']
+          }),
+          m.component(textField, {
+            type: 'password',
+            placeholder: 'Enter Password',
+            id: 'password_confirmation',
+            dataLabel: 'Confirm Password',
+            oninput: m.withAttr("value", Password.model.password_confirmation),
+            error: ctrl.errors()['password_confirmation']
+          }),
+          m("div", { class: "text-center mboth-30" }, [
+            m.component(feedbackButton, {
+              action: ctrl.resetPassword,
+              label: 'Reset',
+              feedbackLabel: 'Executing...',
+              style: 'btn btn-primary contour btn-lg'
+            })
           ])
         ])
       ])

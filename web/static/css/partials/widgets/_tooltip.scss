@@ -1,0 +1,26 @@
+.tooltip {
+  &-arrow {}
+  &-inner {
+    background-color: $mainColor;
+  }
+  &.left {
+    .tooltip-arrow {
+      border-left-color: $mainColor !important;
+    }
+  }
+  &.right {
+    .tooltip-arrow {
+      border-right-color: $mainColor !important;
+    }
+  }
+  &.top {
+    .tooltip-arrow {
+      border-top-color: $mainColor !important;
+    }
+  }
+  &.bottom {
+    .tooltip-arrow {
+      border-bottom-color: $mainColor !important;
+    }
+  }
+}

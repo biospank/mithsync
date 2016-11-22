@@ -51,7 +51,7 @@ var listItem = {
               }.bind(this),
               class: "projects-list__body"
             }, [
-              m("h5", { class: "title mb-10" }, [
+              m("h5", { class: "title" }, [
                 this.project().name,
               ]),
               m("p", { class: "creation-date" }, moment(this.project().inserted_at).format('LLL')),
