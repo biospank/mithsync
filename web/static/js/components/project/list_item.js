@@ -72,7 +72,7 @@ var listItem = {
                 onclick: function() {
                   this.editMode(true);
                 }.bind(this),
-                title: "Modify project name",
+                title: "Change project name",
                 "data-toggle": "tooltip",
                 "data-placement": "top",
                 config: function(element, isInit, context) {

@@ -53,7 +53,7 @@ var videoList = {
     }
 
     ctrl.getVideos = function(params, args) {
-      return Video.all(Project.current().id, params, args).then(function(videos) {
+      return Video.all(m.route.param("projectId"), params, args).then(function(videos) {
         ctrl.videos(videos);
       }, function(response) {
         ctrl.errors(response.errors);
