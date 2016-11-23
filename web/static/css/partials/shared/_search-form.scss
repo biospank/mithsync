@@ -3,6 +3,7 @@
   .input-group {
     border-radius: 5px;
     padding: 0px 3px;
+    background-color: white;
     @include box-shadow(0 0 0 1px #dee1e5);
     .input-group-btn {
       .btn {

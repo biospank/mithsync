@@ -1,11 +1,13 @@
 .pagination {
+  @include box-shadow(0 0 0 1px #dee1e5);
+  border-radius: 5px;
   & > li:first-child > a {
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
   }
   & > li:last-child > a {
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
   }
   & > .active > a {
     border-color: #dddddd;
@@ -19,5 +21,6 @@
     padding: 8px 15px;
     color: black;
     @include transition(all 0.3s ease-out);
+    border: none;
   }
 }
