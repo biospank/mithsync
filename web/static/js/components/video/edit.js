@@ -125,6 +125,14 @@ var editVideo = (function() {
           selectCallback: function(slide) {
             ctrl.highlightSlide(slide);
             ctrl.showVideoFrame(slide);
+          },
+          mouseOverCallback: function(slide) {
+            if(slide !== slickCarousel.currentSlide())
+              ctrl.overHandle(slickCarousel.slideIndex(slide));
+          },
+          mouseOutCallback: function(slide) {
+            if(slide !== slickCarousel.currentSlide())
+              ctrl.outHandle(slickCarousel.slideIndex(slide));
           }
         }, slickCarousel.slides())
       ])
@@ -415,7 +423,7 @@ var editVideo = (function() {
         // m.endComputation();
 
         Slide.resetModel(slide);
-        ctrl.focusHandle(_.findIndex(slickCarousel.slides(), slide));
+        ctrl.focusHandle(slickCarousel.slideIndex(slide));
       };
 
       ctrl.refreshSlider = function(slides) {
@@ -442,6 +450,18 @@ var editVideo = (function() {
             element.removeAttribute('disabled');
           }
         });
+      };
+
+      ctrl.overHandle = function(index) {
+        var origins = ctrl.slider().target.getElementsByClassName('noUi-origin');
+        var element = _.nth(origins, index);
+        element.removeAttribute('disabled');
+      };
+
+      ctrl.outHandle = function(index) {
+        var origins = ctrl.slider().target.getElementsByClassName('noUi-origin');
+        var element = _.nth(origins, index);
+        element.setAttribute('disabled', true);
       };
 
       ctrl.paintConnects = function() {

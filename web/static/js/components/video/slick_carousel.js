@@ -55,6 +55,14 @@ var slickCarousel = (function() {
                 if(args.selectCallback)
                   args.selectCallback(slide);
 
+              },
+              mouseOverCallback: function(slide) {
+                if(args.mouseOverCallback)
+                  args.mouseOverCallback(slide);
+              },
+              mouseOutCallback: function(slide) {
+                if(args.mouseOutCallback)
+                  args.mouseOutCallback(slide);
               }
             }, slide, _.isEqual(slide, carousel.currentSlide));
           })

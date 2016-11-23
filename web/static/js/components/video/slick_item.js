@@ -10,6 +10,14 @@ var slickItem = {
         onclick: function() {
           if(args.selectCallback)
             args.selectCallback(ctrl.slide);
+        },
+        onmouseover: function() {
+          if(args.mouseOverCallback)
+            args.mouseOverCallback(ctrl.slide);
+        },
+        onmouseout: function() {
+          if(args.mouseOutCallback)
+            args.mouseOutCallback(ctrl.slide);
         }
       }, [
         // m("i", { class: "fa fa-bookmark bookmark-color", "aria-hidden": true, style: "color: " + ctrl.slide.connectColor }),
