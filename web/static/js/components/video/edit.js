@@ -52,7 +52,7 @@ var editVideo = (function() {
               ])
             ])
           ]),
-          m(".mt-60", [
+          m(".mt-80 mb-100", [
             (ctrl.isPlayerReady()) ? m("#slider") : m(loader),
           ]),
           m("footer", { class: "buttons row" }, [
