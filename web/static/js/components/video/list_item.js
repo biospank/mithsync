@@ -29,7 +29,7 @@ var listItem = {
     ctrl.video = video;
 
     return m("li", [
-      m("div", { class: "video-list__row media" }, [
+      m("div", { class: "list media" }, [
         m("a", {
           href: "",
           onclick: function(event) {
@@ -37,27 +37,27 @@ var listItem = {
             Video.current(video);
             m.route("/projects/" + Project.current().id + "/videos/" + video.id + "/edit");
           },
-          class: "video-list__body"
+          class: "list__contents"
         }, [
-          m("figure", { class: "poster media-left" }, [
+          m("figure", { class: "list__image border-right media-left hidden-xs hidden-sm" }, [
             m("a", [
               m("img", {
                 src: _.isEmpty(ctrl.video.slides) ? '/images/thumb-placeholder.png' : _.first(ctrl.video.slides).thumb_url,
                 class: "media-object",
-                width: "80"
+                width: "90"
               })
             ])
           ]),
-          m("div", { class: "media-body" }, [
-            m("h5", { class: "title" }, _.truncate(video.title, { length: 30 })),
-            m("p", { class: "description" }, _.truncate(video.description, { length: 50 })),
-            m("span", { class: "creation-date" }, moment(video.inserted_at).format('LLL')),
+          m("div", { class: "list__body media-body" }, [
+            m("h5", { class: "list__body-title mboth-0 text-uppercase" }, _.truncate(video.title, { length: 30 })),
+            m("p", { class: "list__body-description text-uppercase" }, _.truncate(video.description, { length: 50 })),
+            m("span", { class: "list__body-summary list__body-summary--space-right10 text-uppercase" }, moment(video.inserted_at).format('LLL')),
             m("span", {
-              class: "video-slide"
+              class: "text-uppercase list__body-summary coloured"
             }, ctrl.video.slide_count + (_.gt(ctrl.video.slide_count, 1) ? " slides" : " slide"))
           ])
         ]),
-        m(".video-list__buttons", [
+        m(".list__buttons list__buttons--40", [
           m("a", {
             href: "#",
             class: "btn btn-default btn-square",

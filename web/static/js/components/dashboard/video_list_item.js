@@ -13,7 +13,7 @@ var videoListItem = {
   },
   view: function(ctrl, video){
     return m("li", [
-      m(".video-list__row media", [
+      m(".list media", [
         m("a", {
           href: "",
           onclick: function(event) {
@@ -21,25 +21,22 @@ var videoListItem = {
             Video.current(video);
             m.route("/projects/" + video.project_id + "/videos/" + video.id + "/edit");
           },
-          class: "video-list__body" }, [
-          m("figure", { class: "poster media-left" }, [
-            m("a", { href: "#" }, [
+          class: "list__contents" }, [
+          m("figure", { class: "list__image media-left border-right hidden-xs hidden-sm hidden-md" }, [
+            m("a", [
               m("img", {
                 src: _.isEmpty(video.slides) ? '/images/thumb-placeholder.png' : _.first(video.slides).thumb_url,
                 class: "media-object",
-                width: "53"
+                width: "56"
               })
             ])
           ]),
-          m("div", { class: "media-body" }, [
-            m("h5", { class: "title" }, _.truncate(video.title, { length: 25 })),
-            m("p", { class: "description mb-0" }, _.truncate(video.description, { length: 30 }))
-            // m("span", {
-            //   class: "video-slide"
-            // }, video.slide_count + (_.gt(video.slide_count, 1) ? " slides" : " slide"))
+          m(".list__body media-body", [
+            m("h5", { class: "list__body-title mboth-0 text-uppercase" }, _.truncate(video.title, { length: 25 })),
+            m("p", { class: "list__body-description mb-0 text-uppercase" }, _.truncate(video.description, { length: 30 }))
           ])
         ]),
-        m(".video-list__buttons dashboard", [
+        m(".list__buttons list__buttons--32", [
           m("a", {
             href: "#",
             class: "btn btn-default btn-square btn-square--32",

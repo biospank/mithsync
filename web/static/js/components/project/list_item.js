@@ -7,7 +7,7 @@ var listItem = {
       editMode: m.prop(false),
       showItem: function() {
         if(this.editMode()) {
-          return m(".projects-list__body", { class: "status" }, [
+          return m(".list__contents", { class: "status" }, [
             m(".input-group", [
               m("input", {
                 type: "text",
@@ -49,17 +49,24 @@ var listItem = {
                 Project.current(this.project());
                 m.route("/projects/" + this.project().id + "/videos");
               }.bind(this),
-              class: "projects-list__body"
+              class: "list__contents"
             }, [
-              m("h5", { class: "title" }, [
-                this.project().name,
+              m("figure", { class: "list__image media-left p-all-side-10 hidden-xs hidden-sm" }, [
+                m("a", [
+                  m("img", { src: "/images/icons/folder.svg", class: "media-object", width: "40", height: "40" })
+                ])
               ]),
-              m("p", { class: "creation-date" }, moment(this.project().inserted_at).format('LLL')),
-              m("span", {
-                class: "videos-number"
-              }, this.project().video_count + (_.gt(this.project().video_count, 1) ? " videos" : " video"))
+              m(".list__body media-body", [
+                m("h5", { class: "list__body-title mboth-0 text-uppercase" }, [
+                  this.project().name,
+                ]),
+                m("span", { class: "list__body-summary list__body-summary--space-right10 text-uppercase" }, moment(this.project().inserted_at).format('LLL')),
+                m("span", {
+                  class: "list__body-summary coloured text-uppercase"
+                }, this.project().video_count + (_.gt(this.project().video_count, 1) ? " videos" : " video"))
+              ])
             ]),
-            m(".projects-list__buttons", [
+            m(".list__buttons list__buttons--32", [
               m("a", {
                 class: "btn btn-default btn-square btn-square--32 btn-space--left-10",
                 onclick: function() {
@@ -112,7 +119,7 @@ var listItem = {
     ctrl.project(project);
 
     return m("li", [
-      m("div", { class: "projects-list__row" }, [
+      m("div", { class: "list media" }, [
         ctrl.showItem()
       ])
     ]);

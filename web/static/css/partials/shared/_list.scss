@@ -1,0 +1,90 @@
+.list {
+  background-color: white;
+  @include box-shadow(0px 0px 10px #dfe4ee);
+  @include spaces(0, 0 0 15px 0);
+  border-radius: 5px;
+  position: relative;
+  &.media {
+    overflow: visible;
+  }
+  &__contents {
+    display: block;
+    &:hover {
+      text-decoration: none;
+    }
+    &.status {
+      padding: 10px;
+      & > .input-group {
+        margin-top: 0px;
+        .form-control {
+          @include box-shadow(none);
+          border-color: $mainColor;
+          border-right: 0;
+          &:focus {
+            border-color: $mainColor;
+          }
+        }
+        .input-group-addon {
+          background-color: white;
+          border-color: $mainColor;
+          @include box-shadow(none);
+          .fa, i, span {
+            font-size: 16px;
+            color: #d2dfe9;
+            @include transition(color 0.3s ease-out);
+            &:hover {
+              cursor: pointer;
+              color: $mainColor;
+            }
+          }
+        }
+      }
+    }
+  }
+  &__image {
+    padding: 0;
+    & > a {
+      display: block;
+      position: relative;
+      overflow: hidden;
+    }
+    &.border-right {
+      @include border(#eaeaea, 1px, right);
+    }
+    .media-object {
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+  }
+  &__body {
+    padding: 12px 55px 10px 10px;
+    &-title {
+      @include font-style(12px, $grey-superdark, 400);
+    }
+    &-description {
+      @include font-style(12px, $grey-light);
+    }
+    &-summary {
+      @include font-style(12px, $grey-light, 300);
+      &.coloured {
+        color: $coloured;
+        font-weight: 500;
+      }
+      &--space-left10 {
+        margin-left: 10px;
+      }
+      &--space-right10 {
+        margin-right: 10px;
+      }
+    }
+  }
+  &__buttons {
+    @include position(right, 15px, top, 50%);
+    &--32 {
+      margin-top: -16px;
+    }
+    &--40 {
+      margin-top: -20px;
+    }
+  }
+}

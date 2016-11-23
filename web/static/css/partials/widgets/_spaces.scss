@@ -44,3 +44,11 @@
   }
 }
 // end
+
+// Padding both - from 0 to 100
+@for $i from 0 through 20 {
+  .p-all-side-#{$i * 5} {
+    padding: $i * 5px !important;
+  }
+}
+// end

@@ -24,6 +24,7 @@
 
 @import "./partials/shared/search-form";
 @import "./partials/shared/socials-group";
+@import "./partials/shared/list";
 
 @import "./partials/plugins/customized-dropzone";
 @import "./partials/plugins/customized-sweetalert";
@@ -31,11 +32,11 @@
 @import "./partials/plugins/customized-loader";
 @import "./partials/plugins/customized-clipboard";
 
-@import "./partials/projects/projects-list";
+// @import "./partials/projects/projects-list";
 
 @import "./partials/profile/card";
 
-@import "./partials/video/videos-list";
+// @import "./partials/video/videos-list";
 @import "./partials/video/noui-customized";
 @import "./partials/video/edit";
 @import "./partials/video/library";

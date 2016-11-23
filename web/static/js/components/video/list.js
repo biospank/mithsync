@@ -106,7 +106,7 @@ var videoList = {
           }, "New video")
         ])
       ]),
-      m("ol", { class: "video-list list-unstyled" }, [
+      m("ul", { class: "video-list list-unstyled" }, [
         ctrl.showVideos()
       ]),
       m("div", { class: "clearfix" }, [
