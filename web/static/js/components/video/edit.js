@@ -416,14 +416,9 @@ var editVideo = (function() {
       }
 
       ctrl.highlightSlide = function(slide) {
-        // var duration = new Date(slide.start * 1000).toISOString().substr(11, 8);
-        //
-        // m.startComputation();
-        // ctrl.svalue(duration);
-        // m.endComputation();
-
         Slide.resetModel(slide);
         ctrl.focusHandle(slickCarousel.slideIndex(slide));
+        m.redraw()
       };
 
       ctrl.refreshSlider = function(slides) {
