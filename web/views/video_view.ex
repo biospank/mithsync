@@ -24,6 +24,7 @@ defmodule Videosync.VideoView do
       title: video.title,
       description: video.description,
       layout: video.layout,
+      watch_code: video.watch_code,
       slide_count: video.slide_count
     }
   end
@@ -41,6 +42,7 @@ defmodule Videosync.VideoView do
       title: video.title,
       description: video.description,
       layout: video.layout,
+      watch_code: video.watch_code,
       slide_count: video.slide_count,
       slides: render_many(video.slides, Videosync.SlideView, "slide.json"),
       inserted_at: video.inserted_at
@@ -61,6 +63,7 @@ defmodule Videosync.VideoView do
       title: video.title,
       description: video.description,
       layout: video.layout,
+      watch_code: video.watch_code,
       slide_count: video.slide_count,
       slides: render_many(video.slides, Videosync.SlideView, "slide.json")
     }

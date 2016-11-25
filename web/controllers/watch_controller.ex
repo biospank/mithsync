@@ -10,7 +10,7 @@ defmodule Videosync.WatchController do
   def show(conn, %{"id" => id}) do
     video = Video
       |> Video.preload_slides(Slide.order_by(:start))
-      |> Repo.get!(id)
+      |> Repo.get_by!(watch_code: id)
 
     render(conn, "show.html", video: video)
   end

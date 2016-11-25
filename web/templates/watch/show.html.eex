@@ -8,7 +8,7 @@
       <div class="slides">
         <%= for slide <- @video.slides do %>
           <section hidden class="future" aria-hidden="true" style="display: none;">
-            <img src="<%= slide.url %>" data-start="<%= slide.start %>"/>
+            <img src="<%= slide_url(@conn, slide) %>" data-start="<%= slide.start %>"/>
           </section>
         <% end %>
       </div>

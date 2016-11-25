@@ -1,6 +1,8 @@
 defmodule Videosync.User do
   use Videosync.Web, :model
 
+  alias Videosync.Crypto
+
   schema "users" do
     field :email, :string
     field :password, :string, virtual: true
@@ -56,7 +58,7 @@ defmodule Videosync.User do
   end
 
   def gen_code_reset_changeset(model) do
-    Ecto.Changeset.change(model, reset_code: random_string(32))
+    Ecto.Changeset.change(model, reset_code: Crypto.random_string(32))
   end
 
   def password_reset_changeset(model, params \\ %{}) do
@@ -83,13 +85,9 @@ defmodule Videosync.User do
   defp put_activation_code(changeset) do
     case changeset do
       %Ecto.Changeset{valid?: true} ->
-        put_change(changeset, :activation_code, random_string(32))
+        put_change(changeset, :activation_code, Crypto.random_string(32))
       _ ->
         changeset
     end
-  end
-
-  defp random_string(length) do
-    :crypto.strong_rand_bytes(length) |> Base.url_encode64 |> binary_part(0, length)
   end
 end

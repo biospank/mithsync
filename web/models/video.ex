@@ -1,7 +1,7 @@
 defmodule Videosync.Video do
   use Videosync.Web, :model
 
-  alias Videosync.Repo
+  alias Videosync.{Repo, Crypto}
 
   schema "videos" do
     field :url, :string
@@ -9,6 +9,7 @@ defmodule Videosync.Video do
     field :description, :string
     field :layout, :integer
     field :slide_count, :integer
+    field :watch_code, :string
     belongs_to :user, Videosync.User
     belongs_to :project, Videosync.Project
     has_many :slides, Videosync.Slide
@@ -27,6 +28,7 @@ defmodule Videosync.Video do
 
   def create_changeset(struct, params \\ %{}) do
     changeset(struct, params)
+    |> put_watch_code()
     |> prepare_changes(fn(change) ->
         assoc(change.data, :project)
         |> Repo.update_all(inc: [video_count: 1])
@@ -78,5 +80,14 @@ defmodule Videosync.Video do
 
   def preload_slides(query, preload_query) do
     from v in query, preload: [slides: ^preload_query]
+  end
+
+  defp put_watch_code(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true} ->
+        put_change(changeset, :watch_code, Crypto.random_string(32))
+      _ ->
+        changeset
+    end
   end
 end
