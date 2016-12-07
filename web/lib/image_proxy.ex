@@ -22,7 +22,7 @@ defmodule Videosync.ImageProxy do
 
   defp list(:local, opts) do
     {:ok, scope} = Map.fetch(opts, :scope)
-    filter = Map.get(opts, :filter)
+    {:ok, filter} = Map.fetch(opts, :filter)
 
     with {:ok, contents} <- File.ls(ArcImage.storage_dir(:thumb, {nil, scope})),
          {:ok, files} <- get_files_info(:local, contents, scope),
@@ -32,8 +32,8 @@ defmodule Videosync.ImageProxy do
 
   defp list(:s3, opts) do
     {:ok, scope} = Map.fetch(opts, :scope)
+    {:ok, filter} = Map.fetch(opts, :filter)
     {:ok, bucket} = Application.fetch_env(:arc, :bucket)
-    filter = Map.get(opts, :filter)
 
     prefix = "uploads/#{scope.user_id}/#{scope.project_id}/#{scope.video_id}/images/thumb"
 
