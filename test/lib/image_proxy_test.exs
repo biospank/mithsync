@@ -38,8 +38,8 @@ defmodule Videosync.ImageProxyTest do
   end
 
   @tag :local
-  test "list local scoped files without filter", %{scope: scope} do
-    {:ok, list} = ImageProxy.list(%{ scope: scope, filter: nil })
+  test "list local scoped files", %{scope: scope} do
+    {:ok, list} = ImageProxy.list(%{ scope: scope })
     refute Enum.empty? list
   end
 
@@ -56,8 +56,8 @@ defmodule Videosync.ImageProxyTest do
   end
 
   @tag :s3
-  test "list s3 scoped files without filter", %{scope: scope} do
-    {:ok, list} = ImageProxy.list(%{ scope: scope, filter: nil })
+  test "list s3 scoped files", %{scope: scope} do
+    {:ok, list} = ImageProxy.list(%{ scope: scope })
     refute Enum.empty? list
   end
 
