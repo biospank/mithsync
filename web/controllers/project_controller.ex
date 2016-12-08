@@ -1,7 +1,7 @@
 defmodule Videosync.ProjectController do
   use Videosync.Web, :controller
 
-  alias Videosync.{Project, ImageProxy}
+  alias Videosync.{Project, ImageProxy, Scope}
 
   @max_recent_pagination 5
 
@@ -93,8 +93,9 @@ defmodule Videosync.ProjectController do
     Project.delete_changeset(project)
     |> Repo.delete!
 
-    ImageProxy.bulk_delete(%{
-      scope: "#{user.id}/#{id}"
+    ImageProxy.bulk_delete(%Scope{
+      user_id: user.id,
+      project_id: id
     })
 
     send_resp(conn, :no_content, "")

@@ -27,19 +27,19 @@ defmodule Videosync.ImageProxyTest do
 
   @tag :local
   test "bulk delete local scoped files", %{scope: scope} do
-    {:ok, list} = ImageProxy.bulk_delete(%{ scope: "#{scope.user_id}/#{scope.project_id}/#{scope.video_id}" })
+    {:ok, list} = ImageProxy.bulk_delete(%{ scope: scope })
     refute Enum.empty? list
   end
 
   @tag :s3
   test "bulk delete s3 scoped files", %{scope: scope} do
-    {:ok, list} = ImageProxy.bulk_delete(%{ scope: "#{scope.user_id}/#{scope.project_id}/#{scope.video_id}" })
-    refute Enum.empty? list
+    {:ok, [%{status_code: status}]} = ImageProxy.bulk_delete(%{ scope: scope })
+    assert status == 200
   end
 
   @tag :local
-  test "list local scoped files without filter", %{scope: scope} do
-    {:ok, list} = ImageProxy.list(%{ scope: scope, filter: nil })
+  test "list local scoped files", %{scope: scope} do
+    {:ok, list} = ImageProxy.list(%{ scope: scope })
     refute Enum.empty? list
   end
 
@@ -56,8 +56,8 @@ defmodule Videosync.ImageProxyTest do
   end
 
   @tag :s3
-  test "list s3 scoped files without filter", %{scope: scope} do
-    {:ok, list} = ImageProxy.list(%{ scope: scope, filter: nil })
+  test "list s3 scoped files", %{scope: scope} do
+    {:ok, list} = ImageProxy.list(%{ scope: scope })
     refute Enum.empty? list
   end
 

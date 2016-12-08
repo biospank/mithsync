@@ -6,9 +6,10 @@ defmodule Videosync.ArcImage do
 
   @versions [:original, :thumb, :slide]
 
-  # uncomment for S3 storage mode
-  # def __storage, do: Arc.Storage.S3
-  def __storage, do: Arc.Storage.Local
+  # def __storage, do: Arc.Storage.S3 / Arc.Storage.Local
+  def __storage do
+    Application.fetch_env!(:arc, :storage)
+  end
 
   # To add a thumbnail version:
   # @versions [:original, :thumb]

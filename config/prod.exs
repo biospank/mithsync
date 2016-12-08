@@ -67,6 +67,7 @@ config :logger, level: :info
 # arc/ex_aws configuration
 # enable for S3 storage mode
 config :arc,
+  storage: Arc.Storage.S3,
   bucket: "zinkroo",
   virtual_host: true
 

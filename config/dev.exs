@@ -55,7 +55,8 @@ config :videosync, Videosync.Mailer,
 
 # arc/ex_aws configuration
 # enable for S3 storage mode
-# config :arc,
+config :arc,
+  storage: Arc.Storage.Local
 #   bucket: "zinkroo",
 #   virtual_host: true
 #

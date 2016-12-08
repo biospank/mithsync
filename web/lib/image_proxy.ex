@@ -1,6 +1,5 @@
 defmodule Videosync.ImageProxy do
-  alias Videosync.ArcImage
-  alias Videosync.Image
+  alias Videosync.{Image, ArcImage}
 
   def list(opts \\ %{}) do
     case ArcImage.__storage do
@@ -22,7 +21,7 @@ defmodule Videosync.ImageProxy do
 
   defp list(:local, opts) do
     {:ok, scope} = Map.fetch(opts, :scope)
-    {:ok, filter} = Map.fetch(opts, :filter)
+    filter = Map.get(opts, :filter)
 
     with {:ok, contents} <- File.ls(ArcImage.storage_dir(:thumb, {nil, scope})),
          {:ok, files} <- get_files_info(:local, contents, scope),
@@ -32,15 +31,20 @@ defmodule Videosync.ImageProxy do
 
   defp list(:s3, opts) do
     {:ok, scope} = Map.fetch(opts, :scope)
-    {:ok, filter} = Map.fetch(opts, :filter)
-    {:ok, bucket} = Application.fetch_env(:arc, :bucket)
+    filter = Map.get(opts, :filter)
 
-    prefix = "uploads/#{scope.user_id}/#{scope.project_id}/#{scope.video_id}/images/thumb"
-
-    with {:ok, %{body: %{contents: contents}}} = ExAws.S3.list_objects(bucket, prefix: prefix),
+    with {:ok, %{body: %{contents: contents}}} <- list(:raw_s3, scope),
          {:ok, files} <- get_files_info(:s3, contents, scope),
     do: {:ok, Image.map_all(files, scope, filter)}
 
+  end
+
+  defp list(:raw_s3, scope) do
+    {:ok, bucket} = Application.fetch_env(:arc, :bucket)
+
+    prefix = "uploads/#{scope}/images/thumb"
+
+    ExAws.S3.list_objects(bucket, prefix: prefix)
   end
 
   defp delete_all(:local, opts) do
@@ -55,11 +59,9 @@ defmodule Videosync.ImageProxy do
     {:ok, scope} = Map.fetch(opts, :scope)
     {:ok, bucket} = Application.fetch_env(:arc, :bucket)
 
-    prefix = "uploads/#{scope}"
-
-    with {:ok, contents} <- list(:s3, Map.merge(%{prefix: prefix}, opts)),
+    with {:ok, %{body: %{contents: contents}}} <- list(:raw_s3, scope),
           {:ok, objects} <- get_key_names(contents),
-    do: {:ok, ExAws.S3.delete_all_objects(bucket, objects)}
+    do: ExAws.S3.delete_all_objects(bucket, objects)
 
   end
 
