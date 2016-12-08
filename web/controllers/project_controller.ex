@@ -93,9 +93,11 @@ defmodule Videosync.ProjectController do
     Project.delete_changeset(project)
     |> Repo.delete!
 
-    ImageProxy.bulk_delete(%Scope{
-      user_id: user.id,
-      project_id: id
+    ImageProxy.bulk_delete(%{
+      scope: %Scope{
+        user_id: user.id,
+        project_id: id
+      }
     })
 
     send_resp(conn, :no_content, "")
