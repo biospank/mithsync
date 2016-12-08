@@ -31,18 +31,17 @@ defmodule Videosync.ImageProxy do
 
   defp list(:s3, opts) do
     {:ok, scope} = Map.fetch(opts, :scope)
+    prefix = "uploads/#{scope}/images/thumb"
     filter = Map.get(opts, :filter)
 
-    with {:ok, %{body: %{contents: contents}}} <- list(:raw_s3, scope),
+    with {:ok, %{body: %{contents: contents}}} <- list(:raw_s3, prefix),
          {:ok, files} <- get_files_info(:s3, contents, scope),
     do: {:ok, Image.map_all(files, scope, filter)}
 
   end
 
-  defp list(:raw_s3, scope) do
+  defp list(:raw_s3, prefix) do
     {:ok, bucket} = Application.fetch_env(:arc, :bucket)
-
-    prefix = "uploads/#{scope}/images/thumb"
 
     ExAws.S3.list_objects(bucket, prefix: prefix)
   end
@@ -58,8 +57,9 @@ defmodule Videosync.ImageProxy do
   defp delete_all(:s3, opts) do
     {:ok, scope} = Map.fetch(opts, :scope)
     {:ok, bucket} = Application.fetch_env(:arc, :bucket)
+    prefix = "uploads/#{scope}"
 
-    with {:ok, %{body: %{contents: contents}}} <- list(:raw_s3, scope),
+    with {:ok, %{body: %{contents: contents}}} <- list(:raw_s3, prefix),
           {:ok, objects} <- get_key_names(contents),
     do: ExAws.S3.delete_all_objects(bucket, objects)
 
