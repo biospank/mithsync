@@ -10,7 +10,7 @@ var Video = {
     title: m.prop(""),
     description: m.prop(""),
     url: m.prop(""),
-    layout: m.prop(""),
+    layout: m.prop({}),
     inserted_at: m.prop("")
   },
   resetModel: function(video) {
@@ -34,7 +34,7 @@ var Video = {
   },
   playerColumnSize: function() {
     var cols;
-    switch (parseInt(this.model.layout())) {
+    switch (parseInt(this.model.layout().theme)) {
       case 1:
         cols = 6;
         break;
@@ -50,7 +50,7 @@ var Video = {
   },
   sliderColumnSize: function() {
     var cols;
-    switch (this.model.layout()) {
+    switch (this.model.layout().theme) {
       case 1:
         cols = 6;
         break;

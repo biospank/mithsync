@@ -14,17 +14,38 @@ var videoDetail = {
 
     return {
       errors: m.prop({}),
-      updateVideo: function() {
-        return Video.update(Video.current()).then(function() {
-          swal({
-            type: 'success',
-            title: 'Video info saved!',
-            showConfirmButton: false,
-            timer: 1000
-          }).catch(swal.noop);
-        }, function(response) {
-          this.errors(response.errors);
-        })
+      updateVideo: function(event) {
+        event.preventDefault();
+        swal({
+          title: 'Saving...',
+          width: '400px',
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          showConfirmButton: false,
+          onOpen: function(progress) {
+            swal.showLoading();
+            return Video.update(Video.current()).then(function() {
+              swal.close();
+              swal({
+                type: 'success',
+                title: 'Layout saved!',
+                width: '400px',
+                showConfirmButton: false,
+                timer: 1000
+              }).catch(swal.noop);
+            }, function(response) {
+              this.errors(response.errors);
+              swal.close();
+              // swal({
+              //   type: 'error',
+              //   title: 'Oops!! something went wrong',
+              //   text: 'Please, try again later or let us know about that',
+              //   showCloseButton: true,
+              //   showConfirmButton: false
+              // }).catch(swal.noop);
+            });
+          }
+        }).catch(swal.noop);
       },
       initClipboard: function(element, isInit, context) {
         if(!isInit) {
@@ -85,12 +106,16 @@ var videoDetail = {
         value: moment(Video.model.inserted_at()).format('LLL')
       }),
       m("div", { class: "text-right mb-60" }, [
-        m.component(feedbackButton, {
-          action: ctrl.updateVideo,
-          label: 'Update',
-          feedbackLabel: 'Updating...',
-          style: 'btn btn-success btn-md btn-rectangular'
-        })
+        m("div", { class: "text-right" }, [
+          m("button[type=submit]", {
+            onclick: ctrl.updateVideo,
+            class: 'btn btn-success btn-md btn-rectangular btn-space--left-5 icon-inside--left',
+            title: "Update"
+          }, [
+            m("i", { class: "fa fa-save" }),
+            "Update"
+          ])
+        ])
       ])
     ])
   }

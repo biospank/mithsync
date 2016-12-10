@@ -46,6 +46,7 @@ defmodule Videosync.Router do
     get "/videos/recent", VideoController, :recent, as: :recent_videos
     resources "/projects", ProjectController, only: [:index, :create, :update, :delete] do
       resources "/videos", VideoController, only: [:index, :show, :create, :update, :delete] do
+        resources "/layout", LayoutController, only: [:update]
         resources "/slides", SlideController, only: [:create, :update, :delete]
         post "/slides/save_all", SlideController, :save_all, as: :save_all_slides
         resources "/images", ImageController, only: [:index, :create, :delete]

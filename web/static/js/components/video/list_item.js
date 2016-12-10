@@ -49,8 +49,8 @@ var listItem = {
             ])
           ]),
           m("div", { class: "list__body media-body" }, [
-            m("h5", { class: "list__body-title mboth-0 text-uppercase" }, _.truncate(video.title, { length: 30 })),
-            m("p", { class: "list__body-description text-uppercase" }, _.truncate(video.description, { length: 50 })),
+            m("h5", { class: "list__body-title mboth-0 text-uppercase" }, _.truncate(video.title, { length: 50 })),
+            m("p", { class: "list__body-description text-uppercase" }, _.truncate(video.description, { length: 70 })),
             m("span", { class: "list__body-summary list__body-summary--space-right10 text-uppercase" }, moment(video.inserted_at).format('LLL')),
             m("span", {
               class: "text-uppercase list__body-summary coloured"

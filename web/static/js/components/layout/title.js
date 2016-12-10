@@ -11,7 +11,7 @@ var title = {
         'name' : 'Videos'
       },
       'edit' : {
-        'name' : video.title
+        'name' : _.truncate(video.title, { length: 70 })
       },
       'faq' : {
         'name' : 'Faq'

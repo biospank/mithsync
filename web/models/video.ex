@@ -7,12 +7,12 @@ defmodule Videosync.Video do
     field :url, :string
     field :title, :string
     field :description, :string
-    field :layout, :integer
     field :slide_count, :integer
     field :watch_code, :string
     belongs_to :user, Videosync.User
     belongs_to :project, Videosync.Project
     has_many :slides, Videosync.Slide
+    has_one :layout, Videosync.Layout
 
     timestamps
   end
@@ -22,7 +22,7 @@ defmodule Videosync.Video do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:url, :title, :description, :layout])
+    |> cast(params, [:url, :title, :description])
     |> validate_required([:url, :title, :description])
   end
 
@@ -76,6 +76,10 @@ defmodule Videosync.Video do
 
   def preload_project(query) do
     from v in query, preload: [:project]
+  end
+
+  def preload_layout(query) do
+    from v in query, preload: [:layout]
   end
 
   def preload_slides(query, preload_query) do

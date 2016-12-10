@@ -23,7 +23,6 @@ defmodule Videosync.VideoView do
       url: video.url,
       title: video.title,
       description: video.description,
-      layout: video.layout,
       watch_code: video.watch_code,
       slide_count: video.slide_count
     }
@@ -41,7 +40,8 @@ defmodule Videosync.VideoView do
       url: video.url,
       title: video.title,
       description: video.description,
-      layout: video.layout,
+      # we pass as: to avoid override layout: option
+      layout: render_one(video.layout, Videosync.LayoutView, "layout.json", as: :data),
       watch_code: video.watch_code,
       slide_count: video.slide_count,
       slides: render_many(video.slides, Videosync.SlideView, "slide.json"),
@@ -62,7 +62,8 @@ defmodule Videosync.VideoView do
       url: video.url,
       title: video.title,
       description: video.description,
-      layout: video.layout,
+      # we pass as: to avoid override layout: option
+      layout: render_one(video.layout, Videosync.LayoutView, "layout.json", as: :data),
       watch_code: video.watch_code,
       slide_count: video.slide_count,
       slides: render_many(video.slides, Videosync.SlideView, "slide.json")

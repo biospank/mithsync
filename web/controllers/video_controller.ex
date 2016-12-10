@@ -21,6 +21,7 @@ defmodule Videosync.VideoController do
     videos =
       Video.own_by(user)
       |> Video.order_by(:inserted_at)
+      |> Video.preload_layout()
       |> Video.preload_slides(Slide.order_by(:start))
       |> Repo.all
 
@@ -43,6 +44,7 @@ defmodule Videosync.VideoController do
       |> Video.belongs_to_model(:project_id, params["project_id"])
       |> Video.filter_by(params["filter"])
       |> Video.order_by(:inserted_at)
+      |> Video.preload_layout()
       |> Video.preload_slides(Slide.order_by(:start))
       |> Repo.all
 
@@ -66,6 +68,8 @@ defmodule Videosync.VideoController do
 
     case Repo.insert(changeset) do
       {:ok, video} ->
+        video |> build_assoc(:layout) |> Repo.insert!
+
         conn
         |> put_status(:created)
         |> put_resp_header("location", project_video_path(conn, :show, project, video))
@@ -81,6 +85,7 @@ defmodule Videosync.VideoController do
     video = Video.own_by(user)
       |> Video.belongs_to_model(:project_id, project_id)
       |> Video.preload_project()
+      |> Video.preload_layout()
       |> Video.preload_slides(Slide.order_by(:start))
       |> Repo.get!(id)
       # |> Repo.preload(:slides)
@@ -91,6 +96,7 @@ defmodule Videosync.VideoController do
   def update(conn, %{"project_id" => project, "id" => id, "video" => video_params}, user) do
     video = Video.own_by(user)
       |> Video.belongs_to_model(:project_id, project)
+      |> Video.preload_layout()
       |> Repo.get!(id)
 
     changeset = Video.changeset(video, video_params)

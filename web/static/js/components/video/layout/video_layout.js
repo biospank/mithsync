@@ -1,37 +1,48 @@
 import Video from "../../../models/video";
+import Layout from "../../../models/layout";
 import feedbackButton from "../../widgets/feedback_button";
 
 var videoLayout = {
   controller: function() {
-    var layout = m.prop(Video.current().layout);
+    Layout.model = Video.current().layout;
 
     return {
-      get currentLayout() {
-        return layout;
-      },
-      set currentLayout(lyt) {
-        layout = lyt;
+      theme: function(value) {
+        if(arguments.length)
+          layout().theme = value;
+
+        return layout().theme;
       },
       updateLayout: function() {
-        Video.model.layout(this.currentLayout());
-
-        return Video.update(Video.current()).then(function() {
-          swal({
-            type: 'success',
-            title: 'Video layout saved!',
-            showConfirmButton: false,
-            timer: 1000
-          }).catch(swal.noop);
-        })
+        swal({
+          title: 'Saving...',
+          width: '400px',
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          showConfirmButton: false,
+          onOpen: function(progress) {
+            swal.showLoading();
+            return Layout.update(Video.current()).then(function() {
+              swal.close();
+              swal({
+                type: 'success',
+                title: 'Layout saved!',
+                width: '400px',
+                showConfirmButton: false,
+                timer: 1000
+              }).catch(swal.noop);
+            });
+          }
+        }).catch(swal.noop);
       }
     };
   },
   view: function(ctrl) {
     return m("", [
       m("div", {
-        class: "panel panel-default theme-layout" + ((ctrl.currentLayout() === 1) ? " active" : ""),
+        class: "panel panel-default theme-layout" + ((Layout.model.theme === 1) ? " active" : ""),
         onclick: function() {
-          ctrl.currentLayout(1);
+          Layout.model.theme = 1
         }
       }, [
         m(".panel-body", { class: "row" }, [
@@ -48,9 +59,9 @@ var videoLayout = {
         ])
       ]),
       m("div", {
-        class: "panel panel-default theme-layout" + ((ctrl.currentLayout() === 2) ? " active" : ""),
+        class: "panel panel-default theme-layout" + ((Layout.model.theme === 2) ? " active" : ""),
         onclick: function() {
-          ctrl.currentLayout(2);
+          Layout.model.theme = 2;
         }
       }, [
         m(".panel-body", { class: "row" }, [
@@ -67,9 +78,9 @@ var videoLayout = {
         ])
       ]),
       m("div", {
-        class: "panel panel-default theme-layout" + ((ctrl.currentLayout() === 3) ? " active" : ""),
+        class: "panel panel-default theme-layout" + ((Layout.model.theme === 3) ? " active" : ""),
         onclick: function() {
-          ctrl.currentLayout(3);
+          Layout.model.theme = 3;
         }
       }, [
         m(".panel-body", { class: "row" }, [
@@ -83,17 +94,65 @@ var videoLayout = {
               m("span")
             ])
           ])
+        ])
+      ]),
+      m("div", { class: "checkbox" }, [
+        m("label", [
+          m("input", {
+            type: "checkbox",
+            onclick: function(e) {
+              Layout.model.show_title = e.target.checked;
+            },
+            checked: Layout.model.show_title
+          }),
+          m.trust("Show Title")
+        ])
+      ]),
+      m("div", { class: "checkbox" }, [
+        m("label", [
+          m("input", {
+            type: "checkbox",
+            onclick: function(e) {
+              Layout.model.show_description = e.target.checked;
+            },
+            checked: Layout.model.show_description
+          }),
+          m.trust("Show Description")
+        ])
+      ]),
+      m("div", { class: "checkbox" }, [
+        m("label", [
+          m("input", {
+            type: "checkbox",
+            onclick: function(e) {
+              Layout.model.show_date = e.target.checked;
+            },
+            checked: Layout.model.show_date
+          }),
+          m.trust("Show Date")
+        ])
+      ]),
+      m("div", { class: "checkbox" }, [
+        m("label", [
+          m("input", {
+            type: "checkbox",
+            onclick: function(e) {
+              Layout.model.show_slider = e.target.checked;
+            },
+            checked: Layout.model.show_slider
+          }),
+          m.trust("Show Slider")
         ])
       ]),
       m("div", { class: "text-right" }, [
-        m.component(feedbackButton, {
-          action: function() {
-            return ctrl.updateLayout();
-          },
-          label: 'Update',
-          feedbackLabel: 'Updating...',
-          style: 'btn btn-success btn-md btn-rectangular'
-        })
+        m("button[type=submit]", {
+          onclick: ctrl.updateLayout,
+          class: 'btn btn-success btn-md btn-rectangular btn-space--left-5 icon-inside--left',
+          title: "Update"
+        }, [
+          m("i", { class: "fa fa-save" }),
+          "Update"
+        ])
       ])
     ])
   }
