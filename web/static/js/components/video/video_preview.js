@@ -26,7 +26,7 @@ var videoPreview = {
             ]),
             m("h4.modal-title", "Preview")
           ]),
-          m(".modal-body", [
+          m(".modal-body", { class: "p-all-side-0" }, [
             m(preview, video, slides)
           ])
         ])

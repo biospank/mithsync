@@ -96,52 +96,68 @@ var videoLayout = {
           ])
         ])
       ]),
-      m("div", { class: "checkbox" }, [
-        m("label", [
-          m("input", {
-            type: "checkbox",
-            onclick: function(e) {
-              Layout.model.show_title = e.target.checked;
-            },
-            checked: Layout.model.show_title
-          }),
-          m.trust("Show Title")
-        ])
-      ]),
-      m("div", { class: "checkbox" }, [
-        m("label", [
-          m("input", {
-            type: "checkbox",
-            onclick: function(e) {
-              Layout.model.show_description = e.target.checked;
-            },
-            checked: Layout.model.show_description
-          }),
-          m.trust("Show Description")
-        ])
-      ]),
-      m("div", { class: "checkbox" }, [
-        m("label", [
-          m("input", {
-            type: "checkbox",
-            onclick: function(e) {
-              Layout.model.show_date = e.target.checked;
-            },
-            checked: Layout.model.show_date
-          }),
-          m.trust("Show Date")
-        ])
-      ]),
-      m("div", { class: "checkbox" }, [
-        m("label", [
-          m("input", {
-            type: "checkbox",
-            onclick: function(e) {
-              Layout.model.show_slider = e.target.checked;
-            },
-            checked: Layout.model.show_slider
-          }),
-          m.trust("Show Slider")
+      m("section", { class: "p-all-side-20 mb-30 panel panel-default" }, [
+        m("div", { class: "row" }, [
+          m("div", { class: "col-sm-6" }, [
+            m("div", { class: "mb-10" }, [
+              m("input", {
+                class: "magic-checkbox",
+                type: "checkbox",
+                name: "layout",
+                id: "1",
+                onclick: function(e) {
+                  Layout.model.show_title = e.target.checked;
+                },
+                checked: Layout.model.show_title
+              }),
+              m("label", { class: "mb-0 weight-regular", for: "1" }, "Show Title")
+            ])
+          ]),
+          m("div", { class: "col-sm-6" }, [
+            m("div", { class: "mb-10" }, [
+              m("input", {
+                class: "magic-checkbox",
+                type: "checkbox",
+                name: "layout",
+                id: "2",
+                onclick: function(e) {
+                  Layout.model.show_description = e.target.checked;
+                },
+                checked: Layout.model.show_description
+              }),
+              m("label", { class: "mb-0 weight-regular", for: "2" }, "Show Description")
+            ])
+          ]),
+          m("div", { class: "col-sm-6" }, [
+            m("div", [
+              m("input", {
+                class: "magic-checkbox",
+                type: "checkbox",
+                name: "layout",
+                id: "3",
+                onclick: function(e) {
+                  Layout.model.show_date = e.target.checked;
+                },
+                checked: Layout.model.show_date
+              }),
+              m("label", { class: "mb-0 weight-regular", for: "3" }, "Show Date")
+            ])
+          ]),
+          m("div", { class: "col-sm-6" }, [
+            m("div", [
+              m("input", {
+                class: "magic-checkbox",
+                type: "checkbox",
+                name: "layout",
+                id: "4",
+                onclick: function(e) {
+                  Layout.model.show_slider = e.target.checked;
+                },
+                checked: Layout.model.show_slider
+              }),
+              m("label", { class: "mb-0 weight-regular", for: "4" }, "Show Slider")
+            ])
+          ])
         ])
       ]),
       m("div", { class: "text-right" }, [

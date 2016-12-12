@@ -98,7 +98,13 @@ var preview = (function() {
 
           $("#owl-slider").owlCarousel({
               navigation: true,
-              pagination: false
+              pagination: false,
+              items: 10,
+              itemsDesktop : [1199,10],
+              itemsDesktopSmall : [980,5],
+              itemsTablet: [768,5],
+              itemsMobile : false,
+              navigationText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"]
           });
 
           slider = $("#owl-slider").data("owlCarousel");
@@ -133,22 +139,20 @@ var preview = (function() {
           return m("")
         } else {
           return slides.map(function(slide) {
-            return m("", [
-              m("figure", {
-                class: "img-thumbnail",
+            return m("figure", {
+              class: "img-thumbnail mhorizontal-5",
+            }, [
+              m("a", {
+                href: "#",
+                onclick: function(event) {
+                  event.preventDefault();
+                  player.seek(slide.start);
+                }
               }, [
-                m("a", {
-                  href: "#",
-                  onclick: function(event) {
-                    event.preventDefault();
-                    player.seek(slide.start);
-                  }
-                }, [
-                  m("img", {
-                    src: slide.thumb_url,
-                    class: "img-responsive"
-                  })
-                ])
+                m("img", {
+                  src: slide.thumb_url,
+                  class: "img-responsive"
+                })
               ])
             ])
           });
@@ -157,7 +161,7 @@ var preview = (function() {
 
       var showTitle = function() {
         if(Video.model.layout().show_title) {
-          return m("h3", Video.model.title());
+          return m("h3", { class: "mt-0 text-black" }, Video.model.title());
         } else {
           return "";
         }
@@ -169,11 +173,11 @@ var preview = (function() {
 
           switch (layout) {
             case 1:
-              description = m("h4", Video.model.description());
+              description = m("p", { class: "text-black mb-15" }, Video.model.description());
               break;
             case 2:
             case 3:
-              description = m("div", Video.model.description());
+              description = m("div", { class: "mt-20 p-all-side-25", style: "background-color: #d5d8dc;" }, Video.model.description());
               break;
           }
 
@@ -201,11 +205,12 @@ var preview = (function() {
       };
 
       var showSlider = function() {
-        return m(".owl-carousel", {
-          id: "owl-slider",
-          config: toggleSlider
-        }, [
-          injectSliderSlides()
+        return m(".p-all-side-30 bg-grey", { config: toggleSlider }, [
+          m(".owl-carousel", {
+            id: "owl-slider"
+          }, [
+            injectSliderSlides()
+          ])
         ]);
       };
 
@@ -223,14 +228,16 @@ var preview = (function() {
           switch (parseInt(Video.model.layout().theme)) {
             case 1:
               layout = [
-                m(".row", [
+                m("div", { class: "p-all-side-30" }, [
                   showTitle(),
                   showDescriptionFor(1),
-                  m(".col-xs-6", [
-                    showVideo()
-                  ]),
-                  m(".col-xs-6", [
-                    showReveal()
+                  m(".row", [
+                    m(".col-xs-6", [
+                      showVideo()
+                    ]),
+                    m(".col-xs-6", [
+                      showReveal()
+                    ])
                   ])
                 ]),
                 showSlider()
@@ -238,14 +245,16 @@ var preview = (function() {
               break;
             case 2:
               layout = [
-                m(".row", [
+                m("div", { class: "p-all-side-30" }, [
                   showTitle(),
-                  m(".col-xs-4", [
-                    showVideo(),
-                    showDescriptionFor(2)
-                  ]),
-                  m(".col-xs-8", [
-                    showReveal()
+                  m(".row", [
+                    m(".col-xs-4", [
+                      showVideo(),
+                      showDescriptionFor(2)
+                    ]),
+                    m(".col-xs-8", [
+                      showReveal()
+                    ])
                   ])
                 ]),
                 showSlider()
@@ -253,14 +262,16 @@ var preview = (function() {
               break;
             case 3:
               layout = [
-                m(".row", [
+                m("div", { class: "p-all-side-30" }, [
                   showTitle(),
-                  m(".col-xs-8", [
-                    showVideo()
-                  ]),
-                  m(".col-xs-4", [
-                    showReveal(),
-                    showDescriptionFor(3)
+                  m(".row", [
+                    m(".col-xs-8", [
+                      showVideo()
+                    ]),
+                    m(".col-xs-4", [
+                      showReveal(),
+                      showDescriptionFor(3)
+                    ])
                   ])
                 ]),
                 showSlider()

@@ -21,6 +21,23 @@
 }
 // end
 
+// Margin all side - from 0 to 100
+@for $i from 0 through 20 {
+  .m-all-side-#{$i * 5} {
+    margin: $i * 5px !important;
+  }
+}
+// end
+
+// Margin horizontal - from 0 to 100
+@for $i from 0 through 20 {
+  .mhorizontal-#{$i * 5} {
+    margin-left: $i * 5px !important;
+    margin-right: $i * 5px !important;
+  }
+}
+// end
+
 
 // Padding top - from 0 to 100
 @for $i from 0 through 20 {
@@ -45,10 +62,19 @@
 }
 // end
 
-// Padding both - from 0 to 100
+// Padding all side - from 0 to 100
 @for $i from 0 through 20 {
   .p-all-side-#{$i * 5} {
     padding: $i * 5px !important;
+  }
+}
+// end
+
+// Padding horizontal - from 0 to 100
+@for $i from 0 through 20 {
+  .phorizontal-#{$i * 5} {
+    padding-left: $i * 5px !important;
+    padding-right: $i * 5px !important;
   }
 }
 // end
