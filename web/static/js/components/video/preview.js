@@ -14,6 +14,7 @@ var preview = (function() {
       var videoInfo = Video.info(video.url);
       var currentSlide = undefined;
       var timeVector = [];
+      var slider = null;
 
       var inRange = function(progress, idx1, idx2) {
         return _.inRange(progress, timeVector[idx1], (timeVector[idx2] || 100000));
@@ -33,6 +34,7 @@ var preview = (function() {
         currentSlide = _.find(slides, function(slide, index, collection) {
           if(inRange(currentSec, index, (index + 1))) {
             Reveal.slide(index);
+            slider.goTo(index);
             return true;
           }
 
@@ -93,10 +95,18 @@ var preview = (function() {
             width: 'auto',
             height: 'auto'
           });
+
+          $("#owl-slider").owlCarousel({
+              navigation: true,
+              pagination: false
+          });
+
+          slider = $("#owl-slider").data("owlCarousel");
+
         }
       };
 
-      var injectSlides = function() {
+      var injectRevealSlides = function() {
         if(_.isEmpty(slides)) {
           return m("section[hidden]", {
             'class': 'future',
@@ -113,6 +123,33 @@ var preview = (function() {
               m("img", {
                 src: slide.url
               })
+            ])
+          });
+        }
+      };
+
+      var injectSliderSlides = function() {
+        if(_.isEmpty(slides)) {
+          return m("")
+        } else {
+          return slides.map(function(slide) {
+            return m("", [
+              m("figure", {
+                class: "img-thumbnail",
+              }, [
+                m("a", {
+                  href: "#",
+                  onclick: function(event) {
+                    event.preventDefault();
+                    player.seek(slide.start);
+                  }
+                }, [
+                  m("img", {
+                    src: slide.thumb_url,
+                    class: "img-responsive"
+                  })
+                ])
+              ])
             ])
           });
         }
@@ -155,12 +192,29 @@ var preview = (function() {
         });
       };
 
-      var showSlides = function() {
+      var showReveal = function() {
         return m(".reveal", {}, [
           m(".slides", [
-            injectSlides()
+            injectRevealSlides()
           ])
         ]);
+      };
+
+      var showSlider = function() {
+        return m(".owl-carousel", {
+          id: "owl-slider",
+          config: toggleSlider
+        }, [
+          injectSliderSlides()
+        ]);
+      };
+
+      var toggleSlider = function(element, isInit, context) {
+        if(Video.model.layout().show_slider) {
+          element.style.display = 'block';
+        } else {
+          element.style.display = 'none'
+        }
       };
 
       return {
@@ -169,38 +223,47 @@ var preview = (function() {
           switch (parseInt(Video.model.layout().theme)) {
             case 1:
               layout = [
-                showTitle(),
-                showDescriptionFor(1),
-                m(".col-xs-6", [
-                  showVideo()
+                m(".row", [
+                  showTitle(),
+                  showDescriptionFor(1),
+                  m(".col-xs-6", [
+                    showVideo()
+                  ]),
+                  m(".col-xs-6", [
+                    showReveal()
+                  ])
                 ]),
-                m(".col-xs-6", [
-                  showSlides()
-                ])
+                showSlider()
               ]
               break;
             case 2:
               layout = [
-                showTitle(),
-                m(".col-xs-4", [
-                  showVideo(),
-                  showDescriptionFor(2)
+                m(".row", [
+                  showTitle(),
+                  m(".col-xs-4", [
+                    showVideo(),
+                    showDescriptionFor(2)
+                  ]),
+                  m(".col-xs-8", [
+                    showReveal()
+                  ])
                 ]),
-                m(".col-xs-8", [
-                  showSlides()
-                ])
+                showSlider()
               ]
               break;
             case 3:
               layout = [
-                showTitle(),
-                m(".col-xs-8", [
-                  showVideo()
+                m(".row", [
+                  showTitle(),
+                  m(".col-xs-8", [
+                    showVideo()
+                  ]),
+                  m(".col-xs-4", [
+                    showReveal(),
+                    showDescriptionFor(3)
+                  ])
                 ]),
-                m(".col-xs-4", [
-                  showSlides(),
-                  showDescriptionFor(3)
-                ])
+                showSlider()
               ]
               break;
           }
@@ -218,7 +281,7 @@ var preview = (function() {
     view: function(ctrl, video, slides) {
       ctrl.setTimeVector(slides);
 
-      return m(".row", [
+      return m("", [
         ctrl.buildLayout()
       ]);
     }
