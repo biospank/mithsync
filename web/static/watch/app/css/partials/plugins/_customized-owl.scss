@@ -1,0 +1,32 @@
+.owl {
+  &-theme {}
+  &-controls {
+    margin: 0 !important;
+  }
+  &-buttons {
+    & > div {
+      position: absolute;
+      padding: 0 !important;
+      margin: -12px 0 0 0 !important;
+      border-radius: 0;
+      background-color: transparent !important;
+      color: #c6c6c6 !important;
+      font-size: 18px !important;
+      top: 50%;
+    }
+  }
+  &-prev {
+    left: -18px;
+    i, .fa {
+      color: white;
+      text-shadow: 1px 2px 3px #666;
+    }
+  }
+  &-next {
+    right: -18px;
+    i, .fa {
+      color: white;
+      text-shadow: 1px 2px 3px #666;
+    }
+  }
+}
