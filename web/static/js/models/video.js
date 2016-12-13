@@ -22,47 +22,15 @@ var Video = {
 
     return this.model;
   },
-  export: function() {
+  export: function(video) {
     var code = '<div style="position: relative; padding-bottom: 56.25%; padding-top: 35px; height: 0; overflow: hidden;"> ' +
       '<iframe style="position: absolute; top: 0; left: 0; height: 100%; width: 100%; " id="ifrm" frameborder="0" width="1000" height="450" src="<%= domain %>/watch/<%= video.watch_code %>">Your browser doesn\'t support iframes.</iframe>' +
     '</div>'
 
     return _.template(code)({
       domain: Videosync.domain,
-      video: this.current()
+      video: video
     });
-  },
-  playerColumnSize: function() {
-    var cols;
-    switch (parseInt(this.model.layout().theme)) {
-      case 1:
-        cols = 6;
-        break;
-      case 2:
-        cols = 4;
-        break;
-      case 3:
-        cols = 8;
-        break;
-    }
-
-    return cols;
-  },
-  sliderColumnSize: function() {
-    var cols;
-    switch (this.model.layout().theme) {
-      case 1:
-        cols = 6;
-        break;
-      case 2:
-        cols = 8;
-        break;
-      case 3:
-        cols = 4;
-        break;
-    }
-
-    return cols;
   },
   current: m.prop({}),
   create: function(projectId, args) {

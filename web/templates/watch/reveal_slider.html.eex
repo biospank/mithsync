@@ -1,0 +1,7 @@
+<div class="col-sm-<%= @view_module.slide_column_size(@video.layout) %>">
+  <div class="reveal">
+    <div class="slides">
+      <%= render_many @slides, @view_module, "reveal_slide.html", as: :slide, conn: @conn %>
+    </div>
+  </div>
+</div>

@@ -2,11 +2,11 @@ import Video from "../../models/video";
 import Clippy from "../../models/clippy";
 
 var videoListItem = {
-  controller: function() {
+  controller: function(video) {
     return {
       initClipboard: function(element, isInit, context) {
         if(!isInit) {
-          Clippy.init(element);
+          Clippy.init(element, video);
         }
       }
     };

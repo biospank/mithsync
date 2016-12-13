@@ -177,7 +177,7 @@ var preview = (function() {
               break;
             case 2:
             case 3:
-              description = m("div", { class: "mt-20 p-all-side-25", style: "background-color: #d5d8dc;" }, Video.model.description());
+              description = m("div", { class: "mt-20 p-all-side-25 bg-grey" }, Video.model.description());
               break;
           }
 

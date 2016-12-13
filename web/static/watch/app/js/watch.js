@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var slides = [];
   var currentSlide = undefined;
   var timeVector = [];
+  var slider = null;
 
   var inRange = function(progress, idx1, idx2) {
     return _.inRange(progress, timeVector[idx1], (timeVector[idx2] || 100000));
@@ -23,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
     currentSlide = _.find(slides, function(slide, index, collection) {
       if(inRange(currentSec, index, (index + 1))) {
         Reveal.slide(index);
+        slider.goTo(index);
         return true;
       }
 
@@ -55,9 +57,9 @@ document.addEventListener('DOMContentLoaded', function() {
     controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'current-time']
   })[0];
 
-  player.on('ready', function(event) {
-    console.log('player ready!');
-  });
+  // player.on('ready', function(event) {
+  //   console.log('player ready!');
+  // });
 
   player.on('timeupdate', _.throttle(updateSlide, 1000, {
     'leading': true,
@@ -93,29 +95,21 @@ document.addEventListener('DOMContentLoaded', function() {
     width: 'auto',
     height: 'auto'
   });
-});
 
-// $(document).ready(function() {
-//   console.log('retrieving #video-player-watch tag');
-//   var $playerTag = $('#video-player-watch');
-//
-//   if($playerTag) {
-//     var urlParser = new UrlParser();
-//
-//     // urlParser.addProvider('vimeo');
-//     urlParser.addProvider('youtube');
-//     var videoInfo = urlParser.parse(url);
-//
-//     $playerTag.data('type', videoInfo.provider);
-//     $playerTag.data('video-id', videoInfo.videoId);
-//
-//     var player = plyr.setup('#video-player-watch', {
-//       //['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'fullscreen']
-//       controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'current-time']
-//     })[0];
-//
-//     player.on('ready', function(event) {
-//       console.log('player ready!');
-//     });
-//   }
-// })
+  $("#owl-slider").owlCarousel({
+      navigation: true,
+      pagination: false,
+      items: 10,
+      itemsDesktop : [1199,10],
+      itemsDesktopSmall : [980,5],
+      itemsTablet: [768,5],
+      itemsMobile : false,
+      navigationText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"]
+  });
+
+  slider = $("#owl-slider").data("owlCarousel");
+
+  $(".owl-item figure").on('click', function() {
+    player.seek($(this).data('start'));
+  })
+});
