@@ -1,7 +1,7 @@
 import Video from "./video";
 
 var Clippy = {
-  init: function(element) {
+  init: function(element, video) {
     $(element).tooltip({
       placement: 'left',
       title: 'Copied!',
@@ -10,7 +10,7 @@ var Clippy = {
 
     var clipboard = new Clipboard(element, {
       text: function(btn) {
-        return Video.export();
+        return Video.export(video);
       }
     });
 

@@ -21,7 +21,7 @@ var listItem = {
 
     ctrl.initClipboard = function(element, isInit, context) {
       if(!isInit) {
-        Clippy.init(element);
+        Clippy.init(element, video);
       }
     };
   },

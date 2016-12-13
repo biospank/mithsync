@@ -49,7 +49,7 @@ var videoDetail = {
       },
       initClipboard: function(element, isInit, context) {
         if(!isInit) {
-          Clippy.init(element);
+          Clippy.init(element, Video.current());
         }
       }
     };
@@ -86,7 +86,7 @@ var videoDetail = {
               event.preventDefault();
             }
           }, "copy"),
-          m('code', { class: 'html' }, Video.export())
+          m('code', { class: 'html' }, Video.export(Video.current()))
         ])
       ]),
       m.component(textField, {

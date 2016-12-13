@@ -1,0 +1,3 @@
+<section hidden class="future" aria-hidden="true" style="display: none;">
+  <img src="<%= @view_module.slide_url(@conn, @slide) %>" data-start="<%= @slide.start %>"/>
+</section>

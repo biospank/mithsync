@@ -1,0 +1,4 @@
+<div class="col-sm-<%= @view_module.video_column_size(@video.layout) %>">
+  <div class="video-player-watch" data-url="<%= @video.url %>" data-type="" data-video-id="">
+  </div>
+</div>

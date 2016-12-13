@@ -1,17 +1,1 @@
-<div class="row">
-  <div class="col-sm-<%= video_column_size(@video) %>">
-    <div class="video-player-watch" data-url="<%= @video.url %>" data-type="" data-video-id="">
-    </div>
-  </div>
-  <div class="col-sm-<%= slide_column_size(@video) %>">
-    <div class="reveal">
-      <div class="slides">
-        <%= for slide <- @video.slides do %>
-          <section hidden class="future" aria-hidden="true" style="display: none;">
-            <img src="<%= slide_url(@conn, slide) %>" data-start="<%= slide.start %>"/>
-          </section>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render @view_module, "layout_#{@video.layout.theme}.html", video: @video, conn: @conn %>

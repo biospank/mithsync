@@ -1,0 +1,3 @@
+<%= if @video.layout.show_title do %>
+  <h3 class="mt-0 text-black"><%= @video.title %></h3>
+<%= end %>
