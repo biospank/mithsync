@@ -161,7 +161,7 @@ var preview = (function() {
 
       var showTitle = function() {
         if(Video.model.layout().show_title) {
-          return m("h3", { class: "mt-0 text-black" }, Video.model.title());
+          return m("h3", { class: "mt-0 text-black mb-15" }, Video.model.title());
         } else {
           return "";
         }
