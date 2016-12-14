@@ -2,9 +2,12 @@ import textField from "../../widgets/text_field";
 import feedbackButton from "../../widgets/feedback_button";
 import Video from "../../../models/video";
 import Clippy from "../../../models/clippy";
+import UrlParser from "../../../util/urlParser"
 
 var videoDetail = {
   controller: function() {
+    var errors = m.prop({});
+
     Video.resetModel(Video.current());
 
     document.body.addEventListener("video:edit:reload", function(e) {
@@ -12,19 +15,50 @@ var videoDetail = {
       m.redraw();
     }, false);
 
+    var isValidUrl = function(url) {
+      var urlParser = new UrlParser();
+      // urlParser.addProvider('vimeo');
+      urlParser.addProvider('youtube');
+      var infoUrl = urlParser.parse(url);
+      if( infoUrl.provider === "unknown" ) {
+        return false;
+      } else {
+        return true;
+      }
+    };
+
+    var rejectUrlVideo = function() {
+      var deferred = m.deferred();
+      setTimeout(function() {
+        deferred.reject("Invalid url for youtube video");
+      }, 1000);
+      return deferred.promise;
+    };
+
     return {
-      errors: m.prop({}),
+      errors: function() {
+        return errors();
+      },
       updateVideo: function() {
-        return Video.update(Video.current()).then(function() {
-          swal({
-            type: 'success',
-            title: 'Video info saved!',
-            showConfirmButton: false,
-            timer: 1000
-          }).catch(swal.noop);
-        }, function(response) {
-          this.errors(response.errors);
-        })
+        if(isValidUrl(Video.model.url())) {
+          return Video.update(Video.current()).then(function() {
+            swal({
+              type: 'success',
+              title: 'Video info saved!',
+              showConfirmButton: false,
+              timer: 1000
+            }).catch(swal.noop);
+          }, function(response) {
+            errors(response.errors);
+          })
+        } else {
+          return rejectUrlVideo().then(function(value) {
+          }, function(value) {
+            errors({
+              url: value
+            });
+          });
+        }
       },
       initClipboard: function(element, isInit, context) {
         if(!isInit) {
@@ -68,6 +102,15 @@ var videoDetail = {
           m('code', { class: 'html' }, Video.export())
         ])
       ]),
+      // m.component(textField, {
+      //   type: 'Url',
+      //   placeholder: 'link to video',
+      //   id: 'url',
+      //   dataLabel: 'Video Link',
+      //   oninput: m.withAttr("value", Video.model.url),
+      //   error: ctrl.errors()['url'],
+      //   value: Video.model.url()
+      // }),
       m.component(textField, {
         type: 'url',
         placeholder: 'Url',
