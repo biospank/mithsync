@@ -66,7 +66,8 @@ defmodule Videosync.VideoView do
       layout: render_one(video.layout, Videosync.LayoutView, "layout.json", as: :data),
       watch_code: video.watch_code,
       slide_count: video.slide_count,
-      slides: render_many(video.slides, Videosync.SlideView, "slide.json")
+      slides: render_many(video.slides, Videosync.SlideView, "slide.json"),
+      inserted_at: video.inserted_at
     }
   end
 end

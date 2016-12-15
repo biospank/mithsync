@@ -28,6 +28,7 @@ defmodule Videosync.Mixfile do
                     :postgrex,
                     :ex_aws,
                     :httpoison,
+                    :timex,
                     # enable corsica
                     # :corsica,
                     :bamboo]]
@@ -57,6 +58,7 @@ defmodule Videosync.Mixfile do
      {:ex_aws, "~> 0.5.0"},
      {:httpoison, "~> 0.7"},
      {:poison, "~> 1.2"},
+     {:timex, "~> 3.1.5"},
      # enable corsica
      # {:corsica, "~> 0.5"},
      {:sweet_xml, "~> 0.6.1"},

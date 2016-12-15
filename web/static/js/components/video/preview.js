@@ -167,6 +167,14 @@ var preview = (function() {
         }
       };
 
+      var showDate = function() {
+        if(Video.model.layout().show_date) {
+          return m("h4", { class: "mt-0 text-black" }, moment(Video.model.inserted_at()).format('lll'));
+        } else {
+          return "";
+        }
+      };
+
       var showDescriptionFor = function(layout) {
         if(Video.model.layout().show_description) {
           var description = null;
@@ -230,6 +238,7 @@ var preview = (function() {
               layout = [
                 m("div", { class: "p-all-side-30" }, [
                   showTitle(),
+                  showDate(),
                   showDescriptionFor(1),
                   m(".row", [
                     m(".col-xs-6", [
@@ -247,6 +256,7 @@ var preview = (function() {
               layout = [
                 m("div", { class: "p-all-side-30" }, [
                   showTitle(),
+                  showDate(),
                   m(".row", [
                     m(".col-xs-4", [
                       showVideo(),
@@ -264,6 +274,7 @@ var preview = (function() {
               layout = [
                 m("div", { class: "p-all-side-30" }, [
                   showTitle(),
+                  showDate(),
                   m(".row", [
                     m(".col-xs-8", [
                       showVideo()

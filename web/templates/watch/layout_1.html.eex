@@ -1,5 +1,6 @@
 <div class="p-all-side-30">
   <%= render @view_module, "title.html", video: @video, conn: @conn %>
+  <%= render @view_module, "date.html", video: @video, conn: @conn %>
   <%= raw @view_module.render_video_description(@video) %>
   <div class="row">
     <%= render @view_module, "video.html", video: @video, conn: @conn %>
