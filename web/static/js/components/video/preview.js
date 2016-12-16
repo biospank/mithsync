@@ -5,8 +5,12 @@ import videoPlayback from './video_playback';
 
 var preview = (function() {
   var player = {};
+  var slider = null;
 
   return {
+    reinitSlider: function() {
+      slider.reinit();
+    },
     pause: function() {
       player.pause();
     },
@@ -14,7 +18,6 @@ var preview = (function() {
       var videoInfo = Video.info(video.url);
       var currentSlide = undefined;
       var timeVector = [];
-      var slider = null;
 
       var inRange = function(progress, idx1, idx2) {
         return _.inRange(progress, timeVector[idx1], (timeVector[idx2] || 100000));

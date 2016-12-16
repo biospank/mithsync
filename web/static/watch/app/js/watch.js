@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var urlParser = new UrlParser();
 
-  // urlParser.addProvider('vimeo');
+  urlParser.addProvider('vimeo');
   urlParser.addProvider('youtube');
 
   var videoInfo = urlParser.parse(playerTag.dataset.url);

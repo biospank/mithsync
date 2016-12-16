@@ -17,7 +17,7 @@ var videoDetail = {
 
     var isValidUrl = function(url) {
       var urlParser = new UrlParser();
-      // urlParser.addProvider('vimeo');
+      urlParser.addProvider('vimeo');
       urlParser.addProvider('youtube');
       var infoUrl = urlParser.parse(url);
       if( infoUrl.provider === "unknown" ) {

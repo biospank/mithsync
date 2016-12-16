@@ -2,6 +2,7 @@ import preview from './preview';
 
 var videoPreview = {
   show: function() {
+    preview.reinitSlider();
     $("#videoPreview").fadeIn( "fast" );
   },
   view: function(ctrl, video, slides) {
