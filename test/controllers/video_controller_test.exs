@@ -75,7 +75,8 @@ defmodule Videosync.VideoControllerTest do
       "layout" => nil,
       "watch_code" => "",
       "slide_count" => 0,
-      "slides" => video.slides
+      "slides" => video.slides,
+      "inserted_at" => Ecto.DateTime.to_iso8601(video.inserted_at)
     }
   end
 
