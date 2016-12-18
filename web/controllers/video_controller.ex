@@ -20,7 +20,7 @@ defmodule Videosync.VideoController do
   def recent(conn, params, user) do
     videos =
       Video.own_by(user)
-      |> Video.order_by(:inserted_at)
+      |> Video.order_by(:updated_at)
       |> Video.preload_layout()
       |> Video.preload_slides(Slide.order_by(:start))
       |> Repo.all
@@ -70,6 +70,11 @@ defmodule Videosync.VideoController do
       {:ok, video} ->
         video |> build_assoc(:layout) |> Repo.insert!
 
+        video =
+          Repo.get(Video, video.id)
+          |> Repo.preload(:layout)
+          |> Repo.preload(:slides)
+
         conn
         |> put_status(:created)
         |> put_resp_header("location", project_video_path(conn, :show, project, video))
@@ -97,6 +102,7 @@ defmodule Videosync.VideoController do
     video = Video.own_by(user)
       |> Video.belongs_to_model(:project_id, project)
       |> Video.preload_layout()
+      |> Video.preload_slides(Slide.order_by(:start))
       |> Repo.get!(id)
 
     changeset = Video.changeset(video, video_params)

@@ -8,6 +8,12 @@ var Slide = (function() {
   var model = {};
 
   return {
+    placeHolder() {
+      return slidePlaceHolder;
+    },
+    thumbPlaceHolder() {
+      return thumbPlaceHolder;
+    },
     validate: function() {
       if(model.url === slidePlaceHolder) {
         return false;

@@ -1,6 +1,7 @@
 import Videosync from '../../videosync';
 import Slide from '../../models/slide';
 import Video from '../../models/video';
+import Layout from '../../models/layout';
 import videoPlayback from './video_playback';
 
 var preview = (function() {
@@ -18,6 +19,7 @@ var preview = (function() {
       var videoInfo = Video.info(video.url);
       var currentSlide = undefined;
       var timeVector = [];
+      var sliderSlides = [];
 
       var inRange = function(progress, idx1, idx2) {
         return _.inRange(progress, timeVector[idx1], (timeVector[idx2] || 100000));
@@ -27,14 +29,14 @@ var preview = (function() {
         var currentSec = _.floor(event.detail.plyr.getCurrentTime());
 
         if(currentSlide) {
-          var currentSlideIndex = _.findIndex(slides, currentSlide);
+          var currentSlideIndex = _.findIndex(sliderSlides, currentSlide);
 
           if(inRange(currentSec, currentSlideIndex, (currentSlideIndex + 1))) {
             return;
           }
         }
 
-        currentSlide = _.find(slides, function(slide, index, collection) {
+        currentSlide = _.find(sliderSlides, function(slide, index, collection) {
           if(inRange(currentSec, index, (index + 1))) {
             Reveal.slide(index);
             slider.goTo(index);
@@ -116,14 +118,18 @@ var preview = (function() {
       };
 
       var injectRevealSlides = function() {
-        if(_.isEmpty(slides)) {
+        if(_.isEmpty(sliderSlides)) {
           return m("section[hidden]", {
             'class': 'future',
             'aria-hidden': true,
             'style': 'display: none;'
-          })
+          }, [
+            m("img", {
+              src: Slide.placeHolder()
+            })
+          ])
         } else {
-          return slides.map(function(slide) {
+          return sliderSlides.map(function(slide) {
             return m("section[hidden]", {
               'class': 'future',
               'aria-hidden': true,
@@ -138,10 +144,19 @@ var preview = (function() {
       };
 
       var injectSliderSlides = function() {
-        if(_.isEmpty(slides)) {
-          return m("")
+        if(_.isEmpty(sliderSlides)) {
+          return m("figure", {
+            class: "img-thumbnail mhorizontal-5",
+          }, [
+            m("a", { href: "#",}, [
+              m("img", {
+                src: Slide.thumbPlaceHolder(),
+                class: "img-responsive"
+              })
+            ])
+          ])
         } else {
-          return slides.map(function(slide) {
+          return sliderSlides.map(function(slide) {
             return m("figure", {
               class: "img-thumbnail mhorizontal-5",
             }, [
@@ -163,7 +178,7 @@ var preview = (function() {
       };
 
       var showTitle = function() {
-        if(Video.model.layout().show_title) {
+        if(Layout.model.show_title) {
           return m("h3", { class: "mt-0 text-black" }, Video.model.title());
         } else {
           return "";
@@ -171,7 +186,7 @@ var preview = (function() {
       };
 
       var showDate = function() {
-        if(Video.model.layout().show_date) {
+        if(Layout.model.show_date) {
           return m("h4", { class: "mt-0 text-black" }, moment(Video.model.inserted_at()).format('lll'));
         } else {
           return "";
@@ -179,7 +194,7 @@ var preview = (function() {
       };
 
       var showDescriptionFor = function(layout) {
-        if(Video.model.layout().show_description) {
+        if(Layout.model.show_description) {
           var description = null;
 
           switch (layout) {
@@ -226,7 +241,7 @@ var preview = (function() {
       };
 
       var toggleSlider = function(element, isInit, context) {
-        if(Video.model.layout().show_slider) {
+        if(Layout.model.show_slider) {
           element.style.display = 'block';
         } else {
           element.style.display = 'none'
@@ -235,8 +250,8 @@ var preview = (function() {
 
       return {
         buildLayout: function() {
-          var layout;
-          switch (parseInt(Video.model.layout().theme)) {
+          var layout = null;
+          switch (parseInt(Layout.model.theme)) {
             case 1:
               layout = [
                 m("div", { class: "p-all-side-30" }, [
@@ -300,10 +315,14 @@ var preview = (function() {
         },
         setTimeVector: function(slides) {
           timeVector = slides.map(function(slide) { return slide.start; });
+        },
+        setSliderSlides: function(slides) {
+          sliderSlides = slides;
         }
       };
     },
     view: function(ctrl, video, slides) {
+      ctrl.setSliderSlides(slides);
       ctrl.setTimeVector(slides);
 
       return m("", [

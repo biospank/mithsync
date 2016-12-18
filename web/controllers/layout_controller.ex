@@ -7,8 +7,8 @@ defmodule Videosync.LayoutController do
 
   def update(conn, %{"video_id" => video, "id" => id, "layout" => layout_params}) do
     changeset = Layout
-      |> Layout.belongs_to_model(:video_id, video)
-      |> Repo.get!(id)
+      |> Layout.belongs_to_model(:video_id, String.to_integer(video))
+      |> Repo.get!(String.to_integer(id))
       |> Layout.changeset(layout_params)
 
     case Repo.update(changeset) do

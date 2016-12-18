@@ -96,6 +96,13 @@ defmodule Videosync.VideoControllerTest do
   end
 
   @tag :logged_in
+  test "a newly created video has a layout", %{conn: conn, user: user} do
+    project = insert_project(user, %Project{})
+    conn = post conn, project_video_path(conn, :create, project), video: @valid_attrs
+    assert json_response(conn, 201)["data"]["layout"]["id"]
+  end
+
+  @tag :logged_in
   test "increment project's video counter cache on a valid transaction", %{conn: conn, user: user} do
     project = insert_project(user, %Project{})
     post conn, project_video_path(conn, :create, project), video: @valid_attrs

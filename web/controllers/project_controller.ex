@@ -18,7 +18,7 @@ defmodule Videosync.ProjectController do
   def recent(conn, params, user) do
     projects =
       Project.own_by(user)
-      |> Project.order_by(:inserted_at)
+      |> Project.order_by(:updated_at)
       |> Repo.all
 
     paged_projects = paginate(projects, params["page"], @max_recent_pagination)

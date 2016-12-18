@@ -30,7 +30,7 @@ var videoDetail = {
     var rejectUrlVideo = function() {
       var deferred = m.deferred();
       setTimeout(function() {
-        deferred.reject("Invalid url for youtube video");
+        deferred.reject("Invalid url for vimeo/youtube video");
       }, 1000);
       return deferred.promise;
     };

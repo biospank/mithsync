@@ -58,6 +58,7 @@ var newVideo = (function() {
         if(ctrl.isValidUrl(Video.model.url())) {
           var projectId = Project.current().id;
           return Video.create(projectId, args).then(function(response) {
+            Video.current(response.data);
             m.route("/projects/" + projectId + "/videos/" + response.data.id + "/edit");
           }, function(response) {
             ctrl.errors(response.errors);
@@ -87,7 +88,7 @@ var newVideo = (function() {
       ctrl.rejectUrlVideo = function() {
         var deferred = m.deferred();
         setTimeout(function() {
-          deferred.reject("Invalid url for youtube video");
+          deferred.reject("Invalid url for vimeo/youtube video");
         }, 1000);
         return deferred.promise;
       };

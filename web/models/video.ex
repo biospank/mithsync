@@ -55,7 +55,7 @@ defmodule Videosync.Video do
 
   def order_by(query, order) do
     case order do
-      :inserted_at ->
+      ts when ts in [:inserted_at, :updated_at] ->
         from v in query, order_by: [desc: field(v, ^order)]
       _ ->
         from v in query, order_by: field(v, ^order)

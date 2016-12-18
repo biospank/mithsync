@@ -48,7 +48,7 @@ defmodule Videosync.Project do
 
   def order_by(query, order) do
     case order do
-      :inserted_at ->
+      ts when ts in [:inserted_at, :updated_at] ->
         from p in query, order_by: [desc: field(p, ^order)]
       _ ->
         from p in query, order_by: field(p, ^order)

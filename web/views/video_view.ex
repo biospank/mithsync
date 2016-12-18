@@ -24,7 +24,9 @@ defmodule Videosync.VideoView do
       title: video.title,
       description: video.description,
       watch_code: video.watch_code,
-      slide_count: video.slide_count
+      slide_count: video.slide_count,
+      slides: render_many(video.slides, Videosync.SlideView, "slide.json"),
+      layout: render_one(video.layout, Videosync.LayoutView, "layout.json", as: :data)
     }
   end
 
