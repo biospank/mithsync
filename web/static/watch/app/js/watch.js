@@ -44,13 +44,23 @@ document.addEventListener('DOMContentLoaded', function() {
   playerTag.dataset.type = videoInfo.provider;
   playerTag.dataset.videoId = videoInfo.videoId;
 
-  document.body.querySelectorAll('img').forEach(function(img) {
+  var imgs = document.body.querySelectorAll('img');
+
+  for(var i = 0; i < imgs.length; i++) {
     slides.push({
-      src: img.src,
-      start: img.dataset.start
+      src: imgs[i].src,
+      start: imgs[i].dataset.start
     });
-    timeVector.push(img.dataset.start);
-  });
+    timeVector.push(imgs[i].dataset.start);
+  }
+
+  // document.body.querySelectorAll('img').forEach(function(img) {
+  //   slides.push({
+  //     src: img.src,
+  //     start: img.dataset.start
+  //   });
+  //   timeVector.push(img.dataset.start);
+  // });
 
   var player = plyr.setup('.video-player-watch', {
     //['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'fullscreen']
@@ -104,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
       itemsDesktopSmall : [980,5],
       itemsTablet: [768,5],
       itemsMobile : false,
-      navigationText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"]
+      navigationText: ["<i class='glyphicon glyphicon-chevron-left'></i>", "<i class='glyphicon glyphicon-chevron-right'></i>"]
   });
 
   slider = $("#owl-slider").data("owlCarousel");

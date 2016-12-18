@@ -23,8 +23,8 @@ var Video = {
     return this.model;
   },
   export: function(video) {
-    var code = '<div style="position: relative; padding-bottom: 56.25%; padding-top: 35px; height: 0; overflow: hidden;"> ' +
-      '<iframe style="position: absolute; top: 0; left: 0; height: 100%; width: 100%; " id="ifrm" frameborder="0" width="1000" height="450" src="<%= domain %>/watch/<%= video.watch_code %>" data-zinrkoo-title="<%= video.title %>" data-zinkroo-description="<%= video.description %>" data-zinkroo-date="<%= video.inserted_at %>">' +
+    var code = '<div class="embed-responsive embed-responsive-16by9"> ' +
+      '<iframe class="embed-responsive-item" " id="ifrm" scrolling="no" src="<%= domain %>/watch/<%= video.watch_code %>" data-zinrkoo-title="<%= video.title %>" data-zinkroo-description="<%= video.description %>" data-zinkroo-date="<%= video.inserted_at %>">' +
         'Your browser doesn\'t support iframes.' +
       '</iframe>' +
     '</div>'
