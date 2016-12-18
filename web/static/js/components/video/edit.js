@@ -233,70 +233,49 @@ var editVideo = (function() {
           // to enable video
           ctrl.player = plyr.setup('.video_player', {
             //['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'fullscreen']
+            // debug: true,
             controls: ['play', 'mute', 'volume', 'current-time']
           })[0];
 
           ctrl.player.on('ready', function(event) {
-            m.startComputation();
-            ctrl.isPlayerReady(true);
-            m.endComputation();
-
-            if(_.isEmpty(slickCarousel.slides())) {
-              var slide = Slide.resetModel({
-                start: 0,
-                connectColor: Color.sample()
-              });
-
-              slickCarousel.addSlide(slide);
-              slickCarousel.currentSlide(slide);
-            }
-
-            ctrl.slider(Slider.init('slider', {
-              start: slickCarousel.slides().map(function(slide) {
-                return slide.start;
-              }),
-              max: ctrl.player.getDuration(),
-              onChange: ctrl.onChangeSlider,
-              onUpdate: ctrl.onUpdateSlider
-            }));
-
-            ctrl.highlightSlide(_.first(slickCarousel.slides()));
-
-            ctrl.paintConnects();
+            if(event.detail.plyr.getType() === 'youtube')
+              ctrl.setupSlider();
           });
 
-          // if(_.isEmpty(slickCarousel.slides())) {
-          //   var slide = Slide.resetModel({
-          //     start: 0,
-          //     connectColor: Color.sample()
-          //   });
-          //
-          //   slickCarousel.addSlide(slide);
-          //   slickCarousel.currentSlide(slide);
-          // }
-          //
-          // ctrl.slider(Slider.init('slider', {
-          //   start: slickCarousel.slides().map(function(slide) {
-          //     return slide.start;
-          //   }),
-          //   max: 180, // ctrl.player.getDuration(),
-          //   onChange: ctrl.onChangeSlider,
-          //   onUpdate: ctrl.onUpdateSlider
-          // }));
-          //
-          // ctrl.highlightSlide(_.first(slickCarousel.slides()));
-          //
-          // ctrl.paintConnects();
-
-          // ctrl.player.on('error', function(error) {
-          //   console.log(error);
-          // });
-          //
-          // ctrl.player.on('stalled', function(event) {
-          //   console.log(event);
-          //   console.log("stalled");
-          // });
+          ctrl.player.on('durationchange', function(event) {
+            if(event.detail.plyr.getType() === 'vimeo')
+              ctrl.setupSlider();
+          })
         }
+      };
+
+      ctrl.setupSlider = function() {
+        m.startComputation();
+        ctrl.isPlayerReady(true);
+        m.endComputation();
+
+        if(_.isEmpty(slickCarousel.slides())) {
+          var slide = Slide.resetModel({
+            start: 0,
+            connectColor: Color.sample()
+          });
+
+          slickCarousel.addSlide(slide);
+          slickCarousel.currentSlide(slide);
+        }
+
+        ctrl.slider(Slider.init('slider', {
+          start: slickCarousel.slides().map(function(slide) {
+            return slide.start;
+          }),
+          max: ctrl.player.getDuration(),
+          onChange: ctrl.onChangeSlider,
+          onUpdate: ctrl.onUpdateSlider
+        }));
+
+        ctrl.highlightSlide(_.first(slickCarousel.slides()));
+
+        ctrl.paintConnects();
       };
 
       ctrl.getVideo = function(videoId) {
