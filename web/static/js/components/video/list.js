@@ -53,8 +53,13 @@ var videoList = {
     }
 
     ctrl.getVideos = function(params, args) {
-      return Video.all(m.route.param("projectId"), params, args).then(function(videos) {
-        ctrl.videos(videos);
+      return Video.all(m.route.param("projectId"), params, args).then(function(data) {
+        Project.current(data.project);
+        ctrl.videos(data.videos);
+        // needed to update data in breadcrumb
+        // since it is rendered before loading video list
+        var reloadEvent = new CustomEvent("video:list:reload");
+        document.body.dispatchEvent(reloadEvent);
       }, function(response) {
         ctrl.errors(response.errors);
       })

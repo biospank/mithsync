@@ -50,7 +50,15 @@ defmodule Videosync.VideoControllerTest do
   test "lists all entries on index", %{conn: conn, user: user} do
     project = insert_project(user, %Project{})
     conn = get conn, project_video_path(conn, :index, project)
-    assert json_response(conn, 200)["data"] == []
+    assert json_response(conn, 200)["data"] == %{
+      "project" => %{
+        "id" => project.id,
+        "inserted_at" => Ecto.DateTime.to_iso8601(project.inserted_at),
+        "name" => project.name,
+        "video_count" => 0
+      },
+      "videos" => []
+    }
   end
 
   @tag :logged_in

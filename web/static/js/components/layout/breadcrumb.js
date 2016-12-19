@@ -1,5 +1,14 @@
+import Project from "../../models/project";
+
 var breadcrumb = {
   controller: function(project) {
+    document.body.addEventListener("video:list:reload", function(e) {
+      currentProject = Project.current();
+      m.redraw();
+    }, false);
+
+    var currentProject = project;
+
     var slugMapping = {
       ''         : {
         'name' : 'Home',
@@ -43,9 +52,9 @@ var breadcrumb = {
         if(project)
           return m("li", [
             m("a", {
-              href: "/projects/" + project.id + "/videos",
+              href: "/projects/" + currentProject.id + "/videos",
               config: m.route
-            }, project.name)
+            }, currentProject.name)
           ]);
         else
           return "";

@@ -1,7 +1,7 @@
 defmodule Videosync.VideoController do
   use Videosync.Web, :controller
 
-  alias Videosync.{Video, Slide, ImageProxy, Scope}
+  alias Videosync.{Project, Video, Slide, ImageProxy, Scope}
 
   plug :scrub_params, "video" when action in [:create, :update]
 
@@ -39,9 +39,11 @@ defmodule Videosync.VideoController do
   end
 
   def index(conn, params, user) do
+    project = Repo.get!(Project, String.to_integer(params["project_id"]))
+
     videos =
       Video.own_by(user)
-      |> Video.belongs_to_model(:project_id, params["project_id"])
+      |> Video.belongs_to_model(:project_id, project.id)
       |> Video.filter_by(params["filter"])
       |> Video.order_by(:inserted_at)
       |> Video.preload_layout()
@@ -58,7 +60,7 @@ defmodule Videosync.VideoController do
         paged_videos
     end
 
-    render(conn, "index.json", page: paged_videos)
+    render(conn, "project_and_videos.json", project: project, page: paged_videos)
   end
 
   def create(conn, %{"project_id" => project, "video" => video_params}, user) do

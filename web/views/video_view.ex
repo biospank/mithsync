@@ -1,6 +1,19 @@
 defmodule Videosync.VideoView do
   use Videosync.Web, :view
 
+  def render("project_and_videos.json", %{project: project, page: page}) do
+    %{
+      data: %{
+        project: render_one(project, Videosync.ProjectView, "project.json"),
+        videos: render_many(page.entries, Videosync.VideoView, "video_with_slides.json"),
+      },
+      page_number: page.page_number,
+      page_size: page.page_size,
+      total_pages: page.total_pages,
+      total_entries: page.total_entries
+    }
+  end
+
   def render("index.json", %{page: page}) do
     %{
       data: render_many(page.entries, Videosync.VideoView, "video_with_slides.json"),
