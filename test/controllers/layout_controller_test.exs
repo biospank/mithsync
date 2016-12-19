@@ -1,7 +1,7 @@
 defmodule Videosync.LayoutControllerTest do
   use Videosync.ConnCase
 
-  alias Videosync.Project
+  alias Videosync.{Project, Video}
 
   @video_attrs %{
     description: "some description",
@@ -56,5 +56,16 @@ defmodule Videosync.LayoutControllerTest do
     video_conn = get conn, project_video_path(conn, :show, project, json_response(video_conn, 201)["data"]["id"])
     layout_conn = put conn, project_video_layout_path(conn, :update, project, json_response(video_conn, 200)["data"]["id"], json_response(video_conn, 200)["data"]["layout"]["id"]), layout: @invalid_attrs
     assert json_response(layout_conn, 422)["errors"] != %{}
+  end
+
+  @tag :logged_in
+  test "updates video 'updated_at' timestamp on save all", %{conn: conn, user: user} do
+    project = insert_project(user, %Project{})
+    video_conn = post conn, project_video_path(conn, :create, project), video: @video_attrs
+    video = Repo.get!(Video, json_response(video_conn, 201)["data"]["id"])
+    :timer.sleep(1000)
+    put conn, project_video_layout_path(conn, :update, project, json_response(video_conn, 201)["data"]["id"], json_response(video_conn, 201)["data"]["layout"]["id"]), layout: @valid_attrs
+    video_timestamp = Repo.get!(Video, video.id)
+    assert Ecto.DateTime.compare(video_timestamp.updated_at, video.updated_at) == :gt
   end
 end

@@ -1,7 +1,7 @@
 defmodule Videosync.SlideController do
   use Videosync.Web, :controller
 
-  alias Videosync.Slide
+  alias Videosync.{Slide, Video}
 
   plug :scrub_params, "slide" when action in [:create, :update]
 
@@ -40,6 +40,10 @@ defmodule Videosync.SlideController do
 
     case Repo.update(changeset) do
       {:ok, slide} ->
+        Video
+        |> Repo.get!(String.to_integer(video))
+        |> Ecto.Changeset.change() |> Repo.update(force: true)
+
         render(conn, "show.json", slide: slide)
       {:error, changeset} ->
         conn
@@ -66,6 +70,10 @@ defmodule Videosync.SlideController do
           Repo.update!(changeset)
       end
     end)
+
+    Video
+    |> Repo.get!(String.to_integer(video))
+    |> Ecto.Changeset.change() |> Repo.update(force: true)
 
     slides = user
       |> Slide.own_by(video)

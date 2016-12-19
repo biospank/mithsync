@@ -1,7 +1,7 @@
 defmodule Videosync.LayoutController do
   use Videosync.Web, :controller
 
-  alias Videosync.Layout
+  alias Videosync.{Layout, Video}
 
   plug :scrub_params, "layout" when action in [:update]
 
@@ -13,6 +13,10 @@ defmodule Videosync.LayoutController do
 
     case Repo.update(changeset) do
       {:ok, layout} ->
+        Video
+        |> Repo.get!(String.to_integer(video))
+        |> Ecto.Changeset.change() |> Repo.update(force: true)
+
         render(conn, "layout.json", data: layout)
       {:error, changeset} ->
         conn

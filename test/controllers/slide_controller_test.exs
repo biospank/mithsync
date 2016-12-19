@@ -85,6 +85,18 @@ defmodule Videosync.SlideControllerTest do
   end
 
   @tag :logged_in
+  test "updates video 'updated_at' timestamp on slide change", %{conn: conn, user: user} do
+    project = insert_project(user, %Project{})
+    video = insert_video(user, %Video{})
+    slide = insert_slide(user, video, %Slide{})
+    :timer.sleep(1000)
+    conn = put conn, project_video_slide_path(conn, :update, project, video, slide), slide: @valid_attrs
+    assert json_response(conn, 200)["data"]["id"]
+    video_timestamp = Repo.get!(Video, video.id)
+    assert Ecto.DateTime.compare(video_timestamp.updated_at, video.updated_at) == :gt
+  end
+
+  @tag :logged_in
   test "does not update chosen resource and renders errors when data is invalid", %{conn: conn, user: user} do
     project = insert_project(user, %Project{})
     video = insert_video(user, %Video{})
@@ -134,6 +146,16 @@ defmodule Videosync.SlideControllerTest do
     refute result_data |> Enum.empty?
     [%{"id" => id} | _] = result_data
     assert is_integer(id)
+  end
+
+  @tag :logged_in
+  test "updates video 'updated_at' timestamp on save all", %{conn: conn, user: user} do
+    project = insert_project(user, %Project{})
+    video = insert_video(user, %Video{})
+    :timer.sleep(1000)
+    post conn, project_video_save_all_slides_path(conn, :save_all, project, video), slides: []
+    video_timestamp = Repo.get!(Video, video.id)
+    assert Ecto.DateTime.compare(video_timestamp.updated_at, video.updated_at) == :gt
   end
 
   @tag :logged_in
