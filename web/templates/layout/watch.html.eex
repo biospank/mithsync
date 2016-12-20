@@ -9,14 +9,14 @@
 
     <title>Zinkroo watch video</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/watch.css") %>">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700" rel="stylesheet">
     <!-- empty script needed to allows plyr.js to work correctly -->
     <script></script>
   </head>
 
   <body id="watch-video">
-    <div class="container">
+    <div class="container-fluid zinkroo">
       <%= render @view_module, @view_template, assigns %>
-
     </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/watch.js") %>"></script>
   </body>

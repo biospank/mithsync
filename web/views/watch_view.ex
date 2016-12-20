@@ -5,10 +5,10 @@ defmodule Videosync.WatchView do
     if video.layout.show_description do
       case video.layout.theme do
         1 -> '''
-          <p class="text-black mb-15">#{video.description}</p>
+          <p class="mb-15 zinkroo__description">#{video.description}</p>
         '''
         _ -> '''
-          <div class="mt-20 p-all-side-25 bg-grey">#{video.description}</div>
+          <div class="mt-10 p-all-side-15 bg-grey zinkroo__description">#{video.description}</div>
         '''
       end
     end
