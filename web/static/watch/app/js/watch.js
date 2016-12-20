@@ -24,7 +24,9 @@ document.addEventListener('DOMContentLoaded', function() {
     currentSlide = _.find(slides, function(slide, index, collection) {
       if(inRange(currentSec, index, (index + 1))) {
         Reveal.slide(index);
-        slider.goTo(index);
+        if(slider)
+          slider.goTo(index);
+          
         return true;
       }
 

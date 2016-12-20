@@ -23,11 +23,18 @@ var Video = {
     return this.model;
   },
   export: function(video) {
-    var code = '<div class="embed-responsive embed-responsive-16by9"> ' +
-      '<iframe class="embed-responsive-item" " id="ifrm" scrolling="no" src="<%= domain %>/watch/<%= video.watch_code %>" data-zinrkoo-title="<%= video.title %>" data-zinkroo-description="<%= video.description %>" data-zinkroo-date="<%= video.inserted_at %>">' +
+    // var code = '<div class="embed-responsive embed-responsive-16by9"> ' +
+    //   '<iframe class="embed-responsive-item" " id="ifrm" scrolling="no" src="<%= domain %>/watch/<%= video.watch_code %>" data-zinrkoo-title="<%= video.title %>" data-zinkroo-description="<%= video.description %>" data-zinkroo-date="<%= video.inserted_at %>">' +
+    //     'Your browser doesn\'t support iframes.' +
+    //   '</iframe>' +
+    // '</div>'
+
+    var code = '<iframe width="100%" scrolling="no" frameborder="0" src="<%= domain %>/watch/<%= video.watch_code %>" data-zinrkoo-title="<%= video.title %>" data-zinkroo-description="<%= video.description %>" data-zinkroo-date="<%= video.inserted_at %>">' +
         'Your browser doesn\'t support iframes.' +
       '</iframe>' +
-    '</div>'
+      '<script src="<%= domain %>/js/iframeResizer.min.js"></script>' +
+      '<script>iFrameResize()</script>'
+
 
     return _.template(code)({
       domain: Videosync.domain,
