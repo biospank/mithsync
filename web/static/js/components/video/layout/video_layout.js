@@ -104,13 +104,16 @@ var videoLayout = {
                 class: "magic-checkbox",
                 type: "checkbox",
                 name: "layout",
-                id: "1",
+                id: "show-title-chk",
                 onclick: function(e) {
                   Layout.model.show_title = e.target.checked;
                 },
                 checked: Layout.model.show_title
               }),
-              m("label", { class: "mb-0 weight-regular", for: "1" }, "Show Title")
+              m("label", {
+                class: "mb-0 weight-regular",
+                for: "show-title-chk"
+              }, "Show Title")
             ])
           ]),
           m("div", { class: "col-sm-6" }, [
@@ -119,13 +122,16 @@ var videoLayout = {
                 class: "magic-checkbox",
                 type: "checkbox",
                 name: "layout",
-                id: "2",
+                id: "show-description-chk",
                 onclick: function(e) {
                   Layout.model.show_description = e.target.checked;
                 },
                 checked: Layout.model.show_description
               }),
-              m("label", { class: "mb-0 weight-regular", for: "2" }, "Show Description")
+              m("label", {
+                class: "mb-0 weight-regular",
+                for: "show-description-chk"
+              }, "Show Description")
             ])
           ]),
           m("div", { class: "col-sm-6" }, [
@@ -134,13 +140,16 @@ var videoLayout = {
                 class: "magic-checkbox",
                 type: "checkbox",
                 name: "layout",
-                id: "3",
+                id: "show-date-chk",
                 onclick: function(e) {
                   Layout.model.show_date = e.target.checked;
                 },
                 checked: Layout.model.show_date
               }),
-              m("label", { class: "mb-0 weight-regular", for: "3" }, "Show Date")
+              m("label", {
+                class: "mb-0 weight-regular",
+                for: "show-date-chk"
+              }, "Show Date")
             ])
           ]),
           m("div", { class: "col-sm-6" }, [
@@ -149,13 +158,16 @@ var videoLayout = {
                 class: "magic-checkbox",
                 type: "checkbox",
                 name: "layout",
-                id: "4",
+                id: "show-slider-chk",
                 onclick: function(e) {
                   Layout.model.show_slider = e.target.checked;
                 },
                 checked: Layout.model.show_slider
               }),
-              m("label", { class: "mb-0 weight-regular", for: "4" }, "Show Slider")
+              m("label", {
+                class: "mb-0 weight-regular",
+                for: "show-slider-chk"
+              }, "Show Slider")
             ])
           ])
         ])
