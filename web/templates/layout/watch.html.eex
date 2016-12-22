@@ -15,7 +15,7 @@
   </head>
 
   <body id="watch-video">
-    <div class="container-fluid zinkroo">
+    <div class="container-fluid p-all-side-0 zinkroo">
       <%= render @view_module, @view_template, assigns %>
     </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/watch.js") %>"></script>
