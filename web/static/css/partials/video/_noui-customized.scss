@@ -1,6 +1,9 @@
 .noUi {
   &-origin {
     &[disabled="true"] {
+      .noUi-tooltip {
+        display: none;
+      }
       .noUi-handle {
         width: 5px;
         border-radius: 0;
