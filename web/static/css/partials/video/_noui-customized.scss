@@ -2,13 +2,15 @@
   &-origin {
     &[disabled="true"] {
       .noUi-handle {
-        width: 10px;
-        left: -5px;
+        width: 5px;
+        border-radius: 0;
+        left: -2px;
         &:before {
-          left: 2px;
+          left: 1px;
         }
         &:after {
-          left: 5px;
+          // left: 5px;
+          display: none;
         }
       }
     }
