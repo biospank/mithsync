@@ -29,7 +29,7 @@ var Video = {
     //   '</iframe>' +
     // '</div>'
 
-    var code = '<iframe width="100%" scrolling="no" frameborder="0" src="<%= domain %>/watch/<%= video.watch_code %>" data-zinrkoo-title="<%= video.title %>" data-zinkroo-description="<%= video.description %>" data-zinkroo-date="<%= video.inserted_at %>">' +
+    var code = '<iframe width="100%" scrolling="no" frameborder="0" src="<%= domain %>/watch/<%= video.watch_code %>" data-zinkroo-title="<%= video.title %>" data-zinkroo-description="<%= video.description %>" data-zinkroo-date="<%= video.inserted_at %>">' +
         'Your browser doesn\'t support iframes.' +
       '</iframe>' +
       '<script src="<%= domain %>/js/iframeResizer.min.js"></script>' +

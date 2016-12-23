@@ -1,5 +1,5 @@
 var title = {
-  controller: function(video) {
+  controller: function() {
     var slugMapping = {
       ''         : {
         'name' : 'Dashboard'
@@ -11,7 +11,7 @@ var title = {
         'name' : 'Videos'
       },
       'edit' : {
-        'name' : _.truncate(video.title, { length: 70 })
+        'name' : "<%= _.truncate(title, { length: 70 }) %>"
       },
       'faq' : {
         'name' : 'Faq'
@@ -32,10 +32,10 @@ var title = {
       }
     };
   },
-  view: function(ctrl) {
+  view: function(ctrl, title) {
     return m("h2", {
       class: "section-title pull-left"
-    }, ctrl.slugFor(_.last(ctrl.crumbs()))['name'])
+    }, _.template(ctrl.slugFor(_.last(ctrl.crumbs()))['name'])({title}))
   }
 }
 

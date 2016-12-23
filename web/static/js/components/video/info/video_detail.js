@@ -52,6 +52,9 @@ var videoDetail = {
       updateVideo: function(event) {
         event.preventDefault();
         errors({});
+
+        var originalUrl = Video.current().url;
+
         swal({
           title: 'Saving...',
           width: '400px',
@@ -61,15 +64,26 @@ var videoDetail = {
           onOpen: function(progress) {
             swal.showLoading();
             if(isValidUrl(Video.model.url())) {
-              return Video.update(Video.current()).then(function() {
+              return Video.update(Video.current()).then(function(response) {
+                Video.current(response.data);
                 swal.close();
                 swal({
                   type: 'success',
-                  title: 'Video info saved!',
+                  title: 'Video info published!',
                   width: '400px',
                   showConfirmButton: false,
                   timer: 1000
-                }).catch(swal.noop);
+                }).then(function () {
+                },
+                  // handling the promise rejection
+                  function (dismiss) {
+                    if (dismiss === 'timer') {
+                      if(Video.model.url() !== originalUrl)
+                        m.route("/projects/" + Video.current().project_id + "/videos/" + Video.current().id + "/edit");
+
+                    }
+                  }
+                ).catch(swal.noop);
               }, function(response) {
                 errors(response.errors);
                 swal.close();
@@ -132,23 +146,23 @@ var videoDetail = {
           m('code', { class: 'html' }, Video.export(Video.current()))
         ])
       ]),
-      // m.component(textField, {
-      //   type: 'Url',
-      //   placeholder: 'link to video',
-      //   id: 'url',
-      //   dataLabel: 'Video Link',
-      //   oninput: m.withAttr("value", Video.model.url),
-      //   error: ctrl.errors()['url'],
-      //   value: Video.model.url()
-      // }),
       m.component(textField, {
-        type: 'url',
-        placeholder: 'Url',
-        id: 'video-url',
-        dataLabel: 'Url',
-        disabled: true,
+        type: 'Url',
+        placeholder: 'link to video',
+        id: 'url',
+        dataLabel: 'Video Link',
+        oninput: m.withAttr("value", Video.model.url),
+        error: ctrl.errors()['url'],
         value: Video.model.url()
       }),
+      // m.component(textField, {
+      //   type: 'url',
+      //   placeholder: 'Url',
+      //   id: 'video-url',
+      //   dataLabel: 'Url',
+      //   disabled: true,
+      //   value: Video.model.url()
+      // }),
       m.component(textField, {
         type: 'text',
         placeholder: 'Creation date',
@@ -162,10 +176,10 @@ var videoDetail = {
           m("button[type=submit]", {
             onclick: ctrl.updateVideo,
             class: 'btn btn-success btn-md btn-rectangular btn-space--left-5 icon-inside--left',
-            title: "Update"
+            title: "Publish"
           }, [
             m("i", { class: "fa fa-save" }),
-            "Update"
+            "Publish"
           ])
         ])
       ])

@@ -20,6 +20,7 @@ var slickItem = {
             args.mouseOutCallback(ctrl.slide);
         }
       }, [
+        m("label", ctrl.slide.start),
         // m("i", { class: "fa fa-bookmark bookmark-color", "aria-hidden": true, style: "color: " + ctrl.slide.connectColor }),
         m("a", {}, [
           m("img", {
