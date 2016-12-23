@@ -1,3 +1,4 @@
+@import "./mixin/custom-mixin";
 @import "./partials/widgets/spaces";
 @import "./partials/plugins/customized-reveal";
 
@@ -25,8 +26,11 @@
     font-size: 13px;
   }
   &__slide {
-    padding: 10px 30px;
+    padding: 10px;
     background-color: #f2f2f2;
+    @include respond-to(min-width, 768px) {
+      padding: 10px 30px;
+    }
     .owl-item {
       line-height: normal;
       .img-thumbnail {
@@ -42,15 +46,19 @@
     margin: 0 !important;
   }
   &-buttons {
-    & > div {
-      position: absolute;
+    .owl-prev, .owl-next {
       padding: 0 !important;
-      margin: -12px 0 0 0 !important;
       border-radius: 0;
+      margin-bottom: 0 !important;
       background-color: transparent !important;
       color: #c6c6c6 !important;
       font-size: 18px !important;
-      top: 50%;
+      @include respond-to(min-width, 768px) {
+        position: absolute;
+        padding: 0 !important;
+        margin: -12px 0 0 0 !important;
+        top: 50%;
+      }
     }
   }
   &-prev {

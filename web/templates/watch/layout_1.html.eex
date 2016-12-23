@@ -1,4 +1,4 @@
-<div class="pb-10">
+<div class="">
   <%= render @view_module, "title.html", video: @video, conn: @conn %>
   <%= render @view_module, "date.html", video: @video, conn: @conn %>
   <%= raw @view_module.render_video_description(@video) %>
