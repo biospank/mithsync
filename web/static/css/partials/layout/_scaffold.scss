@@ -19,7 +19,8 @@
   @include size(250px, 100%);
   z-index: 1000;
   overflow-y: auto;
-  @include gradient-vertical($light, $dark, 0%, 100%);
+  //@include gradient-vertical($light, $dark, 0%, 100%);
+  background-color: $dark;
 }
 
 #page-content-wrapper {
