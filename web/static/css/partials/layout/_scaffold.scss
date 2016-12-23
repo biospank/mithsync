@@ -15,7 +15,7 @@
 }
 
 #sidebar-wrapper {
-  @include position(left, 0, top, 65px, fixed);
+  @include position(left, 0, top, 55px, fixed);
   @include size(250px, 100%);
   z-index: 1000;
   overflow-y: auto;
