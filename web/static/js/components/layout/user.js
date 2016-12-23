@@ -12,39 +12,52 @@ var user = {
   },
   view: function(ctrl) {
 
-    return m(".user-avatar", [
-      m("i", { class: "fa fa-user", "aria-hidden": "true" })
-    ]);
+    // return m(".user-avatar", [
+    //   m("i", { class: "fa fa-user", "aria-hidden": "true" })
+    // ]);
 
     // return m(".user-avatar", [
     //   m("img", { src: "/images/avatar.jpg", alt: "Ilaria Di Rosa" }),
     //   m("span", { class: "user-avatar__name" }, "Ilaria Di Rosa")
     //   //m("b", { class: "caret" })
     // ])
-    
-    // return m(".dropdown", { class: "user-avatar" }, [
-    //   m("a", {
-    //     "data-toggle": "dropdown",
-    //     class: "dropdown-toggle",
-    //     href: "#",
-    //     "aria-expanded": false }, [
-    //       m("figure", { class: "user-avatar__photo" }, [
-    //         m("img", { src: "/images/avatar.jpg", alt: "Ilaria Di Rosa" })
-    //       ]),
-    //       m("div", { class: "user-avatar__name" }, [
-    //         m("span", "Ilaria Di Rosa"),
-    //         m("i", { class: "fa fa-caret-down", "aria-hidden": true })
-    //       ])
-    //     ]),
-    //   m("ul", { class: "dropdown-menu list-unstyled" }, [
-    //     m("li", [
-    //       m("a", { class: "", href: "#" }, "link")
-    //     ]),
-    //     m("li", [
-    //       m("a", { class: "", href: "#" }, "link")
-    //     ])
-    //   ])
-    // ])
+
+    return m(".dropdown", {
+        class: "user-avatar clearfix",
+        config: function(element, isInit, context) {
+          if(!isInit)
+            $('.dropdown-toggle').dropdown();
+        }
+      }, [
+      m("a", {
+        class: "dropdown-toggle user-avatar__button clearfix",
+        href: "#",
+        id: "dropdownMenu1",
+        "data-toggle": "dropdown",
+        "aria-haspopup": true,
+        "aria-expanded": false
+      }, [
+        m("figure", { class: "user-avatar__photo pull-right" }, [
+          m("img", { src: "/images/icons/avatar.png", alt: "Ilaria Di Rosa" })
+        ]),
+        m("div", { class: "user-avatar__name pull-right" }, [
+          m("span", "Benvenuto "),
+          m("span", { class: "text-black" }, "Ilaria Di Rosa"),
+          m("i", { class: "fa fa-caret-down", "aria-hidden": true })
+        ])
+      ]),
+      m("ul", { class: "dropdown-menu", "aria-labelledby": "dropdownMenu1" }, [
+        m("li", [
+          m("a", { class: "", href: "#" }, "Mio Profilo")
+        ]),
+        // m("li", [
+        //   m("a", { class: "", href: "#" }, "Logout")
+        // ])
+        m("li", [
+          m("a", { class: "", href: "#" }, "Logout")
+        ])
+      ])
+    ])
   }
 };
 

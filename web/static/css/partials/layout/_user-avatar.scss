@@ -1,11 +1,23 @@
 .user-avatar {
-  @include size(45px, 45px);
-  border-radius: 4px;
-  line-height: 45px;
-  @include border(rgba(#dee1e5 ,.2));
+  //line-height: 45px;
+  //@include border(rgba(#dee1e5 ,.2));
   text-align: center;
-  margin: 10px 15px 10px 0;
-  i {
-    @include font-style(21px, white, 400, 45px);
+  margin: 10px 15px 10px;
+  &__button {
+    display: block;
+  }
+  &__photo {
+    img {
+      @include size(45px, 45px);
+      border-radius: 50%;
+    }
+  }
+  &__name {
+    margin: 0 10px;
+    color: #707a82;
+    i {
+      @include font-style(15px, #707a82, 400, 45px);
+      margin-left: 5px;
+    }
   }
 }
