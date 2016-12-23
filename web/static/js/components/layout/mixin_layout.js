@@ -40,7 +40,7 @@ var mixinLayout = function(content, layout) {
           ])
         ]),
         m("footer", { id: "page-footer" }, [
-          m(".container", "© Company 2016. All rights reserved. Terms of Service | Privacy Policy")
+          m("p", { class: "mb-0" }, "© Company 2016. All rights reserved. Terms of Service | Privacy Policy")
         ])
       ]
     },

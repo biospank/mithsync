@@ -1,17 +1,20 @@
 #wrapper {
+  position: relative;
   padding-left: 250px;
+  padding-top: 55px;
+  //padding-bottom: 40px;
   //margin-top: 15px;
   // add style for footer fixting
   min-height: 100%;
   /* equal to footer height */
-  margin-bottom: 40px;
-  @include respond-to(min-width, 971px) {
-    &:after {
-      content: "";
-      display: block;
-      height: 40px;
-    }
-  }
+  //margin-bottom: 40px;
+  // @include respond-to(min-width, 971px) {
+  //   &:after {
+  //     content: "";
+  //     display: block;
+  //     height: 40px;
+  //   }
+  // }
 }
 
 #sidebar-wrapper {
@@ -24,15 +27,21 @@
 }
 
 #page-content-wrapper {
-  padding: 0px;
+  // padding: 0px;
   position: relative;
 }
 
 #page-footer {
-  height: 40px;
+  // height: 40px;
   @include font-style(12px, #5e6060);
-  text-align: left;
-  padding-left: 250px;
+  // text-align: left;
+  position: absolute;
+  left: 250px;
+  //@include position(left, 250px, bottom, 0);
+  right: 0;
+  width: 100%;
+  padding: 10px;
+  display: none;
 }
 
 .main-container {
