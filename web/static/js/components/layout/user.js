@@ -41,8 +41,8 @@ var user = {
           m("img", { src: "/images/icons/avatar.png", alt: "Ilaria Di Rosa" })
         ]),
         m("div", { class: "user-avatar__name pull-right" }, [
-          m("span", "Benvenuto "),
-          m("span", { class: "text-black" }, "Ilaria Di Rosa"),
+          //m("span", "Benvenuto "),
+          m("span", { class: "text-black" }, "dirosa.ilaria@gmail.com"),
           m("i", { class: "fa fa-caret-down", "aria-hidden": true })
         ])
       ]),
