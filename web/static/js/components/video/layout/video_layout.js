@@ -26,7 +26,7 @@ var videoLayout = {
               swal.close();
               swal({
                 type: 'success',
-                title: 'Layout saved!',
+                title: 'Layout published!',
                 width: '400px',
                 showConfirmButton: false,
                 timer: 1000
@@ -176,10 +176,10 @@ var videoLayout = {
         m("button[type=submit]", {
           onclick: ctrl.updateLayout,
           class: 'btn btn-success btn-md btn-rectangular btn-space--left-5 icon-inside--left',
-          title: "Update"
+          title: "Publish"
         }, [
           m("i", { class: "fa fa-save" }),
-          "Update"
+          "Publish"
         ])
       ])
     ])
