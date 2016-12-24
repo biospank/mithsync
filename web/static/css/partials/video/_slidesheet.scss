@@ -26,7 +26,7 @@
     margin-right: 10px;
     padding: 0;
     position: relative;
-    a {
+    & > a {
       display: block;
       cursor: pointer;
       @include size(100%, 100%);
@@ -37,6 +37,14 @@
     &.active, &:hover {
       @include border($mainColor, 2px);
       @include box-shadow(1px 2px 10px #000);
+    }
+    .bookmark-time {
+      @include position(left, 0, bottom, 0);
+      right: 0;
+      background-color: rgba(43, 65, 93, 0.5);
+      margin-bottom: 0;
+      color: white;
+      padding: 3px 5px;
     }
     .bookmark-color {
       text-shadow: 1px 1px 1px #424856;
