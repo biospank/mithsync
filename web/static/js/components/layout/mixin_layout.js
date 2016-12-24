@@ -38,10 +38,10 @@ var mixinLayout = function(content, layout) {
               content
             ])
           ])
-        ]),
-        m("footer", { id: "page-footer" }, [
-          m("p", { class: "mb-0" }, "© Company 2016. All rights reserved. Terms of Service | Privacy Policy")
         ])
+        // m("footer", { id: "page-footer" }, [
+        //   m("p", { class: "mb-0" }, "© Company 2016. All rights reserved. Terms of Service | Privacy Policy")
+        // ])
       ]
     },
     edit: function(content) {
@@ -52,16 +52,6 @@ var mixinLayout = function(content, layout) {
         ]),
         m("section", { class: "clearfix", id: "wrapper" }, [
           m("aside", { id: "sidebar-wrapper" }, [
-            // m("form", { class: "navbar-form page-search-form" }, [
-            //   m(".input-group", [
-            //     m("input", { type: "text", class: "form-control", placeholder: "Search" }),
-            //     m("span", { class: "input-group-btn" }, [
-            //       m("button", { type: "submit", class: "btn btn-none" }, [
-            //         m("img", { src: "/images/icons/search.png" })
-            //       ])
-            //     ])
-            //   ])
-            // ]),
             m.component(mainNav)
           ]),
           m("section", { id: "page-content-wrapper" }, [

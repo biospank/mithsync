@@ -34,6 +34,8 @@ var topBar = {
           ])
         ])
       ])
+    } else {
+      return "";
     }
   },
   view: function(ctrl, args) {
