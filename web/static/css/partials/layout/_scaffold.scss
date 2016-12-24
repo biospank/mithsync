@@ -63,10 +63,10 @@ body {
       @include translate(-100%, 0);
     }
     .breadcrumb-bar {
-      position: fixed;
-      right: 0;
-      left: 0;
-      z-index: 5;
+      // position: fixed;
+      // right: 0;
+      // left: 0;
+      // z-index: 5;
       min-width: $minWidthPage;
       background-color: #f6f8f8;
       @include border(#dce0e6, 1px, bottom);
@@ -74,7 +74,7 @@ body {
     #wrapper {
       //padding-right: $sidebar-video-edit-width - 100px;
       padding-left: 0;
-      padding-top: 64px;
+      padding-top: 103px;
       position: relative;
       margin-bottom: 0;
       @include transition(all 0.5s ease);
@@ -86,7 +86,7 @@ body {
       }
       @include respond-to(min-width, 971px) {
         padding-right: $sidebar-video-edit-width;
-        margin-top: 64px;
+        margin-top: 103px;
         padding-top: 0;
       }
     }

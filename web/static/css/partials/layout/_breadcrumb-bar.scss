@@ -1,8 +1,8 @@
 .breadcrumb-bar {
   @include border(#eaeaea, 1px, bottom);
-  padding: 13px 20px 0;
+  padding: 13px 20px 13px;
   background-color: white;
-  height: 49px;
+  //height: 49px;
   .section-title {
     @include font-style(21px, #424856, 300, 21px);
     margin: 0;

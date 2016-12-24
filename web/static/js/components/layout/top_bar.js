@@ -36,8 +36,8 @@ var topBar = {
       ])
     }
   },
-  view: function(ctrl) {
-    return m("nav", { class: "topbar navbar-fixed-top" }, [
+  view: function(ctrl, args) {
+    return m("nav", { class: "topbar " + (args.additionalClass ? args.additionalClass : "") }, [
       m(".clearfix", {}, [
         m(".pull-left", [
           m("a", {
