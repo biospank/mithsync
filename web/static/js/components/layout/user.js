@@ -48,7 +48,7 @@ var user = {
       ]),
       m("ul", { class: "dropdown-menu", "aria-labelledby": "dropdownMenu1" }, [
         m("li", [
-          m("a", { class: "", href: "#" }, "Mio Profilo")
+          m("a", { class: "", href: "/userprofile", config: m.route }, "Mio Profilo")
         ]),
         // m("li", [
         //   m("a", { class: "", href: "#" }, "Logout")

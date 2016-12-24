@@ -13,17 +13,3 @@
     border-radius: 4px;
   }
 }
-
-.profile-card {
-  position: relative;
-  &__photo {}
-  &__info {
-    @include position(left, 0, bottom, 0);
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 10px;
-    color: white;
-    .name {}
-    .email {}
-  }
-}

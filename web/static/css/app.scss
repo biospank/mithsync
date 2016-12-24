@@ -26,6 +26,7 @@
 @import "./partials/shared/search-form";
 @import "./partials/shared/socials-group";
 @import "./partials/shared/list";
+@import "./partials/shared/card-wrapper";
 
 @import "./partials/plugins/customized-dropzone";
 @import "./partials/plugins/customized-sweetalert";
@@ -44,5 +45,7 @@
 @import "./partials/video/library";
 @import "./partials/video/slidesheet";
 @import "./partials/video/sidebar-video-edit";
+
+@import "./partials/user/index";
 
 @import "./partials/dashboard/dashboard";
