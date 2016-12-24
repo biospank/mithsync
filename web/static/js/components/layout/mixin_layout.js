@@ -17,7 +17,7 @@ var mixinLayout = function(content, layout) {
     },
     standard: function(content) {
       return [
-        m.component(topBar),
+        m.component(topBar, { additionalClass: "navbar-fixed-top" }),
         m("section", { class: "clearfix", id: "wrapper" }, [
           m("aside", { id: "sidebar-wrapper" }, [
             // m("form", { class: "navbar-form page-search-form" }, [
@@ -46,8 +46,8 @@ var mixinLayout = function(content, layout) {
     },
     edit: function(content) {
       return m(".edit-layout", [
-        m("header", [
-          m.component(topBar),
+        m("header", { class: "navbar-fixed-top" }, [
+          m.component(topBar, {}),
           m.component(breadcrumbBar)
         ]),
         m("section", { class: "clearfix", id: "wrapper" }, [
