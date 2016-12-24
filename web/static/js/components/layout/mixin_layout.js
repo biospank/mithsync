@@ -46,8 +46,10 @@ var mixinLayout = function(content, layout) {
     },
     edit: function(content) {
       return m(".edit-layout", [
-        m.component(topBar),
-        m.component(breadcrumbBar),
+        m("header", [
+          m.component(topBar),
+          m.component(breadcrumbBar)
+        ]),
         m("section", { class: "clearfix", id: "wrapper" }, [
           m("aside", { id: "sidebar-wrapper" }, [
             // m("form", { class: "navbar-form page-search-form" }, [
@@ -107,10 +109,10 @@ var mixinLayout = function(content, layout) {
               ])
             ])
           ])
-        ]),
-        m("footer", { id: "page-footer" }, [
-          m(".container", "© Company 2016. All rights reserved. Terms of Service | Privacy Policy")
         ])
+        // m("footer", { id: "page-footer" }, [
+        //   m(".container", "© Company 2016. All rights reserved. Terms of Service | Privacy Policy")
+        // ])
       ])
     }
   };
