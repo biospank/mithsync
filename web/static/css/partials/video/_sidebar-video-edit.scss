@@ -82,13 +82,18 @@
       }
     }
   }
-  .tab-content {
-    height: 100%;
-    overflow: scroll;
-    @include transition(overflow 0.3s ease);
-    @include spaces(15px 15px 0px 15px, 0);
-    @include respond-to(min-width, 971px) {
-      padding-bottom: 110px;
+  .tab {
+    &-content {
+      height: 800px;
+      overflow-y: auto;
+      // @include transition(overflow 0.3s ease);
+      @include spaces(15px 15px 0px 15px, 0);
+      // @include respond-to(min-width, 971px) {
+      //   padding-bottom: 110px;
+      // }
+    }
+    &-pane {
+      height: 1500px;
     }
   }
 }

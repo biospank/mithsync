@@ -114,14 +114,12 @@ body {
         float: left;
       }
       @include respond-to(min-width, 971px) {
-        overflow-y: scroll;
+        overflow-y: auto;
         height: 100%;
         margin-right: $sidebar-video-edit-width;
         padding-bottom: 100px;
-        position: absolute;
-        left: 0;
+        @include position(left, 0, top, 0);
         right: 0;
-        top: 0;
         bottom: 0;
       }
     }

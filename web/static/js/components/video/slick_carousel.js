@@ -48,7 +48,7 @@ var slickCarousel = (function() {
     view: function(ctrl, args, slides) {
       carousel.slides = slides;
 
-      return m("section", { class: "slidesheet pb-90", config: ctrl.onReady }, [
+      return m("section", { class: "slidesheet", config: ctrl.onReady }, [
         m(".row", [
           carousel.slides.map(function(slide) {
             return m(slickItem, {
