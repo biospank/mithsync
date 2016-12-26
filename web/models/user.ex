@@ -41,11 +41,12 @@ defmodule Videosync.User do
     |> validate_format(:email, ~r/@/)
   end
 
-  # def login_changeset(model, params \\ %{}) do
-  #   model
-  #   |> changeset(params)
-  #   |> put_password_hash()
-  # end
+  # used only for test
+  def login_changeset(model, params \\ %{}) do
+    model
+    |> changeset(params)
+    |> put_password_hash()
+  end
 
   def registration_changeset(model, params \\ %{}) do
     model
@@ -71,11 +72,7 @@ defmodule Videosync.User do
   end
 
   def password_reset_changeset(model, params \\ %{}) do
-    model
-    |> cast(params, @required_reset_fields, @optional_fields)
-    |> validate_length(:password, min: 6)
-    |> validate_confirmation(:password, required: true, message: "does not match password")
-    |> put_password_hash()
+    password_change_changeset(model, params)
   end
 
   def activation_changeset(model) do

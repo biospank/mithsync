@@ -1,13 +1,13 @@
-defmodule Videosync.Tokentest do
+defmodule Videosync.TokenTest do
   use Videosync.ConnCase
 
   test "unauthenticated", %{conn: conn} do
-    conn = get conn, user_path(conn, :index)
+    conn = get conn, project_path(conn, :index)
     assert json_response(conn, 401)
   end
 
   test "unauthorized", %{conn: conn} do
-    conn = get conn, user_path(conn, :index)
+    conn = get conn, project_path(conn, :index)
     assert json_response(conn, 401)
   end
 end
