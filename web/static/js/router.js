@@ -5,7 +5,7 @@ import resetRequestPage from "./components/password/reset_request_page";
 import resendActivationPage from "./components/signup/resend_activation_page";
 import resetPage from "./components/password/reset_page";
 import dashboard from "./components/dashboard/index";
-import userProfile from "./components/user/user_profile";
+import profile from "./components/user/profile";
 import projectList from "./components/project/index";
 import videoPage from "./components/video/index";
 import newVideo from "./components/video/new";
@@ -30,7 +30,7 @@ export default m.route(document.getElementById('app'), "/", {
 
   "/password/reset/:code": resetPage,
 
-  "/userprofile": userProfile,
+  "/userprofile": profile,
 
   "/projects": projectList,
 

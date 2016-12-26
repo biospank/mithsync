@@ -51,9 +51,9 @@ var topBar = {
           ]),
           this.showMenuButton()
         ]),
-        m(".pull-left", [
-          this.showMenuTop()
-        ]),
+        // m(".pull-left", [
+        //   this.showMenuTop()
+        // ]),
         m(".pull-right", [
           m.component(user)
         ])

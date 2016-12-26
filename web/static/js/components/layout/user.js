@@ -52,7 +52,7 @@ var user = (function() {
         ]),
         m("ul", { class: "dropdown-menu", "aria-labelledby": "dropdownMenu1" }, [
           m("li", [
-            m("a", { class: "", href: "/userprofile", config: m.route }, "My Profile")
+            m("a", { class: "", href: "/userprofile", config: m.route }, "Profile")
           ]),
           m("li", [
             m("a", { class: "", href: "#", onclick: ctrl.logout }, "Logout")

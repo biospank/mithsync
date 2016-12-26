@@ -41,11 +41,11 @@ defmodule Videosync.User do
     |> validate_format(:email, ~r/@/)
   end
 
-  def login_changeset(model, params \\ %{}) do
-    model
-    |> changeset(params)
-    |> put_password_hash()
-  end
+  # def login_changeset(model, params \\ %{}) do
+  #   model
+  #   |> changeset(params)
+  #   |> put_password_hash()
+  # end
 
   def registration_changeset(model, params \\ %{}) do
     model
@@ -55,6 +55,15 @@ defmodule Videosync.User do
     |> validate_confirmation(:password, required: true, message: "does not match password")
     |> put_password_hash()
     |> put_activation_code()
+  end
+
+  def password_change_changeset(model, params \\ %{}) do
+    model
+    |> cast(params, [:password])
+    |> validate_required([:password])
+    |> validate_length(:password, min: 6)
+    |> validate_confirmation(:password, required: true, message: "does not match password")
+    |> put_password_hash()
   end
 
   def gen_code_reset_changeset(model) do

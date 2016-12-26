@@ -25,11 +25,11 @@ defmodule Videosync.UserControllerTest do
     end
   end
 
-  @tag :logged_in
-  test "lists all entries on index", %{conn: conn} do
-    conn = get conn, user_path(conn, :index)
-    assert json_response(conn, 200)["data"]
-  end
+  # @tag :logged_in
+  # test "lists all entries on index", %{conn: conn} do
+  #   conn = get conn, user_path(conn, :index)
+  #   assert json_response(conn, 200)["data"]
+  # end
 
   @tag :logged_in
   test "shows chosen resource", %{conn: conn, user: user} do
@@ -66,11 +66,11 @@ defmodule Videosync.UserControllerTest do
     assert json_response(conn, 422)["errors"] != %{}
   end
 
-  @tag :logged_in
-  test "deletes chosen resource", %{conn: conn} do
-    user = Repo.insert! %User{}
-    conn = delete conn, user_path(conn, :delete, user)
-    assert response(conn, 204)
-    refute Repo.get(User, user.id)
-  end
+  # @tag :logged_in
+  # test "deletes chosen resource", %{conn: conn} do
+  #   user = Repo.insert! %User{}
+  #   conn = delete conn, user_path(conn, :delete, user)
+  #   assert response(conn, 204)
+  #   refute Repo.get(User, user.id)
+  # end
 end

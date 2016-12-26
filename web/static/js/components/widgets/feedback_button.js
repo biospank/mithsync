@@ -9,6 +9,7 @@ var feedbackButton = {
 
       ctrl.label(attrs.feedbackLabel);
       ctrl.style(ctrl.style() + ' disabled');
+      m.redraw();
 
       attrs.action({background: true}).then(function() {
         ctrl.label(attrs.label);

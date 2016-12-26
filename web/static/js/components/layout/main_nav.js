@@ -74,7 +74,7 @@ var mainNav = {
               //   m("a", {
               //     href: "/userprofile",
               //     config: m.route,
-              //     class: "sub-nav__tab" }, "Edit profile")
+              //     class: "sub-nav__tab" }, "Profile")
               // ]),
               m("li", [
                 m("a", {

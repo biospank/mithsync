@@ -25,7 +25,7 @@ defmodule Videosync.UserController do
 
   def update(conn, %{"id" => id, "user" => user_params}) do
     user = Repo.get!(User, id)
-    changeset = User.registration_changeset(user, user_params)
+    changeset = User.password_change_changeset(user, user_params)
 
     case Repo.update(changeset) do
       {:ok, user} ->
