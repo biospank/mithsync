@@ -175,6 +175,7 @@ var editVideo = (function() {
       ctrl.onChangeSlider = function(values, handle, unencodedValues) {
         var currentValue = _.round(values[handle]);
         slickCarousel.currentSlide().start = currentValue;
+        slickCarousel.refreshCurrentSlide();
         // to enable video
         ctrl.player.seek(currentValue);
         ctrl.unsaved(true);

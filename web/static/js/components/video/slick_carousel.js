@@ -42,6 +42,9 @@ var slickCarousel = (function() {
     updateSlide: function(oldSlide, newSlide) {
       _.assign(_.find(carousel.slides, oldSlide), newSlide);
     },
+    refreshCurrentSlide: function() {
+      m.redraw()
+    },
     view: function(ctrl, args, slides) {
       carousel.slides = slides;
 
