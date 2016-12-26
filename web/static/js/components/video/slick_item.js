@@ -20,6 +20,10 @@ var slickItem = {
             args.mouseOutCallback(ctrl.slide);
         }
       }, [
+        m("div", { class: "flag-check" }, [
+          m("input", { class: "magic-checkbox", type: "checkbox", name: "layout", id: "1" }),
+          m("label", { for: "1" })
+        ]),
         m("label", { class: "bookmark-time text-right weight-regular" }, ctrl.slide.start ),
         // m("i", { class: "fa fa-bookmark bookmark-color", "aria-hidden": true, style: "color: " + ctrl.slide.connectColor }),
         m("a", {}, [
