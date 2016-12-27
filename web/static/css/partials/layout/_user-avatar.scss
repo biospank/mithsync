@@ -1,6 +1,4 @@
 .user-avatar {
-  //line-height: 45px;
-  //@include border(rgba(#dee1e5 ,.2));
   text-align: center;
   margin: 5px 15px;
   &__button {
@@ -19,5 +17,11 @@
       @include font-style(15px, #707a82, 400, 45px);
       margin-left: 8px;
     }
+  }
+  .dropdown-menu {
+    padding: 0;
+    border-radius: 0;
+    width: 100%;
+    border: 0;
   }
 }

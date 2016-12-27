@@ -31,6 +31,37 @@
   #{$y}: $Yval;
 }
 
+@mixin arrow($size, $side, $color) {
+  width: 0;
+  height: 0;
+
+  @if($side == 'up') {
+    // UP
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-bottom: $size solid $color;
+    // end
+  } @elseif($side == 'down') {
+    // DOWN
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-top: $size solid #f00;
+    // end
+  } @elseif($side == 'right') {
+    // RIGHT
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+    border-left: $size solid green;
+    // end
+  } @else {
+    // LEFT
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+    border-right: $size solid blue;
+    // end
+  }
+}
+
 @mixin respond-to($type-1, $query-1, $type-2: 'nil', $query-2: 'nil') {
   @if ($type-2 == 'nil') {
     @media($type-1: $query-1) {
