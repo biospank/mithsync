@@ -120,7 +120,11 @@ defmodule Videosync.SlideControllerTest do
   test "deletes all given resources", %{conn: conn, user: user} do
     project = insert_project(user, %Project{})
     video = insert_video(user, %Video{})
-    [_ | slides] = Enum.map(1..5, fn(_) -> insert_slide(user, video, %Slide{}) end)
+    [_ | slides] = Enum.map(1..5, fn(_) ->
+      slide = insert_slide(user, video, %Slide{})
+
+      %{ id: slide.id }
+    end)
     post_conn = post conn, project_video_delete_all_slides_path(conn, :delete_all, project, video), slides: slides
 
     assert response(post_conn, 200)
