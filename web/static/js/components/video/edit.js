@@ -335,22 +335,48 @@ var editVideo = (function() {
         }).catch(swal.noop);
       };
 
-      ctrl.deleteSlide = function(event) {
-        Slide.resetModel(slickCarousel.currentSlide());
+      ctrl.deleteSlide = function() {
+        if(slickCarousel.hasCheckedSlides()) {
+          var slides = slickCarousel.checkedSlides();
 
-        if(Slide.isNewRecord()) {
-          ctrl.postDeleteAction();
-        } else {
-          Slide.delete(ctrl.video()).then(function(response) {
-            ctrl.postDeleteAction();
+          var slidesToDelete = _.filter(slides, function(slide) {
+            return slide.id !== undefined;
+          });
+
+          Slide.deleteAll(ctrl.video(), slidesToDelete).then(function(response) {
+            ctrl.postDeleteAction(response.data);
           }, function(response) {
             ctrl.errors(response.errors);
           })
+        } else {
+          Slide.resetModel(slickCarousel.currentSlide());
+
+          if(Slide.isNewRecord()) {
+            ctrl.postDeleteAction();
+          } else {
+            Slide.delete(ctrl.video()).then(function(response) {
+              ctrl.postDeleteAction();
+            }, function(response) {
+              ctrl.errors(response.errors);
+            })
+          }
         }
       };
 
-      ctrl.postDeleteAction = function() {
-        slickCarousel.removeSlide();
+      ctrl.postDeleteAction = function(slides) {
+        if(slides !== undefined) {
+          slickCarousel.slides(slides);
+          if(_.isEmpty(slickCarousel.slides())) {
+            slickCarousel.addSlide(
+              Slide.resetModel({
+                start: 0,
+                connectColor: Color.sample()
+              })
+            );
+          }
+        } else {
+          slickCarousel.removeSlide();
+        }
         ctrl.refreshSlider(slickCarousel.slides())
         var slide = _.first(slickCarousel.slides())
         slickCarousel.currentSlide(slide);

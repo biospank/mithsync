@@ -109,6 +109,22 @@ var Slide = (function() {
           }
         }
       );
+    },
+    deleteAll: function(video, slides) {
+      return m.request({
+        method: "POST",
+        url: Videosync.apiBaseUrl() +
+          _.replace(
+            _.replace(url, 'projectId', video.project_id),
+            'videoId', video.id
+          ) + '/delete_all',
+        data: { slides: slides },
+        config: function(xhr) {
+          xhr.setRequestHeader("accept", "application/json");
+          xhr.setRequestHeader("content-type", "application/json");
+          xhr.setRequestHeader("Authorization", Videosync.realm + " " + Session.token());
+        }
+      });
     }
   };
 })();

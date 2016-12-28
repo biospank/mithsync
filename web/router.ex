@@ -49,6 +49,7 @@ defmodule Videosync.Router do
         resources "/layout", LayoutController, only: [:update]
         resources "/slides", SlideController, only: [:create, :update, :delete]
         post "/slides/save_all", SlideController, :save_all, as: :save_all_slides
+        post "/slides/delete_all", SlideController, :delete_all, as: :delete_all_slides
         resources "/images", ImageController, only: [:index, :create, :delete]
       end
     end
