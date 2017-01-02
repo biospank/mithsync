@@ -1,100 +1,61 @@
 .main-nav {
   margin: 0 0 25px;
   &__tab {
-    color: white;
-    text-transform: uppercase;
-    @include transition(all 0.3s ease-out);
-    padding: 15px 50px 15px 20px !important;
-    @include border(transparent, 2px, left); //#34c9df
-    &:hover, &:focus {
-      background-color: darken($light, 10%) !important;
+    & > a {
       color: white;
-      border-radius: 0;
-      @include border($mainColor, 2px, left);
-    }
-    &:focus {
-      .main-nav__icon {
-        color: $mainColor;
-
+      border-radius: 0 !important;
+      text-transform: uppercase;
+      @include transition(all 0.3s ease-out);
+      padding: 15px 50px 15px 20px !important;
+      @include border(transparent, 2px, left); //#34c9df
+      &:hover, &:focus {
+        background-color: darken($light, 10%) !important;
+        color: white;
+        border-radius: 0;
+        @include border($mainColor, 2px, left);
+      }
+      &:focus {
+        .main-nav__icon {
+          color: $mainColor;
+        }
+      }
+      .badge {
+        @include position(right, 20px, top, 12px);
       }
     }
-    .badge {
-      @include position(right, 20px, top, 12px);
+    &.active {
+      &::after {
+        $borderSize: 7px;
+        content: "";
+        display: block;
+        @include position(right, 0, top, 17px);
+        @include border(transparent, $borderSize, top);
+        @include border(transparent, $borderSize, bottom);
+        @include border($body-bg, $borderSize, right);
+        @include size(0, 0);
+      }
+      & > a {
+        background-color: darken($dark, 2%) !important;
+        border-radius: 0;
+        @include border($mainColor, 2px, left);
+        &:hover {
+          background-color: darken($dark, 2%) !important;
+        }
+        .main-nav__icon {
+          color: $mainColor;
+        }
+      }
+      .sub-nav {
+        display: block;
+      }
     }
   }
   &__icon {
-    //width: 20px;
     color: #213147;
     @include position(left, 20px, top, 18px);
   }
   &__voice {
     padding: 0 10px;
     margin-left: 20px;
-    // &:after {
-    //   position: absolute;
-    //   right: 0;
-    //   content: "\f078";
-    //   display: inline-block;
-    //   font: normal normal normal 14px/1 FontAwesome;
-    // }
-  }
-  &__arrow {
-    font-size: 11px;
-  }
-  li.active {
-    &::after {
-      $borderSize: 7px;
-      content: "";
-      display: block;
-      @include position(right, 0, top, 17px);
-      @include border(transparent, $borderSize, top);
-      @include border(transparent, $borderSize, bottom);
-      @include border(#f1f4f7, $borderSize, right);
-      @include size(0, 0);
-    }
-    .main-nav__tab {
-      background-color: darken($dark, 2%);
-      border-radius: 0;
-      @include border($mainColor, 2px, left);
-      &:hover {
-        background-color: darken($dark, 2%) !important;
-      }
-      .main-nav__icon {
-        color: $mainColor;
-      }
-    }
-    .sub-nav {
-      display: block;
-    }
-  }
-}
-
-.sub-nav {
-  padding-left: 26px;
-  padding-right: 26px;
-  background-color: $light;
-  & > .nav {
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
-  &__tab {
-    color: white;
-    //text-transform: uppercase;
-    @include transition(all 0.3s ease-out);
-    padding: 7px 23px !important;
-    @include border($dark, 2px, left);
-    &:hover, &:focus {
-      background-color: transparent !important;
-      color: white;
-      text-decoration: none;
-      border-color: $mainColor;
-    }
-  }
-  li.active {
-    .sub-nav__tab {
-      background-color: transparent;
-      color: white;
-      border-color: $mainColor;
-    }
   }
 }

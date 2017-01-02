@@ -49,7 +49,7 @@ var topBar = {
           }, [
             m("img", { src: "images/logo-zinkroo-azzurro.png", class: "img-responsive" })
           ]),
-          this.showMenuButton()
+          // this.showMenuButton()
         ]),
         // m(".pull-left", [
         //   this.showMenuTop()

@@ -36,14 +36,14 @@ var mainNav = {
   view: function(ctrl) {
     return m("nav", { class: "main-nav"}, [
       m("ul", { class: "nav nav-pills nav-stacked" }, [
-        m("li", { class: (ctrl.isActive("/") ? 'active' : '') }, [
-          m("a", { href: "/", config: m.route, class: "main-nav__tab" }, [
+        m("li", { class: (ctrl.isActive("/") ? 'active main-nav__tab' : 'main-nav__tab') }, [
+          m("a", { href: "/", config: m.route, class: "" }, [
             m("i", { class: "fa fa-dashboard main-nav__icon" }),
             m("span", { class: "main-nav__voice" }, "Dashboard")
           ])
         ]),
-        m("li", {  class: (ctrl.isActive("/projects") ? 'active' : '') }, [
-          m("a", { href: "/projects", config: m.route, class: "main-nav__tab" }, [
+        m("li", {  class: (ctrl.isActive("/projects") ? 'active main-nav__tab' : 'main-nav__tab') }, [
+          m("a", { href: "/projects", config: m.route, class: "" }, [
             m("i", { class: "fa fa-film main-nav__icon" }),
             m("span", { class: "main-nav__voice" }, "Projects"),
             m("span", {
@@ -57,10 +57,10 @@ var mainNav = {
         //     m("span", { class: "main-nav__voice" }, "Faq")
         //   ])
         // ]),
-        m("li", {  class: (ctrl.isActive("/userprofile") ? 'active' : '') }, [
+        m("li", {  class: (ctrl.isActive("/userprofile") ? 'active main-nav__tab' : 'main-nav__tab') }, [
           m("a", {
             href: "#collapseUserNav",
-            class: "collapsed main-nav__tab",
+            class: "collapsed",
             "aria-expanded": false,
             "data-toggle": "collapse" }, [
             m("i", { class: "fa fa-cog main-nav__icon" }),
@@ -70,17 +70,17 @@ var mainNav = {
           ]),
           m("nav", { class: "collapse sub-nav", id: "collapseUserNav", "aria-expanded": false }, [
             m("ul", { class: "nav" }, [
-              // m("li", { class: (ctrl.isActive("/userprofile") ? 'active' : '') }, [
-              //   m("a", {
-              //     href: "/userprofile",
-              //     config: m.route,
-              //     class: "sub-nav__tab" }, "Profile")
-              // ]),
-              m("li", [
+              m("li", { class: (ctrl.isActive("/userprofile") ? 'active sub-nav__tab' : 'sub-nav__tab') }, [
+                m("a", {
+                  href: "/userprofile",
+                  config: m.route,
+                  class: "" }, "Profile")
+              ]),
+              m("li", { class: "sub-nav__tab" }, [
                 m("a", {
                   href: "#",
                   onclick: ctrl.logout,
-                  class: "sub-nav__tab" }, "Logout")
+                  class: "" }, "Logout")
               ])
             ])
           ])

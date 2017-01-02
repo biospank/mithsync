@@ -5,7 +5,7 @@
   //@include border(#eaeaea);
   @include box-shadow(0px 0px 10px #e1e5ef);
   min-height: 140px;
-  border-radius: 5px;
+  //border-radius: 5px;
   &__title {
     margin: 0 0 20px 0;
     @include font-style(14px, $coloured, 400);

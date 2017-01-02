@@ -2,7 +2,7 @@
   background-color: white;
   @include box-shadow(0px 0px 10px #dfe4ee);
   @include spaces(0, 0 0 15px 0);
-  border-radius: 5px;
+  //border-radius: 5px;
   position: relative;
   &.media {
     overflow: visible;
@@ -52,8 +52,8 @@
       @include border(#eaeaea, 1px, right);
     }
     .media-object {
-      border-top-left-radius: 5px;
-      border-bottom-left-radius: 5px;
+      // border-top-left-radius: 5px;
+      // border-bottom-left-radius: 5px;
     }
   }
   &__body {

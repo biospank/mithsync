@@ -11,7 +11,7 @@ var breadcrumb = {
 
     var slugMapping = {
       ''         : {
-        'name' : 'Home',
+        'name' : 'Dashboard',
         'urlTemplate'  : '/'
       },
       'projects' : {
@@ -32,7 +32,7 @@ var breadcrumb = {
         'urlTemplate'  : '/faq'
       },
       'userprofile' : {
-        'name' : 'User',
+        'name' : 'Profile',
         'urlTemplate'  : '/userprofile'
       }
     };

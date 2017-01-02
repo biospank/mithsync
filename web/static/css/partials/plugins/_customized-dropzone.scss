@@ -5,6 +5,13 @@
   margin-bottom: 25px;
   overflow: hidden;
   padding: 16px 8px 8px 16px;
+  &:after {
+    content: "Max allowed file size 1 MB";
+    display: block;
+    @include font-style(13px, #646C7F);
+    margin-bottom: 30px;
+    text-align: center;
+  }
   .dz-details {
     display: none;
   }
@@ -22,7 +29,7 @@
       margin-left: -($width / 2);
     }
     &:after {
-      content: "Max allowed file size 1 MB";
+      content: "Upload only 16:9 pixel ratio image";
       display: block;
       @include font-style(13px, #646C7F);
       margin-top: 3px;

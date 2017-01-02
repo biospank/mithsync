@@ -83,6 +83,7 @@ body {
         #sidebar-wrapper {
           //width: 250px;
           @include translate(0, 0);
+          z-index: 10000;
         }
       }
       @include respond-to(min-width, 971px) {

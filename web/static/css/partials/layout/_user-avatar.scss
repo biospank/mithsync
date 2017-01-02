@@ -18,10 +18,30 @@
       margin-left: 8px;
     }
   }
-  .dropdown-menu {
-    padding: 0;
-    border-radius: 0;
-    width: 100%;
-    border: 0;
+  .dropdown {
+    &-menu {
+      // background-color: #f5f5f5;
+      margin-top: 12px;
+      padding: 0;
+      border-radius: 0;
+      width: 100%;
+      border: 0;
+      &:before {
+        @include arrow(10px, up, white);
+        display: block;
+        content: "";
+        @include position(right, 10px, top, -10px);
+      }
+      & > li {
+        @include border(#f5f5f5, 1px, bottom);
+        & > a {
+          padding-top: 10px;
+          padding-bottom: 10px;
+        }
+        &:last-child {
+          border: 0;
+        }
+      }
+    }
   }
 }

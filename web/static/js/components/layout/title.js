@@ -17,7 +17,7 @@ var title = {
         'name' : 'Faq'
       },
       'userprofile' : {
-        'name' : 'User'
+        'name' : 'Profile'
       }
     };
 

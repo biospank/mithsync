@@ -1,0 +1,31 @@
+.sub-nav {
+  padding-left: 26px;
+  padding-right: 26px;
+  background-color: $light;
+  & > .nav {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  &__tab {
+    & > a {
+      color: white;
+      //text-transform: uppercase;
+      @include transition(all 0.3s ease-out);
+      padding: 7px 23px !important;
+      @include border($dark, 2px, left);
+      &:hover, &:focus {
+        background-color: transparent !important;
+        color: white;
+        text-decoration: none;
+        border-color: $mainColor;
+      }
+    }
+    &.active {
+      & > a {
+        background-color: transparent;
+        color: white;
+        border-color: $mainColor;
+      }
+    }
+  }
+}
