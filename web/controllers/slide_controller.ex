@@ -93,4 +93,24 @@ defmodule Videosync.SlideController do
 
     send_resp(conn, :no_content, "")
   end
+
+  def delete_all(conn, %{"video_id" => video_id, "slides" => slides_to_delete}, user) do
+    user
+    |> Slide.own_by(video_id)
+    |> Slide.includes(Enum.map(slides_to_delete, &(&1["id"])))
+    |> Repo.delete_all
+
+    video = Video
+    |> Repo.get!(String.to_integer(video_id))
+
+    slides = user
+      |> Slide.own_by(video_id)
+      |> Slide.order_by(:start)
+      |> Repo.all
+
+    Ecto.Changeset.change(video, slide_count: length(slides))
+      |> Repo.update()
+
+    render(conn, "index.json", slides: slides)
+  end
 end

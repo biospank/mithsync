@@ -49,6 +49,11 @@ defmodule Videosync.Slide do
       where: s.video_id == ^video
   end
 
+  def includes(query, items) do
+    from s in query,
+      where: s.id in ^items
+  end
+
   def order_by(order) do
     from s in Videosync.Slide, order_by: field(s, ^order)
   end

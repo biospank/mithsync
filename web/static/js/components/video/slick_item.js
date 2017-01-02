@@ -1,5 +1,12 @@
 var slickItem = {
-  view: function(ctrl, args, slide, active){
+  controller: function(args, slide, active) {
+    return {
+      checkId: _.once(function() {
+        return _.uniqueId('check-');
+      })
+    };
+  },
+  view: function(ctrl, args, slide, active) {
     ctrl.slide = slide;
     ctrl.active = active;
 
@@ -21,8 +28,18 @@ var slickItem = {
         }
       }, [
         m("div", { class: "flag-check" }, [
-          m("input", { class: "magic-checkbox", type: "checkbox", name: "layout", id: "1" }),
-          m("label", { for: "1" })
+          m("input", {
+            class: "magic-checkbox",
+            type: "checkbox",
+            name: "delete-" + ctrl.checkId(),
+            id: ctrl.checkId(),
+            onclick: function(e) {
+              if(args.checkCallback)
+                args.checkCallback(e.target.checked);
+            },
+            checked: ctrl.slide.checked
+          }),
+          m("label", { for: ctrl.checkId() })
         ]),
         m("label", { class: "bookmark-time text-right weight-regular" }, ctrl.slide.start ),
         // m("i", { class: "fa fa-bookmark bookmark-color", "aria-hidden": true, style: "color: " + ctrl.slide.connectColor }),

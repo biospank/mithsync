@@ -32,7 +32,8 @@ defmodule Videosync.SlideControllerTest do
         put(conn, project_video_slide_path(conn, :update, 4, 12, 34, %{})),
         post(conn, project_video_slide_path(conn, :create, 4, 12, %{})),
         post(conn, project_video_save_all_slides_path(conn, :save_all, 4, 12, [])),
-        delete(conn, project_video_slide_path(conn, :delete, 4, 12, 34))
+        delete(conn, project_video_slide_path(conn, :delete, 4, 12, 34)),
+        post(conn, project_video_delete_all_slides_path(conn, :delete_all, 4, 12, []))
       ], fn conn ->
         assert json_response(conn, 401)
         assert conn.halted
@@ -113,6 +114,22 @@ defmodule Videosync.SlideControllerTest do
     conn = delete conn, project_video_slide_path(conn, :delete, project, video, slide)
     assert response(conn, 204)
     refute Repo.get(Slide.own_by(user, video.id), slide.id)
+  end
+
+  @tag :logged_in
+  test "deletes all given resources", %{conn: conn, user: user} do
+    project = insert_project(user, %Project{})
+    video = insert_video(user, %Video{})
+    [_ | slides] = Enum.map(1..5, fn(_) ->
+      slide = insert_slide(user, video, %Slide{})
+
+      %{ id: slide.id }
+    end)
+    post_conn = post conn, project_video_delete_all_slides_path(conn, :delete_all, project, video), slides: slides
+
+    assert response(post_conn, 200)
+    retrieve_deleted_slides = Slide.includes(Slide, Enum.map(slides, &(&1.id))) |> Repo.all()
+    assert retrieve_deleted_slides |> Enum.empty?
   end
 
   @tag :logged_in

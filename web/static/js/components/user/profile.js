@@ -26,9 +26,9 @@ var profile = (function() {
                 m(".col-md-6", [
                   m.component(textField, {
                     type: 'password',
-                    placeholder: 'Enter Password',
+                    placeholder: 'Enter New Password',
                     id: 'password',
-                    dataLabel: 'Password',
+                    dataLabel: 'New Password',
                     oninput: m.withAttr("value", User.model.password),
                     error: ctrl.errors()['password']
                   })
@@ -36,9 +36,9 @@ var profile = (function() {
                 m(".col-md-6", [
                   m.component(textField, {
                     type: 'password',
-                    placeholder: 'Reenter Password',
+                    placeholder: 'Reenter New Password',
                     id: 'password_confirmation',
-                    dataLabel: 'Confirm Password',
+                    dataLabel: 'Confirm New Password',
                     oninput: m.withAttr("value", User.model.password_confirmation),
                     error: ctrl.errors()['password_confirmation']
                   })

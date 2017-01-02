@@ -45,6 +45,14 @@ var slickCarousel = (function() {
     refreshCurrentSlide: function() {
       m.redraw()
     },
+    hasCheckedSlides: function() {
+      return _.some(carousel.slides, ['checked', true])
+    },
+    checkedSlides: function() {
+      return _.filter(carousel.slides, function(slide, index, collection) {
+        return slide.checked;
+      });
+    },
     view: function(ctrl, args, slides) {
       carousel.slides = slides;
 
@@ -66,6 +74,9 @@ var slickCarousel = (function() {
               mouseOutCallback: function(slide) {
                 if(args.mouseOutCallback)
                   args.mouseOutCallback(slide);
+              },
+              checkCallback: function(checked) {
+                slide.checked = checked;
               }
             }, slide, _.isEqual(slide, carousel.currentSlide));
           })
