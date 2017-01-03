@@ -33,6 +33,17 @@ var slickCarousel = (function() {
     slideByIndex: function(index) {
       return _.nth(carousel.slides, index);
     },
+    prevSlide: function(index) {
+      return _.nth(carousel.slides, index - 1);
+    },
+    nextSlide: function(index) {
+      var slide = _.nth(carousel.slides, index + 1);
+
+      if(slide !== undefined)
+        return slide;
+      else
+        return _.first(carousel.slides);
+    },
     addSlide: function(slide) {
       carousel.slides.push(slide);
     },

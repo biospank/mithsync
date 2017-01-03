@@ -37,6 +37,7 @@ var Slider = {
 
     slider.on('change', opts.onChange);
     slider.on('update', opts.onUpdate);
+    slider.on('set', opts.onSet);
 
     return slider;
   }
