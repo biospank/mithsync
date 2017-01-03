@@ -12,7 +12,7 @@ var Slider = {
     	start: opts.start,
       connect: (opts.start.length > 1) ? _.concat(false, _.times(opts.start.length, _.constant(true))) :  true,
       behaviour: 'none',
-      margin: 5,
+      margin: 3,
       step: 1,
       tooltips: true,
       format: wNumb({
