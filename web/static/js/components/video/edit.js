@@ -173,12 +173,7 @@ var editVideo = (function() {
       };
 
       ctrl.onChangeSlider = function(values, handle, unencodedValues) {
-        var currentValue = _.round(values[handle]);
-        slickCarousel.currentSlide().start = currentValue;
-        slickCarousel.refreshCurrentSlide();
-        // to enable video
-        ctrl.player.seek(currentValue);
-        ctrl.unsaved(true);
+        ctrl.syncSlide(_.round(values[handle]));
       };
 
       ctrl.onUpdateSlider = function(values, handle, unencodedValues) {
@@ -190,6 +185,19 @@ var editVideo = (function() {
         // ctrl.svalue(duration);
         // m.endComputation();
 
+      };
+
+      ctrl.onSetSlider = function(values, handle, unencodedValues) {
+        if(slickCarousel.slideIndex(slickCarousel.currentSlide()) === handle)
+          ctrl.syncSlide(_.round(values[handle]));
+      };
+
+      ctrl.syncSlide = function(currentValue) {
+        slickCarousel.currentSlide().start = currentValue;
+        slickCarousel.refreshCurrentSlide();
+        // // to enable video
+        ctrl.player.seek(currentValue);
+        ctrl.unsaved(true);
       };
 
       ctrl.onunload = function(e) {
@@ -271,7 +279,8 @@ var editVideo = (function() {
           }),
           max: ctrl.player.getDuration(),
           onChange: ctrl.onChangeSlider,
-          onUpdate: ctrl.onUpdateSlider
+          onUpdate: ctrl.onUpdateSlider,
+          onSet: ctrl.onSetSlider
         }));
 
         ctrl.highlightSlide(_.first(slickCarousel.slides()));
@@ -436,19 +445,47 @@ var editVideo = (function() {
           // to enable video
           max: ctrl.player.getDuration(), // max: 180,
           onChange: ctrl.onChangeSlider,
-          onUpdate: ctrl.onUpdateSlider
+          onUpdate: ctrl.onUpdateSlider,
+          onSet: ctrl.onSetSlider
         }));
 
         ctrl.paintConnects();
       };
 
+      ctrl.seekHandle = function(event) {
+        var allValues = ctrl.slider().get();
+
+        var idx = slickCarousel.slideIndex(slickCarousel.currentSlide())
+        // console.log(event);
+
+        switch ( event.which ) {
+          case 37:
+            allValues[idx] = _.toString(_.toNumber(allValues[idx]) - 1);
+            // console.log(allValues);
+            ctrl.slider().set( allValues );
+            break;
+          case 39:
+            allValues[idx] = _.toString(_.toNumber(allValues[idx]) + 1);
+            // console.log(allValues);
+            ctrl.slider().set( allValues );
+            break;
+        }
+      }
+
       ctrl.focusHandle = function(index) {
         var origins = ctrl.slider().target.getElementsByClassName('noUi-origin');
+
         _.forEach(origins, function(element, idx) {
+          var handle = element.querySelector('.noUi-handle');
+
           if(idx !== index) {
             element.setAttribute('disabled', true);
+            handle.setAttribute('tabindex', -idx);
           } else {
             element.removeAttribute('disabled');
+            handle.setAttribute('tabindex', idx);
+            handle.focus();
+            handle.addEventListener('keydown', ctrl.seekHandle);
           }
         });
       };
