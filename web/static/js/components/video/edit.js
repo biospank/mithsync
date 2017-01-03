@@ -459,7 +459,7 @@ var editVideo = (function() {
 
         switch ( event.which ) {
           case 37:
-            if(event.ctrlKey) {
+            if(event.ctrlKey || event.altKey) {
               ctrl.changeSlide(slickCarousel.prevSlide(idx))
             } else {
               allValues[idx] = _.toString(_.toNumber(allValues[idx]) - 1);
@@ -467,7 +467,7 @@ var editVideo = (function() {
             }
             break;
           case 39:
-            if(event.ctrlKey) {
+            if(event.ctrlKey || event.altKey) {
               ctrl.changeSlide(slickCarousel.nextSlide(idx))
             } else {
               allValues[idx] = _.toString(_.toNumber(allValues[idx]) + 1);
