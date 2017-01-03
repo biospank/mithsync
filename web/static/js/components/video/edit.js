@@ -456,21 +456,32 @@ var editVideo = (function() {
         var allValues = ctrl.slider().get();
 
         var idx = slickCarousel.slideIndex(slickCarousel.currentSlide())
-        // console.log(event);
 
         switch ( event.which ) {
           case 37:
-            allValues[idx] = _.toString(_.toNumber(allValues[idx]) - 1);
-            // console.log(allValues);
-            ctrl.slider().set( allValues );
+            if(event.ctrlKey) {
+              ctrl.changeSlide(slickCarousel.prevSlide(idx))
+            } else {
+              allValues[idx] = _.toString(_.toNumber(allValues[idx]) - 1);
+              ctrl.slider().set( allValues );
+            }
             break;
           case 39:
-            allValues[idx] = _.toString(_.toNumber(allValues[idx]) + 1);
-            // console.log(allValues);
-            ctrl.slider().set( allValues );
+            if(event.ctrlKey) {
+              ctrl.changeSlide(slickCarousel.nextSlide(idx))
+            } else {
+              allValues[idx] = _.toString(_.toNumber(allValues[idx]) + 1);
+              ctrl.slider().set( allValues );
+            }
             break;
         }
       }
+
+      ctrl.changeSlide = function(slide) {
+        slickCarousel.currentSlide(slide);
+        ctrl.highlightSlide(slide);
+        ctrl.showVideoFrame(slide);
+      };
 
       ctrl.focusHandle = function(index) {
         var origins = ctrl.slider().target.getElementsByClassName('noUi-origin');
