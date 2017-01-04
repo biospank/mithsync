@@ -53,20 +53,20 @@ var profile = (function() {
                 })
               ]),
             ])
-          ]),
-          m(".col-xs-5 col-lg-3", [
-            m('.card-wrapper bordered mboth-25', [
-              m(".profile-card", [
-                m("figure", { class: "profile-card__photo" }, [
-                  m("img", { src: "/images/icons/avatar-no-photo.png", alt: "Avatar", class: "img-responsive center-block" })
-                ])
-                // m(".profile-card__info", [
-                //   m("h4", { class: "name mboth-0" }, "Paolo Branco"),
-                //   m("p", { class: "email mboth-0" }, "paolo.branco@gmail.com")
-                // ])
-              ])
-            ])
           ])
+          // m(".col-xs-5 col-lg-3", [
+          //   m('.card-wrapper bordered mboth-25', [
+          //     m(".profile-card", [
+          //       m("figure", { class: "profile-card__photo" }, [
+          //         m("img", { src: "/images/icons/avatar-no-photo.png", alt: "Avatar", class: "img-responsive center-block" })
+          //       ])
+          //       // m(".profile-card__info", [
+          //       //   m("h4", { class: "name mboth-0" }, "Paolo Branco"),
+          //       //   m("p", { class: "email mboth-0" }, "paolo.branco@gmail.com")
+          //       // ])
+          //     ])
+          //   ])
+          // ])
         ])
       ])
     ])
