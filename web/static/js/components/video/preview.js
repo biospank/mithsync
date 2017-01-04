@@ -179,7 +179,7 @@ var preview = (function() {
 
       var showTitle = function() {
         if(Layout.model.show_title) {
-          return m("h3", { class: "mt-0 text-black mb-15" }, Video.model.title());
+          return m("h3", { class: "mt-0 text-black mb-5" }, Video.model.title());
         } else {
           return "";
         }
@@ -187,7 +187,7 @@ var preview = (function() {
 
       var showDate = function() {
         if(Layout.model.show_date) {
-          return m("h4", { class: "mt-0 text-black" }, moment(Video.model.inserted_at()).format('lll'));
+          return m("label", { class: "mt-0 text-black weight-light mb-15" }, moment(Video.model.inserted_at()).format('lll'));
         } else {
           return "";
         }
