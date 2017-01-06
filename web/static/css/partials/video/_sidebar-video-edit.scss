@@ -14,7 +14,7 @@
   // }
   @include respond-to(min-width, 971px) {
     padding-bottom: 70px;
-    @include position(right, 0, top, 103px, fixed);
+    @include position(right, 0, top, 107px, fixed);
     z-index: 999;
     width: $sidebar-video-edit-width;
   }

@@ -58,24 +58,24 @@ body {
     .main-container {
       //padding: 40px;
     }
+    #header-page {
+      background-color: white;
+    }
     #sidebar-wrapper {
       @include transition(all 0.5s ease);
       @include translate(-100%, 0);
       top: 103px;
     }
     .breadcrumb-bar {
-      // position: fixed;
-      // right: 0;
-      // left: 0;
-      // z-index: 5;
       min-width: $minWidthPage;
-      background-color: #f6f8f8;
-      @include border(#dce0e6, 1px, bottom);
+      background-color: white;
+      // border-color: #dce0e6;
+      margin-top: 4px;
     }
     #wrapper {
       //padding-right: $sidebar-video-edit-width - 100px;
       padding-left: 0;
-      padding-top: 103px;
+      padding-top: 107px;
       position: relative;
       margin-bottom: 0;
       @include transition(all 0.5s ease);
@@ -88,7 +88,7 @@ body {
       }
       @include respond-to(min-width, 971px) {
         padding-right: $sidebar-video-edit-width;
-        margin-top: 103px;
+        margin-top: 107px;
         padding-top: 0;
       }
     }

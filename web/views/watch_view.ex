@@ -38,4 +38,13 @@ defmodule Videosync.WatchView do
         slide.url
     end
   end
+
+  def slide_thumb_url(conn, slide) do
+    case Mix.env do
+      :dev ->
+        Videosync.Router.Helpers.static_path(conn, "/#{slide.thumb_url}")
+      _ ->
+        slide.thumb_url
+    end
+  end
 end

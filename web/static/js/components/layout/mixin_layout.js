@@ -46,14 +46,14 @@ var mixinLayout = function(content, layout) {
     },
     edit: function(content) {
       return m(".edit-layout", [
-        m("header", { class: "navbar-fixed-top" }, [
+        m("header", { class: "navbar-fixed-top", id: "header-page" }, [
           m.component(topBar, {}),
           m.component(breadcrumbBar)
         ]),
         m("section", { class: "clearfix", id: "wrapper" }, [
-          m("aside", { id: "sidebar-wrapper" }, [
-            m.component(mainNav)
-          ]),
+          // m("aside", { id: "sidebar-wrapper" }, [
+          //   m.component(mainNav)
+          // ]),
           m("section", { id: "page-content-wrapper" }, [
             content
           ]),

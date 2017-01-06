@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
         Reveal.slide(index);
         if(slider)
           slider.goTo(index);
-          
+
         return true;
       }
 
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
       pagination: false,
       items: 10,
       itemsDesktop : [1199,10],
-      itemsDesktopSmall : [980,5],
+      itemsDesktopSmall : [980,10],
       itemsTablet: [768,5],
       itemsMobile : false,
       navigationText: ["<i class='glyphicon glyphicon-chevron-left'></i>", "<i class='glyphicon glyphicon-chevron-right'></i>"]

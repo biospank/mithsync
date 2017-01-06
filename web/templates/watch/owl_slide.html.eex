@@ -1,5 +1,5 @@
 <figure class="img-thumbnail mhorizontal-5" data-start="<%= @slide.start %>">
   <a href="#">
-    <img src="<%= @view_module.slide_url(@conn, @slide) %>" class="img-responsive">
+    <img src="<%= @view_module.slide_thumb_url(@conn, @slide) %>" class="img-responsive">
   </a>
 </figure>
