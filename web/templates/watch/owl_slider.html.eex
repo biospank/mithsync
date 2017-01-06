@@ -1,5 +1,5 @@
 <%= if @video.layout.show_slider do %>
-  <div class="zinkroo__slide">
+  <div class="zinkroo__slide mb-5">
     <div id="owl-slider" class="owl-carousel">
       <%= render_many @slides, @view_module, "owl_slide.html", as: :slide, conn: @conn %>
     </div>

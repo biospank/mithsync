@@ -17,7 +17,7 @@
   <body id="watch-video">
     <div class="container-fluid p-all-side-0 zinkroo">
       <%= render @view_module, @view_template, assigns %>
-      <figure class="text-right mboth-5">
+      <figure class="text-right mb-5">
         <a href="http://www.zinkroo.com" target="_blank">
           <img src="<%= static_path(@conn, "/images/logo-zinkroo--small.png") %>">
         </a>
