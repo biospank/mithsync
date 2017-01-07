@@ -14,7 +14,7 @@ var Dropper = {
         "Authorization" : Videosync.realm + " " + Session.token()
       },
       maxFilesize: 1,
-      parallelUploads: 2,
+      parallelUploads: 5,
       acceptedFiles: "image/*",
       maxFiles: 20
     });
