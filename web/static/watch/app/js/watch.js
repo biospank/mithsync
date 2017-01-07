@@ -16,7 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if(currentSlide) {
       var currentSlideIndex = _.findIndex(slides, currentSlide);
 
-      if(inRange(currentSec, currentSlideIndex, (currentSlideIndex + 1))) {
+      if((currentSlideIndex !== -1) &&
+        inRange(currentSec, currentSlideIndex, (currentSlideIndex + 1))) {
         return;
       }
     }
