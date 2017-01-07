@@ -4,7 +4,19 @@ defmodule Videosync.SessionController do
   alias Videosync.Auth
 
   def create(conn, %{"user" => user_params}) do
-    case Auth.login_by_email_and_password(conn, user_params["email"], user_params["password"], repo: Repo) do
+    opts = Keyword.new repo: Repo
+    opts = case user_params["remember_me"] do
+      true ->
+        Keyword.merge(opts, ttl: { 7, :days })
+      false ->
+        opts
+    end
+
+    case Auth.login_by_email_and_password(
+          conn,
+          user_params["email"],
+          user_params["password"],
+          opts) do
       {:ok, user, _} ->
         conn = case user_params["remember_me"] do
           true ->

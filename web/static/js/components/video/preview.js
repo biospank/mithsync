@@ -10,7 +10,8 @@ var preview = (function() {
 
   return {
     reinitSlider: function() {
-      slider.reinit();
+      if(slider)
+        slider.reinit();
     },
     pause: function() {
       player.pause();
