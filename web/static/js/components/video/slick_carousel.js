@@ -60,7 +60,7 @@ var slickCarousel = (function() {
       return _.some(carousel.slides, ['checked', true])
     },
     checkedSlides: function() {
-      return _.filter(carousel.slides, function(slide, index, collection) {
+      return _.partition(carousel.slides, function(slide) {
         return slide.checked;
       });
     },

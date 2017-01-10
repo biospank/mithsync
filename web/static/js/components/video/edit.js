@@ -346,14 +346,14 @@ var editVideo = (function() {
 
       ctrl.deleteSlide = function() {
         if(slickCarousel.hasCheckedSlides()) {
-          var slides = slickCarousel.checkedSlides();
+          var [checkedSlides, unckeckedSlides] = slickCarousel.checkedSlides();
 
-          var slidesToDelete = _.filter(slides, function(slide) {
+          var slidesToDelete = _.filter(checkedSlides, function(slide) {
             return slide.id !== undefined;
           });
 
           Slide.deleteAll(ctrl.video(), slidesToDelete).then(function(response) {
-            ctrl.postDeleteAction(response.data);
+            ctrl.postDeleteAction(unckeckedSlides);
           }, function(response) {
             ctrl.errors(response.errors);
           })
