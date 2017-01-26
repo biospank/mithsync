@@ -1,6 +1,7 @@
 @import "./mixin/custom-mixin";
 @import "./partials/widgets/spaces";
 @import "./partials/plugins/customized-reveal";
+@import "./partials/widgets/typography";
 
 .plyr {
   min-width: 0;
@@ -10,32 +11,116 @@
   background-color: #f2f2f2;
 }
 
+.align-horizontal {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.row {
+  margin-left: -5px;
+  margin-right: -5px;
+}
+
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2,
+.col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3,
+.col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4,
+.col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5,
+.col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7,
+.col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8,
+.col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9,
+.col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10,
+.col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12,
+.col-sm-12, .col-md-12, .col-lg-12 {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
 .zinkroo {
+  background-color: white;
   &__title {
-    font-family: 'Roboto Slab', serif;
-    color: #629ef4;
+    font-family: 'Roboto', sans-serif;
+    @include font-style(28px, #000, 500);
   }
   &__date {
-    color: #999;
-    font-size: 12px;
-    font-weight: 300;
     display: block;
+    @include font-style(12px, #999);
   }
   &__description {
-    color: #606060;
-    font-size: 13px;
+    @include font-style(16px, #878787);
   }
   &__slide {
     padding: 10px;
-    background-color: #f2f2f2;
+    // background-color: #f2f2f2;
     @include respond-to(min-width, 768px) {
-      padding: 10px 30px;
+      padding: 30px 30px;
     }
     .owl-item {
       line-height: normal;
       .img-thumbnail {
         border-radius: 0;
       }
+    }
+  }
+  &__button {
+    @include position(right, 0, top, 0);
+    padding: 20px;
+    &--close {
+      display: inline-block;
+      @include size(30px, 30px);
+      overflow: hidden;
+      position: relative;
+      &:hover {
+        &::before, &::after {
+          background: #3178d0;
+        }
+      }
+      &::before, &::after {
+        content: '';
+        @include size(100%, 2px);
+        @include position(left, 0, top, 50%);
+        margin-top: -1px;
+        background: #ffffff;
+        @include transition(background 0.3s ease);
+      }
+      &::before {
+        @include rotate(45deg, true, true);
+      }
+      &::after {
+        @include rotate(-45deg, true, true);
+      }
+      &.hairline {
+        &::before, &::after {
+         height: 1px;
+       }
+      }
+    }
+    &--subscribe {
+      font-size: 25px;
+      background-color: white;
+      padding: 10px 30px;
+      display: inline-block;;
+      color: #6b98d1;
+      @include transition(color 0.3s ease);
+      &:hover {
+        text-decoration: none;
+        color: #3178d0;
+      }
+    }
+  }
+  .back {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    .description {
+      font-size: 30px;
+      line-height: 46px;
+      span {
+        font-size: 25px;
+        display: block;
+      }
+    }
+    .child {
+      @include position(left, 50%, top, 50%);
+      @include translate(-50%, -50%);
     }
   }
 }
@@ -77,21 +162,49 @@
   }
 }
 
-.row {
-  margin-left: -5px;
-  margin-right: -5px;
-}
-
-.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2,
-.col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3,
-.col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4,
-.col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5,
-.col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7,
-.col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8,
-.col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9,
-.col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10,
-.col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12,
-.col-sm-12, .col-md-12, .col-lg-12 {
-  padding-left: 5px;
-  padding-right: 5px;
+.flip-container {
+  width: 100%;
+  /* ruota il pannello al mousehover */
+  &.hover {
+    .flipper {
+      @include rotate(180deg, nil, true);
+    }
+  }
+  /* impostare velocità di transizione */
+  .flipper {
+    // padding: 30px;
+    -moz-transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    position: relative;
+    @include transition(all 1.0s linear);
+  }
+  /* front pane, placed above back, quello con lo z-index + alto, anche se sta prima nel codice, finisce sopra */
+  .front {
+    z-index: 2;
+    //@include box-shadow(0 0 50px rgba(0,0,0,0.3));
+    &--face {
+      @include border(#908f8f, 0.5px);
+    }
+  }
+  /* back, initially hidden pane */
+  .back {
+    @include rotate(180deg, nil, true);
+    @include box-shadow(0 0 40px rgba(0,0,0,0.2));
+    background-color: #6b98d1 !important;
+    @include position(left, 0, top, 0);
+    z-index: 9999;
+    @include size(100%, 100%);
+  }
+  /* nasconde il retro durante lo swap */
+  .front, .back {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    // position: absolute;
+    // top: 0;
+    // left: 0;
+    background:none;
+    width: 100%;
+  }
 }

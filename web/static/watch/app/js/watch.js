@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
       itemsDesktopSmall : [980,10],
       itemsTablet: [768,5],
       itemsMobile : false,
-      navigationText: ["<i class='glyphicon glyphicon-chevron-left'></i>", "<i class='glyphicon glyphicon-chevron-right'></i>"]
+      navigationText: ["<i class='glyphicon glyphicon-menu-left'></i>", "<i class='glyphicon glyphicon-menu-right'></i>"]
   });
 
   slider = $("#owl-slider").data("owlCarousel");
@@ -125,4 +125,21 @@ document.addEventListener('DOMContentLoaded', function() {
   $(".owl-item figure").on('click', function() {
     player.seek($(this).data('start'));
   })
+
+  $(".zinkroo__button--flip").on('click', function(event) {
+    event.preventDefault();
+    $(".flip-container").addClass("hover");
+  })
+
+  $(".zinkroo__button--close").on('click', function(event) {
+    event.preventDefault();
+    $(".flip-container").removeClass("hover");
+  })
+
+  // var flipperFrontWidth = $( "iframe#iFrameResizer0" ).width();
+  // var flipperFrontHeight = $( "iframe#iFrameResizer0" )[0]//.iFrameResize()[0].clientHeight;
+  // console.log(flipperFrontHeight.clientHeight);
+  // $(".flipper .back").height(flipperFrontHeight);
+  // $(".flipper .back").width(flipperFrontWidth);
+
 });

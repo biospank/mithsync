@@ -9,19 +9,44 @@
 
     <title>Zinkroo watch video</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/watch.css") %>">
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
     <!-- empty script needed to allows plyr.js to work correctly -->
     <script></script>
   </head>
 
   <body id="watch-video">
     <div class="container-fluid p-all-side-0 zinkroo">
-      <%= render @view_module, @view_template, assigns %>
-      <figure class="text-right mb-5">
-        <a href="http://www.zinkroo.com" target="_blank">
-          <img src="<%= static_path(@conn, "/images/logo-zinkroo--small.png") %>">
-        </a>
-      </figure>
+      <div class="flip-container">
+        <div class="flipper">
+          <div class="front">
+            <div class="front--face">
+              <%= render @view_module, @view_template, assigns %>
+            </div>
+            <figure class="text-right mt-5">
+              <a href="#" class="zinkroo__button--flip">
+                <img src="<%= static_path(@conn, "/images/logo-zinkroo--small.png") %>">
+              </a>
+            </figure>
+          </div>
+          <div class="back text-center">
+            <a href="#" class="zinkroo__button">
+              <span class="zinkroo__button--close hairline"></span>
+            </a>
+            <div class="child">
+              <figure class="mb-40">
+                <a href="http://www.zinkroo.com">
+                  <img src="<%= static_path(@conn, "/images/logo-zinkroo--white.png") %>" width="320" class="img-responsive align-horizontal">
+                </a>
+              </figure>
+              <p class="mb-30 description weight-thin">
+                The perfect way to sync and embed your video and images
+                <span class="weight-regular">everywhere!</span>
+              </p>
+              <a href="http://www.zinkroo.com" class="text-uppercase zinkroo__button--subscribe weight-regular" target="_blank">Subscribe</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/watch.js") %>"></script>
   </body>
