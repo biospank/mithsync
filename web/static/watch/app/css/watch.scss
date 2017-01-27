@@ -149,15 +149,15 @@
   &-prev {
     left: -20px;
     i, .fa {
-      color: #629ef4;
-      text-shadow: 1px 2px 3px #666;
+      color: #555;
+      // text-shadow: 1px 2px 3px #666;
     }
   }
   &-next {
     right: -20px;
     i, .fa {
-      color: #629ef4;
-      text-shadow: 1px 2px 3px #666;
+      color: #555;
+      //text-shadow: 1px 2px 3px #666;
     }
   }
 }
@@ -184,7 +184,7 @@
     z-index: 2;
     //@include box-shadow(0 0 50px rgba(0,0,0,0.3));
     &--face {
-      @include border(#908f8f, 0.5px);
+      @include border(#908f8f, 1px);
     }
   }
   /* back, initially hidden pane */
@@ -192,7 +192,6 @@
     @include rotate(180deg, nil, true);
     @include box-shadow(0 0 40px rgba(0,0,0,0.2));
     background-color: #6b98d1 !important;
-    @include position(left, 0, top, 0);
     z-index: 9999;
     @include size(100%, 100%);
   }
@@ -201,9 +200,7 @@
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
     backface-visibility: hidden;
-    // position: absolute;
-    // top: 0;
-    // left: 0;
+    @include position(left, 0, top, 0);
     background:none;
     width: 100%;
   }

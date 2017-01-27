@@ -1,6 +1,7 @@
 import UrlParser from "./util/urlParser";
 
 document.addEventListener('DOMContentLoaded', function() {
+//$(document).ready(function(){
   var slides = [];
   var currentSlide = undefined;
   var timeVector = [];
@@ -136,10 +137,21 @@ document.addEventListener('DOMContentLoaded', function() {
     $(".flip-container").removeClass("hover");
   })
 
-  // var flipperFrontWidth = $( "iframe#iFrameResizer0" ).width();
-  // var flipperFrontHeight = $( "iframe#iFrameResizer0" )[0]//.iFrameResize()[0].clientHeight;
-  // console.log(flipperFrontHeight.clientHeight);
-  // $(".flipper .back").height(flipperFrontHeight);
-  // $(".flipper .back").width(flipperFrontWidth);
+  // setTimeout(function() {
+  //   var flipperFrontHeight = $(".flip-container").find(".front").outerHeight(true);//.iFrameResize()[0].clientHeight;
+  //   console.log(flipperFrontHeight);
+  //   $(".flip-container .flipper").height(flipperFrontHeight);
+  // }, 1000);
+
+  document.getElementsByTagName('iframe')[0].onload = function() {
+    //console.log("caricata");
+    var flipperFrontHeight = $(".flip-container").find(".front").outerHeight(true);
+    console.log(flipperFrontHeight);
+    $(".flip-container .flipper").height(flipperFrontHeight);
+  }
+
+  // var flipperFrontHeight = $(".flip-container").find(".front").outerHeight(true);//.iFrameResize()[0].clientHeight;
+  // console.log(flipperFrontHeight);
+  // $(".flip-container .flipper").height(flipperFrontHeight);
 
 });

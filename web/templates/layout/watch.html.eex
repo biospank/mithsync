@@ -22,7 +22,7 @@
             <div class="front--face">
               <%= render @view_module, @view_template, assigns %>
             </div>
-            <figure class="text-right mt-5">
+            <figure class="text-right pt-5">
               <a href="#" class="zinkroo__button--flip">
                 <img src="<%= static_path(@conn, "/images/logo-zinkroo--small.png") %>">
               </a>
