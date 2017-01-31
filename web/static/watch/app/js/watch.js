@@ -1,7 +1,6 @@
 import UrlParser from "./util/urlParser";
 
 document.addEventListener('DOMContentLoaded', function() {
-//$(document).ready(function(){
   var slides = [];
   var currentSlide = undefined;
   var timeVector = [];
