@@ -34,6 +34,22 @@ var user = (function() {
               $('.dropdown-toggle').dropdown();
           }
         }, [
+        // m("a", {
+        //   class: "dropdown-toggle user-avatar__button clearfix",
+        //   href: "#",
+        //   id: "dropdownMenu1",
+        //   "data-toggle": "dropdown",
+        //   "aria-haspopup": true,
+        //   "aria-expanded": false
+        // }, [
+        //   m("figure", { class: "user-avatar__photo pull-right" }, [
+        //     m("img", { src: "/images/icons/avatar.png", alt: currentUser().email })
+        //   ]),
+        //   m("div", { class: "user-avatar__name pull-right" }, [
+        //     m("span", { class: "text-black" }, currentUser().email),
+        //     m("i", { class: "fa fa-caret-down", "aria-hidden": true })
+        //   ])
+        // ]),
         m("a", {
           class: "dropdown-toggle user-avatar__button clearfix",
           href: "#",
@@ -42,10 +58,7 @@ var user = (function() {
           "aria-haspopup": true,
           "aria-expanded": false
         }, [
-          m("figure", { class: "user-avatar__photo pull-right" }, [
-            m("img", { src: "/images/icons/avatar.png", alt: currentUser().email })
-          ]),
-          m("div", { class: "user-avatar__name pull-right" }, [
+          m("div", { class: "user-avatar__name" }, [
             m("span", { class: "text-black" }, currentUser().email),
             m("i", { class: "fa fa-caret-down", "aria-hidden": true })
           ])
