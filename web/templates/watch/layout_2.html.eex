@@ -1,4 +1,9 @@
-<div class="p-all-side-25">
+<div class="p-all-side-25 layout--2">
+  <section class="visible-xs-block">
+    <%= render @view_module, "title.html", video: @video, conn: @conn %>
+    <p class="zinkroo__description"><%= @video.description %></p>
+    <%= render @view_module, "date.html", video: @video, conn: @conn %>
+  </section>
   <div class="row">
     <%= render @view_module, "video_with_description.html", video: @video, conn: @conn %>
     <%= render @view_module, "reveal_slider.html", video: @video, slides: @video.slides, conn: @conn %>

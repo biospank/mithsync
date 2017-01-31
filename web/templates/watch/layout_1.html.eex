@@ -1,8 +1,8 @@
-<div class="p-all-side-25">
+<div class="p-all-side-25 layout--1">
   <%= render @view_module, "title.html", video: @video, conn: @conn %>
   <p class="zinkroo__description"><%= @video.description %></p>
   <%= render @view_module, "date.html", video: @video, conn: @conn %>
-  <div class="clearfix">
+  <div class="row">
     <%= render @view_module, "video.html", video: @video, conn: @conn %>
     <%= render @view_module, "reveal_slider.html", video: @video, slides: @video.slides, conn: @conn %>
   </div>

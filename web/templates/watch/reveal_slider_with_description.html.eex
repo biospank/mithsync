@@ -4,7 +4,9 @@
       <%= render_many @slides, @view_module, "reveal_slide.html", as: :slide, conn: @conn %>
     </div>
   </div>
-  <%= render @view_module, "title.html", video: @video, conn: @conn %>
-  <p class="zinkroo__description"><%= @video.description %></p>
-  <%= render @view_module, "date.html", video: @video, conn: @conn %>
+  <section class="hidden-xs">
+    <%= render @view_module, "title.html", video: @video, conn: @conn %>
+    <p class="zinkroo__description"><%= @video.description %></p>
+    <%= render @view_module, "date.html", video: @video, conn: @conn %>
+  </section>
 </div>

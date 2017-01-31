@@ -17,8 +17,8 @@
 }
 
 .row {
-  margin-left: -5px;
-  margin-right: -5px;
+  margin-left: -10px;
+  margin-right: -10px;
 }
 
 .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2,
@@ -53,6 +53,14 @@
     @include font-style(14px, #878787);
     @include respond-to(min-width, 768px) {
       font-size: 16px;
+    }
+  }
+  .layout {
+    &--1 {}
+    &--2, &--3 {
+      .zinkroo__title {
+        @include font-style(24px, #000, 500, 27px);
+      }
     }
   }
   &__slide {

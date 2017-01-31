@@ -1,7 +1,9 @@
-<div class="col-sm-<%= @view_module.video_column_size(@video.layout) %> phorizontal-0 pb-10">
+<div class="col-sm-<%= @view_module.video_column_size(@video.layout) %> pb-10">
   <div class="video-player-watch mb-15" data-url="<%= @video.url %>" data-type="" data-video-id="">
   </div>
-  <%= render @view_module, "title.html", video: @video, conn: @conn %>
-  <p class="zinkroo__description"><%= @video.description %></p>
-  <%= render @view_module, "date.html", video: @video, conn: @conn %>
+  <section class="hidden-xs">
+    <%= render @view_module, "title.html", video: @video, conn: @conn %>
+    <p class="zinkroo__description"><%= @video.description %></p>
+    <%= render @view_module, "date.html", video: @video, conn: @conn %>
+  </section>
 </div>
