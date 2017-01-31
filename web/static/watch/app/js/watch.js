@@ -137,21 +137,9 @@ document.addEventListener('DOMContentLoaded', function() {
     $(".flip-container").removeClass("hover");
   })
 
-  // setTimeout(function() {
-  //   var flipperFrontHeight = $(".flip-container").find(".front").outerHeight(true);//.iFrameResize()[0].clientHeight;
-  //   console.log(flipperFrontHeight);
-  //   $(".flip-container .flipper").height(flipperFrontHeight);
-  // }, 1000);
-
-  document.getElementsByTagName('iframe')[0].onload = function() {
-    //console.log("caricata");
-    var flipperFrontHeight = $(".flip-container").find(".front").outerHeight(true);
-    console.log(flipperFrontHeight);
-    $(".flip-container .flipper").height(flipperFrontHeight);
-  }
-
-  // var flipperFrontHeight = $(".flip-container").find(".front").outerHeight(true);//.iFrameResize()[0].clientHeight;
-  // console.log(flipperFrontHeight);
-  // $(".flip-container .flipper").height(flipperFrontHeight);
-
 });
+
+window.onload = function() {
+  var flipperFrontHeight = $(".flip-container").find(".front").outerHeight(true);
+  $(".flip-container .flipper").height(flipperFrontHeight);
+}
