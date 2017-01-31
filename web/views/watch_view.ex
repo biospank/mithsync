@@ -8,7 +8,7 @@ defmodule Videosync.WatchView do
           <p class="mb-30 zinkroo__description">#{video.description}</p>
         '''
         _ -> '''
-          <div class="mt-10 p-all-side-15 bg-grey zinkroo__description">#{video.description}</div>
+          <div class="mt-10 zinkroo__description">#{video.description}</div>
         '''
       end
     end

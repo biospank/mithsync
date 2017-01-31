@@ -31,29 +31,35 @@
 .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10,
 .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12,
 .col-sm-12, .col-md-12, .col-lg-12 {
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .zinkroo {
   background-color: white;
   font-family: 'Roboto', sans-serif !important;
   &__title {
-    //font-family: 'Roboto', sans-serif;
-    @include font-style(28px, #000, 500);
+    @include font-style(20px, #000, 500, 24px);
+    @include respond-to(min-width, 768px) {
+      font-size: 28px;
+      line-height: 30px;
+    }
   }
   &__date {
-    display: block;
     @include font-style(14px, #b2b2b2);
-    //font-family: 'Roboto', sans-serif;
+    display: block;
   }
   &__description {
-    @include font-style(16px, #878787);
-    //font-family: 'Roboto', sans-serif;
+    @include font-style(14px, #878787);
+    @include respond-to(min-width, 768px) {
+      font-size: 16px;
+    }
   }
   &__slide {
     padding: 10px;
     // background-color: #f2f2f2;
+    @include border(#b4b2b2, 1px, top);
+    @include box-shadow(0 -6px 10px rgba(238,238,238,0.9));
     @include respond-to(min-width, 768px) {
       padding: 30px 30px;
     }
@@ -152,14 +158,14 @@
   &-prev {
     left: -20px;
     i, .fa {
-      color: #555;
+      color: #a3a2a2;
       // text-shadow: 1px 2px 3px #666;
     }
   }
   &-next {
     right: -20px;
     i, .fa {
-      color: #555;
+      color: #a3a2a2;
       //text-shadow: 1px 2px 3px #666;
     }
   }
@@ -187,7 +193,7 @@
     z-index: 2;
     //@include box-shadow(0 0 50px rgba(0,0,0,0.3));
     &--face {
-      @include border(#908f8f, 1px);
+      @include border(#e3e3e3, 1px);
     }
   }
   /* back, initially hidden pane */
