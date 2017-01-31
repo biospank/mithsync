@@ -47,13 +47,15 @@ var videoLayout = {
       }, [
         m(".panel-body", { class: "row" }, [
           m("div", { class: "col-xs-6" }, [
-            m("div", { class: "panel-body__col" }, [
-              m("span")
+            m("div", { class: "panel-body__col video" }, [
+              // m("span")
+              m("img", { src: "/images/icons/movie.png", alt: "video", class: "img-responsive center-block", width: "30" })
             ])
           ]),
           m("div", { class: "col-xs-6" }, [
-            m("div", { class: "panel-body__col" }, [
-              m("span")
+            m("div", { class: "panel-body__col slide" }, [
+              // m("span")
+              m("img", { src: "/images/icons/photo.png", alt: "slide", class: "img-responsive center-block", width: "30" })
             ])
           ])
         ])
@@ -66,13 +68,15 @@ var videoLayout = {
       }, [
         m(".panel-body", { class: "row" }, [
           m("div", { class: "col-xs-4" }, [
-            m("div", { class: "panel-body__col" }, [
-              m("span")
+            m("div", { class: "panel-body__col video" }, [
+              // m("span")
+              m("img", { src: "/images/icons/movie.png", alt: "video", class: "img-responsive center-block", width: "30" })
             ])
           ]),
           m("div", { class: "col-xs-8" }, [
-            m("div", { class: "panel-body__col" }, [
-              m("span")
+            m("div", { class: "panel-body__col slide" }, [
+              // m("span")
+              m("img", { src: "/images/icons/photo.png", alt: "slide", class: "img-responsive center-block", width: "30" })
             ])
           ])
         ])
@@ -85,13 +89,15 @@ var videoLayout = {
       }, [
         m(".panel-body", { class: "row" }, [
           m("div", { class: "col-xs-8" }, [
-            m("div", { class: "panel-body__col" }, [
-              m("span")
+            m("div", { class: "panel-body__col video" }, [
+              // m("span")
+              m("img", { src: "/images/icons/movie.png", alt: "video", class: "img-responsive center-block", width: "30" })
             ])
           ]),
           m("div", { class: "col-xs-4" }, [
-            m("div", { class: "panel-body__col" }, [
-              m("span")
+            m("div", { class: "panel-body__col slide" }, [
+              // m("span")
+              m("img", { src: "/images/icons/photo.png", alt: "slide", class: "img-responsive center-block", width: "30" })
             ])
           ])
         ])

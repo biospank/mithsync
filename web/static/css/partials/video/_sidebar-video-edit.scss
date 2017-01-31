@@ -121,6 +121,16 @@
       .panel-body__col {
         background-color: #e0e0e0;
         padding: 10px 15px;
+        border-radius: 2px;
+        @include box-shadow(0 0 10px rgba(106,152,206,.20));
+        &.slide {
+          background-color: $mainColor;
+          @include border($mainColor);
+        }
+        &.video {
+          background-color: #ececec;
+          @include border($mainColor);
+        }
         span {
           background-color: #d3d3d3;
           border: 2px dashed #c3c3c3;
