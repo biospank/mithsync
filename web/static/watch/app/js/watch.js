@@ -125,21 +125,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
   $(".owl-item figure").on('click', function() {
     player.seek($(this).data('start'));
-  })
+  });
 
-  $(".zinkroo__button--flip").on('click', function(event) {
-    event.preventDefault();
-    $(".flip-container").addClass("hover");
-  })
-
-  $(".zinkroo__button--close").on('click', function(event) {
-    event.preventDefault();
-    $(".flip-container").removeClass("hover");
-  })
+  flipper.initHandlers();
 
 });
 
-window.onload = function() {
-  var flipperFrontHeight = $(".flip-container").find(".front").outerHeight(true);
-  $(".flip-container .flipper").height(flipperFrontHeight);
+var flipper = {
+  initHandlers: function() {
+    $(".zinkroo__button--flip").on('click', function(event) {
+      event.preventDefault();
+      $(".flip-container").addClass("hover");
+    });
+    $(".zinkroo__button--close").on('click', function(event) {
+      event.preventDefault();
+      $(".flip-container").removeClass("hover");
+    })
+  },
+  setHeight: function() {
+    var flipperFrontHeight = $(".flip-container").find(".front").outerHeight(true);
+    $(".flip-container .flipper").height(flipperFrontHeight);
+  }
 }
+
+window.onload = function() {
+  flipper.setHeight();
+}
+
+window.onresize = _.throttle(flipper.setHeight, 1000, {
+  'leading': false,
+  'trailing': true
+})
