@@ -117,12 +117,41 @@ document.addEventListener('DOMContentLoaded', function() {
       itemsDesktopSmall : [980,10],
       itemsTablet: [768,5],
       itemsMobile : false,
-      navigationText: ["<i class='glyphicon glyphicon-chevron-left'></i>", "<i class='glyphicon glyphicon-chevron-right'></i>"]
+      navigationText: ["<i class='glyphicon glyphicon-menu-left'></i>", "<i class='glyphicon glyphicon-menu-right'></i>"]
   });
 
   slider = $("#owl-slider").data("owlCarousel");
 
   $(".owl-item figure").on('click', function() {
     player.seek($(this).data('start'));
-  })
+  });
+
+  flipper.initHandlers();
+
 });
+
+var flipper = {
+  initHandlers: function() {
+    $(".zinkroo__button--flip").on('click', function(event) {
+      event.preventDefault();
+      $(".flip-container").addClass("hover");
+    });
+    $(".zinkroo__button--close").on('click', function(event) {
+      event.preventDefault();
+      $(".flip-container").removeClass("hover");
+    })
+  },
+  setHeight: function() {
+    var flipperFrontHeight = $(".flip-container").find(".front").outerHeight(true);
+    $(".flip-container .flipper").height(flipperFrontHeight);
+  }
+}
+
+window.onload = function() {
+  flipper.setHeight();
+}
+
+window.onresize = _.throttle(flipper.setHeight, 1000, {
+  'leading': false,
+  'trailing': true
+})

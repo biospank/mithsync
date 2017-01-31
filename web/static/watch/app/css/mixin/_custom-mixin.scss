@@ -11,6 +11,11 @@
   }
 }
 
+@mixin size($width, $height) {
+  width: $width;
+  height: $height;
+}
+
 @mixin font-style($size, $color, $weight: 300, $line-height: inherit){
   font-size: $size;
   color: $color;
@@ -99,4 +104,48 @@
          -o-transform: translate($x, $y);
             transform: translate($x, $y);
   }
+}
+
+@mixin rotate($degrees, $x: "nil", $y: "nil") {
+  @if ($x == "nil") {
+    -webkit-transform: rotateY($degrees);
+       -moz-transform: rotateY($degrees);
+        -ms-transform: rotateY($degrees);
+         -o-transform: rotateY($degrees);
+            transform: rotateY($degrees);
+  } @else if ($y == "nil") {
+    -webkit-transform: rotateX($degrees);
+       -moz-transform: rotateX($degrees);
+        -ms-transform: rotateX($degrees);
+         -o-transform: rotateX($degrees);
+            transform: rotateX($degrees);
+  } @else {
+    -webkit-transform: rotate($degrees);
+       -moz-transform: rotate($degrees);
+        -ms-transform: rotate($degrees);
+         -o-transform: rotate($degrees);
+            transform: rotate($degrees);
+  }
+}
+
+// @mixin rotate-simple($degrees) {
+//   -webkit-transform: rotate($degrees);
+//      -moz-transform: rotate($degrees);
+//       -ms-transform: rotate($degrees);
+//        -o-transform: rotate($degrees);
+//           transform: rotate($degrees);
+// }
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+     -moz-transition: $transition;
+      -ms-transition: $transition;
+       -o-transition: $transition;
+          transition: $transition;
+}
+
+@mixin box-shadow($shadow: 0 1px 3px rgba(0,0,0,.25)) {
+  -webkit-box-shadow: $shadow;
+     -moz-box-shadow: $shadow;
+          box-shadow: $shadow;
 }

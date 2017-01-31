@@ -1,7 +1,7 @@
-<%= render @view_module, "title.html", video: @video, conn: @conn %>
-<%= render @view_module, "date.html", video: @video, conn: @conn %>
-<div class="row">
-  <%= render @view_module, "video_with_description.html", video: @video, conn: @conn %>
-  <%= render @view_module, "reveal_slider.html", video: @video, slides: @video.slides, conn: @conn %>
+<div class="p-all-side-25">
+  <div class="row">
+    <%= render @view_module, "video_with_description.html", video: @video, conn: @conn %>
+    <%= render @view_module, "reveal_slider.html", video: @video, slides: @video.slides, conn: @conn %>
+  </div>
 </div>
 <%= render @view_module, "owl_slider.html", video: @video, slides: @video.slides, conn: @conn %>

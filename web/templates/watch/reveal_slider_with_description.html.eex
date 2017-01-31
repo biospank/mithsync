@@ -1,8 +1,10 @@
 <div class="col-sm-<%= @view_module.slide_column_size(@video.layout) %> pb-10">
-  <div class="reveal">
+  <div class="reveal mb-15">
     <div class="slides">
       <%= render_many @slides, @view_module, "reveal_slide.html", as: :slide, conn: @conn %>
     </div>
   </div>
-  <%= raw @view_module.render_video_description(@video) %>
+  <%= render @view_module, "title.html", video: @video, conn: @conn %>
+  <p class="zinkroo__description"><%= @video.description %></p>
+  <%= render @view_module, "date.html", video: @video, conn: @conn %>
 </div>
