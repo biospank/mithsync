@@ -111,7 +111,7 @@ var preview = (function() {
               itemsDesktopSmall : [980,5],
               itemsTablet: [768,5],
               itemsMobile : false,
-              navigationText: ["<i class='glyphicon glyphicon-chevron-left'></i>", "<i class='glyphicon glyphicon-chevron-right'></i>"]
+              navigationText: ["<i class='glyphicon glyphicon-menu-left'></i>", "<i class='glyphicon glyphicon-menu-right'></i>"]
           });
 
           slider = $("#owl-slider").data("owlCarousel");
@@ -181,7 +181,7 @@ var preview = (function() {
 
       var showTitle = function() {
         if(Layout.model.show_title) {
-          return m("h3", { class: "mt-0 text-black mb-5" }, Video.model.title());
+          return m("h3", { class: "mt-0 mb-10 zinkroo-preview__title" }, Video.model.title());
         } else {
           return "";
         }
@@ -189,7 +189,7 @@ var preview = (function() {
 
       var showDate = function() {
         if(Layout.model.show_date) {
-          return m("label", { class: "mt-0 text-black weight-light mb-15" }, moment(Video.model.inserted_at()).format('lll'));
+          return m("label", { class: "mt-0 weight-light zinkroo-preview__date" }, moment(Video.model.inserted_at()).format('lll'));
         } else {
           return "";
         }
@@ -201,11 +201,11 @@ var preview = (function() {
 
           switch (layout) {
             case 1:
-              description = m("p", { class: "text-black mb-15" }, Video.model.description());
+              description = m("p", { class: "mb-10 zinkroo-preview__description" }, Video.model.description());
               break;
             case 2:
             case 3:
-              description = m("div", { class: "mt-20 p-all-side-25 bg-grey" }, Video.model.description());
+              description = m("div", { class: "mb-10 zinkroo-preview__description" }, Video.model.description());
               break;
           }
 
@@ -217,7 +217,7 @@ var preview = (function() {
 
       var showVideo = function() {
         return m(videoPlayback, {
-          class: '.video-player-watch',
+          class: '.video-player-watch mb-10',
           provider: videoInfo.provider,
           videoId: videoInfo.videoId,
           onReady: onReady
@@ -225,7 +225,7 @@ var preview = (function() {
       };
 
       var showReveal = function() {
-        return m(".reveal", {}, [
+        return m(".reveal mb-10", {}, [
           m(".slides", [
             injectRevealSlides()
           ])
@@ -233,7 +233,7 @@ var preview = (function() {
       };
 
       var showSlider = function() {
-        return m(".p-all-side-30 bg-grey", { config: toggleSlider }, [
+        return m(".p-all-side-25 zinkroo-preview__slide", { config: toggleSlider }, [
           m(".owl-carousel", {
             id: "owl-slider"
           }, [
@@ -256,10 +256,10 @@ var preview = (function() {
           switch (parseInt(Layout.model.theme)) {
             case 1:
               layout = [
-                m("div", { class: "p-all-side-30" }, [
+                m("div", { class: "p-all-side-25 layout--1" }, [
                   showTitle(),
-                  showDate(),
                   showDescriptionFor(1),
+                  showDate(),
                   m(".row", [
                     m(".col-xs-6", [
                       showVideo()
@@ -274,13 +274,13 @@ var preview = (function() {
               break;
             case 2:
               layout = [
-                m("div", { class: "p-all-side-30" }, [
-                  showTitle(),
-                  showDate(),
+                m("div", { class: "p-all-side-25 layout--2" }, [
                   m(".row", [
                     m(".col-xs-4", [
                       showVideo(),
-                      showDescriptionFor(2)
+                      showTitle(),
+                      showDescriptionFor(2),
+                      showDate()
                     ]),
                     m(".col-xs-8", [
                       showReveal()
@@ -292,16 +292,16 @@ var preview = (function() {
               break;
             case 3:
               layout = [
-                m("div", { class: "p-all-side-30" }, [
-                  showTitle(),
-                  showDate(),
+                m("div", { class: "p-all-side-25 layout--3" }, [
                   m(".row", [
                     m(".col-xs-8", [
                       showVideo()
                     ]),
                     m(".col-xs-4", [
                       showReveal(),
-                      showDescriptionFor(3)
+                      showTitle(),
+                      showDescriptionFor(3),
+                      showDate()
                     ])
                   ])
                 ]),
@@ -327,7 +327,7 @@ var preview = (function() {
       ctrl.setSliderSlides(slides);
       ctrl.setTimeVector(slides);
 
-      return m("", [
+      return m(".zinkroo-preview", [
         ctrl.buildLayout()
       ]);
     }

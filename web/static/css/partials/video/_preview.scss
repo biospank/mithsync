@@ -1,0 +1,22 @@
+.zinkroo-preview {
+  &__title {
+    @include font-style(28px, #000, 500, 30px);
+  }
+  &__description {
+    @include font-style(16px, #878787);
+  }
+  &__date {
+    @include font-style(14px, #b2b2b2);
+    //display: block;
+  }
+  &__slide {
+    @include border(#e5e5e5, 1px, top);
+  }
+  .layout {
+    &--2, &--3 {
+      .zinkroo-preview__title {
+        @include font-style(24px, #000, 500, 27px);
+      }
+    }
+  }
+}
