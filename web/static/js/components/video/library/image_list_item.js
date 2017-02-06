@@ -46,7 +46,7 @@ var imageListItem = {
         m("a", { href: "#" }, [
           m("img", {
             src: ctrl.image.thumb_url,
-            class: "media-object"
+            class: "media-object img-responsive"
           })
         ])
       ]),

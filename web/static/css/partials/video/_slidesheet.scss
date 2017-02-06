@@ -26,6 +26,7 @@
     margin-right: 10px;
     padding: 0;
     position: relative;
+    border-radius: 2px;
     & > a {
       display: block;
       cursor: pointer;
@@ -52,6 +53,7 @@
         &:before {
           @include size(15px, 15px);
           background-color: white;
+          border-radius: 2px;
         }
       }
     }

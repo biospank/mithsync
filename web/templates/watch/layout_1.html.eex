@@ -1,7 +1,10 @@
 <div class="p-all-side-25 layout--1">
+  <section class="visible-xs-block">
+    <%= render @view_module, "date.html", video: @video, conn: @conn %>
+  </section>
   <%= render @view_module, "title.html", video: @video, conn: @conn %>
-  <p class="zinkroo__description"><%= @video.description %></p>
-  <%= render @view_module, "date.html", video: @video, conn: @conn %>
+  <p class="zinkroo__description mb-40"><%= @video.description %></p>
+  <hr class="visible-xs-block mb-40" />
   <div class="row">
     <%= render @view_module, "video.html", video: @video, conn: @conn %>
     <%= render @view_module, "reveal_slider.html", video: @video, slides: @video.slides, conn: @conn %>

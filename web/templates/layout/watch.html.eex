@@ -22,23 +22,28 @@
             <div class="front--face">
               <%= render @view_module, @view_template, assigns %>
             </div>
-            <figure class="text-right pt-5">
-              <a href="#" class="zinkroo__button--flip">
-                <img src="<%= static_path(@conn, "/images/logo-zinkroo--small.png") %>">
-              </a>
-            </figure>
+            <section class="row pboth-10">
+              <label class="col-sm-6 hidden-xs">
+                <%= render @view_module, "date.html", video: @video, conn: @conn %>
+              </label>
+              <figure class="col-sm-6 text-right">
+                <a href="#" class="zinkroo__button--flip">
+                  <img src="<%= static_path(@conn, "/images/logo-zinkroo--small.png") %>">
+                </a>
+              </figure>
+            </section>
           </div>
           <div class="back text-center">
             <a href="#" class="zinkroo__button">
               <span class="zinkroo__button--close hairline"></span>
             </a>
             <div class="child">
-              <figure class="mb-40">
+              <figure class="mb-60">
                 <a href="http://www.zinkroo.com">
                   <img src="<%= static_path(@conn, "/images/logo-zinkroo--white.png") %>" width="320" class="img-responsive align-horizontal">
                 </a>
               </figure>
-              <p class="mb-30 description weight-thin">
+              <p class="mb-60 description weight-thin">
                 The perfect way to sync and embed your video and images
                 <span class="weight-regular">everywhere!</span>
               </p>

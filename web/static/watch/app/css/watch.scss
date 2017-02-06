@@ -39,27 +39,27 @@
   background-color: white;
   font-family: 'Roboto', sans-serif !important;
   &__title {
-    @include font-style(20px, #000, 500, 24px);
+    @include font-style(20px, #000, 800, 24px);
     @include respond-to(min-width, 768px) {
-      font-size: 28px;
-      line-height: 30px;
+      font-size: 24px;
+      line-height: 28px;
     }
   }
   &__date {
-    @include font-style(14px, #b2b2b2);
+    @include font-style(12px, #b2b2b2, 500);
     display: block;
   }
   &__description {
-    @include font-style(14px, #878787);
-    @include respond-to(min-width, 768px) {
-      font-size: 16px;
-    }
+    @include font-style(14px, #878787, 500);
+    // @include respond-to(min-width, 768px) {
+    //   font-size: 14px;
+    // }
   }
   .layout {
     &--1 {}
     &--2, &--3 {
       .zinkroo__title {
-        @include font-style(24px, #000, 500, 27px);
+        @include font-style(20px, #000, 800, 22px);
       }
     }
   }
@@ -112,7 +112,7 @@
       }
     }
     &--subscribe {
-      font-size: 25px;
+      font-size: 26px;
       background-color: white;
       padding: 10px 30px;
       display: inline-block;;
@@ -128,10 +128,10 @@
     color: white;
     font-family: 'Roboto', sans-serif;
     .description {
-      font-size: 30px;
-      line-height: 46px;
+      font-size: 32px;
+      line-height: 48px;
       span {
-        font-size: 25px;
+        font-size: 32px;
         display: block;
       }
     }

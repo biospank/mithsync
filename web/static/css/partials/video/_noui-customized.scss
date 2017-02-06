@@ -5,6 +5,7 @@
         display: none;
       }
       .noUi-handle {
+        z-index: 15 !important;
         width: 5px;
         border-radius: 0;
         left: -2px;
@@ -20,6 +21,14 @@
     &:not([disabled="true"]) {
       .noUi-handle {
         @include box-shadow(2px 2px 3px #424856);
+        width: 18px;
+        z-index: 16 !important;
+        &:before {
+          left: 6px;
+        }
+        &:after {
+          left: 10px;
+        }
       }
     }
   }
