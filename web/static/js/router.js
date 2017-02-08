@@ -13,10 +13,13 @@ import editVideo from "./components/video/edit";
 import infoVideo from "./components/video/info";
 import viewVideo from "./components/video/view";
 import faq from "./components/faq/index";
+import landingpage from "./components/landingpage/index";
 
 export default m.route(document.getElementById('app'), "/", {
   // Login routing
-  "/": dashboard,
+  "/": landingpage,
+
+  "/dashboard": dashboard,
 
   "/signin": signIn,
 

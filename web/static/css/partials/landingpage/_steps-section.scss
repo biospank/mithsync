@@ -1,0 +1,41 @@
+.steps-section {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  @include respond-to(min-width, 768px) {
+    padding-top: 390px;
+    padding-bottom: 150px;
+  }
+  &__title {
+    @include respond-to(max-width, 767px) {
+      font-size: 32px;
+    }
+  }
+  &__description {
+    font-size: 20px;
+    color: #95989a;
+    @include respond-to(min-width, 768px) {
+      font-size: 28px;
+    }
+  }
+  &__item {
+    &--image {
+      img {
+        width: 100%;
+      }
+    }
+    &--title {
+      font-size: 18px;
+    }
+    &--description {
+      @include font-style(14px, #95989a, 400, 18px);
+    }
+    .widget-step {
+      @include position(left, 0, bottom, 0);
+      @include size(40px, 40px);
+      border-radius: 50%;
+      @include border($mainColor);
+      background-color: white;
+      @include font-style(16px, $mainColor, 300, 30px);
+    }
+  }
+}

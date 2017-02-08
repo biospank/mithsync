@@ -1,0 +1,7 @@
+.intro-section {
+  padding-bottom: 30px;
+  @include respond-to(min-width, 768px) {
+    max-height: 800px;
+    padding-bottom: 0;
+  }
+}

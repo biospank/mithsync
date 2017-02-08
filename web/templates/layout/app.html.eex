@@ -14,7 +14,7 @@
     <script></script>
   </head>
 
-  <body id="app" class="bg-main">
+  <body id="app">
     <!-- <script src="https://www.youtube.com/iframe_api"></script> -->
     <!-- <script src="https://player.vimeo.com/api/player.js"></script> -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>

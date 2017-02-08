@@ -1,0 +1,14 @@
+.start-now-section {
+  .btn-now {
+    width: 100%;
+    font-size: 28px;
+    @include respond-to(min-width, 768px) {
+      width: 700px;
+    }
+  }
+  &__title {}
+  &__description {
+    font-size: 24px;
+    color: #95989a;
+  }
+}
