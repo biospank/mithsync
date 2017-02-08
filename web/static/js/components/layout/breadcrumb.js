@@ -10,9 +10,9 @@ var breadcrumb = {
     var currentProject = project;
 
     var slugMapping = {
-      ''         : {
+      'dashboard'         : {
         'name' : 'Dashboard',
-        'urlTemplate'  : '/'
+        'urlTemplate'  : '/dashboard'
       },
       'projects' : {
         'name' : 'Projects',

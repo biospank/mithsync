@@ -1,7 +1,7 @@
 var title = {
   controller: function() {
     var slugMapping = {
-      ''         : {
+      'dashboard'         : {
         'name' : 'Dashboard'
       },
       'projects' : {

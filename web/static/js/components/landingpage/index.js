@@ -3,7 +3,6 @@ var landingpage = {
     return m("div", {
         config: function(element, isInit) {
           if(!isInit) {
-            console.log("entrato");
             ScrollReveal().reveal('.images-intro, .steps-section__item, .layout-thumb, .btn-signup-now');
           }
         }
