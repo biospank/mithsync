@@ -13,5 +13,8 @@
     @include respond-to(max-width, 767px) {
       margin-bottom: 15px;
     }
+    img {
+      width: 100%;
+    }
   }
 }

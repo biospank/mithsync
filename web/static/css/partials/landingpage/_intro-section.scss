@@ -4,4 +4,17 @@
     max-height: 800px;
     padding-bottom: 0;
   }
+  &__buttons {
+    .btn-lg {
+      @include respond-to(max-width, 767px) {
+        min-width: auto;
+      }
+    }
+  }
+  &__logo {
+    max-width: 200px;
+    @include respond-to(min-width, 768px) {
+      min-width: 370px;
+    }
+  }
 }
