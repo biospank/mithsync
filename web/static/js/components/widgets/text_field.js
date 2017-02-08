@@ -6,12 +6,12 @@ var textField = (function() {
           m("i", { class: attrs.icon })
         ]),
         m(attrs.field || "input", _.assign(attrs, {
-          class: 'form-control'
+          class: 'form-control ' + attrs.inputSize
         }))
       ]);
     } else {
       return m(attrs.field || "input", _.assign(attrs, {
-        class: 'form-control'
+        class: 'form-control ' + attrs.inputSize
       }));
     }
   }
@@ -19,7 +19,7 @@ var textField = (function() {
   return {
     view: function(ctrl, attrs) {
       return m(".form-group", { class: attrs.error ? "has-error" : "" }, [
-        m("label", { class: "text-uppercase" }, attrs.dataLabel ),
+        m("label", { class: attrs.labelStyles }, attrs.dataLabel ),
         showField(attrs),
         m("p", {
           class: "error-label " + (attrs.error ? "show" : "hidden")

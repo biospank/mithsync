@@ -26,6 +26,10 @@ h1, h2, h3, h4, h5, h6 {
   outline: 0 !important;
 }
 
+.display-table {
+  display: table;
+}
+
 .center-block {
   float: none;
 }
@@ -84,6 +88,10 @@ h1, h2, h3, h4, h5, h6 {
   margin-right: 15px;
 }
 
-.bg-grey {
-  background-color: #d5d8dc;
+.reset-boxshadow {
+  @include box-shadow(none);
+}
+
+.reset-radius--2 {
+  border-radius: 2px;
 }

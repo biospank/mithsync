@@ -7,58 +7,69 @@ var signIn = (function() {
   var content = function(ctrl) {
     return [
       m(".align-vertical-block", [
-        m("header", { class: "header-text space-bottom" }, [
-          m("hgroup", { class: "text-center" }, [
-            m("h1", { class: "header-text__title mt-0" }, "Sign in to zinkroo.com"),
-            m("h2", { class: "header-text__subtitle" }, m.trust("Enter your <b>email</b> address and <b>password</b>")),
-            //m("hr", { class: "header-text__separator" })
-          ])
+        m("figure", { class: "center-block display-table mboth-60" }, [
+          m("img", { src: "/images/logo-zinkroo--white.png", width: "400" }),
+          m("h4", { class: "text-right text-white weight-regular" }, "live media sync")
         ]),
-        m('.card-wrapper sign bordered center-block', [
-          m("form", { class: "light-form" }, [
-            m.component(textField, {
-              type: 'email',
-              placeholder: 'Enter your Email',
-              id: 'email',
-              dataLabel: 'Email',
-              oninput: m.withAttr("value", Session.model.email),
-              error: ctrl.errors()['email'],
-              fieldType: "group",
-              icon: "fa fa-user"
-            }),
+        m('.card-wrapper sign center-block p-all-side-75', [
+          m("p", { class: "mb-40 text-dark--grey" }, [
+            "Need a Zinkroo account? ",
+            m("a", { href: "", class: "btn-link" }, "Create your account")
+          ]),
+          m("form", { class: "" }, [
+            m(".mb-25", [
+              m.component(textField, {
+                type: 'email',
+                //placeholder: 'Enter your Email',
+                id: 'email',
+                dataLabel: 'Email',
+                oninput: m.withAttr("value", Session.model.email),
+                error: ctrl.errors()['email'],
+                fieldType: "",
+                icon: "fa fa-user",
+                labelStyles: "text-dark--grey mb-15",
+                inputSize: "input-lg reset-boxshadow reset-radius--2"
+              })
+            ]),
             m.component(textField, {
               type: 'password',
-              placeholder: 'Enter Password',
+              //placeholder: 'Enter Password',
               id: 'password',
               dataLabel: 'Password',
               oninput: m.withAttr("value", Session.model.password),
               error: ctrl.errors()['password'],
-              fieldType: "group",
-              icon: "fa fa-unlock-alt"
+              fieldType: "",
+              icon: "fa fa-unlock-alt",
+              labelStyles: "text-dark--grey mb-15",
+              inputSize: "input-lg reset-boxshadow reset-radius--2"
             }),
-            m("p", [
-              m("a", { href: "/password/request", config: m.route }, "Forgot password?")
-            ]),
-            m(".checkbox", [
-              m("label", [
-                m("input", {
-                  type: "checkbox",
-                  onclick: m.withAttr("checked", Session.model.remember_me),
-                  checked: Session.model.remember_me()
-                }),
-                "Keep me signed in for 1 week"
-              ])
-            ]),
             m("div", { class: "text-center mboth-30" }, [
               m.component(feedbackButton, {
                 action: ctrl.createSession,
                 label: 'Login',
                 feedbackLabel: 'Authenticating...',
-                style: 'btn btn-primary btn-lg'
+                style: 'btn btn-primary btn-lg btn-block mb-75 mt-60'
               })
             ]),
-            m("p", { class: "text-center" }, "Haven't you got an account yet? ", [
-              m("a", { href: "/signup", config: m.route }, "Click here")
+            m(".row", [
+              m(".col-sm-6", [
+                m(".keep-signed", [
+                  m("input", {
+                    class: "magic-checkbox",
+                    type: "checkbox",
+                    name: "layout",
+                    onclick: m.withAttr("checked", Session.model.remember_me),
+                    checked: Session.model.remember_me(),
+                    id: "keep-signed"
+                  }),
+                  m("label", { for: "keep-signed", class: "weight-light" }, "Keep me signed in for 1 week")
+                ])
+              ]),
+              m(".col-sm-6", [
+                m("p", { class: "text-right mt-5" }, [
+                  m("a", { href: "/password/request", config: m.route, class: "btn-link" }, "Forgot your password?")
+                ])
+              ])
             ])
           ])
         ])
