@@ -30,7 +30,7 @@ var landingpage = {
           ])
         ])
       ]),
-      m("section", { class: "steps-section" }, [
+      m("section", { class: "steps-section bg-white" }, [
         m(".container", [
           m("header", { class: "text-center mb-50" }, [
             m("h1", { class: "text-color--main weight-bold mt-0 mb-25 steps-section__title" }, "Just a while to be online!"),
@@ -125,7 +125,7 @@ var landingpage = {
           ])
         ])
       ]),
-      m("section", { class: "text-center pboth-100 mt-50 mb-50 start-now-section" }, [
+      m("section", { class: "text-center pboth-100 start-now-section bg-white" }, [
         m(".container", [
           m("header", { class: "mb-100" }, [
             m("h1", { class: "text-color--main weight-bold mt-0 start-now-section__title mb-25" }, "Get started now"),

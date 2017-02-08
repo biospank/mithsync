@@ -6,9 +6,11 @@ import Session from "../../models/session";
 var signIn = (function() {
   var content = function(ctrl) {
     return [
-      m(".align-vertical-block", [
+      m("div", [
         m("figure", { class: "center-block display-table mboth-60" }, [
-          m("img", { src: "/images/logo-zinkroo--white.png", width: "400" }),
+          m("a", { href:"/", config: m.route }, [
+            m("img", { src: "/images/logo-zinkroo--white.png", width: "400", class:"img-responsive" }),
+          ]),
           m("h4", { class: "text-right text-white weight-regular" }, "live media sync")
         ]),
         m('.card-wrapper sign center-block p-all-side-75', [
