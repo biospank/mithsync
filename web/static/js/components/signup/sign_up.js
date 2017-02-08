@@ -7,55 +7,59 @@ var signUp = (function() {
   var content = function(ctrl) {
     return [
       m(".align-vertical-block", [
-        m("header", { class: "header-text" }, [
-          m("hgroup", { class: "text-center" }, [
-            m("h1", { class: "header-text__title mt-0" }, "Create your account"),
-            m("h2", { class: "header-text__subtitle" }, "You can get it for free!"),
-            //m("hr", { class: "header-text__separator" })
-          ])
+        m("figure", { class: "center-block display-table mboth-60" }, [
+          m("img", { src: "/images/logo-zinkroo--white.png", width: "400" }),
+          m("h4", { class: "text-right text-white weight-regular" }, "live media sync")
         ]),
-        m(".card-wrapper sign bordered center-block", [
-          m("form", { class: "light-form" }, [
+        m("h1", { class: "mt-0 mb-60 text-center text-white" }, "Create your account: you can get it for free!"),,
+        m(".card-wrapper sign center-block p-all-side-75", [
+          m("p", { class: "text-dark--grey mb-45" }, "Already a member. ", [
+            m("a", { href: "/signin", config: m.route, class: "btn-link" }, "Login!")
+          ]),
+          m("form", { class: "" }, [
             m.component(textField, {
               type: 'email',
-              placeholder: 'Enter your Email',
+              //placeholder: 'Enter your Email',
               id: 'email',
               dataLabel: 'Email',
               oninput: m.withAttr("value", Registration.model.email),
               error: ctrl.errors()['email'],
-              fieldType: "group",
-              icon: "fa fa-user"
+              fieldType: "",
+              icon: "fa fa-user",
+              labelStyles: "text-dark--grey mb-15",
+              inputSize: "input-lg reset-boxshadow reset-radius--2"
             }),
             m.component(textField, {
               type: 'password',
-              placeholder: 'Enter Password',
+              //placeholder: 'Enter Password',
               id: 'password',
               dataLabel: 'Password',
               oninput: m.withAttr("value", Registration.model.password),
               error: ctrl.errors()['password'],
-              fieldType: "group",
-              icon: "fa fa-unlock-alt"
+              fieldType: "",
+              icon: "fa fa-unlock-alt",
+              labelStyles: "text-dark--grey mb-15",
+              inputSize: "input-lg reset-boxshadow reset-radius--2"
             }),
             m.component(textField, {
               type: 'password',
-              placeholder: 'Enter Password',
+              //placeholder: 'Enter Password',
               id: 'password_confirmation',
               dataLabel: 'Confirm Password',
               oninput: m.withAttr("value", Registration.model.password_confirmation),
               error: ctrl.errors()['password_confirmation'],
-              fieldType: "group",
-              icon: "fa fa-unlock-alt"
+              fieldType: "",
+              icon: "fa fa-unlock-alt",
+              labelStyles: "text-dark--grey mb-15",
+              inputSize: "input-lg reset-boxshadow reset-radius--2"
             }),
             m("div", { class: "text-center mboth-30" }, [
               m.component(feedbackButton, {
                 action: ctrl.createUser,
                 label: 'Register',
                 feedbackLabel: 'Signing up...',
-                style: 'btn btn-primary btn-lg'
+                style: 'btn btn-primary btn-lg btn-block mt-60'
               })
-            ]),
-            m("p", { class: "text-center" }, "Already a member. ", [
-              m("a", { href: "/signin", config: m.route }, "Login!")
             ])
           ])
         ])

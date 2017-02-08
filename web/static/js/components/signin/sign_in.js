@@ -14,7 +14,7 @@ var signIn = (function() {
         m('.card-wrapper sign center-block p-all-side-75', [
           m("p", { class: "mb-40 text-dark--grey" }, [
             "Need a Zinkroo account? ",
-            m("a", { href: "", class: "btn-link" }, "Create your account")
+            m("a", { href: "/signup", config: m.route, class: "btn-link" }, "Create your account")
           ]),
           m("form", { class: "" }, [
             m(".mb-25", [
