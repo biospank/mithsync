@@ -8,7 +8,7 @@ defmodule Videosync.SessionController do
     opts = case user_params["remember_me"] do
       true ->
         Keyword.merge(opts, ttl: { 7, :days })
-      false ->
+      _ ->
         opts
     end
 
