@@ -4,8 +4,22 @@ import topBar from "./top_bar";
 import imageLibrary from "../video/library/image_library";
 import videoDetail from "../video/info/video_detail";
 import videoLayout from "../video/layout/video_layout";
+import Videosync from "../../videosync";
 
 var mixinLayout = function(content, layout) {
+  var loadFixedLayout = function() {
+    var cssId = 'fixed-layout';
+    if (!document.getElementById(cssId)) {
+        var head  = document.getElementsByTagName('head')[0];
+        var link  = document.createElement('link');
+        link.id   = cssId;
+        link.rel  = 'stylesheet';
+        link.type = 'text/css';
+        link.href = Videosync.domain + '/css/fixed-layout.css';
+        link.media = 'all';
+        head.appendChild(link);
+    }
+  };
 
   var layouts = {
     login: function(content) {
@@ -16,6 +30,7 @@ var mixinLayout = function(content, layout) {
       ]
     },
     standard: function(content) {
+      loadFixedLayout();
       return [
         m.component(topBar, { additionalClass: "navbar-fixed-top" }),
         m("section", { class: "clearfix", id: "wrapper" }, [
@@ -45,6 +60,7 @@ var mixinLayout = function(content, layout) {
       ]
     },
     edit: function(content) {
+      loadFixedLayout();
       return m(".edit-layout", [
         m("header", { class: "navbar-fixed-top", id: "header-page" }, [
           m.component(topBar, {}),
