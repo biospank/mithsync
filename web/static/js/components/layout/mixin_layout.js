@@ -21,8 +21,18 @@ var mixinLayout = function(content, layout) {
     }
   };
 
+  var unloadFixedLayout = function() {
+    var cssId = 'fixed-layout';
+    if (document.getElementById(cssId)) {
+      var head  = document.getElementsByTagName('head')[0];
+      var link  = document.getElementById(cssId);
+      head.removeChild(link);
+    }
+  };
+
   var layouts = {
     login: function(content) {
+      unloadFixedLayout();
       return [
         m('main', { class: 'main-container'}, [
           content
