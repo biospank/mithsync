@@ -47,7 +47,7 @@ var topBar = {
             config: m.route,
             class: "navbar-brand pull-left"
           }, [
-            m("img", { src: "images/logo-zinkroo-azzurro.png", class: "img-responsive" })
+            m("img", { src: "images/logo-zinkroo--azzurro.png", class: "img-responsive" })
           ]),
           // this.showMenuButton()
         ]),
