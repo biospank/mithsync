@@ -10,9 +10,9 @@ var resetPage = (function() {
         m("a", { href:"/", config: m.route }, [
           m("img", { src: "/images/logo-zinkroo--white.png", width: "400", class:"img-responsive" }),
         ]),
-        m("h4", { class: "text-right text-white weight-regular" }, "live media sync")
+        m("h4", { class: "text-right text-white weight-regular mb-0" }, "live media sync")
       ]),
-      m("h1", { class: "mt-0 mb-60 text-center text-white" }, "Reset Password"),
+      m("h2", { class: "mt-0 mb-60 text-center text-white" }, "Reset Password"),
       m('.card-wrapper sign center-block p-all-side-75', [
         m("form", [
           m.component(textField, {

@@ -10,7 +10,7 @@ var resendActivationPage = (function() {
         m("a", { href:"/", config: m.route }, [
           m("img", { src: "/images/logo-zinkroo--white.png", width: "400", class:"img-responsive" }),
         ]),
-        m("h4", { class: "text-right text-white weight-regular" }, "live media sync")
+        m("h4", { class: "text-right text-white weight-regular mb-0" }, "live media sync")
       ]),
       m("header", { class: "mb-60" }, [
         m("hgroup", { class: "text-center" }, [

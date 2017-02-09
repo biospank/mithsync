@@ -2,8 +2,8 @@
   padding-top: 50px;
   padding-bottom: 50px;
   @include respond-to(min-width, 768px) {
-    padding-top: 390px;
-    padding-bottom: 150px;
+    padding-top: 420px;
+    padding-bottom: 190px;
   }
   &__title {
     @include respond-to(max-width, 767px) {
@@ -14,7 +14,8 @@
     font-size: 20px;
     color: #95989a;
     @include respond-to(min-width, 768px) {
-      font-size: 28px;
+      font-size: 24px;
+      line-height: 28px;
     }
   }
   &__item {

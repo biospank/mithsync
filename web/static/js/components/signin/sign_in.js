@@ -55,7 +55,7 @@ var signIn = (function() {
             ]),
             m(".row", [
               m(".col-sm-6", [
-                m(".keep-signed", [
+                m(".magic-checkbox--big", [
                   m("input", {
                     class: "magic-checkbox",
                     type: "checkbox",

@@ -34,11 +34,12 @@
           font-size: 20px;
         }
       }
-      .keep-signed {
+      .magic-checkbox--big {
         .magic-checkbox {
           &+label {
             padding-left: 40px;
             padding-top: 5px;
+            display: inline-block;
             &:before {
               @include size(30px, 30px);
             }

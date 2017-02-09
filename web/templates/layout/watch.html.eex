@@ -28,7 +28,7 @@
               </label>
               <figure class="col-sm-6 text-right">
                 <a href="#" class="zinkroo__button--flip">
-                  <img src="<%= static_path(@conn, "/images/logo-zinkroo--small.png") %>">
+                  <img src="<%= static_path(@conn, "/images/logo-zinkroo--azzurro.png") %>" width="106">
                 </a>
               </figure>
             </section>
@@ -43,9 +43,9 @@
                   <img src="<%= static_path(@conn, "/images/logo-zinkroo--white.png") %>" width="320" class="img-responsive align-horizontal">
                 </a>
               </figure>
-              <p class="mb-60 description weight-thin">
+              <p class="mb-60 description weight-light">
                 The perfect way to sync and embed your video and images
-                <span class="weight-regular">everywhere!</span>
+                <span class="weight-strong">everywhere!</span>
               </p>
               <a href="http://www.zinkroo.com" class="text-uppercase zinkroo__button--subscribe weight-regular" target="_blank">Subscribe</a>
             </div>

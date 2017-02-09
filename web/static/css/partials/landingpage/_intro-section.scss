@@ -1,7 +1,7 @@
 .intro-section {
   padding-bottom: 30px;
   @include respond-to(min-width, 768px) {
-    max-height: 800px;
+    max-height: 1100px;
     padding-bottom: 0;
   }
   &__buttons {
@@ -16,5 +16,8 @@
     @include respond-to(min-width, 768px) {
       min-width: 370px;
     }
+  }
+  &__title {
+    line-height: 44px;
   }
 }

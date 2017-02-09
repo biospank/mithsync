@@ -16,7 +16,7 @@ var landingpage = {
       }, [
       m("section", { class: "bg-main pt-30 intro-section" }, [
         m(".container", [
-          m("header", { class: "clearfix" }, [
+          m("header", { class: "clearfix pb-100" }, [
             m(".navbar-header", { class: "hidden-xs" }, [
               m("a", { class: "navbar-brand pboth-0" }, [
                 m("img", { src: "/images/logo-zinkroo--white.png", width: "170", class: "img-responsive" })
@@ -24,14 +24,15 @@ var landingpage = {
             ]),
             m(".pull-right intro-section__buttons", [
               m("a", { href: "/signin", config: m.route, class: "btn btn-link btn-lg text-white" }, "Login"),
-              m("a", { href: "/signup", config: m.route, class: "btn btn-lg bg-white text-color--main" }, "Signup")
+              m("a", { href: "/signup", config: m.route, class: "btn btn-lg bg-white text-color--main" }, "Sign up"),
+              m("a", { href: "mailto:", config: m.route, class: "btn btn-link btn-lg text-white" }, "Contact us")
             ])
           ]),
-          m("figure", { class: "center-block display-table mboth-60 intro-section__logo" }, [
+          m("figure", { class: "center-block display-table mt-60 mb-80 intro-section__logo" }, [
             m("img", { src: "/images/logo-zinkroo--white.png", class: "img-responsive" }),
             m("h4", { class: "text-right text-white weight-regular" }, "live media sync")
           ]),
-          m("h2", { class: "text-center text-white weight-light mb-60 pb-60" }, m.trust("The perfect way to sync and embed your video<br>and images, <span class='weight-strong'>everywhere!</span>")),
+          m("h1", { class: "text-center text-white weight-light pt-100 mb-100 mt-0 pb-60 intro-section__title" }, m.trust("The perfect way to sync and embed your video<br>and images, <span class='weight-strong'>everywhere!</span>")),
           m("figure", { class: "images-intro" }, [
             m("img", { src: "/images/intro-img.png", class: "img-responsive center-block" })
           ])
@@ -39,7 +40,7 @@ var landingpage = {
       ]),
       m("section", { class: "steps-section bg-white" }, [
         m(".container", [
-          m("header", { class: "text-center mb-50" }, [
+          m("header", { class: "text-center mb-30 pb-100" }, [
             m("h1", { class: "text-color--main weight-bold mt-0 mb-25 steps-section__title" }, "Just a while to be online!"),
             m("p", { class: "weight-light steps-section__description" }, m.trust("Create a project, add new video link from Youtube o Vimeo, upload your<br>image gallery, sync all, choose template and copy the embed code in<br>your post or website"))
           ]),
@@ -57,7 +58,7 @@ var landingpage = {
             m(".col-xs-12 col-sm-4 col-md-4 col-lg-4", [
               m("div", { class: "steps-section__item mb-50" }, [
                 m("figure", { class: "steps-section__item--image block-relative mb-20" }, [
-                  m("img", { src: "/images/thumbs-step.jpg", class: "img-responsive" }),
+                  m("img", { src: "/images/step-2.jpg", class: "img-responsive" }),
                   m("span", { class: "widget-step text-center pt-5 weight-strong" }, "2")
                 ]),
                 m("h4", { class: "steps-section__item--title weight-strong text-color--main text-center mb-20" }, "Grab video link"),
@@ -87,7 +88,7 @@ var landingpage = {
             m(".col-xs-12 col-sm-4 col-md-4 col-lg-4", [
               m("div", { class: "steps-section__item mb-50" }, [
                 m("figure", { class: "steps-section__item--image block-relative mb-20" }, [
-                  m("img", { src: "/images/thumbs-step.jpg", class: "img-responsive" }),
+                  m("img", { src: "/images/step-5.jpg", class: "img-responsive" }),
                   m("span", { class: "widget-step text-center pt-5 weight-strong" }, "5")
                 ]),
                 m("h4", { class: "steps-section__item--title weight-strong text-color--main text-center mb-20" }, "Choose template"),
@@ -132,9 +133,9 @@ var landingpage = {
           ])
         ])
       ]),
-      m("section", { class: "text-center pboth-100 start-now-section bg-white" }, [
+      m("section", { class: "text-center start-now-section bg-white" }, [
         m(".container", [
-          m("header", { class: "mb-100" }, [
+          m("header", { class: "mb-100 pb-30" }, [
             m("h1", { class: "text-color--main weight-bold mt-0 start-now-section__title mb-25" }, "Get started now"),
             m("p", { class: "start-now-section__description weight-light" }, m.trust("Zinkroo gives you an easier and faster solution. Change your way to<br>work. Try it and give us your opinion"))
           ]),

@@ -1,4 +1,5 @@
 @import "./mixin/custom-mixin";
+@import "./partials/widgets/variables";
 @import "./partials/widgets/spaces";
 @import "./partials/plugins/customized-reveal";
 @import "./partials/widgets/typography";
@@ -116,7 +117,7 @@
       background-color: white;
       padding: 10px 30px;
       display: inline-block;;
-      color: #6b98d1;
+      color: $mainColor;
       @include transition(color 0.3s ease);
       &:hover {
         text-decoration: none;
@@ -208,7 +209,7 @@
   .back {
     @include rotate(180deg, nil, true);
     @include box-shadow(0 0 40px rgba(0,0,0,0.2));
-    background-color: #6b98d1 !important;
+    background-color: $mainColor !important;
     z-index: 9999;
     @include size(100%, 100%);
   }

@@ -11,9 +11,9 @@ var signUp = (function() {
           m("a", { href:"/", config: m.route }, [
             m("img", { src: "/images/logo-zinkroo--white.png", width: "400", class:"img-responsive" }),
           ]),
-          m("h4", { class: "text-right text-white weight-regular" }, "live media sync")
+          m("h4", { class: "text-right text-white weight-regular mb-0" }, "live media sync")
         ]),
-        m("h1", { class: "mt-0 mb-60 text-center text-white" }, "Create your account: you can get it for free!"),
+        m("h2", { class: "mt-0 mb-60 text-center text-white" }, "Create your account: you can get it for free!"),
         m(".card-wrapper sign center-block p-all-side-75", [
           m("p", { class: "text-dark--grey mb-45" }, "Already a member. ", [
             m("a", { href: "/signin", config: m.route, class: "btn-link" }, "Login!")
@@ -55,7 +55,31 @@ var signUp = (function() {
               labelStyles: "text-dark--grey mb-15",
               inputSize: "input-lg reset-boxshadow reset-radius--2"
             }),
-            m("div", { class: "text-center mboth-30" }, [
+            m(".magic-checkbox--big mt-55", [
+              m("input", {
+                class: "magic-checkbox",
+                type: "checkbox",
+                name: "layout",
+                // onclick: m.withAttr("checked", Session.model.remember_me),
+                // checked: Session.model.remember_me(),
+                id: "terms-conditions"
+              }),
+              m("label", { for: "terms-conditions", class: "weight-light" }, [
+                "I accept the Terms of Service. ",
+                m("a", {
+                  class: "btn-link",
+                  onclick: function() {
+                    swal({
+                      title: 'Testo',
+                      text: "You won't be able to revert this!",
+                      width: '400px',
+                      confirmButtonText: 'I got it!'
+                    }).catch(swal.noop);
+                  }
+                }, "Read more")
+              ])
+            ]),
+            m("div", { class: "text-center" }, [
               m.component(feedbackButton, {
                 action: ctrl.createUser,
                 label: 'Register',

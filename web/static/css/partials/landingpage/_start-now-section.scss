@@ -1,4 +1,10 @@
 .start-now-section {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  @include respond-to(min-width, 768px) {
+    padding-top: 160px;
+    padding-bottom: 230px;
+  }
   .btn-signup-now {
     width: 100%;
     font-size: 28px;
@@ -8,7 +14,6 @@
   }
   &__title {}
   &__description {
-    font-size: 24px;
-    color: #95989a;
+    @include font-style(24px, #95989a, 300, 28px);
   }
 }
