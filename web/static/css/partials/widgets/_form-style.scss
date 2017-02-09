@@ -54,3 +54,14 @@
     }
   }
 }
+
+.has-error {
+  .form-control {
+    @include border(#FB404B !important);
+    margin-bottom: 5px;
+  }
+  .error-label {
+    @include font-style(12px, #FB404B);
+    margin: 5px 0 0;
+  }
+}

@@ -39,7 +39,7 @@ var videoListItem = {
         m(".list__buttons list__buttons--32", [
           m("a", {
             href: "#",
-            class: "btn btn-default btn-square btn-square--32",
+            class: "btn btn-default btn-square btn-square--32 box-shadow",
             config: ctrl.initClipboard,
             onclick: function(e) {
               e.preventDefault();

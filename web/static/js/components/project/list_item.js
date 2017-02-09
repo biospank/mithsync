@@ -68,7 +68,7 @@ var listItem = {
             ]),
             m(".list__buttons list__buttons--32", [
               m("a", {
-                class: "btn btn-default btn-square btn-square--32 btn-space--left-10",
+                class: "btn btn-default btn-square box-shadow btn-square--32 btn-space--left-10",
                 onclick: function() {
                   this.editMode(true);
                 }.bind(this),
@@ -83,7 +83,7 @@ var listItem = {
                 m("i", { class: "fa fa-pencil", "aria-hidden": true })
               ]),
               m("a", {
-                class: "btn btn-default btn-square btn-square btn-square--32 btn-space--left-10",
+                class: "btn btn-default btn-square box-shadow btn-square btn-square--32 btn-space--left-10",
                 onclick: function() {
                   swal({
                     title: 'Are you sure?',

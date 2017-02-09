@@ -60,7 +60,7 @@ var listItem = {
         m(".list__buttons list__buttons--40", [
           m("a", {
             href: "#",
-            class: "btn btn-default btn-square",
+            class: "btn btn-default btn-square box-shadow",
             config: ctrl.initClipboard,
             onclick: function(e) {
               e.preventDefault();
@@ -93,7 +93,7 @@ var listItem = {
               }).catch(swal.noop);
             },
             // type: "button",
-            class: "btn btn-default btn-square btn-space--left-10"
+            class: "btn btn-default btn-square box-shadow btn-space--left-10"
           }, [
             m("i", { class: "fa fa-trash", "aria-hidden": true })
           ])
