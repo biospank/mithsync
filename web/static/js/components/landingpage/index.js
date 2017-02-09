@@ -1,4 +1,11 @@
+import Session from "../../models/session";
+
 var landingpage = {
+  controller: function() {
+    if(!Session.isExpired()) {
+      m.route("/dashboard");
+    }
+  },
   view: function() {
     return m("div", {
         config: function(element, isInit) {
