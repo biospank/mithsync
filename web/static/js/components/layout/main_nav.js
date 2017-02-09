@@ -36,8 +36,8 @@ var mainNav = {
   view: function(ctrl) {
     return m("nav", { class: "main-nav"}, [
       m("ul", { class: "nav nav-pills nav-stacked" }, [
-        m("li", { class: (ctrl.isActive("/") ? 'active main-nav__tab' : 'main-nav__tab') }, [
-          m("a", { href: "/", config: m.route, class: "" }, [
+        m("li", { class: (ctrl.isActive("/dashboard") ? 'active main-nav__tab' : 'main-nav__tab') }, [
+          m("a", { href: "/dashboard", config: m.route, class: "" }, [
             m("i", { class: "fa fa-dashboard main-nav__icon" }),
             m("span", { class: "main-nav__voice" }, "Dashboard")
           ])
