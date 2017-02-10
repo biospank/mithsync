@@ -3,7 +3,9 @@ import Videosync from '../videosync';
 var Session = {
   url: '/signin',
   extract: function(xhr, xhrOptions) {
-    if (xhr.status >= 200) {
+    var user = JSON.parse(xhr.response);
+
+    if (user.data.active && xhr.status >= 200) {
       Session.token(
         _.last(
           _.split(
