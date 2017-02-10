@@ -5,6 +5,9 @@
     padding-bottom: 0;
   }
   &__buttons {
+    .btn {
+      font-size: 15px;
+    }
     .btn-lg {
       @include respond-to(max-width, 767px) {
         min-width: auto;

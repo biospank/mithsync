@@ -23,16 +23,16 @@ var landingpage = {
               ])
             ]),
             m(".pull-right intro-section__buttons", [
+              m("a", { href: "mailto:customercare@zinkroo.com", class: "btn btn-link text-white" }, "Contact us"),
               m("a", { href: "/signin", config: m.route, class: "btn btn-link btn-lg text-white" }, "Login"),
-              m("a", { href: "/signup", config: m.route, class: "btn btn-lg bg-white text-color--main" }, "Sign up"),
-              m("a", { href: "mailto:", config: m.route, class: "btn btn-link btn-lg text-white" }, "Contact us")
+              m("a", { href: "/signup", config: m.route, class: "btn btn-lg bg-white text-color--main" }, "Sign up")
             ])
           ]),
           m("figure", { class: "center-block display-table mt-60 mb-80 intro-section__logo" }, [
             m("img", { src: "/images/logo-zinkroo--white.png", class: "img-responsive" }),
             m("h4", { class: "text-right text-white weight-regular" }, "live media sync")
           ]),
-          m("h1", { class: "text-center text-white weight-light pt-100 mb-100 mt-0 pb-60 intro-section__title" }, m.trust("The perfect way to sync and embed your video<br>and images, <span class='weight-strong'>everywhere!</span>")),
+          m("h1", { class: "text-center text-white weight-light mb-100 mt-0 pb-60 intro-section__title" }, m.trust("The perfect way to sync and embed your video<br>and images, <span class='weight-strong'>everywhere!</span>")),
           m("figure", { class: "images-intro" }, [
             m("img", { src: "/images/intro-img.png", class: "img-responsive center-block" })
           ])
