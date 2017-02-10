@@ -23,7 +23,6 @@ var landingpage = {
               ])
             ]),
             m(".pull-right intro-section__buttons", [
-              m("a", { href: "mailto:customercare@zinkroo.com", class: "btn btn-link text-white" }, "Contact us"),
               m("a", { href: "/signin", config: m.route, class: "btn btn-link btn-lg text-white" }, "Login"),
               m("a", { href: "/signup", config: m.route, class: "btn btn-lg bg-white text-color--main" }, "Sign up")
             ])
