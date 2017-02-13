@@ -1,21 +1,25 @@
 .zinkroo-preview {
   &__title {
-    @include font-style(28px, #000, 500, 30px);
+    @include font-style(24px, #000, 800, 28px);
   }
   &__description {
-    @include font-style(16px, #878787);
+    @include font-style(14px, #878787, 500);
   }
   &__date {
-    @include font-style(14px, #b2b2b2);
+    @include font-style(12px, #b2b2b2, 500);
     //display: block;
   }
   &__slide {
-    @include border(#e5e5e5, 1px, top);
+    @include border(#b4b2b2, 1px, top);
+    @include box-shadow(0 -6px 10px rgba(238, 238, 238, 0.9));
+    .owl-item .img-thumbnail {
+      border-radius: 0;
+    }
   }
   .layout {
     &--2, &--3 {
       .zinkroo-preview__title {
-        @include font-style(24px, #000, 500, 27px);
+        @include font-style(20px, #000, 800, 22px);
       }
     }
   }

@@ -189,7 +189,7 @@ var preview = (function() {
 
       var showDate = function() {
         if(Layout.model.show_date) {
-          return m("label", { class: "mt-0 weight-light zinkroo-preview__date" }, moment(Video.model.inserted_at()).format('lll'));
+          return m("label", { class: "mt-0 mb-10 zinkroo-preview__date" }, moment(Video.model.inserted_at()).format('lll'));
         } else {
           return "";
         }
