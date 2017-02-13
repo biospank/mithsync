@@ -14,10 +14,16 @@ import infoVideo from "./components/video/info";
 import viewVideo from "./components/video/view";
 import faq from "./components/faq/index";
 import landingpage from "./components/landingpage/index";
+import privacyPolicy from "./components/landingpage/privacy";
+import terms from "./components/landingpage/terms";
 
 export default m.route(document.getElementById('app'), "/", {
   // Login routing
   "/": landingpage,
+
+  "/privacy": privacyPolicy,
+
+  "/terms": terms,
 
   "/dashboard": dashboard,
 
