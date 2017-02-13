@@ -1,5 +1,5 @@
 .topbar {
-  background-color: white;
+  background-color: $mainColor;
   border: 0;
   // background-color: #3e4358;
   @include box-shadow(0px 2px 3px rgba(63,65,72,0.18));

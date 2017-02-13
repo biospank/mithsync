@@ -2,47 +2,56 @@
   margin: 0 0 25px;
   &__tab {
     & > a {
-      color: white;
+      color: #333333;
       border-radius: 0 !important;
       text-transform: uppercase;
       @include transition(all 0.3s ease-out);
       padding: 15px 50px 15px 20px !important;
+      // margin-right: 10px;
+      // border-top-right-radius: 25px !important;
+      // border-bottom-right-radius: 25px !important;
       @include border(transparent, 2px, left); //#34c9df
       &:hover, &:focus {
-        background-color: darken($light, 10%) !important;
+        background-color: $mainColor !important;
         color: white;
         border-radius: 0;
         @include border($mainColor, 2px, left);
+        .badge {
+          background-color: white;
+          color: $mainColor;
+        }
       }
       &:focus {
         .main-nav__icon {
-          color: $mainColor;
+          color: white;
         }
       }
       .badge {
         @include position(right, 20px, top, 12px);
+        @include transition(all 0.3s ease-out);
       }
     }
     &.active {
-      &::after {
-        $borderSize: 7px;
-        content: "";
-        display: block;
-        @include position(right, 0, top, 17px);
-        @include border(transparent, $borderSize, top);
-        @include border(transparent, $borderSize, bottom);
-        @include border($body-bg, $borderSize, right);
-        @include size(0, 0);
-      }
+      // &::after {
+      //   $borderSize: 7px;
+      //   content: "";
+      //   display: block;
+      //   @include position(right, 10px, top, 17px);
+      //   @include border(transparent, $borderSize, top);
+      //   @include border(transparent, $borderSize, bottom);
+      //   @include border(#f4f4f4, $borderSize, right);
+      //   @include size(0, 0);
+      // }
       & > a {
-        background-color: darken($dark, 2%) !important;
+        background-color: $mainColor !important;
         border-radius: 0;
         @include border($mainColor, 2px, left);
+        //margin-right: 10px;
         &:hover {
-          background-color: darken($dark, 2%) !important;
+          background-color: $mainColor !important;
         }
         .main-nav__icon {
-          color: $mainColor;
+          color: white;
         }
       }
       .sub-nav {
@@ -51,7 +60,7 @@
     }
   }
   &__icon {
-    color: #213147;
+    color: #333333;
     @include position(left, 20px, top, 18px);
   }
   &__voice {

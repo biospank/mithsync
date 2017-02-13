@@ -2,7 +2,8 @@
   position: relative;
   padding-left: 250px;
   padding-top: 55px;
-  background-color: #fafbfd;
+  // background-color: #fafbfd;
+  background-color: white;
   //padding-bottom: 40px;
   //margin-top: 15px;
   // add style for footer fixting
@@ -21,10 +22,12 @@
 #sidebar-wrapper {
   @include position(left, 0, top, 55px, fixed);
   @include size(250px, 100%);
+  @include border(#e5e3e4, 1px, right);
   z-index: 1000;
   overflow-y: auto;
   //@include gradient-vertical($light, $dark, 0%, 100%);
-  background-color: $dark;
+  // background-color: $dark;
+  background-color: #f4f4f4;
 }
 
 #page-content-wrapper {
@@ -69,8 +72,9 @@ body {
     }
     .breadcrumb-bar {
       min-width: $minWidthPage;
-      background-color: white;
+      background-color: #eef7ff;
       // border-color: #dce0e6;
+      @include border(#e5e3e4, 1px, bottom);
       margin-top: 4px;
     }
     #wrapper {

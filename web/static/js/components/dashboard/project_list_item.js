@@ -3,7 +3,7 @@ import Project from "../../models/project";
 var projectListItem = {
   view: function(ctrl, project){
     return m("li", [
-      m(".list media", [
+      m(".list media border radius", [
         m("a", {
             href: "#",
             onclick: function(event) {

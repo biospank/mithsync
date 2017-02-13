@@ -13,7 +13,7 @@ var videoListItem = {
   },
   view: function(ctrl, video){
     return m("li", [
-      m(".list media", [
+      m(".list media border radius", [
         m("a", {
           href: "",
           onclick: function(event) {
@@ -39,7 +39,7 @@ var videoListItem = {
         m(".list__buttons list__buttons--32", [
           m("a", {
             href: "#",
-            class: "btn btn-default btn-square btn-square--32 box-shadow",
+            class: "btn btn-default btn-square border btn-square--32",
             config: ctrl.initClipboard,
             onclick: function(e) {
               e.preventDefault();

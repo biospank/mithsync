@@ -1,7 +1,7 @@
 .search-form {
   @include spaces(0, 0);
   .input-group {
-    //border-radius: 5px;
+    border-radius: 25px;
     padding: 0px 3px;
     background-color: white;
     @include box-shadow(0 0 0 1px #dee1e5);

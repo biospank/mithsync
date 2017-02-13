@@ -10,7 +10,7 @@ var dashboard = (function() {
     return [
       m("section", { class: "row" }, [
         m("article", { class: "col-xs-3 col-sm-3 col-md-3" }, [
-          m("div", { class: "box" }, [
+          m("div", { class: "box border radius" }, [
             m("h4", { class: "box__title" }, "Create new project"),
             m("div", { class: "text-center" }, [
               m("a", {

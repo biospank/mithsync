@@ -59,8 +59,8 @@ var user = (function() {
           "aria-expanded": false
         }, [
           m("div", { class: "user-avatar__name" }, [
-            m("span", { class: "text-black" }, currentUser().email),
-            m("i", { class: "fa fa-caret-down", "aria-hidden": true })
+            m("span", { class: "text-white" }, currentUser().email),
+            m("i", { class: "fa fa-caret-down text-white", "aria-hidden": true })
           ])
         ]),
         m("ul", { class: "dropdown-menu", "aria-labelledby": "dropdownMenu1" }, [

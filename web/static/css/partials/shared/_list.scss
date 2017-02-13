@@ -1,8 +1,15 @@
 .list {
   background-color: white;
-  @include box-shadow(0px 0px 10px #dfe4ee);
   @include spaces(0, 0 0 15px 0);
-  //border-radius: 5px;
+  &.shadow {
+    @include box-shadow(0px 0px 10px #dfe4ee);
+  }
+  &.radius {
+    border-radius: 2px;
+  }
+  &.border {
+    @include border(#e5e3e4);
+  }
   position: relative;
   &.media {
     overflow: visible;

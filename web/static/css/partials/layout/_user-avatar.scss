@@ -3,6 +3,9 @@
   margin: 5px 15px;
   &__button {
     display: block;
+    &:hover, &:focus {
+      text-decoration: none;
+    }
   }
   &__photo {
     img {
@@ -11,7 +14,8 @@
     }
   }
   &__name {
-    margin: 0 15px;
+    // margin: 0 15px;
+    margin: 0 5px 0 15px;
     color: #707a82;
     i {
       @include font-style(15px, #707a82, 400, 45px);

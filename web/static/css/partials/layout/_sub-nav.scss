@@ -1,7 +1,7 @@
 .sub-nav {
   padding-left: 26px;
   padding-right: 26px;
-  background-color: $light;
+  background-color: $mainColor;
   & > .nav {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -12,19 +12,19 @@
       //text-transform: uppercase;
       @include transition(all 0.3s ease-out);
       padding: 7px 23px !important;
-      @include border($dark, 2px, left);
+      @include border(#333, 2px, left);
       &:hover, &:focus {
         background-color: transparent !important;
         color: white;
         text-decoration: none;
-        border-color: $mainColor;
+        border-color: white;
       }
     }
     &.active {
       & > a {
         background-color: transparent;
         color: white;
-        border-color: $mainColor;
+        border-color: white;
       }
     }
   }

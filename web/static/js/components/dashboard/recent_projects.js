@@ -43,7 +43,7 @@ var recentProjects = {
   },
   view: function(ctrl) {
     return m("article", { class: "col-xs-4 col-sm-4 col-md-4" }, [
-      m("div", { class: "box" }, [
+      m("div", { class: "box border radius" }, [
         m("h4", { class: "box__title" }, "Projects"),
         m("div", { class: "box__counter" }, [
           m("span", { class: "box__counter-number" }, ctrl.pageInfo.totalEntries || 0),

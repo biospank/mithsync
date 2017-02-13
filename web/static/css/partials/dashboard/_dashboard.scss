@@ -2,10 +2,16 @@
   @include spaces(15px, 0 0 20px 0);
   padding: 15px;
   background-color: white;
-  //@include border(#eaeaea);
-  @include box-shadow(0px 0px 10px #e1e5ef);
   min-height: 140px;
-  //border-radius: 5px;
+  &.shadow {
+    @include box-shadow(0px 0px 10px #e1e5ef);
+  }
+  &.border {
+    @include border(#e5e3e4);
+  }
+  &.radius {
+    border-radius: 2px;
+  }
   &__title {
     margin: 0 0 20px 0;
     @include font-style(14px, $coloured, 400);

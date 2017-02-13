@@ -43,7 +43,7 @@ var recentVideos = {
   },
   view: function(ctrl) {
     return m("article", { class: "col-xs-5 col-sm-5 col-md-5" }, [
-      m("div", { class: "box" }, [
+      m("div", { class: "box border radius" }, [
         m("h4", { class: "box__title" }, "Video"),
         m("div", { class: "box__counter" }, [
           m("span", { class: "box__counter-number" }, ctrl.pageInfo.totalEntries || 0),

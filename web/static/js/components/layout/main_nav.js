@@ -47,7 +47,7 @@ var mainNav = {
             m("i", { class: "fa fa-film main-nav__icon" }),
             m("span", { class: "main-nav__voice" }, "Projects"),
             m("span", {
-              class: "badge"
+              class: "badge radius"
             }, ctrl.projectCount())
           ])
         ]),
