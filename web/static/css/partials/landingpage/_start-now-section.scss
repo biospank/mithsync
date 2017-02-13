@@ -1,14 +1,14 @@
 .start-now-section {
   padding-top: 100px;
   padding-bottom: 100px;
-  @include respond-to(min-width, 768px) {
+  @include respond-to(min-width, $screen-md-min) {
     padding-top: 160px;
     padding-bottom: 230px;
   }
   .btn-signup-now {
     width: 100%;
     font-size: 28px;
-    @include respond-to(min-width, 768px) {
+    @include respond-to(min-width, $screen-md-min) {
       width: 700px;
     }
   }

@@ -32,7 +32,7 @@ var newVideo = (function() {
           }),
           m.component(textField, {
             type: 'link',
-            placeholder: 'link to video',
+            placeholder: 'Insert here your Youtube/Vimeo URL',
             id: 'url',
             dataLabel: 'Video Link',
             oninput: m.withAttr("value", Video.model.url),

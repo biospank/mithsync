@@ -1,6 +1,6 @@
 .intro-section {
   padding-bottom: 30px;
-  @include respond-to(min-width, 768px) {
+  @include respond-to(min-width, $screen-md-min) {
     max-height: 1100px;
     padding-bottom: 0;
   }
@@ -16,7 +16,7 @@
   }
   &__logo {
     max-width: 200px;
-    @include respond-to(min-width, 768px) {
+    @include respond-to(min-width, $screen-md-min) {
       min-width: 370px;
     }
   }
