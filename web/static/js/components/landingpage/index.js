@@ -142,7 +142,7 @@ var landingpage = {
         ])
       ]),
       m("footer", { class: "bg-main text-center pboth-40" }, [
-        m("p", { class: "mb-0 text-white" }, m.trust("©2017 <a href='http://axenso.com/' class='weight-strong text-white'>Axenso</a> all Rights Reserved"))
+        m("p", { class: "mb-0 text-white" }, m.trust("©2017 <a href='http://axenso.com/' class='weight-strong text-white'>Axenso</a> all Rights Reserved. <a href='#' class='weight-strong text-white'>Privacy</a> and <a href='#' class='weight-strong text-white'>Terms</a>"))
       ])
     ])
   }

@@ -74,98 +74,81 @@ var signUp = (function() {
                       confirmButtonText: 'I got it!',
                       //title: 'Testo',
                       text: "<div class='text-left'>" +
-                              "<label>Termini e condizioni d’uso</label><br><br>" +
-                              "Il presente documento disciplina i termini e le condizioni di utilizzo del presente portale. Se l’utente non intende aderire alle condizioni d’uso qui previste non può procedere alla registrazione e, quindi, accedere ai contenuti e alle funzionalità del portale stesso.<br><br>" +
-                              "Zinkroo è una piattaforma web per la gestione delle sincronizzazioni video e immagini<br><br>" +
-                              "La presente piattaforma è stata sviluppata da Axedyn Srl che ne è proprietaria.<br><br>" +
-                              "La registrazione dell’utente presuppone che egli abbia preventivamente visionato le condizioni per la protezione e il trattamento dei dati personali, nonché l’informativa di cui all’art. 13 D.Lgs. n. 196/2003 e che abbia prestato il consenso al trattamento dei propri dati.<br><br>" +
-                              "Le condizioni per la protezione e il trattamento dei dati personali si trovano in calce al presente documento.<br><br>" +
-                              "L’utente è responsabile della correttezza e veridicità dei dati forniti all’atto della registrazione, nonché di ogni eventuale violazione di diritti e/o prerogative di terzi relativa, conseguente e/o connessa ai dati forniti all’atto della registrazione. L’utente registrato è esclusivo responsabile dell’utilizzo delle credenziali di accesso alla piattaforma – strettamente personali e non cedibili a terzi – nonché della relativa conservazione.<br><br>" +
-                              "Axedyn Srl non può garantire il costante aggiornamento dei contenuti del sito, né che questi ultimi siano completi e privi di errori. Axedyn Srl non risponde pertanto di eventuali oneri, spese, perdite e/o danni che dovessero derivare all’utente dall’utilizzo e/o dall’impossibilità di utilizzare questo sito web, ovvero dalla circostanza che l’utente abbia fatto affidamento, in tutto o in parte, sui contenuti informativi/divulgativi del portale.<br><br>" +
-                              "Il presente portale può contenere collegamenti e/o riferimenti a siti internet di terze parti, sui quali Axedyn Srl non ha alcun controllo. La sussistenza di eventuali collegamenti e/o riferimenti a siti internet di terze parti non equivale ad approvazione dei relativi contenuti da parte di Axedyn Srl, che non risponde pertanto della relativa attendibilità e correttezza, declinando ogni responsabilità rispetto a quanto offerto all’interno dei predetti siti.<br><br>" +
-                              "Axedyn Srl si impegna ad adottare tutte le misure idonee e ragionevoli per proteggere il sito da worms, trojans e/o altre minacce (c.d. materiali nocivi). Pur adottando la massima diligenza, Axedyn Srl non può comunque garantire che il sito sia del tutto privo di materiali nocivi e declina, pertanto, ogni responsabilità in ordine a qualsivoglia perdita, spesa, onere e/o danno occorso all’utente a causa di materiali nocivi provenienti da questo portale, ovvero da eventuali collegamenti e/o riferimenti a siti di terze parti presenti sul sito. I contenuti pubblicati e/o resi disponibili sono tutelati dalla normativa sul diritto d’autore e della proprietà intellettuale. I contenuti pubblicati sul presente portale non possono pertanto essere copiati, salvo che per uso personale e non commerciale, senza apportare alcuna modifica ai contenuti stessi e mantenendo tutti gli avvisi e le indicazioni sulla titolarità del diritto d’autore e/o dei diritti di proprietà intellettuale, ivi comprese le clausole di esclusione da responsabilità in favore di Axedyn Srl qui disciplinate.<br><br>" +
-                              "Axedyn Srl si impegna a garantire con continuità la funzionalità del sito, ma declina ogni responsabilità rispetto ad eventuali inconvenienti tecnici e/o a necessità di manutenzione tali da causare interruzioni alla funzionalità del sito. In ogni caso, Axedyn Srl si riserva il diritto di oscurare, modificare e/o interrompere (temporaneamente o definitivamente) una o più funzionalità del presente portale, in qualsiasi momento e senza preavviso agli utenti.<br><br>" +
-                              "I termini e le condizioni di utilizzo del sito sono efficaci e vincolanti per l’utente dal momento dell’attivazione dell’account per l’accesso ai contenuti del portale. Per qualsiasi chiarimento e/o informazione circa i termini e le condizioni di utilizzo del sito, l’utente può rivolgersi per iscritto, in qualsiasi momento, al seguente indirizzo: privacy@axenso.com<br><br>" +
-                              "Le presenti condizioni di utilizzo sono disciplinate dalla legge italiana. Qualsiasi controversia concernente i contenuti, l’interpretazione e/o l’esecuzione delle stesse è devoluta alla giurisdizione del Foro di Milano.<br><br>" +
-                              "<label>Cooky Policy</label><br><br>" +
-                              "Per cookie si intende un elemento testuale che viene inserito nel disco fisso di un computer solo in seguito ad autorizzazione. I cookies hanno la funzione di snellire l’analisi del traffico su web o di segnalare quando un sito specifico viene visitato e consentono alle applicazioni web di inviare informazioni a singoli utenti.<br><br>" +
-                              "Nessun dato degli utenti viene in proposito acquisito dal sito.<br><br>" +
-                              "Non viene fatto uso di cookies per la trasmissione di informazioni di carattere personale, ovvero sistemi per il tracciamento degli utenti.<br><br>" +
-                              "I cookies utilizzati dal sito www.ecmclub.org sono i seguenti: cookiesDirective<br><br>" +
-                              "Cookie utilizzato per rilevare se un utente ha accettato l’impiego di diverse categorie di cookies sul sito web. Si tratta di un cookie permanente, che viene eliminato se l’utente modifica le proprie impostazioni sui cookies.<br><br>" +
-                              "Cookies utilizzati da Google Analytics per monitorare l’utilizzo del sito da parte degli utenti. Tutti i dati memorizzati sono in forma anonima e non correlabili al singolo utente. Non viene memorizzato nessun dato sensibile dell’utente, solamente la modalità di utilizzo del sito per migliorare il servizio offerto.<br>" +
-                              "wordpress, wordpress_logged_in<br>" +
-                              "Cookies tecnici per la gestione del login dell’utente.<br>" +
-                              "wp-<br>" +
-                              "Cookies tecnici per la gestione del backoffice del sito.<br>" +
-                              "cookie-<br>" +
-                              "Cookies tecnici per l’accesso ad alcune sezioni del sito.<br><br>" +
-                              "Disabilitazione totale o parziale dei cookies<br>" +
-                              "L’utente può decidere se accettare o meno i cookies utilizzando le impostazioni del proprio browser.<br>" +
-                              "La disabilitazione totale o parziale dei cookies tecnici può compromettere l’utilizzo delle funzionalità del sito riservate agli utenti registrati. Al contrario, la fruibilità dei contenuti pubblici è possibile anche disabilitando completamente i cookies. Disabilitare i cookies “terze parti” non pregiudica in alcun modo la navigabilità. L’impostazione può essere definita in modo specifico per i diversi siti e applicazioni web. I migliori browser, infatti, consentono di definire impostazioni diverse per i cookies “proprietari” e per quelli di “terze parti”. Di seguito indichiamo come procedere alla disabilitazione dei cookies attraverso alcuni browser.<br><br>" +
-                              "<label>Firefox:</label><br>" +
-                              "<ul class='list-unstyled text-left'>" +
-                                "<li>1.1. Apri Firefox</li>" +
-                                "<li>1.2. Premi il pulsante “Alt” sulla tastiera</li>" +
-                                "<li>1.3. Nella barra degli strumenti situata nella parte superiore del browser, seleziona “Strumenti” e successivamente “Opzioni”</li>" +
-                                "<li>1.4. Seleziona quindi la scheda “Privacy”</li>" +
-                                "<li>1.5. Vai su “Impostazioni Cronologia:” e successivamente su “Utilizza impostazioni personalizzate”. Deseleziona “Accetta i cookie dai siti” e salva le preferenze.</li>" +
-                              "</ul>" +
-                              "<label>Internet Explorer:</label><br>" +
-                              "<ul class='list-unstyled text-left'>" +
-                                "<li>2.1. Apri Internet Explorer</li>" +
-                                "<li>2.2. Clicca sul pulsante “Strumenti” e quindi su “Opzioni Internet”</li>" +
-                                "<li>2.3. Seleziona la scheda “Privacy” e sposta il dispositivo di scorrimento sul livello di privacy che desideri impostare (verso l’alto per bloccare tutti i cookies o verso il basso per consentirli tutti)</li>" +
-                                "<li>2.4. Quindi clicca su OK</li>" +
-                              "</ul>" +
-                              "<label>Google Chrome:</label><br>" +
-                              "<ul class='list-unstyled text-left'>" +
-                                "<li>3.1. Apri Google Chrome</li>" +
-                                "<li>3.2. Clicca sull’icona “Strumenti”</li>" +
-                                "<li>3.3. Seleziona “Impostazioni” e successivamente “Impostazioni avanzate”</li>" +
-                                "<li>3.4. Seleziona “Impostazioni dei contenuti” sotto la voce “Privacy”</li>" +
-                                "<li>3.5. Nella scheda “Cookies” è possibile deselezionare i cookies e salvare le preferenze</li>" +
-                              "</ul>" +
-                              "<label>Safari:</label><br>" +
-                              "<ul class='list-unstyled text-left'>" +
-                                "<li>4.1. Apri Safari</li>" +
-                                "<li>4.2. Scegli “Preferenze” nella barra degli strumenti, quindi seleziona il pannello “Sicurezza” nella finestra di dialogo che segue</li>" +
-                                "<li>4.3. Nella sezione “Accetta cookie” è possibile specificare se e quando Safari deve salvare i cookies dai siti web. Per ulteriori informazioni clicca sul pulsante di Aiuto (contrassegnato da un punto interrogativo)</li>" +
-                                "<li>4.4. Per maggiori informazioni sui cookies che vengono memorizzati sul vostro computer, clicca su “Mostra cookie”</li>" +
-                              "</ul>" +
-                              "<label>Privacy Policy</label><br><br>" +
-                              "Nellʼambito dellʼespletamento del servizio reso, la società Axedyn S.r.l., con sede legale in Milano, via W. Tobagi, n. 8/a, acquisisce notizie riservate dagli utenti. Pertanto, conformemente a quanto previsto e contemplato dalla legge n. 196/2003, recante disposizioni per la tutela delle persone e di altri soggetti rispetto al trattamento dei dati personali, la stessa, quale titolare del trattamento, è tenuta ad illustrare le modalità di utilizzo delle informazioni in suo possesso. A tale riguardo, ai sensi dell’articolo 13 del D. Lgs 196/2013, si precisa che:<br><br>" +
-                              "il trattamento dei dati in parola avviene con procedure idonee a garantire il rispetto del diritto alla riservatezza dell’utente e si articola nella loro raccolta, registrazione, organizzazione, conservazione, elaborazione, modificazione, selezione, estrazione, raffronto, utilizzo, interconnessione, blocco, comunicazione, diffusione, cancellazione, distruzione, anche mediante combinazione di due o più delle operazioni predette;<br>" +
-                              "il trattamento stesso ha finalità unicamente connesse o strumentali al servizio fornito, e precisamente quelle di: raccogliere dati e notizie relative a ciascun utente essenziali per poter realizzare un effettivo programma personalizzato; ciò implica la necessità, per il sistema, di individuare e riconoscere il singolo utente e di memorizzare il suo percorso formativo e il punteggio raggiunto;<br>" +
-                              "raccogliere dati ed informazioni in via generale e particolare sugli orientamenti e le preferenze dell’utente;<br>" +
-                              "inviare messaggi a contenuto meramente informativo o contenenti offerte commerciali;<br>" +
-                              "inviare materiale pubblicitario e informativo;<br>" +
-                              "effettuare comunicazioni commerciali, anche interattive;<br>" +
-                              "compiere attività dirette di collocamento di prodotti o servizi;<br>" +
-                              "elaborare studi e ricerche statistiche su vendite, clienti e altre informazioni, ed eventualmente comunicare le stesse a terzi.<br>" +
-                              "In relazione alle sopradescritte finalità, il trattamento dei dati personali avrà luogo prevalentemente con modalità automatizzate ed informatizzate, con logiche strettamente correlate alle finalità stesse e, comunque, sempre nel rispetto delle regole di riservatezza e di sicurezza previste dalla normativa vigente. I dati saranno conservati, per i termini di legge, presso la sede operativa della Axedyn S.r.l., in via W. Tobagi, n. 8/a, Milano e trattati da parte di dipendenti e/o professionisti da questa incaricati, i quali svolgono le suddette attività sotto la diretta supervisione del Titolare del trattamento. A tal fine, i dati stessi potranno essere trasmessi a soggetti esterni che svolgono funzioni strettamente connesse e strumentali all’operatività del servizio. Il conferimento del consenso al trattamento da parte dell’utente è facoltativo. Un eventuale rifiuto ad inserire le informazioni richieste nella pagina dedicata alla registrazione rende, però, impossibile lʼutilizzo del servizio.<br>" +
-                              "Alla società Axedyn S.r.l., titolare del trattamento, lʼutente potrà rivolgersi per far valere i suoi diritti così come previsti dallʼart. 7 della legge n. 196/03, il cui testo si riporta integralmente qui di seguito:<br><br>" +
-                              "Art. 7 Diritto di accesso ai dati personali ed altri diritti.<br><br>" +
-                              "L’interessato ha diritto di ottenere la conferma dell’esistenza o meno di dati personali che lo riguardano, anche se non ancora registrati, e la loro comunicazione in forma intelligibile.<br><br>" +
-                              "<label>L’interessato ha diritto di ottenere l’indicazione:</label>" +
+                              "<label>TERMS AND CONDITIONS</label><br><br>" +
+                              "Introduction<br><br>" +
+                              "These terms and conditions govern your use of this website; by using this website, you accept these terms and conditions in full. If you disagree with these terms and conditions or any part of these terms and conditions, you must not use this website.<br><br>" +
+                              "You must be at least 18 years of age to use this website. By using this website and by agreeing to these terms and conditions you warrant and represent that you are at least 18]years of age.<br><br>" +
+                              "This website uses cookies. By using this website and agreeing to these terms and conditions, you consent to our zinkroo's use of cookies in accordance with the terms of zinkroo's privacy policy / cookies policy.<br><br>" +
+                              "License to use website<br><br>" +
+                              "Unless otherwise stated, zinkroo and/or its licensors own the intellectual property rights in the website and material on the website. Subject to the license below, all these intellectual property rights are reserved.<br><br>" +
+                              "You may view, download for caching purposes only, and print pages from the website for your own personal use, subject to the restrictions set out below and elsewhere in these terms and conditions.<br><br>" +
+                              "You must not:" +
                               "<ul class='list-unstyled'>" +
-                                "<li>a) dell’origine dei dati personali;</li>" +
-                                "<li>b) delle finalità e modalità del trattamento;</li>" +
-                                "<li>c) della logica applicata in caso di trattamento effettuato con l’ausilio di strumenti elettronici;</li>" +
-                                "<li>d) degli estremi identificativi del titolare, dei responsabili e del rappresentante designato ai sensi dell’articolo 5, comma 2;</li>" +
-                                "<li>e) dei soggetti o delle categorie di soggetti ai quali i dati personali possono essere comunicati o che possono venirne a conoscenza in qualità di rappresentante designato nel territorio dello Stato, di responsabili o incaricati.</li>" +
+                                "<li>republish material from this website (including republication on another website);</li>" +
+                                "<li>sell, rent or sub-license material from the website;</li>" +
+                                "<li>show any material from the website in public;</li>" +
+                                "<li>reproduce, duplicate, copy or otherwise exploit material on this website for a commercial purpose;</li>" +
+                                "<li>edit or otherwise modify any material on the website;</li>" +
+                                "<li>redistribute material from this website [except for content specifically and expressly made available for redistribution].</li>" +
                               "</ul>" +
-                              "<label>L’interessato ha diritto di ottenere:</label>" +
-                              "<ul class='list-unstyled'>" +
-                                "<li>a) l’aggiornamento, la rettificazione ovvero, quando vi ha interesse, l’integrazione dei dati;</li>" +
-                                "<li>b) la cancellazione, la trasformazione in forma anonima o il blocco dei dati trattati in violazione di legge, compresi quelli di cui non è necessaria la conservazione in relazione agli scopi per i quali i dati sono stati raccolti o successivamente trattati;</li>" +
-                                "<li>c) l’attestazione che le operazioni di cui alle lettere a) e b) sono state portate a conoscenza, anche per quanto riguarda il loro contenuto, di coloro ai quali i dati sono stati comunicati o diffusi, eccettuato il caso in cui tale adempimento si rivela impossibile o comporta un impiego di mezzi manifestamente sproporzionato rispetto al diritto tutelato.</li>" +
+                              "Acceptable use<br><br>" +
+                              "You must not use this website in any way that causes, or may cause, damage to the website or impairment of the availability or accessibility of the website; or in any way which is unlawful, illegal, fraudulent or harmful, or in connection with any unlawful, illegal, fraudulent or harmful purpose or activity.<br><br>" +
+                              "You must not use this website to copy, store, host, transmit, send, use, publish or distribute any material which is linked to any spyware, computer virus, Trojan horse, worm, keystroke logger, rootkit or other malicious computer software.<br><br>" +
+                              "You must not conduct any systematic or automated data collection activities (including without limitation scraping, data mining, data extraction and data harvesting) on or in relation to this website without zinkroo’s express written consent.<br><br>" +
+                              "You must not use this website to transmit or send unsolicited commercial communications.<br><br>" +
+                              "You must not use this website for any purposes related to marketing without zinkroo’s express written consent.<br><br>" +
+                              "User content<br><br>" +
+                              "In these terms and conditions, “your user content” means material (including without limitation text, images, audio material, video material and audio-visual material) that you submit to this website, for whatever purpose.<br><br>" +
+                              "You grant to zinkroo a worldwide, irrevocable, non-exclusive, royalty-free license to use, reproduce, adapt, publish, translate and distribute your user content in any existing or future media. You also grant to zinkroo the right to sub-license these rights, and the right to bring an action for infringement of these rights.<br><br>" +
+                              "Your user content must not be illegal or unlawful, must not infringe any third party's legal rights, and must not be capable of giving rise to legal action whether against you or zinkroo or a third party (in each case under any applicable law).<br><br>" +
+                              "You must not submit any user content to the website that is or has ever been the subject of any threatened or actual legal proceedings or other similar complaint.<br><br>" +
+                              "Zinkroo reserves the right to edit or remove any material submitted to this website, or stored on zinkroo servers, or hosted or published upon this website.<br><br>" +
+                              "Notwithstanding zinkroo’s rights under these terms and conditions in relation to user content, zinkroo does not undertake to monitor the submission of such content to, or the publication of such content on, this website.<br><br>" +
+                              "No warranties<br><br>" +
+                              "This website is provided “as is” without any representations or warranties, express or implied. Zinkroo makes no representations or warranties in relation to this website or the information and materials provided on this website.<br><br>" +
+                              "Without prejudice to the generality of the foregoing paragraph, zinkroo does not warrant that:<br><br>" +
+                              "this website will be constantly available, or available at all; or the information on this website is complete, true, accurate or non-misleading.<br><br>" +
+                              "Nothing on this website constitutes, or is meant to constitute, advice of any kind.<br><br>" +
+                              "Limitations of liability<br><br>" +
+                              "Zinkroo will not be liable to you (whether under the law of contact, the law of torts or otherwise) in relation to the contents of, or use of, or otherwise in connection with, this website:" +
+                              "<ul class='list-unstyled text-left'>" +
+                                "<li>for any direct loss;</li>" +
+                                "<li>for any indirect, special or consequential loss;</li>" +
+                                "<li>or for any business losses, loss of revenue, income, profits or anticipated savings, loss of contracts or business relationships, loss of reputation or goodwill, or loss or corruption of information or data.</li>" +
                               "</ul>" +
-                              "<label>L’interessato ha diritto di opporsi, in tutto o in parte:</label>" +
-                              "<ul class='list-unstyled'>" +
-                                "<li>a) per motivi legittimi al trattamento dei dati personali che lo riguardano, ancorché pertinenti allo scopo della raccolta;</li>" +
-                                "<li>b) al trattamento di dati personali che lo riguardano a fini di invio di materiale pubblicitario o di vendita diretta o per il compimento di ricerche di mercato o di comunicazione commerciale.</li>" +
+                              "These limitations of liability apply even if zinkroo has been expressly advised of the potential loss.<br><br>" +
+                              "Exceptions<br><br>" +
+                              "Nothing in these terms and conditions will exclude or limit any warranty implied by law that it would be unlawful to exclude or limit; and nothing in the terms and conditions will exclude or limit zinkroo liability in respect of any:<br><br>" +
+                              "<ul class='list-unstyled text-left'>" +
+                                "<li>death or personal injury caused by zinkroo’s negligence;</li>" +
+                                "<li>fraud or fraudulent misrepresentation on the part of zinkroo;</li>" +
+                                "<li>or matter which it would be illegal or unlawful for zinkroo to exclude or limit, or to attempt or purport to exclude or limit, its liability.</li>" +
                               "</ul>" +
+                              "Reasonableness<br><br>" +
+                              "By using this website, you agree that the exclusions and limitations of liability set out in these terms and conditions are reasonable. If you do not think they are reasonable, you must not use this website.<br><br>" +
+                              "Other parties<br><br>" +
+                              "Zinkroo has an interest in limiting the personal liability of its officers and employees. You agree that you will not bring any claim personally against zinkroo’s officers or employees in respect of any losses you suffer in connection with the website.<br><br>" +
+                              "You agree that the limitations of warranties and liability set out in this website disclaimer will protect zinkroo’s officers, employees, agents, subsidiaries, successors, assigns and sub-contractors as well as zinkroo.<br><br>" +
+                              "Unenforceable provisions<br><br>" +
+                              "If any provision of this website disclaimer is, or is found to be, unenforceable under applicable law, that will not affect the enforceability of the other provisions of this website disclaimer.<br><br>" +
+                              "Indemnity<br><br>" +
+                              "You hereby indemnify zinkroo and undertake to keep zinkroo indemnified against any losses, damages, costs, liabilities and expenses (including without limitation legal expenses and any amounts paid by zinkroo to a third party in settlement of a claim or dispute on the advice of zinkroo legal advisers) incurred or suffered by zinkroo arising out of any breach by you of any provision of these terms and conditions.<br><br>" +
+                              "Breaches of these terms and conditions<br><br>" +
+                              "Without prejudice to zinkroo’s other rights under these terms and conditions, if you breach these terms and conditions in any way, zinkroo may take such action as zinkroo deems appropriate to deal with the breach, including suspending your access to the website, prohibiting you from accessing the website, blocking computers using your IP address from accessing the website, contacting your internet service provider to request that they block your access to the website and/or bringing court proceedings against you.<br><br>" +
+                              "Variation<br><br>" +
+                              "Zinkroo may revise these terms and conditions from time-to-time. Revised terms and conditions will apply to the use of this website from the date of the publication of the revised terms and conditions on this website. Please check this page regularly to ensure you are familiar with the current version.<br><br>" +
+                              "Assignment<br><br>" +
+                              "Zinkroo may transfer, sub-contract or otherwise deal with zinkroo’s rights and/or obligations under these terms and conditions without notifying you or obtaining your consent.<br><br>" +
+                              "You may not transfer, sub-contract or otherwise deal with your rights and/or obligations under these terms and conditions.<br><br>" +
+                              "Severability<br><br>" +
+                              "If a provision of these terms and conditions is determined by any court or other competent authority to be unlawful and/or unenforceable, the other provisions will continue in effect. If any unlawful and/or unenforceable provision would be lawful or enforceable if part of it were deleted, that part will be deemed to be deleted, and the rest of the provision will continue in effect.<br><br>" +
+                              "Entire agreement<br><br>" +
+                              "These terms and conditions constitute the entire agreement between you and zinkroo in relation to your use of this website, and supersede all previous agreements in respect of your use of this website.<br><br>" +
+                              "Law and jurisdiction<br><br>" +
+                              "These terms and conditions will be governed by and construed in accordance with Italian law, and any disputes relating to these terms and conditions will be subject to the Milan jurisdiction.<br><br>" +
+                              "Registrations and authorisations<br><br>" +
+                              "Zinkroo is registered with Axedyn srl, registered in Milan, via Walter Tobagi 8/A, Italy.<br><br>" +
+                              "You can contact zinkroo by email to customercare@zinkroo.com." +
                             "</div>"
                     }).catch(swal.noop);
                   }
