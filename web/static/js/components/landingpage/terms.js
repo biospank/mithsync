@@ -18,7 +18,7 @@ var terms = {
         m(".container", [
           m("header", { class: "clearfix" }, [
             m(".navbar-header", { class: "hidden-xs" }, [
-              m("a", { class: "navbar-brand pboth-0" }, [
+              m("a", { href: "/", class: "navbar-brand pboth-0", config: m.route }, [
                 m("img", { src: "/images/logo-zinkroo--white.png", width: "170", class: "img-responsive" })
               ])
             ]),
