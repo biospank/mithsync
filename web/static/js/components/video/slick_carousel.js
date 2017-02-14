@@ -45,6 +45,10 @@ var slickCarousel = (function() {
         return _.first(carousel.slides);
     },
     addSlide: function(slide) {
+      var currentSlidePosition = _.indexOf(carousel.slides, carousel.currentSlide);
+      carousel.slides.splice((currentSlidePosition + 1), 0, slide);
+    },
+    appendSlide: function(slide) {
       carousel.slides.push(slide);
     },
     removeSlide: function() {

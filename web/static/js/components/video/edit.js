@@ -269,7 +269,7 @@ var editVideo = (function() {
             connectColor: Color.sample()
           });
 
-          slickCarousel.addSlide(slide);
+          slickCarousel.appendSlide(slide);
           slickCarousel.currentSlide(slide);
         }
 
@@ -376,7 +376,7 @@ var editVideo = (function() {
         if(slides !== undefined) {
           slickCarousel.slides(slides);
           if(_.isEmpty(slickCarousel.slides())) {
-            slickCarousel.addSlide(
+            slickCarousel.appendSlide(
               Slide.resetModel({
                 start: 0,
                 connectColor: Color.sample()
@@ -395,11 +395,32 @@ var editVideo = (function() {
       ctrl.newSlide = function(event) {
         event.preventDefault();
 
-        var lastValue = _.last(slickCarousel.slides()).start;
-        var newValue = lastValue + 10;
+        var currentSlideIndex = slickCarousel.slideIndex(slickCarousel.currentSlide());
+        var currentValue = slickCarousel.currentSlide().start;
+        var nextSlide = slickCarousel.slideByIndex(currentSlideIndex + 1);
+        var newValue = currentValue + 10;
         var videoDuration = ctrl.player.getDuration();
 
-        if(lastValue === videoDuration) {
+        if(nextSlide !== undefined) {
+          var nextValue = nextSlide.start;
+          var currentMargin = nextValue - currentValue;
+          var minimumMargin = (ctrl.slider().options.margin * 2) + 1;
+          if(currentMargin < minimumMargin) {
+            swal({
+              title: 'Margin too short',
+              text: "Not enough room for a new slide (min. " +
+                minimumMargin.toString() + " sec.)",
+              type: 'info',
+              confirmButtonText: 'Ok'
+            }).catch(swal.noop);
+
+            return;
+          } else if(newValue >= nextValue || _.inRange(newValue, nextValue - ctrl.slider().options.margin, nextValue)) {
+            newValue = nextValue - (ctrl.slider().options.margin + 1)
+          }
+        }
+
+        if(currentValue === videoDuration) {
           swal({
             title: 'Slide time exceeded',
             text: "You reached maximum allowed time for this video",
