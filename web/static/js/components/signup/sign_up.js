@@ -55,7 +55,7 @@ var signUp = (function() {
               labelStyles: "text-dark--grey mb-15",
               inputSize: "input-lg reset-boxshadow reset-radius--2"
             }),
-            m(".magic-checkbox--big mt-55", [
+            m(".magic-checkbox--big mt-55 has-error", [
               m("input", {
                 id: "accept_terms_and_conditions",
                 class: "magic-checkbox",
