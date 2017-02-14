@@ -6,7 +6,8 @@ defmodule Videosync.UserTest do
   @valid_attrs %{
     email: "some@content",
     password: "secret",
-    password_confirmation: "secret"
+    password_confirmation: "secret",
+    accept_terms_and_conditions: true
   }
   @invalid_email %{email: "some content", password: "secret"}
   @invalid_password %{email: "some@content", password: "pass"}
@@ -23,39 +24,40 @@ defmodule Videosync.UserTest do
   end
 
   test "changeset with invalid email format" do
-    changeset = User.changeset(%User{}, @invalid_email)
+    changeset = User.changeset(%User{}, Map.put(@valid_attrs, :email, "some content"))
     refute changeset.valid?
     assert changeset.errors[:email] == {"has invalid format", []}
   end
 
   test "registration changeset with invalid password" do
-    changeset = User.registration_changeset(%User{}, @invalid_password)
+    changeset = User.registration_changeset(%User{}, Map.put(@valid_attrs, :password, "pass"))
     refute changeset.valid?
     assert changeset.errors[:password] == {"should be at least %{count} character(s)", [count: 6]}
   end
 
-  @invalid_password_confirmation %{
-    email: "some@content",
-    password: "secret",
-    password_confirmation: "terces"
-  }
   test "registration changeset with invalid password confirmation" do
-    changeset = User.registration_changeset(%User{}, @invalid_password_confirmation)
+    changeset = User.registration_changeset(%User{}, Map.put(@valid_attrs, :password_confirmation, "terces"))
     refute changeset.valid?
     assert changeset.errors[:password_confirmation] == {"does not match password", []}
   end
 
-  @empty_password_confirmation %{
-    email: "some@content",
-    password: "secret",
-    password_confirmation: ""
-  }
   test "registration changeset with empty password confirmation" do
-    changeset = User.registration_changeset(%User{}, @empty_password_confirmation)
+    changeset = User.registration_changeset(%User{}, Map.put(@valid_attrs, :password_confirmation, ""))
     refute changeset.valid?
     assert changeset.errors[:password_confirmation] == {"does not match password", []}
   end
 
+  test "registration changeset without accept terms and conditions" do
+    changeset = User.registration_changeset(%User{}, Map.delete(@valid_attrs, :accept_terms_and_conditions))
+    refute changeset.valid?
+    assert changeset.errors[:accept_terms_and_conditions] == {"can't be blank", []}
+  end
+
+  test "registration changeset with accept terms and conditions set to valse" do
+    changeset = User.registration_changeset(%User{}, Map.put(@valid_attrs, :accept_terms_and_conditions, false))
+    refute changeset.valid?
+    assert changeset.errors[:accept_terms_and_conditions] == {"is invalid", []}
+  end
   # @duplicate_email %{
   #   email: "some@content",
   #   password: "secret",

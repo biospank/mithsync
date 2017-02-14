@@ -1,8 +1,6 @@
 defmodule Videosync.SessionControllerTest do
   use Videosync.ConnCase
 
-  alias Videosync.{Repo, User}
-
   @valid_attrs %{
     email: "some@content",
     password: "secret",
@@ -10,8 +8,9 @@ defmodule Videosync.SessionControllerTest do
   }
 
   setup %{conn: conn} = config do
+    user = insert_user()
+
     if config[:logged_in] do
-      user = insert_user()
       {:ok, jwt, full_claims} = Guardian.encode_and_sign(user)
 
       conn = conn
@@ -20,7 +19,6 @@ defmodule Videosync.SessionControllerTest do
 
       {:ok, conn: conn, user: user, jwt: jwt, claims: full_claims}
     else
-      user = Repo.insert! User.login_changeset(%User{}, @valid_attrs)
       {:ok, conn: conn, user: user}
     end
   end

@@ -1,12 +1,10 @@
 defmodule Videosync.AuthTest do
   use Videosync.ConnCase
 
-  alias Videosync.User
-
   @valid_attrs %{email: "some@content", password: "secret"}
 
   setup %{conn: conn} do
-    Repo.insert! User.login_changeset(%User{}, @valid_attrs)
+    insert_user()
 
     {:ok, conn: conn}
   end

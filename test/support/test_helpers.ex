@@ -6,7 +6,8 @@ defmodule Videosync.TestHelpers do
     changes = Dict.merge(%{
       email: "some@content",
       password: "secret",
-      password_confirmation: "secret"
+      password_confirmation: "secret",
+      accept_terms_and_conditions: true
     }, attrs)
 
     %User{}

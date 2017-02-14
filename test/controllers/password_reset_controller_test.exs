@@ -11,7 +11,8 @@ defmodule Videosync.PasswordResetControllerTest do
   @valid_attrs %{
     email: @valid_email,
     password: "secret",
-    password_confirmation: "secret"
+    password_confirmation: "secret",
+    accept_terms_and_conditions: true
   }
 
   @valid_reset_data %{

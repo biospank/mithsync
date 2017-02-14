@@ -57,14 +57,14 @@ var signUp = (function() {
             }),
             m(".magic-checkbox--big mt-55", [
               m("input", {
+                id: "accept_terms_and_conditions",
                 class: "magic-checkbox",
                 type: "checkbox",
-                name: "layout",
-                // onclick: m.withAttr("checked", Session.model.remember_me),
-                // checked: Session.model.remember_me(),
-                id: "terms-conditions"
+                name: "accept_terms_and_conditions",
+                onclick: m.withAttr("checked", Registration.model.accept_terms_and_conditions),
+                checked: Registration.model.accept_terms_and_conditions()
               }),
-              m("label", { for: "terms-conditions", class: "weight-light" }, [
+              m("label", { for: "accept_terms_and_conditions", class: "weight-light" }, [
                 "I accept the Terms of Service. ",
                 m("a", {
                   class: "btn-link",
@@ -152,7 +152,10 @@ var signUp = (function() {
                             "</div>"
                     }).catch(swal.noop);
                   }
-                }, "Read more")
+                }, "Read more"),
+                m("p", {
+                  class: "error-label " + (ctrl.errors()['accept_terms_and_conditions'] ? "show" : "hidden")
+                }, ctrl.errors()['accept_terms_and_conditions'])
               ])
             ]),
             m("div", { class: "text-center" }, [

@@ -11,17 +11,13 @@ defmodule Videosync.User do
     field :reset_code, :string
     field :active, :boolean
     field :project_count, :integer
+    field :accept_terms_and_conditions, :boolean
     has_many :projects, Videosync.Project
     has_many :videos, Videosync.Video
     has_many :slides, Videosync.Slide
 
     timestamps
   end
-
-  @required_fields ~w(email password)
-  @required_reset_fields ~w(password)
-  @required_reset_request_fields ~w(email)
-  @optional_fields ~w()
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -31,13 +27,14 @@ defmodule Videosync.User do
   """
   def changeset(model, params \\ %{}) do
     model
-    |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, [:email, :password, :accept_terms_and_conditions])
+    |> validate_required([:email, :password, :accept_terms_and_conditions])
     |> validate_format(:email, ~r/@/)
   end
 
   def reset_changeset(model, params \\ %{}) do
     model
-    |> cast(params, @required_reset_request_fields, @optional_fields)
+    |> cast(params, [:email])
     |> validate_format(:email, ~r/@/)
   end
 
@@ -54,6 +51,7 @@ defmodule Videosync.User do
     |> unique_constraint(:email)
     |> validate_length(:password, min: 6)
     |> validate_confirmation(:password, required: true, message: "does not match password")
+    |> validate_inclusion(:accept_terms_and_conditions, [true])
     |> put_password_hash()
     |> put_activation_code()
   end

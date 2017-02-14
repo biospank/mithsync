@@ -6,7 +6,8 @@ defmodule Videosync.RegistrationControllerTest do
   @valid_attrs %{
     email: "some@content",
     password: "secret",
-    password_confirmation: "secret"
+    password_confirmation: "secret",
+    accept_terms_and_conditions: true
   }
   @invalid_attrs %{}
 
@@ -20,7 +21,8 @@ defmodule Videosync.RegistrationControllerTest do
   @new_user %{
     email: "some_other@content",
     password: "secret",
-    password_confirmation: "secret"
+    password_confirmation: "secret",
+    accept_terms_and_conditions: true
   }
   test "creates and register user when data is valid", %{conn: conn} do
     conn = post conn, registration_path(conn, :create), user: @new_user

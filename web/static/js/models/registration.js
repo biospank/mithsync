@@ -6,7 +6,8 @@ var Registration = {
   model: {
     email: m.prop(""),
     password: m.prop(""),
-    password_confirmation: m.prop("")
+    password_confirmation: m.prop(""),
+    accept_terms_and_conditions: m.prop(false)
   },
   create: function(args) {
     return m.request(_.assign({
