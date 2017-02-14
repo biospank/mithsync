@@ -72,7 +72,7 @@ body {
     }
     .breadcrumb-bar {
       min-width: $minWidthPage;
-      background-color: #eef7ff;
+      background-color: rgba(238, 247, 255, 0.4 );
       // border-color: #dce0e6;
       @include border(#e5e3e4, 1px, bottom);
       margin-top: 4px;
