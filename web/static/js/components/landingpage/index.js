@@ -1,4 +1,5 @@
 import Session from "../../models/session";
+import socialShare from "../widgets/social_share";
 
 var landingpage = {
   controller: function() {
@@ -15,6 +16,7 @@ var landingpage = {
         }
       }, [
       m("section", { class: "bg-main pt-30 intro-section" }, [
+        // m.component(socialShare),
         m(".container", [
           m("header", { class: "clearfix pb-100" }, [
             m(".navbar-header", { class: "hidden-xs" }, [

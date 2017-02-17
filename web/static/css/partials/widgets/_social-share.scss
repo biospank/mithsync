@@ -1,0 +1,47 @@
+.social-share {
+  @include position(right, 0, top, 130px, fixed);
+  &__item {
+    a {
+      margin-right: -68px;
+      padding: 10px;
+      background-color: white;
+      display: block;
+      @include transition(all 0.3s ease);
+      i {
+        padding-left: 4px;
+        color: white;
+      }
+      label {
+        color: white;
+        //display: none;
+        padding-left: 15px;
+        margin: 0;
+      }
+      &.facebook {
+        background-color: $facebook;
+      }
+      &.twitter {
+        background-color: $twitter;
+      }
+      &.googleplus {
+        background-color: $googleplus;
+      }
+      &:hover {
+        margin-right: 0;
+        // label {
+        //   display: inline-block;
+        // }
+      }
+    }
+    &:first-child {
+      & > a {
+        border-top-left-radius: 2px;
+      }
+    }
+    &:last-child {
+      & > a {
+        border-bottom-left-radius: 2px;
+      }
+    }
+  }
+}
