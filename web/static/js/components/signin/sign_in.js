@@ -7,7 +7,7 @@ var signIn = (function() {
   var content = function(ctrl) {
     return [
       m("div", [
-        m("figure", { class: "center-block display-table mboth-60" }, [
+        m("figure", { class: "center-block display-table mboth-60 intro-section__logo" }, [
           m("a", { href:"/", config: m.route }, [
             m("img", { src: "/images/logo-zinkroo--white.png", width: "400", class:"img-responsive" }),
           ]),

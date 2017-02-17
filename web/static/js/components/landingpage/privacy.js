@@ -23,6 +23,12 @@ var privacyPolicy = {
               ])
             ]),
             m(".pull-right intro-section__buttons", [
+              m("a", { href: "/", config: m.route, class: "btn btn-link btn-lg text-white" }, [
+                m("i", { class: "fa fa-home" })
+              ]),
+              m("span", { class: "text-white" }, "|"),
+              m("a", { href: "/contacts", config: m.route, class: "btn btn-link btn-lg text-white" }, "Contact Us"),
+              m("span", { class: "text-white" }, "|"),
               m("a", { href: "/signin", config: m.route, class: "btn btn-link btn-lg text-white" }, "Login"),
               m("a", { href: "/signup", config: m.route, class: "btn btn-lg bg-white text-color--main" }, "Sign up")
             ])

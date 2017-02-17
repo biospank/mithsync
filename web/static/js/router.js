@@ -16,6 +16,7 @@ import faq from "./components/faq/index";
 import landingpage from "./components/landingpage/index";
 import privacyPolicy from "./components/landingpage/privacy";
 import terms from "./components/landingpage/terms";
+import contactUs from "./components/landingpage/contact_us";
 
 export default m.route(document.getElementById('app'), "/", {
   // Login routing
@@ -24,6 +25,8 @@ export default m.route(document.getElementById('app'), "/", {
   "/privacy": privacyPolicy,
 
   "/terms": terms,
+
+  "/contacts": contactUs,
 
   "/dashboard": dashboard,
 
