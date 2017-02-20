@@ -9,10 +9,12 @@
     <meta name="keywords" content="embed your video, axenso, youtube, vimeo, zinkroo">
     <meta name="author" content="Axenso">
 
-    <meta property="og:title" content="The perfect way to sync and embed your video and images, everywhere!" />
+    <!-- for Facebook -->
+    <meta property="og:title" content="Zinkroo" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="www.zinkroo.com" />
     <meta property="og:image" content="http://www.zinkroo.com/images/intro-img.png" />
+    <meta property="og:url" content="www.zinkroo.com" />
+    <meta property="og:description" content="The perfect way to sync and embed your video and images, everywhere!" />
 
     <title>Zinkroo</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">

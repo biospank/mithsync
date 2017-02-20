@@ -1,14 +1,47 @@
 .social-share {
-  @include position(right, 0, top, 130px, fixed);
+  &.left {
+    @include position(left, 0, top, 130px, fixed);
+    .social-share__item {
+      &:first-child {
+        & > a {
+          border-top-right-radius: 2px;
+        }
+      }
+      &:last-child {
+        & > a {
+          border-bottom-right-radius: 2px;
+        }
+      }
+    }
+  }
+  &.right {
+    @include position(right, 0, top, 150px, fixed);
+    .social-share__item {
+      &:first-child {
+        & > a {
+          border-top-left-radius: 2px;
+        }
+      }
+      &:last-child {
+        & > a {
+          border-bottom-left-radius: 2px;
+        }
+      }
+    }
+  }
   &__item {
+    // margin-right: -68px;
+    // &.selected {
+    //   margin-right: 0;
+    // }
     a {
-      margin-right: -68px;
-      padding: 10px;
+      padding: 10px 0;
       background-color: white;
       display: block;
+      @include size(40px, 40px);
+      text-align: center;
       @include transition(all 0.3s ease);
       i {
-        padding-left: 4px;
         color: white;
       }
       label {
@@ -19,29 +52,34 @@
       }
       &.facebook {
         background-color: $facebook;
+        &:hover {
+          background-color: darken($facebook, 10%);
+        }
       }
       &.twitter {
         background-color: $twitter;
+        &:hover {
+          background-color: darken($twitter, 10%);
+        }
       }
       &.googleplus {
         background-color: $googleplus;
+        &:hover {
+          background-color: darken($googleplus, 10%);
+        }
       }
-      &:hover {
-        margin-right: 0;
-        // label {
-        //   display: inline-block;
-        // }
+      &.linkedin {
+        background-color: $linkedin;
+        &:hover {
+          background-color: darken($linkedin, 10%);
+        }
       }
-    }
-    &:first-child {
-      & > a {
-        border-top-left-radius: 2px;
-      }
-    }
-    &:last-child {
-      & > a {
-        border-bottom-left-radius: 2px;
-      }
+      // &:hover {
+      //   margin-right: 0;
+      //   label {
+      //     display: inline-block;
+      //   }
+      // }
     }
   }
 }

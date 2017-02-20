@@ -16,7 +16,9 @@ var landingpage = {
         }
       }, [
       m("section", { class: "bg-main pt-30 intro-section" }, [
-        // m.component(socialShare),
+        m.component(socialShare, {
+          position: "left"
+        }),
         m(".container", [
           m("header", { class: "clearfix pb-100" }, [
             m(".navbar-header", { class: "hidden-xs" }, [
