@@ -7,6 +7,12 @@
   &__buttons {
     .btn {
       font-size: 15px;
+      padding-left: 15px;
+      padding-right: 15px;
+      @include respond-to(min-width, $screen-md-min) {
+        padding-left: 30px;
+        padding-right: 30px;
+      }
     }
     .btn-lg {
       @include respond-to(max-width, 767px) {
