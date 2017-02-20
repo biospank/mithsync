@@ -1,6 +1,9 @@
 .social-share {
   &.left {
-    @include position(left, 0, top, 130px, fixed);
+    @include position(left, 0, top, 55px);
+    @include respond-to(min-width, 768px) {
+      @include position(left, 0, top, 150px, fixed);
+    }
     .social-share__item {
       &:first-child {
         & > a {
@@ -15,7 +18,10 @@
     }
   }
   &.right {
-    @include position(right, 0, top, 150px, fixed);
+    @include position(right, 0, top, 55px);
+    @include respond-to(min-width, 768px) {
+      @include position(left, 0, top, 150px, fixed);
+    }
     .social-share__item {
       &:first-child {
         & > a {
