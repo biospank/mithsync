@@ -38,7 +38,7 @@ var landingpage = {
             m("h4", { class: "text-right text-white weight-regular" }, "live media sync")
           ]),
           m("h1", { class: "text-center text-white weight-light mb-100 mt-0 pb-60 intro-section__title" }, m.trust("The perfect way to sync and embed your video<br>and images, <span class='weight-strong'>everywhere!</span>")),
-          m("figure", { class: "images-intro" }, [
+          m("figure", { class: "images-intro hidden-xs" }, [
             m("img", { src: "/images/intro-img.png", class: "img-responsive center-block" })
           ])
         ])
@@ -116,7 +116,7 @@ var landingpage = {
       m("section", { class: "bg-main layouts-section" }, [
         m(".container", [
           m("header", { class: "text-center mb-100" }, [
-            m("h1", { class: "text-white weight-strong mt-0 mb-25" }, "Templates ready to be used"),
+            m("h1", { class: "text-white weight-strong mt-0 mb-25 layouts-section__title" }, "Templates ready to be used"),
             m("p", { class: "text-white weight-light layouts-section__description" }, m.trust("Zinkroo offers three different kinds of template. Choose your favourite<br>to personalize your own output"))
           ]),
           m(".row", [

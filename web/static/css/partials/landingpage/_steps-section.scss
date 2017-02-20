@@ -6,7 +6,8 @@
     padding-bottom: 190px;
   }
   &__title {
-    @include respond-to(max-width, 767px) {
+    font-size: 28px;
+    @include respond-to(max-width, $screen-md-min) {
       font-size: 32px;
     }
   }

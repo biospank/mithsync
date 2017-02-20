@@ -1,15 +1,16 @@
 .start-now-section {
-  padding-top: 100px;
-  padding-bottom: 100px;
+  padding-top: 70px;
+  padding-bottom: 70px;
   @include respond-to(min-width, $screen-md-min) {
     padding-top: 160px;
     padding-bottom: 230px;
   }
   .btn-signup-now {
     width: 100%;
-    font-size: 28px;
+    font-size: 23px;
     @include respond-to(min-width, $screen-md-min) {
       width: 700px;
+      font-size: 28px;
     }
   }
   &__title {}

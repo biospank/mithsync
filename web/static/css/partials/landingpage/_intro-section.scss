@@ -27,6 +27,10 @@
     }
   }
   &__title {
-    line-height: 44px;
+    line-height: 38px;
+    font-size: 28px;
+    @include respond-to(min-width, $screen-md-min) {
+      line-height: 44px;
+    }
   }
 }
