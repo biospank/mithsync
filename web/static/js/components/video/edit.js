@@ -408,7 +408,7 @@ var editVideo = (function() {
           if(currentMargin < minimumMargin) {
             swal({
               title: 'Margin too short',
-              text: "Not enough room for a new slide (min. " +
+              text: "Not enough room between slides (min. " +
                 minimumMargin.toString() + " sec.)",
               type: 'info',
               confirmButtonText: 'Ok'
