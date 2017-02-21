@@ -31,6 +31,7 @@
     font-size: 28px;
     @include respond-to(min-width, $screen-md-min) {
       line-height: 44px;
+      font-size: 36px;
     }
   }
 }

@@ -13,7 +13,12 @@
       font-size: 28px;
     }
   }
-  &__title {}
+  &__title {
+    font-size: 28px;
+    @include respond-to(min-width, $screen-md-min) {
+      font-size: 36px;
+    }
+  }
   &__description {
     @include font-style(24px, #95989a, 300, 28px);
   }

@@ -21,11 +21,11 @@ var landingpage = {
         }),
         m(".container", [
           m("header", { class: "clearfix pb-100" }, [
-            m(".navbar-header", { class: "hidden-xs" }, [
-              m("a", { class: "navbar-brand pboth-0" }, [
-                m("img", { src: "/images/logo-zinkroo--white.png", width: "170", class: "img-responsive" })
-              ])
-            ]),
+            // m(".navbar-header", { class: "hidden-xs" }, [
+            //   m("a", { class: "navbar-brand pboth-0" }, [
+            //     m("img", { src: "/images/logo-zinkroo--white.png", width: "170", class: "img-responsive" })
+            //   ])
+            // ]),
             m(".pull-right intro-section__buttons", [
               m("a", { href: "/contacts", config: m.route, class: "btn btn-link text-white" }, "Contact us"),
               m("span", { class: "text-white" }, "|"),

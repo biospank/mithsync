@@ -7,6 +7,9 @@
   }
   &__title {
     font-size: 28px;
+    @include respond-to(min-width, $screen-md-min) {
+      font-size: 36px;
+    }
   }
   &__description {
     font-size: 20px;
