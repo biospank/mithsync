@@ -70,7 +70,7 @@ var videoList = {
         return m(loader);
       } else {
         if(_.isEmpty(ctrl.videos())) {
-           return m(recordNotFound);
+           //return m(recordNotFound);
         } else {
           return ctrl.videos().map(function(video) {
             return m(listItem, video, ctrl);

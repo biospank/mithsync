@@ -65,7 +65,7 @@ var projectList = {
         return m(loader);
       } else {
         if(_.isEmpty(ctrl.projects())) {
-           return m(recordNotFound);
+           //return m(recordNotFound);
         } else {
           return ctrl.projects().map(function(project) {
             return m(listItem, project, ctrl);
