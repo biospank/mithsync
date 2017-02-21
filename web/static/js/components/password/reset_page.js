@@ -5,7 +5,7 @@ import Password from "../../models/password";
 
 var resetPage = (function() {
   var content = function(ctrl) {
-    return m('.col-xs-7 .col-sm-7 .col-md-4 .col-lg-3 .center-block ', [
+    return m('div', [
       m("figure", { class: "center-block display-table mboth-60 intro-section__logo" }, [
         m("a", { href:"/", config: m.route }, [
           m("img", { src: "/images/logo-zinkroo--white.png", width: "400", class:"img-responsive" }),
