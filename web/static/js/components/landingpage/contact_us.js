@@ -1,4 +1,5 @@
 import Session from "../../models/session";
+import textField from "../widgets/text_field";
 
 var contactUs = {
   controller: function() {
@@ -26,43 +27,64 @@ var contactUs = {
         m(".container", [
           m(".col-sm-6 center-block contact-us mb-95", [
             m("h2", { class: "text-white text-center mb-55 mt-0" }, "Get In Touch"),
-            m("p", { class: "text-white text-left mb-55 contact-us__description" }, "Zinkroo is still a Beta Tool and has to be improved. Let us know if you have some question, advice or anything that could help our improvement, or just to have a talk"),
-            m(".row mb-25", [
-              m(".col-sm-2", [
-                m("label", { class: "text-white mb-0" }, "Call: ")
-              ]),
-              m(".col-sm-10", [
-                m("p", { class: "text-white weight-bold mb-0" }, "+39 02 8135947")
-              ])
-            ]),
-            m(".row mb-25", [
-              m(".col-sm-2", [
-                m("label", { class: "text-white mb-0" }, "Fax: ")
-              ]),
-              m(".col-sm-10", [
-                m("p", { class: "text-white weight-bold mb-0" }, "+39 02 87382752")
-              ])
-            ]),
-            m(".row mb-25", [
-              m(".col-sm-2", [
-                m("label", { class: "text-white mb-0" }, "Email: ")
-              ]),
-              m(".col-sm-10", [
-                m("p", { class: "text-white weight-bold mb-0" }, "info@axenso.com")
-              ])
-            ]),
+            m("p", { class: "text-white text-left mb-55 contact-us__description" }, "Zinkroo is still a Beta Tool and has to be improved. Let us know if you have some question, advice or anything that could help our improvement, or just to have a talk")
+            // m(".row mb-25", [
+            //   m(".col-sm-2", [
+            //     m("label", { class: "text-white mb-0" }, "Call: ")
+            //   ]),
+            //   m(".col-sm-10", [
+            //     m("p", { class: "text-white weight-bold mb-0" }, "+39 02 8135947")
+            //   ])
+            // ]),
+            // m(".row mb-25", [
+            //   m(".col-sm-2", [
+            //     m("label", { class: "text-white mb-0" }, "Fax: ")
+            //   ]),
+            //   m(".col-sm-10", [
+            //     m("p", { class: "text-white weight-bold mb-0" }, "+39 02 87382752")
+            //   ])
+            // ]),
+            // m(".row mb-25", [
+            //   m(".col-sm-2", [
+            //     m("label", { class: "text-white mb-0" }, "Email: ")
+            //   ]),
+            //   m(".col-sm-10", [
+            //     m("p", { class: "text-white weight-bold mb-0" }, "info@axenso.com")
+            //   ])
+            // ]),
+            // m(".row", [
+            //   m(".col-sm-2", [
+            //     m("label", { class: "text-white mb-0" }, "Visit: ")
+            //   ]),
+            //   m(".col-sm-10", [
+            //     m("p", { class: "text-white weight-bold mb-0" }, "Axenso Srl - Via Walter Tobagi 8/A 20143 Milano")
+            //   ])
+            // ])
+          ])
+        ])
+        // m("figure", [
+        //   m("img", { src: "/images/maps.jpg", class: "img-responsive" })
+        // ])
+      ]),
+      m("section", { class: "bg-white pb-80 pt-80" }, [
+        m(".container", [
+          m("form", { id: "contact-form" }, [
             m(".row", [
-              m(".col-sm-2", [
-                m("label", { class: "text-white mb-0" }, "Visit: ")
+              m(".col-sm-4", [
+                m("input", { type: "text", class: "form-control", placeholder: "Name" })
               ]),
-              m(".col-sm-10", [
-                m("p", { class: "text-white weight-bold mb-0" }, "Axenso Srl - Via Walter Tobagi 8/A 20143 Milano")
+              m(".col-sm-4", [
+                m("input", { type: "email", class: "form-control", placeholder: "Email" })
+              ]),
+              m(".col-sm-4", [
+                m("input", { type: "text", class: "form-control", placeholder: "Phone" })
               ])
+            ]),
+            m("textarea", { class: "form-control mb-80", rows: "4" }, "Message"),
+            m(".text-center", [
+              m("button", { type: "submit", class: "btn btn-primary btn-lg text-uppercase" }, "Submit")
             ])
           ])
-        ]),
-        m("figure", [
-          m("img", { src: "/images/maps.jpg", class: "img-responsive" })
         ])
       ]),
       m("footer", { class: "bg-main text-center pboth-40" }, [

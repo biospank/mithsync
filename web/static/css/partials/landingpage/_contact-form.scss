@@ -1,0 +1,19 @@
+#contact-form {
+  .form-control {
+    @include border(#edf0f1, 2px);
+    border-radius: 0;
+    padding: 20px;
+    margin-bottom: 15px;
+    @include respond-to(min-width, $screen-md-min) {
+      margin-bottom: 30px;
+      padding: 23px;
+      @include border(#edf0f1, 4px);
+    }
+  }
+  .btn-lg {
+    //font-size: 20px;
+    @include respond-to(min-width, $screen-md-min) {
+      font-size: 20px;
+    }
+  }
+}
