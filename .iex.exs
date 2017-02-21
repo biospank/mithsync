@@ -7,3 +7,4 @@ alias Videosync.Video
 alias Videosync.ArcImage
 alias Videosync.Image
 alias Videosync.Slide
+alias Videosync.Contact

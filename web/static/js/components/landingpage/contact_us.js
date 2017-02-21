@@ -1,13 +1,29 @@
 import Session from "../../models/session";
 import textField from "../widgets/text_field";
+import Contact from "../../models/contact";
+import feedbackButton from "../widgets/feedback_button";
 
 var contactUs = {
   controller: function() {
+    var ctrl = this;
+    ctrl.errors = m.prop({});
+    ctrl.showMsg = m.prop(false);
+
+    ctrl.sendMessage = function(args) {
+      return Contact.create(args).then(function() {
+        ctrl.showMsg(true);
+        Contact.resetModel();
+        ctrl.errors({})
+      }, function(response) {
+        ctrl.errors(response.errors);
+      })
+    };
+
     if(!Session.isExpired()) {
       m.route("/dashboard");
     }
   },
-  view: function() {
+  view: function(ctrl) {
     return m("div", {
         config: function(element, isInit) {
           if(!isInit) {
@@ -68,21 +84,64 @@ var contactUs = {
       ]),
       m("section", { class: "bg-white pb-80 pt-80" }, [
         m(".container", [
+          m("div", {
+            class: "alert alert-warning " + (ctrl.showMsg() ? "show" : "hidden"),
+            role: "alert"
+          }, "Thanks for contacting us. We'll reply as soon as possible."),
           m("form", { id: "contact-form" }, [
             m(".row", [
               m(".col-sm-4", [
-                m("input", { type: "text", class: "form-control", placeholder: "Name" })
+                m.component(textField, {
+                  type: 'text',
+                  class: 'form-control',
+                  placeholder: 'Name',
+                  id: 'name',
+                  oninput: m.withAttr("value", Contact.model.name),
+                  value: Contact.model.name(),
+                  error: ctrl.errors()['name']
+                })
               ]),
               m(".col-sm-4", [
-                m("input", { type: "email", class: "form-control", placeholder: "Email" })
+                m.component(textField, {
+                  type: 'email',
+                  class: 'form-control',
+                  placeholder: 'Email',
+                  id: 'email',
+                  oninput: m.withAttr("value", Contact.model.email),
+                  value: Contact.model.email(),
+                  error: ctrl.errors()['email']
+                })
               ]),
               m(".col-sm-4", [
-                m("input", { type: "text", class: "form-control", placeholder: "Phone" })
+                m.component(textField, {
+                  type: 'email',
+                  class: 'form-control',
+                  placeholder: 'Phone',
+                  id: 'phone',
+                  oninput: m.withAttr("value", Contact.model.phone),
+                  value: Contact.model.phone(),
+                  error: ctrl.errors()['phone']
+                })
               ])
             ]),
-            m("textarea", { class: "form-control mb-80", rows: "4" }, "Message"),
+            m.component(textField, {
+              field: 'textarea',
+              class: 'form-control mb-80',
+              rows: '4',
+              placeholder: 'Message',
+              id: 'message',
+              oninput: m.withAttr("value", Contact.model.message),
+              value: Contact.model.message(),
+              error: ctrl.errors()['message']
+            }),
             m(".text-center", [
-              m("button", { type: "submit", class: "btn btn-primary btn-lg text-uppercase" }, "Submit")
+              m.component(feedbackButton, {
+                action: ctrl.sendMessage,
+                label: 'Send message',
+                feedbackLabel: 'Sending...',
+                disabled: ctrl.showMsg(),
+                style: 'btn btn-primary btn-lg text-uppercase'
+              })
             ])
           ])
         ])
