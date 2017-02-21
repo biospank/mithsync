@@ -14,8 +14,11 @@ var resetRequestPage = (function() {
       ]),
       m("h2", { class: "mt-0 mb-60 text-center text-white" }, "Have you lost your password?"),
       m(".card-wrapper sign center-block p-all-side-75", [
+        m("div", {
+          class: "alert alert-warning " + (ctrl.showMsg() ? "show" : "hidden"),
+          role: "alert"
+        }, "An email has just been sent to the address provided. Please follow the instructions to reset your password."),
         m("p", { class: "text-dark--grey mb-45" }, [
-          "If you are wrong ",
           m("a", { href: "/signin", config: m.route, class: "btn-link" }, "Return to login"),
         ]),
         m("form", [
@@ -32,6 +35,7 @@ var resetRequestPage = (function() {
           m("div", { class: "mt-30" }, [
             m.component(feedbackButton, {
               action: ctrl.passwordResetRequest,
+              disabled: ctrl.showMsg(),
               label: 'Send instructions',
               feedbackLabel: 'Sending...',
               style: 'btn btn-primary btn-lg btn-block mt-60 contour'
