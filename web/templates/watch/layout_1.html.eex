@@ -4,7 +4,7 @@
   </section>
   <%= render @view_module, "title.html", video: @video, conn: @conn %>
   <p class="zinkroo__description mb-25"><%= @video.description %></p>
-  <hr class="visible-xs-block mb-40" />
+  <hr class="visible-xs-block mb-25 mt-0" />
   <div class="row">
     <%= render @view_module, "video.html", video: @video, conn: @conn %>
     <%= render @view_module, "reveal_slider.html", video: @video, slides: @video.slides, conn: @conn %>
