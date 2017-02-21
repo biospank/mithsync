@@ -40,7 +40,7 @@
   background-color: white;
   font-family: 'Roboto', sans-serif !important;
   &__title {
-    @include font-style(20px, #000, 800, 24px);
+    @include font-style(20px, #000, 500, 24px);
     @include respond-to(min-width, 768px) {
       font-size: 24px;
       line-height: 28px;
@@ -51,7 +51,7 @@
     display: block;
   }
   &__description {
-    @include font-style(14px, #878787, 500);
+    @include font-style(14px, #878787);
     // @include respond-to(min-width, 768px) {
     //   font-size: 14px;
     // }

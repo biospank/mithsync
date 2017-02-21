@@ -3,7 +3,7 @@
     <%= render @view_module, "date.html", video: @video, conn: @conn %>
   </section>
   <%= render @view_module, "title.html", video: @video, conn: @conn %>
-  <p class="zinkroo__description mb-40"><%= @video.description %></p>
+  <p class="zinkroo__description mb-25"><%= @video.description %></p>
   <hr class="visible-xs-block mb-40" />
   <div class="row">
     <%= render @view_module, "video.html", video: @video, conn: @conn %>
