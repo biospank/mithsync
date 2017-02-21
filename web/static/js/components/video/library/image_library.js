@@ -44,7 +44,7 @@ var imageLibrary = (function() {
       return m(loader);
     } else {
       if(_.isEmpty(ctrl.images())) {
-         return m(recordNotFound);
+         //return m(recordNotFound);
       } else {
         if(ctrl.asList()) {
           return ctrl.images().map(function(image) {

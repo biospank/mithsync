@@ -133,7 +133,7 @@ var videoDetail = {
         value: Video.model.description()
       }),
       m('.form-group', [
-        m('label.text-uppercase', 'Export'),
+        m('label.text-uppercase', 'Embed code'),
         m('pre', { class: "zero-clipboard" }, [
           m("a", {
             href: "#",
