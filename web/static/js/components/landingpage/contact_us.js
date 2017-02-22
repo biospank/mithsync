@@ -85,12 +85,12 @@ var contactUs = {
       m("section", { class: "bg-white pb-80 pt-80" }, [
         m(".container", [
           m("div", {
-            class: "alert alert-warning " + (ctrl.showMsg() ? "show" : "hidden"),
+            class: "alert alert-success " + (ctrl.showMsg() ? "show" : "hidden"),
             role: "alert"
           }, "Thanks for contacting us. We'll reply as soon as possible."),
           m("form", { id: "contact-form" }, [
             m(".row", [
-              m(".col-sm-4", [
+              m(".col-sm-6", [
                 m.component(textField, {
                   type: 'text',
                   class: 'form-control',
@@ -101,7 +101,7 @@ var contactUs = {
                   error: ctrl.errors()['name']
                 })
               ]),
-              m(".col-sm-4", [
+              m(".col-sm-6", [
                 m.component(textField, {
                   type: 'email',
                   class: 'form-control',
@@ -110,17 +110,6 @@ var contactUs = {
                   oninput: m.withAttr("value", Contact.model.email),
                   value: Contact.model.email(),
                   error: ctrl.errors()['email']
-                })
-              ]),
-              m(".col-sm-4", [
-                m.component(textField, {
-                  type: 'email',
-                  class: 'form-control',
-                  placeholder: 'Phone',
-                  id: 'phone',
-                  oninput: m.withAttr("value", Contact.model.phone),
-                  value: Contact.model.phone(),
-                  error: ctrl.errors()['phone']
                 })
               ])
             ]),
@@ -134,7 +123,7 @@ var contactUs = {
               value: Contact.model.message(),
               error: ctrl.errors()['message']
             }),
-            m(".text-center", [
+            m(".text-center mt-40", [
               m.component(feedbackButton, {
                 action: ctrl.sendMessage,
                 label: 'Send message',
