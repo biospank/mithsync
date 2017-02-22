@@ -37,11 +37,19 @@ defmodule Videosync.Email do
   end
 
   def contact_us_email(contact) do
-    new_email
-    |> from(contact.email)
+    base_email
     |> to("customercare@zinkroo.com")
     |> subject("Zinkroo contact request")
-    |> html_body(contact.message)
+    |> html_body("""
+        A contact request has been sent by #{contact.email}.
+        <br />
+        Here is the message content:
+        <br />
+        <br />
+        #{contact.message}
+        <br />
+        <br />
+      """)
   end
 
   defp base_email do
