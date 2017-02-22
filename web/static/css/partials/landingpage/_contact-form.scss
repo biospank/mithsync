@@ -1,11 +1,22 @@
 #contact-form {
+  .has-error {
+    .form-control {
+      border-width: 4px !important;
+    }
+  }
+  .form-group {
+    margin-bottom: 25px;
+    & > label {
+      display: none;
+    }
+  }
   .form-control {
     @include border(#edf0f1, 2px);
     border-radius: 0;
     padding: 20px;
-    margin-bottom: 15px;
+    // margin-bottom: 15px;
     @include respond-to(min-width, $screen-md-min) {
-      margin-bottom: 30px;
+      // margin-bottom: 30px;
       padding: 23px;
       @include border(#edf0f1, 4px);
     }
