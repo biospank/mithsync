@@ -36,6 +36,14 @@ defmodule Videosync.Email do
       """)
   end
 
+  def contact_us_email(contact) do
+    new_email
+    |> from(contact.email)
+    |> to("customercare@zinkroo.com")
+    |> subject("Zinkroo contact request")
+    |> html_body(contact.message)
+  end
+
   defp base_email do
     new_email
     |> from("noreply@zinkroo.com")

@@ -1,7 +1,7 @@
 defmodule Videosync.ContactController do
   use Videosync.Web, :controller
 
-  alias Videosync.Contact
+  alias Videosync.{Contact, Mailer, Email}
 
   plug :scrub_params, "contact"
 
@@ -10,9 +10,9 @@ defmodule Videosync.ContactController do
 
     case changeset.valid? do
       true ->
-        # Ecto.Changeset.apply_changes(changeset)
-        # |> Email.contact_us_email
-        # |> Mailer.deliver_later
+        Ecto.Changeset.apply_changes(changeset)
+        |> Email.contact_us_email
+        |> Mailer.deliver_later
 
         conn
         |> put_status(:created)

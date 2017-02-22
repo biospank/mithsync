@@ -3,7 +3,12 @@ defmodule Videosync.ContactTest do
 
   alias Videosync.Contact
 
-  @valid_attrs %{email: "some content", message: "some content", name: "some content", phone: "some content"}
+  @valid_attrs %{
+    email: "test@example.com",
+    message: "some content",
+    name: "Test",
+    phone: "99382387822"
+  }
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
