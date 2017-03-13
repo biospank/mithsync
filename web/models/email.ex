@@ -54,6 +54,6 @@ defmodule Videosync.Email do
 
   defp base_email do
     new_email
-    |> from("noreply@mg.zinkroo.com")
+    |> from("noreply@zinkroo.com")
   end
 end
