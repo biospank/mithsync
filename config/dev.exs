@@ -43,7 +43,7 @@ config :videosync, Videosync.Repo,
   pool_size: 10
 
 # Configure Bamboo dev
-config :sso, Sso.Mailer,
+config :videosync, Videosync.Mailer,
   adapter: Bamboo.SendinBlueAdapter,
   api_key: System.get_env("SENDINBLUE_API_KEY")
 
