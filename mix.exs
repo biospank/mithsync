@@ -53,7 +53,7 @@ defmodule Videosync.Mixfile do
      {:cowboy, "~> 1.0"},
      {:comeonin, "~> 2.5.2"},
      {:guardian, "~> 0.12.0"},
-     {:bamboo_smtp, "~> 1.1"},
+     {:bamboo_sendinblue, "~> 0.1.0"},
      {:arc, "~> 0.5.3"},
      {:ex_aws, "~> 0.5.0"},
      {:httpoison, "~> 0.7"},
