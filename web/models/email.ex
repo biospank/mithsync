@@ -52,18 +52,18 @@ defmodule Videosync.Email do
       """)
   end
 
-  def weekly_report_email(report) do
+  def daily_report_email(report, send_to) do
     new_email
     |> from("noreply@zinkroo.com")
-    |> to("fabio.petrucci@gmail.com")
-    |> subject("Zinkroo weekly report")
+    |> to(send_to)
+    |> subject("Zinkroo daily report")
     |> html_body("""
-        Report settimanale utenti iscritti a Zinkroo
+        Report giornaliero
         <br />
         <br />
-        Totale utenti iscritti - #{report.users_count}
+        Totale Utenti - #{report.users_count}
         <br />
-        Totale utenti attivi - #{report.active_users_count}
+        Utenti attivi - #{report.active_users_count}
         <br />
         Totale progetti - #{report.projects_count}
         <br />

@@ -15,7 +15,9 @@ defmodule Videosync.Workers.DailyReport do
 
   def handle_info(:send_mail, state) do
     if Mix.env == :prod do
-      Report.perform |> Email.weekly_report_email |> Mailer.deliver_later
+      report = Report.perform
+      report |> Email.daily_report_email("axenso.dardy@gmail.com") |> Mailer.deliver_later
+      report |> Email.daily_report_email("fabio.petrucci@gmail.com") |> Mailer.deliver_later
     end
 
     schedule_work()
@@ -48,7 +50,7 @@ defmodule Videosync.Workers.DailyReport do
   defp seven_pm(which_day \\ nil) do
     (which_day || Timex.local)
     |> Timex.end_of_day
-    |> Timex.shift(hours: -10) # -5 -> 7pm
+    |> Timex.shift(hours: -6)
   end
 
   defp tomorrow do
