@@ -11,8 +11,8 @@ defmodule Videosync do
       supervisor(Videosync.Endpoint, []),
       # Start the Ecto repository
       supervisor(Videosync.Repo, []),
-      # Start workers
-      worker(Videosync.Workers.DailyReport, [])
+      # Here you could define other workers and supervisors as children
+      # worker(Videosync.Worker, [arg1, arg2, arg3]),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
