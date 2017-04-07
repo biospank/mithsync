@@ -2491,7 +2491,9 @@
 
 			// Limit view distance on weaker devices
 			if( isMobileDevice ) {
-				viewDistance = isOverview() ? 6 : 2;
+				// biospank
+				//viewDistance = isOverview() ? 6 : 2;
+				viewDistance = isOverview() ? 6 : 1;
 			}
 
 			// All slides need to be visible when exporting to PDF
