@@ -123,6 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
   slider = $("#owl-slider").data("owlCarousel");
 
   $(".owl-item figure").on('click', function() {
+    console.log(".owl-item figure click: ", $(this).data('start'));
     player.seek($(this).data('start'));
   });
 
