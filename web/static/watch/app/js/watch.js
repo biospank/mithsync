@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
   };
 
   var updateSlide = function(event) {
+    console.log("updating slide..");
     var currentSec = _.floor(event.detail.plyr.getCurrentTime());
 
     if(currentSlide) {
