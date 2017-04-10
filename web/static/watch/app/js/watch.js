@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var player = plyr.setup('.video-player-watch', {
     //['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'fullscreen']
-    controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'current-time']
+    controls: ['play', 'progress', 'mute', 'volume', 'current-time']
   })[0];
 
   // player.on('ready', function(event) {
@@ -124,7 +124,6 @@ document.addEventListener('DOMContentLoaded', function() {
   slider = $("#owl-slider").data("owlCarousel");
 
   $(".owl-item figure").on('click', function() {
-    console.log(".owl-item figure click: ", $(this).data('start'));
     player.seek($(this).data('start'));
   });
 
