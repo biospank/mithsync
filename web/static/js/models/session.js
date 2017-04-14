@@ -5,7 +5,7 @@ var Session = {
   extract: function(xhr, xhrOptions) {
     var user = JSON.parse(xhr.response);
 
-    if (user.data.active && xhr.status >= 200) {
+    if (xhr.status < 400 && xhr.status >= 200 && user.data.active) {
       Session.token(
         _.last(
           _.split(
