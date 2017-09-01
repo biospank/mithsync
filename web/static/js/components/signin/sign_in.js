@@ -4,11 +4,11 @@ import feedbackButton from "../widgets/feedback_button";
 import Session from "../../models/session";
 
 var signIn = (function() {
-  var content = function(ctrl) {
+  var content = function({state}) {
     return [
       m("div", [
         m("figure", { class: "center-block display-table mboth-60 intro-section__logo" }, [
-          m("a", { href:"/", config: m.route }, [
+          m("a", { href:"/", oncreate: m.route.link }, [
             m("img", { src: "/images/logo-zinkroo--white.png", width: "400", class:"img-responsive" }),
           ]),
           m("h4", { class: "text-right text-white weight-regular" }, "live media sync")
@@ -16,38 +16,38 @@ var signIn = (function() {
         m('.card-wrapper sign center-block p-all-side-75', [
           m("p", { class: "mb-40 text-dark--grey" }, [
             "Need a Zinkroo account? ",
-            m("a", { href: "/signup", config: m.route, class: "btn-link" }, "Create your account")
+            m("a", { href: "/signup", oncreate: m.route.link, class: "btn-link" }, "Create your account")
           ]),
           m("form", { class: "" }, [
             m(".mb-25", [
-              m.component(textField, {
+              m(textField, {
                 type: 'email',
                 //placeholder: 'Enter your Email',
                 id: 'email',
                 dataLabel: 'Email',
                 oninput: m.withAttr("value", Session.model.email),
-                error: ctrl.errors()['email'],
+                error: state.errors()['email'],
                 fieldType: "",
                 icon: "fa fa-user",
                 labelStyles: "text-dark--grey mb-15",
                 inputSize: "input-lg reset-boxshadow reset-radius--2"
               })
             ]),
-            m.component(textField, {
+            m(textField, {
               type: 'password',
               //placeholder: 'Enter Password',
               id: 'password',
               dataLabel: 'Password',
               oninput: m.withAttr("value", Session.model.password),
-              error: ctrl.errors()['password'],
+              error: state.errors()['password'],
               fieldType: "",
               icon: "fa fa-unlock-alt",
               labelStyles: "text-dark--grey mb-15",
               inputSize: "input-lg reset-boxshadow reset-radius--2"
             }),
             m("div", { class: "text-center mboth-30" }, [
-              m.component(feedbackButton, {
-                action: ctrl.createSession,
+              m(feedbackButton, {
+                action: state.createSession,
                 label: 'Login',
                 feedbackLabel: 'Authenticating...',
                 style: 'btn btn-primary btn-lg btn-block mb-75 mt-60'
@@ -69,7 +69,7 @@ var signIn = (function() {
               ]),
               m(".col-sm-6", [
                 m("p", { class: "text-right mt-5" }, [
-                  m("a", { href: "/password/request", config: m.route, class: "btn-link" }, "Forgot your password?")
+                  m("a", { href: "/password/request", oncreate: m.route.link, class: "btn-link" }, "Forgot your password?")
                 ])
               ])
             ])
@@ -80,18 +80,19 @@ var signIn = (function() {
   };
 
   return {
-    controller: function(){
-      var ctrl = this;
-      ctrl.errors = m.prop({});
+    oninit(vnode){
+      this.errors = m.stream({});
 
-      ctrl.createSession = function(args) {
-        return Session.create(args).then(function(user) {
+      this.createSession = (args) => {
+        return Session.create(args).then((userData) => {
+          let user = JSON.parse(userData);
+
           if(user.data.active)
-            m.route("/dashboard");
+            m.route.set("/dashboard");
           else
-            m.route("/activate");
-        }, function(response) {
-          ctrl.errors(response.errors);
+            m.route.set("/activate");
+        }, (e) => {
+          this.errors(JSON.parse(e.message).errors);
         })
         // User.create().then(function() {
         //   update();

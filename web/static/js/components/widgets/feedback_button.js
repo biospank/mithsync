@@ -1,32 +1,36 @@
-var feedbackButton = {
-  controller: function(attrs) {
-    var ctrl = this;
-    ctrl.label = m.prop(attrs.label);
-    ctrl.style = m.prop(attrs.style);
+const feedbackButton = {
+  oninit({attrs, state}) {
+    state.label = attrs.label;
+    state.style = attrs.style;
 
-    ctrl.actionWithFeedback = function(event) {
+    state.actionWithFeedback = (event) => {
       event.preventDefault();
 
-      ctrl.label(attrs.feedbackLabel);
-      ctrl.style(ctrl.style() + ' disabled');
-      m.redraw();
+      state.label = attrs.feedbackLabel;
+      state.style = attrs.style + ' disabled';
+      // m.redraw();
 
-      attrs.action({background: true}).then(function() {
-        ctrl.label(attrs.label);
-        ctrl.style(attrs.style);
+      attrs.action({background: true}).then(() => {
+        state.label = attrs.label;
+        state.style = attrs.style;
         m.redraw();
       });
+      // , () => {
+      //   state.label = attrs.label;
+      //   state.style = attrs.style;
+      //   m.redraw();
+      // });
     }
 
   },
-  view: function(ctrl, attrs) {
-    ctrl.disabled = m.prop(attrs.disabled || false);
+  view({attrs, state}) {
+    state.disabled = attrs.disabled || false;
 
-    return m("button[type=submit]", {
-              disabled: ctrl.disabled(),
-              class: ctrl.style() + (ctrl.disabled() ? ' disabled' : ''), //'btn btn-success btn-lg',
-              onclick: ctrl.actionWithFeedback
-            }, ctrl.label());
+    return m('button', {
+              disabled: state.disabled,
+              className: state.style + (state.disabled ? ' disabled' : ''),
+              onclick: state.actionWithFeedback
+            }, state.label);
   }
 };
 

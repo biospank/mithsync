@@ -7,7 +7,7 @@ var resetPage = (function() {
   var content = function(ctrl) {
     return m('div', [
       m("figure", { class: "center-block display-table mboth-60 intro-section__logo" }, [
-        m("a", { href:"/", config: m.route }, [
+        m("a", { href:"/", oncreate: m.route.link }, [
           m("img", { src: "/images/logo-zinkroo--white.png", width: "400", class:"img-responsive" }),
         ]),
         m("h4", { class: "text-right text-white weight-regular mb-0" }, "live media sync")
@@ -15,7 +15,7 @@ var resetPage = (function() {
       m("h2", { class: "mt-0 mb-60 text-center text-white" }, "Reset Password"),
       m('.card-wrapper sign center-block p-all-side-75', [
         m("form", [
-          m.component(textField, {
+          m(textField, {
             type: 'password',
             placeholder: 'Enter Password',
             id: 'password',
@@ -25,7 +25,7 @@ var resetPage = (function() {
             labelStyles: "text-dark--grey mb-15",
             inputSize: "input-lg reset-boxshadow reset-radius--2"
           }),
-          m.component(textField, {
+          m(textField, {
             type: 'password',
             placeholder: 'Enter Password',
             id: 'password_confirmation',
@@ -36,7 +36,7 @@ var resetPage = (function() {
             inputSize: "input-lg reset-boxshadow reset-radius--2"
           }),
           m("div", { class: "text-center mboth-30" }, [
-            m.component(feedbackButton, {
+            m(feedbackButton, {
               action: ctrl.resetPassword,
               label: 'Reset',
               feedbackLabel: 'Executing...',
@@ -49,21 +49,20 @@ var resetPage = (function() {
   };
 
   return {
-    controller: function(){
-      var ctrl = this;
-      ctrl.errors = m.prop({});
-      ctrl.resetCode = m.prop(m.route.param("code"));
+    oninit(vnode) {
+      this.errors = m.stream({});
+      this.resetCode = m.stream(m.route.param("code"));
 
-      ctrl.resetPassword = function(args) {
+      this.resetPassword = (args) => {
         return Password.reset(
           _.assign(
             args,
-            {resetCode: ctrl.resetCode()}
+            {resetCode: this.resetCode()}
           )
-        ).then(function(data) {
-          m.route("/signin");
-        }, function(response) {
-          ctrl.errors(response.errors);
+        ).then((data) => {
+          m.route.set("/signin");
+        }, (e) => {
+          vnode.state.errors(JSON.parse(e.message).errors);
         })
       };
     },

@@ -1,8 +1,8 @@
 import user from "./user";
 
 var topBar = {
-  showMenuButton: function() {
-    if(/videos\/\d+\/edit/i.exec(m.route())) {
+  showMenuButton() {
+    if(/videos\/\d+\/edit/i.exec(m.route.get())) {
       return m("a", {
         href: "#",
         class: "navbar-button",
@@ -22,8 +22,8 @@ var topBar = {
       return "";
     }
   },
-  showMenuTop: function() {
-    if(/videos\/\d+\/edit/i.exec(m.route()) == null) {
+  showMenuTop() {
+    if(/videos\/\d+\/edit/i.exec(m.route.get()) == null) {
       return m("nav", { class: "top-nav", id: "" }, [
         m("ul", { class: "nav nav-pills" }, [
           m("li", { role: "presentation", class: "active" }, [
@@ -38,13 +38,16 @@ var topBar = {
       return "";
     }
   },
-  view: function(ctrl, args) {
-    return m("nav", { class: "topbar " + (args.additionalClass ? args.additionalClass : "") }, [
+  oninit(vnode) {
+    this.additionalClass = vnode.attrs.additionalClass;
+  },
+  view({state}) {
+    return m("nav", { class: "topbar " + (state.additionalClass ? state.additionalClass : "") }, [
       m(".clearfix", {}, [
         m(".pull-left", [
           m("a", {
             href: "/dashboard",
-            config: m.route,
+            oncreate: m.route.link,
             class: "navbar-brand pull-left"
           }, [
             m("img", { src: "images/logo-zinkroo--white.png", class: "img-responsive" })
@@ -55,7 +58,7 @@ var topBar = {
         //   this.showMenuTop()
         // ]),
         m(".pull-right", [
-          m.component(user)
+          m(user)
         ])
       ])
     ])

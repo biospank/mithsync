@@ -1,8 +1,8 @@
 import mixinLayout from "../layout/mixin_layout";
 
-var faq = (function() {
+var faq = (() => {
 
-  var content = function(ctrl) {
+  var content = (vnode) => {
     return m(".panel-group", { id: "accordion", role: "tablist", "aria-multiselectable": true }, [
       m(".panel panel-default", [
         m(".panel-heading", { role: "tab", id: "headingOne" }, [
@@ -74,9 +74,6 @@ var faq = (function() {
   }
 
   return {
-    controller: function() {
-      var ctrl = this;
-    },
     view: mixinLayout(content)
   };
 })();

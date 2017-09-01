@@ -5,7 +5,7 @@ var videoPage = (function() {
 
   var content = function() {
     return [
-      m.component(videoList)
+      m(videoList)
     ];
   };
 

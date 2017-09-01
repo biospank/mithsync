@@ -3,7 +3,7 @@ import Image from "../../models/image";
 var thumbItem = {
   controller: function(image, callback){
     var ctrl = this;
-    ctrl.currentImage = m.prop({});
+    ctrl.currentImage = m.stream({});
 
     ctrl.selectImage = function() {
       callback(ctrl.currentImage());

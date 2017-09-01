@@ -49,9 +49,9 @@ var Session = {
     return !this.isValid();
   },
   model: {
-    email: m.prop(""),
-    password: m.prop(""),
-    remember_me: m.prop(true)
+    email: m.stream(""),
+    password: m.stream(""),
+    remember_me: m.stream(true)
   },
   create: function(args) {
     return m.request(_.assign({

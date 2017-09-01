@@ -2,12 +2,12 @@ import Session from "../../models/session";
 import socialShare from "../widgets/social_share";
 
 var landingpage = {
-  controller: function() {
+  oninit(vnode) {
     if(!Session.isExpired()) {
-      m.route("/dashboard");
+      m.route.set("/dashboard");
     }
   },
-  view: function() {
+  view(vnode) {
     return m("div", {
         config: function(element, isInit) {
           if(!isInit) {
@@ -16,7 +16,7 @@ var landingpage = {
         }
       }, [
       m("section", { class: "bg-main pt-30 intro-section" }, [
-        m.component(socialShare, {
+        m(socialShare, {
           position: "left"
         }),
         m(".container", [
@@ -27,10 +27,10 @@ var landingpage = {
             //   ])
             // ]),
             m(".pull-right intro-section__buttons", [
-              m("a", { href: "/contacts", config: m.route, class: "btn btn-link text-white" }, "Contact us"),
+              m("a", { href: "/contacts", oncreate: m.route.link, class: "btn btn-link text-white" }, "Contact us"),
               m("span", { class: "text-white" }, "|"),
-              m("a", { href: "/signin", config: m.route, class: "btn btn-link text-white" }, "Login"),
-              m("a", { href: "/signup", config: m.route, class: "btn btn-lg bg-white text-color--main" }, "Sign up")
+              m("a", { href: "/signin", oncreate: m.route.link, class: "btn btn-link text-white" }, "Login"),
+              m("a", { href: "/signup", oncreate: m.route.link, class: "btn btn-lg bg-white text-color--main" }, "Sign up")
             ])
           ]),
           m("figure", { class: "center-block display-table mt-60 mb-80 intro-section__logo" }, [
@@ -144,7 +144,7 @@ var landingpage = {
             m("h1", { class: "text-color--main weight-bold mt-0 start-now-section__title mb-25" }, "Get started now"),
             m("p", { class: "start-now-section__description weight-light" }, m.trust("Zinkroo gives you an easier and faster solution. Change your way to<br>work. Try it and give us your opinion"))
           ]),
-          m("a", { class: "btn btn-primary btn-lg btn-signup-now pboth-40", href: "/signup", config: m.route }, "SIGN UP FOR FREE")
+          m("a", { class: "btn btn-primary btn-lg btn-signup-now pboth-40", href: "/signup", oncreate: m.route.link }, "SIGN UP FOR FREE")
         ])
       ]),
       m("footer", { class: "bg-main text-center pboth-40" }, [
@@ -152,9 +152,9 @@ var landingpage = {
           "©2017 ",
           m("a", { href: "http://axenso.com/", target: "_blank", class: "weight-strong text-white" }, "Axenso "),
           "all Rights Reserved. ",
-          m("a", { href: "/privacy", class: "weight-strong text-white", config: m.route }, "Privacy"),
+          m("a", { href: "/privacy", class: "weight-strong text-white", oncreate: m.route.link }, "Privacy"),
           " and ",
-          m("a", { href: "/terms", class: "weight-strong text-white", config: m.route }, "Terms")
+          m("a", { href: "/terms", class: "weight-strong text-white", oncreate: m.route.link }, "Terms")
         ])
       ])
     ])

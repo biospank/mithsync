@@ -21,7 +21,8 @@ exports.config = {
         before: [
           "web/static/vendor/js/jquery-1.11.3.min.js",
           "web/static/vendor/js/lodash.min.js",
-          "web/static/vendor/js/mithril.min.js"
+          "web/static/vendor/js/mithril.min.js",
+          "web/static/vendor/js/mithril-stream.js"
         ]
       }
     },

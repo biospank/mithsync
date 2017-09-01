@@ -7,9 +7,9 @@ var Password = {
     xhr.setRequestHeader("content-type", "application/json");
   },
   model: {
-    email: m.prop(""),
-    password: m.prop(""),
-    password_confirmation: m.prop("")
+    email: m.stream(""),
+    password: m.stream(""),
+    password_confirmation: m.stream("")
   },
   resetRequest: function(args) {
     return m.request(_.assign({

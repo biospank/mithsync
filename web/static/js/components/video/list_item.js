@@ -4,64 +4,60 @@ import Video from "../../models/video";
 import Clippy from "../../models/clippy";
 
 var listItem = {
-  controller: function(video, parent){
-    var ctrl = this;
+  oninit({attrs}){
+    this.video = attrs.video;
+    this.parent = attrs.parent;
 
-    ctrl.delete = function() {
-      Video.delete(ctrl.video).then(function() {
-        parent.getVideos(
+    this.delete = function() {
+      Video.delete(this.video).then(() => {
+        this.parent.getVideos(
           _.assign(
-            parent.pageInfo.defaultParams || {},
-            { page: parent.pageInfo.pageNumber }
-          ),
-          parent.requestOptions
+            this.parent.pageInfo.defaultParams || {},
+            { page: this.parent.pageInfo.pageNumber }
+          )
         );
       });
     };
 
-    ctrl.initClipboard = function(element, isInit, context) {
-      if(!isInit) {
-        Clippy.init(element, video);
-      }
+    this.initClipboard = ({dom}) => {
+      Clippy.init(dom, this.video);
     };
   },
-  view: function(ctrl, video){
-    ctrl.video = video;
-
+  view({state}) {
     return m("li", [
       m("div", { class: "list media border radius" }, [
         m("a", {
           href: "",
           onclick: function(event) {
             event.preventDefault();
-            Video.current(video);
-            m.route("/projects/" + Project.current().id + "/videos/" + video.id + "/edit");
+            Video.current(state.video);
+            m.route.set("/projects/" + Project.current().id + "/videos/" + state.video.id + "/edit");
           },
           class: "list__contents"
         }, [
           m("figure", { class: "list__image border-right media-left hidden-xs hidden-sm" }, [
             m("a", [
               m("img", {
-                src: _.isEmpty(ctrl.video.slides) ? '/images/thumb-placeholder.png' : _.first(ctrl.video.slides).thumb_url,
+                src: _.isEmpty(state.video.slides) ? '/images/thumb-placeholder.png' : _.first(state.video.slides).thumb_url,
                 class: "media-object",
                 width: "90"
               })
             ])
           ]),
           m("div", { class: "list__body media-body" }, [
-            m("h5", { class: "list__body-title mboth-0 text-uppercase" }, _.truncate(video.title, { length: 50 })),
-            m("p", { class: "list__body-description text-uppercase" }, _.truncate(video.description, { length: 70 })),
-            m("span", { class: "list__body-summary list__body-summary--space-right10 text-uppercase" }, moment(video.inserted_at).format('LLL')),
+            m("h5", { class: "list__body-title mboth-0 text-uppercase" }, _.truncate(state.video.title, { length: 50 })),
+            m("p", { class: "list__body-description text-uppercase" }, _.truncate(state.video.description, { length: 70 })),
+            m("span", { class: "list__body-summary list__body-summary--space-right10 text-uppercase" }, moment(state.video.inserted_at).format('LLL')),
             m("span", {
               class: "text-uppercase list__body-summary coloured"
-            }, ctrl.video.slide_count + (_.gt(ctrl.video.slide_count, 1) ? " slides" : " slide"))
+            }, state.video.slide_count + (_.gt(state.video.slide_count, 1) ? " slides" : " slide"))
           ])
         ]),
         m(".list__buttons list__buttons--40", [
           m("a", {
             href: "#",
             class: "btn btn-default btn-square border",
-            config: ctrl.initClipboard,
+            oncreate: state.initClipboard,
             onclick: function(e) {
               e.preventDefault();
             }
@@ -86,7 +82,7 @@ var listItem = {
                 showLoaderOnConfirm: true,
                 preConfirm: function() {
                   return new Promise(function(resolve, reject) {
-                    ctrl.delete();
+                    state.delete();
                     resolve()
                   })
                 }

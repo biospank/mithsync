@@ -8,9 +8,9 @@ import Project from "../../models/project";
 import Video from "../../models/video";
 
 var imageDialog = (function() {
-  var images = m.prop(undefined);
-  var errors = m.prop({});
-  var filter = m.prop("");
+  var images = m.stream(undefined);
+  var errors = m.stream({});
+  var filter = m.stream("");
   var pageInfo = {};
   var requestOptions = {
     unwrapSuccess: function(response) {
@@ -123,7 +123,7 @@ var imageDialog = (function() {
                   imageView()
                 ])
               ]),
-              m.component(new Pagination(),
+              m(new Pagination(),
                 _.assign(
                   pageInfo,
                   {

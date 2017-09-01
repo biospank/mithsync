@@ -12,10 +12,10 @@ var User = (function() {
       this.model.password_confirmation("");
     },
     model: {
-      id: m.prop(undefined),
-      email: m.prop(""),
-      password: m.prop(""),
-      password_confirmation: m.prop("")
+      id: m.stream(undefined),
+      email: m.stream(""),
+      password: m.stream(""),
+      password_confirmation: m.stream("")
     },
     getCurrent: function(opts = {}) {
       return m.request(_.assign({

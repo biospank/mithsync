@@ -5,8 +5,8 @@ import Clippy from "../../../models/clippy";
 import UrlParser from "../../../util/urlParser"
 
 var videoDetail = {
-  controller: function() {
-    var errors = m.prop({});
+  oninit(vnode) {
+    this.errors = m.stream({});
 
     Video.resetModel(Video.current());
 
@@ -15,7 +15,7 @@ var videoDetail = {
       m.redraw();
     }, false);
 
-    var isValidUrl = function(url) {
+    this.isValidUrl = (url) => {
       var urlParser = new UrlParser();
       urlParser.addProvider('vimeo');
       urlParser.addProvider('youtube');
@@ -27,15 +27,15 @@ var videoDetail = {
       }
     };
 
-    var rejectUrlVideo = function() {
-      var deferred = m.deferred();
-      setTimeout(function() {
-        deferred.reject("Invalid url for vimeo/youtube video");
-      }, 1000);
-      return deferred.promise;
+    this.rejectUrlVideo = () => {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          reject("Invalid url for vimeo/youtube video");
+        }, 1000);
+      })
     };
 
-    var swalValidationError = function() {
+    this.swalValidationError = function() {
       swal({
         type: 'error',
         title: 'Validation error',
@@ -45,91 +45,84 @@ var videoDetail = {
       }).catch(swal.noop);
     };
 
-    return {
-      errors: function() {
-        return errors();
-      },
-      updateVideo: function(event) {
-        event.preventDefault();
-        errors({});
+    this.updateVideo = (event) => {
+      event.preventDefault();
+      this.errors({});
 
-        var originalUrl = Video.current().url;
+      var originalUrl = Video.current().url;
 
-        swal({
-          title: 'Saving...',
-          width: '400px',
-          allowOutsideClick: false,
-          allowEscapeKey: false,
-          showConfirmButton: false,
-          onOpen: function(progress) {
-            swal.showLoading();
-            if(isValidUrl(Video.model.url())) {
-              return Video.update(Video.current()).then(function(response) {
-                Video.current(response.data);
-                swal.close();
-                swal({
-                  type: 'success',
-                  title: 'Video info published!',
-                  width: '400px',
-                  showConfirmButton: false,
-                  timer: 1000
-                }).then(function () {
-                },
-                  // handling the promise rejection
-                  function (dismiss) {
-                    if (dismiss === 'timer') {
-                      if(Video.model.url() !== originalUrl)
-                        m.route("/projects/" + Video.current().project_id + "/videos/" + Video.current().id + "/edit");
+      swal({
+        title: 'Saving...',
+        width: '400px',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        onOpen: (progress) => {
+          swal.showLoading();
+          if(isValidUrl(Video.model.url())) {
+            return Video.update(Video.current()).then((response) => {
+              Video.current(response.data);
+              swal.close();
+              swal({
+                type: 'success',
+                title: 'Video info published!',
+                width: '400px',
+                showConfirmButton: false,
+                timer: 1000
+              }).then(() => {
+              },
+                // handling the promise rejection
+                (dismiss) => {
+                  if (dismiss === 'timer') {
+                    if(Video.model.url() !== originalUrl)
+                      m.route.set("/projects/" + Video.current().project_id + "/videos/" + Video.current().id + "/edit");
 
-                    }
                   }
-                ).catch(swal.noop);
-              }, function(response) {
-                errors(response.errors);
-                swal.close();
-                swalValidationError();
-              })
-            } else {
-              return rejectUrlVideo().then(function(value) {
-              }, function(value) {
-                m.startComputation();
-                errors({
-                  url: value
-                });
-                m.endComputation();
-                swal.close();
-                swalValidationError();
+                }
+              ).catch(swal.noop);
+            }, (response) => {
+              this.errors(response.errors);
+              swal.close();
+              this.swalValidationError();
+            })
+          } else {
+            return rejectUrlVideo().then((value) => {
+            }, (value) => {
+              this.errors({
+                url: value
               });
-            }
+              swal.close();
+              this.swalValidationError();
+            });
           }
-        }).catch(swal.noop);
-      },
-      initClipboard: function(element, isInit, context) {
-        if(!isInit) {
-          Clippy.init(element, Video.current());
         }
-      }
+      }).catch(swal.noop);
     };
+
+    this.initClipboard = ({dom}) => {
+      Clippy.init(element, Video.current());
+    };
+
   },
-  view: function(ctrl) {
+  view({state}) {
     return m("form", { class: "light-form" }, [
-      m.component(textField, {
+      m(textField, {
         type: 'text',
         placeholder: 'Name',
         id: 'video-name',
         dataLabel: 'Name',
         oninput: m.withAttr("value", Video.model.title),
-        error: ctrl.errors()['title'],
+        error: state.errors()['title'],
         value: Video.model.title()
       }),
-      m.component(textField, {
+      m(textField, {
         field: 'textarea',
         rows: 5,
         placeholder: 'Description',
         id: 'description',
         dataLabel: 'Description',
         oninput: m.withAttr("value", Video.model.description),
-        error: ctrl.errors()['description'],
+        error: state.errors()['description'],
         value: Video.model.description()
       }),
       m('.form-group', [
@@ -138,7 +131,7 @@ var videoDetail = {
           m("a", {
             href: "#",
             class: "btn btn-clipboard",
-            config: ctrl.initClipboard,
+            config: state.initClipboard,
             onclick: function(event) {
               event.preventDefault();
             }
@@ -146,16 +139,16 @@ var videoDetail = {
           m('code', { class: 'html' }, Video.export(Video.current()))
         ])
       ]),
-      m.component(textField, {
+      m(textField, {
         type: 'Url',
         placeholder: 'link to video',
         id: 'url',
         dataLabel: 'Video Link',
         oninput: m.withAttr("value", Video.model.url),
-        error: ctrl.errors()['url'],
+        error: state.errors()['url'],
         value: Video.model.url()
       }),
-      // m.component(textField, {
+      // m(textField, {
       //   type: 'url',
       //   placeholder: 'Url',
       //   id: 'video-url',
@@ -163,7 +156,7 @@ var videoDetail = {
       //   disabled: true,
       //   value: Video.model.url()
       // }),
-      m.component(textField, {
+      m(textField, {
         type: 'text',
         placeholder: 'Creation date',
         id: 'creation-date',
@@ -174,7 +167,7 @@ var videoDetail = {
       m("div", { class: "text-right mb-60" }, [
         m("div", { class: "text-right" }, [
           m("button[type=submit]", {
-            onclick: ctrl.updateVideo,
+            onclick: state.updateVideo,
             class: 'btn btn-success btn-md btn-rectangular btn-space--left-5 icon-inside--left',
             title: "Publish"
           }, [

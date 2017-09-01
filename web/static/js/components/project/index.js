@@ -7,16 +7,16 @@ import recordNotFound from "../widgets/404";
 import Session from "../../models/session";
 import Project from "../../models/project";
 
-var paginate = function(ctrl) {
-  return m.component(new Pagination(),
+var paginate = function(state) {
+  return m(new Pagination(),
     _.assign(
-      ctrl.pageInfo,
+      state.pageInfo,
       {
         xhr: function(params) {
-          ctrl.getProjects(params, ctrl.requestOptions);
+          state.getProjects(params, state.requestOptions);
         },
         defaultParams: {
-          filter: ctrl.filter()
+          filter: state.filter()
         }
       }
     )
@@ -24,107 +24,104 @@ var paginate = function(ctrl) {
 }
 
 var projectList = {
-  controller: function() {
-    var ctrl = this;
+  oninit(vnode) {
+    this.projects = m.stream(undefined);
+    this.errors = m.stream({});
+    this.filter = m.stream("");
+    this.pageInfo = {};
 
-    ctrl.projects = m.prop(undefined);
-    ctrl.errors = m.prop({});
-    ctrl.filter = m.prop("");
-    ctrl.pageInfo = {};
+    this.unwrapSuccess = (response) => {
+      if(response) {
+        this.pageInfo = {
+          totalEntries: response.total_entries,
+          totalPages: response.total_pages,
+          pageNumber: response.page_number
+        };
 
-    ctrl.requestOptions = {
-      unwrapSuccess: function(response) {
-        if(response) {
-          ctrl.pageInfo = {
-            totalEntries: response.total_entries,
-            totalPages: response.total_pages,
-            pageNumber: response.page_number
-          };
-          return response.data;
-        }
-      },
-      unwrapError: function(response) {
-        return response.error;
+        return response;
       }
     };
 
     if(Session.isExpired()) {
-      m.route("/signin");
+      m.route.set("/signin");
     }
 
-    ctrl.getProjects = function(params, args) {
-      return Project.all(params, args).then(function(projects) {
-        ctrl.projects(projects);
-      }, function(response) {
-        ctrl.errors(response.errors);
+    this.getProjects = (params) => {
+      return Project.all(params).then(this.unwrapSuccess).then((response) => {
+        this.projects(response.data);
+      }, (e) => {
+        this.errors(JSON.parse(e.message).errors);
       })
     };
 
-    ctrl.showProjects = function() {
-      if(!ctrl.projects()) {
+    this.showProjects = () => {
+      if(!this.projects()) {
         return m(loader);
       } else {
-        if(_.isEmpty(ctrl.projects())) {
+        if(_.isEmpty(this.projects())) {
            //return m(recordNotFound);
         } else {
-          return ctrl.projects().map(function(project) {
-            return m(listItem, project, ctrl);
+          return this.projects().map(function(project) {
+            return m(listItem, {key: project.id, project: project, parent: vnode.state});
           })
         }
       }
     };
 
-    ctrl.updateProject = function(project) {
-      Project.update(project.id).then(function(response) {
-        var index = _.findIndex(ctrl.projects(), { id: response.data.id })
-        ctrl.projects()[index] = response.data;
+    this.updateProject = (project) => {
+      Project.update(project.id).then((response) => {
+        let newProjectList = _.map(this.projects(), (prj) => {
+          if(prj.id === response.data.id)
+            prj.name = response.data.name;
+
+          return prj;
+        })
+        this.projects(newProjectList);
       });
     };
 
-    ctrl.deleteProject = function(project) {
-      return Project.delete(project.id).then(function() {
-        m.route('/projects');
-      }, function(response) {
-        ctrl.errors(response.errors);
+    this.deleteProject = (project) => {
+      return Project.delete(project.id).then(() => {
+        // m.route.set('/projects');
+        m.route.set(m.route.get(), null, {state: {key: Date.now()}});
+      }, (e) => {
+        this.errors(JSON.parse(e.message).errors);
       })
     };
 
-    ctrl.getProjects(
-      ctrl.pageInfo.defaultParams || {},
-      ctrl.requestOptions
-    );
+    this.getProjects(this.pageInfo.defaultParams || {});
 
   },
-  view: mixinLayout(function(ctrl) {
+  view: mixinLayout(({state}) => {
     return [
       m("div", { class: "clearfix mb-25" }, [
         m("div", { class: "pull-left" }, [
           m(searchForm, {
-            action: function(event) {
+            action: (event) => {
               event.preventDefault();
 
-              ctrl.getProjects(
+              state.getProjects(
                 _.assign(
-                  ctrl.pageInfo.defaultParams || {},
+                  state.pageInfo.defaultParams || {},
                   { page: 1 }
-                ), ctrl.requestOptions
+                ), state.requestOptions
               );
             },
-            filter: ctrl.filter
+            filter: state.filter
           })
         ]),
         m("div", { class: "pull-right" }, [
           m("button", {
             class: "btn btn-success btn-md",
-            onclick: function() {
+            onclick: () => {
               swal({
                 title: 'Project name',
                 input: 'text',
                 showCancelButton: true,
                 showCloseButton: true,
                 confirmButtonText: 'Create',
-                inputValidator: function(value) {
-                  return new Promise(function(resolve, reject) {
+                inputValidator: (value) => {
+                  return new Promise((resolve, reject) => {
                     if (value) {
                       resolve();
                     } else {
@@ -132,10 +129,11 @@ var projectList = {
                     }
                   });
                 },
-              }).then(function(value) {
+              }).then((value) => {
                 Project.model.name(value);
                 Project.create().then(function(data) {
-                  m.route("/projects");
+                  // m.route.set("/projects");
+                  m.route.set(m.route.get(), null, {state: {key: Date.now()}});
                 })
               }).catch(swal.noop)
             }
@@ -143,11 +141,11 @@ var projectList = {
         ])
       ]),
       m("ul", { class: "list-unstyled projects-list" }, [
-        ctrl.showProjects()
+        state.showProjects()
       ]),
       m("div", { class: "clearfix" }, [
         m("div", { class: "pull-left" }, [
-          paginate(ctrl)
+          paginate(state)
         ])
       ])
     ]

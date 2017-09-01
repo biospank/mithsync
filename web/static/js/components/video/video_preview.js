@@ -1,15 +1,16 @@
 import preview from './preview';
 
-var videoPreview = (function() {
-  var previewSlides = [];
-
+const videoPreview = (() => {
   return {
-    show: function() {
+    show() {
       preview.reinitSlider();
       $("#videoPreview").fadeIn( "fast" );
     },
-    view: function(ctrl, video, slides) {
-      previewSlides = slides
+    oninit({attrs}) {
+      this.video = attrs.video;
+      this.slides = attrs.slides;
+    },
+    view({state}) {
       return m(".modal image-modal-lg", {
         "tabindex": "-1",
         "role": "dialog",
@@ -22,7 +23,7 @@ var videoPreview = (function() {
           m(".modal-content", [
             m(".modal-header", [
               m("button.close", {
-                onclick: function() {
+                onclick: () => {
                   preview.pause();
                   $("#videoPreview").hide();
                 }
@@ -32,7 +33,7 @@ var videoPreview = (function() {
               m("h4.modal-title", "Preview")
             ]),
             m(".modal-body", { class: "p-all-side-0" }, [
-              m(preview, video, previewSlides)
+              m(preview, {video: state.video, slides: state.slides})
             ])
           ])
         ])

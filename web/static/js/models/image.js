@@ -8,7 +8,7 @@ var Image = {
         method: "GET",
         url: Videosync.apiBaseUrl() +
           _.replace(_.replace(this.url, 'projectId', urlParams['projectId']), 'videoId',  urlParams['videoId']) +
-          "?" + m.route.buildQueryString(params),
+          "?" + m.buildQueryString(params),
         config: function(xhr) {
           xhr.setRequestHeader("accept", "application/json");
           xhr.setRequestHeader("Authorization", Videosync.realm + " " + Session.token())

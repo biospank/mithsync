@@ -5,41 +5,41 @@ import Project from "../../models/project";
 import Video from "../../models/video";
 import UrlParser from "../../util/urlParser"
 
-var newVideo = (function() {
+var newVideo = (() => {
 
-  var content = function(ctrl) {
+  var content = ({state}) => {
     return [
       m(".col-sm-6 center-block", [
         m("h3", "Create a new Zinkroo"),
         //m("p", "Channels are where your team communicates. They’re best when organized around a topic — #leads, for example."),
         m("form", { class: "light-form", role: "form" }, [
-          m.component(textField, {
+          m(textField, {
             type: 'text',
             placeholder: 'Title',
             id: 'title',
             dataLabel: 'Title',
             oninput: m.withAttr("value", Video.model.title),
-            error: ctrl.errors()['title']
+            error: state.errors()['title']
           }),
-          m.component(textField, {
+          m(textField, {
             field: 'textarea',
             rows: 9,
             placeholder: 'Description',
             id: 'description',
             dataLabel: 'Description',
             oninput: m.withAttr("value", Video.model.description),
-            error: ctrl.errors()['description']
+            error: state.errors()['description']
           }),
-          m.component(textField, {
+          m(textField, {
             type: 'link',
             placeholder: 'Insert here your Youtube/Vimeo URL',
             id: 'url',
             dataLabel: 'Video Link',
             oninput: m.withAttr("value", Video.model.url),
-            error: ctrl.errors()['url']
+            error: state.errors()['url']
           }),
-          m.component(feedbackButton, {
-            action: ctrl.createVideo,
+          m(feedbackButton, {
+            action: state.createVideo,
             label: 'Create',
             feedbackLabel: 'Creating...',
             style: 'btn btn-primary effect btn-lg'
@@ -50,30 +50,29 @@ var newVideo = (function() {
   };
 
   return {
-    controller: function(){
-      var ctrl = this;
-      ctrl.errors = m.prop({});
+    oninit(vnode){
+      this.errors = m.stream({});
 
-      ctrl.createVideo = function(args) {
-        if(ctrl.isValidUrl(Video.model.url())) {
+      this.createVideo = (args) => {
+        if(this.isValidUrl(Video.model.url())) {
           var projectId = Project.current().id;
-          return Video.create(projectId, args).then(function(response) {
+          return Video.create(projectId, args).then((response) => {
             Video.current(response.data);
-            m.route("/projects/" + projectId + "/videos/" + response.data.id + "/edit");
-          }, function(response) {
-            ctrl.errors(response.errors);
+            m.route.set("/projects/" + projectId + "/videos/" + response.data.id + "/edit");
+          }, (e) => {
+            this.errors(JSON.parse(e.message).errors);
           })
         } else {
-          return ctrl.rejectUrlVideo().then(function(value) {
-          }, function(value) {
-            ctrl.errors({
+          return this.rejectUrlVideo().then((value) => {
+          }, (value) => {
+            this.errors({
               url: value
             });
           })
         }
       };
 
-      ctrl.isValidUrl = function(url) {
+      this.isValidUrl = (url) => {
         var urlParser = new UrlParser();
         urlParser.addProvider('vimeo');
         urlParser.addProvider('youtube');
@@ -85,12 +84,12 @@ var newVideo = (function() {
         }
       };
 
-      ctrl.rejectUrlVideo = function() {
-        var deferred = m.deferred();
-        setTimeout(function() {
-          deferred.reject("Invalid url for vimeo/youtube video");
-        }, 1000);
-        return deferred.promise;
+      this.rejectUrlVideo = () => {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            reject("Invalid url for vimeo/youtube video");
+          }, 1000);
+        })
       };
 
     },

@@ -7,11 +7,11 @@ var Video = {
   recent_url: '/videos/recent',
   urlParser: {},
   model: {
-    title: m.prop(""),
-    description: m.prop(""),
-    url: m.prop(""),
-    layout: m.prop({}),
-    inserted_at: m.prop("")
+    title: m.stream(""),
+    description: m.stream(""),
+    url: m.stream(""),
+    layout: m.stream({}),
+    inserted_at: m.stream("")
   },
   resetModel: function(video) {
     this.model.title(video.title);
@@ -41,9 +41,10 @@ var Video = {
       video: video
     });
   },
-  current: m.prop({}),
+  current: m.stream({}),
   create: function(projectId, args) {
-    return m.request(_.assign({
+    return m.request(
+      {
         method: "POST",
         url: Videosync.apiBaseUrl() +
           _.replace(this.url, 'projectId', projectId),
@@ -53,20 +54,21 @@ var Video = {
           xhr.setRequestHeader("content-type", "application/json");
           xhr.setRequestHeader("Authorization", Videosync.realm + " " + Session.token());
         }
-      }, args)
+      }
     );
   },
-  all: function(projectId, params, args) {
-    return m.request(_.assign({
+  all: function(projectId, params) {
+    return m.request(
+      {
         method: "GET",
         url: Videosync.apiBaseUrl() +
           _.replace(this.url, 'projectId', projectId) +
-          "?" + m.route.buildQueryString(params),
+          "?" + m.buildQueryString(params),
         config: function(xhr) {
           xhr.setRequestHeader("accept", "application/json");
           xhr.setRequestHeader("Authorization", Videosync.realm + " " + Session.token())
         }
-      }, args)
+      }
     );
   },
   recent: function(args) {

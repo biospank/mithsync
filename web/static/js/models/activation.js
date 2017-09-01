@@ -5,8 +5,8 @@ var Activation = {
   url: '/activate/',
   extract: Session.extract,
   model: {
-    email: m.prop(""),
-    activation_code: m.prop("invalid-code")
+    email: m.stream(""),
+    activation_code: m.stream("invalid-code")
   },
   confirm: function(args) {
     return m.request(_.assign({

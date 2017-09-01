@@ -42,7 +42,7 @@ var mixinLayout = function(content, layout) {
     standard: function(content) {
       loadFixedLayout();
       return [
-        m.component(topBar, { additionalClass: "navbar-fixed-top" }),
+        m(topBar, { additionalClass: "navbar-fixed-top" }),
         m("section", { class: "clearfix", id: "wrapper" }, [
           m("aside", { id: "sidebar-wrapper" }, [
             // m("form", { class: "navbar-form page-search-form" }, [
@@ -55,10 +55,10 @@ var mixinLayout = function(content, layout) {
             //     ])
             //   ])
             // ]),
-            m.component(mainNav)
+            m(mainNav)
           ]),
           m("section", { id: "page-content-wrapper" }, [
-            m.component(breadcrumbBar),
+            m(breadcrumbBar),
             m("main", { class: "main-container" }, [
               content
             ])
@@ -73,12 +73,12 @@ var mixinLayout = function(content, layout) {
       loadFixedLayout();
       return m(".edit-layout", [
         m("header", { class: "navbar-fixed-top", id: "header-page" }, [
-          m.component(topBar, {}),
-          m.component(breadcrumbBar)
+          m(topBar, {}),
+          m(breadcrumbBar)
         ]),
         m("section", { class: "clearfix", id: "wrapper" }, [
           // m("aside", { id: "sidebar-wrapper" }, [
-          //   m.component(mainNav)
+          //   m(mainNav)
           // ]),
           m("section", { id: "page-content-wrapper" }, [
             content

@@ -5,9 +5,9 @@ var Project = {
   url: '/projects',
   recent_url: '/projects/recent',
   model: {
-    name: m.prop("")
+    name: m.stream("")
   },
-  current: m.prop({}),
+  current: m.stream({}),
   create: function() {
     return m.request({
       method: "POST",
@@ -33,15 +33,16 @@ var Project = {
     });
   },
   all: function(params, args) {
-    return m.request(_.assign({
+    return m.request(
+      {
         method: "GET",
         url: Videosync.apiBaseUrl() +
-          this.url + "?" + m.route.buildQueryString(params),
+          this.url + "?" + m.buildQueryString(params),
         config: function(xhr) {
           xhr.setRequestHeader("accept", "application/json");
           xhr.setRequestHeader("Authorization", Videosync.realm + " " + Session.token())
         }
-      }, args)
+      }
     );
   },
   recent: function(args) {

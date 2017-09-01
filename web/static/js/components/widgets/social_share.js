@@ -1,5 +1,5 @@
 var socialShare = {
-  view: function(ctrl, attrs) {
+  view({attrs}) {
     return m("ul", { class: "list-unstyled social-share " + attrs.position }, [
       m("li", { class: "social-share__item" }, [
         m("a", { href: "http://www.facebook.com/share.php?u=http://www.zinkroo.com", class: "facebook", target: "_blank" }, [

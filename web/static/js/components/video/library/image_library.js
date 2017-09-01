@@ -11,8 +11,8 @@ import loader from "../../widgets/loader";
 import recordNotFound from "../../widgets/404";
 import {} from "../../../util/polyfill_custom_event";
 
-var imageLibrary = (function() {
-  var paginate = function(ctrl) {
+var imageLibrary = (() => {
+  var paginate = (state) => {
     // to use pagination component you need to provide the following params:
     // 1. pagination (the component)
     // 2. a json configuration options
@@ -24,35 +24,35 @@ var imageLibrary = (function() {
     //         }
     //   2d. defaultParams: additional params to include on xhr callback (optional)
 
-    return m.component(new Pagination(),
+    return m(new Pagination(),
       _.assign(
-        ctrl.pageInfo,
+        state.pageInfo,
         {
           xhr: function(params) {
-            ctrl.getImages(params, ctrl.requestOptions);
+            state.getImages(params);
           },
           defaultParams: {
-            filter: ctrl.filter()
+            filter: state.filter()
           }
         }
       )
     )
   };
 
-  var imageView = function(ctrl) {
-    if(!ctrl.images()) {
+  var imageView = (state) => {
+    if(!state.images()) {
       return m(loader);
     } else {
-      if(_.isEmpty(ctrl.images())) {
+      if(_.isEmpty(state.images())) {
          //return m(recordNotFound);
       } else {
-        if(ctrl.asList()) {
-          return ctrl.images().map(function(image) {
-            return m(imageListItem, image, ctrl);
+        if(state.asList()) {
+          return state.images().map(function(image) {
+            return m(imageListItem, image, state);
           });
         } else {
-          return ctrl.images().map(function(image) {
-            return m(imageThumbItem, image, ctrl);
+          return state.images().map(function(image) {
+            return m(imageThumbItem, image, state);
           })
         }
       }
@@ -60,35 +60,30 @@ var imageLibrary = (function() {
   };
 
   return {
-    controller: function() {
-      var ctrl = this;
+    oninit(vnode) {
+      this.images = m.stream(undefined);
+      this.asList = m.stream(false);
+      this.errors = m.stream({});
+      this.filter = m.stream("");
+      this.pageInfo = {};
 
-      ctrl.images = m.prop(undefined);
-      ctrl.asList = m.prop(false);
-      ctrl.errors = m.prop({});
-      ctrl.filter = m.prop("");
-      ctrl.requestOptions = {
-        unwrapSuccess: function(response) {
-          if(response) {
-            ctrl.pageInfo = {
-              totalEntries: response.total_entries,
-              totalPages: response.total_pages,
-              pageNumber: response.page_number
-            };
-            return response.data;
-          }
-        },
-        unwrapError: function(response) {
-          return response.error;
+      this.unwrapSuccess = (response) => {
+        if(response) {
+          this.pageInfo = {
+            totalEntries: response.total_entries,
+            totalPages: response.total_pages,
+            pageNumber: response.page_number
+          };
+
+          return response;
         }
       };
-      ctrl.pageInfo = {};
 
       if(Session.isExpired()) {
-        m.route("/signin");
+        m.route.set("/signin");
       }
 
-      ctrl.initializeDropper = function(element, isInit, context) {
+      this.initializeDropper = function(element, isInit, context) {
         if(!isInit) {
           Dropper.init("#dropper", {
             urlParams: {
@@ -96,12 +91,11 @@ var imageLibrary = (function() {
               videoId: Video.current().id
             },
             onQueueComplete: function() {
-              ctrl.getImages(
+              this.getImages(
                 _.assign(
-                  ctrl.pageInfo.defaultParams || {},
-                  { page: ctrl.pageInfo.pageNumber }
-                ),
-                ctrl.requestOptions
+                  this.pageInfo.defaultParams || {},
+                  { page: this.pageInfo.pageNumber }
+                )
               );
 
               var initDraggerEvent = new CustomEvent("library:image:initDragger");
@@ -113,48 +107,44 @@ var imageLibrary = (function() {
         }
       };
 
-      ctrl.getImages = function(params, args) {
-        ctrl.images(undefined);
-
+      this.getImages = (params) => {
+        this.images(undefined);
+        // console.log(Project.current());
+        // console.log(Video.current());
         return Image.all(
             {
               projectId: Project.current().id,
               videoId: Video.current().id
             },
             params,
-            _.assign(args, { background: true })
-        ).then(function(images) {
-          ctrl.images(images);
+            { background: true }
+        ).then(this.unwrapSuccess).then((response) => {
+          this.images(response.data);
           m.redraw();
-        }, function(response) {
+        }, (response) => {
           // in case of 404 http status code
           // response is undefined: (cannot extract json data)
-          ctrl.images([]);
+          this.images([]);
           m.redraw();
         })
       };
 
-      // ctrl.getImages(
-      //   ctrl.pageInfo.defaultParams || {},
-      //   ctrl.requestOptions
+      // this.getImages(
+      //   this.pageInfo.defaultParams || {},
+      //   this.requestOptions
       // );
     },
-    view: function(ctrl) {
+    view({state}) {
       return m("div", {
-        config: function(element, isInit, context) {
-          if(!isInit) {
-            ctrl.getImages(
-              ctrl.pageInfo.defaultParams || {},
-              ctrl.requestOptions
-            );
-          }
+        oncreate: (vnode) => {
+          state.getImages(state.pageInfo.defaultParams || {});
         },
         class: "pb-90"
       }, [
         m("div", {
           class: "dropzone needsclick dz-clickable",
           id: "dropper",
-          config: ctrl.initializeDropper
+          config: state.initializeDropper
         }),
         m("section", { class: "library" }, [
           m("div", { class: "clearfix mb-25 library-fetuares" }, [
@@ -162,28 +152,28 @@ var imageLibrary = (function() {
               action: function(event) {
                 event.preventDefault();
 
-                ctrl.getImages(
+                state.getImages(
                   _.assign(
-                    ctrl.pageInfo.defaultParams || {},
+                    state.pageInfo.defaultParams || {},
                     { page: 1 }
-                  ), ctrl.requestOptions
+                  )
                 );
               },
-              filter: ctrl.filter
+              filter: state.filter
             }),
             m("div", { class: "show-items" }, [
               m("button", {
-                class: ctrl.asList() ? 'btn btn-square btn-default' : 'btn btn-square btn-default active',
+                class: state.asList() ? 'btn btn-square btn-default' : 'btn btn-square btn-default active',
                 onclick: function(event) {
-                  ctrl.asList(false);
+                  state.asList(false);
                 }
               }, [
                 m("i", { class: "fa fa-th-large" })
               ]),
               m("button", {
-                class: ctrl.asList() ? 'btn btn-square btn-default btn-space--left-5 active' : 'btn btn-square btn-default btn-space--left-5',
+                class: state.asList() ? 'btn btn-square btn-default btn-space--left-5 active' : 'btn btn-square btn-default btn-space--left-5',
                 onclick: function(event) {
-                  ctrl.asList(true);
+                  state.asList(true);
                 }
               }, [
                 m("i", { class: "fa fa-th-list" })
@@ -199,10 +189,10 @@ var imageLibrary = (function() {
               }
             }
           }, [
-            imageView(ctrl)
+            imageView(state)
           ])
         ]),
-        paginate(ctrl)
+        paginate(state)
       ]);
     }
   };

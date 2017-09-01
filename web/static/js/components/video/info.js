@@ -44,7 +44,7 @@ var infoVideo = (function() {
         m("a", {
           //href: "/video/" + video.id + "/edit",
           class: "btn btn-primary effect btn-md icon-left text-uppercase mgt30 pull-left",
-          config: m.route }, [
+          oncreate: m.route.link }, [
             m("i", { class: "fa fa-reply", "aria-hidden": true }),
             m("span", "Back to project")
           ]),
@@ -58,7 +58,7 @@ var infoVideo = (function() {
       var ctrl = this;
 
       if(Session.isExpired()) {
-        m.route("/signin");
+        m.route.set("/signin");
       };
     },
     view: mixinLayout(content)

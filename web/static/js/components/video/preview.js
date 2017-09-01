@@ -9,28 +9,29 @@ var preview = (function() {
   var slider = null;
 
   return {
-    reinitSlider: function() {
+    reinitSlider() {
       if(slider)
         slider.reinit();
     },
-    pause: function() {
+    pause() {
       player.pause();
     },
-    controller: function(video, slides) {
-      var videoInfo = Video.info(video.url);
-      var currentSlide = undefined;
-      var timeVector = [];
-      var sliderSlides = [];
+    oninit({attrs}) {
+      this.videoInfo = Video.info(attrs.video.url);
+      this.slides = attrs.slides;
+      this.currentSlide = undefined;
+      this.timeVector = [];
+      this.sliderSlides = [];
 
-      var inRange = function(progress, idx1, idx2) {
-        return _.inRange(progress, timeVector[idx1], (timeVector[idx2] || 100000));
+      this.inRange = (progress, idx1, idx2) => {
+        return _.inRange(progress, this.timeVector[idx1], (this.timeVector[idx2] || 100000));
       };
 
-      var updateSlide = function(event) {
+      this.updateSlide = (event) => {
         var currentSec = _.floor(event.detail.plyr.getCurrentTime());
 
-        if(currentSlide) {
-          var currentSlideIndex = _.findIndex(sliderSlides, currentSlide);
+        if(this.currentSlide) {
+          var currentSlideIndex = _.findIndex(this.sliderSlides, this.currentSlide);
 
           if((currentSlideIndex !== -1) &&
             inRange(currentSec, currentSlideIndex, (currentSlideIndex + 1))) {
@@ -38,7 +39,7 @@ var preview = (function() {
           }
         }
 
-        currentSlide = _.find(sliderSlides, function(slide, index, collection) {
+        this.currentSlide = _.find(this.sliderSlides, (slide, index, collection) => {
           if(inRange(currentSec, index, (index + 1))) {
             Reveal.slide(index);
             slider.goTo(index);
@@ -49,78 +50,76 @@ var preview = (function() {
         });
       };
 
-      var onReady = function(element, isInit, context) {
-        if( !isInit ) {
-          player = plyr.setup('.video-player-watch', {
-            //['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'fullscreen']
-            controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'current-time']
-          })[0];
+      this.onReady = (vnode) => {
+        player = plyr.setup('.video-player-watch', {
+          //['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'fullscreen']
+          controls: ['play', 'progress', 'current-time', 'mute', 'volume', 'current-time']
+        })[0];
 
-          // player.on('ready', function(event) {
-          //   console.log('player ready!');
-          // });
+        // player.on('ready', function(event) {
+        //   console.log('player ready!');
+        // });
 
-          player.on('timeupdate', _.throttle(updateSlide, 1000, {
-            'leading': true,
-            'trailing': false
-          }));
+        player.on('timeupdate', _.throttle(updateSlide, 1000, {
+          'leading': true,
+          'trailing': false
+        }));
 
-          // player.on('timeupdate', _.debounce(function(event) {
-          //   console.log(player.getCurrentTime());
-          // }, 1000, {
-          //   'leading': true,
-          //   'trailing': false,
-          //   'maxWait': 1000
-          // }));
+        // player.on('timeupdate', _.debounce(function(event) {
+        //   console.log(player.getCurrentTime());
+        // }, 1000, {
+        //   'leading': true,
+        //   'trailing': false,
+        //   'maxWait': 1000
+        // }));
 
-          Reveal.initialize({
-            // Flags if the presentation is running in an embedded mode,
-            // i.e. contained within a limited portion of the screen
-            embedded: true,
-            // Display controls in the bottom right corner
-            controls: false,
-            // Display a presentation progress bar
-            progress: false,
-            // Enable keyboard shortcuts for navigation
-            keyboard: false,
-            // Enable the slide overview mode
-            overview: false,
-            // Vertical centering of slides
-            center: false,
-            // Enables touch navigation on devices with touch input
-            touch: false,
-            // Enables touch navigation on devices with touch input
-            help: false,
-            // Transition style
-            transition: 'slide', // none/fade/slide/convex/concave/zoom
-            // Transition speed
-            transitionSpeed: 'slow', // default/fast/slow
-            // Transition style for full page slide backgrounds
-            // backgroundTransition: 'none',
-            // Number of slides away from the current that are visible
-            viewDistance: 1,
-            width: 'auto',
-            height: 'auto'
-          });
+        Reveal.initialize({
+          // Flags if the presentation is running in an embedded mode,
+          // i.e. contained within a limited portion of the screen
+          embedded: true,
+          // Display controls in the bottom right corner
+          controls: false,
+          // Display a presentation progress bar
+          progress: false,
+          // Enable keyboard shortcuts for navigation
+          keyboard: false,
+          // Enable the slide overview mode
+          overview: false,
+          // Vertical centering of slides
+          center: false,
+          // Enables touch navigation on devices with touch input
+          touch: false,
+          // Enables touch navigation on devices with touch input
+          help: false,
+          // Transition style
+          transition: 'slide', // none/fade/slide/convex/concave/zoom
+          // Transition speed
+          transitionSpeed: 'slow', // default/fast/slow
+          // Transition style for full page slide backgrounds
+          // backgroundTransition: 'none',
+          // Number of slides away from the current that are visible
+          viewDistance: 1,
+          width: 'auto',
+          height: 'auto'
+        });
 
-          $("#owl-slider").owlCarousel({
-              navigation: true,
-              pagination: false,
-              items: 10,
-              itemsDesktop : [1199,10],
-              itemsDesktopSmall : [980,5],
-              itemsTablet: [768,5],
-              itemsMobile : false,
-              navigationText: ["<i class='glyphicon glyphicon-menu-left'></i>", "<i class='glyphicon glyphicon-menu-right'></i>"]
-          });
+        $("#owl-slider").owlCarousel({
+            navigation: true,
+            pagination: false,
+            items: 10,
+            itemsDesktop : [1199,10],
+            itemsDesktopSmall : [980,5],
+            itemsTablet: [768,5],
+            itemsMobile : false,
+            navigationText: ["<i class='glyphicon glyphicon-menu-left'></i>", "<i class='glyphicon glyphicon-menu-right'></i>"]
+        });
 
-          slider = $("#owl-slider").data("owlCarousel");
+        slider = $("#owl-slider").data("owlCarousel");
 
-        }
       };
 
-      var injectRevealSlides = function() {
-        if(_.isEmpty(sliderSlides)) {
+      this.injectRevealSlides = () => {
+        if(_.isEmpty(this.sliderSlides)) {
           return m("section[hidden]", {
             'class': 'future',
             'aria-hidden': true,
@@ -131,7 +130,7 @@ var preview = (function() {
             })
           ])
         } else {
-          return sliderSlides.map(function(slide) {
+          return this.sliderSlides.map((slide) => {
             return m("section[hidden]", {
               'class': 'future',
               'aria-hidden': true,
@@ -145,8 +144,8 @@ var preview = (function() {
         }
       };
 
-      var injectSliderSlides = function() {
-        if(_.isEmpty(sliderSlides)) {
+      this.injectSliderSlides = () => {
+        if(_.isEmpty(this.sliderSlides)) {
           return m("figure", {
             class: "img-thumbnail mhorizontal-5",
           }, [
@@ -158,13 +157,13 @@ var preview = (function() {
             ])
           ])
         } else {
-          return sliderSlides.map(function(slide) {
+          return this.sliderSlides.map((slide) => {
             return m("figure", {
               class: "img-thumbnail mhorizontal-5",
             }, [
               m("a", {
                 href: "#",
-                onclick: function(event) {
+                onclick: (event) => {
                   event.preventDefault();
                   player.seek(slide.start);
                 }
@@ -179,7 +178,7 @@ var preview = (function() {
         }
       };
 
-      var showTitle = function() {
+      this.showTitle = () => {
         if(Layout.model.show_title) {
           return m("h3", { class: "mt-0 mb-10 zinkroo-preview__title" }, Video.model.title());
         } else {
@@ -187,7 +186,7 @@ var preview = (function() {
         }
       };
 
-      var showDate = function() {
+      this.showDate = () => {
         if(Layout.model.show_date) {
           return m("label", { class: "mt-0 mb-10 zinkroo-preview__date" }, moment(Video.model.inserted_at()).format('lll'));
         } else {
@@ -195,7 +194,7 @@ var preview = (function() {
         }
       };
 
-      var showDescriptionFor = function(layout) {
+      this.showDescriptionFor = (layout) => {
         if(Layout.model.show_description) {
           var description = null;
 
@@ -215,16 +214,16 @@ var preview = (function() {
         }
       };
 
-      var showVideo = function() {
+      this.showVideo = () => {
         return m(videoPlayback, {
           class: '.video-player-watch mb-10',
-          provider: videoInfo.provider,
-          videoId: videoInfo.videoId,
+          provider: this.videoInfo.provider,
+          videoId: this.videoInfo.videoId,
           onReady: onReady
         });
       };
 
-      var showReveal = function() {
+      this.showReveal = () => {
         return m(".reveal mb-10", {}, [
           m(".slides", [
             injectRevealSlides()
@@ -232,8 +231,8 @@ var preview = (function() {
         ]);
       };
 
-      var showSlider = function() {
-        return m(".p-all-side-25 zinkroo-preview__slide", { config: toggleSlider }, [
+      this.showSlider = () => {
+        return m(".p-all-side-25 zinkroo-preview__slide", { oncreate: toggleSlider }, [
           m(".owl-carousel", {
             id: "owl-slider"
           }, [
@@ -242,93 +241,94 @@ var preview = (function() {
         ]);
       };
 
-      var toggleSlider = function(element, isInit, context) {
+      this.toggleSlider = ({dom}) => {
         if(Layout.model.show_slider) {
-          element.style.display = 'block';
+          dom.style.display = 'block';
         } else {
-          element.style.display = 'none'
+          dom.style.display = 'none'
         }
       };
+
+      this.buildLayout = () => {
+        let layout = null;
+
+        switch (parseInt(Layout.model.theme)) {
+          case 1:
+            layout = [
+              m("div", { class: "p-all-side-25 layout--1" }, [
+                this.showTitle(),
+                this.showDescriptionFor(1),
+                this.showDate(),
+                m(".row", [
+                  m(".col-xs-6", [
+                    this.showVideo()
+                  ]),
+                  m(".col-xs-6", [
+                    this.showReveal()
+                  ])
+                ])
+              ]),
+              this.showSlider()
+            ]
+            break;
+          case 2:
+            layout = [
+              m("div", { class: "p-all-side-25 layout--2" }, [
+                m(".row", [
+                  m(".col-xs-4", [
+                    this.showVideo(),
+                    this.showTitle(),
+                    this.showDescriptionFor(2),
+                    this.showDate()
+                  ]),
+                  m(".col-xs-8", [
+                    this.showReveal()
+                  ])
+                ])
+              ]),
+              this.showSlider()
+            ]
+            break;
+          case 3:
+            layout = [
+              m("div", { class: "p-all-side-25 layout--3" }, [
+                m(".row", [
+                  m(".col-xs-8", [
+                    this.showVideo()
+                  ]),
+                  m(".col-xs-4", [
+                    this.showReveal(),
+                    this.showTitle(),
+                    this.showDescriptionFor(3),
+                    this.showDate()
+                  ])
+                ])
+              ]),
+              this.showSlider()
+            ]
+            break;
+        }
+
+        return layout;
+      },
+
+      this.setTimeVector = (slides) => {
+        this.timeVector = slides.map((slide) => { return slide.start; });
+      };
+
+      this.setSliderSlides = (slides) => {
+        this.sliderSlides = slides;
+      }
 
       return {
-        buildLayout: function() {
-          var layout = null;
-          switch (parseInt(Layout.model.theme)) {
-            case 1:
-              layout = [
-                m("div", { class: "p-all-side-25 layout--1" }, [
-                  showTitle(),
-                  showDescriptionFor(1),
-                  showDate(),
-                  m(".row", [
-                    m(".col-xs-6", [
-                      showVideo()
-                    ]),
-                    m(".col-xs-6", [
-                      showReveal()
-                    ])
-                  ])
-                ]),
-                showSlider()
-              ]
-              break;
-            case 2:
-              layout = [
-                m("div", { class: "p-all-side-25 layout--2" }, [
-                  m(".row", [
-                    m(".col-xs-4", [
-                      showVideo(),
-                      showTitle(),
-                      showDescriptionFor(2),
-                      showDate()
-                    ]),
-                    m(".col-xs-8", [
-                      showReveal()
-                    ])
-                  ])
-                ]),
-                showSlider()
-              ]
-              break;
-            case 3:
-              layout = [
-                m("div", { class: "p-all-side-25 layout--3" }, [
-                  m(".row", [
-                    m(".col-xs-8", [
-                      showVideo()
-                    ]),
-                    m(".col-xs-4", [
-                      showReveal(),
-                      showTitle(),
-                      showDescriptionFor(3),
-                      showDate()
-                    ])
-                  ])
-                ]),
-                showSlider()
-              ]
-              break;
-          }
-
-          return layout;
-        },
-        videoInfo: function() {
-          return videoInfo;
-        },
-        setTimeVector: function(slides) {
-          timeVector = slides.map(function(slide) { return slide.start; });
-        },
-        setSliderSlides: function(slides) {
-          sliderSlides = slides;
-        }
       };
     },
-    view: function(ctrl, video, slides) {
-      ctrl.setSliderSlides(slides);
-      ctrl.setTimeVector(slides);
+    view({state}) {
+      state.setSliderSlides(state.slides);
+      state.setTimeVector(state.slides);
 
       return m(".zinkroo-preview", [
-        ctrl.buildLayout()
+        state.buildLayout()
       ]);
     }
   };

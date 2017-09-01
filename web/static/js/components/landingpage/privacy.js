@@ -1,32 +1,30 @@
 import Session from "../../models/session";
 
 var privacyPolicy = {
-  controller: function() {
+  oninit(vnode) {
     if(!Session.isExpired()) {
-      m.route("/dashboard");
+      m.route.set("/dashboard");
     }
   },
-  view: function() {
+  view(vnode) {
     return m("div", {
-        config: function(element, isInit) {
-          if(!isInit) {
-            ScrollReveal().reveal('.images-intro, .steps-section__item, .layout-thumb, .btn-signup-now');
-          }
+        oncreate: function(vnode) {
+          ScrollReveal().reveal('.images-intro, .steps-section__item, .layout-thumb, .btn-signup-now');
         }
       }, [
       m("section", { class: "bg-main pboth-30 intro-section" }, [
         m(".container", [
           m("header", { class: "clearfix" }, [
             m(".navbar-header", { class: "hidden-xs" }, [
-              m("a", { class: "navbar-brand pboth-0", config: m.route, href: "/" }, [
+              m("a", { class: "navbar-brand pboth-0", oncreate: m.route.link, href: "/" }, [
                 m("img", { src: "/images/logo-zinkroo--white.png", width: "170", class: "img-responsive" })
               ])
             ]),
             m(".pull-right intro-section__buttons", [
-              m("a", { href: "/contacts", config: m.route, class: "btn btn-link text-white" }, "Contact us"),
+              m("a", { href: "/contacts", oncreate: m.route.link, class: "btn btn-link text-white" }, "Contact us"),
               m("span", { class: "text-white" }, "|"),
-              m("a", { href: "/signin", config: m.route, class: "btn btn-link text-white" }, "Login"),
-              m("a", { href: "/signup", config: m.route, class: "btn btn-lg bg-white text-color--main" }, "Sign up")
+              m("a", { href: "/signin", oncreate: m.route.link, class: "btn btn-link text-white" }, "Login"),
+              m("a", { href: "/signup", oncreate: m.route.link, class: "btn btn-lg bg-white text-color--main" }, "Sign up")
             ])
           ])
         ])
@@ -102,9 +100,9 @@ var privacyPolicy = {
           "©2017 ",
           m("a", { href: "http://axenso.com/", target: "_blank", class: "weight-strong text-white" }, "Axenso "),
           "all Rights Reserved. ",
-          m("a", { href: "/privacy", class: "weight-strong text-white", config: m.route }, "Privacy"),
+          m("a", { href: "/privacy", class: "weight-strong text-white", oncreate: m.route.link }, "Privacy"),
           " and ",
-          m("a", { href: "/terms", class: "weight-strong text-white", config: m.route }, "Terms")
+          m("a", { href: "/terms", class: "weight-strong text-white", oncreate: m.route.link }, "Terms")
         ])
       ])
     ])

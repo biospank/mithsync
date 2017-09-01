@@ -3,10 +3,10 @@ import Videosync from '../videosync';
 var Contact = {
   url: '/contacts',
   model: {
-    name: m.prop(""),
-    email: m.prop(""),
-    phone: m.prop(""),
-    message: m.prop("")
+    name: m.stream(""),
+    email: m.stream(""),
+    phone: m.stream(""),
+    message: m.stream("")
   },
   resetModel: function() {
     this.model.name("");

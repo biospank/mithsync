@@ -2,7 +2,7 @@ import Session from "../../models/session"
 import User from "../../models/user";
 
 var user = (function() {
-  var currentUser = m.prop({ email: '' });
+  var currentUser = m.stream({ email: '' });
   var getCurrentUser = _.once(function() {
     return User.getCurrent({
       background: true,
@@ -21,7 +21,7 @@ var user = (function() {
         logout: function(event) {
           event.preventDefault();
           Session.reset();
-          m.route("/signin");
+          m.route.set("/signin");
         }
       };
     },
@@ -65,7 +65,7 @@ var user = (function() {
         ]),
         m("ul", { class: "dropdown-menu", "aria-labelledby": "dropdownMenu1" }, [
           m("li", [
-            m("a", { class: "", href: "/userprofile", config: m.route }, "Profile")
+            m("a", { class: "", href: "/userprofile", oncreate: m.route.link }, "Profile")
           ]),
           m("li", [
             m("a", { class: "", href: "#", onclick: ctrl.logout }, "Logout")

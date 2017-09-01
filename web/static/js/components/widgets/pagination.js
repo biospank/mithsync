@@ -1,60 +1,65 @@
 var Pagination = function() {
   return {
-    pageInfo: {},
-    paramsFor: function(pageNumber) {
-      return _.assign(this.pageInfo.defaultParams || {}, { page: pageNumber });
-    },
-    prevAvailable: function() {
-      return this.pageInfo.pageNumber > 1;
-    },
-    nextAvailable: function() {
-      return this.pageInfo.pageNumber < this.pageInfo.totalPages;
-    },
-    view: function(ctrl, pageInfo) {
-      this.pageInfo = pageInfo;
+    oninit({attrs}) {
+      // console.log(attrs);
+      this.pageInfo = attrs.pageInfo;
 
-      if(this.pageInfo.totalPages > 1) {
+      this.paramsFor = (pageNumber) => {
+        return _.assign(this.pageInfo.defaultParams || {}, { page: pageNumber });
+      };
+
+      this.prevAvailable = () => {
+        return this.pageInfo.pageNumber > 1;
+      };
+
+      this.nextAvailable = () => {
+        return this.pageInfo.pageNumber < this.pageInfo.totalPages;
+      };
+
+    },
+    view({state}) {
+      if(state.pageInfo && state.pageInfo.totalPages > 1) {
         return m("nav", { class: "text-right" }, [
           m("ul", { class: "pagination" }, [].concat(
             m("li", {}, [
               m("a", {
                 href: "#",
-                onclick: function(event) {
+                onclick: (event) => {
                   event.preventDefault();
-                  if(this.prevAvailable())
-                    this.pageInfo.xhr(this.paramsFor(this.pageInfo.pageNumber - 1));
+                  if(state.prevAvailable())
+                    state.pageInfo.xhr(state.paramsFor(state.pageInfo.pageNumber - 1));
                   else
                     void(0);
-                }.bind(this),
+                },
                 "aria-label": "Precedente",
-                class: this.prevAvailable() ? "active" : "disabled"
+                class: state.prevAvailable() ? "active" : "disabled"
               }, [
                 m("span", { "aria-hidden": "true" }, m.trust("&laquo;"))
               ])
             ])).concat(
-              (Array.apply(null, Array(this.pageInfo.totalPages))).map(function(_, idx) {
+              (Array.apply(null, Array(state.pageInfo.totalPages))).map((_, idx) => {
                 return m(new PaginationLink(), {
-                  action: function(event) {
+                  action: (event) => {
                     event.preventDefault();
-                    this.pageInfo.xhr(this.paramsFor(idx + 1));
-                  }.bind(this),
+                    state.pageInfo.xhr(state.paramsFor(idx + 1));
+                  },
                   idx: (idx + 1),
-                  currentPage: this.pageInfo.pageNumber
+                  currentPage: state.pageInfo.pageNumber
                 });
-              }.bind(this))
+              })
             ).concat(
             m("li", {}, [
               m("a", {
                 href: "#",
-                onclick: function(event) {
+                onclick: (event) => {
                   event.preventDefault();
-                  if(this.nextAvailable())
-                    this.pageInfo.xhr(this.paramsFor(this.pageInfo.pageNumber + 1));
+                  if(state.nextAvailable())
+                    state.pageInfo.xhr(state.paramsFor(state.pageInfo.pageNumber + 1));
                   else
                     void(0);
-                }.bind(this),
+                },
                 "aria-label": "Successiva",
-                class: this.nextAvailable() ? "active" : "disabled"
+                class: state.nextAvailable() ? "active" : "disabled"
               }, [
                 m("span", { "aria-hidden": "true" }, m.trust("&raquo;"))
               ])
@@ -70,18 +75,19 @@ var Pagination = function() {
 
 var PaginationLink = function() {
   return {
-    view: function(ctrl, attrs) {
+    oninit({attrs}) {
       this.action = attrs.action;
       this.idx = attrs.idx;
       this.currentPage = attrs.currentPage;
-
+    },
+    view({state}) {
       return m("li", {
-        class: (this.currentPage === this.idx) ? "active" : ""
+        class: (state.currentPage === state.idx) ? "active" : ""
       }, [
         m("a", {
           href: "#",
-          onclick: this.action
-        }, this.idx)
+          onclick: state.action
+        }, state.idx)
       ]);
     }
   };

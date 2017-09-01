@@ -2,15 +2,13 @@ import Video from "../../models/video";
 import videoListItem from "./video_list_item";
 
 var recentVideos = {
-  controller: function() {
-    var ctrl = this;
+  oninit(vnode) {
+    this.videos = m.stream([]);
+    this.errors = m.stream({});
+    this.pageInfo = {};
 
-    ctrl.videos = m.prop([]);
-    ctrl.errors = m.prop({});
-    ctrl.pageInfo = {};
-
-    ctrl.requestOptions = {
-      unwrapSuccess: function(response) {
+    this.requestOptions = {
+      unwrapSuccess: (response) => {
         if(response) {
           ctrl.pageInfo = {
             totalEntries: response.total_entries,
@@ -20,38 +18,38 @@ var recentVideos = {
           return response.data;
         }
       },
-      unwrapError: function(response) {
+      unwrapError: (response) => {
         return response.error;
       }
     };
 
-    ctrl.getRecentVideos = function(args) {
-      return Video.recent(args).then(function(videos) {
-        ctrl.videos(videos);
-      }, function(response) {
-        ctrl.errors(response.errors);
+    this.getRecentVideos = (args) => {
+      return Video.recent(args).then((response) => {
+        this.videos(response.data);
+      }, (e) => {
+        vnode.state.errors(JSON.parse(e.message).errors);
       })
     };
 
-    ctrl.showVideos = function() {
-      return ctrl.videos().map(function(video) {
-        return m(videoListItem, video);
+    this.showVideos = () => {
+      return this.videos().map((video) => {
+        return m(videoListItem, {key: video.id, video: video});
       })
     };
 
-    ctrl.getRecentVideos(ctrl.requestOptions);
+    this.getRecentVideos(this.requestOptions);
   },
-  view: function(ctrl) {
+  view: function({state}) {
     return m("article", { class: "col-xs-5 col-sm-5 col-md-5" }, [
       m("div", { class: "box border radius" }, [
         m("h4", { class: "box__title" }, "Videos"),
         m("div", { class: "box__counter" }, [
-          m("span", { class: "box__counter-number" }, ctrl.pageInfo.totalEntries || 0),
-          m("p", { class: "box__counter-text" }, m.trust("You’ve got " + (ctrl.pageInfo.totalEntries || 0) + "<br>videos"))
+          m("span", { class: "box__counter-number" }, state.pageInfo.totalEntries || 0),
+          m("p", { class: "box__counter-text" }, m.trust("You’ve got " + (state.pageInfo.totalEntries || 0) + "<br>videos"))
         ])
       ]),
       m("ol", { class: "video-list list-unstyled" }, [
-        _.isEmpty(ctrl.videos()) ? "" : ctrl.showVideos()
+        _.isEmpty(state.videos()) ? "" : state.showVideos()
       ])
     ])
   }

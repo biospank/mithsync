@@ -7,16 +7,16 @@ import searchForm from "../widgets/search_form";
 import Pagination from "../widgets/pagination";
 import recordNotFound from "../widgets/404";
 
-var paginate = function(ctrl) {
-  return m.component(new Pagination(),
+var paginate = function(state) {
+  return m(new Pagination(),
     _.assign(
-      ctrl.pageInfo,
+      state.pageInfo,
       {
         xhr: function(params) {
-          ctrl.getVideos(params, ctrl.requestOptions);
+          state.getVideos(params);
         },
         defaultParams: {
-          filter: ctrl.filter()
+          filter: state.filter()
         }
       }
     )
@@ -24,68 +24,60 @@ var paginate = function(ctrl) {
 }
 
 var videoList = {
-  controller: function() {
-    var ctrl = this;
+  oninit(vnode) {
+    this.videos = m.stream(undefined);
+    this.errors = m.stream({});
+    this.filter = m.stream("");
+    this.pageInfo = {};
 
-    ctrl.videos = m.prop(undefined);
-    ctrl.errors = m.prop({});
-    ctrl.filter = m.prop("");
-    ctrl.pageInfo = {};
+    this.unwrapSuccess = (response) => {
+      if(response) {
+        // console.log(response);
+        this.pageInfo = {
+          totalEntries: response.total_entries,
+          totalPages: response.total_pages,
+          pageNumber: response.page_number
+        };
 
-    ctrl.requestOptions = {
-      unwrapSuccess: function(response) {
-        if(response) {
-          ctrl.pageInfo = {
-            totalEntries: response.total_entries,
-            totalPages: response.total_pages,
-            pageNumber: response.page_number
-          };
-          return response.data;
-        }
-      },
-      unwrapError: function(response) {
-        return response.error;
+        return response;
       }
     };
 
     if(Session.isExpired()) {
-      m.route("/signin");
+      m.route.set("/signin");
     }
 
-    ctrl.getVideos = function(params, args) {
-      return Video.all(m.route.param("projectId"), params, args).then(function(data) {
-        Project.current(data.project);
-        ctrl.videos(data.videos);
+    this.getVideos = function(params) {
+      return Video.all(m.route.param("projectId"), params).then(this.unwrapSuccess).then((response) => {
+        Project.current(response.data.project);
+        this.videos(response.data.videos);
         // needed to update data in breadcrumb
         // since it is rendered before loading video list
         var reloadEvent = new CustomEvent("video:list:reload");
         document.body.dispatchEvent(reloadEvent);
-      }, function(response) {
-        ctrl.errors(response.errors);
+      }, (e) => {
+        this.errors(JSON.parse(e.message).errors);
       })
     };
 
-    ctrl.showVideos = function() {
-      if(!ctrl.videos()) {
+    this.showVideos = function() {
+      if(!this.videos()) {
         return m(loader);
       } else {
-        if(_.isEmpty(ctrl.videos())) {
+        if(_.isEmpty(this.videos())) {
            //return m(recordNotFound);
         } else {
-          return ctrl.videos().map(function(video) {
-            return m(listItem, video, ctrl);
+          return this.videos().map(function(video) {
+            return m(listItem, {video: video, parent: vnode.state});
           })
         }
       }
     };
 
-    ctrl.getVideos(
-      ctrl.pageInfo.defaultParams || {},
-      ctrl.requestOptions
-    );
+    this.getVideos(this.pageInfo.defaultParams || {});
 
   },
-  view: function(ctrl) {
+  view({state}) {
     return m("div", [
       m("div", { class: "clearfix mb-25" }, [
         m("div", { class: "pull-left" }, [
@@ -93,39 +85,39 @@ var videoList = {
             action: function(event) {
               event.preventDefault();
 
-              ctrl.getVideos(
+              state.getVideos(
                 _.assign(
-                  ctrl.pageInfo.defaultParams || {},
+                  state.pageInfo.defaultParams || {},
                   { page: 1 }
-                ), ctrl.requestOptions
+                )
               );
             },
-            filter: ctrl.filter
+            filter: state.filter
           })
         ]),
         m("div", { class: "pull-right" }, [
           m("a", {
-            href: m.route() + '/new',
-            config: m.route,
+            href: m.route.get() + '/new',
+            oncreate: m.route.link,
             class: "btn btn-success btn-md"
           }, "New video")
         ])
       ]),
       m("ul", { class: "video-list list-unstyled" }, [
-        ctrl.showVideos()
+        state.showVideos()
       ]),
       m("div", { class: "clearfix" }, [
         m("div", { class: "pull-left" }, [
-          paginate(ctrl)
+          paginate(state)
         ]),
-        this.deleteSelectedButton(ctrl)
+        this.deleteSelectedButton(state)
       ])
     ]);
   },
-  deleteSelectedButton: function(ctrl) {
-    if(!_.isEmpty(ctrl.videos())) {
+  deleteSelectedButton(state) {
+    if(!_.isEmpty(state.videos())) {
       return m("div", { class: "pull-right" }, [
-        // m("button", { href: "/video/new", config: m.route, class: "btn btn-warning btn-lg text-uppercase mgv20 icon-left" }, [
+        // m("button", { href: "/video/new", oncreate: m.route.link, class: "btn btn-warning btn-lg text-uppercase mgv20 icon-left" }, [
         //   m("i", { class: 'fa fa-trash' }),
         //   m("span", {}, "Delete selected")
         // ])

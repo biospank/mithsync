@@ -4,10 +4,10 @@ import Session from './session'
 var Registration = {
   url: '/signup',
   model: {
-    email: m.prop(""),
-    password: m.prop(""),
-    password_confirmation: m.prop(""),
-    accept_terms_and_conditions: m.prop(false)
+    email: m.stream(""),
+    password: m.stream(""),
+    password_confirmation: m.stream(""),
+    accept_terms_and_conditions: m.stream(false)
   },
   create: function(args) {
     return m.request(_.assign({

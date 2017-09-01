@@ -6,7 +6,7 @@ import feedbackButton from "../widgets/feedback_button";
 
 var profile = (function() {
 
-  var content = function(ctrl) {
+  var content = ({state}) => {
     return m(".row", [
       m(".col-sm-8", [
         m(".row", [
@@ -14,7 +14,7 @@ var profile = (function() {
             m("form", { class: "light-form" }, [
               m(".row", [
                 m(".col-md-12", [
-                  m.component(textField, {
+                  m(textField, {
                     type: 'email',
                     placeholder: 'Enter your Email',
                     id: 'email',
@@ -24,29 +24,29 @@ var profile = (function() {
                   })
                 ]),
                 m(".col-md-6", [
-                  m.component(textField, {
+                  m(textField, {
                     type: 'password',
                     placeholder: 'Enter New Password',
                     id: 'password',
                     dataLabel: 'New Password',
                     oninput: m.withAttr("value", User.model.password),
-                    error: ctrl.errors()['password']
+                    error: state.errors()['password']
                   })
                 ]),
                 m(".col-md-6", [
-                  m.component(textField, {
+                  m(textField, {
                     type: 'password',
                     placeholder: 'Reenter New Password',
                     id: 'password_confirmation',
                     dataLabel: 'Confirm New Password',
                     oninput: m.withAttr("value", User.model.password_confirmation),
-                    error: ctrl.errors()['password_confirmation']
+                    error: state.errors()['password_confirmation']
                   })
                 ]),
               ]),
               m("div", { class: "text-center mboth-30" }, [
-                m.component(feedbackButton, {
-                  action: ctrl.changePassword,
+                m(feedbackButton, {
+                  action: state.changePassword,
                   label: 'Change Password',
                   feedbackLabel: 'Changing...',
                   style: 'btn btn-primary btn-lg'
@@ -73,22 +73,21 @@ var profile = (function() {
   };
 
   return {
-    controller: function() {
-      var ctrl = this;
-      ctrl.errors = m.prop({});
+    oninit() {
+      this.errors = m.stream({});
 
       if(Session.isExpired())
-        m.route("/signin");
+        m.route.set("/signin");
 
-      ctrl.changePassword = function() {
-        return User.update().then(function(response) {
-          m.route("/dashboard");
-        }, function(response) {
-          ctrl.errors(response.errors);
+      this.changePassword = () => {
+        return User.update().then((response) => {
+          m.route.set("/dashboard");
+        }, (e) => {
+          this.errors(JSON.parse(e.message).errors);
         })
       };
 
-      User.getCurrent().then(function(response) {
+      User.getCurrent().then((response) => {
         User.resetModel(response.data);
       });
     },

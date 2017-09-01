@@ -4,10 +4,10 @@ import feedbackButton from "../widgets/feedback_button";
 import Activation from "../../models/activation";
 
 var resendActivationPage = (function() {
-  var content = function(ctrl) {
+  var content = ({state}) => {
     return m("div", [
       m("figure", { class: "center-block display-table mboth-60 intro-section__logo" }, [
-        m("a", { href:"/", config: m.route }, [
+        m("a", { href:"/", oncreate: m.route.link }, [
           m("img", { src: "/images/logo-zinkroo--white.png", width: "400", class:"img-responsive" }),
         ]),
         m("h4", { class: "text-right text-white weight-regular mb-0" }, "live media sync")
@@ -20,26 +20,26 @@ var resendActivationPage = (function() {
       ]),
       m(".card-wrapper sign center-block p-all-side-75", [
         m("form", [
-          m.component(textField, {
+          m(textField, {
             type: 'email',
             placeholder: 'Enter your Email',
             id: 'email',
             oninput: m.withAttr("value", Activation.model.email),
-            error: ctrl.errors()['email'],
+            error: state.errors()['email'],
             dataLabel: 'Email',
             labelStyles: "text-dark--grey mb-15",
             inputSize: "input-lg reset-boxshadow reset-radius--2"
           }),
           m("div", { class: "text-center mboth-50" }, [
-            m.component(feedbackButton, {
-              action: ctrl.sendActivationCode,
+            m(feedbackButton, {
+              action: state.sendActivationCode,
               label: 'Send activation code',
               feedbackLabel: 'Sending...',
               style: 'btn btn-primary btn-lg btn-block mt-60 contour'
             })
           ]),
           m("p", { class: "text-center text-dark--grey mb-0" }, [
-            m("a", { href: "/signin", config: m.route, class: "btn-link" }, "Return to login")
+            m("a", { href: "/signin", oncreate: m.route.link, class: "btn-link" }, "Return to login")
           ])
         ])
       ])
@@ -47,15 +47,14 @@ var resendActivationPage = (function() {
   };
 
   return {
-    controller: function(){
-      var ctrl = this;
-      ctrl.errors = m.prop({});
+    oninit(vnode){
+      this.errors = m.stream({});
 
-      ctrl.sendActivationCode = function() {
-        return Activation.resend().then(function(data) {
-          m.route('/activate')
-        }, function(response) {
-          ctrl.errors(response.errors);
+      this.sendActivationCode = () => {
+        return Activation.resend().then((data) => {
+          m.route.set('/activate')
+        }, (e) => {
+          this.errors(JSON.parse(e.message).errors);
         })
       };
     },

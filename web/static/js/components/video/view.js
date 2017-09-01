@@ -5,8 +5,8 @@ var viewVideo = (function() {
   var content = function() {
     return [
       m("header", { class: "text-right" }, [
-        m("a", { href:"/video/edit", config: m.route, class: "btn btn-success" }, "Edit"),
-        m("a", { href:"/library", config: m.route, class: "btn btn-success" }, "Create Contents")
+        m("a", { href:"/video/edit", oncreate: m.route.link, class: "btn btn-success" }, "Edit"),
+        m("a", { href:"/library", oncreate: m.route.link, class: "btn btn-success" }, "Create Contents")
       ]),
       m(".row", [
         m(".col-sm-6", [

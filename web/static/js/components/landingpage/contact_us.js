@@ -4,36 +4,33 @@ import Contact from "../../models/contact";
 import feedbackButton from "../widgets/feedback_button";
 
 var contactUs = {
-  controller: function() {
-    var ctrl = this;
-    ctrl.errors = m.prop({});
-    ctrl.showMsg = m.prop(false);
+  oninit({state}) {
+    state.errors = m.stream({});
+    state.showMsg = m.stream(false);
 
-    ctrl.sendMessage = function(args) {
-      return Contact.create(args).then(function() {
-        ctrl.showMsg(true);
+    state.sendMessage = (args) => {
+      return Contact.create(args).then(() => {
+        state.showMsg(true);
         Contact.resetModel();
-        ctrl.errors({})
-      }, function(response) {
-        ctrl.errors(response.errors);
+        state.errors({})
+      }, (e) => {
+        state.errors(JSON.parse(e.message).errors);
       })
     };
 
     if(!Session.isExpired()) {
-      m.route("/dashboard");
+      m.route.set("/dashboard");
     }
   },
-  view: function(ctrl) {
+  view: function({state}) {
     return m("div", {
-        config: function(element, isInit) {
-          if(!isInit) {
-            ScrollReveal().reveal('.images-intro, .steps-section__item, .layout-thumb, .btn-signup-now');
-          }
+        oncreate(vnode) {
+          ScrollReveal().reveal('.images-intro, .steps-section__item, .layout-thumb, .btn-signup-now');
         }
       }, [
       m("div", [
         m("figure", { class: "center-block display-table mboth-60 intro-section__logo" }, [
-          m("a", { href:"/", config: m.route }, [
+          m("a", { href:"/", oncreate: m.route.link }, [
             m("img", { src: "/images/logo-zinkroo--white.png", width: "400", class:"img-responsive" }),
           ]),
           m("h4", { class: "text-right text-white weight-regular" }, "live media sync")
@@ -85,35 +82,35 @@ var contactUs = {
       m("section", { class: "bg-white pb-80 pt-80" }, [
         m(".container", [
           m("div", {
-            class: "alert alert-success " + (ctrl.showMsg() ? "show" : "hidden"),
+            class: "alert alert-success " + (state.showMsg() ? "show" : "hidden"),
             role: "alert"
           }, "Thanks for contacting us. We'll reply as soon as possible."),
           m("form", { id: "contact-form" }, [
             m(".row", [
               m(".col-sm-6", [
-                m.component(textField, {
+                m(textField, {
                   type: 'text',
                   class: 'form-control',
                   placeholder: 'Name',
                   id: 'name',
                   oninput: m.withAttr("value", Contact.model.name),
                   value: Contact.model.name(),
-                  error: ctrl.errors()['name']
+                  error: state.errors()['name']
                 })
               ]),
               m(".col-sm-6", [
-                m.component(textField, {
+                m(textField, {
                   type: 'email',
                   class: 'form-control',
                   placeholder: 'Email',
                   id: 'email',
                   oninput: m.withAttr("value", Contact.model.email),
                   value: Contact.model.email(),
-                  error: ctrl.errors()['email']
+                  error: state.errors()['email']
                 })
               ])
             ]),
-            m.component(textField, {
+            m(textField, {
               field: 'textarea',
               class: 'form-control mb-80',
               rows: '4',
@@ -121,14 +118,14 @@ var contactUs = {
               id: 'message',
               oninput: m.withAttr("value", Contact.model.message),
               value: Contact.model.message(),
-              error: ctrl.errors()['message']
+              error: state.errors()['message']
             }),
             m(".text-center mt-40", [
-              m.component(feedbackButton, {
-                action: ctrl.sendMessage,
+              m(feedbackButton, {
+                action: state.sendMessage,
                 label: 'Send message',
                 feedbackLabel: 'Sending...',
-                disabled: ctrl.showMsg(),
+                disabled: state.showMsg(),
                 style: 'btn btn-primary btn-lg text-uppercase'
               })
             ])
@@ -140,9 +137,9 @@ var contactUs = {
           "©2017 ",
           m("a", { href: "http://axenso.com/", target: "_blank", class: "weight-strong text-white" }, "Axenso "),
           "all Rights Reserved. ",
-          m("a", { href: "/privacy", class: "weight-strong text-white", config: m.route }, "Privacy"),
+          m("a", { href: "/privacy", class: "weight-strong text-white", oncreate: m.route.link }, "Privacy"),
           " and ",
-          m("a", { href: "/terms", class: "weight-strong text-white", config: m.route }, "Terms")
+          m("a", { href: "/terms", class: "weight-strong text-white", oncreate: m.route.link }, "Terms")
         ])
       ])
     ])

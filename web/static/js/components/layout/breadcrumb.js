@@ -1,15 +1,15 @@
 import Project from "../../models/project";
 
 var breadcrumb = {
-  controller: function(project) {
+  oninit({attrs}) {
     document.body.addEventListener("video:list:reload", function(e) {
-      currentProject = Project.current();
+      this.currentProject = Project.current();
       m.redraw();
     }, false);
 
-    var currentProject = project;
+    this.currentProject = attrs.project;
 
-    var slugMapping = {
+    this.slugMapping = {
       'dashboard'         : {
         'name' : 'Dashboard',
         'urlTemplate'  : '/dashboard'
@@ -19,7 +19,7 @@ var breadcrumb = {
         'urlTemplate'  : '/projects'
       },
       'videos' : {
-        'project' : project,
+        'project' : attrs.project,
         'name' : 'Videos',
         'urlTemplate'   : "/projects/<%= m.route.param('projectId') %>/videos"
       },
@@ -37,51 +37,50 @@ var breadcrumb = {
       }
     };
 
-    return {
-      crumbs: _.once(function() {
-        return _.filter(_.uniq(_.split(m.route(), '/')), function(crumb) {
-          return !_.includes(['new', 'edit'], crumb) && _.isNaN(_.parseInt(crumb));
-        });
-      }),
-      slugFor: function(slug) {
-        return slugMapping[slug];
-      },
-      projectNameSlug: function() {
-        var project = this.slugFor(_.last(this.crumbs())).project;
+    this.crumbs = _.once(() => {
+      return _.filter(_.uniq(_.split(m.route.get(), '/')), (crumb) => {
+        return !_.includes(['new', 'edit'], crumb) && _.isNaN(_.parseInt(crumb));
+      });
+    });
 
-        if(project)
-          return m("li", [
-            m("a", {
-              href: "/projects/" + currentProject.id + "/videos",
-              config: m.route
-            }, currentProject.name)
-          ]);
-        else
-          return "";
+    this.slugFor = (slug) => {
+      return this.slugMapping[slug];
+    },
 
-      }
-    };
+    this.projectNameSlug = () => {
+      var project = this.slugFor(_.last(this.crumbs())).project;
+
+      if(project)
+        return m("li", [
+          m("a", {
+            href: "/projects/" + this.currentProject.id + "/videos",
+            oncreate: m.route.link
+          }, this.currentProject.name)
+        ]);
+      else
+        return "";
+    }
   },
-  view: function(ctrl) {
+  view({state}) {
     return m("ol.breadcrumb", [
       _.concat(
-        _.initial(ctrl.crumbs()).map(function(crumb) {
-          var slug = ctrl.slugFor(crumb);
+        _.initial(state.crumbs()).map((crumb) => {
+          var slug = state.slugFor(crumb);
 
           if(slug) {
             return m("li", [
               m("a", {
                 href: _.template(slug['urlTemplate'])(),
-                config: m.route
+                oncreate: m.route.link
               }, slug['name'])
             ]);
           }
         }),
-        ctrl.projectNameSlug(),
-        m("li", ctrl.slugFor(_.last(ctrl.crumbs()))['name'])
+        state.projectNameSlug(),
+        m("li", state.slugFor(_.last(state.crumbs()))['name'])
       )
     ]);
   }
-}
+};
 
 export default breadcrumb;

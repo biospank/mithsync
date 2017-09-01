@@ -1,6 +1,6 @@
 var title = {
-  controller: function() {
-    var slugMapping = {
+  oninit(vnode) {
+    let slugMapping = {
       'dashboard'         : {
         'name' : 'Dashboard'
       },
@@ -21,21 +21,21 @@ var title = {
       }
     };
 
-    return {
-      crumbs: _.once(function() {
-        return _.filter(_.uniq(_.split(m.route(), '/')), function(crumb) {
-          return !_.includes(['new'], crumb) && _.isNaN(_.parseInt(crumb));
-        });
-      }),
-      slugFor: function(slug) {
-        return slugMapping[slug];
-      }
+    this.crumbs = _.once(() => {
+      return _.filter(_.uniq(_.split(m.route.get(), '/')), (crumb) => {
+        return !_.includes(['new'], crumb) && _.isNaN(_.parseInt(crumb));
+      });
+    });
+
+    this.slugFor = (slug) => {
+      return slugMapping[slug];
     };
+
   },
-  view: function(ctrl, title) {
+  view({state, attrs}) {
     return m("h2", {
       class: "section-title pull-left"
-    }, _.template(ctrl.slugFor(_.last(ctrl.crumbs()))['name'])({title}))
+    }, _.template(state.slugFor(_.last(state.crumbs()))['name'])({title: attrs.title}))
   }
 }
 

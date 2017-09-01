@@ -1,51 +1,49 @@
-var slickItem = {
-  controller: function(args, slide, active) {
-    return {
-      checkId: _.once(function() {
-        return _.uniqueId('check-');
-      })
-    };
-  },
-  view: function(ctrl, args, slide, active) {
-    ctrl.slide = slide;
-    ctrl.active = active;
+const slickItem = {
+  oninit({attrs}) {
+    this.slide = attrs.slide;
+    this.active = attrs.active;
 
+    this.checkId = _.once(() => {
+      return _.uniqueId('check-');
+    });
+  },
+  view({state, attrs}) {
     // return m(".col-xs-3 .col-sm-3 .col-md-2 .col-lg-1", [
     return m(".col-xs-2 .col-sm-2 .col-md-2 .col-lg-1", [
       m("figure", {
-        class: "img-thumbnail" + (ctrl.active ? ' active' : ''),
-        onclick: function() {
-          if(args.selectCallback)
-            args.selectCallback(ctrl.slide);
+        class: "img-thumbnail" + (state.active ? ' active' : ''),
+        onclick: () => {
+          if(attrs.selectCallback)
+            attrs.selectCallback(state.slide);
         },
-        onmouseover: function() {
-          if(args.mouseOverCallback)
-            args.mouseOverCallback(ctrl.slide);
+        onmouseover: () => {
+          if(attrs.mouseOverCallback)
+            attrs.mouseOverCallback(state.slide);
         },
-        onmouseout: function() {
-          if(args.mouseOutCallback)
-            args.mouseOutCallback(ctrl.slide);
+        onmouseout: () => {
+          if(attrs.mouseOutCallback)
+            attrs.mouseOutCallback(state.slide);
         }
       }, [
         m("div", { class: "flag-check" }, [
           m("input", {
             class: "magic-checkbox",
             type: "checkbox",
-            name: "delete-" + ctrl.checkId(),
-            id: ctrl.checkId(),
+            name: "delete-" + state.checkId(),
+            id: state.checkId(),
             onclick: function(e) {
-              if(args.checkCallback)
-                args.checkCallback(e.target.checked);
+              if(attrs.checkCallback)
+                attrs.checkCallback(e.target.checked);
             },
-            checked: ctrl.slide.checked
+            checked: state.slide.checked
           }),
-          m("label", { for: ctrl.checkId() })
+          m("label", { for: state.checkId() })
         ]),
-        m("label", { class: "bookmark-time text-right weight-regular" }, ctrl.slide.start ),
+        m("label", { class: "bookmark-time text-right weight-regular" }, state.slide.start ),
         // m("i", { class: "fa fa-bookmark bookmark-color", "aria-hidden": true, style: "color: " + ctrl.slide.connectColor }),
         m("a", {}, [
           m("img", {
-            src: ctrl.slide.thumb_url,
+            src: state.slide.thumb_url,
             class: "img-responsive"
           })
         ])

@@ -2,16 +2,16 @@ import slickItem from './slick_item';
 import Slide from "../../models/slide";
 import Color from '../../models/color';
 
-var slickCarousel = (function() {
+var slickCarousel = (() => {
   var carousel = {};
 
   carousel.slides = [];
   carousel.currentSlide = Slide.resetModel();
 
   return {
-    slides: function(slides) {
+    slides(slides) {
       if (arguments.length) {
-        carousel.slides = slides.map(function(slide) {
+        carousel.slides = slides.map((slide) => {
           slide.connectColor = Color.sample();
 
           return slide;
@@ -20,23 +20,23 @@ var slickCarousel = (function() {
 
       return carousel.slides;
     },
-    currentSlide: function(slide) {
+    currentSlide(slide) {
       if (arguments.length) {
         carousel.currentSlide = slide;
       }
 
       return carousel.currentSlide;
     },
-    slideIndex: function(slide) {
+    slideIndex(slide) {
       return _.indexOf(carousel.slides, slide);
     },
-    slideByIndex: function(index) {
+    slideByIndex(index) {
       return _.nth(carousel.slides, index);
     },
-    prevSlide: function(index) {
+    prevSlide(index) {
       return _.nth(carousel.slides, index - 1);
     },
-    nextSlide: function(index) {
+    nextSlide(index) {
       var slide = _.nth(carousel.slides, index + 1);
 
       if(slide !== undefined)
@@ -44,56 +44,64 @@ var slickCarousel = (function() {
       else
         return _.first(carousel.slides);
     },
-    addSlide: function(slide) {
+    addSlide(slide) {
       var currentSlidePosition = _.indexOf(carousel.slides, carousel.currentSlide);
       carousel.slides.splice((currentSlidePosition + 1), 0, slide);
     },
-    appendSlide: function(slide) {
+    appendSlide(slide) {
       carousel.slides.push(slide);
     },
-    removeSlide: function() {
+    removeSlide() {
       _.remove(carousel.slides, carousel.currentSlide);
     },
-    updateSlide: function(oldSlide, newSlide) {
+    updateSlide(oldSlide, newSlide) {
       _.assign(_.find(carousel.slides, oldSlide), newSlide);
     },
-    refreshCurrentSlide: function() {
+    refreshCurrentSlide() {
       m.redraw()
     },
-    hasCheckedSlides: function() {
+    hasCheckedSlides() {
       return _.some(carousel.slides, ['checked', true])
     },
-    checkedSlides: function() {
+    checkedSlides() {
       return _.partition(carousel.slides, function(slide) {
         return slide.checked;
       });
     },
-    view: function(ctrl, args, slides) {
-      carousel.slides = slides;
+    oninit({attrs}) {
+      // console.log(attrs);
+      this.args = attrs.args;
+      carousel.slides = attrs.slides;
 
-      return m("section", { class: "slidesheet", config: ctrl.onReady }, [
+    },
+    view({state}) {
+      // return m("section", { class: "slidesheet", oncreate: state.onReady }, [
+      return m("section", { class: "slidesheet" }, [
         m(".row", [
-          carousel.slides.map(function(slide) {
+          carousel.slides.map((slide) => {
             return m(slickItem, {
-              selectCallback: function(slide) {
+              key: slide.id,
+              selectCallback: (slide) => {
                 carousel.currentSlide = slide;
 
-                if(args.selectCallback)
-                  args.selectCallback(slide);
+                if(state.args.selectCallback)
+                  state.args.selectCallback(slide);
 
               },
               mouseOverCallback: function(slide) {
-                if(args.mouseOverCallback)
-                  args.mouseOverCallback(slide);
+                if(state.args.mouseOverCallback)
+                  state.args.mouseOverCallback(slide);
               },
               mouseOutCallback: function(slide) {
-                if(args.mouseOutCallback)
-                  args.mouseOutCallback(slide);
+                if(state.args.mouseOutCallback)
+                  state.args.mouseOutCallback(slide);
               },
               checkCallback: function(checked) {
                 slide.checked = checked;
-              }
-            }, slide, _.isEqual(slide, carousel.currentSlide));
+              },
+              slide: slide,
+              active: _.isEqual(slide, carousel.currentSlide)
+            });
           })
         ])
       ]);

@@ -2,17 +2,15 @@ import Project from "../../models/project";
 import projectListItem from "./project_list_item";
 
 var recentProjects = {
-  controller: function() {
-    var ctrl = this;
+  oninit(vnode) {
+    this.projects = m.stream([]);
+    this.errors = m.stream({});
+    this.pageInfo = {};
 
-    ctrl.projects = m.prop([]);
-    ctrl.errors = m.prop({});
-    ctrl.pageInfo = {};
-
-    ctrl.requestOptions = {
-      unwrapSuccess: function(response) {
+    this.requestOptions = {
+      unwrapSuccess: (response) => {
         if(response) {
-          ctrl.pageInfo = {
+          this.pageInfo = {
             totalEntries: response.total_entries,
             totalPages: response.total_pages,
             pageNumber: response.page_number
@@ -20,38 +18,38 @@ var recentProjects = {
           return response.data;
         }
       },
-      unwrapError: function(response) {
+      unwrapError: (response) => {
         return response.error;
       }
     };
 
-    ctrl.getRecentProjects = function(args) {
-      return Project.recent(args).then(function(projects) {
-        ctrl.projects(projects);
-      }, function(response) {
-        ctrl.errors(response.errors);
+    this.getRecentProjects = (args) => {
+      return Project.recent(args).then((response) => {
+        this.projects(response.data);
+      }, (e) => {
+        vnode.state.errors(JSON.parse(e.message).errors);
       })
     };
 
-    ctrl.showProjects = function() {
-      return ctrl.projects().map(function(project) {
-        return m(projectListItem, project);
+    this.showProjects = () => {
+      return this.projects().map(function(project) {
+        return m(projectListItem, {key: project.id, project: project});
       })
     };
 
-    ctrl.getRecentProjects(ctrl.requestOptions);
+    this.getRecentProjects(this.requestOptions);
   },
-  view: function(ctrl) {
+  view: function({state}) {
     return m("article", { class: "col-xs-4 col-sm-4 col-md-4" }, [
       m("div", { class: "box border radius" }, [
         m("h4", { class: "box__title" }, "Projects"),
         m("div", { class: "box__counter" }, [
-          m("span", { class: "box__counter-number" }, ctrl.pageInfo.totalEntries || 0),
-          m("p", { class: "box__counter-text" }, m.trust("You’ve got " + (ctrl.pageInfo.totalEntries || 0) + "<br>projects"))
+          m("span", { class: "box__counter-number" }, state.pageInfo.totalEntries || 0),
+          m("p", { class: "box__counter-text" }, m.trust("You’ve got " + (state.pageInfo.totalEntries || 0) + "<br>projects"))
         ])
       ]),
       m("ol", { class: "projects-list list-unstyled" }, [
-        _.isEmpty(ctrl.projects()) ? "" : ctrl.showProjects()
+        _.isEmpty(state.projects()) ? "" : state.showProjects()
       ])
     ])
   }
