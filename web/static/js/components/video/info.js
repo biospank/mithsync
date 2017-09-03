@@ -2,9 +2,13 @@ import mixinLayout from "../layout/mixin_layout";
 import Session from "../../models/session";
 import Video from "../../models/video";
 
-var infoVideo = (function() {
-
-  var content = function(ctrl, video) {
+const infoVideo = {
+  oninit(vnode){
+    if(Session.isExpired()) {
+      m.route.set("/signin");
+    };
+  },
+  view: mixinLayout((vnode) => {
     return m("section", [
       m("div", { class: "light-form" }, [
         m("div", { class: "row" }, [
@@ -51,18 +55,7 @@ var infoVideo = (function() {
         m("button", { class: "btn btn-success effect btn-md text-uppercase mgt30 pull-right" }, "Save")
       ])
     ])
-  };
-
-  return {
-    controller: function(video, parent){
-      var ctrl = this;
-
-      if(Session.isExpired()) {
-        m.route.set("/signin");
-      };
-    },
-    view: mixinLayout(content)
-  };
-})();
+  })
+};
 
 export default infoVideo;

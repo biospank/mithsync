@@ -3,45 +3,38 @@ import Layout from "../../../models/layout";
 import feedbackButton from "../../widgets/feedback_button";
 
 var videoLayout = {
-  controller: function() {
+  oninit(vnode) {
     Layout.model = Video.current().layout;
 
-    return {
-      theme: function(value) {
-        if(arguments.length)
-          layout().theme = value;
-
-        return layout().theme;
-      },
-      updateLayout: function() {
-        swal({
-          title: 'Saving...',
-          width: '400px',
-          allowOutsideClick: false,
-          allowEscapeKey: false,
-          showConfirmButton: false,
-          onOpen: function(progress) {
-            swal.showLoading();
-            return Layout.update(Video.current()).then(function() {
-              swal.close();
-              swal({
-                type: 'success',
-                title: 'Layout published!',
-                width: '400px',
-                showConfirmButton: false,
-                timer: 1000
-              }).catch(swal.noop);
-            });
-          }
-        }).catch(swal.noop);
-      }
+    this.updateLayout = () => {
+      swal({
+        title: 'Saving...',
+        width: '400px',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        onOpen: function(progress) {
+          swal.showLoading();
+          return Layout.update(Video.current()).then(function() {
+            swal.close();
+            swal({
+              type: 'success',
+              title: 'Layout published!',
+              width: '400px',
+              showConfirmButton: false,
+              timer: 1000
+            }).catch(swal.noop);
+          });
+        }
+      }).catch(swal.noop);
     };
+
   },
-  view: function(ctrl) {
+  view({state}) {
     return m("", [
       m("div", {
         class: "panel panel-default theme-layout" + ((Layout.model.theme === 1) ? " active" : ""),
-        onclick: function() {
+        onclick: () => {
           Layout.model.theme = 1
         }
       }, [
@@ -62,7 +55,7 @@ var videoLayout = {
       ]),
       m("div", {
         class: "panel panel-default theme-layout" + ((Layout.model.theme === 2) ? " active" : ""),
-        onclick: function() {
+        onclick: () => {
           Layout.model.theme = 2;
         }
       }, [
@@ -83,7 +76,7 @@ var videoLayout = {
       ]),
       m("div", {
         class: "panel panel-default theme-layout" + ((Layout.model.theme === 3) ? " active" : ""),
-        onclick: function() {
+        onclick: () => {
           Layout.model.theme = 3;
         }
       }, [
@@ -111,7 +104,7 @@ var videoLayout = {
                 type: "checkbox",
                 name: "layout",
                 id: "show-title-chk",
-                onclick: function(e) {
+                onclick: (e) => {
                   Layout.model.show_title = e.target.checked;
                 },
                 checked: Layout.model.show_title
@@ -129,7 +122,7 @@ var videoLayout = {
                 type: "checkbox",
                 name: "layout",
                 id: "show-description-chk",
-                onclick: function(e) {
+                onclick: (e) => {
                   Layout.model.show_description = e.target.checked;
                 },
                 checked: Layout.model.show_description
@@ -147,7 +140,7 @@ var videoLayout = {
                 type: "checkbox",
                 name: "layout",
                 id: "show-date-chk",
-                onclick: function(e) {
+                onclick: (e) => {
                   Layout.model.show_date = e.target.checked;
                 },
                 checked: Layout.model.show_date
@@ -165,7 +158,7 @@ var videoLayout = {
                 type: "checkbox",
                 name: "layout",
                 id: "show-slider-chk",
-                onclick: function(e) {
+                onclick: (e) => {
                   Layout.model.show_slider = e.target.checked;
                 },
                 checked: Layout.model.show_slider
@@ -180,7 +173,7 @@ var videoLayout = {
       ]),
       m("div", { class: "text-right" }, [
         m("button[type=submit]", {
-          onclick: ctrl.updateLayout,
+          onclick: state.updateLayout,
           class: 'btn btn-success btn-md btn-rectangular btn-space--left-5 icon-inside--left',
           title: "Publish"
         }, [

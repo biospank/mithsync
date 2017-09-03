@@ -1,26 +1,24 @@
 import Image from "../../models/image";
 
-var thumbItem = {
-  controller: function(image, callback){
-    var ctrl = this;
-    ctrl.currentImage = m.stream({});
+const thumbItem = {
+  oninit({attrs}){
+    this.currentImage = m.stream(image);
+    this.callback = attrs.callback;
 
-    ctrl.selectImage = function() {
-      callback(ctrl.currentImage());
+    this.selectImage = () => {
+      this.callback(this.currentImage());
     };
   },
-  view: function(ctrl, image){
-    ctrl.currentImage(image);
-
+  view({state}){
     return m(".col-xs-2", [
       m("figure", { class: "img-thumbnail" }, [
         m("a", {
           href: "#",
-          onclick: ctrl.selectImage
+          onclick: state.selectImage
         }, [
           m("img", {
-            src: ctrl.currentImage().thumb_url,
-            title: ctrl.currentImage().name,
+            src: state.currentImage().thumb_url,
+            title: state.currentImage().name,
             class: "img-responsive"
           })
         ])

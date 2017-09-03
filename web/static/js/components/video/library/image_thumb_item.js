@@ -3,46 +3,46 @@ import Project from "../../../models/project";
 import Video from "../../../models/video";
 
 var imageThumbItem = {
-  controller: function(image, parent){
-    var ctrl = this;
+  oninit({attrs}){
+    this.image = attrs.image;
+    this.parent = attrs.parent;
 
-    ctrl.delete = function() {
+    this.delete = function() {
       Image.delete(
         {
           projectId: Project.current().id,
           videoId: Video.current().id
         },
-        ctrl.image.name
-      ).then(function() {
+        this.image.name
+      ).then(() => {
         parent.getImages(
           _.assign(
             parent.pageInfo.defaultParams || {},
             { page: parent.pageInfo.pageNumber }
-          ),
-          parent.requestOptions
+          )
         );
-      }, function(response) {
+      }, (e) => {
         swal(
           'Delete error',
-          response.errors.reason,
+          // TO TEST
+          JSON.parse(e.message).errors.reason,
           'error'
         ).catch(swal.noop);
       });
     };
   },
-  view: function(ctrl, image){
-    ctrl.image = image;
+  view({state}) {
     return m(".col-xs-3", {
-      'data-url': ctrl.image.thumb_url,
+      'data-url': state.image.thumb_url,
     }, [
       m("figure", { class: "img-thumbnail" }, [
         m("img", {
-          src: ctrl.image.thumb_url,
-          title: ctrl.image.name,
+          src: state.image.thumb_url,
+          title: state.image.name,
           class: "img-responsive",
           onmousedown: function() {
             var selectEvent = new CustomEvent("library:image:select", {
-              detail: ctrl.image
+              detail: state.image
             });
             document.body.dispatchEvent(selectEvent);
           }
@@ -61,7 +61,7 @@ var imageThumbItem = {
                 showLoaderOnConfirm: true,
                 preConfirm: function() {
                   return new Promise(function(resolve, reject) {
-                    ctrl.delete();
+                    state.delete();
                     resolve()
                   })
                 }

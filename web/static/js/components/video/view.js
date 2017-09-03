@@ -1,8 +1,7 @@
 import mixinLayout from "../layout/mixin_layout";
 
-var viewVideo = (function() {
-
-  var content = function() {
+const viewVideo = {
+  view: mixinLayout((vnode) => {
     return [
       m("header", { class: "text-right" }, [
         m("a", { href:"/video/edit", oncreate: m.route.link, class: "btn btn-success" }, "Edit"),
@@ -21,12 +20,7 @@ var viewVideo = (function() {
         ])
       ])
     ];
-  };
-
-  return {
-    controller: function() {},
-    view: mixinLayout(content)
-  };
-})();
+  })
+}
 
 export default viewVideo;

@@ -3,41 +3,41 @@ import Project from "../../../models/project";
 import Video from "../../../models/video";
 
 var imageListItem = {
-  controller: function(image, parent){
-    var ctrl = this;
+  oninit({attrs}){
+    this.image = attrs.image;
+    this.parent = attrs.parent;
 
-    ctrl.delete = function() {
+    this.delete = () => {
       Image.delete(
         {
           projectId: Project.current().id,
           videoId: Video.current().id
         },
-        ctrl.image.name
+        this.image.name
       ).then(function() {
-        parent.getImages(
+        this.parent.getImages(
           _.assign(
-            parent.pageInfo.defaultParams || {},
-            { page: parent.pageInfo.pageNumber }
-          ),
-          parent.requestOptions
+            this.parent.pageInfo.defaultParams || {},
+            { page: this.parent.pageInfo.pageNumber }
+          )
         );
-      }, function(response) {
+      }, (e) => {
         swal(
           'Delete error',
-          response.errors.reason,
+          // TO TEST
+          JSON.parse(e.message).errors.reason,
           'error'
         ).catch(swal.noop);
       });
     };
   },
-  view: function(ctrl, image){
-    ctrl.image = image;
+  view({state}) {
     return m(".media", {
       class: "list_libraryitem",
-      'data-url': ctrl.image.thumb_url,
+      'data-url': state.image.thumb_url,
       onmousedown: function() {
         var selectEvent = new CustomEvent("library:image:select", {
-          detail: ctrl.image
+          detail: state.image
         });
         document.body.dispatchEvent(selectEvent);
       }
@@ -45,20 +45,20 @@ var imageListItem = {
       m("figure", { class: "media-left" }, [
         m("a", { href: "#" }, [
           m("img", {
-            src: ctrl.image.thumb_url,
+            src: state.image.thumb_url,
             class: "media-object img-responsive"
           })
         ])
       ]),
       m(".media-body", [
-        m("h5", { class: "media-heading" }, _.truncate(ctrl.image.name, { length: 25 })),
+        m("h5", { class: "media-heading" }, _.truncate(state.image.name, { length: 25 })),
         m("p", {
           class: "media-text"
         }, _.join(
           [
-            _.toUpper(_.last(_.split(ctrl.image.name, '.'))),
-            _.join([_.floor(Math.log(ctrl.image.size) / Math.log(1024), 3), 'KB'], ' '),
-            moment(ctrl.image.last_modified).format('L')
+            _.toUpper(_.last(_.split(state.image.name, '.'))),
+            _.join([_.floor(Math.log(state.image.size) / Math.log(1024), 3), 'KB'], ' '),
+            moment(state.image.last_modified).format('L')
           ], ' · ')
         ),
         m("button", {
@@ -74,7 +74,7 @@ var imageListItem = {
               showLoaderOnConfirm: true,
               preConfirm: function() {
                 return new Promise(function(resolve, reject) {
-                  ctrl.delete();
+                  state.delete();
                   resolve()
                 })
               }

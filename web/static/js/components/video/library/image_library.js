@@ -11,8 +11,8 @@ import loader from "../../widgets/loader";
 import recordNotFound from "../../widgets/404";
 import {} from "../../../util/polyfill_custom_event";
 
-var imageLibrary = (() => {
-  var paginate = (state) => {
+const imageLibrary = (() => {
+  let paginate = (state) => {
     // to use pagination component you need to provide the following params:
     // 1. pagination (the component)
     // 2. a json configuration options
@@ -39,7 +39,7 @@ var imageLibrary = (() => {
     )
   };
 
-  var imageView = (state) => {
+  let imageView = (state) => {
     if(!state.images()) {
       return m(loader);
     } else {
@@ -47,12 +47,12 @@ var imageLibrary = (() => {
          //return m(recordNotFound);
       } else {
         if(state.asList()) {
-          return state.images().map(function(image) {
-            return m(imageListItem, image, state);
+          return state.images().map((image) => {
+            return m(imageListItem, {image: image, parent: state});
           });
         } else {
-          return state.images().map(function(image) {
-            return m(imageThumbItem, image, state);
+          return state.images().map((image) => {
+            return m(imageThumbItem, {image: image, parent: state});
           })
         }
       }
@@ -83,28 +83,26 @@ var imageLibrary = (() => {
         m.route.set("/signin");
       }
 
-      this.initializeDropper = function(element, isInit, context) {
-        if(!isInit) {
-          Dropper.init("#dropper", {
-            urlParams: {
-              projectId: Project.current().id,
-              videoId: Video.current().id
-            },
-            onQueueComplete: function() {
-              this.getImages(
-                _.assign(
-                  this.pageInfo.defaultParams || {},
-                  { page: this.pageInfo.pageNumber }
-                )
-              );
+      this.initializeDropper = (vnode) => {
+        Dropper.init("#dropper", {
+          urlParams: {
+            projectId: Project.current().id,
+            videoId: Video.current().id
+          },
+          onQueueComplete: () => {
+            this.getImages(
+              _.assign(
+                this.pageInfo.defaultParams || {},
+                { page: this.pageInfo.pageNumber }
+              )
+            );
 
-              var initDraggerEvent = new CustomEvent("library:image:initDragger");
+            var initDraggerEvent = new CustomEvent("library:image:initDragger");
 
-              document.body.dispatchEvent(initDraggerEvent);
+            document.body.dispatchEvent(initDraggerEvent);
 
-            }
-          });
-        }
+          }
+        });
       };
 
       this.getImages = (params) => {
@@ -144,7 +142,7 @@ var imageLibrary = (() => {
         m("div", {
           class: "dropzone needsclick dz-clickable",
           id: "dropper",
-          config: state.initializeDropper
+          oncreate: state.initializeDropper
         }),
         m("section", { class: "library" }, [
           m("div", { class: "clearfix mb-25 library-fetuares" }, [
