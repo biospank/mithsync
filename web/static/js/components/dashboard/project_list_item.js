@@ -10,7 +10,7 @@ var projectListItem = {
         m("a", {
             href: "#",
             onclick: (event) => {
-              console.log(state.project);
+              // console.log(state.project);
               event.preventDefault();
               Project.current(state.project);
               m.route.set("/projects/" + state.project.id + "/videos");

@@ -18,7 +18,7 @@ const user = {
       m.route.set("/signin");
     };
 
-    getCurrentUser().then((response) => {
+    this.getCurrentUser().then((response) => {
       this.currentUser(response.data);
       // m.redraw();
     });

@@ -256,6 +256,7 @@ var editVideo = (() => {
 
       this.setupSlider = () => {
         this.isPlayerReady(true);
+        m.redraw(true);
 
         if(_.isEmpty(slickCarousel.slides())) {
           var slide = Slide.resetModel({

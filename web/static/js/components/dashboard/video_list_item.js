@@ -11,7 +11,7 @@ var videoListItem = {
         m("a", {
           href: "",
           onclick: (event) => {
-            console.log(state.video);
+            // console.log(state.video);
             event.preventDefault();
             Video.current(state.video);
             m.route.set("/projects/" + state.video.project_id + "/videos/" + state.video.id + "/edit");

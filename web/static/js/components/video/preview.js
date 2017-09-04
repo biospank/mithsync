@@ -40,7 +40,7 @@ var preview = (function() {
         }
 
         this.currentSlide = _.find(this.sliderSlides, (slide, index, collection) => {
-          if(inRange(currentSec, index, (index + 1))) {
+          if(this.inRange(currentSec, index, (index + 1))) {
             Reveal.slide(index);
             slider.goTo(index);
             return true;
@@ -60,7 +60,7 @@ var preview = (function() {
         //   console.log('player ready!');
         // });
 
-        player.on('timeupdate', _.throttle(updateSlide, 1000, {
+        player.on('timeupdate', _.throttle(this.updateSlide, 1000, {
           'leading': true,
           'trailing': false
         }));
@@ -219,24 +219,24 @@ var preview = (function() {
           class: '.video-player-watch mb-10',
           provider: this.videoInfo.provider,
           videoId: this.videoInfo.videoId,
-          onReady: onReady
+          onReady: this.onReady
         });
       };
 
       this.showReveal = () => {
         return m(".reveal mb-10", {}, [
           m(".slides", [
-            injectRevealSlides()
+            this.injectRevealSlides()
           ])
         ]);
       };
 
       this.showSlider = () => {
-        return m(".p-all-side-25 zinkroo-preview__slide", { oncreate: toggleSlider }, [
+        return m(".p-all-side-25 zinkroo-preview__slide", { oncreate: this.toggleSlider }, [
           m(".owl-carousel", {
             id: "owl-slider"
           }, [
-            injectSliderSlides()
+            this.injectSliderSlides()
           ])
         ]);
       };

@@ -69,34 +69,33 @@ var slickCarousel = (() => {
       });
     },
     oninit({attrs}) {
-      // console.log(attrs);
       this.args = attrs.args;
       carousel.slides = attrs.slides;
 
     },
-    view({state}) {
+    view({state, attrs}) {
       // return m("section", { class: "slidesheet", oncreate: state.onReady }, [
       return m("section", { class: "slidesheet" }, [
         m(".row", [
           carousel.slides.map((slide) => {
             return m(slickItem, {
-              key: slide.id,
+              key: slide.id || 0,
               selectCallback: (slide) => {
                 carousel.currentSlide = slide;
 
-                if(state.args.selectCallback)
-                  state.args.selectCallback(slide);
+                if(attrs.selectCallback)
+                  attrs.selectCallback(slide);
 
               },
-              mouseOverCallback: function(slide) {
-                if(state.args.mouseOverCallback)
-                  state.args.mouseOverCallback(slide);
+              mouseOverCallback: (slide) => {
+                if(attrs.mouseOverCallback)
+                  attrs.mouseOverCallback(slide);
               },
-              mouseOutCallback: function(slide) {
-                if(state.args.mouseOutCallback)
-                  state.args.mouseOutCallback(slide);
+              mouseOutCallback: (slide) => {
+                if(attrs.mouseOutCallback)
+                  attrs.mouseOutCallback(slide);
               },
-              checkCallback: function(checked) {
+              checkCallback: (checked) => {
                 slide.checked = checked;
               },
               slide: slide,

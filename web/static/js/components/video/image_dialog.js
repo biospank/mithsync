@@ -64,7 +64,7 @@ const imageDialog = {
         return m(loader);
       } else {
         return _.isEmpty(this.images()) ? m(recordNotFound) : this.images().map((image) => {
-          return m(imageItem, {image: image, callback: () => {}});
+          return m(imageItem, {key: image.id, image: image, callback: () => {}});
         });
       }
     };
@@ -75,7 +75,7 @@ const imageDialog = {
     // $("#imageDialog").modal('show');
     getImages(
       _.assign(
-        pageInfo.defaultParams || {},
+        {},
         { page: 1 }
       )
     );
@@ -100,25 +100,25 @@ const imageDialog = {
               m("span", { "aria-hidden": "true" }, m.trust("&times"))
             ]),
             m(searchForm, {
-              action: filterImages,
-              filter: filter
+              action: state.filterImages,
+              filter: state.filter
             })
           ]),
           m(".modal-body", [
             m("section", { class: "slidesheet slidesheet-height" }, [
               m("div", { class: "row" }, [
-                this.imageView()
+                state.imageView()
               ])
             ]),
             m(new Pagination(),
               _.assign(
-                pageInfo,
+                state.pageInfo,
                 {
                   xhr: (params) => {
-                    this.getImages(params);
+                    state.getImages(params);
                   },
                   defaultParams: {
-                    filter: this.filter()
+                    filter: state.filter()
                   }
                 }
               )

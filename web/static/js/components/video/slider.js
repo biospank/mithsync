@@ -2,10 +2,10 @@ import Videosync from '../../videosync';
 import Session from '../../models/session'
 
 var Slider = {
-  encoder: function(value) {
+  encoder: (value) => {
     return moment("2015-01-01").startOf('day').seconds(value).format('HH:mm:ss');
   },
-  init: function(element, opts) {
+  init: (element, opts) => {
     var sliderContainer = document.getElementById(element);
 
     var slider = noUiSlider.create(sliderContainer, {
