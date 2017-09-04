@@ -34,7 +34,7 @@ var preview = (function() {
           var currentSlideIndex = _.findIndex(this.sliderSlides, this.currentSlide);
 
           if((currentSlideIndex !== -1) &&
-            inRange(currentSec, currentSlideIndex, (currentSlideIndex + 1))) {
+            this.inRange(currentSec, currentSlideIndex, (currentSlideIndex + 1))) {
             return;
           }
         }

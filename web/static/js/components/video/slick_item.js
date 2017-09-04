@@ -8,6 +8,9 @@ const slickItem = {
     });
   },
   view({state, attrs}) {
+    state.slide = attrs.slide;
+    state.active = attrs.active;
+
     // return m(".col-xs-3 .col-sm-3 .col-md-2 .col-lg-1", [
     return m(".col-xs-2 .col-sm-2 .col-md-2 .col-lg-1", [
       m("figure", {

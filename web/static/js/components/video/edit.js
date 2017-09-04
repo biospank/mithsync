@@ -123,8 +123,9 @@ var editVideo = (() => {
           ]),
           m(slickCarousel, {
             selectCallback: (slide) => {
-              state.highlightSlide(slide);
-              state.showVideoFrame(slide);
+              state.changeSlide(slide);
+              // state.highlightSlide(slide);
+              // state.showVideoFrame(slide);
             },
             mouseOverCallback: (slide) => {
               if(slide !== slickCarousel.currentSlide())
