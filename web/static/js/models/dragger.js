@@ -1,5 +1,5 @@
 var dragger = {
-  init: function(opts={}) {
+  init: (opts={}) => {
     // var drake = dragula({
     //   copy: true
     // });
@@ -11,20 +11,20 @@ var dragger = {
         document.getElementById(opts.containers.to)
       ],
       {
-        copy: function (el, source) {
+        copy: (el, source) => {
           return source === document.getElementById(opts.containers.from)
         },
         revertOnSpill: true
       }
     );
 
-    drake.on('drop', function(el, target, source, sibling) {
+    drake.on('drop', (el, target, source, sibling) => {
       drake.cancel();
       if(opts.onDropCallback)
         opts.onDropCallback(el.dataset.url)
-    }).on('over', function (el, container) {
+    }).on('over', (el, container) => {
       container.className += ' ex-over';
-    }).on('out', function (el, container) {
+    }).on('out', (el, container) => {
       container.className = container.className.replace(' ex-over', '');
     });
 
