@@ -59,7 +59,7 @@ var videoDetail = {
         showConfirmButton: false,
         onOpen: (progress) => {
           swal.showLoading();
-          if(isValidUrl(Video.model.url())) {
+          if(this.isValidUrl(Video.model.url())) {
             return Video.update(Video.current()).then((response) => {
               Video.current(response.data);
               swal.close();

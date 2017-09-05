@@ -169,6 +169,7 @@ var editVideo = (() => {
         slickCarousel.currentSlide().url = image.slide_url
         slickCarousel.currentSlide().thumb_url = image.thumb_url
         this.unsaved(true);
+        m.redraw(true);
       };
 
       this.onChangeSlider = (values, handle, unencodedValues) => {

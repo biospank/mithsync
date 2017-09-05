@@ -13,9 +13,9 @@ var videoLayout = {
         allowOutsideClick: false,
         allowEscapeKey: false,
         showConfirmButton: false,
-        onOpen: function(progress) {
+        onOpen: (progress) => {
           swal.showLoading();
-          return Layout.update(Video.current()).then(function() {
+          return Layout.update(Video.current()).then(() => {
             swal.close();
             swal({
               type: 'success',

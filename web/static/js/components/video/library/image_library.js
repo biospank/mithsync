@@ -180,11 +180,9 @@ const imageLibrary = (() => {
           ]),
           m("div#image-library", {
             class: "row",
-            config: function(element, isInit, context) {
-              if( !isInit ) {
-                var initDraggerEvent = new CustomEvent("library:image:initDragger");
-                document.body.dispatchEvent(initDraggerEvent);
-              }
+            oncreate: (vnode) => {
+              var initDraggerEvent = new CustomEvent("library:image:initDragger");
+              document.body.dispatchEvent(initDraggerEvent);
             }
           }, [
             imageView(state)
