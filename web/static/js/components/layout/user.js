@@ -20,7 +20,7 @@ const user = {
 
     this.getCurrentUser().then((response) => {
       this.currentUser(response.data);
-      // m.redraw();
+      m.redraw();
     });
 
   },

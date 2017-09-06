@@ -7,24 +7,19 @@ var recentProjects = {
     this.errors = m.stream({});
     this.pageInfo = {};
 
-    this.requestOptions = {
-      unwrapSuccess: (response) => {
-        if(response) {
-          this.pageInfo = {
-            totalEntries: response.total_entries,
-            totalPages: response.total_pages,
-            pageNumber: response.page_number
-          };
-          return response.data;
-        }
-      },
-      unwrapError: (response) => {
-        return response.error;
+    this.unwrapSuccess = (response) => {
+      if(response) {
+        this.pageInfo = {
+          totalEntries: response.total_entries,
+          totalPages: response.total_pages,
+          pageNumber: response.page_number
+        };
+        return response;
       }
     };
 
     this.getRecentProjects = (args) => {
-      return Project.recent(args).then((response) => {
+      return Project.recent(args).then(this.unwrapSuccess).then((response) => {
         this.projects(response.data);
       }, (e) => {
         vnode.state.errors(JSON.parse(e.message).errors);

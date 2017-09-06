@@ -63,12 +63,11 @@ var newVideo = (() => {
             this.errors(JSON.parse(e.message).errors);
           })
         } else {
-          return this.rejectUrlVideo().then((value) => {
-          }, (value) => {
+          return this.rejectUrlVideo().then((value) => {}, (value) => {
             this.errors({
               url: value
             });
-          })
+          });
         }
       };
 

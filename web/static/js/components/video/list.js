@@ -68,7 +68,7 @@ var videoList = {
            //return m(recordNotFound);
         } else {
           return this.videos().map(function(video) {
-            return m(listItem, {video: video, parent: vnode.state});
+            return m(listItem, {key: video.id, video: video, parent: vnode.state});
           })
         }
       }

@@ -7,13 +7,11 @@ var topBar = {
         href: "#",
         class: "navbar-button",
         id: "menu-toggle",
-        config: function(element, isInit, context) {
-          if(!isInit) {
-            $(element).click(function(e) {
-                e.preventDefault();
-                $("#wrapper").toggleClass("toggled");
-            });
-          }
+        oncreate: ({dom}) => {
+          $(dom).click((e) => {
+              e.preventDefault();
+              $("#wrapper").toggleClass("toggled");
+          });
         }
       }, [
         m("i", { class: "fa fa-bars", "aria-hidden": true })

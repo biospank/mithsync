@@ -32,7 +32,7 @@ var videoDetail = {
         setTimeout(() => {
           reject("Invalid url for vimeo/youtube video");
         }, 1000);
-      })
+      });
     };
 
     this.swalValidationError = function() {
@@ -86,14 +86,13 @@ var videoDetail = {
               this.swalValidationError();
             })
           } else {
-            return rejectUrlVideo().then((value) => {
-            }, (value) => {
+            // return rejectUrlVideo().then((value) => {}, (value) => {
               this.errors({
-                url: value
+                url: "Invalid url for vimeo/youtube video" //value
               });
               swal.close();
               this.swalValidationError();
-            });
+            // });
           }
         }
       }).catch(swal.noop);
