@@ -2,10 +2,11 @@ import Image from "../../models/image";
 
 const thumbItem = {
   oninit({attrs}){
-    this.currentImage = m.stream(image);
+    this.currentImage = m.stream(attrs.image);
     this.callback = attrs.callback;
 
-    this.selectImage = () => {
+    this.selectImage = (event) => {
+      event.preventDefault();
       this.callback(this.currentImage());
     };
   },

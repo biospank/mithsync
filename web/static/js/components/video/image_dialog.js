@@ -14,7 +14,7 @@ const imageDialog = (() => {
   let pageInfo = {};
   let unwrapSuccess = (response) => {
     if(response) {
-      this.pageInfo = {
+      pageInfo = {
         totalEntries: response.total_entries,
         totalPages: response.total_pages,
         pageNumber: response.page_number
