@@ -4,16 +4,16 @@ import User from "../../models/user";
 const mainNav = {
   oninit(vnode) {
 
-    this.user = m.stream({ data: { project_count: 0 } });
-
-    this.getCurrentUser = _.throttle(() => {
-      return User.getCurrent({
-        background: true,
-        initialValue: { data: { project_count: 0 } }
-      }).then((response) => {
-        this.user(response.data);
-      }, (e) => {});
-    }, 10000),
+    // this.user = m.stream({ data: { project_count: 0 } });
+    //
+    // this.getCurrentUser = _.throttle(() => {
+    //   return User.getCurrent({
+    //     background: true,
+    //     initialValue: { data: { project_count: 0 } }
+    //   }).then((response) => {
+    //     this.user(response.data);
+    //   }, (e) => {});
+    // }, 10000),
 
     this.logout = (event) => {
       event.preventDefault();
@@ -31,7 +31,7 @@ const mainNav = {
       }
     };
 
-    this.getCurrentUser();
+    // this.getCurrentUser();
 
   },
   view({state}) {
@@ -47,9 +47,9 @@ const mainNav = {
           m("a", { href: "/projects", oncreate: m.route.link, class: "" }, [
             m("i", { class: "fa fa-film main-nav__icon" }),
             m("span", { class: "main-nav__voice" }, "Projects"),
-            // m("span", {
-            //   class: "badge radius"
-            // }, state.user().project_count)
+            m("span", {
+              class: "badge radius"
+            }, User.current().project_count)
           ])
         ]),
         m("li", {  class: (state.isActive("/userprofile") ? 'active main-nav__tab' : 'main-nav__tab') }, [

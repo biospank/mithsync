@@ -180,7 +180,7 @@ const imageLibrary = (() => {
           ]),
           m("div#image-library", {
             class: "row",
-            oncreate: (vnode) => {
+            onupdate: (vnode) => {
               var initDraggerEvent = new CustomEvent("library:image:initDragger");
               document.body.dispatchEvent(initDraggerEvent);
             }

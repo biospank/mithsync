@@ -3,14 +3,14 @@ import User from "../../models/user";
 
 const user = {
   oninit(vnode) {
-    this.currentUser = m.stream({ email: '' });
-
-    this.getCurrentUser = _.once(() => {
-      return User.getCurrent({
-        background: true,
-        initialValue: { data: { email: '' } }
-      });
-    });
+    // this.currentUser = m.stream({ email: '' });
+    //
+    // this.getCurrentUser = _.once(() => {
+    //   return User.getCurrent({
+    //     background: true,
+    //     initialValue: { data: { email: '' } }
+    //   });
+    // });
 
     this.logout = (event) => {
       event.preventDefault();
@@ -18,10 +18,10 @@ const user = {
       m.route.set("/signin");
     };
 
-    this.getCurrentUser().then((response) => {
-      this.currentUser(response.data);
-      m.redraw();
-    });
+    // this.getCurrentUser().then((response) => {
+    //   this.currentUser(response.data);
+    //   m.redraw();
+    // });
 
   },
   view({state}) {
@@ -56,7 +56,7 @@ const user = {
         "aria-expanded": false
       }, [
         m("div", { class: "user-avatar__name" }, [
-          m("span", { class: "text-white" }, this.currentUser().email),
+          m("span", { class: "text-white" }, User.current().email),
           m("i", { class: "fa fa-caret-down text-white", "aria-hidden": true })
         ])
       ]),

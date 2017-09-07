@@ -87,9 +87,16 @@ var profile = (function() {
         })
       };
 
-      User.getCurrent().then((response) => {
-        User.resetModel(response.data);
-      });
+      if(_.isEmpty(User.current())) {
+        User.getCurrent().then((response) => {
+          User.resetModel(response.data);
+          User.current(response.data);
+        });
+      }
+
+      // User.getCurrent().then((response) => {
+      //   User.resetModel(response.data);
+      // });
     },
     view: mixinLayout(content)
   };

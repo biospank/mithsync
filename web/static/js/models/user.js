@@ -11,6 +11,7 @@ var User = (function() {
       this.model.password("");
       this.model.password_confirmation("");
     },
+    current: m.stream({}),
     model: {
       id: m.stream(undefined),
       email: m.stream(""),

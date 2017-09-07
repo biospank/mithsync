@@ -24,7 +24,6 @@ var imageThumbItem = {
       }, (e) => {
         swal(
           'Delete error',
-          // TO TEST
           JSON.parse(e.message).errors.reason,
           'error'
         ).catch(swal.noop);

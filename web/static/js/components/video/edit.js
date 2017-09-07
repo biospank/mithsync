@@ -12,6 +12,7 @@ import feedbackButton from "../widgets/feedback_button";
 import videoPreview from "./video_preview";
 import Color from '../../models/color';
 import dragger from '../../models/dragger';
+import User from "../../models/user";
 
 var editVideo = (() => {
   var content = ({state}) => {
@@ -200,6 +201,7 @@ var editVideo = (() => {
         this.unsaved(true);
       };
 
+      // TO TEST
       this.onunload = (e) => {
         var requestedUrl = m.route.get();
 
@@ -219,7 +221,8 @@ var editVideo = (() => {
         }
       }
 
-      this.initDragger = () => {
+      this.initDragger = _.once(() => {
+        dragger.destroy();
         dragger.init({
           containers: {
             from: 'image-library',
@@ -229,7 +232,7 @@ var editVideo = (() => {
             this.selectLibraryImage(this.currentLibraryImage());
           }
         });
-      };
+      });
 
       // the first argument is the DOM element;
       // the second argument is false if the element has just been created and true otherwise;
@@ -537,6 +540,12 @@ var editVideo = (() => {
           element.style.backgroundColor = slickCarousel.slides()[idx].connectColor;
         });
       };
+
+      if(_.isEmpty(User.current())) {
+        User.getCurrent().then((response) => {
+          User.current(response.data);
+        });
+      }
 
       Video.bindProviders();
 

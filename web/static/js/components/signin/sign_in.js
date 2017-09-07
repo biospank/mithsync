@@ -2,6 +2,7 @@ import mixinLayout from "../layout/mixin_layout";
 import textField from "../widgets/text_field";
 import feedbackButton from "../widgets/feedback_button";
 import Session from "../../models/session";
+import User from "../../models/user";
 
 var signIn = (function() {
   var content = function({state}) {
@@ -87,10 +88,12 @@ var signIn = (function() {
         return Session.create(args).then((userData) => {
           let user = JSON.parse(userData);
 
-          if(user.data.active)
+          if(user.data.active) {
+            User.current(user.data);
             m.route.set("/dashboard");
-          else
+          } else {
             m.route.set("/activate");
+          }
         }, (e) => {
           this.errors(JSON.parse(e.message).errors);
         })

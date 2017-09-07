@@ -232,7 +232,10 @@ var preview = (function() {
       };
 
       this.showSlider = () => {
-        return m(".p-all-side-25 zinkroo-preview__slide", { oncreate: this.toggleSlider }, [
+        return m(".p-all-side-25 zinkroo-preview__slide", {
+          oncreate: this.toggleSlider,
+          onupdate: this.toggleSlider
+        }, [
           m(".owl-carousel", {
             id: "owl-slider"
           }, [

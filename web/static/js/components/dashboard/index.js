@@ -3,6 +3,7 @@ import Session from "../../models/session";
 import Project from "../../models/project";
 import recentProjects from "./recent_projects";
 import recentVideos from "./recent_videos";
+import User from "../../models/user";
 
 const dashboard = (() => {
   const content = ({state}) => {
@@ -31,7 +32,7 @@ const dashboard = (() => {
     oninit(vnode) {
       this.newProject = (event) => {
         event.preventDefault();
-        
+
         swal({
           title: 'Project name',
           input: 'text',
@@ -56,6 +57,12 @@ const dashboard = (() => {
 
       if(Session.isExpired()) {
         m.route.set("/signin");
+      }
+
+      if(_.isEmpty(User.current())) {
+        User.getCurrent().then((response) => {
+          User.current(response.data);
+        });
       }
 
     },

@@ -6,6 +6,7 @@ import loader from "../widgets/loader";
 import recordNotFound from "../widgets/404";
 import Session from "../../models/session";
 import Project from "../../models/project";
+import User from "../../models/user";
 
 var paginate = function(state) {
   return m(new Pagination(),
@@ -82,12 +83,21 @@ var projectList = {
 
     this.deleteProject = (project) => {
       return Project.delete(project.id).then(() => {
+        User.getCurrent().then((response) => {
+          User.current(response.data);
+        });
         // m.route.set('/projects');
         m.route.set(m.route.get(), null, {state: {key: Date.now()}});
       }, (e) => {
         this.errors(JSON.parse(e.message).errors);
       })
     };
+
+    if(_.isEmpty(User.current())) {
+      User.getCurrent().then((response) => {
+        User.current(response.data);
+      });
+    }
 
     this.getProjects(this.pageInfo.defaultParams || {});
 
@@ -132,6 +142,9 @@ var projectList = {
               }).then((value) => {
                 Project.model.name(value);
                 Project.create().then(function(data) {
+                  User.getCurrent().then((response) => {
+                    User.current(response.data);
+                  });
                   // m.route.set("/projects");
                   m.route.set(m.route.get(), null, {state: {key: Date.now()}});
                 })
