@@ -323,10 +323,13 @@ var preview = (function() {
         this.sliderSlides = slides;
       }
 
-      return {
-      };
+    },
+    onupdate({attrs}) {
+      this.videoInfo = Video.info(attrs.video.url);
+      this.slides = attrs.slides;
     },
     view({state}) {
+      // console.log(state.slides);
       state.setSliderSlides(state.slides);
       state.setTimeVector(state.slides);
 

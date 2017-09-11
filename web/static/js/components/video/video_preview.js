@@ -10,6 +10,10 @@ const videoPreview = (() => {
       this.video = attrs.video;
       this.slides = attrs.slides;
     },
+    onupdate({attrs}) {
+      this.video = attrs.video;
+      this.slides = attrs.slides;
+    },
     view({state}) {
       return m(".modal image-modal-lg", {
         "tabindex": "-1",

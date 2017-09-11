@@ -221,8 +221,7 @@ var editVideo = (() => {
         }
       }
 
-      this.initDragger = _.once(() => {
-        dragger.destroy();
+      this.initDragger = () => {
         dragger.init({
           containers: {
             from: 'image-library',
@@ -232,7 +231,7 @@ var editVideo = (() => {
             this.selectLibraryImage(this.currentLibraryImage());
           }
         });
-      });
+      };
 
       // the first argument is the DOM element;
       // the second argument is false if the element has just been created and true otherwise;
