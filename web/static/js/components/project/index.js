@@ -87,6 +87,7 @@ var projectList = {
           User.current(response.data);
         });
         // m.route.set('/projects');
+        // to reload the same url use {state: {key: Date.now()}}
         m.route.set(m.route.get(), null, {state: {key: Date.now()}});
       }, (e) => {
         this.errors(JSON.parse(e.message).errors);

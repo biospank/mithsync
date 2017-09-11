@@ -1,4 +1,5 @@
 import Project from "../../models/project";
+import Video from "../../models/video";
 
 var breadcrumb = {
   oninit({attrs}) {
@@ -47,6 +48,26 @@ var breadcrumb = {
       return this.slugMapping[slug];
     },
 
+    this.onunload = (e, requestedUrl) => {
+      e.preventDefault();
+
+      if (Video.unsaved()) {
+        swal({
+          type: 'warning',
+          title: 'Unsaved changes',
+          text: "Some changes has not been saved.\nDo you want to leave this page anyway?",
+          confirmButtonText: "Yes, leave this page!", // "Don't save!"
+          showCancelButton: true,
+          focusCancel: true
+        }).then(() => {
+          Video.unsaved(false);
+          m.route.set(requestedUrl);
+        }).catch(swal.noop)
+      } else {
+        m.route.set(requestedUrl);
+      }
+    }
+
     this.projectNameSlug = () => {
       var project = this.slugFor(_.last(this.crumbs())).project;
 
@@ -54,12 +75,18 @@ var breadcrumb = {
         return m("li", [
           m("a", {
             href: "/projects/" + this.currentProject.id + "/videos",
-            oncreate: m.route.link
+            // oncreate: m.route.link
+            onclick: (e) => {
+              this.onunload(e, "/projects/" + this.currentProject.id + "/videos")
+            }
           }, this.currentProject.name)
         ]);
       else
         return "";
     }
+  },
+  onupdate(vnode) {
+    this.currentProject = Project.current();
   },
   view({state}) {
     return m("ol.breadcrumb", [
@@ -71,7 +98,10 @@ var breadcrumb = {
             return m("li", [
               m("a", {
                 href: _.template(slug['urlTemplate'])(),
-                oncreate: m.route.link
+                // oncreate: m.route.link,
+                onclick: (e) => {
+                  this.onunload(e, _.template(slug['urlTemplate'])())
+                }
               }, slug['name'])
             ]);
           }

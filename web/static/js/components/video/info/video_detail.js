@@ -75,7 +75,9 @@ var videoDetail = {
                 (dismiss) => {
                   if (dismiss === 'timer') {
                     if(Video.model.url() !== originalUrl)
-                      m.route.set("/projects/" + Video.current().project_id + "/videos/" + Video.current().id + "/edit");
+                      // to reload the same url use {state: {key: Date.now()}}
+                      m.route.set("/projects/" + Video.current().project_id +
+                        "/videos/" + Video.current().id + "/edit", null, {state: {key: Date.now()}});
 
                   }
                 }

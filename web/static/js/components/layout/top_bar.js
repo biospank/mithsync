@@ -1,4 +1,5 @@
 import user from "./user";
+import Video from "../../models/video";
 
 var topBar = {
   showMenuButton() {
@@ -38,14 +39,37 @@ var topBar = {
   },
   oninit(vnode) {
     this.additionalClass = vnode.attrs.additionalClass;
+    this.onunload = (e, requestedUrl) => {
+      e.preventDefault();
+
+      if (Video.unsaved()) {
+        swal({
+          type: 'warning',
+          title: 'Unsaved changes',
+          text: "Some changes has not been saved.\nDo you want to leave this page anyway?",
+          confirmButtonText: "Yes, leave this page!", // "Don't save!"
+          showCancelButton: true,
+          focusCancel: true
+        }).then(() => {
+          Video.unsaved(false);
+          m.route.set(requestedUrl);
+        }).catch(swal.noop)
+      } else {
+        m.route.set(requestedUrl);
+      }
+    }
+
   },
   view({state}) {
     return m("nav", { class: "topbar " + (state.additionalClass ? state.additionalClass : "") }, [
       m(".clearfix", {}, [
         m(".pull-left", [
           m("a", {
-            href: "/dashboard",
-            oncreate: m.route.link,
+            href: '/dashboard',
+            // oncreate: m.route.link,
+            onclick: (e) => {
+              this.onunload(e, '/dashboard')
+            },
             class: "navbar-brand pull-left"
           }, [
             m("img", { src: "images/logo-zinkroo--white.png", class: "img-responsive" })

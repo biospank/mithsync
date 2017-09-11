@@ -152,7 +152,6 @@ var editVideo = (() => {
       this.player = {};
       this.isPlayerReady = m.stream(false);
       this.slider = m.stream();
-      this.unsaved = m.stream(false);
 
       if(Session.isExpired()) {
         m.route.set("/signin");
@@ -169,7 +168,7 @@ var editVideo = (() => {
       this.selectLibraryImage = (image) => {
         slickCarousel.currentSlide().url = image.slide_url
         slickCarousel.currentSlide().thumb_url = image.thumb_url
-        this.unsaved(true);
+        Video.unsaved(true);
         m.redraw(true);
       };
 
@@ -198,28 +197,8 @@ var editVideo = (() => {
         slickCarousel.refreshCurrentSlide();
         // // to enable video
         this.player.seek(currentValue);
-        this.unsaved(true);
+        Video.unsaved(true);
       };
-
-      // TO TEST
-      this.onunload = (e) => {
-        var requestedUrl = m.route.get();
-
-        if (this.unsaved()) {
-          e.preventDefault();
-          swal({
-            type: 'warning',
-            title: 'Unsaved changes',
-            text: "Some changes has not been saved.\nDo you want to leave this page anyway?",
-            confirmButtonText: "Yes, leave this page!", // "Don't save!"
-            showCancelButton: true,
-            focusCancel: true
-          }).then(() => {
-            this.unsaved(false);
-            m.route.set(requestedUrl);
-          }).catch(swal.noop)
-        }
-      }
 
       this.initDragger = () => {
         dragger.init({
@@ -328,7 +307,7 @@ var editVideo = (() => {
                 showConfirmButton: false,
                 timer: 1000
               }).catch(swal.noop);
-              this.unsaved(false);
+              Video.unsaved(false);
             }, (response) => {
               swal.close();
               swal({
@@ -440,7 +419,7 @@ var editVideo = (() => {
         this.refreshSlider(slickCarousel.slides());
         this.highlightSlide(slide);
         this.showVideoFrame(slide);
-        this.unsaved(true);
+        Video.unsaved(true);
       };
 
       this.showVideoFrame = (slide) => {

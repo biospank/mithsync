@@ -13,6 +13,7 @@ var Video = {
     layout: m.stream({}),
     inserted_at: m.stream("")
   },
+  unsaved: m.stream(false),
   resetModel: function(video) {
     this.model.title(video.title);
     this.model.description(video.description);
