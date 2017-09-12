@@ -4,8 +4,8 @@ var recordNotFound = {
       m("figure", { class: "text-center" }, [
         m("img", { src: "images/no-list.svg", with: "80", height: "80" })
       ]),
-      m("h3", { class: "text-center mgv20" }, "No records found"),
-      m("p", { class: "text-center" }, "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis.")
+      m("h3", { class: "text-center mgv20" }, "No images found"),
+      m("p", { class: "text-center" }, "")
     ])
   }
 }

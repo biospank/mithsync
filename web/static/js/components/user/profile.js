@@ -92,6 +92,8 @@ var profile = (function() {
           User.resetModel(response.data);
           User.current(response.data);
         });
+      } else {
+        User.resetModel(User.current());
       }
 
       // User.getCurrent().then((response) => {
