@@ -8,18 +8,19 @@ import Pagination from "../widgets/pagination";
 import recordNotFound from "../widgets/404";
 
 var paginate = function(state) {
-  return m(new Pagination(),
-    _.assign(
-      state.pageInfo,
-      {
-        xhr: function(params) {
-          state.getVideos(params);
-        },
-        defaultParams: {
-          filter: state.filter()
+  return m(new Pagination(), {
+    pageInfo: _.assign(
+        state.pageInfo,
+        {
+          xhr: function(params) {
+            state.getVideos(params);
+          },
+          defaultParams: {
+            filter: state.filter()
+          }
         }
-      }
-    )
+      )
+    }
   );
 }
 

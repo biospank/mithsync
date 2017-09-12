@@ -24,18 +24,19 @@ const imageLibrary = (() => {
     //         }
     //   2d. defaultParams: additional params to include on xhr callback (optional)
 
-    return m(new Pagination(),
-      _.assign(
-        state.pageInfo,
-        {
-          xhr: function(params) {
-            state.getImages(params);
-          },
-          defaultParams: {
-            filter: state.filter()
+    return m(new Pagination(), {
+      pageInfo: _.assign(
+          state.pageInfo,
+          {
+            xhr: function(params) {
+              state.getImages(params);
+            },
+            defaultParams: {
+              filter: state.filter()
+            }
           }
-        }
-      )
+        )
+      }
     )
   };
 

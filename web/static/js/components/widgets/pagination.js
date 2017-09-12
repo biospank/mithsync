@@ -1,7 +1,6 @@
 var Pagination = function() {
   return {
     oninit({attrs}) {
-      // console.log(attrs);
       this.pageInfo = attrs.pageInfo;
 
       this.paramsFor = (pageNumber) => {

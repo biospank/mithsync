@@ -15,10 +15,10 @@ var imageThumbItem = {
         },
         this.image.name
       ).then(() => {
-        parent.getImages(
+        this.parent.getImages(
           _.assign(
-            parent.pageInfo.defaultParams || {},
-            { page: parent.pageInfo.pageNumber }
+            this.parent.pageInfo.defaultParams || {},
+            { page: this.parent.pageInfo.pageNumber }
           )
         );
       }, (e) => {

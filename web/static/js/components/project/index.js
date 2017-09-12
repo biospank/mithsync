@@ -9,18 +9,19 @@ import Project from "../../models/project";
 import User from "../../models/user";
 
 var paginate = function(state) {
-  return m(new Pagination(),
-    _.assign(
-      state.pageInfo,
-      {
-        xhr: function(params) {
-          state.getProjects(params, state.requestOptions);
-        },
-        defaultParams: {
-          filter: state.filter()
+  return m(new Pagination(), {
+      pageInfo: _.assign(
+        state.pageInfo,
+        {
+          xhr: function(params) {
+            state.getProjects(params, state.requestOptions);
+          },
+          defaultParams: {
+            filter: state.filter()
+          }
         }
-      }
-    )
+      )
+    }
   );
 }
 

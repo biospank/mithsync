@@ -14,7 +14,7 @@ var imageListItem = {
           videoId: Video.current().id
         },
         this.image.name
-      ).then(function() {
+      ).then(() => {
         this.parent.getImages(
           _.assign(
             this.parent.pageInfo.defaultParams || {},

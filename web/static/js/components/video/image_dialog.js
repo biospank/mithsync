@@ -116,18 +116,19 @@ const imageDialog = (() => {
                   imageView()
                 ])
               ]),
-              m(new Pagination(),
-                _.assign(
-                  pageInfo,
-                  {
-                    xhr: (params) => {
-                      getImages(params);
-                    },
-                    defaultParams: {
-                      filter: filter()
+              m(new Pagination(), {
+                  pageInfo: _.assign(
+                    pageInfo,
+                    {
+                      xhr: (params) => {
+                        getImages(params);
+                      },
+                      defaultParams: {
+                        filter: filter()
+                      }
                     }
-                  }
-                )
+                  )
+                }
               )
             ])
           ])
