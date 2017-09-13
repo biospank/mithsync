@@ -163,7 +163,7 @@ const imageLibrary = (() => {
             m("div", { class: "show-items" }, [
               m("button", {
                 class: state.asList() ? 'btn btn-square btn-default' : 'btn btn-square btn-default active',
-                onclick: function(event) {
+                onclick: (event) => {
                   state.asList(false);
                 }
               }, [
@@ -171,7 +171,7 @@ const imageLibrary = (() => {
               ]),
               m("button", {
                 class: state.asList() ? 'btn btn-square btn-default btn-space--left-5 active' : 'btn btn-square btn-default btn-space--left-5',
-                onclick: function(event) {
+                onclick: (event) => {
                   state.asList(true);
                 }
               }, [

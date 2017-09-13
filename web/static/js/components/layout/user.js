@@ -1,27 +1,35 @@
 import Session from "../../models/session"
 import User from "../../models/user";
+import Video from "../../models/video";
 
 const user = {
   oninit(vnode) {
-    // this.currentUser = m.stream({ email: '' });
-    //
-    // this.getCurrentUser = _.once(() => {
-    //   return User.getCurrent({
-    //     background: true,
-    //     initialValue: { data: { email: '' } }
-    //   });
-    // });
+    this.onunload = (e, requestedUrl, logout=false) => {
+      e.preventDefault();
 
-    this.logout = (event) => {
-      event.preventDefault();
-      Session.reset();
-      m.route.set("/signin");
-    };
+      if (Video.unsaved()) {
+        swal({
+          type: 'warning',
+          title: 'Unsaved changes',
+          text: "Some changes has not been saved.\nDo you want to leave this page anyway?",
+          confirmButtonText: "Yes, leave this page!", // "Don't save!"
+          showCancelButton: true,
+          focusCancel: true
+        }).then(() => {
+          Video.unsaved(false);
 
-    // this.getCurrentUser().then((response) => {
-    //   this.currentUser(response.data);
-    //   m.redraw();
-    // });
+          if(logout)
+            Session.reset();
+
+          m.route.set(requestedUrl);
+        }).catch(swal.noop)
+      } else {
+        if(logout)
+          Session.reset();
+
+        m.route.set(requestedUrl);
+      }
+    }
 
   },
   view({state}) {
@@ -62,10 +70,22 @@ const user = {
       ]),
       m("ul", { class: "dropdown-menu", "aria-labelledby": "dropdownMenu1" }, [
         m("li", [
-          m("a", { class: "", href: "/userprofile", oncreate: m.route.link }, "Profile")
+          m("a", {
+            class: "",
+            href: "/userprofile",
+            onclick: (e) => {
+              this.onunload(e, "/userprofile")
+            }
+          }, "Profile")
         ]),
         m("li", [
-          m("a", { class: "", href: "#", onclick: this.logout }, "Logout")
+          m("a", {
+            class: "",
+            href: "#",
+            onclick: (e) => {
+              this.onunload(e, "/signin", true)
+            }
+          }, "Logout")
         ])
       ])
     ])

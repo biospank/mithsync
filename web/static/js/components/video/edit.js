@@ -55,7 +55,8 @@ var editVideo = (() => {
               ])
             ]),
             m(".mt-80 mb-100", [
-              (state.isPlayerReady()) ? m("#slider") : m(loader),
+              (state.isPlayerReady()) ? "" : m(loader),
+              m("#slider")
             ]),
             m("footer", { class: "buttons row" }, [
               m("div", { class: "col-xs-6" }, [
@@ -239,7 +240,6 @@ var editVideo = (() => {
 
       this.setupSlider = () => {
         this.isPlayerReady(true);
-        m.redraw(true);
 
         if(_.isEmpty(slickCarousel.slides())) {
           var slide = Slide.resetModel({

@@ -5,6 +5,7 @@ import imageLibrary from "../video/library/image_library";
 import videoDetail from "../video/info/video_detail";
 import videoLayout from "../video/layout/video_layout";
 import Videosync from "../../videosync";
+import Project from "../../models/project";
 import Video from "../../models/video";
 
 var mixinLayout = function(content, layout) {
@@ -120,10 +121,9 @@ var mixinLayout = function(content, layout) {
               ]),
               m("section", { role: "tabpanel", class: "tab-pane", id: "layout" }, [
                 _.isEmpty(Video.current()) ? "" : m(videoLayout)
-                // Video.current().theme ? m(videoLayout) : ""
               ]),
               m("section", { role: "tabpanel", class: "tab-pane active", id: "library" }, [
-                _.isEmpty(Video.current()) ? "" : m(imageLibrary)
+                (_.isEmpty(Video.current()) || _.isEmpty(Project.current())) ? "" : m(imageLibrary)
               ])
             ])
           ])
