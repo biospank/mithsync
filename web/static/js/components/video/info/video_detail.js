@@ -101,7 +101,7 @@ var videoDetail = {
     };
 
     this.initClipboard = ({dom}) => {
-      Clippy.init(element, Video.current());
+      Clippy.init(dom, Video.current());
     };
 
   },
@@ -132,7 +132,7 @@ var videoDetail = {
           m("a", {
             href: "#",
             class: "btn btn-clipboard",
-            config: state.initClipboard,
+            oncreate: state.initClipboard,
             onclick: function(event) {
               event.preventDefault();
             }
