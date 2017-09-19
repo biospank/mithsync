@@ -1,5 +1,5 @@
-defmodule Videosync.TokenTest do
-  use Videosync.ConnCase
+defmodule VideosyncWeb.TokenTest do
+  use VideosyncWeb.ConnCase
 
   test "unauthenticated", %{conn: conn} do
     conn = get conn, project_path(conn, :index)

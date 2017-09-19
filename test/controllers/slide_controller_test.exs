@@ -1,9 +1,10 @@
-defmodule Videosync.SlideControllerTest do
-  use Videosync.ConnCase
+defmodule VideosyncWeb.SlideControllerTest do
+  use VideosyncWeb.ConnCase
 
-  alias Videosync.Slide
-  alias Videosync.Video
-  alias Videosync.Project
+  alias Videosync.Repo
+  alias VideosyncWeb.Slide
+  alias VideosyncWeb.Video
+  alias VideosyncWeb.Project
 
   @valid_attrs %{
     start: 20,

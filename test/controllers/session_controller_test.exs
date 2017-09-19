@@ -1,5 +1,5 @@
-defmodule Videosync.SessionControllerTest do
-  use Videosync.ConnCase
+defmodule VideosyncWeb.SessionControllerTest do
+  use VideosyncWeb.ConnCase
 
   @valid_attrs %{
     email: "some@content",

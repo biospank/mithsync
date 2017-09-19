@@ -1,7 +1,7 @@
-defmodule Videosync.SlideTest do
-  use Videosync.ModelCase
+defmodule VideosyncWeb.SlideTest do
+  use VideosyncWeb.ModelCase
 
-  alias Videosync.Slide
+  alias VideosyncWeb.Slide
 
   @valid_attrs %{end: 60, start: 20, url: "/upload/33/images/slide/one", thumb_url: "/upload/33/images/thumb/one"}
   @invalid_attrs %{}

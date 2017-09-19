@@ -1,9 +1,9 @@
-defmodule Videosync.TestHelpers do
+defmodule VideosyncWeb.TestHelpers do
   alias Videosync.Repo
-  alias Videosync.User
+  alias VideosyncWeb.User
 
   def insert_user(attrs \\ %{}) do
-    changes = Dict.merge(%{
+    changes = Map.merge(%{
       email: "some@content",
       password: "secret",
       password_confirmation: "secret",

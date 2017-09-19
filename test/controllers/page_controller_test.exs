@@ -1,5 +1,5 @@
-defmodule Videosync.PageControllerTest do
-  use Videosync.ConnCase
+defmodule VideosyncWeb.PageControllerTest do
+  use VideosyncWeb.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get conn, "/"

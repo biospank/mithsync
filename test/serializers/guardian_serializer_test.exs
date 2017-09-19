@@ -1,9 +1,10 @@
-defmodule Videosync.GuardianSerializerTest do
-  use Videosync.ConnCase
+defmodule VideosyncWeb.GuardianSerializerTest do
+  use VideosyncWeb.ConnCase
 
   alias Videosync.Repo
-  alias Videosync.User
-  alias Videosync.GuardianSerializer
+  alias Videosync.Repo
+  alias VideosyncWeb.User
+  alias VideosyncWeb.GuardianSerializer
 
   setup do
     user = Repo.insert!(%User{active: false, project_count: 0, accept_terms_and_conditions: false})

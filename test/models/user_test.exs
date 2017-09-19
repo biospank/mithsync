@@ -1,7 +1,8 @@
-defmodule Videosync.UserTest do
-  use Videosync.ModelCase
+defmodule VideosyncWeb.UserTest do
+  use VideosyncWeb.ModelCase
 
-  alias Videosync.User
+  alias Videosync.Repo
+  alias VideosyncWeb.User
 
   @valid_attrs %{
     email: "some@content",
@@ -26,37 +27,37 @@ defmodule Videosync.UserTest do
   test "changeset with invalid email format" do
     changeset = User.changeset(%User{}, Map.put(@valid_attrs, :email, "some content"))
     refute changeset.valid?
-    assert changeset.errors[:email] == {"has invalid format", []}
+    assert changeset.errors[:email] == {"has invalid format", [validation: :format]}
   end
 
   test "registration changeset with invalid password" do
     changeset = User.registration_changeset(%User{}, Map.put(@valid_attrs, :password, "pass"))
     refute changeset.valid?
-    assert changeset.errors[:password] == {"should be at least %{count} character(s)", [count: 6]}
+    assert changeset.errors[:password] == {"should be at least %{count} character(s)", [count: 6, validation: :length, min: 6]}
   end
 
   test "registration changeset with invalid password confirmation" do
     changeset = User.registration_changeset(%User{}, Map.put(@valid_attrs, :password_confirmation, "terces"))
     refute changeset.valid?
-    assert changeset.errors[:password_confirmation] == {"does not match password", []}
+    assert changeset.errors[:password_confirmation] == {"does not match password", [validation: :confirmation]}
   end
 
   test "registration changeset with empty password confirmation" do
     changeset = User.registration_changeset(%User{}, Map.put(@valid_attrs, :password_confirmation, ""))
     refute changeset.valid?
-    assert changeset.errors[:password_confirmation] == {"does not match password", []}
+    assert changeset.errors[:password_confirmation] == {"does not match password", [validation: :confirmation]}
   end
 
   test "registration changeset without accept terms and conditions" do
     changeset = User.registration_changeset(%User{}, Map.delete(@valid_attrs, :accept_terms_and_conditions))
     refute changeset.valid?
-    assert changeset.errors[:accept_terms_and_conditions] == {"can't be blank", []}
+    assert changeset.errors[:accept_terms_and_conditions] == {"can't be blank", [validation: :required]}
   end
 
   test "registration changeset with accept terms and conditions set to valse" do
     changeset = User.registration_changeset(%User{}, Map.put(@valid_attrs, :accept_terms_and_conditions, false))
     refute changeset.valid?
-    assert changeset.errors[:accept_terms_and_conditions] == {"is invalid", []}
+    assert changeset.errors[:accept_terms_and_conditions] == {"is invalid", [validation: :inclusion]}
   end
   # @duplicate_email %{
   #   email: "some@content",

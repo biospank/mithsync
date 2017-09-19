@@ -1,4 +1,4 @@
-defmodule Videosync.ChannelCase do
+defmodule VideosyncWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -20,14 +20,14 @@ defmodule Videosync.ChannelCase do
       # Import conveniences for testing with channels
       use Phoenix.ChannelTest
 
-      alias Videosync.Repo
-      import Ecto
-      import Ecto.Changeset
-      import Ecto.Query
+      # alias Videosync.Repo
+      # import Ecto
+      # import Ecto.Changeset
+      # import Ecto.Query
 
 
       # The default endpoint for testing
-      @endpoint Videosync.Endpoint
+      @endpoint VideosyncWeb.Endpoint
     end
   end
 

@@ -1,7 +1,7 @@
-defmodule Videosync.ImageProxyTest do
-  use Videosync.ConnCase
+defmodule VideosyncWeb.ImageProxyTest do
+  use VideosyncWeb.ConnCase
 
-  alias Videosync.{Project, Video, Scope, ArcImage, ImageProxy}
+  alias VideosyncWeb.{Project, Video, Scope, ArcImage, ImageProxy}
 
   setup config do
     if config[:local] do

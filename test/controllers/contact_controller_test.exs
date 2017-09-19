@@ -1,8 +1,8 @@
-defmodule Videosync.ContactControllerTest do
-  use Videosync.ConnCase
+defmodule VideosyncWeb.ContactControllerTest do
+  use VideosyncWeb.ConnCase
   use Bamboo.Test, shared: :true
 
-  alias Videosync.Contact
+  alias VideosyncWeb.Contact
 
   @valid_attrs %{
     email: "test@example.com",
@@ -19,7 +19,7 @@ defmodule Videosync.ContactControllerTest do
   test "creates and renders resource when data is valid", %{conn: conn} do
     conn = post conn, contact_path(conn, :create), contact: @valid_attrs
     assert assert conn.status == 201
-    assert_delivered_email Videosync.Email.contact_us_email(Map.merge(%Contact{}, @valid_attrs))
+    assert_delivered_email VideosyncWeb.Email.contact_us_email(Map.merge(%Contact{}, @valid_attrs))
   end
 
   test "does not create resource and renders errors when data is invalid", %{conn: conn} do

@@ -1,7 +1,7 @@
-defmodule Videosync.ContactTest do
-  use Videosync.ModelCase
+defmodule VideosyncWeb.ContactTest do
+  use VideosyncWeb.ModelCase
 
-  alias Videosync.Contact
+  alias VideosyncWeb.Contact
 
   @valid_attrs %{
     email: "test@example.com",

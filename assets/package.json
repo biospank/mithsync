@@ -1,0 +1,24 @@
+{
+  "repository": {},
+  "dependencies": {
+    "babel-brunch": "~6.0.0",
+    "brunch": "~2.1.3",
+    "clean-css-brunch": "~1.8.0",
+    "css-brunch": "~1.7.0",
+    "javascript-brunch": "~1.8.0",
+    "sass-brunch": "^2.6.3",
+    "uglify-js-brunch": "~1.7.0",
+    "phoenix": "file:../deps/phoenix",
+    "phoenix_html": "file:../deps/phoenix_html"
+  },
+  "scripts": {
+    "test": "mocha --compilers js:babel-register --opts test/js/mocha.opts test/js/**/*_spec.js"
+  },
+  "devDependencies": {
+    "babel-register": "^6.9.0",
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3",
+    "sinon": "^1.17.4",
+    "sinon-chai": "^2.8.0"
+  }
+}

@@ -1,3 +1,0 @@
-<%= if @video.layout.show_title do %>
-  <h3 class="mt-0 zinkroo__title text-uppercase"><%= @video.title %></h3>
-<%= end %>

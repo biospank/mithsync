@@ -1,7 +1,8 @@
-defmodule Videosync.LayoutControllerTest do
-  use Videosync.ConnCase
+defmodule VideosyncWeb.LayoutControllerTest do
+  use VideosyncWeb.ConnCase
 
-  alias Videosync.{Project, Video}
+  alias Videosync.Repo
+  alias VideosyncWeb.{Project, Video}
 
   @video_attrs %{
     description: "some description",
@@ -66,6 +67,8 @@ defmodule Videosync.LayoutControllerTest do
     :timer.sleep(1000)
     put conn, project_video_layout_path(conn, :update, project, json_response(video_conn, 201)["data"]["id"], json_response(video_conn, 201)["data"]["layout"]["id"]), layout: @valid_attrs
     video_timestamp = Repo.get!(Video, video.id)
+    IO.puts inspect(video.updated_at)
+    IO.puts inspect(video_timestamp.updated_at)
     assert Ecto.DateTime.compare(video_timestamp.updated_at, video.updated_at) == :gt
   end
 end

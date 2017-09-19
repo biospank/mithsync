@@ -1,10 +1,10 @@
-defmodule Videosync.ImageControllerTest do
-  use Videosync.ConnCase
+defmodule VideosyncWeb.ImageControllerTest do
+  use VideosyncWeb.ConnCase
 
-  alias Videosync.ArcImage
-  alias Videosync.Project
-  alias Videosync.Video
-  alias Videosync.Scope
+  alias VideosyncWeb.ArcImage
+  alias VideosyncWeb.Project
+  alias VideosyncWeb.Video
+  alias VideosyncWeb.Scope
 
   @valid_attrs %Plug.Upload{
     content_type: "image/jpg",
@@ -80,11 +80,11 @@ defmodule Videosync.ImageControllerTest do
   test "does not delete resource referenced by video", %{conn: conn, user: user} do
     project = insert_project(user, %Project{})
     video = insert_video(user, project, %Video{})
-    {:ok, file} = Videosync.ArcImage.store({@valid_attrs, %Scope{ user_id: user.id, project_id: project.id, video_id: video.id }})
+    {:ok, file} = VideosyncWeb.ArcImage.store({@valid_attrs, %Scope{ user_id: user.id, project_id: project.id, video_id: video.id }})
     insert_slide(
       user,
       video,
-      %Videosync.Slide{
+      %VideosyncWeb.Slide{
         thumb_url: ArcImage.url({file, %Scope{ user_id: user.id, project_id: project.id, video_id: video.id }}, :thumb)
       })
     conn = delete conn, project_video_image_path(conn, :delete, project, video, "dummy.jpg")

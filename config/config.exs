@@ -9,11 +9,11 @@ config :videosync,
   ecto_repos: [Videosync.Repo]
 
 # Configures the endpoint
-config :videosync, Videosync.Endpoint,
+config :videosync, VideosyncWeb.Endpoint,
   url: [host: "localhost"],
   root: Path.dirname(__DIR__),
   secret_key_base: "w4Q8/jD33oLOnxgO3lN858dgkfRINx/ufd5SteGOav7aP5xwzm49RG/U7cfDumFQ",
-  render_errors: [accepts: ~w(html json)],
+  render_errors: [view: VideosyncWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Videosync.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
@@ -39,4 +39,4 @@ config :guardian, Guardian,
   ttl: { 1, :day},
   verify_issuer: true,
   secret_key: System.get_env("GUARDIAN_SECRET_KEY"),
-  serializer: Videosync.GuardianSerializer
+  serializer: VideosyncWeb.GuardianSerializer
