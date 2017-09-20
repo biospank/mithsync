@@ -4,8 +4,22 @@ exports.config = {
     javascripts: {
       // joinTo: "js/app.js",
       joinTo: {
-       "js/app.js": /^(js)|(vendor)|(..\/deps)/,
-       "js/watch.js": /^(watch)|(..\/deps)|(..\/priv\/static\/phoenix*)/
+        "js/app.js": [
+          "js/**/*.js",
+          "vendor/js/**/*.js",
+          "node_modules/**/*.js",
+          "(../deps/**/*.js"
+        ],
+        "js/watch.js": [
+          "watch/app/js/**/*.js",
+          "watch/vendor/js/**/*.js",
+          "node_modules/**/*.js",
+          "(../deps/**/*.js"
+          // "../deps/**/*.js",
+          // "../priv/static/phoenix.js"
+        ],
+      //  "js/app.js": /^(js)|(vendor)|(..\/deps)/,
+      //  "js/watch.js": /^(watch)|(..\/deps)|(..\/priv\/static\/phoenix*)/
       },
 
       // To use a separate vendor.js bundle, specify two files path
@@ -29,9 +43,20 @@ exports.config = {
     stylesheets: {
       // joinTo: "css/app.css"
       joinTo: {
-        "css/app.css": /^(css)|(vendor)/,
-        "css/fixed-layout.css": /^(custom-css-layout)/,
-        "css/watch.css": /^(watch\/app)|(watch\/vendor)/
+        "css/app.css": [
+          "css/**/*",
+          "vendor/css/**/*"
+        ],
+        "css/fixed-layout.css": [
+          "custom-css-layout/*.css"
+        ],
+        "css/watch.css": [
+          "watch/app/css/**/*",
+          "watch/vendor/css/**/*.css"
+        ]
+        // "css/app.css": /^(css)|(vendor)/,
+        // "css/fixed-layout.css": /^(custom-css-layout)/,
+        // "css/watch.css": /^(watch)/
       }
     },
     templates: {
@@ -49,7 +74,7 @@ exports.config = {
   // Phoenix paths configuration
   paths: {
     // Dependencies and current project directories to watch
-    watched: ["static", "css", "js", "vendor", "custom-css-layout"],
+    watched: ["static", "css", "js", "vendor", "watch", "custom-css-layout"],
 
     // Where to compile files to
     public: "../priv/static"
