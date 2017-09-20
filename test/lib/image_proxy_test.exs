@@ -33,7 +33,7 @@ defmodule VideosyncWeb.ImageProxyTest do
 
   @tag :s3
   test "bulk delete s3 scoped files", %{scope: scope} do
-    {:ok, [%{status_code: status}]} = ImageProxy.bulk_delete(%{ scope: scope })
+    {:ok, %{status_code: status}} = ImageProxy.bulk_delete(%{ scope: scope })
     assert status == 200
   end
 

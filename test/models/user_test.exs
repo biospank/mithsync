@@ -1,7 +1,6 @@
 defmodule VideosyncWeb.UserTest do
   use VideosyncWeb.ModelCase
 
-  alias Videosync.Repo
   alias VideosyncWeb.User
 
   @valid_attrs %{
@@ -10,8 +9,7 @@ defmodule VideosyncWeb.UserTest do
     password_confirmation: "secret",
     accept_terms_and_conditions: true
   }
-  @invalid_email %{email: "some content", password: "secret"}
-  @invalid_password %{email: "some@content", password: "pass"}
+
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

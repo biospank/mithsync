@@ -54,7 +54,7 @@ defmodule VideosyncWeb.VideoControllerTest do
     assert json_response(conn, 200)["data"] == %{
       "project" => %{
         "id" => project.id,
-        "inserted_at" => Ecto.DateTime.to_iso8601(project.inserted_at),
+        "inserted_at" => NaiveDateTime.to_iso8601(project.inserted_at),
         "name" => project.name,
         "video_count" => 0
       },
@@ -76,7 +76,7 @@ defmodule VideosyncWeb.VideoControllerTest do
         "id" => project.id,
         "name" => project.name,
         "video_count" => 0,
-        "inserted_at" => Ecto.DateTime.to_iso8601(project.inserted_at)
+        "inserted_at" => NaiveDateTime.to_iso8601(project.inserted_at)
       },
       "url" => video.url,
       "title" => video.title,
@@ -85,7 +85,7 @@ defmodule VideosyncWeb.VideoControllerTest do
       "watch_code" => "",
       "slide_count" => 0,
       "slides" => video.slides,
-      "inserted_at" => Ecto.DateTime.to_iso8601(video.inserted_at)
+      "inserted_at" => NaiveDateTime.to_iso8601(video.inserted_at)
     }
   end
 

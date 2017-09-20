@@ -31,7 +31,7 @@ defmodule VideosyncWeb.ImageProxy do
 
   defp list(:s3, opts) do
     {:ok, scope} = Map.fetch(opts, :scope)
-    prefix = "uploads/#{scope}/images/thumb"
+    prefix = ArcImage.storage_dir(:thumb, {nil, scope})
     filter = Map.get(opts, :filter)
 
     with {:ok, %{body: %{contents: contents}}} <- list(:raw_s3, prefix),
@@ -43,7 +43,7 @@ defmodule VideosyncWeb.ImageProxy do
   defp list(:raw_s3, prefix) do
     {:ok, bucket} = Application.fetch_env(:arc, :bucket)
 
-    ExAws.S3.list_objects(bucket, prefix: prefix)
+    ExAws.S3.list_objects(bucket, prefix: prefix) |> ExAws.request
   end
 
   defp delete_all(:local, opts) do
@@ -61,7 +61,7 @@ defmodule VideosyncWeb.ImageProxy do
 
     with {:ok, %{body: %{contents: contents}}} <- list(:raw_s3, prefix),
           {:ok, objects} <- get_key_names(contents),
-    do: ExAws.S3.delete_all_objects(bucket, objects)
+    do: ExAws.S3.delete_multiple_objects(bucket, objects) |> ExAws.request
 
   end
 
@@ -89,7 +89,9 @@ defmodule VideosyncWeb.ImageProxy do
     {
       :ok,
       Enum.map(files, fn(file) ->
-        {:ok, %File.Stat{size: size, mtime: {date, _time}}} = File.lstat(ArcImage.url({file, scope}, :thumb))
+        {:ok, %File.Stat{size: size, mtime: {date, _time}}} = ArcImage.url({file, scope}, :thumb)
+          |> Path.relative
+          |> File.lstat
 
         { file, Integer.to_string(size), Date.from_erl!(date) |> Date.to_iso8601 }
       end)
