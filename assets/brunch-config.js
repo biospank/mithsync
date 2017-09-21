@@ -8,13 +8,13 @@ exports.config = {
           "js/**/*.js",
           "vendor/js/**/*.js",
           "node_modules/**/*.js",
-          "(../deps/**/*.js"
+          "../deps/**/*.js"
         ],
         "js/watch.js": [
           "watch/app/js/**/*.js",
           "watch/vendor/js/**/*.js",
           "node_modules/**/*.js",
-          "(../deps/**/*.js"
+          "../deps/**/*.js"
           // "../deps/**/*.js",
           // "../priv/static/phoenix.js"
         ],
