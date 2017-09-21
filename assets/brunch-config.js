@@ -44,15 +44,15 @@ exports.config = {
       // joinTo: "css/app.css"
       joinTo: {
         "css/app.css": [
-          "css/**/*",
-          "vendor/css/**/*"
+          "vendor/css/**/*",
+          "css/**/*"
         ],
         "css/fixed-layout.css": [
           "custom-css-layout/*.css"
         ],
         "css/watch.css": [
-          "watch/app/css/**/*",
-          "watch/vendor/css/**/*.css"
+          "watch/vendor/css/**/*.css",
+          "watch/app/css/**/*"
         ]
         // "css/app.css": /^(css)|(vendor)/,
         // "css/fixed-layout.css": /^(custom-css-layout)/,

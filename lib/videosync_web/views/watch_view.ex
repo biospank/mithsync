@@ -33,7 +33,11 @@ defmodule VideosyncWeb.WatchView do
   def slide_url(conn, slide) do
     case Mix.env do
       :dev ->
-        VideosyncWeb.Router.Helpers.static_path(conn, "/#{slide.url}")
+        if (slide.url |> String.starts_with?("/")) do
+          slide.url
+        else
+          VideosyncWeb.Router.Helpers.static_path(conn, "/#{slide.url}")
+        end
       _ ->
         slide.url
     end
@@ -42,7 +46,11 @@ defmodule VideosyncWeb.WatchView do
   def slide_thumb_url(conn, slide) do
     case Mix.env do
       :dev ->
-        VideosyncWeb.Router.Helpers.static_path(conn, "/#{slide.thumb_url}")
+        if (slide.thumb_url |> String.starts_with?("/")) do
+          slide.thumb_url
+        else
+          VideosyncWeb.Router.Helpers.static_path(conn, "/#{slide.thumb_url}")
+        end
       _ ->
         slide.thumb_url
     end
