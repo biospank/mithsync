@@ -1,1 +1,1 @@
-web: MIX_ENV=stage mix phx.server
+web: mix phx.server
