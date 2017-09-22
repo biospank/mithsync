@@ -14,7 +14,7 @@ use Mix.Config
 
 config :videosync, Videosync.Endpoint,
   load_from_system_env: true,
-  url: [host: "dry-earth-64607.herokuapp.com", port: 80],
+  url: [host: "zinkroo-phoenix13.herokuapp.com", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json",
   secret_key_base: System.get_env("SECRET_KEY_BASE")
 
