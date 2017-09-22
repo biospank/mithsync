@@ -52,7 +52,7 @@ defmodule VideosyncWeb.ArcImage do
   #
   # def s3_object_headers(version, {file, scope}) do
   # uncomment for S3 storage mode
-  # def s3_object_headers(_, {file, _}) do
-  #   [content_type: Plug.MIME.path(file.file_name)]
-  # end
+  def s3_object_headers(_, {file, _}) do
+    [content_type: Plug.MIME.path(file.file_name)]
+  end
 end

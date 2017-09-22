@@ -13,11 +13,12 @@ use Mix.Config
 # which you typically run after static files are built.
 config :videosync, Videosync.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [host: "zinkroo.com", port: 80],
+  url: [scheme: "https", host: "dry-earth-64607.herokuapp.com/", port: 443],
+  force_ssl: [rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/cache_manifest.json",
   secret_key_base: System.get_env("SECRET_KEY_BASE")
 
-# Do not print debug messages in production
+# Do not print debug messages in staging
 config :logger, level: :info
 
 config :videosync, Videosync.Repo,
@@ -79,15 +80,15 @@ config :videosync, Videosync.Mailer,
 # enable for S3 storage mode
 config :arc,
   storage: Arc.Storage.S3,
-  bucket: "zinkroo-prod",
+  bucket: "zinkroo",
   virtual_host: true
 
 config :ex_aws,
   access_key_id: [{:system, "AWS_ACCESS_KEY_ID"}, :instance_role],
   secret_access_key: [{:system, "AWS_SECRET_ACCESS_KEY"}, :instance_role],
-  region: "eu-central-1",
+  region: "eu-west-1",
   s3: [
     scheme: "https://",
-    host: "s3-eu-central-1.amazonaws.com",
-    region: "eu-central-1"
+    host: "s3-eu-west-1.amazonaws.com",
+    region: "eu-west-1"
   ]
