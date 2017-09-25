@@ -6,6 +6,6 @@
   </div>
   <section class="hidden-xs">
     <%= render @view_module, "title.html", video: @video, conn: @conn %>
-    <p class="zinkroo__description"><%= @video.description %></p>
+    <%= raw render_video_description(@video) %>
   </section>
 </div>
