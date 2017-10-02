@@ -11,17 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
   };
 
   var updateSlide = function(event) {
-    console.log("updating slide..");
     var currentSec = _.floor(event.detail.plyr.getCurrentTime());
-
-    if(currentSlide) {
-      var currentSlideIndex = _.findIndex(slides, currentSlide);
-
-      if((currentSlideIndex !== -1) &&
-        inRange(currentSec, currentSlideIndex, (currentSlideIndex + 1))) {
-        return;
-      }
-    }
 
     currentSlide = _.find(slides, function(slide, index, collection) {
       if(inRange(currentSec, index, (index + 1))) {
@@ -34,6 +24,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
       return false;
     });
+
+    if(currentSlide) {
+      var currentSlideIndex = _.findIndex(slides, currentSlide);
+
+      if((currentSlideIndex !== -1) &&
+        inRange(currentSec, currentSlideIndex, (currentSlideIndex + 1))) {
+        return;
+      }
+    }
+
   };
 
   var playerTag = document.body.querySelector('.video-player-watch');
