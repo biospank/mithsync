@@ -1,6 +1,6 @@
 defmodule VideosyncWeb.GuardianSerializer do
   alias Videosync.Repo
-  alias VideosyncWeb.User
+  alias Videosync.Accounts.User
 
   def for_token(user = %User{}), do: {:ok, "User:#{user.id}"}
   def for_token(_), do: {:error, "Unknown resource type"}

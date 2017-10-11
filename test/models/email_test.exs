@@ -5,7 +5,7 @@ defmodule VideosyncWeb.EmailTest do
     {:ok, conn: conn}
   end
 
-  @user %VideosyncWeb.User{
+  @user %Videosync.Accounts.User{
     email: "email.address@example.com",
     activation_code: "8833e73hhsd783hys7y"
   }

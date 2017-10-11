@@ -2,7 +2,9 @@ defmodule VideosyncWeb.ActivationController do
   use VideosyncWeb, :controller
 
   alias Videosync.Repo
-  alias VideosyncWeb.{User, Auth, Email, Mailer}
+  alias Videosync.Accounts
+  alias Videosync.Accounts.User
+  alias VideosyncWeb.{Auth, Email, Mailer}
 
   def confirm(conn, %{"code" => activation_code}) do
     user = Repo.get_by(User, activation_code: activation_code)
@@ -23,7 +25,7 @@ defmodule VideosyncWeb.ActivationController do
   end
 
   def resend(conn, %{"email" => email}) do
-    user = Repo.get_by(User, email: email)
+    user = Accounts.get_user_by(:email, email)
 
     case user do
       nil ->

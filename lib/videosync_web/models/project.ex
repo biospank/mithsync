@@ -6,7 +6,7 @@ defmodule VideosyncWeb.Project do
   schema "projects" do
     field :name, :string
     field :video_count, :integer
-    belongs_to :user, VideosyncWeb.User
+    belongs_to :user, Videosync.Accounts.User
     has_many :videos, VideosyncWeb.Video
 
     timestamps()

@@ -2,7 +2,7 @@ defmodule VideosyncWeb.ActivationControllerTest do
   use VideosyncWeb.ConnCase
 
   alias Videosync.Repo
-  alias VideosyncWeb.User
+  alias Videosync.Accounts.User
 
   @valid_activation_code "_eoos7749wehhffdlnbbswiw883w7s"
   @invalid_activation_code "_eoos7749wehhbbswiw883w7s"

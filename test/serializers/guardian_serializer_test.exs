@@ -2,8 +2,7 @@ defmodule VideosyncWeb.GuardianSerializerTest do
   use VideosyncWeb.ConnCase
 
   alias Videosync.Repo
-  alias Videosync.Repo
-  alias VideosyncWeb.User
+  alias Videosync.Accounts.User
   alias VideosyncWeb.GuardianSerializer
 
   setup do

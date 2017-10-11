@@ -18,7 +18,7 @@ defmodule VideosyncWeb.Auth do
 
   def login_by_email_and_password(conn, email, given_pass, opts) do
     repo = Keyword.fetch!(opts, :repo)
-    user = repo.get_by(VideosyncWeb.User, email: email)
+    user = repo.get_by(Videosync.Accounts.User, email: email)
 
     cond do
       user && checkpw(given_pass, user.password_hash) ->

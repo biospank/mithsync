@@ -3,7 +3,7 @@ defmodule VideosyncWeb.ProjectControllerTest do
 
   alias Videosync.Repo
   alias VideosyncWeb.Project
-  alias VideosyncWeb.User
+  alias Videosync.Accounts.User
 
   @valid_attrs %{name: "some content"}
   @invalid_attrs %{}

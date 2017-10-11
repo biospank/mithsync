@@ -4,7 +4,8 @@ defmodule VideosyncWeb.Report do
   import Ecto.Query
 
   alias Videosync.Repo
-  alias VideosyncWeb.{User, Project, Video}
+  alias Videosync.Accounts.User
+  alias VideosyncWeb.{Project, Video}
 
   def perform do
     %__MODULE__{

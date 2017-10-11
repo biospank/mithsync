@@ -3,7 +3,7 @@ defmodule VideosyncWeb.UserControllerTest do
   # use Bamboo.Test, shared: :true
 
   alias Videosync.Repo
-  alias VideosyncWeb.User
+  alias Videosync.Accounts.User
 
   @valid_attrs %{
     email: "some@content",

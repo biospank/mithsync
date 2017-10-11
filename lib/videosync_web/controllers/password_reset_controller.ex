@@ -2,7 +2,9 @@ defmodule VideosyncWeb.PasswordResetController do
   use VideosyncWeb, :controller
 
   alias Videosync.Repo
-  alias VideosyncWeb.{User, Email, Mailer}
+  alias Videosync.Accounts
+  alias Videosync.Accounts.User
+  alias VideosyncWeb.{Email, Mailer}
 
   plug :scrub_params, "user" when action in [:create, :update]
 
@@ -16,7 +18,7 @@ defmodule VideosyncWeb.PasswordResetController do
         |> render(VideosyncWeb.ChangesetView, "error.json", changeset: changeset)
       _ ->
     # with %Ecto.Changeset{valid?: true, changes: %{email: email}} <- email_valid?(email), do:
-        user = Repo.get_by(User, email: email)
+        user = Accounts.get_user_by(:email, email)
 
         cond do
           user ->
@@ -40,7 +42,7 @@ defmodule VideosyncWeb.PasswordResetController do
   end
 
   def show(conn, %{"id" => reset_code}) do
-    user = Repo.get_by(User, reset_code: reset_code)
+    user = Accounts.get_user_by(:reset_code, reset_code)
 
     cond do
       user ->
@@ -64,7 +66,7 @@ defmodule VideosyncWeb.PasswordResetController do
         |> render(VideosyncWeb.ChangesetView, "error.json", changeset: changeset)
       _ ->
 
-        user = Repo.get_by(User, reset_code: reset_code)
+        user = Accounts.get_user_by(:reset_code, reset_code)
 
         cond do
           user ->

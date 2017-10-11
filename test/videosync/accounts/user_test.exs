@@ -1,7 +1,7 @@
-defmodule VideosyncWeb.UserTest do
-  use VideosyncWeb.ModelCase
+defmodule Videosync.Accounts.UserTest do
+  use Videosync.DataCase
 
-  alias VideosyncWeb.User
+  alias Videosync.Accounts.User
 
   @valid_attrs %{
     email: "some@content",

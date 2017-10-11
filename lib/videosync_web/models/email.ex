@@ -1,7 +1,7 @@
 defmodule VideosyncWeb.Email do
   use Bamboo.Phoenix, view: VideosyncWeb.EmailView
 
-  def welcome_email(%VideosyncWeb.User{email: email, activation_code: code}) do
+  def welcome_email(%Videosync.Accounts.User{email: email, activation_code: code}) do
     base_email()
     |> to(email)
     |> subject("Zinkroo registration")

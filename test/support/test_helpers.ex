@@ -1,6 +1,6 @@
 defmodule VideosyncWeb.TestHelpers do
   alias Videosync.Repo
-  alias VideosyncWeb.User
+  alias Videosync.Accounts.User
 
   def insert_user(attrs \\ %{}) do
     changes = Map.merge(%{

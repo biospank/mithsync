@@ -10,7 +10,7 @@ defmodule VideosyncWeb.Video do
     field :description, :string
     field :slide_count, :integer
     field :watch_code, :string
-    belongs_to :user, VideosyncWeb.User
+    belongs_to :user, Videosync.Accounts.User
     belongs_to :project, VideosyncWeb.Project
     has_many :slides, VideosyncWeb.Slide
     has_one :layout, VideosyncWeb.Layout

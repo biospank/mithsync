@@ -8,7 +8,7 @@ defmodule VideosyncWeb.Slide do
     field :thumb_url, :string
     field :start, :integer
     belongs_to :video, VideosyncWeb.Video
-    belongs_to :user, VideosyncWeb.User
+    belongs_to :user, Videosync.Accounts.User
 
     timestamps()
   end
