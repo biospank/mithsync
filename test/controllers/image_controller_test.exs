@@ -4,7 +4,7 @@ defmodule VideosyncWeb.ImageControllerTest do
   alias VideosyncWeb.ArcImage
   alias VideosyncWeb.Project
   alias VideosyncWeb.Video
-  alias VideosyncWeb.Scope
+  alias Videosync.Assets.Scope
 
   @valid_attrs %Plug.Upload{
     content_type: "image/jpg",

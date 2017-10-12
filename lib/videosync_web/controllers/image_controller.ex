@@ -2,7 +2,9 @@ defmodule VideosyncWeb.ImageController do
   use VideosyncWeb, :controller
 
   alias Videosync.Repo
-  alias VideosyncWeb.{Image, ImageProxy, ArcImage, Slide, Scope}
+  alias Videosync.Assets.Scope
+  alias Videosync.Assets.Image
+  alias VideosyncWeb.{ImageProxy, ArcImage, Slide}
 
   def action(conn, _) do
     apply(__MODULE__, action_name(conn),

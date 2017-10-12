@@ -1,5 +1,6 @@
-defmodule VideosyncWeb.Image do
-  use VideosyncWeb, :model
+defmodule Videosync.Assets.Image do
+  use Ecto.Schema
+  import Ecto.Changeset
 
   schema "images" do
     field :name, :string, virtual: true
@@ -21,20 +22,5 @@ defmodule VideosyncWeb.Image do
   def changeset(model, params \\ %{}) do
     model
     |> cast(params, @required_fields, @optional_fields)
-  end
-
-  def map_all(files, scope, filter) do
-    Stream.filter(files, fn({file_name, _, _}) ->
-      String.contains?(file_name, filter || "")
-    end)
-    |> Enum.map(fn({file_name, size, last_modified}) ->
-      %VideosyncWeb.Image{
-        name: file_name,
-        size: size,
-        thumb_url: VideosyncWeb.ArcImage.url({file_name, scope}, :thumb),
-        slide_url: VideosyncWeb.ArcImage.url({file_name, scope}, :slide),
-        last_modified: last_modified
-      }
-    end)
   end
 end

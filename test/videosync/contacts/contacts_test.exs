@@ -1,6 +1,6 @@
 defmodule Videosync.ContactsTest do
   use Videosync.DataCase
 
-  alias Videosync.Contacts
+  # alias Videosync.Contacts
 
 end

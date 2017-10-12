@@ -2,7 +2,8 @@ defmodule VideosyncWeb.VideoController do
   use VideosyncWeb, :controller
 
   alias Videosync.Repo
-  alias VideosyncWeb.{Project, Video, Slide, ImageProxy, Scope}
+  alias Videosync.Assets.Scope
+  alias VideosyncWeb.{Project, Video, Slide, ImageProxy}
 
   plug :scrub_params, "video" when action in [:create, :update]
 

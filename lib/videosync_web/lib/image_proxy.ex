@@ -1,5 +1,6 @@
 defmodule VideosyncWeb.ImageProxy do
-  alias VideosyncWeb.{Image, ArcImage}
+  alias Videosync.Assets
+  alias VideosyncWeb.{ArcImage}
 
   def list(opts \\ %{}) do
     case ArcImage.__storage do
@@ -25,7 +26,7 @@ defmodule VideosyncWeb.ImageProxy do
 
     with {:ok, contents} <- File.ls(ArcImage.storage_dir(:thumb, {nil, scope})),
          {:ok, files} <- get_files_info(:local, contents, scope),
-    do: {:ok, Image.map_all(files, scope, filter)}
+    do: {:ok, Assets.map_all_images(files, scope, filter)}
 
   end
 
@@ -36,7 +37,7 @@ defmodule VideosyncWeb.ImageProxy do
 
     with {:ok, %{body: %{contents: contents}}} <- list(:raw_s3, prefix),
          {:ok, files} <- get_files_info(:s3, contents, scope),
-    do: {:ok, Image.map_all(files, scope, filter)}
+    do: {:ok, Assets.map_all_images(files, scope, filter)}
 
   end
 

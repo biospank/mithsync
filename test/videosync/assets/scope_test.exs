@@ -1,7 +1,7 @@
-defmodule VideosyncWeb.ScopeTest do
-  use VideosyncWeb.ModelCase
+defmodule Videosync.Assets.ScopeTest do
+  use Videosync.DataCase
 
-  alias VideosyncWeb.Scope
+  alias Videosync.Assets.Scope
 
   setup do
     {:ok, scope: %Scope{user_id: 4, project_id: 6}}
