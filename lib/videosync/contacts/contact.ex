@@ -1,5 +1,6 @@
-defmodule VideosyncWeb.Contact do
-  use VideosyncWeb, :model
+defmodule Videosync.Contacts.Contact do
+  use Ecto.Schema
+  import Ecto.Changeset
 
   schema "contacts" do
     field :name, :string, virtual: true

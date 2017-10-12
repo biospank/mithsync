@@ -2,7 +2,7 @@ defmodule VideosyncWeb.ContactControllerTest do
   use VideosyncWeb.ConnCase
   use Bamboo.Test, shared: :true
 
-  alias VideosyncWeb.Contact
+  alias Videosync.Contacts.Contact
 
   @valid_attrs %{
     email: "test@example.com",
