@@ -2,7 +2,8 @@ defmodule VideosyncWeb.RegistrationController do
   use VideosyncWeb, :controller
 
   alias Videosync.Accounts
-  alias VideosyncWeb.{Email, Mailer}
+  alias VideosyncWeb.Mailer
+  alias VideosyncWeb.Mailer.Email
 
   plug :scrub_params, "user" when action in [:create]
 

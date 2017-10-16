@@ -30,7 +30,7 @@ defmodule VideosyncWeb.RegistrationControllerTest do
     conn = post conn, registration_path(conn, :create), user: @new_user
     assert json_response(conn, 201)["data"]["id"]
     user = Repo.get(User, json_response(conn, 201)["data"]["id"])
-    assert_delivered_email VideosyncWeb.Email.welcome_email(user)
+    assert_delivered_email VideosyncWeb.Mailer.Email.welcome_email(user)
   end
 
   test "does not create resource and renders errors when data is invalid", %{conn: conn} do

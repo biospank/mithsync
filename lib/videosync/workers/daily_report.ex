@@ -3,7 +3,8 @@ defmodule Videosync.Workers.DailyReport do
   use Timex
 
   alias Videosync.Reports
-  alias VideosyncWeb.{Email, Mailer}
+  alias VideosyncWeb.Mailer
+  alias VideosyncWeb.Mailer.Email
 
   def start_link do
     GenServer.start_link(__MODULE__, [], name: __MODULE__)

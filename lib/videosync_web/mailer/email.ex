@@ -1,4 +1,4 @@
-defmodule VideosyncWeb.Email do
+defmodule VideosyncWeb.Mailer.Email do
   use Bamboo.Phoenix, view: VideosyncWeb.EmailView
 
   def welcome_email(%Videosync.Accounts.User{email: email, activation_code: code}) do

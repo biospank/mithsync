@@ -2,7 +2,8 @@ defmodule VideosyncWeb.ContactController do
   use VideosyncWeb, :controller
 
   alias Videosync.Contacts.Contact
-  alias VideosyncWeb.{Mailer, Email}
+  alias VideosyncWeb.Mailer
+  alias VideosyncWeb.Mailer.Email
 
   plug :scrub_params, "contact"
 

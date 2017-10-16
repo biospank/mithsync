@@ -10,7 +10,7 @@ defmodule VideosyncWeb.EmailTest do
     activation_code: "8833e73hhsd783hys7y"
   }
   test "welcome_email" do
-    email = VideosyncWeb.Email.welcome_email(@user)
+    email = VideosyncWeb.Mailer.Email.welcome_email(@user)
 
     assert email.to == "email.address@example.com"
     assert email.html_body =~ "8833e73hhsd783hys7y"
@@ -22,7 +22,7 @@ defmodule VideosyncWeb.EmailTest do
     reset_url: @reset_url
   }
   test "password_reset_email" do
-    email = VideosyncWeb.Email.password_reset_email(@reset_data)
+    email = VideosyncWeb.Mailer.Email.password_reset_email(@reset_data)
 
     assert email.to == @reset_data.email
     assert email.html_body =~ @reset_url

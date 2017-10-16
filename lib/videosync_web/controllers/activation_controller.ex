@@ -4,7 +4,9 @@ defmodule VideosyncWeb.ActivationController do
   alias Videosync.Repo
   alias Videosync.Accounts
   alias Videosync.Accounts.User
-  alias VideosyncWeb.{Auth, Email, Mailer}
+  alias VideosyncWeb.Mailer
+  alias VideosyncWeb.Mailer.Email
+  alias VideosyncWeb.Auth
 
   def confirm(conn, %{"code" => activation_code}) do
     user = Repo.get_by(User, activation_code: activation_code)

@@ -4,7 +4,8 @@ defmodule VideosyncWeb.PasswordResetController do
   alias Videosync.Repo
   alias Videosync.Accounts
   alias Videosync.Accounts.User
-  alias VideosyncWeb.{Email, Mailer}
+  alias VideosyncWeb.Mailer
+  alias VideosyncWeb.Mailer.Email
 
   plug :scrub_params, "user" when action in [:create, :update]
 

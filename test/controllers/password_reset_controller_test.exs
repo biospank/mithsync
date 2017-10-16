@@ -40,12 +40,12 @@ defmodule VideosyncWeb.PasswordResetControllerTest do
     post conn, password_reset_path(conn, :create), user: %{email: @valid_email}
     user = Repo.get_by(User, email: @valid_email)
     # assert(Plug.Conn.get_resp_header(conn, "location")) == ["http://localhost:4001/?/reset"]
-    assert_delivered_email VideosyncWeb.Email.password_reset_email(%{email: @valid_email, reset_url: @reset_url <> user.reset_code})
+    assert_delivered_email VideosyncWeb.Mailer.Email.password_reset_email(%{email: @valid_email, reset_url: @reset_url <> user.reset_code})
   end
 
   test "password reset for an invalid email", %{conn: conn} do
     post(conn, password_reset_path(conn, :create), user: %{email: @invalid_email})
-    refute_delivered_email VideosyncWeb.Email.password_reset_email(%{email: @invalid_email, reset_url: @reset_url})
+    refute_delivered_email VideosyncWeb.Mailer.Email.password_reset_email(%{email: @invalid_email, reset_url: @reset_url})
   end
 
   test "show with valid reset code, redirect to reset page", %{conn: conn, user: user} do
