@@ -39,4 +39,4 @@ config :guardian, Guardian,
   ttl: { 1, :day},
   verify_issuer: true,
   secret_key: System.get_env("GUARDIAN_SECRET_KEY"),
-  serializer: VideosyncWeb.GuardianSerializer
+  serializer: Videosync.Serializers.GuardianSerializer

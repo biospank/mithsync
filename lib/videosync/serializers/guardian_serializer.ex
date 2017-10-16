@@ -1,4 +1,4 @@
-defmodule VideosyncWeb.GuardianSerializer do
+defmodule Videosync.Serializers.GuardianSerializer do
   alias Videosync.Repo
   alias Videosync.Accounts.User
 
