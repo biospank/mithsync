@@ -13,16 +13,15 @@ defmodule Videosync.Application do
       # Start the endpoint when the application starts
       supervisor(VideosyncWeb.Endpoint, []),
 
-      # Start prod workers
-      worker(VideosyncWeb.Workers.DailyReport, [])
+      # worker(Videosync.Workers.DailyReport, [])
     ]
 
-    # children = if (Mix.env == :prod) do
-    #   # Start prod workers
-    #   [worker(VideosyncWeb.Workers.DailyReport, [])|children] |> Enum.reverse
-    # else
-    #   children
-    # end
+    children = if (Mix.env == :prod) do
+      # Start prod workers
+      [worker(Videosync.Workers.DailyReport, [])|children] |> Enum.reverse
+    else
+      children
+    end
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options

@@ -1,14 +1,16 @@
-defmodule VideosyncWeb.Report do
-  defstruct [:users_count, :active_users_count, :projects_count, :videos_count]
-
-  import Ecto.Query
-
+defmodule Videosync.Reports do
+  @moduledoc """
+  The Reports context.
+  """
+  import Ecto.Query, warn: false
   alias Videosync.Repo
+
   alias Videosync.Accounts.User
+  alias Videosync.Reports.Counter
   alias VideosyncWeb.{Project, Video}
 
   def perform do
-    %__MODULE__{
+    %Counter{
       users_count: count_users(),
       active_users_count: count_active_users(),
       projects_count: count_projects(),

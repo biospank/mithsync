@@ -1,8 +1,9 @@
-defmodule VideosyncWeb.Workers.DailyReport do
+defmodule Videosync.Workers.DailyReport do
   use GenServer
   use Timex
 
-  alias VideosyncWeb.{Report, Email, Mailer}
+  alias Videosync.Reports
+  alias VideosyncWeb.{Email, Mailer}
 
   def start_link do
     GenServer.start_link(__MODULE__, [], name: __MODULE__)
@@ -15,7 +16,7 @@ defmodule VideosyncWeb.Workers.DailyReport do
 
   def handle_info(:send_mail, state) do
     if Mix.env == :prod do
-      report = Report.perform
+      report = Reports.perform
       report |> Email.daily_report_email("axenso.dardy@gmail.com") |> Mailer.deliver_later
       report |> Email.daily_report_email("fabio.petrucci@gmail.com") |> Mailer.deliver_later
     end
