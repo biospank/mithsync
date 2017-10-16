@@ -46,8 +46,8 @@ defmodule Videosync.Assets do
       %Image{
         name: file_name,
         size: size,
-        thumb_url: VideosyncWeb.ArcImage.url({file_name, scope}, :thumb),
-        slide_url: VideosyncWeb.ArcImage.url({file_name, scope}, :slide),
+        thumb_url: Videosync.Uploaders.ArcImage.url({file_name, scope}, :thumb),
+        slide_url: Videosync.Uploaders.ArcImage.url({file_name, scope}, :slide),
         last_modified: last_modified
       }
     end)

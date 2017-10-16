@@ -3,7 +3,8 @@ defmodule VideosyncWeb.ImageController do
 
   alias Videosync.Repo
   alias Videosync.Assets.{Scope, Image, ImageProxy}
-  alias VideosyncWeb.{ArcImage, Slide}
+  alias Videosync.Uploaders.ArcImage
+  alias VideosyncWeb.Slide
 
   def action(conn, _) do
     apply(__MODULE__, action_name(conn),

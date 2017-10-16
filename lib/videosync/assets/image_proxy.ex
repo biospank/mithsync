@@ -1,6 +1,6 @@
 defmodule Videosync.Assets.ImageProxy do
   alias Videosync.Assets
-  alias VideosyncWeb.{ArcImage}
+  alias Videosync.Uploaders.ArcImage
 
   def list(opts \\ %{}) do
     case ArcImage.__storage do

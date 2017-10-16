@@ -1,7 +1,7 @@
 defmodule VideosyncWeb.ImageControllerTest do
   use VideosyncWeb.ConnCase
 
-  alias VideosyncWeb.ArcImage
+  alias Videosync.Uploaders.ArcImage
   alias VideosyncWeb.Project
   alias VideosyncWeb.Video
   alias Videosync.Assets.Scope
@@ -80,7 +80,7 @@ defmodule VideosyncWeb.ImageControllerTest do
   test "does not delete resource referenced by video", %{conn: conn, user: user} do
     project = insert_project(user, %Project{})
     video = insert_video(user, project, %Video{})
-    {:ok, file} = VideosyncWeb.ArcImage.store({@valid_attrs, %Scope{ user_id: user.id, project_id: project.id, video_id: video.id }})
+    {:ok, file} = ArcImage.store({@valid_attrs, %Scope{ user_id: user.id, project_id: project.id, video_id: video.id }})
     insert_slide(
       user,
       video,

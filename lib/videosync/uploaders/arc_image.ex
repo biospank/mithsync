@@ -1,4 +1,4 @@
-defmodule VideosyncWeb.ArcImage do
+defmodule Videosync.Uploaders.ArcImage do
   use Arc.Definition
 
   # Include ecto support (requires package arc_ecto installed):
