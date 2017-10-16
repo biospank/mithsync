@@ -22,6 +22,7 @@ defmodule Videosync.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import Videosync.DataCase
+      import VideosyncWeb.TestHelpers
     end
   end
 

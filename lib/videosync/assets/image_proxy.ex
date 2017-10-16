@@ -1,4 +1,4 @@
-defmodule VideosyncWeb.ImageProxy do
+defmodule Videosync.Assets.ImageProxy do
   alias Videosync.Assets
   alias VideosyncWeb.{ArcImage}
 

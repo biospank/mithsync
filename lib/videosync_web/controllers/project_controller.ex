@@ -2,8 +2,8 @@ defmodule VideosyncWeb.ProjectController do
   use VideosyncWeb, :controller
 
   alias Videosync.Repo
-  alias Videosync.Assets.Scope
-  alias VideosyncWeb.{Project, ImageProxy}
+  alias Videosync.Assets.{Scope, ImageProxy}
+  alias VideosyncWeb.Project
 
   @max_recent_pagination 5
 
