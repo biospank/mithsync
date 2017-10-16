@@ -2,7 +2,7 @@ defmodule VideosyncWeb.Video do
   use VideosyncWeb, :model
 
   alias Videosync.Repo
-  alias VideosyncWeb.Crypto
+  alias Videosync.Utils.Crypto
 
   schema "videos" do
     field :url, :string

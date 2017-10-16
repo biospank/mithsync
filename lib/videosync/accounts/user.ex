@@ -2,7 +2,7 @@ defmodule Videosync.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias VideosyncWeb.Crypto
+  alias Videosync.Utils.Crypto
 
   schema "users" do
     field :email, :string
