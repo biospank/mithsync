@@ -7,7 +7,7 @@ defmodule Videosync.Reports do
 
   alias Videosync.Accounts.User
   alias Videosync.Reports.Counter
-  alias VideosyncWeb.{Project, Video}
+  alias Videosync.Contents.{Project, Video}
 
   def perform do
     %Counter{

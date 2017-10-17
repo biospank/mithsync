@@ -1,9 +1,7 @@
 defmodule VideosyncWeb.ProjectController do
   use VideosyncWeb, :controller
 
-  alias Videosync.Repo
-  alias Videosync.Assets.{Scope, ImageProxy}
-  alias VideosyncWeb.Project
+  alias Videosync.Contents
 
   @max_recent_pagination 5
 
@@ -18,10 +16,7 @@ defmodule VideosyncWeb.ProjectController do
   end
 
   def recent(conn, params, user) do
-    projects =
-      Project.own_by(user)
-      |> Project.order_by(:updated_at)
-      |> Repo.all
+    projects = Contents.list_projects(user)
 
     paged_projects = paginate(projects, params["page"], @max_recent_pagination)
 
@@ -37,11 +32,7 @@ defmodule VideosyncWeb.ProjectController do
   end
 
   def index(conn, params, user) do
-    projects =
-      Project.own_by(user)
-      |> Project.filter_by(params["filter"])
-      |> Project.order_by(:inserted_at)
-      |> Repo.all
+    projects = Contents.list_filtered_projects(user, params["filter"])
 
     paged_projects = paginate(projects, params["page"])
 
@@ -57,11 +48,9 @@ defmodule VideosyncWeb.ProjectController do
   end
 
   def create(conn, %{"project" => project_params}, user) do
-    changeset = user
-      |> build_assoc(:projects)
-      |> Project.create_changeset(project_params)
+    changeset = Contents.create_project_changeset(user, project_params)
 
-    case Repo.insert(changeset) do
+    case Contents.create_project(changeset) do
       {:ok, project} ->
         conn
         |> put_status(:created)
@@ -74,10 +63,10 @@ defmodule VideosyncWeb.ProjectController do
   end
 
   def update(conn, %{"id" => id, "project" => project_params}, user) do
-    project = Repo.get!(Project.own_by(user), id)
-    changeset = Project.changeset(project, project_params)
+    project = Contents.get_project!(user, id)
+    changeset = Contents.update_project_changeset(project, project_params)
 
-    case Repo.update(changeset) do
+    case Contents.update_project(changeset) do
       {:ok, project} ->
         render(conn, "show.json", project: project)
       {:error, changeset} ->
@@ -88,19 +77,13 @@ defmodule VideosyncWeb.ProjectController do
   end
 
   def delete(conn, %{"id" => id}, user) do
-    project = Repo.get!(Project.own_by(user), id)
+    project = Contents.get_project!(user, id)
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
-    Project.delete_changeset(project)
-    |> Repo.delete!
+    Contents.delete_project!(project)
 
-    ImageProxy.bulk_delete(%{
-      scope: %Scope{
-        user_id: user.id,
-        project_id: id
-      }
-    })
+    Contents.delete_project_images(user, id)
 
     send_resp(conn, :no_content, "")
   end

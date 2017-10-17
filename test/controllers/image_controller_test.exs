@@ -2,8 +2,8 @@ defmodule VideosyncWeb.ImageControllerTest do
   use VideosyncWeb.ConnCase
 
   alias Videosync.Uploaders.ArcImage
-  alias VideosyncWeb.Project
-  alias VideosyncWeb.Video
+  alias Videosync.Contents.Project
+  alias Videosync.Contents.Video
   alias Videosync.Assets.Scope
 
   @valid_attrs %Plug.Upload{
@@ -84,7 +84,7 @@ defmodule VideosyncWeb.ImageControllerTest do
     insert_slide(
       user,
       video,
-      %VideosyncWeb.Slide{
+      %Videosync.Contents.Slide{
         thumb_url: ArcImage.url({file, %Scope{ user_id: user.id, project_id: project.id, video_id: video.id }}, :thumb)
       })
     conn = delete conn, project_video_image_path(conn, :delete, project, video, "dummy.jpg")

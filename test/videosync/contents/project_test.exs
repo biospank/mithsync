@@ -1,7 +1,7 @@
-defmodule VideosyncWeb.ProjectTest do
-  use VideosyncWeb.ModelCase
+defmodule Videosync.Contents.ProjectTest do
+  use Videosync.DataCase
 
-  alias VideosyncWeb.Project
+  alias Videosync.Contents.Project
 
   @valid_attrs %{name: "some content"}
   @invalid_attrs %{}

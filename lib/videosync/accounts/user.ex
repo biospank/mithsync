@@ -13,9 +13,9 @@ defmodule Videosync.Accounts.User do
     field :active, :boolean
     field :project_count, :integer
     field :accept_terms_and_conditions, :boolean
-    has_many :projects, VideosyncWeb.Project
-    has_many :videos, VideosyncWeb.Video
-    has_many :slides, VideosyncWeb.Slide
+    has_many :projects, Videosync.Contents.Project
+    has_many :videos, Videosync.Contents.Video
+    has_many :slides, Videosync.Contents.Slide
 
     timestamps()
   end

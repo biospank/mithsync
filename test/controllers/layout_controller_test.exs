@@ -2,7 +2,7 @@ defmodule VideosyncWeb.LayoutControllerTest do
   use VideosyncWeb.ConnCase
 
   alias Videosync.Repo
-  alias VideosyncWeb.{Project, Video}
+  alias Videosync.Contents.{Project, Video}
 
   @video_attrs %{
     description: "some description",

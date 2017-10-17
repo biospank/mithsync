@@ -1,8 +1,7 @@
 defmodule VideosyncWeb.SlideController do
   use VideosyncWeb, :controller
 
-  alias Videosync.Repo
-  alias VideosyncWeb.{Slide, Video}
+  alias Videosync.Contents
 
   plug :scrub_params, "slide" when action in [:create, :update]
 
@@ -17,11 +16,9 @@ defmodule VideosyncWeb.SlideController do
   end
 
   def create(conn, %{"video_id" => video, "slide" => slide_params}, user) do
-    changeset = user
-      |> build_assoc(:slides, %{video_id: String.to_integer(video)})
-      |> Slide.create_changeset(slide_params)
+    changeset = Contents.create_slide_changeset(user, video, slide_params)
 
-    case Repo.insert(changeset) do
+    case Contents.create_slide(changeset) do
       {:ok, slide} ->
         conn
         |> put_status(:created)
@@ -34,16 +31,14 @@ defmodule VideosyncWeb.SlideController do
   end
 
   def update(conn, %{"video_id" => video, "id" => id, "slide" => slide_params}, user) do
-    changeset = user
-      |> Slide.own_by(video)
-      |> Repo.get!(id)
-      |> Slide.changeset(slide_params)
+    changeset =
+      user
+      |> Contents.get_slide!(id, video)
+      |> Contents.update_slide_changeset(slide_params)
 
-    case Repo.update(changeset) do
+    case Contents.update_slide(changeset) do
       {:ok, slide} ->
-        Video
-        |> Repo.get!(String.to_integer(video))
-        |> Ecto.Changeset.change() |> Repo.update(force: true)
+        Contents.touch_video(video)
 
         render(conn, "show.json", slide: slide)
       {:error, changeset} ->
@@ -57,60 +52,42 @@ defmodule VideosyncWeb.SlideController do
     Enum.map(slides_to_save, fn(slide) ->
       case Map.fetch(slide, "id") do
         :error ->
-          changeset = user
-            |> build_assoc(:slides, %{video_id: String.to_integer(video)})
-            |> Slide.create_changeset(slide)
-
-          Repo.insert!(changeset)
+          user
+          |> Contents.create_slide_changeset(video, slide)
+          |> Contents.create_slide!()
         {:ok, id} ->
-          changeset = user
-            |> Slide.own_by(video)
-            |> Repo.get!(id)
-            |> Slide.changeset(slide)
-
-          Repo.update!(changeset)
+          user
+          |> Contents.get_slide!(id, video)
+          |> Contents.update_slide_changeset(slide)
+          |> Contents.update_slide!
       end
     end)
 
-    Video
-    |> Repo.get!(String.to_integer(video))
-    |> Ecto.Changeset.change() |> Repo.update(force: true)
+    Contents.touch_video(video)
 
-    slides = user
-      |> Slide.own_by(video)
-      |> Slide.order_by(:start)
-      |> Repo.all
+    slides = Contents.get_video_slides(user, video)
 
     render(conn, "index.json", slides: slides)
   end
 
   def delete(conn, %{"video_id" => video, "id" => id}, user) do
-    slide = Repo.get!(Slide.own_by(user, String.to_integer(video)), id)
+    slide = Contents.get_slide!(user, id, video)
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
-    Slide.delete_changeset(slide)
-    |> Repo.delete!
+    Contents.delete_slide!(slide)
 
     send_resp(conn, :no_content, "")
   end
 
   def delete_all(conn, %{"video_id" => video_id, "slides" => slides_to_delete}, user) do
-    user
-    |> Slide.own_by(video_id)
-    |> Slide.includes(Enum.map(slides_to_delete, &(&1["id"])))
-    |> Repo.delete_all
+    Contents.delete_all_slides(user, video_id, slides_to_delete)
 
-    video = Video
-    |> Repo.get!(String.to_integer(video_id))
+    video = Contents.get_video!(video_id)
 
-    slides = user
-      |> Slide.own_by(video_id)
-      |> Slide.order_by(:start)
-      |> Repo.all
+    slides = Contents.get_video_slides(user, video_id)
 
-    Ecto.Changeset.change(video, slide_count: length(slides))
-      |> Repo.update()
+    Contents.update_video_slides_count(video, slides)
 
     render(conn, "index.json", slides: slides)
   end

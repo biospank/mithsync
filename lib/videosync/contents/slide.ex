@@ -1,5 +1,9 @@
-defmodule VideosyncWeb.Slide do
-  use VideosyncWeb, :model
+defmodule Videosync.Contents.Slide do
+  use Ecto.Schema
+
+  import Ecto
+  import Ecto.Query, warn: false
+  import Ecto.Changeset
 
   alias Videosync.Repo
 
@@ -7,7 +11,7 @@ defmodule VideosyncWeb.Slide do
     field :url, :string
     field :thumb_url, :string
     field :start, :integer
-    belongs_to :video, VideosyncWeb.Video
+    belongs_to :video, Videosync.Contents.Video
     belongs_to :user, Videosync.Accounts.User
 
     timestamps()
@@ -55,7 +59,7 @@ defmodule VideosyncWeb.Slide do
   end
 
   def order_by(order) do
-    from s in VideosyncWeb.Slide, order_by: field(s, ^order)
+    from s in Videosync.Contents.Slide, order_by: field(s, ^order)
   end
   def order_by(query, order) do
     from s in query, order_by: field(s, ^order)

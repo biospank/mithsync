@@ -1,5 +1,9 @@
-defmodule VideosyncWeb.Project do
-  use VideosyncWeb, :model
+defmodule Videosync.Contents.Project do
+  use Ecto.Schema
+
+  import Ecto
+  import Ecto.Query, warn: false
+  import Ecto.Changeset
 
   alias Videosync.Repo
 
@@ -7,7 +11,7 @@ defmodule VideosyncWeb.Project do
     field :name, :string
     field :video_count, :integer
     belongs_to :user, Videosync.Accounts.User
-    has_many :videos, VideosyncWeb.Video
+    has_many :videos, Videosync.Contents.Video
 
     timestamps()
   end

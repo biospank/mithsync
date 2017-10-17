@@ -1,18 +1,13 @@
 defmodule VideosyncWeb.WatchController do
   use VideosyncWeb, :controller
 
-  alias Videosync.Repo
-  alias VideosyncWeb.Video
-  alias VideosyncWeb.Slide
+  alias Videosync.Contents
 
   plug :put_layout, "watch.html"
   plug :remove_x_frame_options_header
 
   def show(conn, %{"id" => id}) do
-    video = Video
-      |> Video.preload_layout()
-      |> Video.preload_slides(Slide.order_by(:start))
-      |> Repo.get_by!(watch_code: id)
+    video = Contents.get_video_by_whatch_code!(id)
 
     render(conn, "show.html", video: video)
   end

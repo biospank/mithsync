@@ -1,9 +1,7 @@
 defmodule VideosyncWeb.VideoController do
   use VideosyncWeb, :controller
 
-  alias Videosync.Repo
-  alias Videosync.Assets.{Scope, ImageProxy}
-  alias VideosyncWeb.{Project, Video, Slide}
+  alias Videosync.Contents
 
   plug :scrub_params, "video" when action in [:create, :update]
 
@@ -20,12 +18,7 @@ defmodule VideosyncWeb.VideoController do
   end
 
   def recent(conn, params, user) do
-    videos =
-      Video.own_by(user)
-      |> Video.order_by(:updated_at)
-      |> Video.preload_layout()
-      |> Video.preload_slides(Slide.order_by(:start))
-      |> Repo.all
+    videos = Contents.list_videos_with_layout_and_slides(user)
 
     paged_videos = paginate(videos, params["page"], @max_recent_pagination)
 
@@ -41,16 +34,13 @@ defmodule VideosyncWeb.VideoController do
   end
 
   def index(conn, params, user) do
-    project = Repo.get!(Project, String.to_integer(params["project_id"]))
+    project = Contents.get_project!(String.to_integer(params["project_id"]))
 
-    videos =
-      Video.own_by(user)
-      |> Video.belongs_to_model(:project_id, project.id)
-      |> Video.filter_by(params["filter"])
-      |> Video.order_by(:inserted_at)
-      |> Video.preload_layout()
-      |> Video.preload_slides(Slide.order_by(:start))
-      |> Repo.all
+    videos = Contents.list_filtered_videos_with_layout_and_slides(
+      user: user,
+      project: project,
+      filter: params["filter"]
+    )
 
     paged_videos = paginate(videos, params["page"])
 
@@ -66,18 +56,13 @@ defmodule VideosyncWeb.VideoController do
   end
 
   def create(conn, %{"project_id" => project, "video" => video_params}, user) do
-    changeset = user
-      |> build_assoc(:videos, %{project_id: String.to_integer(project)})
-      |> Video.create_changeset(video_params)
+    changeset = Contents.video_changeset(user, project, video_params)
 
-    case Repo.insert(changeset) do
+    case Contents.create_video(changeset) do
       {:ok, video} ->
-        video |> build_assoc(:layout) |> Repo.insert!
+        Contents.create_video_layout!(video)
 
-        video =
-          Repo.get(Video, video.id)
-          |> Repo.preload(:layout)
-          |> Repo.preload(:slides)
+        video = Contents.preload_layout_and_slides(video)
 
         conn
         |> put_status(:created)
@@ -91,27 +76,25 @@ defmodule VideosyncWeb.VideoController do
   end
 
   def show(conn, %{"project_id" => project_id, "id" => id}, user) do
-    video = Video.own_by(user)
-      |> Video.belongs_to_model(:project_id, project_id)
-      |> Video.preload_project()
-      |> Video.preload_layout()
-      |> Video.preload_slides(Slide.order_by(:start))
-      |> Repo.get!(id)
-      # |> Repo.preload(:slides)
+    video = Contents.get_video_with_project_layout_and_slides!(
+      id: id,
+      user: user,
+      project_id: project_id
+    )
 
     render(conn, "show_video_with_project_and_slides.json", video: video)
   end
 
   def update(conn, %{"project_id" => project, "id" => id, "video" => video_params}, user) do
-    video = Video.own_by(user)
-      |> Video.belongs_to_model(:project_id, project)
-      |> Video.preload_layout()
-      |> Video.preload_slides(Slide.order_by(:start))
-      |> Repo.get!(id)
+    video = Contents.get_video_with_layout_and_slides!(
+      id: id,
+      user: user,
+      project: project
+    )
 
-    changeset = Video.changeset(video, video_params)
+    changeset = Contents.update_video_changeset(video, video_params)
 
-    case Repo.update(changeset) do
+    case Contents.update_video(changeset) do
       {:ok, video} ->
         render(conn, "show.json", video: video)
       {:error, changeset} ->
@@ -121,23 +104,18 @@ defmodule VideosyncWeb.VideoController do
     end
   end
 
-  def delete(conn, %{"project_id" => project, "id" => id}, user) do
-    video = Video.own_by(user)
-      |> Video.belongs_to_model(:project_id, project)
-      |> Repo.get!(id)
+  def delete(conn, %{"project_id" => project_id, "id" => id}, user) do
+    video = Contents.get_video!(
+      id: id,
+      user: user,
+      project_id: project_id
+    )
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
-    Video.delete_changeset(video)
-    |> Repo.delete!
+    Contents.delete_video!(video)
 
-    ImageProxy.bulk_delete(%{
-      scope: %Scope{
-        user_id: user.id,
-        project_id: project,
-        video_id: id
-      }
-    })
+    Contents.delete_video_images(user, project_id, id)
 
     send_resp(conn, :no_content, "")
   end

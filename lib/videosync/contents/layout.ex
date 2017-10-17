@@ -1,5 +1,8 @@
-defmodule VideosyncWeb.Layout do
-  use VideosyncWeb, :model
+defmodule Videosync.Contents.Layout do
+  use Ecto.Schema
+
+  import Ecto.Query, warn: false
+  import Ecto.Changeset
 
   schema "layouts" do
     field :theme, :integer, default: 1
@@ -7,7 +10,7 @@ defmodule VideosyncWeb.Layout do
     field :show_description, :boolean, default: false
     field :show_date, :boolean, default: false
     field :show_slider, :boolean, default: false
-    belongs_to :video, VideosyncWeb.Video
+    belongs_to :video, Videosync.Contents.Video
 
     timestamps()
   end

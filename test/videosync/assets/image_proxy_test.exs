@@ -3,7 +3,7 @@ defmodule Videosync.Assets.ImageProxyTest do
 
   alias Videosync.Assets.{Scope, ImageProxy}
   alias Videosync.Uploaders.ArcImage
-  alias VideosyncWeb.{Project, Video}
+  alias Videosync.Contents.{Project, Video}
 
   setup config do
     if config[:local] do

@@ -1,10 +1,9 @@
 defmodule VideosyncWeb.ImageController do
   use VideosyncWeb, :controller
 
-  alias Videosync.Repo
   alias Videosync.Assets.{Scope, Image, ImageProxy}
   alias Videosync.Uploaders.ArcImage
-  alias VideosyncWeb.Slide
+  alias Videosync.Contents
 
   def action(conn, _) do
     apply(__MODULE__, action_name(conn),
@@ -66,13 +65,7 @@ defmodule VideosyncWeb.ImageController do
   def delete(conn, %{"id" => filename}, scope) do
     url = ArcImage.url({filename, scope}, :thumb)
 
-    q = from s in Slide,
-      select: count(s.id),
-      where: s.thumb_url == ^url and
-        s.user_id == ^scope.user_id and
-        s.video_id == ^scope.video_id
-
-    case Repo.one(q) do
+    case Contents.count_images_by(url, scope) do
       0 ->
         ArcImage.delete {filename, scope}
         send_resp(conn, :no_content, "")

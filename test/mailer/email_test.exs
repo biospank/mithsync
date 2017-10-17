@@ -1,4 +1,4 @@
-defmodule VideosyncWeb.EmailTest do
+defmodule VideosyncWeb.Mailer.EmailTest do
   use VideosyncWeb.ConnCase
 
   setup %{conn: conn} do

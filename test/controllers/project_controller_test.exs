@@ -2,7 +2,7 @@ defmodule VideosyncWeb.ProjectControllerTest do
   use VideosyncWeb.ConnCase
 
   alias Videosync.Repo
-  alias VideosyncWeb.Project
+  alias Videosync.Contents.Project
   alias Videosync.Accounts.User
 
   @valid_attrs %{name: "some content"}

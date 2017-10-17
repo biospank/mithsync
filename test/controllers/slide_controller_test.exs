@@ -2,9 +2,7 @@ defmodule VideosyncWeb.SlideControllerTest do
   use VideosyncWeb.ConnCase
 
   alias Videosync.Repo
-  alias VideosyncWeb.Slide
-  alias VideosyncWeb.Video
-  alias VideosyncWeb.Project
+  alias Videosync.Contents.{Slide, Video, Project}
 
   @valid_attrs %{
     start: 20,
