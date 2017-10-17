@@ -47,7 +47,7 @@ var landingpage = {
         m(".container", [
           m("header", { class: "text-center mb-30 pb-100" }, [
             m("h1", { class: "text-color--main weight-bold mt-0 mb-25 steps-section__title" }, "Just a while to be online!"),
-            m("p", { class: "weight-light steps-section__description" }, m.trust("Create a project, add new video link from Youtube o Vimeo, upload your<br>image gallery, sync all, choose template and copy the embed code in<br>your post or website"))
+            m("p", { class: "weight-light steps-section__description" }, m.trust("Create a project, add new video link from Youtube or Vimeo, upload your<br>image gallery, sync all, choose template and copy the embedded code in<br>your post or website"))
           ]),
           m(".row", [
             m(".col-xs-12 col-sm-4 col-md-4 col-lg-4", [
@@ -97,7 +97,7 @@ var landingpage = {
                   m("span", { class: "widget-step text-center pt-5 weight-strong" }, "5")
                 ]),
                 m("h4", { class: "steps-section__item--title weight-strong text-color--main text-center mb-20" }, "Choose template"),
-                m("p", { class: "text-center steps-section__item--description" }, "Almost done. Choose “Layout” tab and select your preferred template. Click “Publish” to save it. For seeing a preview click “Show Preview” button")
+                m("p", { class: "text-center steps-section__item--description" }, "Almost done. Choose “Layout” tab and select your preferred template. Click “Publish” to save it. To see a preview click “Show Preview” button")
               ])
             ]),
             m(".col-xs-12 col-sm-4 col-md-4 col-lg-4", [
@@ -106,8 +106,8 @@ var landingpage = {
                   m("img", { src: "/images/step-6.jpg", class: "img-responsive" }),
                   m("span", { class: "widget-step text-center pt-5 weight-strong" }, "6")
                 ]),
-                m("h4", { class: "steps-section__item--title weight-strong text-color--main text-center mb-20" }, "Copy embed code in your post"),
-                m("p", { class: "text-center steps-section__item--description" }, "You’re now ready to publish your ZInkroo everywhere. Choose “Info” tab, check title and description, copy embed code in your site or blog")
+                m("h4", { class: "steps-section__item--title weight-strong text-color--main text-center mb-20" }, "Copy embedded code in your post"),
+                m("p", { class: "text-center steps-section__item--description" }, "You’re now ready to publish your ZInkroo everywhere. Choose “Info” tab, check title and description, copy embedded code in your site or blog")
               ])
             ])
           ])
