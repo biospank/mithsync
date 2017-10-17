@@ -72,7 +72,7 @@ defmodule VideosyncWeb.ImageController do
       num when num > 0 ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render(VideosyncWeb.ErrorView, :"422", errors: %{reason: "The image is used by this videos."})
+        |> render(VideosyncWeb.ErrorView, :"422", errors: %{reason: "The image is used by this video."})
     end
   end
 
