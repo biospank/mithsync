@@ -2,6 +2,9 @@ defmodule Videosync.AccountsTest do
   use Videosync.DataCase
 
   alias Videosync.Accounts
+  alias Videosync.Accounts.User
+
+  doctest Videosync.Accounts
 
   describe "users" do
     alias Videosync.Accounts.User

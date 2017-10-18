@@ -19,38 +19,8 @@ defmodule Videosync.Contents do
     |> Repo.all
   end
 
-  @doc """
-  Gets a single project.
-
-  Raises `Ecto.NoResultsError` if the Project does not exist.
-
-  ## Examples
-
-      iex> get_project!(123)
-      %Project{}
-
-      iex> get_project!(456)
-      ** (Ecto.NoResultsError)
-
-  """
   def get_project!(id), do: Repo.get!(Project, id)
 
-  @doc """
-  Returns a list of videos.
-
-  ## Examples
-
-      iex> user = %User{}
-      iex> project = %Project{}
-      iex> filter = "test"
-      iex> filtered_videos_with_layout_and_slides_own_by!(
-      ...>  user: user,
-      ...>  project: project,
-      ...>  filter: filter
-      ...> )
-      [%Video{}, ...]
-
-  """
   def list_filtered_videos_with_layout_and_slides(args) do
     Video.own_by(args[:user])
     |> Video.belongs_to_model(:project_id, args[:project].id)
@@ -61,9 +31,16 @@ defmodule Videosync.Contents do
     |> Repo.all
   end
 
-  def video_changeset(user, project, video_params) do
+  def video_changeset(user, project_id, video_params) do
+    project_id = cond do
+      is_binary(project_id) ->
+        String.to_integer(project_id)
+      true ->
+        project_id
+    end
+
     user
-    |> build_assoc(:videos, %{project_id: String.to_integer(project)})
+    |> build_assoc(:videos, %{project_id: project_id})
     |> Video.create_changeset(video_params)
   end
 
@@ -124,9 +101,16 @@ defmodule Videosync.Contents do
     Video.delete_changeset(video) |> Repo.delete!
   end
 
-  def touch_video(id) do
+  def touch_video(video_id) do
+    video_id = cond do
+      is_binary(video_id) ->
+        String.to_integer(video_id)
+      true ->
+        video_id
+    end
+
     Video
-    |> Repo.get!(String.to_integer(id))
+    |> Repo.get!(video_id)
     |> Ecto.Changeset.change()
     |> Repo.update(force: true)
   end

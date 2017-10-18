@@ -32,4 +32,10 @@ defmodule VideosyncWeb.TestHelpers do
     |> Ecto.build_assoc(:slides, Map.merge(attrs, %{video_id: video.id}))
     |> Repo.insert!
   end
+
+  def insert_layout(video, attrs \\ %{}) do
+    video
+    |> Ecto.build_assoc(:layout, Map.merge(attrs, %{video_id: video.id}))
+    |> Repo.insert!
+  end
 end
