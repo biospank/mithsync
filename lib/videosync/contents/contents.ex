@@ -115,19 +115,26 @@ defmodule Videosync.Contents do
     |> Repo.update(force: true)
   end
 
-  def create_slide_changeset(user, video, slide_params) do
+  def create_slide_changeset(user, video_id, slide_params) do
+    video_id = cond do
+      is_binary(video_id) ->
+        String.to_integer(video_id)
+      true ->
+        video_id
+    end
+
     user
-    |> build_assoc(:slides, %{video_id: String.to_integer(video)})
+    |> build_assoc(:slides, %{video_id: video_id})
     |> Slide.create_changeset(slide_params)
   end
 
   def create_slide(changeset), do: Repo.insert(changeset)
   def create_slide!(changeset), do: Repo.insert!(changeset)
 
-  def get_slide!(user, id, video) do
+  def get_slide!(user, slide_id, video_id) do
     user
-    |> Slide.own_by(video)
-    |> Repo.get!(id)
+    |> Slide.own_by(video_id)
+    |> Repo.get!(slide_id)
   end
 
   def update_slide_changeset(slide, slide_params) do

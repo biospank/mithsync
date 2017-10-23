@@ -10,6 +10,20 @@ defmodule Videosync.ContentsTest do
     watch_code: "KDOEONDBUSHHDONDJJNJS"
   }
 
+  @video_params %{
+    description: "some description",
+    title: "some title",
+    url: "some url",
+    watch_code: "KDOEONDBUSHHDONDJJNJS"
+  }
+
+  @slide_params %{
+    end: 60,
+    start: 20,
+    url: "/upload/33/images/slide/one",
+    thumb_url: "/upload/33/images/thumb/one"
+  }
+
   setup do
     user = insert_user()
     project = insert_project(user)
@@ -229,6 +243,81 @@ defmodule Videosync.ContentsTest do
     test "touch_video/1 with invalid id" do
       assert_raise Ecto.NoResultsError, fn ->
         Contents.touch_video(123)
+      end
+    end
+  end
+
+  describe "slide" do
+    alias Videosync.Contents.Slide
+    alias Videosync.Accounts.User
+
+    setup %{user: user, project: project} do
+      video = insert_video(user, project, @video_params)
+      slide = insert_slide(user, video, @slide_params)
+
+      {:ok, video: video, slide: slide}
+    end
+
+    test "create_slide_changeset/3 with string video id", %{user: user, video: video} do
+      assert %Ecto.Changeset{} = Contents.create_slide_changeset(
+        user,
+        Integer.to_string(video.id),
+        @slide_params
+      )
+    end
+
+    test "create_slide_changeset/3 with integer video id", %{user: user, video: video} do
+      assert %Ecto.Changeset{} = Contents.create_slide_changeset(
+        user,
+        video.id,
+        @slide_params
+      )
+    end
+
+    test "create_slide/1 with valid attrs", %{user: user, video: video} do
+      assert {:ok, %Slide{}} =
+        Contents.create_slide_changeset(user, video.id, @slide_params)
+        |> Contents.create_slide()
+    end
+
+    test "create_slide/1 with invalid attrs", %{user: user, video: video} do
+      assert {:error, %Ecto.Changeset{}} =
+        Contents.create_slide_changeset(user, video.id, %{})
+        |> Contents.create_slide()
+    end
+
+    test "create_slide!/1 with valid attrs", %{user: user, video: video} do
+      assert %Slide{} =
+        Contents.create_slide_changeset(user, video.id, @slide_params)
+        |> Contents.create_slide!()
+    end
+
+    test "create_slide!/1 with invalid attrs", %{user: user, video: video} do
+      assert_raise Ecto.InvalidChangesetError, fn ->
+        Contents.create_slide_changeset(user, video.id, %{})
+        |> Contents.create_slide!()
+      end
+    end
+
+    test "get_slide!/3 with valid arguments", %{user: user, video: video, slide: slide} do
+      assert %Slide{} = Contents.get_slide!(user, slide.id, video.id)
+    end
+
+    test "get_slide!/3 with invalid user", %{video: video, slide: slide} do
+      assert_raise Ecto.NoResultsError, fn ->
+        Contents.get_slide!(%User{id: 123}, slide.id, video.id)
+      end
+    end
+
+    test "get_slide!/3 with invalid video", %{user: user, slide: slide} do
+      assert_raise Ecto.NoResultsError, fn ->
+        Contents.get_slide!(user, slide.id, 123)
+      end
+    end
+
+    test "get_slide!/3 with invalid slide", %{user: user, video: video} do
+      assert_raise Ecto.NoResultsError, fn ->
+        Contents.get_slide!(user, 123, video.id)
       end
     end
   end
