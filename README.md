@@ -1,4 +1,4 @@
-# Videosync
+# Zinkroo
 
 To start your Phoenix app:
 
