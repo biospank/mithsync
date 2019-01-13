@@ -1,0 +1,8 @@
+<div class="col-sm-<%= @view_module.video_column_size(@video.layout) %> pb-10">
+  <div class="video-player-watch mb-15" data-url="<%= @video.url %>" data-type="" data-video-id="">
+  </div>
+  <section class="hidden-xs">
+    <%= render @view_module, "title.html", video: @video, conn: @conn %>
+    <%= raw render_video_description(@video) %>
+  </section>
+</div>

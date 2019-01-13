@@ -1,4 +1,4 @@
-defmodule Videosync.ConnCase do
+defmodule VideosyncWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -20,16 +20,16 @@ defmodule Videosync.ConnCase do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
 
-      alias Videosync.Repo
-      import Ecto
-      import Ecto.Changeset
-      import Ecto.Query, only: [from: 1, from: 2]
+      # alias Videosync.Repo
+      # import Ecto
+      # import Ecto.Changeset
+      # import Ecto.Query, only: [from: 1, from: 2]
 
-      import Videosync.Router.Helpers
-      import Videosync.TestHelpers
+      import VideosyncWeb.Router.Helpers
+      import VideosyncWeb.TestHelpers
 
       # The default endpoint for testing
-      @endpoint Videosync.Endpoint
+      @endpoint VideosyncWeb.Endpoint
     end
   end
 

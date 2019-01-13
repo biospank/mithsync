@@ -10,7 +10,7 @@ defmodule Videosync.Repo.Migrations.CreateVideo do
       add :user_id, references(:users, on_delete: :nothing)
       add :project_id, references(:projects, on_delete: :delete_all)
 
-      timestamps
+      timestamps()
     end
 
     create index(:videos, [:user_id])

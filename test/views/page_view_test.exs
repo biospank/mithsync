@@ -1,3 +1,3 @@
-defmodule Videosync.PageViewTest do
-  use Videosync.ConnCase, async: true
+defmodule VideosyncWeb.PageViewTest do
+  use VideosyncWeb.ConnCase, async: true
 end

@@ -1,7 +1,7 @@
-# defmodule Videosync.WatchControllerTest do
-#   use Videosync.ConnCase
+# defmodule VideosyncWeb.WatchControllerTest do
+#   use VideosyncWeb.ConnCase
 #
-#   alias Videosync.Watch
+#   alias VideosyncWeb.Watch
 #   @valid_attrs %{}
 #   @invalid_attrs %{}
 #

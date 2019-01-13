@@ -1,5 +1,7 @@
-defmodule Videosync.AuthTest do
-  use Videosync.ConnCase
+defmodule VideosyncWeb.AuthTest do
+  use VideosyncWeb.ConnCase
+
+  alias Videosync.Repo
 
   @valid_attrs %{email: "some@content", password: "secret"}
 
@@ -10,7 +12,7 @@ defmodule Videosync.AuthTest do
   end
 
   test "login by valid email and password should pass", %{conn: conn} do
-    {:ok, user, _} = Videosync.Auth.login_by_email_and_password(conn,
+    {:ok, user, _} = VideosyncWeb.Auth.login_by_email_and_password(conn,
       @valid_attrs.email,
       @valid_attrs.password,
       repo: Repo)
@@ -19,7 +21,7 @@ defmodule Videosync.AuthTest do
   end
 
   test "login by invalid email returns not found error", %{conn: conn} do
-    assert Videosync.Auth.login_by_email_and_password(
+    assert VideosyncWeb.Auth.login_by_email_and_password(
       conn,
       "invalid@email",
       @valid_attrs.password,
@@ -27,7 +29,7 @@ defmodule Videosync.AuthTest do
   end
 
   test "login by invalid password returns unauthorized error", %{conn: conn} do
-    assert Videosync.Auth.login_by_email_and_password(
+    assert VideosyncWeb.Auth.login_by_email_and_password(
       conn,
       @valid_attrs.email,
       "invalidpass",

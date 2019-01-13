@@ -1,8 +1,10 @@
-defmodule Videosync.UserControllerTest do
-  use Videosync.ConnCase
+defmodule VideosyncWeb.UserControllerTest do
+  use VideosyncWeb.ConnCase
   # use Bamboo.Test, shared: :true
 
-  alias Videosync.User
+  alias Videosync.Repo
+  alias Videosync.Accounts.User
+
   @valid_attrs %{
     email: "some@content",
     password: "secret",

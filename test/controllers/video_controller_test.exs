@@ -1,8 +1,8 @@
-defmodule Videosync.VideoControllerTest do
-  use Videosync.ConnCase
+defmodule VideosyncWeb.VideoControllerTest do
+  use VideosyncWeb.ConnCase
 
-  alias Videosync.Project
-  alias Videosync.Video
+  alias Videosync.Repo
+  alias Videosync.Contents.{Video, Project}
 
   @valid_attrs %{
     description: "some description",
@@ -53,7 +53,7 @@ defmodule Videosync.VideoControllerTest do
     assert json_response(conn, 200)["data"] == %{
       "project" => %{
         "id" => project.id,
-        "inserted_at" => Ecto.DateTime.to_iso8601(project.inserted_at),
+        "inserted_at" => NaiveDateTime.to_iso8601(project.inserted_at),
         "name" => project.name,
         "video_count" => 0
       },
@@ -75,7 +75,7 @@ defmodule Videosync.VideoControllerTest do
         "id" => project.id,
         "name" => project.name,
         "video_count" => 0,
-        "inserted_at" => Ecto.DateTime.to_iso8601(project.inserted_at)
+        "inserted_at" => NaiveDateTime.to_iso8601(project.inserted_at)
       },
       "url" => video.url,
       "title" => video.title,
@@ -84,7 +84,7 @@ defmodule Videosync.VideoControllerTest do
       "watch_code" => "",
       "slide_count" => 0,
       "slides" => video.slides,
-      "inserted_at" => Ecto.DateTime.to_iso8601(video.inserted_at)
+      "inserted_at" => NaiveDateTime.to_iso8601(video.inserted_at)
     }
   end
 

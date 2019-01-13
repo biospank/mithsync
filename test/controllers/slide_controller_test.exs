@@ -1,9 +1,8 @@
-defmodule Videosync.SlideControllerTest do
-  use Videosync.ConnCase
+defmodule VideosyncWeb.SlideControllerTest do
+  use VideosyncWeb.ConnCase
 
-  alias Videosync.Slide
-  alias Videosync.Video
-  alias Videosync.Project
+  alias Videosync.Repo
+  alias Videosync.Contents.{Slide, Video, Project}
 
   @valid_attrs %{
     start: 20,
@@ -94,7 +93,7 @@ defmodule Videosync.SlideControllerTest do
     conn = put conn, project_video_slide_path(conn, :update, project, video, slide), slide: @valid_attrs
     assert json_response(conn, 200)["data"]["id"]
     video_timestamp = Repo.get!(Video, video.id)
-    assert Ecto.DateTime.compare(video_timestamp.updated_at, video.updated_at) == :gt
+    assert NaiveDateTime.compare(video_timestamp.updated_at, video.updated_at) == :gt
   end
 
   @tag :logged_in
@@ -172,7 +171,7 @@ defmodule Videosync.SlideControllerTest do
     :timer.sleep(1000)
     post conn, project_video_save_all_slides_path(conn, :save_all, project, video), slides: []
     video_timestamp = Repo.get!(Video, video.id)
-    assert Ecto.DateTime.compare(video_timestamp.updated_at, video.updated_at) == :gt
+    assert NaiveDateTime.compare(video_timestamp.updated_at, video.updated_at) == :gt
   end
 
   @tag :logged_in

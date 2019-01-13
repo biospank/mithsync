@@ -1,8 +1,10 @@
-defmodule Videosync.RegistrationControllerTest do
-  use Videosync.ConnCase
+defmodule VideosyncWeb.RegistrationControllerTest do
+  use VideosyncWeb.ConnCase
   use Bamboo.Test, shared: :true
 
-  alias Videosync.User
+  alias Videosync.Repo
+  alias Videosync.Accounts.User
+
   @valid_attrs %{
     email: "some@content",
     password: "secret",
@@ -28,7 +30,7 @@ defmodule Videosync.RegistrationControllerTest do
     conn = post conn, registration_path(conn, :create), user: @new_user
     assert json_response(conn, 201)["data"]["id"]
     user = Repo.get(User, json_response(conn, 201)["data"]["id"])
-    assert_delivered_email Videosync.Email.welcome_email(user)
+    assert_delivered_email VideosyncWeb.Mailer.Email.welcome_email(user)
   end
 
   test "does not create resource and renders errors when data is invalid", %{conn: conn} do

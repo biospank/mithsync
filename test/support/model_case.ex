@@ -1,4 +1,4 @@
-defmodule Videosync.ModelCase do
+defmodule VideosyncWeb.ModelCase do
   @moduledoc """
   This module defines the test case to be used by
   model tests.
@@ -21,7 +21,7 @@ defmodule Videosync.ModelCase do
       import Ecto
       import Ecto.Changeset
       import Ecto.Query, only: [from: 1, from: 2]
-      import Videosync.ModelCase
+      import VideosyncWeb.ModelCase
     end
   end
 
@@ -57,9 +57,16 @@ defmodule Videosync.ModelCase do
       iex> {:password, "is unsafe"} in changeset.errors
       true
   """
-  def errors_on(struct, data) do
-    struct.__struct__.changeset(struct, data)
-    |> Ecto.Changeset.traverse_errors(&Videosync.ErrorHelpers.translate_error/1)
-    |> Enum.flat_map(fn {key, errors} -> for msg <- errors, do: {key, msg} end)
+  def errors_on(changeset) do
+    Ecto.Changeset.traverse_errors(changeset, fn {message, opts} ->
+      Enum.reduce(opts, message, fn {key, value}, acc ->
+        String.replace(acc, "%{#{key}}", to_string(value))
+      end)
+    end)
   end
+  # def errors_on(struct, data) do
+  #   struct.__struct__.changeset(struct, data)
+  #   |> Ecto.Changeset.traverse_errors(&VideosyncWeb.ErrorHelpers.translate_error/1)
+  #   |> Enum.flat_map(fn {key, errors} -> for msg <- errors, do: {key, msg} end)
+  # end
 end

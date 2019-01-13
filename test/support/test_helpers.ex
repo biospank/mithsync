@@ -1,9 +1,9 @@
-defmodule Videosync.TestHelpers do
+defmodule VideosyncWeb.TestHelpers do
   alias Videosync.Repo
-  alias Videosync.User
+  alias Videosync.Accounts.User
 
   def insert_user(attrs \\ %{}) do
-    changes = Dict.merge(%{
+    changes = Map.merge(%{
       email: "some@content",
       password: "secret",
       password_confirmation: "secret",
@@ -30,6 +30,12 @@ defmodule Videosync.TestHelpers do
   def insert_slide(user, video, attrs \\ %{}) do
     user
     |> Ecto.build_assoc(:slides, Map.merge(attrs, %{video_id: video.id}))
+    |> Repo.insert!
+  end
+
+  def insert_layout(video, attrs \\ %{}) do
+    video
+    |> Ecto.build_assoc(:layout, Map.merge(attrs, %{video_id: video.id}))
     |> Repo.insert!
   end
 end

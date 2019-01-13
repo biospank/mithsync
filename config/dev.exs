@@ -6,22 +6,22 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
-config :videosync, Videosync.Endpoint,
+config :videosync, VideosyncWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
   watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin",
-             cd: Path.expand("../", __DIR__)]]
+             cd: Path.expand("../assets", __DIR__)]]
 
 # Watch static and templates for browser reloading.
-config :videosync, Videosync.Endpoint,
+config :videosync, VideosyncWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
-      ~r{web/views/.*(ex)$},
-      ~r{web/templates/.*(eex)$}
+      ~r{lib/videosync_web/views/.*(ex)$},
+      ~r{lib/videosync_web/templates/.*(eex)$}
     ]
   ]
 
@@ -43,7 +43,7 @@ config :videosync, Videosync.Repo,
   pool_size: 10
 
 # Configure Bamboo dev
-config :videosync, Videosync.Mailer,
+config :videosync, VideosyncWeb.Mailer,
   adapter: Bamboo.SendinBlueAdapter,
   api_key: System.get_env("SENDINBLUE_API_KEY")
 

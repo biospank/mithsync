@@ -10,7 +10,7 @@ defmodule Videosync.Repo.Migrations.CreateUser do
       add :active, :boolean, default: false
       add :project_count, :integer, null: false, default: 0
 
-      timestamps
+      timestamps()
     end
 
     create unique_index(:users, [:email])
