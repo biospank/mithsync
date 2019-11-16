@@ -1,4 +1,4 @@
-# Zinkroo
+# Mithsyncs
 
 To start your Phoenix app:
 
